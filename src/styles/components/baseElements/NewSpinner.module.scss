@@ -1,0 +1,39 @@
+.container {
+  height: fit-content;
+  // width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  user-select: none;
+}
+
+.spinner {
+  border-radius: 50%;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+  height: 20px;
+  width: 20px;
+  background-color: transparent;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: blue;
+  position: absolute;
+}
+
+.mask {
+  width: 100%;
+  opacity: 0.8;
+  // z-index: 99999;
+  // background-color: rgba(0, 0, 0);
+}
+
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}

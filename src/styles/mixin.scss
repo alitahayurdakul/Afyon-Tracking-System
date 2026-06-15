@@ -1,0 +1,49 @@
+@use "sass:map";
+$breakpoints-up: (
+  "xsmall": "21.5em",
+  // 343px
+  "small": "24.375em",
+  "medium": "40em",
+  "large": "64em",
+  "standard": "75em",
+  "classic": "93.74em",
+  "xlarge": "119.90em"
+);
+
+$breakpoints-down: (
+  "xxsmall": "21.5em",
+  //344
+  "xsmall": "24.3125em",
+  //390px
+  "small": "39.9375em",
+  //640
+  "medium": "63.9375em",
+  //1024px
+  "ipad_pro": "64em",
+  // its for ipad pro because its exactly max-width 1024px and contain ipad_pro.
+  //1024px
+  "standard": "74.9em",
+  // 1120px
+  "classic": "89.9em",
+  // 1440 -- 1472
+  "large": "93.75em",
+  "xlarge": "120em"
+);
+
+@mixin breakpoint-between($minSize, $maxSize) {
+    @media (min-width: map.get($breakpoints-up, $minSize)) and (max-width: map.get($breakpoints-down, $maxSize)){
+        @content
+    }
+};
+
+@mixin breakpoint-down($size){
+    @media (max-width: map.get($breakpoints-down, $size)){
+        @content
+    }
+};
+
+@mixin breakpoint-up($size){
+    @media (min-width: map.get($breakpoints-up, $size)){
+        @content
+    }
+};

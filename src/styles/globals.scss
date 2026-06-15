@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+html,
+body,
+button,
+input,
+select,
+textarea {
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  letter-spacing: -0.005em;
+}
+
+:root {
+  --slate-100: #f1f5f9;
+  --slate-90: #1a1c1e;
+  --slate-60: #475569;
+  --slate-50: #64748b;
+  --slate-40: #f8fafc;
+  --slate-20: #e2e8f0;
+
+  --blue-95: #1f2a44;
+  --blue-90: #004286;
+  --blue-80: #1e3a8a;
+  --blue-70: #1f5aa6;
+  --blue-60: #007bff;
+
+  --base-grey-100: #262b2f;
+  --base-grey-85: #4b5157;
+  --base-grey-15: #d9dadb;
+
+  --green-75: #19745e;
+
+  --red-100: #ed8e7a;
+  --red-75: #f09988;
+  --red-50: #f2ada3;
+  --red-25: #f5c7bf;
+
+  --gray-60: #999999;
+  --gray-70: #666666;
+  --gray-90: #333333;
+
+  --on-sale-badge: #ff4f52;
+  --on-sale-badge-light: #ff4f52ee;
+  --on-sale-badge-dark: #fe393c;
+  --on-sale-badge-hover: #fa3135;
+
+  --base-white: #fff;
+
+  --border-blue-70: #1d4ed8;
+
+  --surface-muted: #e8e8eb;
+
+  --input-error-font-size: 0.875rem;
+  --form-border-radius: 14px;
+
+  --font-headline:
+    "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-body:
+    "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-manrope:
+    "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Auth pages (login / forgot-password) tokens */
+  --primary-blue: #004286;
+  --primary-blue-hover: #1f5aa6;
+  --blue-tint: #245eaa;
+
+  --surface: #f9f9fc;
+  --surface-low: #f3f3f6;
+  --surface-highest: #e2e2e5;
+
+  --white: #ffffff;
+
+  --text-primary: #1a1c1e;
+  --text-secondary: #424751;
+  --text-muted: #737782;
+  --border: #c2c6d3;
+
+  --transition: 0.2s;
+
+  --radius-sm: 0.125rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+
+  --shadow-card: 0 16px 48px rgba(0, 27, 62, 0.08);
+  --shadow-cta: 0 10px 24px -6px rgba(0, 66, 134, 0.3);
+  --shadow-cta-hover: 0 14px 32px -4px rgba(0, 66, 134, 0.4);
+
+
+  // same color will be removed
+  --color-primary: #1a73e8;
+  --color-secondary: #e8710a;
+  --color-tertiary: #1e8e3e;
+  --color-on-surface: #202124;
+  --color-on-surface-variant: #5f6368;
+  --color-surface: #f8f9fa;
+  --color-surface-container-low: #f1f3f4;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-high: #e8eaed;
+  --color-surface-container-highest: #dadce0;
+  --color-on-tertiary-container: #ffffff;
+  --color-primary-fixed: #e8f0fe;
+  --color-outline-variant: #dadce0;
+  --color-error: #d93025;
+}

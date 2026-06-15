@@ -1,0 +1,136 @@
+@use "../../styles//mixin.scss" as *;
+
+.ToastViewport {
+  --viewport-padding: 25px;
+  --viewport-padding-horizontal: 17%;
+  position: fixed;
+  top: 3rem;
+  z-index: 130;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: var(--viewport-padding) var(--viewport-padding-horizontal);
+  gap: 10px;
+  margin-left: var(--radix-toast-swipe-end-x);
+  list-style: none;
+  outline: none;
+  width: 100%;
+  pointer-events: none;
+}
+
+.ToastRoot {
+  background-color: white;
+  border-radius: 6px;
+  width: fit-content;
+  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
+    hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  padding: 15px;
+  display: grid;
+  grid-template-areas: "title action" "description action";
+  grid-template-columns: auto max-content;
+  column-gap: 15px;
+  align-items: center;
+  button {
+    all: unset;
+  }
+  max-width: 100%;
+  pointer-events: all;
+}
+
+@include breakpoint-down("small") {
+  .ToastRoot {
+    width: 375px;
+    max-width: 375px;
+  }
+}
+
+.ToastRoot[data-state="open"] {
+  animation: slideIn 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ToastRoot[data-state="closed"] {
+  animation: hide 100ms ease-in;
+}
+
+.ToastRoot[data-swipe="move"] {
+  transform: translateX(var(--radix-toast-swipe-move-x));
+}
+
+.ToastRoot[data-swipe="cancel"] {
+  transform: translateX(0);
+  transition: transform 200ms ease-out;
+}
+
+.ToastRoot[data-swipe="end"] {
+  animation: swipeOut 100ms ease-out;
+}
+
+@keyframes hide {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(calc(100% + var(--viewport-padding)));
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes swipeOut {
+  from {
+    transform: translateX(var(--radix-toast-swipe-end-x));
+  }
+  to {
+    transform: translateX(calc(100% + var(--viewport-padding)));
+  }
+}
+
+.link-button {
+  color: var(--grey-50, #42525e);
+  font-feature-settings: "clig" off, "liga" off;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.25rem; /* 125% */
+  text-decoration-line: underline;
+  text-underline-offset: 0.4rem;
+}
+
+@include breakpoint-down("small") {
+  .link-button {
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: normal;
+  }
+}
+
+.close-btn {
+  cursor: pointer !important;
+  opacity: 0.7;
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.link {
+  color: var(--blue-50, #2a387a);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.25rem;
+  text-decoration-line: underline;
+  text-underline-offset: 0.4rem;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}

@@ -1,0 +1,43 @@
+@use "../../mixin.scss" as *;
+
+.single-option-section {
+  display: flex;
+  gap: 7px;
+
+  input[type="checkbox"] {
+    min-width: 17px !important;
+    max-width: 17px !important;
+    height: 17.5px !important;
+    cursor: pointer;
+
+    &:disabled {
+      cursor: no-drop;
+    }
+    @include breakpoint-down("small") {
+      min-width: 30px !important;
+      max-width: 30px !important;
+      height: 30px !important;
+
+      &::after {
+        top: 55%;
+      }
+    }
+  }
+
+  label {
+    cursor: pointer;
+    text-wrap: wrap;
+    overflow-wrap: anywhere;
+
+    color: var(--slate-60);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 16.15px;
+  }
+
+  .isDisabled {
+    opacity: 0.5;
+    cursor: no-drop;
+  }
+}

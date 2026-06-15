@@ -1,0 +1,184 @@
+.button {
+  cursor: pointer;
+  border: none;
+  display: flex;
+  position: relative;
+  align-items: center;
+  transition: background-color 0.2s ease-in;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  justify-content: center;
+  text-align: center;
+}
+
+.button:focus {
+  opacity: 0.9;
+}
+.button:disabled {
+  cursor: not-allowed;
+}
+
+/* Primary */
+.primary {
+  background-color: var(--logo-blue);
+  color: var(--white);
+}
+
+.blue-green {
+  background-color: var(--bluegreen-100, #7d94cc);
+  color: var(--white);
+}
+
+.blue-green:hover:enabled {
+  background-color: var(--bluegreen-25);
+}
+
+.blue-green:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.success {
+  background-color: var(--green-100, #1b5748);
+  color: var(--white);
+}
+
+.success:hover:enabled {
+  background-color: var(--success-button-hover);
+}
+
+.danger {
+  background-color: var(--on-sale-badge, #ff4f52);
+  color: var(--white);
+}
+
+.danger:hover:enabled {
+  background-color: var(--error-border);
+}
+
+.primary:hover:enabled {
+  background-color: var(--primary-button-hover, #0e1f8e);
+}
+
+.primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.danger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* !Primary */
+/* Default */
+
+.default {
+  background-color: transparent;
+  border: 1px solid var(--base-grey-15);
+  color: var(--grey-100);
+}
+
+.default:hover:enabled {
+  background-color: var(--base-grey-15);
+}
+
+.default:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* !Default */
+
+.next {
+}
+
+.cancel {
+}
+
+.text {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  padding: 0 !important;
+  gap: 0.675rem;
+}
+
+.btn-size-small {
+  border-radius: 0.875rem;
+  font-size: 0.75rem;
+  padding: 5px 18px;
+  font-weight: 600;
+  line-height: 19px;
+  // height: 20px;
+}
+
+.btn-size-medium {
+  border-radius: 1.25rem;
+  font-size: 0.75rem;
+  padding: 12px 30px;
+  font-weight: 600;
+}
+
+.btn-size-large {
+  font-size: 0.875rem;
+  padding: 15px 216px;
+  border-radius: 1.5625rem;
+  font-weight: 600;
+}
+
+.no-label {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  line-height: 2.5rem;
+}
+
+.no-label svg {
+  display: block;
+  margin: auto;
+}
+
+.primary svg {
+  display: block;
+}
+
+.default svg {
+  display: block;
+}
+
+.rotate {
+  animation: spin 1s ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+
+  to {
+    -moz-transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

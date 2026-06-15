@@ -1,0 +1,154 @@
+/* Top Header */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+
+  height: 64px;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  padding: 0 1.5rem;
+
+  background: var(--slate-100);
+
+  border-radius: var(--radius-xl);
+}
+
+/* Right */
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.status-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-right: 0.75rem;
+}
+
+.train-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: var(--surface-low);
+}
+
+.unit-id {
+  color: var(--primary-blue);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--on-sale-badge);
+  animation: pulse 1.2s infinite;
+}
+
+.motion-text {
+  color: var(--on-sale-badge);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+}
+
+.action-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nav-icon {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: var(--radius-md);
+  transition: background var(--transition), color var(--transition);
+
+  &:hover {
+    color: var(--primary-blue);
+    background: var(--surface-low);
+  }
+}
+
+/* Button */
+.workflow-btn {
+  border: none;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  padding: 0.625rem 1rem;
+  border-radius: var(--radius-xl);
+
+  background: var(--primary-blue);
+  color: var(--white);
+
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  box-shadow: var(--shadow-cta);
+  transition: background var(--transition), transform var(--transition),
+    box-shadow var(--transition);
+
+  &:hover {
+    background: var(--primary-blue-hover);
+    box-shadow: var(--shadow-cta-hover);
+    transform: translateY(-1px);
+  }
+}
+
+/* Animations */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .motion-text {
+    display: none;
+  }
+
+  .workflow-btn {
+    padding: 0.625rem 0.75rem;
+    font-size: 0.6875rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .status-group {
+    display: none;
+  }
+}

@@ -1,0 +1,24 @@
+.error-label {
+  color: var(--red-100);
+  font-size: var(--input-error-font-size) !important;
+  line-height: 0.9375rem;
+  overflow: hidden;
+  width: 100%;
+  text-overflow: ellipsis;
+  height: 0.872rem;
+  white-space: nowrap;
+}
+
+.tooltip-content {
+  display: none;
+  background-color: red;
+}
+
+.checkbox-type {
+  font-size: 10px;
+  overflow: hidden;
+  width: 100%;
+  text-overflow: ellipsis;
+  height: 15px;
+  white-space: nowrap;
+}

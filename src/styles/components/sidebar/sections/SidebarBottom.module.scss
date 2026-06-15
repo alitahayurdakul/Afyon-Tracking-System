@@ -1,0 +1,78 @@
+.sidebar-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.profile {
+  background-color: var(--surface-muted);
+  display: flex;
+  align-items: center;
+
+  gap: 0.65rem;
+  border-radius: 0.5rem;
+  padding: 1rem;
+
+  .profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 0.75rem;
+
+    .profile-icon {
+      width: 40px;
+      height: 40px;
+      fill: currentColor;
+      color: var(--gray-60);
+    }
+  }
+
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    gap: 0.15rem;
+
+    .name {
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--slate-90);
+    }
+
+    .role {
+      font-size: 10px;
+      color: var(--slate-50);
+    }
+  }
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--slate-90);
+  background-color: transparent;
+  border: 1px solid var(--slate-20);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease,
+    border-color 0.15s ease;
+
+  svg {
+    font-size: 14px;
+  }
+
+  &:hover {
+    background-color: #dc2626;
+    border-color: #dc2626;
+    color: var(--base-white);
+  }
+}

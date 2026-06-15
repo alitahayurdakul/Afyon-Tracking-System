@@ -1,0 +1,2 @@
+export const DEFAULT_TABLE_PAGE_COUNT = 10;
+export const DEFAULT_TABLE_CURRENT_PAGE = 1;
