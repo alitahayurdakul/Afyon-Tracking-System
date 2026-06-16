@@ -3,9 +3,8 @@ import { NextRequest } from "next/server";
 import { processOperationsHandlers } from "@/api/handlers/processOperationQueries";
 
 export enum ProcessOperationsQueryTypes {
-  nextStageInProcess = "NEXT_STAGE_IN_PROCESS",
   completeProcess = "COMPLETE_PROCESS",
-  skipStage = "SKIP_STAGE"
+  getSubStageDetail = "GET_SUB_STAGE_DETAIL"
 }
 
 export async function POST(request: NextRequest) {
@@ -13,12 +12,11 @@ export async function POST(request: NextRequest) {
   const { id, stageId, params, type } = body;
 
   switch (type) {
-    case ProcessOperationsQueryTypes.nextStageInProcess:
-      return await processOperationsHandlers.nextStage(params);
+
     case ProcessOperationsQueryTypes.completeProcess:
       return await processOperationsHandlers.completeProcess(id);
-    case ProcessOperationsQueryTypes.skipStage:
-      return await processOperationsHandlers.skipStage(stageId);
+    case ProcessOperationsQueryTypes.getSubStageDetail:
+      return await processOperationsHandlers.getSubStageDetail(stageId);
 
     default: {
       return Response.json(

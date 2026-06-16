@@ -1,6 +1,7 @@
 import { MainStage } from "@/types/activeProcessDetailTypes";
 import StatusChip from "./StatusChip";
 import styles from "./ProcessFlow.module.scss";
+import StageDetailModal from "./stageDetailModal/StageDetailModal";
 
 interface StageRowProps {
   stage: MainStage;
@@ -49,15 +50,7 @@ export default function StageRow({ stage, index, isLast, onOpenDetail }: StageRo
 
         <div className={styles.cardRight}>
           <StatusChip status={stage.status} />
-          <button
-            className={styles.detailBtn}
-            onClick={(e) => {
-              e.stopPropagation();
-              onOpenDetail(stage);
-            }}
-          >
-            Detayı aç
-          </button>
+          <StageDetailModal id={stage.id} />
         </div>
       </div>
     </div>

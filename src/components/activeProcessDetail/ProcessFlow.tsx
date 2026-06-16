@@ -4,7 +4,6 @@ import { useState } from "react";
 import { MainStage } from "@/types/activeProcessDetailTypes";
 import { mockMainStages } from "@/mock/processData";
 import StageRow from "./StageRow";
-import StageDetailModal from "./StageDetailModal/StageDetailModal";
 import styles from "./ProcessFlow.module.scss";
 
 export default function ProcessFlow() {
@@ -54,10 +53,6 @@ export default function ProcessFlow() {
           />
         ))}
       </div>
-
-      {/* {selectedStage && (
-        <StageDetailModal stage={selectedStage} onClose={() => setSelectedStage(null)} />
-      )} */}
     </div>
   );
 }

@@ -101,7 +101,8 @@ export const CLIENT_END_POINTS = {
     editProcessDelayReasons: "/api/processes",
   },
   activeProcessOperation: {
-    complete: "/api/activeProcessOperations"
+    complete: "/api/activeProcessOperations",
+    getSubStageDetail: "/api/activeProcessOperations"
   },
   workflowHistory: {
     getAll: "/api/workflowHistory",
@@ -133,5 +134,5 @@ export const CLIENT_END_POINTS = {
     delete: "/api/users",
     getAll: "/api/users",
     getDetail: "/api/users",
-  },
+  }
 };
