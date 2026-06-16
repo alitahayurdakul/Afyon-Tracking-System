@@ -57,6 +57,11 @@ textarea {
 
   --surface-muted: #e8e8eb;
 
+  // STATUS COLOR
+  --completed: #639922;
+  --active: #378add;
+  --passive: #b4b2a9;
+
   --input-error-font-size: 0.875rem;
   --form-border-radius: 14px;
 
@@ -94,7 +99,6 @@ textarea {
   --shadow-card: 0 16px 48px rgba(0, 27, 62, 0.08);
   --shadow-cta: 0 10px 24px -6px rgba(0, 66, 134, 0.3);
   --shadow-cta-hover: 0 14px 32px -4px rgba(0, 66, 134, 0.4);
-
 
   // same color will be removed
   --color-primary: #1a73e8;

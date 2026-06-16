@@ -1,0 +1,31 @@
+import { MaterialEntry } from "@/types/process";
+import styles from "./StageDetailModal.module.scss";
+
+interface MaterialListProps {
+  materials: MaterialEntry[];
+  disabled: boolean;
+  onChange: (materials: MaterialEntry[]) => void;
+}
+
+export default function MaterialList({ materials, disabled, onChange }: MaterialListProps) {
+  const updateSerial = (name: string, serial: string) => {
+    onChange(materials.map((m) => (m.name === name ? { ...m, serial } : m)));
+  };
+
+  return (
+    <div className={styles.materialList}>
+      {materials.map((material) => (
+        <div key={material.name} className={styles.materialRow}>
+          <span className={styles.materialName}>{material.name}</span>
+          <input
+            type="text"
+            placeholder="Seri numarası"
+            value={material.serial}
+            disabled={disabled}
+            onChange={(e) => updateSerial(material.name, e.target.value)}
+          />
+        </div>
+      ))}
+    </div>
+  );
+}

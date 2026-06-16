@@ -1,0 +1,294 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  width: 320px;
+  height: 100vh;
+
+  overflow-y: auto;
+
+  background: var(--white);
+  border-left: 1px solid var(--border);
+
+  z-index: 40;
+}
+
+.sidebar-inner {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Başlıklar */
+.section-label {
+  display: block;
+  margin-bottom: 0.875rem;
+
+  font-size: 0.875rem;
+  font-weight: 700;
+
+  color: var(--primary-blue);
+}
+
+/* Select */
+.select-wrap {
+  position: relative;
+}
+
+.train-select {
+  width: 100%;
+  appearance: none;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+
+  background: var(--surface-low);
+
+  padding: 0.875rem 2.625rem 0.875rem 1rem;
+
+  font-size: 0.8125rem;
+  font-weight: 700;
+
+  color: var(--text-primary);
+  cursor: pointer;
+
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.train-select:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(0, 66, 134, 0.12);
+}
+
+.select-icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--text-muted);
+}
+
+.helper-text {
+  margin-top: 0.5rem;
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+}
+
+/* Kart */
+.train-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: var(--shadow-card);
+}
+
+.hero {
+  position: relative;
+  height: 11rem;
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 66, 134, 0.85), transparent);
+}
+
+.hero-content {
+  position: absolute;
+  left: 1.5rem;
+  bottom: 1rem;
+}
+
+.hero-content h2 {
+  color: var(--white);
+  font-size: 1.75rem;
+  font-weight: 800;
+}
+
+.hero-content p {
+  color: var(--surface-low);
+  font-size: 0.625rem;
+  letter-spacing: 0.125rem;
+  text-transform: uppercase;
+}
+
+/* Kart Gövde */
+.card-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.time-stage {
+  background: var(--surface-low);
+  border-radius: var(--radius-xl);
+  padding: 1rem;
+  text-align: center;
+}
+
+.time-stage span {
+  display: block;
+  font-size: 0.625rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.375rem;
+}
+
+.time-stage strong {
+  color: var(--primary-blue);
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.625rem;
+}
+
+.mini-box {
+  background: var(--surface-low);
+  padding: 0.75rem;
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+
+.mini-box span {
+  font-size: 0.625rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.mini-box p {
+  margin-top: 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Butonlar */
+.next-btn,
+.complete-btn {
+  border: none;
+  cursor: pointer;
+
+  width: 100%;
+  padding: 0.875rem;
+
+  border-radius: var(--radius-xl);
+
+  color: var(--white);
+
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  box-shadow: var(--shadow-cta);
+  transition: background var(--transition), transform var(--transition),
+    box-shadow var(--transition), opacity var(--transition);
+}
+
+.next-btn {
+  background: var(--primary-blue);
+}
+
+.next-btn:hover {
+  background: var(--primary-blue-hover);
+  box-shadow: var(--shadow-cta-hover);
+  transform: translateY(-1px);
+}
+
+.next-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: var(--shadow-cta);
+}
+
+.complete-btn {
+  background: var(--on-sale-badge);
+}
+
+.complete-btn:hover {
+  background: var(--on-sale-badge-dark);
+  transform: translateY(-1px);
+}
+
+/* Ekip */
+.crew-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.crew-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0.75rem;
+
+  border-radius: var(--radius-xl);
+
+  background: var(--surface);
+  border: 1px solid transparent;
+
+  transition: border-color var(--transition);
+  cursor: pointer;
+}
+
+.crew-card:hover {
+  border-color: var(--border);
+}
+
+.crew-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.crew-left img {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+}
+
+.crew-name {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.crew-role {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+}
+
+.chat-icon {
+  color: var(--primary-blue);
+  opacity: 0.5;
+  transition: opacity var(--transition);
+}
+
+.crew-card:hover .chat-icon {
+  opacity: 1;
+}

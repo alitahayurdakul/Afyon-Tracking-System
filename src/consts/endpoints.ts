@@ -35,12 +35,8 @@ export const END_POINTS = {
       `${apiUrl}/api/processes/stage-entry/${id}/delay-reason`,
   },
   processOperations: {
-    next: (processId: string) =>
-      `${apiUrl}/api/processes/${processId}/start-stage`,
     complete: (processId: string) =>
-      `${apiUrl}/api/processes/${processId}/complete`,
-    skipStage: (id: string) =>
-      `${apiUrl}/api/favorite-processes/stages/${id}/skip`,
+      `${apiUrl}/api/processes/${processId}/complete`
   },
   workflowHistory: {
     getAll: `${apiUrl}/api/processes?status=COMPLETED`,
@@ -105,9 +101,7 @@ export const CLIENT_END_POINTS = {
     editProcessDelayReasons: "/api/processes",
   },
   activeProcessOperation: {
-    next: "/api/activeProcessOperations",
-    complete: "/api/activeProcessOperations",
-    skipStage: "/api/activeProcessOperations",
+    complete: "/api/activeProcessOperations"
   },
   workflowHistory: {
     getAll: "/api/workflowHistory",
