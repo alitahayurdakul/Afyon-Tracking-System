@@ -1,4 +1,5 @@
 import { ActiveProcessesHeader } from "@/components/activeProcesses/ActiveProcessesHeader";
+import { ActiveProcessGrid } from "@/components/activeProcesses/ActiveProcessGrid";
 import Breadcrumb from "@/components/Breadcrumb";
 import { Topbar } from "@/components/common/Topbar";
 // import { HomeActiveProcessGrid } from "@/components/homeActiveProcesses/body/HomeActiveProcessGrid";
@@ -12,7 +13,7 @@ export default function ActiveProcessPage() {
         { name: "Depo Gösterge Paneli" }
       ]}/>
        <ActiveProcessesHeader />
-      {/*<HomeActiveProcessGrid /> */}
+      <ActiveProcessGrid />
     </div>
   );
 }

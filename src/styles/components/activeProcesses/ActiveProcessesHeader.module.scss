@@ -24,6 +24,14 @@
   color: var(--slate-60);
 }
 
+/* RIGHT SIDE */
+
+.right-side {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 /* STAT CARD */
 
 .stat-box {
@@ -34,7 +42,7 @@
   padding: 14px 18px;
   border-radius: 16px;
 
-  background: #ffffff;
+  background: var(--white);
   border: 1px solid var(--slate-20);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
 }
@@ -62,16 +70,6 @@
 .value {
   color: var(--blue-90);
 }
-
-// .value.secondary {
-//   color: var(--blue-70);
-// }
-
-// .divider {
-//   width: 1px;
-//   height: 34px;
-//   background: var(--slate-20);
-// }
 
 /* MOBILE */
 

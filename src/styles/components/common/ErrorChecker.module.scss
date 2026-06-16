@@ -1,0 +1,13 @@
+.error-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .title{
+        font-size: 1.25rem;
+        color: var(--slate-90);
+        font-weight: 600;
+    }
+}
