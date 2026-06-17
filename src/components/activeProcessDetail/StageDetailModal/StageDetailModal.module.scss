@@ -141,9 +141,15 @@
 }
 
 .timeRow {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .timeCol {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
 
   label {
     display: flex;

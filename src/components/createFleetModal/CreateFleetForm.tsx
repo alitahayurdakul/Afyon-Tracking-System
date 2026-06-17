@@ -68,6 +68,17 @@ export const CreateFleetForm = () => {
     removeModal();
   };
 
+  const VAGONS = [
+    {
+      value: "TCB",
+      label: "TCB"
+    },
+    {
+      value: "TCF",
+      label: "TCF"
+    }
+  ]
+
   const onSubmit: SubmitHandler<ICreateFleetFormDataTypes> = useCallback(
     async (data) => {
       const params = {
@@ -108,6 +119,26 @@ export const CreateFleetForm = () => {
               <SelectBox
                 name={item.name}
                 options={trainOptions || []}
+                control={control as any}
+                required={item.isRequired}
+                label={item.label}
+                placeholder={`${item.label} seçiniz`}
+                formLabelClassName={styles["form-label"]}
+                isSearchable
+                isClearable
+                multiselect={item.isMultiselect}
+                hideSelectedOptions
+                loading={isLoading}
+              />
+            </React.Fragment>
+          );
+        }
+           if (item.name === "vagonId") {
+          return (
+            <React.Fragment key={index}>
+              <SelectBox
+                name={item.name}
+                options={VAGONS || []}
                 control={control as any}
                 required={item.isRequired}
                 label={item.label}

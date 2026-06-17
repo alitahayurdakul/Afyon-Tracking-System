@@ -1,19 +1,18 @@
 "use client";
 
-import { useState } from "react";
-import { SubStage } from "@/types/activeProcessDetailTypes";
-import { mockStageDetails } from "@/mock/processData";
-import Stepper from "./Stepper";
-import DelayReasonGroup from "./DelayReasonGroup";
-import MaterialList from "./MaterialList";
-import ImageUploader from "./ImageUploader";
+import { useEffect, useState } from "react";
+import { StageDetail, SubStage } from "@/types/activeProcessDetailTypes";
+
 import StatusChip from "../StatusChip";
 import styles from "./StageDetailModal.module.scss";
 import { Modal } from "@/components/common/Modal";
 import { ACTIVE_STAGE_DETAIL_MODAL } from "@/consts/modals";
-import { useGetActiveProcessesDataQuery } from "@/api/queries/useGetProcessesQueries";
-import { useGetSubStageDetailDataQuery } from "@/api/queries/useGetActiveStageDetailQueries";
-import { formatDate } from "@/utils/formDate";
+import { useGetSubStagesDataQuery } from "@/api/queries/useGetSubStagesQueries";
+import Stepper from "./Stepper";
+import DelayReasonGroup from "./DelayReasonGroup";
+import MaterialList from "./MaterialList";
+import ImageUploader from "./ImageUploader";
+import TimeSection from "./sections/TimeSection";
 
 interface StageDetailModalProps {
   id: string;
@@ -26,38 +25,32 @@ export default function StageDetailModalContent({
   open,
   setOpen,
 }: StageDetailModalProps) {
-  const detail = mockStageDetails[id];
-  const [subStages, setSubStages] = useState<SubStage[]>(
-    detail?.subStages ?? [],
-  );
-  const [activeIndex, setActiveIndex] = useState(
-    subStages.findIndex((s) => s.status === "active") ?? 0,
-  );
-  const { data, isLoading, isError } = useGetSubStageDetailDataQuery(
-    subStages[activeIndex]?.id ?? "",
-  );
-  console.log(data, "data", subStages);
+  const {
+    data: stageDetail,
+    isLoading,
+    isError,
+  } = useGetSubStagesDataQuery<StageDetail>("");
 
-  if (!detail) return null;
+  const subStagesData = stageDetail?.subStages;
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [prevSubStagesData, setPrevSubStagesData] = useState(subStagesData);
 
-  const current = subStages[activeIndex];
-  const isLocked = current.status !== "active";
-
-  const updateCurrent = (changes: Partial<SubStage>) => {
-    setSubStages((prev) =>
-      prev.map((s, i) => (i === activeIndex ? { ...s, ...changes } : s)),
+  if (subStagesData !== prevSubStagesData) {
+    setPrevSubStagesData(subStagesData);
+    const index = subStagesData?.findIndex(
+      (s: SubStage) => s.status === "active",
     );
-  };
+    if (index !== undefined && index !== -1) {
+      setActiveIndex(index);
+    }
+  }
+  const activeSubStageData = subStagesData?.[activeIndex];
+  if (!activeSubStageData) return null;
+
+  const isLocked = activeSubStageData.status !== "active";
 
   const completeStage = () => {
-    setSubStages((prev) =>
-      prev.map((s, i) => {
-        if (i === activeIndex) return { ...s, status: "completed" };
-        if (i === activeIndex + 1) return { ...s, status: "active" };
-        return s;
-      }),
-    );
-    if (activeIndex < subStages.length - 1) {
+    if (activeIndex < subStagesData.length - 1) {
       setActiveIndex(activeIndex + 1);
     }
   };
@@ -67,7 +60,7 @@ export default function StageDetailModalContent({
       name={`${ACTIVE_STAGE_DETAIL_MODAL}_${id}`}
       width="900px"
       height="auto"
-      title={`Aşama detayı — ${detail.stageName}`}
+      title={`Aşama detayı — ${activeSubStageData?.name || ""}`}
       isCloseOutside={false}
       isCloseEsc={false}
       enableParams={true}
@@ -77,77 +70,74 @@ export default function StageDetailModalContent({
       <div className={styles.modal}>
         <div className={styles.header}>
           <div className={styles.headerLeft}>
-            <span className={styles.title}>{subStages[activeIndex].name}</span>
-            <StatusChip status={current.status} />
+            <span className={styles.title}>{activeSubStageData.name}</span>
+            <StatusChip status={activeSubStageData.status} />
           </div>
         </div>
 
         <Stepper
-          subStages={subStages}
+          subStages={subStagesData ?? []}
           activeIndex={activeIndex}
           onSelect={setActiveIndex}
         />
 
         <div className={styles.body}>
+          <TimeSection
+            endDate={activeSubStageData.end}
+            startDate={activeSubStageData.start}
+          />
           <section className={styles.section}>
             <h3>Gecikme nedenleri</h3>
             <DelayReasonGroup
-              selected={current.delayReasons}
+              selected={activeSubStageData.delayReasons}
               disabled={isLocked}
-              onChange={(reasons) => updateCurrent({ delayReasons: reasons })}
+              onChange={(reasons) => console.log(reasons)}
             />
           </section>
-          {current.materials && current.materials.length > 0 && (
-            <section className={styles.section}>
-              <h3>Malzemeler ve seri numaraları</h3>
+          {activeSubStageData.materials &&
+            activeSubStageData.materials.length > 0 && (
+              <section className={styles.section}>
+                <h3>Malzemeler ve seri numaraları</h3>
 
-              <MaterialList
-                materials={current.materials}
-                disabled={isLocked}
-                onChange={(materials) => updateCurrent({ materials })}
-              />
-            </section>
-          )}
-
-          <section className={styles.section}>
-            <h3>Zaman bilgileri</h3>
-            <div className={styles.timeRow}>
-              <label>
-                <b>Başlangıç</b>
-              </label>
-              <label>
-                <b>Bitiş</b>
-              </label>
-              <label>{formatDate(current.start)}</label>
-              <label>{formatDate(current.end)}</label>
-            </div>
-          </section>
+                <MaterialList
+                  materials={activeSubStageData.materials}
+                  disabled={isLocked}
+                  onChange={(materials) => console.log(materials)}
+                />
+              </section>
+            )}
 
           <section className={styles.section}>
             <h3>Açıklama</h3>
             <textarea
-              value={current.description}
+              value={activeSubStageData.description}
               disabled={isLocked}
               className={styles.textarea}
               placeholder="Açıklama giriniz..."
-              onChange={(e) => updateCurrent({ description: e.target.value })}
+              onChange={(e) => console.log(e.target.value)}
             />
           </section>
 
           <section className={styles.section}>
             <h3>Görseller</h3>
             <ImageUploader
-              images={current.images}
+              images={activeSubStageData.images}
               disabled={isLocked}
-              onChange={(images) => updateCurrent({ images })}
+              onChange={(images) => console.log(images)}
             />
           </section>
         </div>
 
         <div className={styles.footer}>
+          {activeSubStageData.status === "active" && (
+            <button className={styles.completeBtn} onClick={completeStage}>
+              Değişiklikleri Kaydet
+            </button>
+          )}
+
           <button
             className={styles.completeBtn}
-            disabled={current.status !== "active"}
+            disabled={activeSubStageData.status !== "active"}
             onClick={completeStage}
           >
             Aşamayı tamamla

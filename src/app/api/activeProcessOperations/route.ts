@@ -4,7 +4,7 @@ import { processOperationsHandlers } from "@/api/handlers/processOperationQuerie
 
 export enum ProcessOperationsQueryTypes {
   completeProcess = "COMPLETE_PROCESS",
-  getSubStageDetail = "GET_SUB_STAGE_DETAIL"
+  getSubStages = "GET_SUB_STAGES"
 }
 
 export async function POST(request: NextRequest) {
@@ -15,8 +15,8 @@ export async function POST(request: NextRequest) {
 
     case ProcessOperationsQueryTypes.completeProcess:
       return await processOperationsHandlers.completeProcess(id);
-    case ProcessOperationsQueryTypes.getSubStageDetail:
-      return await processOperationsHandlers.getSubStageDetail(stageId);
+    case ProcessOperationsQueryTypes.getSubStages:
+      return await processOperationsHandlers.getSubStages();
 
     default: {
       return Response.json(

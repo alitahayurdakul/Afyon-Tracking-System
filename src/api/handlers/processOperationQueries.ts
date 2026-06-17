@@ -6,7 +6,7 @@ import { SubStage } from "@/types/activeProcessDetailTypes";
 
 export const processOperationsHandlers = {
   completeProcess,
-  getSubStageDetail
+  getSubStages
 };
 
 async function completeProcess(processId: string): Promise<Response> {
@@ -29,7 +29,7 @@ async function completeProcess(processId: string): Promise<Response> {
   }
 };
 
-async function getSubStageDetail(subStageId: string): Promise<Response> {
+async function getSubStages(): Promise<Response> {
   try {
     // const response = await axiosInstance.post(
     //   END_POINTS.processOperations.complete(processId || "")
@@ -37,8 +37,8 @@ async function getSubStageDetail(subStageId: string): Promise<Response> {
     // if (response.status === 200) {
     //   return Response.json({ success: true, data: response.data });
     // }
-    const activeData = mockStageDetail.filter((stage: SubStage) => stage.id === subStageId);
-    return Response.json({ success: true, data: activeData }); 
+    
+    return Response.json({ success: true, data: mockStageDetail }); 
     // return Response.json(
     //   { success: false, error: "Failed to create activeWorkflow" },
     //   { status: 200 },

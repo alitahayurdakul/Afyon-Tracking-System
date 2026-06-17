@@ -3,22 +3,21 @@ import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "../axiosInstance";
 import { ProcessOperationsQueryTypes } from "@/app/api/activeProcessOperations/route";
 
-export const useGetSubStageDetailDataQuery = <T>(subStageId: string) => {
-    const isEnabled = Boolean(subStageId && subStageId !== "")
+export const useGetSubStagesDataQuery = <T>(subStageId: string) => {
+    // const isEnabled = Boolean(subStageId && subStageId !== "")
   return useQuery({
     queryKey: [`getSubStageDetail_${subStageId}`],
     refetchOnWindowFocus: false,
-    enabled: isEnabled,
+    enabled: true,
     queryFn: async () => {
-      const { data } = await axiosInstance.post<T>(
-        CLIENT_END_POINTS.activeProcessOperation.getSubStageDetail,
+      const { data } = await axiosInstance.post<{success:boolean; data: T}>(
+        CLIENT_END_POINTS.activeProcessOperation.getSubStages,
         {
-          type: ProcessOperationsQueryTypes.getSubStageDetail,
-          id: subStageId,
+          type: ProcessOperationsQueryTypes.getSubStages
         },
       );
 
-      return data;
+      return data.data;
     },
   });
 };

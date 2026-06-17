@@ -127,7 +127,11 @@ export const mockStageDetails: Record<string, StageDetail> = {
   },
 };
 
-export const mockStageDetail: SubStage[] = [
+export const mockStageDetail: StageDetail = 
+{
+  stageName: "Depoya Giriş",
+  stageId: "3",
+  subStages: [
   {
     id: "ikmal",
     name: "İkmal",
@@ -164,7 +168,7 @@ export const mockStageDetail: SubStage[] = [
   {
     id: "sub-test",
     name: "Test",
-    status: "pending",
+    status: "active",
     start: null,
     end: null,
     delayReasons: [],
@@ -183,7 +187,9 @@ export const mockStageDetail: SubStage[] = [
     description: "",
     images: [],
   },
-];
+]
+}
+
 
 export const delayReasonOptions: string[] = [
   "Malzeme Eksikliği",

@@ -1,6 +1,6 @@
 "use client";
 
-import StageDetailModalContent from "./StageDetailModalContent";
+import StageDetailModalContent from "@/components/activeProcessDetail/stageDetailModal/StageDetailModalContent";
 import styles from "../ProcessFlow.module.scss";
 import { useState } from "react";
 import { useAddQueryParam } from "@/utils/searchParams";
