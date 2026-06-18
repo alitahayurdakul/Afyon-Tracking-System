@@ -12,6 +12,7 @@ interface IPropsType {
   name?: string;
   isMobile?: boolean;
   onChange?: (value: IOptionType["value"], checked: boolean) => void;
+  isDisabled?: boolean;
 }
 
 const Option = ({
@@ -23,6 +24,7 @@ const Option = ({
   name,
   isMobile,
   onChange,
+  isDisabled
 }: IPropsType) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(option.value, e.target.checked);
@@ -39,6 +41,7 @@ const Option = ({
         id={option.value as string}
         checked={isSelected}
         onChange={handleChange}
+        disabled={isDisabled}
       />
       <label
         className={clsx(

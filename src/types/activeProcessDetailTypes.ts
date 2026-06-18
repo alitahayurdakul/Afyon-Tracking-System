@@ -14,13 +14,18 @@ export interface MaterialEntry {
   serial: string;
 }
 
+export interface DelayReasons{
+  id: string;
+  name: string;
+}
+
 export interface SubStage {
   id: string;
   name: string;
   status: StageStatus;
   start: string | null;
   end: string | null;
-  delayReasons: string[];
+  delayReasons: DelayReasons[];
   materials: MaterialEntry[];
   description: string;
   images: string[];

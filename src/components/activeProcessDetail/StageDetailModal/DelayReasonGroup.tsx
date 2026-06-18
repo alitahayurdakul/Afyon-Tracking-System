@@ -1,33 +1,41 @@
 import { delayReasonOptions } from "@/mock/processData";
 import styles from "./StageDetailModal.module.scss";
+import React from "react";
+import Option from "@/components/formElements/Option";
+import { DelayReasons } from "@/types/activeProcessDetailTypes";
+import { IOptionType } from "@/types/formTypes";
 
 interface DelayReasonGroupProps {
-  selected: string[];
+  selectedList: IOptionType["value"][];
   disabled: boolean;
-  onChange: (reasons: string[]) => void;
+  onChange: (selectedList: IOptionType["value"][]) => void;
 }
 
-export default function DelayReasonGroup({ selected, disabled, onChange }: DelayReasonGroupProps) {
-  const toggle = (reason: string) => {
-    if (selected.includes(reason)) {
-      onChange(selected.filter((r) => r !== reason));
-    } else {
-      onChange([...selected, reason]);
-    }
-  };
+export default function DelayReasonGroup({
+  selectedList,
+  disabled,
+  onChange
+}: DelayReasonGroupProps) {
+  console.log(selectedList);
+
+  const handleChange = (value: IOptionType["value"], checked: boolean) => {
+    const updated = checked
+      ? [...selectedList, value]
+      : selectedList.filter((v) => v !== value);
+    onChange(updated);
+  }
 
   return (
     <div className={styles.checkboxGroup}>
-      {delayReasonOptions.map((reason) => (
-        <label key={reason} className={styles.checkboxItem}>
-          <input
-            type="checkbox"
-            checked={selected.includes(reason)}
-            disabled={disabled}
-            onChange={() => toggle(reason)}
+      {delayReasonOptions.map((reason, index) => (
+        <React.Fragment key={index}>
+          <Option
+            option={{ label: reason.name ?? "-", value: reason.id }}
+            isSelected={selectedList.includes(reason.id)}
+            onChange={handleChange}
+            isDisabled={disabled}
           />
-          {reason}
-        </label>
+        </React.Fragment>
       ))}
     </div>
   );

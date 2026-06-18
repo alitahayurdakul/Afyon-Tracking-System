@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { StageDetail, SubStage } from "@/types/activeProcessDetailTypes";
 
 import StatusChip from "../StatusChip";
@@ -13,11 +13,17 @@ import DelayReasonGroup from "./DelayReasonGroup";
 import MaterialList from "./MaterialList";
 import ImageUploader from "./ImageUploader";
 import TimeSection from "./sections/TimeSection";
+import { IOptionType } from "@/types/formTypes";
 
 interface StageDetailModalProps {
   id: string;
   open?: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean | undefined>>;
+}
+
+interface NewSubStageData {
+  selectedList: IOptionType["value"][];
+  materialList: never[]; // or whatever this should actually be
 }
 
 export default function StageDetailModalContent({
@@ -44,7 +50,25 @@ export default function StageDetailModalContent({
       setActiveIndex(index);
     }
   }
+
   const activeSubStageData = subStagesData?.[activeIndex];
+
+  const [newSubStageData, setNewSubStageData] = useState<NewSubStageData>({
+    selectedList:
+      activeSubStageData?.delayReasons?.map((reason) => reason.id) || [],
+    materialList: [],
+  });
+  const [prevActiveIndex, setPrevActiveIndex] = useState(activeIndex);
+
+  if (activeIndex !== prevActiveIndex) {
+    setPrevActiveIndex(activeIndex);
+    setNewSubStageData({
+      selectedList:
+        activeSubStageData?.delayReasons?.map((reason) => reason.id) || [],
+      materialList: [],
+    });
+  }
+
   if (!activeSubStageData) return null;
 
   const isLocked = activeSubStageData.status !== "active";
@@ -89,9 +113,11 @@ export default function StageDetailModalContent({
           <section className={styles.section}>
             <h3>Gecikme nedenleri</h3>
             <DelayReasonGroup
-              selected={activeSubStageData.delayReasons}
+              selectedList={newSubStageData.selectedList}
               disabled={isLocked}
-              onChange={(reasons) => console.log(reasons)}
+              onChange={(selectedList) =>
+                setNewSubStageData((prev) => ({ ...prev, selectedList }))
+              }
             />
           </section>
           {activeSubStageData.materials &&

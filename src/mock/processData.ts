@@ -1,4 +1,5 @@
 import {
+  DelayReasons,
   MainStage,
   StageDetail,
   SubStage,
@@ -96,7 +97,16 @@ export const mockStageDetails: Record<string, StageDetail> = {
         status: "active",
         start: "2026-06-15T09:14:03.041Z",
         end: null,
-        delayReasons: ["Malzeme Eksikliği"],
+        delayReasons: [
+          {
+            name: "Malzeme Eksikliği",
+            id: "1",
+          },
+          {
+            name: "Malzeme Eksikliği 2",
+            id: "2",
+          },
+        ],
         materials: [{ name: "Yağ", serial: "" }],
         description: "",
         images: [],
@@ -127,76 +137,98 @@ export const mockStageDetails: Record<string, StageDetail> = {
   },
 };
 
-export const mockStageDetail: StageDetail = 
-{
+export const mockStageDetail: StageDetail = {
   stageName: "Depoya Giriş",
   stageId: "3",
   subStages: [
-  {
-    id: "ikmal",
-    name: "İkmal",
-    status: "completed",
-    start: "2026-06-15T09:14:03.041Z",
-    end: "2026-06-15T09:15:03.041Z",
-    delayReasons: [],
-    materials: [{ name: "Filtre", serial: "SN-10234" }],
-    description: "Depo girişi standart prosedüre uygun tamamlandı.",
-    images: [],
-  },
-  {
-    id: "muayene",
-    name: "Muayene",
-    status: "completed",
-    start: "2026-06-15T09:14:03.041Z",
-    end: "2026-06-15T09:17:03.041Z",
-    delayReasons: [],
-    materials: [],
-    description: "",
-    images: [],
-  },
-  {
-    id: "bakim",
-    name: "Bakım",
-    status: "active",
-    start: "2026-06-15T09:14:03.041Z",
-    end: null,
-    delayReasons: ["Malzeme Eksikliği"],
-    materials: [{ name: "Yağ", serial: "" }],
-    description: "",
-    images: [],
-  },
-  {
-    id: "sub-test",
-    name: "Test",
-    status: "active",
-    start: null,
-    end: null,
-    delayReasons: [],
-    materials: [],
-    description: "",
-    images: [],
-  },
-  {
-    id: "sub-teslim",
-    name: "Teslim",
-    status: "pending",
-    start: null,
-    end: null,
-    delayReasons: [],
-    materials: [],
-    description: "",
-    images: [],
-  },
-]
-}
+    {
+      id: "ikmal",
+      name: "İkmal",
+      status: "completed",
+      start: "2026-06-15T09:14:03.041Z",
+      end: "2026-06-15T09:15:03.041Z",
+      delayReasons: [],
+      materials: [{ name: "Filtre", serial: "SN-10234" }],
+      description: "Depo girişi standart prosedüre uygun tamamlandı.",
+      images: [],
+    },
+    {
+      id: "muayene",
+      name: "Muayene",
+      status: "completed",
+      start: "2026-06-15T09:14:03.041Z",
+      end: "2026-06-15T09:17:03.041Z",
+      delayReasons: [],
+      materials: [],
+      description: "",
+      images: [],
+    },
+    {
+      id: "bakim",
+      name: "Bakım",
+      status: "active",
+      start: "2026-06-15T09:14:03.041Z",
+      end: null,
+      delayReasons: [
+        {
+          name: "Malzeme Eksikliği",
+          id: "1",
+        },
+        {
+          name: "Malzeme Eksikliği 2",
+          id: "2",
+        },
+      ],
+      materials: [{ name: "Yağ", serial: "" }],
+      description: "",
+      images: [],
+    },
+    {
+      id: "sub-test",
+      name: "Test",
+      status: "active",
+      start: null,
+      end: null,
+      delayReasons: [],
+      materials: [],
+      description: "",
+      images: [],
+    },
+    {
+      id: "sub-teslim",
+      name: "Teslim",
+      status: "pending",
+      start: null,
+      end: null,
+      delayReasons: [],
+      materials: [],
+      description: "",
+      images: [],
+    },
+  ],
+};
 
-
-export const delayReasonOptions: string[] = [
-  "Malzeme Eksikliği",
-  "Masa Kısaltılmalı",
-  "Mazot",
-  "Personel Yetersiz",
-  "Tezgah Uzunluğu",
+export const delayReasonOptions: DelayReasons[] = [
+  {
+    name: "Malzeme Eksikliği",
+    id: "1",
+  },
+  {
+    name: "Masa Kısaltılmalı",
+    id: "2",
+  },
+  {
+    name: "Mazot",
+    id: "3",
+  },
+  {
+    name: "Personel Yetersiz",
+    id: "4",
+  },
+  {
+    name: "Tezgah Uzunluğu",
+    id: "5",
+  },
 ];
 
 export const materialOptions: string[] = [

@@ -1,4 +1,4 @@
-import { MaterialEntry } from "@/types/process";
+import { MaterialEntry } from "@/types/activeProcessDetailTypes";
 import styles from "./StageDetailModal.module.scss";
 
 interface MaterialListProps {
