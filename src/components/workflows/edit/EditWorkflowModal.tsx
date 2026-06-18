@@ -23,12 +23,12 @@ export const EditWorkflowModal = ({ id }: { id: string }) => {
 
     return {
       ...data,
-      stages: ((data.stages as IStageType[]) ?? []).map(
-        (stage: IStageType) => ({
-          value: stage.stageInfo?._id ?? "",
-          label: stage.stageInfo?.name ?? "",
-        }),
-      ),
+      // Aşama verisi hem API şeklinde ({stageInfo}) hem de {value,label}
+      // şeklinde gelebilir; değer boş gelirse index'i key olarak kullan.
+      stages: ((data.stages as any[]) ?? []).map((stage: any, index: number) => ({
+        value: stage?.stageInfo?._id ?? stage?.value ?? `stage-${index}`,
+        label: stage?.stageInfo?.name ?? stage?.label ?? "-",
+      })),
     };
   }, [data]);
 

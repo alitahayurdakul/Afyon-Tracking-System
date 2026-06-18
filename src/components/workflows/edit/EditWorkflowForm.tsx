@@ -143,9 +143,11 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
   );
 
   const options = useCallback(() => {
-    const newOptions = data?.stages.map((stage: IStageType) => ({
-      value: stage._id,
-      label: stage.name,
+    const newOptions = data?.stages?.map((stage: any, index: number) => ({
+      // Aşama verisi hem {_id, name} hem de {value, label} şeklinde gelebilir;
+      // değer boş gelirse benzersizliği korumak için index'i key olarak kullan.
+      value: stage?._id ?? stage?.value ?? `stage-${index}`,
+      label: stage?.name ?? stage?.label ?? "-",
     }));
     return newOptions;
   }, [data]);
