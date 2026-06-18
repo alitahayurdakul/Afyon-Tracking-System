@@ -1,0 +1,16 @@
+.filter-container {
+  display: grid;
+  padding: 1.5rem;
+  gap: 15px;
+  background-color: var(--surface);
+  border-radius: 0.5rem;
+
+  .form-label {
+    margin-left: 4px;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--slate-50) !important;
+  }
+}

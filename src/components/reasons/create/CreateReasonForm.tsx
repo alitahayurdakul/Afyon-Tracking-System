@@ -1,0 +1,123 @@
+"use client";
+/* eslint-disable */
+
+import styles from "@/styles/components/reasons/ReasonForm.module.scss";
+import { Button } from "@/components/formElements/Button";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { ReasonFormValidation } from "@/utils/validations/reasonFormValidation";
+import React, { useCallback } from "react";
+import { TextAreaBox } from "@/components/formElements/TextAreaBox";
+import { InputBox } from "@/components/formElements/InputBox";
+import { InputSpaceEnums } from "@/types/formEnums";
+import { useRemoveQueryParamModal } from "@/utils/searchParams";
+import { useDispatch } from "react-redux";
+import { addToastify } from "@/redux/slices/toastSlice";
+import { IReasonFormDataTypes } from "@/types/reasonsTypes";
+import { axiosInstance } from "@/api/axiosInstance";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { ReasonQueryTypes } from "@/app/api/reasons/route";
+import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+
+export const CreateReasonForm = () => {
+  const {
+    control,
+    handleSubmit,
+    register,
+    reset,
+    formState: { isSubmitting, errors },
+  } = useForm<IReasonFormDataTypes>({
+    resolver: yupResolver(ReasonFormValidation()),
+    defaultValues: {
+      name: "",
+      desc: "",
+    },
+  });
+
+  const dispatch = useDispatch();
+  const removeModal = useRemoveQueryParamModal();
+
+  const onCancel = () => {
+    removeModal();
+  };
+
+  const onSubmit: SubmitHandler<IReasonFormDataTypes> = useCallback(
+    async (data) => {
+      try {
+        const params = {
+          name: data.name,
+          description: data.desc,
+          editor: "Admin",
+        };
+        await axiosInstance.post(CLIENT_END_POINTS.reason.create, {
+          type: ReasonQueryTypes.createReason,
+          params,
+        });
+        dispatch(
+          addToastify({
+            message: "Başarıyla oluşturuldu",
+            type: "success",
+            icon: "close",
+            id: "createReason" + Date.now(),
+          }),
+        );
+        dispatch(addTriggerTable());
+        reset();
+        removeModal();
+      } catch (err) {
+        dispatch(
+          addToastify({
+            message: (err as Error)?.message || "Oluşturma başarısız",
+            type: "error",
+            icon: "close",
+            id: "createReason" + Date.now(),
+          }),
+        );
+      }
+    },
+    [],
+  );
+
+  return (
+    <form className={styles["train-form"]}>
+      <InputBox
+        control={control as any}
+        label="Sebep Başlığı"
+        name="name"
+        placeholder="Sebep başlığı giriniz"
+        required
+        maxLength={100}
+        spacesRule={InputSpaceEnums.limitMaxOneSpace}
+        inputClassName={styles["text-input"]}
+      />
+      <TextAreaBox
+        control={control as any}
+        label="Açıklama"
+        {...register("desc")}
+        required
+        rows={5}
+        placeholder="Açıklama giriniz"
+        maxLength={400}
+        visibleLimit
+        textareaClassName={styles["text-input"]}
+      />
+      <div className={styles["btn-group"]}>
+        <Button
+          clickFn={onCancel}
+          type="simple"
+          className={styles["cancel-btn"]}
+          label="İptal"
+          disabled={isSubmitting}
+        />
+
+        <Button
+          clickFn={handleSubmit(onSubmit)}
+          type="simple"
+          className={styles["submit-btn"]}
+          label="Kaydet"
+          disabled={isSubmitting}
+        />
+      </div>
+    </form>
+  );
+};
