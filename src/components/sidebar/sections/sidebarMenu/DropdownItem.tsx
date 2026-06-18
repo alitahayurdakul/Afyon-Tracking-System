@@ -6,13 +6,14 @@ import styles from "@/styles/components/sidebar/sections/sidebarMenu/DropdownIte
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
+import { stripLocale } from "@/utils/stripLocale";
 import Link from "next/link";
 interface IPropsTypes {
   item: ISidebarItemTypes;
 }
 
 export const DropdownItem = ({ item }: IPropsTypes) => {
-  const pathname = usePathname();
+  const pathname = stripLocale(usePathname());
   const isActive = item?.subItems?.filter(
     (item: ISidebarItemTypes) => item.url === pathname,
   )?.[0];
@@ -54,7 +55,7 @@ export const DropdownItem = ({ item }: IPropsTypes) => {
 };
 
 export const SingleItem = ({ item }: IPropsTypes) => {
-  const pathname = usePathname();
+  const pathname = stripLocale(usePathname());
   const isActive = pathname === item.url;
   return (
     <Link

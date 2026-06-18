@@ -1,0 +1,37 @@
+.table-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.delete-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 12px;
+  border: none;
+  border-radius: 10px;
+
+  background: transparent;
+  cursor: pointer;
+
+  font-size: 14px;
+  font-weight: 700;
+  transition: 0.25s ease;
+}
+
+.delete-btn {
+  color: var(--slate-60);
+}
+
+.delete-btn:hover {
+  background: rgba(220, 38, 38, 0.08);
+  color: var(--on-sale-badge)!important;
+  span{
+    color: var(--on-sale-badge)!important;
+  }
+}
+
+.delete-btn svg {
+  font-size: 16px;
+}

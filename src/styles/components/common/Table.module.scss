@@ -1,0 +1,71 @@
+.table {
+  border-spacing: 0;
+  border: 1px solid var(--grey-15);
+  border-radius: 0.5rem;
+  width: 100%!important;
+
+  thead {
+  }
+
+  th {
+    // padding: 1.25rem;
+    height: 42px !important;
+    color: var(--base-grey-85, #4b5157);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-align: left;
+  }
+
+  tbody {
+    tr {
+      td {
+        color: var(--base-grey-85, #4b5157);
+        font-size: 0.75rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        border: 1px solid var(--grey-15, #e2e8eb);
+      }
+
+      td:first-child {
+        border-left: none;
+      }
+    }
+
+    tr:nth-child(odd) {
+      background-color: var(--Grey-05, #f5f6f6);
+    }
+  }
+}
+.dragging * {
+  cursor: grabbing !important;
+}
+
+.cell {
+  padding: 0 10.8px;
+  word-wrap: break-word;
+  // max-height: 160px;
+}
+
+.price-content {
+  padding: 0px 20px !important;
+}
+
+.price-cell {
+  max-height: 160px;
+  height: unset;
+  display: unset !important;
+}
+
+// 1605 perseus
+// .order-dashboard-table {
+//   tr {
+//     max-height: 100px;
+//     td {
+//       max-height: 100px;
+//       // background-color: yellow !important;
+//     }
+//   }
+// }

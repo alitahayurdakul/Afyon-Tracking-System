@@ -11,6 +11,7 @@ import {
   faUsersGear,
   faUsers,
   faUserShield,
+  faBoxesStacked,
 } from "@fortawesome/free-solid-svg-icons";
 import { URL_PAGES } from "./url";
 
@@ -61,6 +62,11 @@ export const SIDEBAR_ITEMS: ISidebarItemsTypes = [
     name: "Gecikme Sebepleri",
     icon: faCircleExclamation,
     url: "/reasons",
+  },
+  {
+    name: "Malzeme Listesi",
+    icon: faBoxesStacked,
+    url: "/malzeme-listesi",
   },
   {
     name: "Kullanıcı Yönetimi",

@@ -4,6 +4,7 @@ import Link from "next/link";
 import styles from "@/styles/components/sidebar/sections/sidebarMenu/SidebarMenu.module.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { usePathname } from "next/navigation";
+import { stripLocale } from "@/utils/stripLocale";
 import clsx from 'clsx';
 
 interface IPropsTypes {
@@ -11,7 +12,7 @@ interface IPropsTypes {
 }
 
 export const SingleItem = ({ item }: IPropsTypes) => {
-  const pathname = usePathname();
+  const pathname = stripLocale(usePathname());
   const isActive =
     item.url === "/"
       ? pathname === "/"

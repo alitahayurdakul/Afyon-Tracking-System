@@ -39,7 +39,11 @@ export const createUsersTableColumns = () => {
           );
         }
         if (column.name === "email") {
-          return <div>{r.email || "-"}</div>;
+          return (
+            <div className={styles["truncate-cell"]} title={r.email}>
+              {r.email || "-"}
+            </div>
+          );
         }
         if (column.name === "phone") {
           return <div>{r.phone || "-"}</div>;
@@ -48,7 +52,9 @@ export const createUsersTableColumns = () => {
           return <div>{r.department || "-"}</div>;
         }
         if (column.name === "role") {
-          return <div>{r.role || "-"}</div>;
+          const roleLabel =
+            typeof r.role === "string" ? r.role : r.role?.roleName;
+          return <div>{roleLabel || "-"}</div>;
         }
         if (column.name === "isActive") {
           return (

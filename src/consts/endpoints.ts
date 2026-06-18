@@ -68,6 +68,13 @@ export const END_POINTS = {
     getAll: `${apiUrl}/api/users`,
     getDetail: (id: string) => `${apiUrl}/api/users/${id}`,
   },
+  material: {
+    create: `${apiUrl}/api/materials`,
+    edit: (id: string) => `${apiUrl}/api/materials/${id}`,
+    delete: (id: string) => `${apiUrl}/api/materials/${id}`,
+    getAll: `${apiUrl}/api/materials`,
+    getDetail: (id: string) => `${apiUrl}/api/materials/${id}`,
+  },
 };
 
 export const CLIENT_END_POINTS = {
@@ -134,5 +141,12 @@ export const CLIENT_END_POINTS = {
     delete: "/api/users",
     getAll: "/api/users",
     getDetail: "/api/users",
-  }
+  },
+  material: {
+    create: "/api/materials",
+    edit: "/api/materials",
+    delete: "/api/materials",
+    getAll: "/api/materials",
+    getDetail: "/api/materials",
+  },
 };

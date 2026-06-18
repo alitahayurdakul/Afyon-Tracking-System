@@ -3,6 +3,20 @@
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
+
+  // Çok fazla sekme olduğunda menü alanı kaydırılabilir olsun.
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+
+  // Kaydırma çubuğunu gizle ki içerik kayabilsin (genişliği 0).
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // IE/Edge
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
 }
 
 .sidebar-header {
