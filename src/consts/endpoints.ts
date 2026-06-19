@@ -75,6 +75,20 @@ export const END_POINTS = {
     getAll: `${apiUrl}/api/materials`,
     getDetail: (id: string) => `${apiUrl}/api/materials/${id}`,
   },
+  subStage: {
+    create: `${apiUrl}/api/sub-stages`,
+    edit: (id: string) => `${apiUrl}/api/sub-stages/${id}`,
+    delete: (id: string) => `${apiUrl}/api/sub-stages/${id}`,
+    getAll: `${apiUrl}/api/sub-stages`,
+    getDetail: (id: string) => `${apiUrl}/api/sub-stages/${id}`,
+  },
+  project: {
+    create: `${apiUrl}/api/projects`,
+    edit: (id: string) => `${apiUrl}/api/projects/${id}`,
+    delete: (id: string) => `${apiUrl}/api/projects/${id}`,
+    getAll: `${apiUrl}/api/projects`,
+    getDetail: (id: string) => `${apiUrl}/api/projects/${id}`,
+  },
 };
 
 export const CLIENT_END_POINTS = {
@@ -148,5 +162,19 @@ export const CLIENT_END_POINTS = {
     delete: "/api/materials",
     getAll: "/api/materials",
     getDetail: "/api/materials",
+  },
+  subStage: {
+    create: "/api/sub-stages",
+    edit: "/api/sub-stages",
+    delete: "/api/sub-stages",
+    getAll: "/api/sub-stages",
+    getDetail: "/api/sub-stages",
+  },
+  project: {
+    create: "/api/projects",
+    edit: "/api/projects",
+    delete: "/api/projects",
+    getAll: "/api/projects",
+    getDetail: "/api/projects",
   },
 };

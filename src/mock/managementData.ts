@@ -15,6 +15,14 @@ import {
   IMaterialResponseDataTypes,
   IMaterialType,
 } from "@/types/materialsTypes";
+import {
+  ISubStageResponseDataTypes,
+  ISubStageType,
+} from "@/types/subStagesTypes";
+import {
+  IProjectResponseDataTypes,
+  IProjectType,
+} from "@/types/projectsTypes";
 
 /* ----------------------------- Gecikme Sebepleri ---------------------------- */
 
@@ -257,4 +265,89 @@ export const mockMaterials: IMaterialType[] = [
 export const mockMaterialsResponse: IMaterialResponseDataTypes = {
   count: mockMaterials.length,
   materials: mockMaterials,
+};
+
+/* ------------------------------- Alt Aşamalar ------------------------------ */
+
+export const mockSubStages: ISubStageType[] = [
+  {
+    _id: "substage-1",
+    name: "Yağ Seviyesi Kontrolü",
+    stageId: "stage-3",
+    stageName: "İkmal",
+    order: 1,
+    description: "İkmal aşamasında motor yağ seviyesinin kontrol edilmesi.",
+    creator: "Admin",
+    createdAt: "2026-05-02T09:00:00.000Z",
+    updatedAt: "2026-05-02T09:00:00.000Z",
+  },
+  {
+    _id: "substage-2",
+    name: "Yakıt Dolumu",
+    stageId: "stage-3",
+    stageName: "İkmal",
+    order: 2,
+    description: "Yakıt tankının doldurulması.",
+    creator: "Admin",
+    editor: "Admin",
+    createdAt: "2026-05-04T10:30:00.000Z",
+    updatedAt: "2026-05-18T12:00:00.000Z",
+  },
+  {
+    _id: "substage-3",
+    name: "Görsel Muayene",
+    stageId: "stage-4",
+    stageName: "Muayene",
+    order: 1,
+    description: "Dış gövde ve aksamların görsel olarak incelenmesi.",
+    creator: "Admin",
+    createdAt: "2026-05-06T08:00:00.000Z",
+    updatedAt: "2026-05-06T08:00:00.000Z",
+  },
+];
+
+export const mockSubStagesResponse: ISubStageResponseDataTypes = {
+  count: mockSubStages.length,
+  subStages: mockSubStages,
+};
+
+/* --------------------------------- Projeler -------------------------------- */
+
+export const mockProjects: IProjectType[] = [
+  {
+    _id: "project-1",
+    name: "Afyon Depo Modernizasyonu",
+    code: "PRJ-2026-001",
+    status: "IN_PROGRESS",
+    description: "Depo bakım süreçlerinin dijitalleştirilmesi projesi.",
+    creator: "Admin",
+    createdAt: "2026-03-01T09:00:00.000Z",
+    updatedAt: "2026-05-20T09:00:00.000Z",
+  },
+  {
+    _id: "project-2",
+    name: "Filo Takip Entegrasyonu",
+    code: "PRJ-2026-002",
+    status: "PLANNED",
+    description: "Tren filosu takip sisteminin entegrasyonu.",
+    creator: "Admin",
+    createdAt: "2026-04-12T10:00:00.000Z",
+    updatedAt: "2026-04-12T10:00:00.000Z",
+  },
+  {
+    _id: "project-3",
+    name: "Periyodik Bakım Otomasyonu",
+    code: "PRJ-2025-014",
+    status: "COMPLETED",
+    description: "Periyodik bakım planlamasının otomatikleştirilmesi.",
+    creator: "Admin",
+    editor: "Admin",
+    createdAt: "2025-11-01T09:00:00.000Z",
+    updatedAt: "2026-02-15T16:00:00.000Z",
+  },
+];
+
+export const mockProjectsResponse: IProjectResponseDataTypes = {
+  count: mockProjects.length,
+  projects: mockProjects,
 };
