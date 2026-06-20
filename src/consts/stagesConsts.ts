@@ -4,9 +4,10 @@ export const STAGE_FORM_CONSTS: IFormFieldsType = [
   {
     name: "name",
     type: "input",
-    label: "Aşama Adı",
+    label: "İş Akışı Adı",
     isRequired: true,
-    maxLength: 100
+    maxLength: 100,
+    // regex: /[^A-Za-zçğışöüÖÜŞZÇĞİ ]/g,
   },
   {
     name: "description",
@@ -15,14 +16,20 @@ export const STAGE_FORM_CONSTS: IFormFieldsType = [
     isRequired: true,
     maxLength: 400,
     maxRows: 5,
-  }
+  },
+  {
+    name: "subStages",
+    type: "select",
+    label: "Alt Aşama",
+    // isRequired: true,
+  },
 ];
 
 export const EDIT_STAGE_FORM_CONSTS: IFormFieldsType = [
   {
     name: "name",
     type: "input",
-    label: "Aşama Adı",
+    label: "İş Akışı Adı",
     isRequired: true,
     maxLength: 100,
     regex: /[^A-Za-zçğışöüÖÜŞZÇĞİ ]/g,
@@ -35,5 +42,10 @@ export const EDIT_STAGE_FORM_CONSTS: IFormFieldsType = [
     maxLength: 400,
     maxRows: 5,
   },
-  
+  {
+    name: "stages",
+    type: "select",
+    label: "Aşama",
+    isRequired: true,
+  },
 ];

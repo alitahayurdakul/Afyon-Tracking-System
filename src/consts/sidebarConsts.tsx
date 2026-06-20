@@ -51,7 +51,7 @@ export const SIDEBAR_ITEMS: ISidebarItemsTypes = [
   {
     name: "Aşamalar",
     icon: faLayerGroup,
-    url: "/stages",
+    url: "/asamalar",
   },
   {
     name: "Trenler",

@@ -1,6 +1,9 @@
+import { IOptionType } from "./formTypes";
+
 export interface IStageFormDataTypes {
   name: string;
   description: string;
+  subStages?: IOptionType[];
 }
 
 export interface IStageType{
@@ -15,9 +18,12 @@ export interface IStageType{
 
   createdAt: string; // ISO date string
   updatedAt?: string; // ISO date string
+  subStages?: IStageType[] | IOptionType[];
 }
 
 export interface IStageResponseDataTypes {
   count: number,
   stages: Array<IStageType>
 }
+
+export type IStagesTypes = Array<IStageType>;
