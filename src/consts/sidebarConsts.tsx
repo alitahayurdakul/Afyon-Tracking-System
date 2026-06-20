@@ -68,7 +68,7 @@ export const SIDEBAR_ITEMS: ISidebarItemsTypes = [
   {
     name: "Trenler",
     icon: faTrain,
-    url: "/trains",
+    url: "/trenler",
   },
   {
     name: "Gecikme Sebepleri",
