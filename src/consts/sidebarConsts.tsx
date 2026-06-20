@@ -12,6 +12,8 @@ import {
   faUsers,
   faUserShield,
   faBoxesStacked,
+  faSitemap,
+  faFolderTree,
 } from "@fortawesome/free-solid-svg-icons";
 import { URL_PAGES } from "./url";
 
@@ -52,6 +54,16 @@ export const SIDEBAR_ITEMS: ISidebarItemsTypes = [
     name: "Aşamalar",
     icon: faLayerGroup,
     url: "/stages",
+  },
+  {
+    name: "Alt Aşamalar",
+    icon: faSitemap,
+    url: "/alt-asamalar",
+  },
+  {
+    name: "Projeler",
+    icon: faFolderTree,
+    url: "/projeler",
   },
   {
     name: "Trenler",
