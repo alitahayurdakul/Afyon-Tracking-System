@@ -14,12 +14,8 @@ export const subStagesTableColumns: ICommonTableColumnsTypes = [
     label: "Alt Aşama Adı",
   },
   {
-    name: "stageName",
-    label: "Bağlı Aşama",
-  },
-  {
-    name: "order",
-    label: "Sıra",
+    name: "materials",
+    label: "Malzemeler",
   },
   {
     name: "creator",
@@ -54,17 +50,15 @@ export const createSubStagesTableColumns = () => {
             </div>
           );
         }
-        if (column.name === "stageName") {
+        if (column.name === "materials") {
+          const materials = r.materials ?? [];
           return (
             <div className={styles["reason-desc"]}>
-              <p>{r.stageName || "-"}</p>
-            </div>
-          );
-        }
-        if (column.name === "order") {
-          return (
-            <div className={styles["reason-desc"]}>
-              <p>{r.order ?? "-"}</p>
+              <p>
+                {materials.length > 0
+                  ? materials.map((material) => material.label).join(", ")
+                  : "-"}
+              </p>
             </div>
           );
         }

@@ -273,9 +273,7 @@ export const mockSubStages: ISubStageType[] = [
   {
     _id: "substage-1",
     name: "Yağ Seviyesi Kontrolü",
-    stageId: "stage-3",
-    stageName: "İkmal",
-    order: 1,
+    materials: [{ value: "material-2", label: "Motor Yağı" }],
     description: "İkmal aşamasında motor yağ seviyesinin kontrol edilmesi.",
     creator: "Admin",
     createdAt: "2026-05-02T09:00:00.000Z",
@@ -284,9 +282,10 @@ export const mockSubStages: ISubStageType[] = [
   {
     _id: "substage-2",
     name: "Yakıt Dolumu",
-    stageId: "stage-3",
-    stageName: "İkmal",
-    order: 2,
+    materials: [
+      { value: "material-2", label: "Motor Yağı" },
+      { value: "material-3", label: "Hava Filtresi" },
+    ],
     description: "Yakıt tankının doldurulması.",
     creator: "Admin",
     editor: "Admin",
@@ -296,9 +295,7 @@ export const mockSubStages: ISubStageType[] = [
   {
     _id: "substage-3",
     name: "Görsel Muayene",
-    stageId: "stage-4",
-    stageName: "Muayene",
-    order: 1,
+    materials: [{ value: "material-1", label: "Fren Balatası" }],
     description: "Dış gövde ve aksamların görsel olarak incelenmesi.",
     creator: "Admin",
     createdAt: "2026-05-06T08:00:00.000Z",

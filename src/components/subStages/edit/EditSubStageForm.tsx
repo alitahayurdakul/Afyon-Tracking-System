@@ -22,8 +22,9 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { SubStageQueryTypes } from "@/app/api/sub-stages/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import { useGetStagesDataQuery } from "@/api/queries/useGetStagesQueries";
-import { IStageResponseDataTypes } from "@/types/stagesTypes";
+import { IOptionType } from "@/types/formTypes";
+import { useGetMaterialsDataQuery } from "@/api/queries/useGetMaterialsQueries";
+import SelectedMaterials from "../SelectedMaterials";
 
 interface IPropsTypes {
   id: string;
@@ -35,28 +36,34 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
     control,
     handleSubmit,
     register,
+    watch,
+    setValue,
     formState: { isSubmitting },
   } = useForm<ISubStageFormDataTypes>({
     resolver: yupResolver(SubStageFormValidation()),
     defaultValues: {
       name: data?.name ?? "",
-      stage: data?.stageId ?? "",
-      order: data?.order != null ? String(data.order) : "",
+      materials: (data?.materials ?? []).map((material) => ({
+        label: material.label,
+        value: material.value,
+      })),
       desc: data?.description ?? "",
     },
   });
 
   const dispatch = useDispatch();
   const removeModal = useRemoveQueryParamModal();
-  const { data: stagesData } = useGetStagesDataQuery<IStageResponseDataTypes>();
-  const stageOptions = useMemo(
+  const { data: materialsData } = useGetMaterialsDataQuery();
+  const materialOptions = useMemo(
     () =>
-      (stagesData?.stages ?? []).map((stage) => ({
-        label: stage.name,
-        value: stage._id,
+      (materialsData?.materials ?? []).map((material) => ({
+        label: material.name,
+        value: material._id,
       })),
-    [stagesData],
+    [materialsData],
   );
+
+  const selectedMaterials = watch("materials");
 
   const onCancel = () => {
     removeModal();
@@ -68,8 +75,10 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
         const params = {
           id,
           name: formData.name,
-          stageId: formData.stage,
-          order: Number(formData.order),
+          materials: formData.materials.map((material: IOptionType) => ({
+            value: material.value,
+            label: material.label,
+          })),
           description: formData.desc,
           editor: "Admin",
         };
@@ -120,22 +129,24 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
       />
       <SelectBox
         control={control as any}
-        label="Bağlı Aşama"
-        name="stage"
-        placeholder="Aşama seçiniz"
+        label="Malzemeler"
+        name="materials"
+        placeholder="Malzeme seçiniz"
         required
-        options={stageOptions}
+        options={materialOptions}
+        isSearchable
+        isClearable
+        multiselect
+        hideSelectedOptions
       />
-      <InputBox
-        control={control as any}
-        label="Sıra"
-        name="order"
-        placeholder="Sıra numarası giriniz"
-        required
-        maxLength={5}
-        spacesRule={InputSpaceEnums.noSpaces}
-        inputClassName={styles["text-input"]}
-      />
+
+      {selectedMaterials && selectedMaterials.length > 0 && (
+        <SelectedMaterials
+          selectedMaterials={selectedMaterials}
+          setValue={setValue}
+        />
+      )}
+
       <TextAreaBox
         control={control as any}
         label="Açıklama"
