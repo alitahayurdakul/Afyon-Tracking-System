@@ -1,8 +1,12 @@
+export interface IWagonDetail {
+  name: string;
+}
+
 export interface ITrainFormDataTypes {
   trainSetNo: string;
-  trainModel: string;
-  year: string;
+  wagonsCount: string;
   desc: string;
+  wagonDetails: IWagonDetail[];
 }
 
 export interface ITrainType {
@@ -15,6 +19,7 @@ export interface ITrainType {
   editor?: string;
   createdAt: string;
   updatedAt?: string;
+  wagonDetails?: IWagonDetail[];
 }
 
 export interface ITrainResponseDataTypes {

@@ -5,11 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import styles from "@/styles/components/trains/TrainForm.module.scss";
 import { Button } from "@/components/formElements/Button";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm, useFieldArray } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ITrainFormDataTypes, ITrainType } from "@/types/trainsTypes";
 import { TrainFormValidation } from "@/utils/validations/trainFormValidation";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { IFormFieldType } from "@/types/formTypes";
 import { TRAIN_FORM_CONSTS } from "@/consts/trainsConsts";
 import { InputBox } from "@/components/formElements/InputBox";
@@ -43,15 +43,31 @@ export const EditTrainForm = ({ id, data }: IPropsTypes) => {
     resolver: yupResolver(TrainFormValidation()),
     defaultValues: {
       trainSetNo: data?.trainSetNo || "",
-      trainModel: data?.trainModel || "",
-      year: data?.year ? String(data.year) : "",
       desc: data?.desc || "",
+      wagonsCount: data?.wagonDetails ? String(data.wagonDetails.length) : "",
+      wagonDetails: data?.wagonDetails ?? [],
     },
   });
 
   const dispatch = useDispatch();
-
   const removeModal = useRemoveQueryParamModal();
+  const wagonsCount = watch("wagonsCount");
+
+  const { fields } = useFieldArray({
+    control,
+    name: "wagonDetails",
+  });
+
+  useEffect(() => {
+    const count = Number(wagonsCount);
+    if (!count || count < 1) {
+      setValue("wagonDetails", []);
+      return;
+    }
+    const current = watch("wagonDetails") || [];
+    const next = Array.from({ length: count }, (_, i) => current[i] ?? { name: "" });
+    setValue("wagonDetails", next);
+  }, [wagonsCount]);
 
   const onCancel = () => {
     removeModal();
@@ -63,7 +79,6 @@ export const EditTrainForm = ({ id, data }: IPropsTypes) => {
         const params = {
           ...formData,
           id,
-          year: Number(formData.year),
           editor: "Admin",
         };
         await axiosInstance.post(CLIENT_END_POINTS.train.edit, {
@@ -103,7 +118,6 @@ export const EditTrainForm = ({ id, data }: IPropsTypes) => {
               <SelectBox
                 name={item.name}
                 options={item.options || []}
-                // className={styles["row"]}
                 control={control as any}
                 required={item.isRequired}
                 label={item.label}
@@ -116,6 +130,7 @@ export const EditTrainForm = ({ id, data }: IPropsTypes) => {
             </React.Fragment>
           );
         }
+
         if (item.type === "input") {
           return (
             <React.Fragment key={index}>
@@ -160,39 +175,43 @@ export const EditTrainForm = ({ id, data }: IPropsTypes) => {
         return null;
       })}
 
+      <div className={styles["inputbox-group"]}>
+        {fields.map((field, index) => (
+          <InputBox
+            key={field.id}
+            control={control as any}
+            label={`Vagon ${index + 1} Adı`}
+            name={`wagonDetails.${index}.name` as any}
+            placeholder={`Vagon ${index + 1} adı giriniz`}
+            required
+            inputClassName={styles["text-input"]}
+            className={styles["half-input-container"]}
+          />
+        ))}
+      </div>
+
       <section className={styles["activity-section"]}>
         <div className={styles["activity-row"]}>
           <span className={styles["activity-label"]}>Oluşturan:</span>
-          <span className={styles["activity-value"]}>
-            {data?.creator ?? "-"}
-          </span>
+          <span className={styles["activity-value"]}>{data?.creator ?? "-"}</span>
         </div>
         <div className={styles["activity-row"]}>
           <span className={styles["activity-label"]}>Oluşturulma Tarihi:</span>
-          <span className={styles["activity-value"]}>
-            {formatDate(data?.createdAt) ?? "-"}
-          </span>
+          <span className={styles["activity-value"]}>{formatDate(data?.createdAt) ?? "-"}</span>
         </div>
         <div className={styles["activity-row"]}>
           <span className={styles["activity-label"]}>Son Güncelleyen:</span>
-          <span className={styles["activity-value"]}>
-            {data?.editor ?? "-"}
-          </span>
+          <span className={styles["activity-value"]}>{data?.editor ?? "-"}</span>
         </div>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>
-            Son Güncellenme Tarihi:
-          </span>
-          <span className={styles["activity-value"]}>
-            {formatDate(data?.updatedAt) ?? "-"}
-          </span>
+          <span className={styles["activity-label"]}>Son Güncellenme Tarihi:</span>
+          <span className={styles["activity-value"]}>{formatDate(data?.updatedAt) ?? "-"}</span>
         </div>
       </section>
 
       <div>
         <FontAwesomeIcon icon={faCircleInfo} className={styles["alert-icon"]} />
-
-        <span className={styles["info-text"]} >
+        <span className={styles["info-text"]}>
           Tren bilgilerini güncellemek filo envanterini ve ilişkili iş
           akışlarını otomatik olarak etkiler. Kaydetmeden önce değişiklikleri
           kontrol ettiğinizden emin olun.
@@ -207,7 +226,6 @@ export const EditTrainForm = ({ id, data }: IPropsTypes) => {
           label="İptal"
           disabled={isSubmitting}
         />
-
         <Button
           clickFn={handleSubmit(onSubmit)}
           type="simple"
