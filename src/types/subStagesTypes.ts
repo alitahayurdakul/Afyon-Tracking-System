@@ -1,16 +1,20 @@
+import { IOptionType } from "./formTypes";
+
+export interface ISubStageMaterial {
+  value: string;
+  label: string;
+}
+
 export interface ISubStageFormDataTypes {
   name: string;
-  stage: string;
-  order: string;
+  materials: IOptionType[];
   desc: string;
 }
 
 export interface ISubStageType {
   _id: string;
   name: string;
-  stageId: string;
-  stageName?: string;
-  order: number;
+  materials: ISubStageMaterial[];
   description: string;
   creator?: string;
   editor?: string;

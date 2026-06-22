@@ -15,12 +15,13 @@ import { useRemoveQueryParamModal } from "@/utils/searchParams";
 import { useDispatch } from "react-redux";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { ISubStageFormDataTypes } from "@/types/subStagesTypes";
+import { IOptionType } from "@/types/formTypes";
 import { axiosInstance } from "@/api/axiosInstance";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { SubStageQueryTypes } from "@/app/api/sub-stages/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import { useGetStagesDataQuery } from "@/api/queries/useGetStagesQueries";
-import { IStageResponseDataTypes } from "@/types/stagesTypes";
+import { useGetMaterialsDataQuery } from "@/api/queries/useGetMaterialsQueries";
+import SelectedMaterials from "../SelectedMaterials";
 
 export const CreateSubStageForm = () => {
   const {
@@ -28,28 +29,31 @@ export const CreateSubStageForm = () => {
     handleSubmit,
     register,
     reset,
+    watch,
+    setValue,
     formState: { isSubmitting },
   } = useForm<ISubStageFormDataTypes>({
     resolver: yupResolver(SubStageFormValidation()),
     defaultValues: {
       name: "",
-      stage: "",
-      order: "",
+      materials: [],
       desc: "",
     },
   });
 
   const dispatch = useDispatch();
   const removeModal = useRemoveQueryParamModal();
-  const { data: stagesData } = useGetStagesDataQuery<IStageResponseDataTypes>();
-  const stageOptions = useMemo(
+  const { data: materialsData } = useGetMaterialsDataQuery();
+  const materialOptions = useMemo(
     () =>
-      (stagesData?.stages ?? []).map((stage) => ({
-        label: stage.name,
-        value: stage._id,
+      (materialsData?.materials ?? []).map((material) => ({
+        label: material.name,
+        value: material._id,
       })),
-    [stagesData],
+    [materialsData],
   );
+
+  const selectedMaterials = watch("materials");
 
   const onCancel = () => {
     removeModal();
@@ -60,8 +64,10 @@ export const CreateSubStageForm = () => {
       try {
         const params = {
           name: data.name,
-          stageId: data.stage,
-          order: Number(data.order),
+          materials: data.materials.map((material: IOptionType) => ({
+            value: material.value,
+            label: material.label,
+          })),
           description: data.desc,
           editor: "Admin",
         };
@@ -113,22 +119,24 @@ export const CreateSubStageForm = () => {
       />
       <SelectBox
         control={control as any}
-        label="Bağlı Aşama"
-        name="stage"
-        placeholder="Aşama seçiniz"
+        label="Malzemeler"
+        name="materials"
+        placeholder="Malzeme seçiniz"
         required
-        options={stageOptions}
+        options={materialOptions}
+        isSearchable
+        isClearable
+        multiselect
+        hideSelectedOptions
       />
-      <InputBox
-        control={control as any}
-        label="Sıra"
-        name="order"
-        placeholder="Sıra numarası giriniz"
-        required
-        maxLength={5}
-        spacesRule={InputSpaceEnums.noSpaces}
-        inputClassName={styles["text-input"]}
-      />
+
+      {selectedMaterials && selectedMaterials.length > 0 && (
+        <SelectedMaterials
+          selectedMaterials={selectedMaterials}
+          setValue={setValue}
+        />
+      )}
+
       <TextAreaBox
         control={control as any}
         label="Açıklama"
