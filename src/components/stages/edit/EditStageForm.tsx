@@ -12,26 +12,23 @@ import { TextAreaBox } from "@/components/formElements/TextAreaBox";
 import { useRemoveQueryParamModal } from "@/utils/searchParams";
 import { useDispatch } from "react-redux";
 import { addToastify } from "@/redux/slices/toastSlice";
-import {
-  IWorkflowFormDataTypes,
-  IWorkflowFormTypes,
-} from "@/types/workflowTypes";
 import { WORKFLOW_FORM_CONSTS } from "@/consts/workflowConsts";
 import { SelectBox } from "@/components/formElements/SelectBox";
-import { WorkflowFormValidation } from "@/utils/validations/workflowFormValidation";
 import SelectedStages from "../SelectedSubStages";
 import { axiosInstance } from "@/api/axiosInstance";
 import { useGetStagesDataQuery } from "@/api/queries/useGetStagesQueries";
-import { IStageResponseDataTypes, IStageType } from "@/types/stagesTypes";
-import { WorkflowQueryTypes } from "@/app/api/workflows/route";
+import { IStageFormDataTypes, IStageResponseDataTypes, IStageType } from "@/types/stagesTypes";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import { StageFormValidation } from "@/utils/validations/stageFormValidation";
+import SelectedItemList from "@/components/common/SelectedItemList";
+import { STAGE_FORM_CONSTS } from "@/consts/stagesConsts";
 interface IPropsTypes {
   id: string;
-  workflowData?: IWorkflowFormTypes;
+  stageData?: IStageType;
 }
 
-export const EditStageForm = ({ id, workflowData }: IPropsTypes) => {
+export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
   const {
     control,
     handleSubmit,
@@ -42,14 +39,16 @@ export const EditStageForm = ({ id, workflowData }: IPropsTypes) => {
     // clearErrors,
     // setFocus,
     formState: { isSubmitting, errors },
-  } = useForm<IWorkflowFormDataTypes>({
-    resolver: yupResolver(WorkflowFormValidation()),
+  } = useForm<IStageFormDataTypes>({
+    resolver: yupResolver(StageFormValidation()),
     defaultValues: {
-      name: workflowData?.name,
-      description: workflowData?.description,
-      stages: workflowData?.stages,
+      name: stageData?.name,
+      description: stageData?.description,
+      subStages: [],
+      materialList: []
     },
   });
+  const hasSubStage = stageData?.subStages && stageData?.subStages.length > 0; 
 
   const { data, isLoading, isError, isFetching, refetch } =
     useGetStagesDataQuery<IStageResponseDataTypes>();
@@ -63,100 +62,99 @@ export const EditStageForm = ({ id, workflowData }: IPropsTypes) => {
     removeModal();
   };
 
-  const onSubmit: SubmitHandler<IWorkflowFormDataTypes> = useCallback(
+  const onSubmit: SubmitHandler<IStageFormDataTypes> = useCallback(
     async (data) => {
-      const { stages, ...rest } = data;
-      const newStages = stages.map((stage: IOptionType, index: number) => {
-        return {
-          stageInfo: stage.value,
-          plannedOrder: index + 1,
-        };
-      });
+      const { subStages, ...rest } = data;
+      // const newStages = stages.map((stage: IOptionType, index: number) => {
+      //   return {
+      //     stageInfo: stage.value,
+      //     plannedOrder: index + 1,
+      //   };
+      // });
 
-      const params = {
-        ...rest,
-        creator: "admin",
-        stages: newStages,
-      };
-      const response = await axiosInstance.post(CLIENT_END_POINTS.workflow.edit, {
-        type: WorkflowQueryTypes.editWorkflow,
-        params: {
-          ...params,
-          id,
-        },
-      });
-      dispatch(
-        addToastify({
-          message: "Başarılı",
-          type: "success",
-          icon: "close",
-          id: "contactePage" + Date.now(),
-        }),
-      );
-       dispatch(addTriggerTable());
-      //   try {
-      //     if (!isEqualValues) {
-      //       dispatch(
-      //         addToastify({
-      //           message: t("form.notifications.error"),
-      //           type: "error",
-      //           icon: "close",
-      //           id: "contactFormError" + Date.now(),
-      //         }),
-      //       );
-      //       return;
-      //     }
+      // const params = {
+      //   ...rest,
+      //   creator: "admin",
+      //   stages: newStages,
+      // };
+      // const response = await axiosInstance.post(CLIENT_END_POINTS.workflow.edit, {
+      //   type: WorkflowQueryTypes.editWorkflow,
+      //   params: {
+      //     ...params,
+      //     id,
+      //   },
+      // });
+      // dispatch(
+      //   addToastify({
+      //     message: "Başarılı",
+      //     type: "success",
+      //     icon: "close",
+      //     id: "contactePage" + Date.now(),
+      //   }),
+      // );
+      //  dispatch(addTriggerTable());
+      // //   try {
+      // //     if (!isEqualValues) {
+      // //       dispatch(
+      // //         addToastify({
+      // //           message: t("form.notifications.error"),
+      // //           type: "error",
+      // //           icon: "close",
+      // //           id: "contactFormError" + Date.now(),
+      // //         }),
+      // //       );
+      // //       return;
+      // //     }
 
-      //     const response = await axiosInstance.post<any>(
-      //       CLIENT_END_POINTS.career,
-      //       {
-      //         params: data,
-      //       },
-      //     );
+      // //     const response = await axiosInstance.post<any>(
+      // //       CLIENT_END_POINTS.career,
+      // //       {
+      // //         params: data,
+      // //       },
+      // //     );
 
-      //     if (response.status === 200) {
-      //       dispatch(
-      //         addToastify({
-      //           message: t("form.notifications.success"),
-      //           type: "success",
-      //           icon: "close",
-      //           id: "contactePage" + Date.now(),
-      //         }),
-      //       );
-      //       reset();
-      //     }
-      //   } catch (err) {
-      //     dispatch(
-      //       addToastify({
-      //         message: (err as Error)?.message || t("form.notifications.error"),
-      //         type: "error",
-      //         icon: "close",
-      //         id: "contactFormError" + Date.now(),
-      //       }),
-      //     );
-      //   } finally {
-      //     setTriggeredCaptcha(prev => prev + 1);
-      //     setIsEqualValues(false);
-      //   }
+      // //     if (response.status === 200) {
+      // //       dispatch(
+      // //         addToastify({
+      // //           message: t("form.notifications.success"),
+      // //           type: "success",
+      // //           icon: "close",
+      // //           id: "contactePage" + Date.now(),
+      // //         }),
+      // //       );
+      // //       reset();
+      // //     }
+      // //   } catch (err) {
+      // //     dispatch(
+      // //       addToastify({
+      // //         message: (err as Error)?.message || t("form.notifications.error"),
+      // //         type: "error",
+      // //         icon: "close",
+      // //         id: "contactFormError" + Date.now(),
+      // //       }),
+      // //     );
+      // //   } finally {
+      // //     setTriggeredCaptcha(prev => prev + 1);
+      // //     setIsEqualValues(false);
+      // //   }
     },
     [],
   );
 
   const options = useCallback(() => {
     const newOptions = data?.stages?.map((stage: any, index: number) => ({
-      // Aşama verisi hem {_id, name} hem de {value, label} şeklinde gelebilir;
-      // değer boş gelirse benzersizliği korumak için index'i key olarak kullan.
       value: stage?._id ?? stage?.value ?? `stage-${index}`,
       label: stage?.name ?? stage?.label ?? "-",
     }));
     return newOptions;
   }, [data]);
 
-  const selectedStages = watch("stages");
+  const selectedStages = watch("subStages");
+  const selectedMaterials = watch("materialList");
 
   return (
     <form className={styles["stage-form"]}>
-      {WORKFLOW_FORM_CONSTS.map((item: IFormFieldType, index: number) => {
+      {STAGE_FORM_CONSTS.map((item: IFormFieldType, index: number) => {
         if (item.type === "input") {
           return (
             <React.Fragment key={index}>
@@ -186,7 +184,7 @@ export const EditStageForm = ({ id, workflowData }: IPropsTypes) => {
               <TextAreaBox
                 control={control as any}
                 label="Açıklama"
-                {...register(item.name as keyof IWorkflowFormDataTypes)}
+                {...register(item.name as keyof IStageFormDataTypes)}
                 required={item.isRequired}
                 rows={item.maxRows}
                 placeholder="Açıklama giriniz"
@@ -197,21 +195,65 @@ export const EditStageForm = ({ id, workflowData }: IPropsTypes) => {
             </React.Fragment>
           );
         }
-        if (item.type === "select") {
+         if (item.name === "subStages" && hasSubStage) {
           return (
             <React.Fragment key={index}>
               <SelectBox
                 name={item.name}
-                options={options() || []}
-                // className={styles["row"]}
+                options={
+                  // options()
+                  [
+                    {
+                      value: "1",
+                      label: "Sub 1",
+                    },
+                    {
+                      value: "2",
+                      label: "Sub 2",
+                    },
+                  ]
+                  // || []
+                }
                 control={control as any}
                 required={item.isRequired}
                 label="Aşama"
-                placeholder="Aşama seçiniz"
+                placeholder="Alt Aşama seçiniz"
                 formLabelClassName={styles["form-label"]}
                 isSearchable
-                isClearable
                 multiselect
+                isClearable
+                hideSelectedOptions
+              />
+            </React.Fragment>
+          );
+        }
+        if (item.name === "materialList" && !hasSubStage) {
+          return (
+            <React.Fragment key={index}>
+              <SelectBox
+                name={item.name}
+                options={
+                  // options()
+                  [
+                    {
+                      value: "1",
+                      label: "Material 1",
+                    },
+                    {
+                      value: "2",
+                      label: "Material 2",
+                    },
+                  ]
+                  // || []
+                }
+                control={control as any}
+                required={item.isRequired}
+                label={item.label}
+                placeholder="Malzeme seçiniz"
+                formLabelClassName={styles["form-label"]}
+                isSearchable
+                multiselect
+                isClearable
                 hideSelectedOptions
               />
             </React.Fragment>
@@ -220,7 +262,11 @@ export const EditStageForm = ({ id, workflowData }: IPropsTypes) => {
         return null;
       })}
       {selectedStages && selectedStages.length > 0 && (
-        <SelectedStages selectedStages={selectedStages} setValue={setValue} />
+        <SelectedItemList selectedItems={selectedStages} setValue={setValue} title="Seçilen Aşamalar" />
+      )}
+
+      {selectedMaterials && selectedMaterials.length > 0 && (
+        <SelectedItemList selectedItems={selectedMaterials} setValue={setValue} title="Seçilen Malzemeler" />
       )}
 
       <div className={styles["btn-group"]}>

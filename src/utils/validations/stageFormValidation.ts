@@ -2,7 +2,7 @@ import * as Yup from "yup";
 
 import { IStageFormDataTypes } from "@/types/stagesTypes";
 
-export function StageFormValidation(): Yup.ObjectSchema<Omit<IStageFormDataTypes, "subStages">> {
+export function StageFormValidation(): Yup.ObjectSchema<Omit<IStageFormDataTypes, "subStages" | "hasSubStage" | "materialList">> {
   const baseShape = {
     name: Yup.string()
       .trim()

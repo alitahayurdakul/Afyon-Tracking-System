@@ -40,7 +40,7 @@ export const EditWorkflowModal = ({ id }: { id: string }) => {
         className={styles["edit-btn"]}
         onClick={() => {
           if (!open) {
-            addQueryParam("modal", `EDIT_WORKFLOW_MODAL_${id}`);
+            addQueryParam("modal", `EDIT_STAGE_MODAL_${id}`);
           }
         }}
       >
@@ -50,17 +50,17 @@ export const EditWorkflowModal = ({ id }: { id: string }) => {
 
       {!isFetching && (
         <Modal
-          name={`EDIT_WORKFLOW_MODAL_${id}`}
+          name={`EDIT_STAGE_MODAL_${id}`}
           width={"900px"}
           height={"auto"}
-          title="Workflow Bilgilerini Güncelle"
+          title="Aşama Bilgilerini Güncelle"
           isCloseOutside={false}
           isCloseEsc={false}
           enableParams={true}
           open={open}
           setOpen={setOpen}
         >
-          <EditStageForm id={id} workflowData={transformedData} />
+          <EditStageForm id={id} stageData={transformedData} />
         </Modal>
       )}
     </>

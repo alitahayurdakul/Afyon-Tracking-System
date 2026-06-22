@@ -7,21 +7,22 @@ import styles from "@/styles/components/workflowList/SelectedStages.module.scss"
 import { IOptionType } from "@/types/formTypes";
 
 interface IPropsTypes {
-    selectedStages: IOptionType[];
+    selectedItems: IOptionType[];
     setValue: any;
+    title:string;
 }
 
-export default function SelectedStages({selectedStages, setValue}: IPropsTypes) {
+export default function SelectedItemList({selectedItems, setValue, title}: IPropsTypes) {
 const onDeleteHandler = (value: string | number | boolean) => {
-    const filteredStages = selectedStages.filter((stage: IOptionType) => stage.value !== value);
+    const filteredStages = selectedItems.filter((stage: IOptionType) => stage.value !== value);
     setValue && setValue('stages', filteredStages)
 }
   return (
     <div className={styles["selected-stages"]}>
-      <label className={styles["section-label"]}>Seçilen Aşamalar</label>
+      <label className={styles["section-label"]}>{title}</label>
 
       <div className={styles["path-list"]}>
-        {selectedStages.length > 0 && selectedStages.map((stage: IOptionType, index: number) => (
+        {selectedItems.length > 0 && selectedItems.map((stage: IOptionType, index: number) => (
           <div
             key={index}
             className={`${styles["path-card"]} ${styles.primary}`}
