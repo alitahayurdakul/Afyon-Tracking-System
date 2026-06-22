@@ -18,11 +18,22 @@ export const STAGE_FORM_CONSTS: IFormFieldsType = [
     maxRows: 5,
   },
   {
+    name: "hasSubStage",
+    type: "checkbox",
+    label: "Alt aşama bulunmaktadır."
+  },
+  {
     name: "subStages",
     type: "select",
     label: "Alt Aşama",
     // isRequired: true,
   },
+  {
+    name: "materialList",
+    type: "select",
+    label: "Malzeme Listesi",
+    isMultiselect: true
+  }
 ];
 
 export const EDIT_STAGE_FORM_CONSTS: IFormFieldsType = [

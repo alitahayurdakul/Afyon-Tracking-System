@@ -1,10 +1,10 @@
 "use client";
 /* eslint-disable */
-import styles from "@/styles/components/workflowList/WorkflowForm.module.scss";
+import styles from "@/styles/components/stages/StageForm.module.scss";
 import { Button } from "@/components/formElements/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { IFormFieldType, IOptionType } from "@/types/formTypes";
 import { InputBox } from "@/components/formElements/InputBox";
 import { InputSpaceEnums } from "@/types/formEnums";
@@ -13,7 +13,6 @@ import { useRemoveQueryParamModal } from "@/utils/searchParams";
 import { useDispatch } from "react-redux";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { SelectBox } from "@/components/formElements/SelectBox";
-import SelectedStages from "../SelectedSubStages";
 import { axiosInstance } from "@/api/axiosInstance";
 import { IStageFormDataTypes } from "@/types/stagesTypes";
 import { WorkflowQueryTypes } from "@/app/api/workflows/route";
@@ -21,6 +20,8 @@ import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { STAGE_FORM_CONSTS } from "@/consts/stagesConsts";
 import { StageFormValidation } from "@/utils/validations/stageFormValidation";
+import { CheckBox } from "@/components/formElements/Checkbox";
+import SelectedItemList from "@/components/common/SelectedItemList";
 
 export const CreateStageForm = () => {
   const {
@@ -42,8 +43,21 @@ export const CreateStageForm = () => {
     },
   });
 
+  const hasSubStage = watch("hasSubStage");
+  const selectedStages = watch("subStages");
+  const selectedMaterials = watch("materialList");
+
   // const { data, isLoading, isError, isFetching, refetch } =
   //   useGetStagesDataQuery<IStagesTypes>(); // should be subStagesData
+  
+  useEffect(() => {
+    if(hasSubStage){
+      setValue("materialList", [])
+    }
+    else{
+      setValue("subStages", [])
+    }
+  },[hasSubStage])
 
   const dispatch = useDispatch();
 
@@ -112,8 +126,6 @@ export const CreateStageForm = () => {
   //   return newOptions;
   // }, [data]);
 
-  const selectedStages = watch("subStages");
-
   return (
     <form className={styles["stage-form"]}>
       {STAGE_FORM_CONSTS.map((item: IFormFieldType, index: number) => {
@@ -157,7 +169,23 @@ export const CreateStageForm = () => {
             </React.Fragment>
           );
         }
-        if (item.type === "select") {
+        if (item.type === "checkbox") {
+          return (
+            <React.Fragment key={index}>
+              <CheckBox
+                name={item.name}
+                control={control as any}
+                align="top"
+                className={styles["checkbox-container"]}
+                classNameInput={styles["checkbox-input"]}
+                classNameLabel={styles["checkbox-label"]}
+                label={item.label}
+                required={false}
+              />
+            </React.Fragment>
+          );
+        }
+        if (item.name === "subStages" && hasSubStage) {
           return (
             <React.Fragment key={index}>
               <SelectBox
@@ -176,7 +204,6 @@ export const CreateStageForm = () => {
                   ]
                   // || []
                 }
-                // className={styles["row"]}
                 control={control as any}
                 required={item.isRequired}
                 label="Aşama"
@@ -190,12 +217,58 @@ export const CreateStageForm = () => {
             </React.Fragment>
           );
         }
+        if (item.name === "materialList" && !hasSubStage) {
+          return (
+            <React.Fragment key={index}>
+              <SelectBox
+                name={item.name}
+                options={
+                  // options()
+                  [
+                    {
+                      value: "1",
+                      label: "Material 1",
+                    },
+                    {
+                      value: "2",
+                      label: "Material 2",
+                    },
+                  ]
+                  // || []
+                }
+                control={control as any}
+                required={item.isRequired}
+                label={item.label}
+                placeholder="Malzeme seçiniz"
+                formLabelClassName={styles["form-label"]}
+                isSearchable
+                multiselect
+                isClearable
+                hideSelectedOptions
+              />
+            </React.Fragment>
+          );
+        }
         return null;
       })}
-      {selectedStages &&
+      {hasSubStage && selectedStages &&
         Array.isArray(selectedStages) &&
         selectedStages.length > 0 && (
-          <SelectedStages selectedStages={selectedStages} setValue={setValue} />
+          <SelectedItemList
+            selectedItems={selectedStages}
+            setValue={setValue}
+            title="Seçilen Aşamalar"
+          />
+        )}
+
+      {!hasSubStage && selectedMaterials &&
+        Array.isArray(selectedMaterials) &&
+        selectedMaterials.length > 0 && (
+          <SelectedItemList
+            selectedItems={selectedMaterials}
+            setValue={setValue}
+            title="Seçilen Malzemeler"
+          />
         )}
 
       <div className={styles["btn-group"]}>

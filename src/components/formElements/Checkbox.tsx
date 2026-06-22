@@ -74,9 +74,9 @@ export const CheckBox = forwardRef<Ref, CheckBoxProps>(
         >
           <input
             {...field}
-            className={`${styles["check-input"]} ${
+            className={`${
               error && styles["error-input"]
-            } ${classNameInput || ""}`}
+            } ${classNameInput || ""} ${styles["check-input"]}`}
             onClick={() => {
               clickFn && clickFn();
             }}

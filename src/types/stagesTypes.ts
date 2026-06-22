@@ -3,7 +3,9 @@ import { IOptionType } from "./formTypes";
 export interface IStageFormDataTypes {
   name: string;
   description: string;
+  hasSubStage?: boolean;
   subStages?: IOptionType[];
+  materialList?: IOptionType[];
 }
 
 export interface IStageType{
