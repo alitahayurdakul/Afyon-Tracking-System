@@ -116,3 +116,13 @@ textarea {
 .info-text{
   font-size: 14px;
 }
+
+.inputbox-group{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.half-input-container{
+  flex: 0 1 calc(50% - 0.4rem);
+}

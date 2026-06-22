@@ -1,5 +1,4 @@
 import * as Yup from "yup";
-
 import { ITrainFormDataTypes } from "@/types/trainsTypes";
 
 export function TrainFormValidation(): Yup.ObjectSchema<ITrainFormDataTypes> {
@@ -8,25 +7,20 @@ export function TrainFormValidation(): Yup.ObjectSchema<ITrainFormDataTypes> {
       .trim()
       .typeError("Bu alan zorunludur")
       .required("Bu alan zorunludur"),
-    trainModel: Yup.string()
-      .trim()
+    wagonsCount: Yup.string()
       .typeError("Bu alan zorunludur")
       .required("Bu alan zorunludur"),
-    year: Yup.string()
-      .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur")
-      .matches(/^\d{4}$/, "Geçerli bir yıl giriniz")
-      .test(
-        "year-range",
-        "Geçerli bir yıl giriniz",
-        (val) => {
-          if (!val) return false;
-          const n = Number(val);
-          return n >= 1900 && n <= new Date().getFullYear();
-        },
-      ),
     desc: Yup.string().trim().default(""),
+    wagonDetails: Yup.array()
+      .of(
+        Yup.object().shape({
+          name: Yup.string()
+            .trim()
+            .typeError("Bu alan zorunludur")
+            .required("Bu alan zorunludur"),
+        })
+      )
+      .default([]),
   };
 
   return Yup.object().shape(baseShape);
