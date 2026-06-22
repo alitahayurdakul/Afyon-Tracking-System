@@ -9,14 +9,14 @@ export const SidebarHeader = () => {
         <Image
           src={logo}
           alt="TCDD Logo"
-          width={72}
-          height={72}
+          width={300}
+          height={135}
           quality={95}
           priority
         />
       </div>
       <div className={styles["text-container"]}>
-        <p className={styles["subtitle"]}>İŞ AKIŞI YÖNETİM SİSTEMİ</p>
+        <p className={styles["subtitle"]}>AFYON İŞ AKIŞI YÖNETİM SİSTEMİ</p>
       </div>
     </div>
   );

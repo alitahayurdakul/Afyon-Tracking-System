@@ -1,0 +1,60 @@
+.main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem 7rem;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  background-color: var(--surface);
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.blob-primary {
+  position: absolute;
+  top: -10%;
+  left: -5%;
+  width: 40%;
+  height: 60%;
+  background-color: rgba(0, 66, 134, 0.05);
+  border-radius: 50%;
+  filter: blur(120px);
+}
+
+.blob-secondary {
+  position: absolute;
+  bottom: -10%;
+  right: -5%;
+  width: 30%;
+  height: 50%;
+  background-color: rgba(185, 14, 3, 0.05);
+  border-radius: 50%;
+  filter: blur(100px);
+}
+
+.dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle at 2px 2px,
+    var(--border) 1px,
+    transparent 0
+  );
+  background-size: 48px 48px;
+  opacity: 0.15;
+}
+
+.container {
+  width: 100%;
+  max-width: 28rem;
+  position: relative;
+  z-index: 10;
+}
