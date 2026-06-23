@@ -7,7 +7,7 @@ import styles from "@/styles/pages/PageCommonContainer.module.scss";
 
 export default function ActiveProcessPage() {
   return (
-    <div className={styles["home-active-processes-page"]}>
+    <div className={styles["page-container"]}>
       <Topbar showCreateButton={true}/>
       <Breadcrumb data={[
         { name: "Depo Gösterge Paneli" }

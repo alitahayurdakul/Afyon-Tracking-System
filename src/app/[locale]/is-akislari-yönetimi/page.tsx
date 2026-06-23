@@ -5,7 +5,7 @@ import styles from "@/styles/pages/PageCommonContainer.module.scss";
 
 export default function Workflows() {
   return (
-    <div className={styles["stages-container"]}>
+    <div className={styles["page-container"]}>
       <Topbar />
       <Breadcrumb data={[{ name: "İş Akışları" }]} />
       <WorkflowsListBody />
