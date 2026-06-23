@@ -106,44 +106,29 @@ textarea {
 
 .form-label {
   margin-left: 4px;
-  font-size: 11px!important;
-  font-weight: 700!important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--slate-50) !important;
 }
 
-.info-text{
+.info-text {
   font-size: 14px;
 }
 
-.inputbox-group{
+.inputbox-group {
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
 }
 
-.half-input-container{
+.half-input-container {
   flex: 0 1 calc(50% - 0.4rem);
 }
-.info-alert {
-  display: flex;
-  gap: 10px;
-  padding: 12px 14px;
-  border-radius: var(--form-border-radius);
-  background: var(--slate-100);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  font-size: 13px;
-  line-height: 1.5;
 
-  p {
-    margin: 0;
-  }
-
-  .alert-icon {
-    flex-shrink: 0;
-    margin-top: 2px;
-    color: var(--primary-blue);
-  }
+.alert-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--primary-blue);
 }

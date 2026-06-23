@@ -131,33 +131,18 @@ textarea {
   cursor: pointer !important;
   flex-shrink: 0;
   margin-top: 0 !important;
-  min-width: 18px!important;
-  min-height: 18px!important;
+  min-width: 18px !important;
+  min-height: 18px !important;
 }
 
 .checkbox-label {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--slate-60);
-}
-.info-alert {
-  display: flex;
-  gap: 10px;
-  padding: 12px 14px;
-  border-radius: var(--form-border-radius);
-  background: var(--slate-100);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
   font-size: 13px;
-  line-height: 1.5;
+  font-weight: 500;
+  color: var(--slate-60);
+}
 
-  p {
-    margin: 0;
-  }
-
-  .alert-icon {
-    flex-shrink: 0;
-    margin-top: 2px;
-    color: var(--primary-blue);
-  }
+.alert-icon {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--primary-blue);
 }
