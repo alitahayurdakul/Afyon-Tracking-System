@@ -10,15 +10,16 @@ interface IPropsTypes {
     selectedItems: IOptionType[];
     setValue: any;
     title:string;
+    name: string;
 }
 
-export default function SelectedItemList({selectedItems, setValue, title}: IPropsTypes) {
+export default function SelectedItemList({selectedItems, setValue, title, name}: IPropsTypes) {
 const onDeleteHandler = (value: string | number | boolean) => {
-    const filteredStages = selectedItems.filter((stage: IOptionType) => stage.value !== value);
-    setValue && setValue('stages', filteredStages)
+    const filteredItems = selectedItems.filter((item: IOptionType) => item.value !== value);
+    setValue && setValue(name, filteredItems)
 }
   return (
-    <div className={styles["selected-stages"]}>
+    <div className={styles["selected-item-list"]}>
       <label className={styles["section-label"]}>{title}</label>
 
       <div className={styles["path-list"]}>

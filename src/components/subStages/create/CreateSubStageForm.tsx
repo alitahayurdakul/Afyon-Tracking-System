@@ -132,6 +132,7 @@ export const CreateSubStageForm = () => {
 
       {selectedMaterials && selectedMaterials.length > 0 && (
         <SelectedItemList
+          name="materials"
           selectedItems={selectedMaterials}
           setValue={setValue}
           title="Seçilen Malzemeler"

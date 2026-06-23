@@ -220,7 +220,7 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
         return null;
       })}
       {selectedStages && selectedStages.length > 0 && (
-        <SelectedItemList selectedItems={selectedStages} setValue={setValue} title="Seçilen Aşamalar" />
+        <SelectedItemList name="stages" selectedItems={selectedStages} setValue={setValue} title="Seçilen Aşamalar" />
       )}
 
       <div className={styles["btn-group"]}>

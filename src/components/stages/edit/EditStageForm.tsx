@@ -261,11 +261,11 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
         return null;
       })}
       {selectedStages && selectedStages.length > 0 && (
-        <SelectedItemList selectedItems={selectedStages} setValue={setValue} title="Seçilen Aşamalar" />
+        <SelectedItemList name="subStages" selectedItems={selectedStages} setValue={setValue} title="Seçilen Aşamalar" />
       )}
 
       {selectedMaterials && selectedMaterials.length > 0 && (
-        <SelectedItemList selectedItems={selectedMaterials} setValue={setValue} title="Seçilen Malzemeler" />
+        <SelectedItemList name="materialList" selectedItems={selectedMaterials} setValue={setValue} title="Seçilen Malzemeler" />
       )}
 
       <div className={styles["btn-group"]}>
