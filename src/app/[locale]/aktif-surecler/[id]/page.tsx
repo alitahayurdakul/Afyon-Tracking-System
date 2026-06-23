@@ -10,7 +10,7 @@ import { ProgressionContainer } from "@/components/activeProcessDetail/Progressi
 import Breadcrumb from "@/components/Breadcrumb";
 import { Topbar } from "@/components/common/Topbar";
 import { URL_PAGES } from "@/consts/url";
-import styles from "@/styles/pages/ActiveProcessesPage.module.scss";
+import styles from "@/styles/pages/PageCommonContainer.module.scss";
 import { IOptionType } from "@/types/formTypes";
 import {
   IActiveProcessesTypes,

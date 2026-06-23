@@ -3,7 +3,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-import styles from "@/styles/components/materials/MaterialListBody.module.scss";
+import styles from "@/styles/components/common/TableListBody.module.scss";
 import { Table } from "../common/Table";
 import { createMaterialsTableColumns } from "@/utils/materialsListTableUtils";
 import { CreateMaterialsModal } from "./create/CreateMaterialsModal";

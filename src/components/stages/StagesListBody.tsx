@@ -5,7 +5,7 @@ import {
   faSearch
 } from "@fortawesome/free-solid-svg-icons";
 
-import styles from "@/styles/components/workflowList/WorkflowListBody.module.scss";
+import styles from "@/styles/components/common/TableListBody.module.scss";
 import { Table } from "../common/Table";
 import { CreateStageModal } from "./create/CreateStageModal";
 import { useGetWorkflowsDataQuery } from "@/api/queries/useGetWorkflowsQueries";

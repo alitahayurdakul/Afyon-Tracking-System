@@ -3,7 +3,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-import styles from "@/styles/components/trains/TrainListBody.module.scss";
+import styles from "@/styles/components/common/TableListBody.module.scss";
 import { Table } from "../common/Table";
 import { createTrainsTableColumns } from "@/utils/trainsListTableUtils";
 import { CreateTrainsModal } from "./create/CreateTrainsModal";

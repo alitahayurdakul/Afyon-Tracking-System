@@ -3,7 +3,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-import styles from "@/styles/components/roles/RoleListBody.module.scss";
+import styles from "@/styles/components/common/TableListBody.module.scss";
 import { Table } from "../common/Table";
 import { createRolesTableColumns } from "@/utils/rolesListTableUtils";
 import { CreateRolesModal } from "./create/CreateRolesModal";

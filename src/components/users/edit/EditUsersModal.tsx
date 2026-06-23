@@ -1,6 +1,6 @@
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "@/styles/components/users/UserListBody.module.scss";
+import styles from "@/styles/components/common/TableListBody.module.scss";
 import compactStyles from "@/styles/components/users/UsersTableActionsCol.module.scss";
 import clsx from "clsx";
 import { Modal } from "../../common/Modal";

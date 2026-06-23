@@ -1,6 +1,6 @@
 import { Topbar } from "@/components/common/Topbar";
 import { SubStagesListBody } from "@/components/subStages/SubStagesListBody";
-import styles from "@/styles/pages/SubStagesPage.module.scss";
+import styles from "@/styles/pages/PageCommonContainer.module.scss";
 
 export default function SubStagesPage() {
   return (
