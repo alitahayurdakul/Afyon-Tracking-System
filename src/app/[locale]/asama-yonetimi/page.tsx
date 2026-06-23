@@ -4,7 +4,7 @@ import styles from "@/styles/pages/PageCommonContainer.module.scss";
 
 export default function StagesPage() {
   return (
-    <div className={styles["stages-container"]}>
+    <div className={styles["page-container"]}>
       <Topbar />
       <StagesListBody />
     </div>

@@ -4,7 +4,7 @@ import styles from "@/styles/pages/PageCommonContainer.module.scss";
 
 export default function SubStagesPage() {
   return (
-    <div className={styles["trains-container"]}>
+    <div className={styles["page-container"]}>
       <Topbar />
       <SubStagesListBody />
     </div>

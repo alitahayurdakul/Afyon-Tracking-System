@@ -43,7 +43,7 @@ export default function ActiveProcessDetailPage() {
   }, [allFleetsData]);
 
   return (
-    <div className={styles["active-processes-page"]}>
+    <div className={`${styles["page-container"]} ${styles["active-process-detail"]}`}>
       <Topbar showCreateButton={true} />
       <Breadcrumb data={[
         { name: "Depo Gösterge Paneli", link: URL_PAGES.activeProcesses },
