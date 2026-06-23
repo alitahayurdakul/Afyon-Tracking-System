@@ -35,11 +35,12 @@ input:-webkit-autofill:active {
 
 .form-input {
   width: 100%;
-  padding: 0.625rem 0.875rem;
+  padding: 0.625rem 1rem;
   font-size: 0.875rem;
-  // color: var(--primary-gray);
-  background-color: var(--input-background-color);
-  border-radius: 0.25rem;
+  color: var(--text-primary);
+  background-color: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--form-border-radius);
   outline: none;
   font-family: inherit;
   transition:
@@ -47,12 +48,18 @@ input:-webkit-autofill:active {
     box-shadow var(--transition) ease;
 
   &::placeholder {
-    color: var(--gray-60);
+    color: var(--text-muted);
   }
 
-  &:focus,
   &:hover {
     box-sizing: border-box;
+    border-color: var(--primary-blue);
+    outline: none !important;
+  }
+
+  &:focus {
+    box-sizing: border-box;
+    border-color: var(--border-blue-70);
     outline: none !important;
   }
 }
