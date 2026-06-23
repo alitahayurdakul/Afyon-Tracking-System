@@ -19,13 +19,13 @@
 .form-group select,
 .text-input {
   width: 100%;
-  border: none;
+  border: 1px solid var(--border);
   outline: none;
 
   padding: 14px 16px !important;
   border-radius: 14px !important;
 
-  background: var(--surface-muted) !important;
+  background: var(--white) !important;
   color: var(--slate-90) !important;
   font-size: 14px !important;
 }
@@ -111,4 +111,24 @@ textarea {
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--slate-50) !important;
+}.info-alert {
+  display: flex;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: var(--form-border-radius);
+  background: var(--slate-100);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.5;
+
+  p {
+    margin: 0;
+  }
+
+  .alert-icon {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--primary-blue);
+  }
 }

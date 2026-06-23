@@ -3,7 +3,6 @@ import { AnimatePresence } from "framer-motion";
 import React, {
   forwardRef,
   useCallback,
-  useEffect,
   useMemo,
   useRef,
   useState,
@@ -94,7 +93,7 @@ export const SelectBox = forwardRef<Ref, SelectBoxProps>(
       hideSelectedOptions = false,
     } = props;
     const selectRef = useRef<any>(null);
-    const [trigger, setTrigger] = useState<number>(0);
+    const [, setTrigger] = useState<number>(0);
 
     const { field, fieldState } = useController({
       name,
@@ -135,12 +134,6 @@ export const SelectBox = forwardRef<Ref, SelectBoxProps>(
       },
       [changeExtraFn, field, setTrigger],
     );
-
-    useEffect(() => {
-      if (trigger !== 0) {
-        selectRef.current.focus();
-      }
-    }, [trigger]);
 
     const getOptions = useCallback(
       (name: string) => {
@@ -326,46 +319,29 @@ export const SelectBox = forwardRef<Ref, SelectBoxProps>(
                 margin: 0,
               }),
               control: (base: any, state: any) => {
-                const border = state.menuIsOpen
-                  ? "1px solid var(--border-blue-70)"
-                  : fieldState.error
-                    ? "1px solid var(--red-100)"
-                    : "1px solid var(--border)";
-
-                const borderBottom = state.menuIsOpen
-                  ? "1px solid transparent"
-                  : fieldState.error
-                    ? "1px solid var(--red-100)"
-                    : "1px solid var(--border)";
-
-                // const borderHover = fieldState.error
-                //   ? "1px solid var(--red-100)"
-                //   : "1px solid var(--primary-purple)";
-
-                const borderHover = state.menuIsOpen
-                  ? "1px solid var(--border-blue-70)"
-                  : fieldState.error
-                    ? "1px solid var(--red-100)"
-                    : "1px solid var(--primary-blue)";
+                const isActive = state.menuIsOpen || state.isFocused;
+                const activeColor = fieldState.error
+                  ? "var(--red-100)"
+                  : "var(--border-blue-70)";
+                const borderColor = fieldState.error
+                  ? "var(--red-100)"
+                  : isActive
+                    ? "var(--border-blue-70)"
+                    : "var(--border)";
 
                 return {
                   ...base,
-                  color: "var(--slate-90)",
+                  color: "var(--text-primary)",
                   borderRadius: "var(--form-border-radius)",
-                  boxShadow: "none",
-                  border,
-                  borderBottomLeftRadius: state.menuIsOpen
-                    ? "0"
-                    : "var(--form-border-radius)",
-                  borderBottomRightRadius: state.menuIsOpen
-                    ? "0"
-                    : "var(--form-border-radius)",
+                  border: `1px solid ${borderColor}`,
+                  boxShadow: isActive ? `0 0 0 2px ${activeColor}` : "none",
+                  backgroundColor: "var(--white)",
                   "&:hover": {
-                    border: borderHover,
+                    borderColor: fieldState.error
+                      ? "var(--red-100)"
+                      : "var(--border-blue-70)",
                     cursor: "pointer",
                   },
-                  borderBottom,
-                  backgroundColor: "var(--white)",
                 };
               },
               container: (base: any) => ({
@@ -385,12 +361,9 @@ export const SelectBox = forwardRef<Ref, SelectBoxProps>(
               }),
               menu: (base: any) => ({
                 ...base,
-                marginTop: 0,
-                border: "1px solid var(--border-blue-70)",
+                marginTop: "4px",
+                border: "1px solid var(--border)",
                 borderRadius: "var(--form-border-radius)",
-                borderTopLeftRadius: 0,
-                borderTopRightRadius: 0,
-                borderTop: "none",
                 boxShadow: "var(--shadow-card)",
                 padding: 0,
                 backgroundColor: "var(--white)",
