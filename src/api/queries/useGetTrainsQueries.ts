@@ -1,11 +1,11 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-
-import { axiosInstance } from "@/api/axiosInstance";
-import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { TrainQueryTypes } from "@/app/api/trains/route";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
+
+import { axiosInstance } from "@/api/axiosInstance";
+import { TrainQueryTypes } from "@/app/api/trains/route";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
 import {
   ITrainResponseDataTypes,

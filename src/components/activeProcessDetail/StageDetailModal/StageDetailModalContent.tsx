@@ -1,19 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { StageDetail, SubStage } from "@/types/activeProcessDetailTypes";
 
-import StatusChip from "../StatusChip";
-import styles from "./StageDetailModal.module.scss";
+import { useGetSubStagesDataQuery } from "@/api/queries/useGetSubStagesQueries";
 import { Modal } from "@/components/common/Modal";
 import { ACTIVE_STAGE_DETAIL_MODAL } from "@/consts/modals";
-import { useGetSubStagesDataQuery } from "@/api/queries/useGetSubStagesQueries";
-import Stepper from "./Stepper";
-import DelayReasonGroup from "./DelayReasonGroup";
-import MaterialList from "./MaterialList";
-import ImageUploader from "./ImageUploader";
-import TimeSection from "./sections/TimeSection";
+import { StageDetail, SubStage } from "@/types/activeProcessDetailTypes";
 import { IOptionType } from "@/types/formTypes";
+
+import StatusChip from "../StatusChip";
+import DelayReasonGroup from "./DelayReasonGroup";
+import ImageUploader from "./ImageUploader";
+import MaterialList from "./MaterialList";
+import TimeSection from "./sections/TimeSection";
+import styles from "./StageDetailModal.module.scss";
+import Stepper from "./Stepper";
 
 interface StageDetailModalProps {
   id: string;

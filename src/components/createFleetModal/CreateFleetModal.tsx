@@ -1,8 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+
+import { CREATE_FLEET } from "@/consts/modals";
 import styles from "@/styles/components/CreateFleetModal.module.scss";
 import { useAddQueryParam } from "@/utils/searchParams";
-import { useState } from "react";
-import { CREATE_FLEET } from "@/consts/modals";
 
 import { Modal } from "../common/Modal";
 import { CreateFleetForm } from "./CreateFleetForm";

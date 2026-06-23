@@ -1,13 +1,14 @@
 "use client";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import styles from "@/styles/components/common/TableListBody.module.scss";
-import { Table } from "../common/Table";
-import { createSubStagesTableColumns } from "@/utils/subStagesListTableUtils";
-import { CreateSubStagesModal } from "./create/CreateSubStagesModal";
 import { useGetSubStagesListDataQuery } from "@/api/queries/useGetSubStagesManageQueries";
+import styles from "@/styles/components/common/TableListBody.module.scss";
+import { createSubStagesTableColumns } from "@/utils/subStagesListTableUtils";
+
+import { Table } from "../common/Table";
+import { CreateSubStagesModal } from "./create/CreateSubStagesModal";
 
 export const SubStagesListBody = () => {
   const { data, isLoading } = useGetSubStagesListDataQuery();

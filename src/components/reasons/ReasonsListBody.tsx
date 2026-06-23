@@ -1,13 +1,14 @@
 "use client";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import styles from "@/styles/components/common/TableListBody.module.scss";
-import { Table } from "../common/Table";
-import { createReasonsTableColumns } from "@/utils/reasonsListTableUtils";
-import { CreateReasonsModal } from "./create/CreateReasonsModal";
 import { useGetReasonsDataQuery } from "@/api/queries/useGetReasonsQueries";
+import styles from "@/styles/components/common/TableListBody.module.scss";
+import { createReasonsTableColumns } from "@/utils/reasonsListTableUtils";
+
+import { Table } from "../common/Table";
+import { CreateReasonsModal } from "./create/CreateReasonsModal";
 
 export const ReasonsListBody = () => {
   const { data, isLoading } = useGetReasonsDataQuery();

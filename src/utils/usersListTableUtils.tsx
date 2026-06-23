@@ -1,10 +1,9 @@
-import {
-  ICommonTableColumnsTypes,
-  ICommonTableColumnsType,
-} from "@/types/tableColumnTypes";
-
-import styles from "@/styles/components/users/UsersListTableUtils.module.scss";
 import { UsersTableActionsCol } from "@/components/users/UsersTableActionsCol";
+import styles from "@/styles/components/users/UsersListTableUtils.module.scss";
+import {
+  ICommonTableColumnsType,
+  ICommonTableColumnsTypes,
+} from "@/types/tableColumnTypes";
 import { IUserType } from "@/types/usersTypes";
 
 export const usersTableColumns: ICommonTableColumnsTypes = [

@@ -1,6 +1,7 @@
+import styles from "@/styles/components/login/LoginMain.module.scss";
+
 import { LoginBrand } from "./LoginBrand";
 import { LoginCard } from "./LoginCard";
-import styles from "@/styles/components/login/LoginMain.module.scss";
 
 export const LoginMain = () => {
   return (

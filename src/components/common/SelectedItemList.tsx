@@ -1,7 +1,7 @@
 "use client";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRoute, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import styles from "@/styles/components/common/SelectedItemList.module.scss";
 import { IOptionType } from "@/types/formTypes";

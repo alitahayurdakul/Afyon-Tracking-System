@@ -1,14 +1,16 @@
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import clsx from "clsx";
+import { useState } from "react";
+
+import { useGetUserDetailDataQuery } from "@/api/queries/useGetUsersQueries";
+import { EDIT_USER_MODAL } from "@/consts/modals";
 import styles from "@/styles/components/common/TableListBody.module.scss";
 import compactStyles from "@/styles/components/users/UsersTableActionsCol.module.scss";
-import clsx from "clsx";
-import { Modal } from "../../common/Modal";
 import { useAddQueryParam } from "@/utils/searchParams";
-import { useState } from "react";
+
+import { Modal } from "../../common/Modal";
 import { EditUserForm } from "./EditUserForm";
-import { EDIT_USER_MODAL } from "@/consts/modals";
-import { useGetUserDetailDataQuery } from "@/api/queries/useGetUsersQueries";
 
 export const EditUsersModal = ({ id }: { id: string }) => {
   const addQueryParam = useAddQueryParam();

@@ -1,12 +1,12 @@
+import { ReasonsTableActionsCol } from "@/components/reasons/ReasonsTableActionsCol";
+import styles from "@/styles/components/reasons/ReasonsListTableUtils.module.scss";
+import { IReasonType } from "@/types/reasonsTypes";
 import {
-  ICommonTableColumnsTypes,
   ICommonTableColumnsType,
+  ICommonTableColumnsTypes,
 } from "@/types/tableColumnTypes";
 
-import styles from "@/styles/components/reasons/ReasonsListTableUtils.module.scss";
-import { ReasonsTableActionsCol } from "@/components/reasons/ReasonsTableActionsCol";
 import { formatDate } from "./formDate";
-import { IReasonType } from "@/types/reasonsTypes";
 
 export const reasonsTableColumns: ICommonTableColumnsTypes = [
   {

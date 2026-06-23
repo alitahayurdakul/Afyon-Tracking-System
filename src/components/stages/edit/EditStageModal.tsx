@@ -1,16 +1,18 @@
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "@/styles/components/common/TableListBody.module.scss";
-import { Modal } from "../../common/Modal";
-import { useAddQueryParam } from "@/utils/searchParams";
 import { useMemo, useState } from "react";
-import { EditStageForm } from "./EditStageForm";
+
 import { useGetWorkflowDetailDataQuery } from "@/api/queries/useGetWorkflowsQueries";
+import styles from "@/styles/components/common/TableListBody.module.scss";
 import {
   IStageType,
   IWorkflowFormTypes,
   IWorkflowResponseTypes,
 } from "@/types/workflowTypes";
+import { useAddQueryParam } from "@/utils/searchParams";
+
+import { Modal } from "../../common/Modal";
+import { EditStageForm } from "./EditStageForm";
 
 export const EditWorkflowModal = ({ id }: { id: string }) => {
   const addQueryParam = useAddQueryParam();

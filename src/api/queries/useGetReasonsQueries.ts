@@ -1,17 +1,17 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-
 // import { axiosInstance } from "@/api/axiosInstance";
 // import { CLIENT_END_POINTS } from "@/consts/endpoints";
 // import { ReasonQueryTypes } from "@/app/api/reasons/route";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
+
+import { mockReasons, mockReasonsResponse } from "@/mock/managementData";
 import { RootState } from "@/redux/store";
 import {
   IReasonResponseDataTypes,
   IReasonType,
 } from "@/types/reasonsTypes";
-import { mockReasons, mockReasonsResponse } from "@/mock/managementData";
 
 export const useGetReasonsDataQuery = () => {
   const trigger = useSelector(

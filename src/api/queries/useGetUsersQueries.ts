@@ -1,17 +1,17 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-
 // import { axiosInstance } from "@/api/axiosInstance";
 // import { CLIENT_END_POINTS } from "@/consts/endpoints";
 // import { UserQueryTypes } from "@/app/api/users/route";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
+
+import { mockUsers, mockUsersResponse } from "@/mock/managementData";
 import { RootState } from "@/redux/store";
 import {
   IUserResponseDataTypes,
   IUserType,
 } from "@/types/usersTypes";
-import { mockUsers, mockUsersResponse } from "@/mock/managementData";
 
 export const useGetUsersDataQuery = () => {
   const trigger = useSelector(

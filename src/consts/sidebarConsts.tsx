@@ -1,20 +1,22 @@
-import { ISidebarItemsTypes } from "@/types/sidebarTypes";
 import {
-  faHouse,
-  faDiagramProject,
-  faLayerGroup,
-  faTrain,
-  faFilter,
-  faScaleBalanced,
-  faClockRotateLeft,
-  faCircleExclamation,
-  faUsersGear,
-  faUsers,
-  faUserShield,
   faBoxesStacked,
-  faSitemap,
+  faCircleExclamation,
+  faClockRotateLeft,
+  faDiagramProject,
+  faFilter,
   faFolderTree,
+  faHouse,
+  faLayerGroup,
+  faScaleBalanced,
+  faSitemap,
+  faTrain,
+  faUsers,
+  faUsersGear,
+  faUserShield,
 } from "@fortawesome/free-solid-svg-icons";
+
+import { ISidebarItemsTypes } from "@/types/sidebarTypes";
+
 import { URL_PAGES } from "./url";
 
 export const SIDEBAR_ITEMS: ISidebarItemsTypes = [

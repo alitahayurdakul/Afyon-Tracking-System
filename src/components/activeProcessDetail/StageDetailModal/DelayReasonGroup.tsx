@@ -1,9 +1,11 @@
-import { delayReasonOptions } from "@/mock/processData";
-import styles from "./StageDetailModal.module.scss";
 import React from "react";
+
 import Option from "@/components/formElements/Option";
+import { delayReasonOptions } from "@/mock/processData";
 import { DelayReasons } from "@/types/activeProcessDetailTypes";
 import { IOptionType } from "@/types/formTypes";
+
+import styles from "./StageDetailModal.module.scss";
 
 interface DelayReasonGroupProps {
   selectedList: IOptionType["value"][];

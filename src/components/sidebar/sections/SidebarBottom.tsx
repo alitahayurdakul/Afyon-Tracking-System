@@ -1,9 +1,10 @@
 "use client";
 
-import styles from "@/styles/components/sidebar/sections/SidebarBottom.module.scss";
-import { useRouter } from "next/navigation";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/navigation";
+
+import styles from "@/styles/components/sidebar/sections/SidebarBottom.module.scss";
 
 export const SidebarBottom = () => {
   const router = useRouter();

@@ -1,15 +1,15 @@
 'use client';
-import styles from "@/styles/components/common/Topbar.module.scss";
-
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
-  faSearch,
   faBell,
-  faGear,
   faCirclePlus,
+  faGear,
+  faSearch,
 } from "@fortawesome/free-solid-svg-icons";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import styles from "@/styles/components/common/Topbar.module.scss";
+
 import { CreateFleetModal } from "../createFleetModal/CreateFleetModal";
 
 library.add(faSearch, faBell, faGear, faCirclePlus);

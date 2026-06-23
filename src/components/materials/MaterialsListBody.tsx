@@ -1,13 +1,14 @@
 "use client";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import styles from "@/styles/components/common/TableListBody.module.scss";
-import { Table } from "../common/Table";
-import { createMaterialsTableColumns } from "@/utils/materialsListTableUtils";
-import { CreateMaterialsModal } from "./create/CreateMaterialsModal";
 import { useGetMaterialsDataQuery } from "@/api/queries/useGetMaterialsQueries";
+import styles from "@/styles/components/common/TableListBody.module.scss";
+import { createMaterialsTableColumns } from "@/utils/materialsListTableUtils";
+
+import { Table } from "../common/Table";
+import { CreateMaterialsModal } from "./create/CreateMaterialsModal";
 
 export const MaterialsListBody = () => {
   const { data, isLoading } = useGetMaterialsDataQuery();

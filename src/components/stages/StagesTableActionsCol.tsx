@@ -1,16 +1,18 @@
-import React from "react";
-import styles from "@/styles/components/common/TableActionsCol.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { addToastify } from "@/redux/slices/toastSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
 import { useDispatch } from "react-redux";
-import { EditWorkflowModal } from "./edit/EditStageModal";
+
+import { axiosInstance } from "@/api/axiosInstance";
 import { WorkflowQueryTypes } from "@/app/api/workflows/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { axiosInstance } from "@/api/axiosInstance";
-import { PopoverBody } from "../Popover";
-import stylesDeletePopover from "@/styles/components/common/TableDeletePopover.module.scss";
+import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import styles from "@/styles/components/common/TableActionsCol.module.scss";
+import stylesDeletePopover from "@/styles/components/common/TableDeletePopover.module.scss";
+
+import { PopoverBody } from "../Popover";
+import { EditWorkflowModal } from "./edit/EditStageModal";
 
 export const StagesTableActionsCol = ({ id }: { id: string }) => {
   const dispatch = useDispatch();

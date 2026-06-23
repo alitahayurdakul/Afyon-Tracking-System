@@ -1,4 +1,5 @@
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
+
 import { IOptionType } from "./formTypes";
 
 export interface IFilterType {

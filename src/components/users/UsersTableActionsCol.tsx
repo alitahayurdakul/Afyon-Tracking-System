@@ -1,18 +1,20 @@
-import styles from "@/styles/components/common/TableActionsCol.module.scss";
-import compactStyles from "@/styles/components/users/UsersTableActionsCol.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
-import { EditUsersModal } from "./edit/EditUsersModal";
-import { addToastify } from "@/redux/slices/toastSlice";
 import { useDispatch } from "react-redux";
-import { PopoverBody } from "../Popover";
-import stylesDeletePopover from "@/styles/components/common/TableDeletePopover.module.scss";
+
 import { axiosInstance } from "@/api/axiosInstance";
-import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { UserQueryTypes } from "@/app/api/users/route";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import styles from "@/styles/components/common/TableActionsCol.module.scss";
+import stylesDeletePopover from "@/styles/components/common/TableDeletePopover.module.scss";
+import compactStyles from "@/styles/components/users/UsersTableActionsCol.module.scss";
 import { extractApiError } from "@/utils/extractApiError";
+
+import { PopoverBody } from "../Popover";
+import { EditUsersModal } from "./edit/EditUsersModal";
 
 export const UsersTableActionsCol = ({ id }: { id: string }) => {
   const dispatch = useDispatch();

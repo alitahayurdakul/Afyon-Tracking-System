@@ -1,9 +1,10 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+
 import { Sidebar } from "@/components/sidebar/Sidebar";
-import { stripLocale } from "@/utils/stripLocale";
 import styles from "@/styles/Layout.module.scss";
+import { stripLocale } from "@/utils/stripLocale";
 
 const AUTH_ROUTES = ["/login", "/forgot-password"];
 

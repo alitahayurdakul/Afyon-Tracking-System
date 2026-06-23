@@ -1,13 +1,14 @@
 "use client";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import styles from "@/styles/components/common/TableListBody.module.scss";
-import { Table } from "../common/Table";
-import { createProjectsTableColumns } from "@/utils/projectsListTableUtils";
-import { CreateProjectsModal } from "./create/CreateProjectsModal";
 import { useGetProjectsDataQuery } from "@/api/queries/useGetProjectsQueries";
+import styles from "@/styles/components/common/TableListBody.module.scss";
+import { createProjectsTableColumns } from "@/utils/projectsListTableUtils";
+
+import { Table } from "../common/Table";
+import { CreateProjectsModal } from "./create/CreateProjectsModal";
 
 export const ProjectsListBody = () => {
   const { data, isLoading } = useGetProjectsDataQuery();

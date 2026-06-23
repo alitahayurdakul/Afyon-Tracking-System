@@ -1,14 +1,16 @@
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import clsx from "clsx";
+import { useState } from "react";
+
+import { useGetRoleDetailDataQuery } from "@/api/queries/useGetRolesQueries";
+import { EDIT_ROLE_MODAL } from "@/consts/modals";
 import styles from "@/styles/components/common/TableListBody.module.scss";
 import compactStyles from "@/styles/components/roles/RolesTableActionsCol.module.scss";
-import clsx from "clsx";
-import { Modal } from "../../common/Modal";
 import { useAddQueryParam } from "@/utils/searchParams";
-import { useState } from "react";
+
+import { Modal } from "../../common/Modal";
 import { EditRoleForm } from "./EditRoleForm";
-import { EDIT_ROLE_MODAL } from "@/consts/modals";
-import { useGetRoleDetailDataQuery } from "@/api/queries/useGetRolesQueries";
 
 export const EditRolesModal = ({ id }: { id: string }) => {
   const addQueryParam = useAddQueryParam();

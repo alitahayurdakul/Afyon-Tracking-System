@@ -1,13 +1,13 @@
+import { ProjectsTableActionsCol } from "@/components/projects/ProjectsTableActionsCol";
+import { PROJECT_STATUS_LABEL_MAP } from "@/consts/projectsConsts";
+import styles from "@/styles/components/projects/ProjectsListTableUtils.module.scss";
+import { IProjectType } from "@/types/projectsTypes";
 import {
-  ICommonTableColumnsTypes,
   ICommonTableColumnsType,
+  ICommonTableColumnsTypes,
 } from "@/types/tableColumnTypes";
 
-import styles from "@/styles/components/projects/ProjectsListTableUtils.module.scss";
-import { ProjectsTableActionsCol } from "@/components/projects/ProjectsTableActionsCol";
 import { formatDate } from "./formDate";
-import { IProjectType } from "@/types/projectsTypes";
-import { PROJECT_STATUS_LABEL_MAP } from "@/consts/projectsConsts";
 
 export const projectsTableColumns: ICommonTableColumnsTypes = [
   {

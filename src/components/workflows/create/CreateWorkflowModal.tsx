@@ -1,10 +1,12 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "@/styles/components/common/TableListBody.module.scss";
-import { Modal } from "../../common/Modal";
-import { useAddQueryParam } from "@/utils/searchParams";
 import { useState } from "react";
+
 import { CREATE_WORKFLOW_MODAL } from "@/consts/modals";
+import styles from "@/styles/components/common/TableListBody.module.scss";
+import { useAddQueryParam } from "@/utils/searchParams";
+
+import { Modal } from "../../common/Modal";
 import { CreateWorkflowForm } from "./CreateWorkflowForm";
 
 export const CreateWorkflowModal = () => {
