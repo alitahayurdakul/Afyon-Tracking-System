@@ -1,4 +1,4 @@
-/* eslint-disable */
+ 
 import { AxiosInstance } from "axios";
 
 import { END_POINTS } from "@/consts/endpoints";

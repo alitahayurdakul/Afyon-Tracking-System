@@ -1,7 +1,8 @@
 import { MainStage } from "@/types/activeProcessDetailTypes";
-import StatusChip from "./StatusChip";
+
 import styles from "./ProcessFlow.module.scss";
 import StageDetailModal from "./stageDetailModal/StageDetailModal";
+import StatusChip from "./StatusChip";
 
 interface StageRowProps {
   stage: MainStage;

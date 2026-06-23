@@ -1,20 +1,22 @@
-import { ISidebarItemsTypes } from "@/types/sidebarTypes";
 import {
-  faHouse,
-  faDiagramProject,
-  faLayerGroup,
-  faTrain,
-  faFilter,
-  faScaleBalanced,
-  faClockRotateLeft,
-  faCircleExclamation,
-  faUsersGear,
-  faUsers,
-  faUserShield,
   faBoxesStacked,
-  faSitemap,
+  faCircleExclamation,
+  faClockRotateLeft,
+  faDiagramProject,
+  faFilter,
   faFolderTree,
+  faHouse,
+  faLayerGroup,
+  faScaleBalanced,
+  faSitemap,
+  faTrain,
+  faUsers,
+  faUsersGear,
+  faUserShield,
 } from "@fortawesome/free-solid-svg-icons";
+
+import { ISidebarItemsTypes } from "@/types/sidebarTypes";
+
 import { URL_PAGES } from "./url";
 
 export const SIDEBAR_ITEMS: ISidebarItemsTypes = [
@@ -26,7 +28,7 @@ export const SIDEBAR_ITEMS: ISidebarItemsTypes = [
       {
         name: "İstatistikler",
         icon: faFilter,
-        url: "/istatistikler",
+        url: URL_PAGES.statistics,
       },
       {
         name: "Karşılaştır",
@@ -40,45 +42,45 @@ export const SIDEBAR_ITEMS: ISidebarItemsTypes = [
     icon: faDiagramProject,
     url: URL_PAGES.activeProcesses,
   },
-  {
-    name: "Geçmiş Süreçler",
-    icon: faClockRotateLeft,
-    url: URL_PAGES.workflowHistory,
-  },
+  // {
+  //   name: "Geçmiş Süreçler",
+  //   icon: faClockRotateLeft,
+  //   url: URL_PAGES.workflowHistory,
+  // },
   {
     name: "İş Akışları",
     icon: faDiagramProject,
-    url: "/workflows",
+    url: URL_PAGES.workflows,
   },
   {
     name: "Aşamalar",
     icon: faLayerGroup,
-    url: "/asamalar",
+    url: URL_PAGES.stages,
   },
   {
     name: "Alt Aşamalar",
     icon: faSitemap,
-    url: "/alt-asamalar",
+    url: URL_PAGES.subStages,
   },
   {
     name: "Projeler",
     icon: faFolderTree,
-    url: "/projeler",
+    url: URL_PAGES.projects,
   },
   {
     name: "Trenler",
     icon: faTrain,
-    url: "/trenler",
+    url: URL_PAGES.trains,
   },
   {
     name: "Gecikme Sebepleri",
     icon: faCircleExclamation,
-    url: "/reasons",
+    url: URL_PAGES.delayReasons,
   },
   {
     name: "Malzeme Listesi",
     icon: faBoxesStacked,
-    url: "/malzeme-listesi",
+    url: URL_PAGES.materials,
   },
   {
     name: "Kullanıcı Yönetimi",
@@ -87,12 +89,12 @@ export const SIDEBAR_ITEMS: ISidebarItemsTypes = [
       {
         name: "Kullanıcılar",
         icon: faUsers,
-        url: "/users",
+        url: URL_PAGES.users,
       },
       {
         name: "Roller",
         icon: faUserShield,
-        url: "/roles",
+        url: URL_PAGES.roles,
       },
     ],
   },

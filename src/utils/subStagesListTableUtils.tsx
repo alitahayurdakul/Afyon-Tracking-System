@@ -1,12 +1,12 @@
+import { SubStagesTableActionsCol } from "@/components/subStages/SubStagesTableActionsCol";
+import styles from "@/styles/components/subStages/SubStagesListTableUtils.module.scss";
+import { ISubStageType } from "@/types/subStagesTypes";
 import {
-  ICommonTableColumnsTypes,
   ICommonTableColumnsType,
+  ICommonTableColumnsTypes,
 } from "@/types/tableColumnTypes";
 
-import styles from "@/styles/components/subStages/SubStagesListTableUtils.module.scss";
-import { SubStagesTableActionsCol } from "@/components/subStages/SubStagesTableActionsCol";
 import { formatDate } from "./formDate";
-import { ISubStageType } from "@/types/subStagesTypes";
 
 export const subStagesTableColumns: ICommonTableColumnsTypes = [
   {

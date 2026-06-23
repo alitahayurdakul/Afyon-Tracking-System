@@ -1,13 +1,13 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-
 // import { axiosInstance } from "@/api/axiosInstance";
 // import { CLIENT_END_POINTS } from "@/consts/endpoints";
 // import { WorkflowQueryTypes } from "@/app/api/workflows/route";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+
 import { mockWorkflows } from "@/mock/managementData";
+import { RootState } from "@/redux/store";
 
 export const useGetWorkflowsDataQuery = <T>() => {
   const trigger = useSelector((state: RootState) => state.tableTrigger.triggerTrainTableTrigger);

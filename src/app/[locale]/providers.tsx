@@ -1,10 +1,11 @@
 "use client";
 
-import NotificationProvider from "@/components/notification/NotificationProvider";
-import { store } from "@/redux/store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import { Provider } from "react-redux";
+
+import NotificationProvider from "@/components/notification/NotificationProvider";
+import { store } from "@/redux/store";
 // import { Provider } from "react-redux";
 
 // import NotificationProvider from "@/components/notification/NotificationProvider";

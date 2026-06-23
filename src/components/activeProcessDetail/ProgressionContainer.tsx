@@ -1,10 +1,11 @@
 
 
+import { ErrorChecker } from "@/components/common/error/ErrorChecker";
+import { LoadingChecker } from "@/components/common/loaders/LoadingChecker";
+import { SkeletonContainer } from "@/components/common/loaders/SkeletonContainer";
 import styles from "@/styles/components/activeProcessDetail/ProgressionContainer.module.scss";
 import { ProcessResponse } from "@/types/processTypes";
-import { LoadingChecker } from "@/components/common/loaders/LoadingChecker";
-import { ErrorChecker } from "@/components/common/error/ErrorChecker";
-import { SkeletonContainer } from "@/components/common/loaders/SkeletonContainer";
+
 import ProcessFlow from "./ProcessFlow";
 
 interface IPropsTypes {

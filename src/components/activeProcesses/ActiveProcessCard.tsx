@@ -1,10 +1,11 @@
-import styles from "@/styles/components/activeProcesses/ActiveProcessesGrid.module.scss";
-import DE22000 from "@/assets/images/DE-22000.jpg";
 import Image from "next/image";
 import Link from "next/link";
+
+import DE22000 from "@/assets/images/DE-22000.jpg";
+import { URL_PAGES } from "@/consts/url";
+import styles from "@/styles/components/activeProcesses/ActiveProcessesGrid.module.scss";
 import { IActiveProcessType } from "@/types/processTypes";
 import { getStageProgress } from "@/utils/activeProcessUtils";
-import { URL_PAGES } from "@/consts/url";
 
 export const ActiveProcessCard = ({ unit }: { unit: IActiveProcessType }) => {
 

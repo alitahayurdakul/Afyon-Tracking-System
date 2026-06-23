@@ -24,7 +24,7 @@ import { SubStageQueryTypes } from "@/app/api/sub-stages/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { IOptionType } from "@/types/formTypes";
 import { useGetMaterialsDataQuery } from "@/api/queries/useGetMaterialsQueries";
-import SelectedMaterials from "../SelectedMaterials";
+import SelectedItemList from "@/components/common/SelectedItemList";
 
 interface IPropsTypes {
   id: string;
@@ -141,9 +141,11 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
       />
 
       {selectedMaterials && selectedMaterials.length > 0 && (
-        <SelectedMaterials
-          selectedMaterials={selectedMaterials}
+        <SelectedItemList
+          name="materials"
+          selectedItems={selectedMaterials}
           setValue={setValue}
+          title="Seçilen Malzemeler"
         />
       )}
 
@@ -173,7 +175,9 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
         </div>
         <div className={styles["activity-row"]}>
           <span className={styles["activity-label"]}>Son Güncelleyen:</span>
-          <span className={styles["activity-value"]}>{data?.editor ?? "-"}</span>
+          <span className={styles["activity-value"]}>
+            {data?.editor ?? "-"}
+          </span>
         </div>
         <div className={styles["activity-row"]}>
           <span className={styles["activity-label"]}>
@@ -185,13 +189,13 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
         </div>
       </section>
 
-      <div className={styles["info-alert"]}>
+      <div>
         <FontAwesomeIcon icon={faCircleInfo} className={styles["alert-icon"]} />
-        <p>
+        <span className={styles["info-text"]}>
           Alt aşama bilgilerini güncellemek ilişkili süreç kayıtlarını
           etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden
           emin olun.
-        </p>
+        </span>
       </div>
 
       <div className={styles["btn-group"]}>

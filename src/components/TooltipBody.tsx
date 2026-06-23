@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import clsx from "clsx";
-
 import * as Tooltip from "@radix-ui/react-tooltip";
+import clsx from "clsx";
+import React, { useState } from "react";
 
 import styles from "@/styles/components/Tooltip.module.scss";
 

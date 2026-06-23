@@ -1,13 +1,14 @@
 "use client";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import styles from "@/styles/components/users/UserListBody.module.scss";
-import { Table } from "../common/Table";
-import { createUsersTableColumns } from "@/utils/usersListTableUtils";
-import { CreateUsersModal } from "./create/CreateUsersModal";
 import { useGetUsersDataQuery } from "@/api/queries/useGetUsersQueries";
+import styles from "@/styles/components/common/TableListBody.module.scss";
+import { createUsersTableColumns } from "@/utils/usersListTableUtils";
+
+import { Table } from "../common/Table";
+import { CreateUsersModal } from "./create/CreateUsersModal";
 
 export const UsersListBody = () => {
   const { data, isLoading } = useGetUsersDataQuery();

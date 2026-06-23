@@ -1,5 +1,6 @@
-import Skeleton from "react-loading-skeleton";
 import clsx from "clsx";
+import Skeleton from "react-loading-skeleton";
+
 import styles from "@/styles/components/common/Skeleton.module.scss";
 
 interface ISkeletonTypes {

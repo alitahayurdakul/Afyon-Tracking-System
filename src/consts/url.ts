@@ -6,7 +6,12 @@ export const URL_PAGES = {
     workflowHistory: "/gecmis-surecler",
     workflows: "/is-akislari-yonetimi",
     stages: "/asama-yonetimi",
-    trains: "tren-yonetimi",
-    users: "/users",
-    roles: "/roles"
+    trains: "/tren-yonetimi",
+    users: "/kullanici-yonetimi",
+    roles: "/rol-yonetimi",
+    subStages: "/alt-asamalar-yonetimi",
+    delayReasons: "/gecikme-nedenleri",
+    login: "/login",
+    materials: "/malzeme-yonetimi",
+    projects: "/proje-yonetimi"
 }

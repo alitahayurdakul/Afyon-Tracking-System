@@ -1,14 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { InputField } from "@/components/common/InputField";
-import styles from "@/styles/components/login/LoginCard.module.scss";
 import { useLoginMutation } from "@/api/queries/useAuthQueries";
+import { InputField } from "@/components/common/InputField";
 import { addToastify } from "@/redux/slices/toastSlice";
+import styles from "@/styles/components/login/LoginCard.module.scss";
 
 export const LoginCard = () => {
   const router = useRouter();

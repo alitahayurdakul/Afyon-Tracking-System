@@ -1,6 +1,7 @@
-import styles from "@/styles/components/sidebar/sections/TopSection.module.scss";
 import Image from "next/image";
+
 import logo from "@/assets/images/logo.png";
+import styles from "@/styles/components/sidebar/sections/TopSection.module.scss";
 
 export const SidebarHeader = () => {
   return (

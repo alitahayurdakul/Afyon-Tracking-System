@@ -1,7 +1,8 @@
-import { IOptionType } from "@/types/formTypes";
 import clsx from "clsx";
 import React from "react";
+
 import styles from "@/styles/components/formElements/Option.module.scss";
+import { IOptionType } from "@/types/formTypes";
 
 interface IPropsType {
   option: IOptionType;

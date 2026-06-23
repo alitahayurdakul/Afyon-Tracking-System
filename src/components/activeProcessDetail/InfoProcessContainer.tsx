@@ -1,28 +1,28 @@
 "use client";
 
-import styles from "@/styles/components/activeProcessDetail/InfoProcessContainer.module.scss";
-
-import { useEffect, useMemo, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
-  faChevronDown,
   faArrowRight,
+  faChevronDown,
   faComments,
 } from "@fortawesome/free-solid-svg-icons";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
+
+import styles from "@/styles/components/activeProcessDetail/InfoProcessContainer.module.scss";
 
 library.add(faChevronDown, faArrowRight, faComments);
-import DE22000 from "@/assets/images/DE-22000.jpg";
-import { addToastify } from "@/redux/slices/toastSlice";
 import { useDispatch } from "react-redux";
+
 import { axiosInstance } from "@/api/axiosInstance";
-import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { ProcessOperationsQueryTypes } from "@/app/api/activeProcessOperations/route";
+import DE22000 from "@/assets/images/DE-22000.jpg";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { URL_PAGES } from "@/consts/url";
+import { addToastify } from "@/redux/slices/toastSlice";
 import { IOptionType } from "@/types/formTypes";
 import { ProcessResponse } from "@/types/processTypes";
-import { URL_PAGES } from "@/consts/url";
 
 export default function InfoProcessContainer({
   data,

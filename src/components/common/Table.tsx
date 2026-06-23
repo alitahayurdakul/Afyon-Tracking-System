@@ -1,7 +1,3 @@
-import React, { CSSProperties, useEffect, useRef, useState } from "react";
-import clsx from "clsx";
-import Skeleton from "react-loading-skeleton";
-
 import {
   Column,
   ColumnPinningState,
@@ -11,10 +7,12 @@ import {
   Table as TypeReactTable,
   useReactTable
 } from "@tanstack/react-table";
-
-import { DEFAULT_TABLE_PAGE_COUNT } from "@/utils/config";
+import clsx from "clsx";
+import React, { CSSProperties, useEffect, useRef, useState } from "react";
+import Skeleton from "react-loading-skeleton";
 
 import styles from "@/styles/components/common/Table.module.scss";
+import { DEFAULT_TABLE_PAGE_COUNT } from "@/utils/config";
 
 interface TableProps<T> {
   tableName?: string;

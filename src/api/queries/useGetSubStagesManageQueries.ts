@@ -1,17 +1,17 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-
 // import { axiosInstance } from "@/api/axiosInstance";
 // import { CLIENT_END_POINTS } from "@/consts/endpoints";
 // import { SubStageQueryTypes } from "@/app/api/sub-stages/route";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
+
+import { mockSubStages, mockSubStagesResponse } from "@/mock/managementData";
 import { RootState } from "@/redux/store";
 import {
   ISubStageResponseDataTypes,
   ISubStageType,
 } from "@/types/subStagesTypes";
-import { mockSubStages, mockSubStagesResponse } from "@/mock/managementData";
 
 export const useGetSubStagesListDataQuery = () => {
   const trigger = useSelector(

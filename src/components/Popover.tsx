@@ -1,6 +1,5 @@
-import React, { useEffect, useRef } from "react";
-
 import * as Popover from "@radix-ui/react-popover";
+import React, { useEffect, useRef } from "react";
 
 import styles from "@/styles/components/Popover.module.css";
 

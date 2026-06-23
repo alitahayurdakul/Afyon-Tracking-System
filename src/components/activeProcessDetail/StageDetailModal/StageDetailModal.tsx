@@ -1,10 +1,12 @@
 "use client";
 
-import StageDetailModalContent from "@/components/activeProcessDetail/stageDetailModal/StageDetailModalContent";
-import styles from "../ProcessFlow.module.scss";
 import { useState } from "react";
-import { useAddQueryParam } from "@/utils/searchParams";
+
+import StageDetailModalContent from "@/components/activeProcessDetail/stageDetailModal/StageDetailModalContent";
 import { ACTIVE_STAGE_DETAIL_MODAL } from "@/consts/modals";
+import { useAddQueryParam } from "@/utils/searchParams";
+
+import styles from "../ProcessFlow.module.scss";
 
 export default function StageDetailModal({ id }: { id: string }) {
   const [open, setOpen] = useState<boolean | undefined>(false);

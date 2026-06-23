@@ -12,7 +12,6 @@ export function CreateFleetFormValidation(): Yup.ObjectSchema<ICreateFleetFormDa
       .trim()
       .typeError("Bu alan zorunludur")
       .required("Bu alan zorunludur"),
-    trainModal: Yup.string().optional(),
   };
 
   return Yup.object().shape(baseShape);

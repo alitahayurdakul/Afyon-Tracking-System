@@ -1,14 +1,15 @@
 "use client";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import styles from "@/styles/components/roles/RoleListBody.module.scss";
-import { Table } from "../common/Table";
-import { createRolesTableColumns } from "@/utils/rolesListTableUtils";
-import { CreateRolesModal } from "./create/CreateRolesModal";
 import { useGetRolesDataQuery } from "@/api/queries/useGetRolesQueries";
 import { PERMISSION_LABEL_MAP } from "@/consts/permissionsConsts";
+import styles from "@/styles/components/common/TableListBody.module.scss";
+import { createRolesTableColumns } from "@/utils/rolesListTableUtils";
+
+import { Table } from "../common/Table";
+import { CreateRolesModal } from "./create/CreateRolesModal";
 
 export const RolesListBody = () => {
   const { data, isLoading } = useGetRolesDataQuery();

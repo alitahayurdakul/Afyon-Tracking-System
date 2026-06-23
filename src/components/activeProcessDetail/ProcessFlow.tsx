@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { MainStage } from "@/types/activeProcessDetailTypes";
+
 import { mockMainStages } from "@/mock/processData";
-import StageRow from "./StageRow";
+import { MainStage } from "@/types/activeProcessDetailTypes";
+
 import styles from "./ProcessFlow.module.scss";
+import StageRow from "./StageRow";
 
 export default function ProcessFlow() {
   const [stages] = useState<MainStage[]>(mockMainStages);

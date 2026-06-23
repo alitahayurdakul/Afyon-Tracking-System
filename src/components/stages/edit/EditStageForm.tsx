@@ -14,7 +14,6 @@ import { useDispatch } from "react-redux";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { WORKFLOW_FORM_CONSTS } from "@/consts/workflowConsts";
 import { SelectBox } from "@/components/formElements/SelectBox";
-import SelectedStages from "../SelectedSubStages";
 import { axiosInstance } from "@/api/axiosInstance";
 import { useGetStagesDataQuery } from "@/api/queries/useGetStagesQueries";
 import { IStageFormDataTypes, IStageResponseDataTypes, IStageType } from "@/types/stagesTypes";
@@ -262,11 +261,11 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
         return null;
       })}
       {selectedStages && selectedStages.length > 0 && (
-        <SelectedItemList selectedItems={selectedStages} setValue={setValue} title="Seçilen Aşamalar" />
+        <SelectedItemList name="subStages" selectedItems={selectedStages} setValue={setValue} title="Seçilen Aşamalar" />
       )}
 
       {selectedMaterials && selectedMaterials.length > 0 && (
-        <SelectedItemList selectedItems={selectedMaterials} setValue={setValue} title="Seçilen Malzemeler" />
+        <SelectedItemList name="materialList" selectedItems={selectedMaterials} setValue={setValue} title="Seçilen Malzemeler" />
       )}
 
       <div className={styles["btn-group"]}>

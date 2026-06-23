@@ -3,7 +3,7 @@ import { ActiveProcessGrid } from "@/components/activeProcesses/ActiveProcessGri
 import Breadcrumb from "@/components/Breadcrumb";
 import { Topbar } from "@/components/common/Topbar";
 // import { HomeActiveProcessGrid } from "@/components/homeActiveProcesses/body/HomeActiveProcessGrid";
-import styles from "@/styles/pages/HomeActiveProcesses.module.scss";
+import styles from "@/styles/pages/PageCommonContainer.module.scss";
 
 export default function ActiveProcessPage() {
   return (

@@ -1,12 +1,14 @@
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "@/styles/components/trains/TrainListBody.module.scss";
-import { Modal } from "../../common/Modal";
-import { useAddQueryParam } from "@/utils/searchParams";
 import { useState } from "react";
-import { EditTrainForm } from "./EditTrainForm";
-import { EDIT_TRAIN_MODAL } from "@/consts/modals";
+
 import { useGetTrainDetailDataQuery } from "@/api/queries/useGetTrainsQueries";
+import { EDIT_TRAIN_MODAL } from "@/consts/modals";
+import styles from "@/styles/components/common/TableListBody.module.scss";
+import { useAddQueryParam } from "@/utils/searchParams";
+
+import { Modal } from "../../common/Modal";
+import { EditTrainForm } from "./EditTrainForm";
 
 export const EditTrainsModal = ({ id }: { id: string }) => {
   const addQueryParam = useAddQueryParam();

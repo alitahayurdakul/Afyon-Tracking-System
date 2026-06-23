@@ -1,24 +1,24 @@
 "use client";
 
+import { useParams } from "next/navigation";
+import { useMemo } from "react";
+
 import {
   useActiveProcessDetailDataQuery,
   useGetActiveProcessesDataQuery,
 } from "@/api/queries/useGetProcessesQueries";
 import InfoProcessContainer from "@/components/activeProcessDetail/InfoProcessContainer";
 import { ProgressionContainer } from "@/components/activeProcessDetail/ProgressionContainer";
-
 import Breadcrumb from "@/components/Breadcrumb";
 import { Topbar } from "@/components/common/Topbar";
 import { URL_PAGES } from "@/consts/url";
-import styles from "@/styles/pages/ActiveProcessesPage.module.scss";
+import styles from "@/styles/pages/PageCommonContainer.module.scss";
 import { IOptionType } from "@/types/formTypes";
 import {
   IActiveProcessesTypes,
   IActiveProcessType,
   ProcessResponse,
 } from "@/types/processTypes";
-import { useParams } from "next/navigation";
-import { useMemo } from "react";
 
 export default function ActiveProcessDetailPage() {
   const id = useParams().id;

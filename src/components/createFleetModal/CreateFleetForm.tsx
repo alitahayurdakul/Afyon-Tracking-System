@@ -20,7 +20,6 @@ import { useGetWorkflowsDataQuery } from "@/api/queries/useGetWorkflowsQueries";
 import { IWorkflowResponseTypes } from "@/types/workflowTypes";
 import { useRouter } from "next/navigation";
 import { CreateFleetFormValidation } from "@/utils/validations/createFleetFormValidation";
-import { ITrainType } from "@/types/trainsTypes";
 import { useGetTrainsDataQuery } from "@/api/queries/useGetTrainsQueries";
 import { URL_PAGES } from "@/consts/url";
 import { InputSpaceEnums } from "@/types/formEnums";

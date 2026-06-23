@@ -1,17 +1,17 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-
 // import { axiosInstance } from "@/api/axiosInstance";
 // import { CLIENT_END_POINTS } from "@/consts/endpoints";
 // import { MaterialQueryTypes } from "@/app/api/materials/route";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
+
+import { mockMaterials, mockMaterialsResponse } from "@/mock/managementData";
 import { RootState } from "@/redux/store";
 import {
   IMaterialResponseDataTypes,
   IMaterialType,
 } from "@/types/materialsTypes";
-import { mockMaterials, mockMaterialsResponse } from "@/mock/managementData";
 
 export const useGetMaterialsDataQuery = () => {
   const trigger = useSelector(
