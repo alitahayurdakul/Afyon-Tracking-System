@@ -21,7 +21,7 @@ import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { SubStageQueryTypes } from "@/app/api/sub-stages/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { useGetMaterialsDataQuery } from "@/api/queries/useGetMaterialsQueries";
-import SelectedMaterials from "../SelectedMaterials";
+import SelectedItemList from "@/components/common/SelectedItemList";
 
 export const CreateSubStageForm = () => {
   const {
@@ -131,9 +131,10 @@ export const CreateSubStageForm = () => {
       />
 
       {selectedMaterials && selectedMaterials.length > 0 && (
-        <SelectedMaterials
-          selectedMaterials={selectedMaterials}
+        <SelectedItemList
+          selectedItems={selectedMaterials}
           setValue={setValue}
+          title="Seçilen Malzemeler"
         />
       )}
 

@@ -176,13 +176,13 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
         </div>
       </section>
 
-      <div className={styles["info-alert"]}>
+      <div>
         <FontAwesomeIcon icon={faCircleInfo} className={styles["alert-icon"]} />
-        <p>
+        <span className={styles["info-text"]} >
           Malzeme bilgilerini güncellemek ilişkili stok kayıtlarını ve raporları
           etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden
           emin olun.
-        </p>
+        </span>
       </div>
 
       <div className={styles["btn-group"]}>
