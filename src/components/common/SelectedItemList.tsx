@@ -3,7 +3,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRoute, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-import styles from "@/styles/components/workflowList/SelectedStages.module.scss";
+import styles from "@/styles/components/common/SelectedItemList.module.scss";
 import { IOptionType } from "@/types/formTypes";
 
 interface IPropsTypes {

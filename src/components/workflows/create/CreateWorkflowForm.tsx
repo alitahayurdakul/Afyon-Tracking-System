@@ -16,13 +16,13 @@ import { IWorkflowFormDataTypes } from "@/types/workflowTypes";
 import { WORKFLOW_FORM_CONSTS } from "@/consts/workflowConsts";
 import { SelectBox } from "@/components/formElements/SelectBox";
 import { WorkflowFormValidation } from "@/utils/validations/workflowFormValidation";
-import SelectedStages from "../SelectedStages";
 import { axiosInstance } from "@/api/axiosInstance";
 import { useGetStagesDataQuery } from "@/api/queries/useGetStagesQueries";
 import { IStageResponseDataTypes, IStageType } from "@/types/stagesTypes";
 import { WorkflowQueryTypes } from "@/app/api/workflows/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import SelectedItemList from "@/components/common/SelectedItemList";
 
 export const CreateWorkflowForm = () => {
   const {
@@ -180,7 +180,7 @@ export const CreateWorkflowForm = () => {
         return null;
       })}
       {selectedStages && Array.isArray(selectedStages) && selectedStages.length > 0 && (
-        <SelectedStages selectedStages={selectedStages} setValue={setValue} />
+        <SelectedItemList selectedItems={selectedStages} setValue={setValue} title="Seçilen Aşamalar" />
       )}
 
       <div className={styles["btn-group"]}>
