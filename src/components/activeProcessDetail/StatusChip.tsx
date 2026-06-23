@@ -1,4 +1,4 @@
-import { StageStatus } from "@/types/process";
+import { StageStatus } from "@/types/activeProcessDetailTypes";
 import styles from "./StatusChip.module.scss";
 
 const LABELS: Record<StageStatus, string> = {
