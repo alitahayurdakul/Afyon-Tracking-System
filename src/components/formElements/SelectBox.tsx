@@ -135,11 +135,6 @@ export const SelectBox = forwardRef<Ref, SelectBoxProps>(
       [changeExtraFn, field, setTrigger],
     );
 
-    // Not: Seçim sonrası selectRef.current.focus() ile odağı geri almıyoruz.
-    // react-select, closeMenuOnSelect=false iken menüyü zaten açık/odaklı
-    // tutuyor; manuel odaklama, başka alana tıklandıktan sonra aktiflik
-    // halkasının (mavi border) takılı kalmasına yol açıyordu.
-
     const getOptions = useCallback(
       (name: string) => {
         // if (tParent) {
@@ -324,8 +319,6 @@ export const SelectBox = forwardRef<Ref, SelectBoxProps>(
                 margin: 0,
               }),
               control: (base: any, state: any) => {
-                // Input ile birebir aynı stil: 1px --border kenarlık,
-                // odaklı/aktifken --border-blue-70 kenarlık + 2px halka.
                 const isActive = state.menuIsOpen || state.isFocused;
                 const activeColor = fieldState.error
                   ? "var(--red-100)"
