@@ -1,15 +1,15 @@
-import {
-  ICommonTableColumnsTypes,
-  ICommonTableColumnsType,
-} from "@/types/tableColumnTypes";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import styles from "@/styles/components/workflowHistory/WorkflowHistoryTableUtils.module.scss";
+import { IActiveProcessType } from "@/types/processTypes";
+import {
+  ICommonTableColumnsType,
+  ICommonTableColumnsTypes,
+} from "@/types/tableColumnTypes";
+
 import { formatDate } from "./formDate";
 import { getElapsedTime } from "./getElapsedTime";
-import { IActiveProcessType } from "@/types/processTypes";
 
 export const workflowHistoryTableColumns: ICommonTableColumnsTypes = [
   {

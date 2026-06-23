@@ -49,15 +49,14 @@ export const CreateStageForm = () => {
 
   // const { data, isLoading, isError, isFetching, refetch } =
   //   useGetStagesDataQuery<IStagesTypes>(); // should be subStagesData
-  
+
   useEffect(() => {
-    if(hasSubStage){
-      setValue("materialList", [])
+    if (hasSubStage) {
+      setValue("materialList", []);
+    } else {
+      setValue("subStages", []);
     }
-    else{
-      setValue("subStages", [])
-    }
-  },[hasSubStage])
+  }, [hasSubStage]);
 
   const dispatch = useDispatch();
 
@@ -251,20 +250,24 @@ export const CreateStageForm = () => {
         }
         return null;
       })}
-      {hasSubStage && selectedStages &&
+      {hasSubStage &&
+        selectedStages &&
         Array.isArray(selectedStages) &&
         selectedStages.length > 0 && (
           <SelectedItemList
+            name="subStages"
             selectedItems={selectedStages}
             setValue={setValue}
             title="Seçilen Aşamalar"
           />
         )}
 
-      {!hasSubStage && selectedMaterials &&
+      {!hasSubStage &&
+        selectedMaterials &&
         Array.isArray(selectedMaterials) &&
         selectedMaterials.length > 0 && (
           <SelectedItemList
+            name="materialList"
             selectedItems={selectedMaterials}
             setValue={setValue}
             title="Seçilen Malzemeler"

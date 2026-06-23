@@ -1,4 +1,5 @@
 import * as Yup from "yup";
+
 import { ITrainFormDataTypes } from "@/types/trainsTypes";
 
 export function TrainFormValidation(): Yup.ObjectSchema<ITrainFormDataTypes> {

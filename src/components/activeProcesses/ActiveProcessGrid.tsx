@@ -1,14 +1,16 @@
 "use client";
-import styles from "@/styles/components/activeProcesses/ActiveProcessesGrid.module.scss";
 import React from "react";
-import { ActiveProcessCard } from "./ActiveProcessCard";
+
 import { useGetActiveProcessesDataQuery } from "@/api/queries/useGetProcessesQueries";
+import { ErrorChecker } from "@/components/common/error/ErrorChecker";
+import { LoadingChecker } from "@/components/common/loaders/LoadingChecker";
+import styles from "@/styles/components/activeProcesses/ActiveProcessesGrid.module.scss";
 import {
   IActiveProcessesTypes,
   IActiveProcessType,
 } from "@/types/processTypes";
-import { LoadingChecker } from "@/components/common/loaders/LoadingChecker";
-import { ErrorChecker } from "@/components/common/error/ErrorChecker";
+
+import { ActiveProcessCard } from "./ActiveProcessCard";
 
 export const ActiveProcessGrid = () => {
   const { data, isLoading, isError } =

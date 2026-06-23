@@ -1,8 +1,10 @@
 "use client";
-import styles from '@/styles/components/activeProcesses/ActiveProcessesHeader.module.scss';
-import { SelectBox } from '../formElements/SelectBox';
-import { useForm } from 'react-hook-form';
 import { useCallback } from 'react';
+import { useForm } from 'react-hook-form';
+
+import styles from '@/styles/components/activeProcesses/ActiveProcessesHeader.module.scss';
+
+import { SelectBox } from '../formElements/SelectBox';
 
 export const ActiveProcessesHeader = () => {
   const { control } = useForm();

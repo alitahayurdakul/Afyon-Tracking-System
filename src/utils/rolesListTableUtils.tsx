@@ -1,11 +1,10 @@
-import {
-  ICommonTableColumnsTypes,
-  ICommonTableColumnsType,
-} from "@/types/tableColumnTypes";
-
-import styles from "@/styles/components/roles/RolesListTableUtils.module.scss";
 import { RolesTableActionsCol } from "@/components/roles/RolesTableActionsCol";
+import styles from "@/styles/components/roles/RolesListTableUtils.module.scss";
 import { IRoleType } from "@/types/rolesTypes";
+import {
+  ICommonTableColumnsType,
+  ICommonTableColumnsTypes,
+} from "@/types/tableColumnTypes";
 
 export const rolesTableColumns: ICommonTableColumnsTypes = [
   { name: "roleName", label: "Rol Adı" },

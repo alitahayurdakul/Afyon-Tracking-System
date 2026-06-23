@@ -1,8 +1,10 @@
 'use client';
 import { useQuery } from "@tanstack/react-query";
 import { useLocale } from "next-intl";
-import { axiosInstance } from "../axiosInstance";
+
 import { IOptionType } from "@/types/formTypes";
+
+import { axiosInstance } from "../axiosInstance";
 
 export const useModuleQuery = (
   apiUrl: string,

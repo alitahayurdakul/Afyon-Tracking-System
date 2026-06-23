@@ -1,17 +1,17 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-
 // import { axiosInstance } from "@/api/axiosInstance";
 // import { CLIENT_END_POINTS } from "@/consts/endpoints";
 // import { ProjectQueryTypes } from "@/app/api/projects/route";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
+
+import { mockProjects, mockProjectsResponse } from "@/mock/managementData";
 import { RootState } from "@/redux/store";
 import {
   IProjectResponseDataTypes,
   IProjectType,
 } from "@/types/projectsTypes";
-import { mockProjects, mockProjectsResponse } from "@/mock/managementData";
 
 export const useGetProjectsDataQuery = () => {
   const trigger = useSelector(

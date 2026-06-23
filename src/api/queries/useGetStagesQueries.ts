@@ -1,13 +1,13 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-
 // import { axiosInstance } from "@/api/axiosInstance";
 // import { CLIENT_END_POINTS } from "@/consts/endpoints";
 // import { StageQueryTypes } from "@/app/api/stages/route";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+
 import { mockStages, mockStagesResponse } from "@/mock/managementData";
+import { RootState } from "@/redux/store";
 
 export const useGetStagesDataQuery = <T>() => {
   const trigger = useSelector((state: RootState) => state.tableTrigger.triggerTrainTableTrigger);

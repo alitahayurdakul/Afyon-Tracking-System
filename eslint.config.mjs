@@ -1,27 +1,60 @@
-import { defineConfig, globalIgnores } from "eslint/config";
-import nextVitals from "eslint-config-next/core-web-vitals";
-import nextTs from "eslint-config-next/typescript";
+import tsParser from "@typescript-eslint/parser";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
+import prettierPlugin from "eslint-plugin-prettier";
+import tsPlugin from "@typescript-eslint/eslint-plugin";
+import react from "eslint-plugin-react";
 
-const eslintConfig = defineConfig([
-  ...nextVitals,
-  ...nextTs,
+export default [
+  { ignores: ["**/.next/**"] },
+
   {
+    files: ["src/**/*.{js,jsx,ts,tsx}"],
+
+    plugins: {
+      "@typescript-eslint": tsPlugin,
+      "simple-import-sort": simpleImportSort,
+      prettier: prettierPlugin,
+      react
+    },
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module",
+        ecmaFeatures: {
+          jsx: true,
+        },
+        project: "./tsconfig.json",
+      },
+    },
     rules: {
-      "@typescript-eslint/no-explicit-any": "off",
-      "@typescript-eslint/no-unused-vars": "off",
-      "@typescript-eslint/no-inferrable-types": "off",
-      "react-hooks/exhaustive-deps": "off",
-      "no-console": "off",
+      "simple-import-sort/imports": [
+        "warn",
+        {
+          groups: [
+            ["^react$", "^next", "^[a-z]"],
+            ["^@"],
+            ["^@/"],
+            ["^~"],
+            ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+            ["\\.png$", "\\.svg$"],
+            ["^.+\\.s?css$"],
+            ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+            ["^\\u0000"],
+          ],
+        },
+      ],
+      "react/no-unknown-property": "off",
+      "@typescript-eslint/no-unnecessary-type-constraint": "off",
+      "no-duplicate-imports": "error",
+      "simple-import-sort/imports": "warn",
+      "simple-import-sort/exports": "warn",
+      "no-unused-vars": [
+      "warn",
+      { "ignoreRestSiblings": true, "varsIgnorePattern": "^_" }
+    ],
+      "react/react-in-jsx-scope": "off",
+      "@next/next/no-img-element": "off"
     },
   },
-  // Override default ignores of eslint-config-next.
-  globalIgnores([
-    // Default ignores of eslint-config-next:
-    ".next/**",
-    "out/**",
-    "build/**",
-    "next-env.d.ts",
-  ]),
-]);
-
-export default eslintConfig;
+];

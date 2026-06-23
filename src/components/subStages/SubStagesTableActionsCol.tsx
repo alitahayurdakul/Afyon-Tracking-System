@@ -1,15 +1,17 @@
-import styles from "@/styles/components/common/TableActionsCol.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { EditSubStagesModal } from "./edit/EditSubStagesModal";
-import { addToastify } from "@/redux/slices/toastSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch } from "react-redux";
-import { PopoverBody } from "../Popover";
-import stylesDeletePopover from "@/styles/components/common/TableDeletePopover.module.scss";
+
 import { axiosInstance } from "@/api/axiosInstance";
-import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { SubStageQueryTypes } from "@/app/api/sub-stages/route";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import styles from "@/styles/components/common/TableActionsCol.module.scss";
+import stylesDeletePopover from "@/styles/components/common/TableDeletePopover.module.scss";
+
+import { PopoverBody } from "../Popover";
+import { EditSubStagesModal } from "./edit/EditSubStagesModal";
 
 export const SubStagesTableActionsCol = ({ id }: { id: string }) => {
   const dispatch = useDispatch();

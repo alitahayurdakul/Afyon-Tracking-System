@@ -1,16 +1,17 @@
 "use client";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSearch
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import styles from "@/styles/components/workflowList/WorkflowListBody.module.scss";
-import { Table } from "../common/Table";
-import { CreateStageModal } from "./create/CreateStageModal";
 import { useGetWorkflowsDataQuery } from "@/api/queries/useGetWorkflowsQueries";
+import styles from "@/styles/components/common/TableListBody.module.scss";
 import { IWorkflowResponseTypes } from "@/types/workflowTypes";
 import { createStagesTableColumns } from "@/utils/stagesListTableUtils";
+
+import { Table } from "../common/Table";
+import { CreateStageModal } from "./create/CreateStageModal";
 
 export const StagesListBody = () => {
   const { data, isLoading, isError, isFetching, refetch } = useGetWorkflowsDataQuery<IWorkflowResponseTypes[]>();

@@ -1,4 +1,5 @@
 import { useRef } from "react";
+
 import styles from "./StageDetailModal.module.scss";
 
 interface ImageUploaderProps {
@@ -40,7 +41,6 @@ export default function ImageUploader({ images, disabled, onChange }: ImageUploa
       )}
       <div className={styles.imagePreview}>
         {images.map((src, i) => (
-          // eslint-disable-next-line @next/next/no-img-element
           <img key={i} src={src} alt="" className={styles.imageThumb} />
         ))}
       </div>

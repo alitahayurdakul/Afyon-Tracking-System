@@ -1,13 +1,14 @@
 "use client";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import styles from "@/styles/components/trains/TrainListBody.module.scss";
-import { Table } from "../common/Table";
-import { createTrainsTableColumns } from "@/utils/trainsListTableUtils";
-import { CreateTrainsModal } from "./create/CreateTrainsModal";
 import { useGetTrainsDataQuery } from "@/api/queries/useGetTrainsQueries";
+import styles from "@/styles/components/common/TableListBody.module.scss";
+import { createTrainsTableColumns } from "@/utils/trainsListTableUtils";
+
+import { Table } from "../common/Table";
+import { CreateTrainsModal } from "./create/CreateTrainsModal";
 
 export const TrainsListBody = () => {
   const { data, isLoading, isError, isFetching, refetch } =

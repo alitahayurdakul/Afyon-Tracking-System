@@ -6,23 +6,23 @@
  * yorum satırındaki gerçek `axiosInstance` çağrısını aktif etmek yeterlidir.
  */
 
-import { IReasonResponseDataTypes, IReasonType } from "@/types/reasonsTypes";
-import { IRoleResponseDataTypes, IRoleType } from "@/types/rolesTypes";
-import { IUserResponseDataTypes, IUserType } from "@/types/usersTypes";
-import { IStageResponseDataTypes, IStageType } from "@/types/stagesTypes";
-import { IWorkflowResponseTypes } from "@/types/workflowTypes";
 import {
   IMaterialResponseDataTypes,
   IMaterialType,
 } from "@/types/materialsTypes";
 import {
-  ISubStageResponseDataTypes,
-  ISubStageType,
-} from "@/types/subStagesTypes";
-import {
   IProjectResponseDataTypes,
   IProjectType,
 } from "@/types/projectsTypes";
+import { IReasonResponseDataTypes, IReasonType } from "@/types/reasonsTypes";
+import { IRoleResponseDataTypes, IRoleType } from "@/types/rolesTypes";
+import { IStageResponseDataTypes, IStageType } from "@/types/stagesTypes";
+import {
+  ISubStageResponseDataTypes,
+  ISubStageType,
+} from "@/types/subStagesTypes";
+import { IUserResponseDataTypes, IUserType } from "@/types/usersTypes";
+import { IWorkflowResponseTypes } from "@/types/workflowTypes";
 
 /* ----------------------------- Gecikme Sebepleri ---------------------------- */
 

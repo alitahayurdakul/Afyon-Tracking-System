@@ -1,12 +1,12 @@
+import { MaterialsTableActionsCol } from "@/components/materials/MaterialsTableActionsCol";
+import styles from "@/styles/components/materials/MaterialsListTableUtils.module.scss";
+import { IMaterialType } from "@/types/materialsTypes";
 import {
-  ICommonTableColumnsTypes,
   ICommonTableColumnsType,
+  ICommonTableColumnsTypes,
 } from "@/types/tableColumnTypes";
 
-import styles from "@/styles/components/materials/MaterialsListTableUtils.module.scss";
-import { MaterialsTableActionsCol } from "@/components/materials/MaterialsTableActionsCol";
 import { formatDate } from "./formDate";
-import { IMaterialType } from "@/types/materialsTypes";
 
 export const materialsTableColumns: ICommonTableColumnsTypes = [
   {

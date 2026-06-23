@@ -17,7 +17,6 @@ import { InputSpaceEnums } from "@/types/formEnums";
 import { useRemoveQueryParamModal } from "@/utils/searchParams";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { useDispatch } from "react-redux";
-import { formatDate } from "@/utils/formDate";
 import { axiosInstance } from "@/api/axiosInstance";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { UserQueryTypes } from "@/app/api/users/route";
@@ -46,9 +45,7 @@ export const EditUserForm = ({ id, data }: IPropsTypes) => {
       phone: data?.phone ?? "",
       department: data?.department ?? "",
       role:
-        typeof data?.role === "string"
-          ? data?.role
-          : (data?.role?._id ?? ""),
+        typeof data?.role === "string" ? data?.role : (data?.role?._id ?? ""),
       isActive: data?.isActive ?? true,
     },
   });
@@ -164,13 +161,13 @@ export const EditUserForm = ({ id, data }: IPropsTypes) => {
         options={USER_ACTIVE_OPTIONS}
       />
 
-<div className={styles["info-alert"]}>
+      <div>
         <FontAwesomeIcon icon={faCircleInfo} className={styles["alert-icon"]} />
-        <p>
+        <span className={styles["info-text"]}>
           Kullanıcı bilgilerini güncellemek erişim ve yetkilendirme akışını
           etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden
           emin olun.
-        </p>
+        </span>
       </div>
 
       <div className={styles["btn-group"]}>

@@ -1,11 +1,14 @@
-import type { Metadata } from "next";
-import styles from "@/styles/Layout.module.scss";
-import { AppShell } from "@/components/layout/AppShell";
-import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import { Providers } from "./providers";
 import "react-loading-skeleton/dist/skeleton.css";
 import "../globals.css";
+
+import { config } from "@fortawesome/fontawesome-svg-core";
+import type { Metadata } from "next";
+
+import { AppShell } from "@/components/layout/AppShell";
+import styles from "@/styles/Layout.module.scss";
+
+import { Providers } from "./providers";
 
 config.autoAddCss = false;
 

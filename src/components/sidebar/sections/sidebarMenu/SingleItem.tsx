@@ -1,11 +1,12 @@
 'use client';
-import { ISidebarItemTypes } from "@/types/sidebarTypes";
-import Link from "next/link";
-import styles from "@/styles/components/sidebar/sections/sidebarMenu/SidebarMenu.module.scss";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { usePathname } from "next/navigation";
-import { stripLocale } from "@/utils/stripLocale";
 import clsx from 'clsx';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+import styles from "@/styles/components/sidebar/sections/sidebarMenu/SidebarMenu.module.scss";
+import { ISidebarItemTypes } from "@/types/sidebarTypes";
+import { stripLocale } from "@/utils/stripLocale";
 
 interface IPropsTypes {
   item: ISidebarItemTypes;

@@ -1,12 +1,12 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
+import { useSelector } from "react-redux";
 
 import { axiosInstance } from "@/api/axiosInstance";
-import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { useParams } from "next/navigation";
 import { ProcessQueryTypes } from "@/app/api/processes/route";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
-import { useSelector } from "react-redux";
 
 export const useGetActiveProcessesDataQuery = <T>() => {
   return useQuery({

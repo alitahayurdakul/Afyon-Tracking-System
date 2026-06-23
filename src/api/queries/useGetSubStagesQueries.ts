@@ -1,7 +1,9 @@
-import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { useQuery } from "@tanstack/react-query";
-import { axiosInstance } from "../axiosInstance";
+
 import { ProcessOperationsQueryTypes } from "@/app/api/activeProcessOperations/route";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+
+import { axiosInstance } from "../axiosInstance";
 
 export const useGetSubStagesDataQuery = <T>(subStageId: string) => {
     // const isEnabled = Boolean(subStageId && subStageId !== "")

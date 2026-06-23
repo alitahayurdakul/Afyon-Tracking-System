@@ -1,12 +1,14 @@
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "@/styles/components/subStages/SubStageListBody.module.scss";
-import { Modal } from "../../common/Modal";
-import { useAddQueryParam } from "@/utils/searchParams";
 import { useState } from "react";
-import { EditSubStageForm } from "./EditSubStageForm";
-import { EDIT_SUB_STAGE_MODAL } from "@/consts/modals";
+
 import { useGetSubStageDetailDataQuery } from "@/api/queries/useGetSubStagesManageQueries";
+import { EDIT_SUB_STAGE_MODAL } from "@/consts/modals";
+import styles from "@/styles/components/common/TableListBody.module.scss";
+import { useAddQueryParam } from "@/utils/searchParams";
+
+import { Modal } from "../../common/Modal";
+import { EditSubStageForm } from "./EditSubStageForm";
 
 export const EditSubStagesModal = ({ id }: { id: string }) => {
   const addQueryParam = useAddQueryParam();

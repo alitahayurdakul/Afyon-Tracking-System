@@ -1,4 +1,5 @@
 import { SubStage } from "@/types/activeProcessDetailTypes";
+
 import styles from "./StageDetailModal.module.scss";
 
 interface StepperProps {

@@ -1,15 +1,17 @@
-import styles from "@/styles/components/common/TableActionsCol.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { EditReasonsModal } from "./edit/EditReasonsModal";
-import { addToastify } from "@/redux/slices/toastSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch } from "react-redux";
-import { PopoverBody } from "../Popover";
-import stylesDeletePopover from "@/styles/components/common/TableDeletePopover.module.scss";
+
 import { axiosInstance } from "@/api/axiosInstance";
-import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { ReasonQueryTypes } from "@/app/api/reasons/route";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import styles from "@/styles/components/common/TableActionsCol.module.scss";
+import stylesDeletePopover from "@/styles/components/common/TableDeletePopover.module.scss";
+
+import { PopoverBody } from "../Popover";
+import { EditReasonsModal } from "./edit/EditReasonsModal";
 
 export const ReasonsTableActionsCol = ({ id }: { id: string }) => {
   const dispatch = useDispatch();
