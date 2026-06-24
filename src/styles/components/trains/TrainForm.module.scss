@@ -19,7 +19,7 @@
 .form-group select,
 .text-input {
   width: 100%;
-  border: none;
+  border: 1px solid var(--border);
   outline: none;
 
   padding: 14px 16px !important;
@@ -110,11 +110,6 @@ textarea {
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--slate-50) !important;
-}
-
-.info-text {
-  font-size: 14px;
-  color: var(--text-secondary);
 }
 
 .inputbox-group {

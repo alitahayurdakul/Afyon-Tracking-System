@@ -19,10 +19,9 @@
 .form-group select,
 .text-input {
   width: 100%;
-  border: none;
+  border: 1px solid var(--border);
   outline: none;
 
-  border: 1px solid var(--border);
   padding: 14px 16px !important;
   border-radius: 14px !important;
 
