@@ -145,4 +145,10 @@ textarea {
   flex-shrink: 0;
   margin-top: 2px;
   color: var(--primary-blue);
+  padding-right: 4px;
+}
+
+.info-text {
+  font-size: 14px;
+  color: var(--text-secondary);
 }
