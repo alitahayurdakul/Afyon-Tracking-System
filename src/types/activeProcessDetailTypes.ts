@@ -3,7 +3,7 @@ export type StageStatus = "completed" | "active" | "pending";
 export interface MainStage {
   id: string;
   name: string;
-  status: StageStatus;
+  status: string | number;
   start: string | null;
   end: string | null;
   elapsed: string | null;

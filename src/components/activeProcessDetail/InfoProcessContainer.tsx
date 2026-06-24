@@ -13,6 +13,7 @@ import { useEffect, useMemo, useState } from "react";
 import styles from "@/styles/components/activeProcessDetail/InfoProcessContainer.module.scss";
 
 library.add(faChevronDown, faArrowRight, faComments);
+import { useTranslations } from "next-intl";
 import { useDispatch } from "react-redux";
 
 import { axiosInstance } from "@/api/axiosInstance";
@@ -36,6 +37,7 @@ export default function InfoProcessContainer({
   const { id } = useParams();
   const router = useRouter();
   const dispatch = useDispatch();
+  const t = useTranslations("activeProcessDetail");
 
   const stageId = useMemo(() => {
     if (data && data?.entries.length !== data?.stages.length) {
@@ -118,7 +120,7 @@ export default function InfoProcessContainer({
       <div className={styles["sidebar-inner"]}>
         {/* Aktif Projeler */}
         <section>
-          <label className={styles["section-label"]}>Aktif Projeler</label>
+          <label className={styles["section-label"]}>{t("active-projects")}</label>
 
           <div className={styles["select-wrap"]}>
             <select
@@ -144,7 +146,7 @@ export default function InfoProcessContainer({
           </div>
 
           <p className={styles["helper-text"]}>
-            Canlı iş akışı ilerlemesini görüntülemek için bir tren seçin.
+            {t("active-projects-select-explaining")}
           </p>
         </section>
 
@@ -167,7 +169,7 @@ export default function InfoProcessContainer({
 
           <div className={styles["card-body"]}>
             <div className={styles["time-stage"]}>
-              <span>Toplam Geçen Süre</span>
+              <span>{t("total-elapsed-time")}</span>
               <strong suppressHydrationWarning>{currentTime}</strong>
             </div>
 
@@ -186,7 +188,7 @@ export default function InfoProcessContainer({
               className={styles["complete-btn"]}
               onClick={onCompleteProcess}
             >
-              Süreci Tamamla
+              {t("complete-process")}
               <FontAwesomeIcon icon="arrow-right" />
             </button>
           </div>

@@ -1,0 +1,19 @@
+{
+    "process-flow": "Süreç Akışı",
+    "status": {
+        "completed": "Tamamlandı",
+        "active": "Aktif",
+        "pending": "Bekliyor"
+    },
+    "progress-process": "{progress} tamamlandı",
+    "open-detail": "Detayı aç",
+    "start-date": "Başlangıç",
+    "end-date": "Bitiş",
+    "not-yet-started": "Henüz başlamadı",
+    "pending": "Sürüyor",
+    "complete-process": "Süreci Tamamla",
+    "total-elapsed-time": "TOPLAM GEÇEN SÜRE",
+    "active-projects": "Aktif Projeler",
+    "active-projects-select-explaining": "Canlı iş akışı ilerlemesini görüntülemek için bir tren seçin.",
+    "processId": "Süreç ID"
+}

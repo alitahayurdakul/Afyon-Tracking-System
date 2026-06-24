@@ -1,0 +1,19 @@
+{
+  "process-flow": "Prozessablauf",
+  "status": {
+    "completed": "Abgeschlossen",
+    "active": "Aktiv",
+    "pending": "Ausstehend"
+  },
+  "progress-process": "{progress} abgeschlossen",
+  "open-detail": "Details öffnen",
+  "start-date": "Startdatum",
+  "end-date": "Enddatum",
+  "not-yet-started": "Noch nicht begonnen",
+  "pending": "In Bearbeitung",
+  "complete-process": "Prozess abschließen",
+  "total-elapsed-time": "GESAMT VERGANGENE ZEIT",
+  "active-projects": "Aktive Projekte",
+  "active-projects-select-explaining": "Wählen Sie einen Zug aus, um den Live-Fortschritt des Workflows anzuzeigen.",
+  "processId": "Prozess-ID"
+}

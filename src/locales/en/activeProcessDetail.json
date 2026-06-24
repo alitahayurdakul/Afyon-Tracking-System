@@ -1,0 +1,19 @@
+{
+  "process-flow": "Process Flow",
+  "status": {
+    "completed": "Completed",
+    "active": "Active",
+    "pending": "Pending"
+  },
+  "progress-process": "{progress} completed",
+  "open-detail": "Open Details",
+  "start-date": "Start Date",
+  "end-date": "End Date",
+  "not-yet-started": "Not Yet Started",
+  "pending": "In Progress",
+  "complete-process": "Complete Process",
+  "total-elapsed-time": "TOTAL ELAPSED TIME",
+  "active-projects": "Active Projects",
+  "active-projects-select-explaining": "Select a train to view live workflow progress.",
+  "processId": "Process ID"
+}

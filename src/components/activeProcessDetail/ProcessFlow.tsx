@@ -1,9 +1,11 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { mockMainStages } from "@/mock/processData";
 import { MainStage } from "@/types/activeProcessDetailTypes";
+import { getStatus } from "@/utils/getStatus";
 
 import styles from "./ProcessFlow.module.scss";
 import StageRow from "./StageRow";
@@ -11,20 +13,26 @@ import StageRow from "./StageRow";
 export default function ProcessFlow() {
   const [stages] = useState<MainStage[]>(mockMainStages);
   const [selectedStage, setSelectedStage] = useState<MainStage | null>(null);
+  const t = useTranslations("activeProcessDetail");
 
-  const completedCount = stages.filter((s) => s.status === "completed").length;
+  const completedCount = stages.filter((s) => getStatus(s.status.toString()) === "completed").length;
   const progressPercent = Math.round((completedCount / stages.length) * 100);
 
   return (
     <div className={styles.wrap}>
       <div className={styles.header}>
-        <span className={styles.title}>Süreç Akışı</span>
+        <span className={styles.title}>{t("process-flow")}</span>
         <div className={styles.progress}>
           <span className={styles.progressText}>
-            {completedCount} / {stages.length} tamamlandı
+            {t.rich("progress-process", {
+              progress: `${completedCount} / ${stages.length}`,
+            })}
           </span>
           <div className={styles.progressBar}>
-            <div className={styles.progressFill} style={{ width: `${progressPercent}%` }} />
+            <div
+              className={styles.progressFill}
+              style={{ width: `${progressPercent}%` }}
+            />
           </div>
         </div>
       </div>
@@ -32,15 +40,15 @@ export default function ProcessFlow() {
       <div className={styles.legend}>
         <span className={styles.legendItem}>
           <span className={`${styles.legendDot} ${styles.completed}`} />
-          Tamamlandı
+          {t("status.completed")}
         </span>
         <span className={styles.legendItem}>
           <span className={`${styles.legendDot} ${styles.active}`} />
-          Aktif
+          {t("status.active")}
         </span>
         <span className={styles.legendItem}>
           <span className={`${styles.legendDot} ${styles.pending}`} />
-          Bekliyor
+          {t("status.pending")}
         </span>
       </div>
 

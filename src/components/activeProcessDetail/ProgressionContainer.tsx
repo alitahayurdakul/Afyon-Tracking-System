@@ -1,5 +1,7 @@
 
 
+import { useTranslations } from "next-intl";
+
 import { ErrorChecker } from "@/components/common/error/ErrorChecker";
 import { LoadingChecker } from "@/components/common/loaders/LoadingChecker";
 import { SkeletonContainer } from "@/components/common/loaders/SkeletonContainer";
@@ -15,6 +17,8 @@ interface IPropsTypes {
 }
 
 export const ProgressionContainer = ({ data, isLoading, isError }: IPropsTypes) => {
+  const t = useTranslations("activeProcessDetail");
+
   return (
     <div className={styles["active-progression-body"]}>
       <div className={styles["header"]}>
@@ -32,7 +36,7 @@ export const ProgressionContainer = ({ data, isLoading, isError }: IPropsTypes) 
           {isLoading ? (
             <SkeletonContainer />
           ) : (
-            <>Süreç ID: <span className={styles["workflow-id"]}>{data?.process?._id ?? "-"}</span></>
+            <>{t("processId")}: <span className={styles["workflow-id"]}>{data?.process?._id ?? "-"}</span></>
           )}
         </p>
       </div>

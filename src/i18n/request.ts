@@ -11,7 +11,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
     locale = routing.defaultLocale;
   }
 
-  const files = ["example"];
+  const files = ["example", "activeProcessDetail"];
   const messages: Record<string, any> = {};
 
   for (const file of files) {

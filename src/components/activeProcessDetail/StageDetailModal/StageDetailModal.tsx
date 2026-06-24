@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import StageDetailModalContent from "@/components/activeProcessDetail/stageDetailModal/StageDetailModalContent";
@@ -11,6 +12,7 @@ import styles from "../ProcessFlow.module.scss";
 export default function StageDetailModal({ id }: { id: string }) {
   const [open, setOpen] = useState<boolean | undefined>(false);
   const addQueryParam = useAddQueryParam();
+  const t = useTranslations("activeProcessDetail")
   return (
     <>
       <button
@@ -21,7 +23,7 @@ export default function StageDetailModal({ id }: { id: string }) {
           }
         }}
       >
-        Detayı aç
+        {t("open-detail")}
       </button>
 
       <StageDetailModalContent id={id} open={open} setOpen={setOpen} />
