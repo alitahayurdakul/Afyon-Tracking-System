@@ -37,7 +37,7 @@ textarea {
   }
 
   &:focus {
-    box-shadow: 0 0 0 2px var(--border-blue-70);
+    box-shadow: 0 0 0 1px var(--border-blue-70);
   }
 }
 
@@ -115,6 +115,7 @@ textarea {
 
 .info-text {
   font-size: 14px;
+  color: var(--text-secondary);
 }
 
 .inputbox-group {
