@@ -1,5 +1,6 @@
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { useGetSubStageDetailDataQuery } from "@/api/queries/useGetSubStagesManageQueries";
@@ -11,6 +12,7 @@ import { Modal } from "../../common/Modal";
 import { EditSubStageForm } from "./EditSubStageForm";
 
 export const EditSubStagesModal = ({ id }: { id: string }) => {
+  const t = useTranslations("subStages");
   const addQueryParam = useAddQueryParam();
   const [open, setOpen] = useState<boolean | undefined>(false);
   const { data, isFetching } = useGetSubStageDetailDataQuery(id);
@@ -26,14 +28,14 @@ export const EditSubStagesModal = ({ id }: { id: string }) => {
         }}
       >
         <FontAwesomeIcon icon={faPen} />
-        <span>Güncelle</span>
+        <span>{t("actions.edit")}</span>
       </button>
       {!isFetching && (
         <Modal
           name={`${EDIT_SUB_STAGE_MODAL}_${id}`}
           width={"900px"}
           height={"auto"}
-          title="Alt Aşama Bilgilerini Güncelle"
+          title={t("modal.edit")}
           isCloseOutside={false}
           isCloseEsc={false}
           enableParams={true}

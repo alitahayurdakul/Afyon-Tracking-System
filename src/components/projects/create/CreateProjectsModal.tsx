@@ -1,5 +1,6 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { CREATE_PROJECT_MODAL } from "@/consts/modals";
@@ -10,6 +11,7 @@ import { Modal } from "../../common/Modal";
 import { CreateProjectForm } from "./CreateProjectForm";
 
 export const CreateProjectsModal = () => {
+  const t = useTranslations("projects");
   const addQueryParam = useAddQueryParam();
   const [open, setOpen] = useState<boolean | undefined>(false);
 
@@ -24,14 +26,14 @@ export const CreateProjectsModal = () => {
         }}
       >
         <FontAwesomeIcon icon={faPlus} />
-        Yeni Proje Ekle
+        {t("addButton")}
       </button>
 
       <Modal
         name={CREATE_PROJECT_MODAL}
         width={"900px"}
         height={"auto"}
-        title="Yeni Proje Oluştur"
+        title={t("modal.create")}
         isCloseOutside={false}
         isCloseEsc={false}
         enableParams={true}

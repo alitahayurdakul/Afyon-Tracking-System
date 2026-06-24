@@ -31,14 +31,16 @@ export const subStagesTableColumns: ICommonTableColumnsTypes = [
   },
 ];
 
-export const createSubStagesTableColumns = () => {
+export const createSubStagesTableColumns = (
+  t?: (key: string) => string,
+) => {
   const columns = subStagesTableColumns;
 
   return [
     ...columns.map((column: ICommonTableColumnsType) => ({
       accessorKey: column.name,
       header: () => {
-        return <div>{column.label}</div>;
+        return <div>{t ? t(`columns.${column.name}`) : column.label}</div>;
       },
       cell: ({ row }: { row: { original: ISubStageType } }) => {
         const r = row.original;

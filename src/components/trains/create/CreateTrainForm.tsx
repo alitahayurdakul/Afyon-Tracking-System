@@ -21,8 +21,10 @@ import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { TrainQueryTypes } from "@/app/api/trains/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { SelectBox } from "@/components/formElements/SelectBox";
+import { useTranslations } from "next-intl";
 
 export const CreateTrainForm = () => {
+  const t = useTranslations("trains.form");
   const {
     control,
     handleSubmit,
@@ -185,14 +187,14 @@ export const CreateTrainForm = () => {
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label="İptal"
+          label={t("cancel")}
           disabled={isSubmitting}
         />
         <Button
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label="Kaydet"
+          label={t("save")}
           disabled={isSubmitting}
         />
       </div>

@@ -1,0 +1,33 @@
+{
+  "title": "Sub Stages",
+  "description": "Manage the sub stages linked to stages centrally.",
+  "addButton": "Add New Sub Stage",
+  "search": "Search...",
+  "columns": {
+    "name": "Sub Stage Name",
+    "materials": "Materials",
+    "creator": "Created By",
+    "editor": "Updated By",
+    "actions": "Actions"
+  },
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "modal": {
+    "create": "Create New Sub Stage",
+    "edit": "Update Sub Stage Details"
+  },
+  "form": {
+    "nameLabel": "Sub Stage Name",
+    "namePlaceholder": "Enter sub stage name",
+    "materialsLabel": "Materials",
+    "materialsPlaceholder": "Select material",
+    "selectedMaterials": "Selected Materials",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Enter description",
+    "cancel": "Cancel",
+    "save": "Save",
+    "editInfo": "Updating sub stage details may affect related process records. Make sure to review the changes before saving."
+  }
+}

@@ -32,7 +32,9 @@ export const stagesTableColumns: ICommonTableColumnsTypes = [
   },
 ];
 
-export const createStagesTableColumns = () => {
+export const createStagesTableColumns = (
+  t?: (key: string) => string,
+) => {
   const columns = stagesTableColumns;
 
   return [
@@ -40,7 +42,7 @@ export const createStagesTableColumns = () => {
       accessorKey: column.name,
       header: () => {
         return (
-          <div>{column.label}</div>
+          <div>{t ? t(`columns.${column.name}`) : column.label}</div>
         );
       },
       cell: ({ row }: any) => {

@@ -1,0 +1,26 @@
+{
+  "title": "Train Fleet",
+  "description": "Manage your fleet centrally.",
+  "addButton": "Add New Train",
+  "search": "Search...",
+  "columns": {
+    "trainSetNo": "Train No",
+    "info": "TRAIN INFO",
+    "creator": "Created By",
+    "editor": "Updated By",
+    "actions": "Actions"
+  },
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "modal": {
+    "create": "Create New Train",
+    "edit": "Update Train Details"
+  },
+  "form": {
+    "cancel": "Cancel",
+    "save": "Save",
+    "editInfo": "Updating train details may affect the fleet inventory and related workflows. Make sure to review the changes before saving."
+  }
+}

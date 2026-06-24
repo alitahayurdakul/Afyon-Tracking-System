@@ -1,0 +1,35 @@
+{
+  "title": "Projects",
+  "description": "Manage projects and their statuses centrally.",
+  "addButton": "Add New Project",
+  "search": "Search...",
+  "columns": {
+    "name": "Project Name",
+    "code": "Project Code",
+    "status": "Status",
+    "creator": "Created By",
+    "editor": "Updated By",
+    "actions": "Actions"
+  },
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "modal": {
+    "create": "Create New Project",
+    "edit": "Update Project Details"
+  },
+  "form": {
+    "nameLabel": "Project Name",
+    "namePlaceholder": "Enter project name",
+    "codeLabel": "Project Code",
+    "codePlaceholder": "Enter project code",
+    "statusLabel": "Status",
+    "statusPlaceholder": "Select status",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Enter description",
+    "cancel": "Cancel",
+    "save": "Save",
+    "editInfo": "Updating project details may affect related records and reports. Make sure to review the changes before saving."
+  }
+}

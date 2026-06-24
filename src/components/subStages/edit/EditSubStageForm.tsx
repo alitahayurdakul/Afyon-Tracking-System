@@ -9,6 +9,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ISubStageFormDataTypes, ISubStageType } from "@/types/subStagesTypes";
 import { SubStageFormValidation } from "@/utils/validations/subStageFormValidation";
+import { useTranslations } from "next-intl";
 import React, { useCallback, useMemo } from "react";
 import { TextAreaBox } from "@/components/formElements/TextAreaBox";
 import { InputBox } from "@/components/formElements/InputBox";
@@ -32,6 +33,7 @@ interface IPropsTypes {
 }
 
 export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
+  const t = useTranslations("subStages.form");
   const {
     control,
     handleSubmit,
@@ -119,9 +121,9 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
     <form className={styles["train-form"]}>
       <InputBox
         control={control as any}
-        label="Alt Aşama Adı"
+        label={t("nameLabel")}
         name="name"
-        placeholder="Alt aşama adı giriniz"
+        placeholder={t("namePlaceholder")}
         required
         maxLength={100}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -129,9 +131,9 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
       />
       <SelectBox
         control={control as any}
-        label="Malzemeler"
+        label={t("materialsLabel")}
         name="materials"
-        placeholder="Malzeme seçiniz"
+        placeholder={t("materialsPlaceholder")}
         required
         options={materialOptions}
         isSearchable
@@ -145,16 +147,16 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
           name="materials"
           selectedItems={selectedMaterials}
           setValue={setValue}
-          title="Seçilen Malzemeler"
+          title={t("selectedMaterials")}
         />
       )}
 
       <TextAreaBox
         control={control as any}
-        label="Açıklama"
+        label={t("descriptionLabel")}
         {...register("desc")}
         rows={5}
-        placeholder="Açıklama giriniz"
+        placeholder={t("descriptionPlaceholder")}
         maxLength={400}
         visibleLimit
         textareaClassName={styles["text-input"]}
@@ -191,11 +193,7 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
 
       <div>
         <FontAwesomeIcon icon={faCircleInfo} className={styles["alert-icon"]} />
-        <span className={styles["info-text"]}>
-          Alt aşama bilgilerini güncellemek ilişkili süreç kayıtlarını
-          etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden
-          emin olun.
-        </span>
+        <span className={styles["info-text"]}>{t("editInfo")}</span>
       </div>
 
       <div className={styles["btn-group"]}>
@@ -203,7 +201,7 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label="İptal"
+          label={t("cancel")}
           disabled={isSubmitting}
         />
 
@@ -211,7 +209,7 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label="Kaydet"
+          label={t("save")}
           disabled={isSubmitting}
         />
       </div>

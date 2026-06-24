@@ -1,0 +1,26 @@
+{
+  "title": "Tren Filosu",
+  "description": "Filonuzu merkezi olarak yönetin.",
+  "addButton": "Yeni Tren Ekle",
+  "search": "Arama...",
+  "columns": {
+    "trainSetNo": "Tren No",
+    "info": "TREN BİLGİSİ",
+    "creator": "Oluşturan",
+    "editor": "Güncelleyen",
+    "actions": "İşlemler"
+  },
+  "actions": {
+    "edit": "Güncelle",
+    "delete": "Sil"
+  },
+  "modal": {
+    "create": "Yeni Tren Oluştur",
+    "edit": "Tren Bilgilerini Güncelle"
+  },
+  "form": {
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "editInfo": "Tren bilgilerini güncellemek filo envanterini ve ilişkili iş akışlarını etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden emin olun."
+  }
+}

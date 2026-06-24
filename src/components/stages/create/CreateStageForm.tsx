@@ -22,8 +22,10 @@ import { STAGE_FORM_CONSTS } from "@/consts/stagesConsts";
 import { StageFormValidation } from "@/utils/validations/stageFormValidation";
 import { CheckBox } from "@/components/formElements/Checkbox";
 import SelectedItemList from "@/components/common/SelectedItemList";
+import { useTranslations } from "next-intl";
 
 export const CreateStageForm = () => {
+  const t = useTranslations("stages.form");
   const {
     control,
     handleSubmit,
@@ -258,7 +260,7 @@ export const CreateStageForm = () => {
             name="subStages"
             selectedItems={selectedStages}
             setValue={setValue}
-            title="Seçilen Aşamalar"
+            title={t("selectedStages")}
           />
         )}
 
@@ -270,7 +272,7 @@ export const CreateStageForm = () => {
             name="materialList"
             selectedItems={selectedMaterials}
             setValue={setValue}
-            title="Seçilen Malzemeler"
+            title={t("selectedMaterials")}
           />
         )}
 
@@ -279,7 +281,7 @@ export const CreateStageForm = () => {
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label="İptal"
+          label={t("cancel")}
           disabled={isSubmitting}
         />
 
@@ -287,7 +289,7 @@ export const CreateStageForm = () => {
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label="Kaydet"
+          label={t("save")}
           disabled={isSubmitting}
         />
       </div>

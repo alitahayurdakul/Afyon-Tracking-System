@@ -9,6 +9,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IProjectFormDataTypes, IProjectType } from "@/types/projectsTypes";
 import { ProjectFormValidation } from "@/utils/validations/projectFormValidation";
+import { useTranslations } from "next-intl";
 import React, { useCallback } from "react";
 import { TextAreaBox } from "@/components/formElements/TextAreaBox";
 import { InputBox } from "@/components/formElements/InputBox";
@@ -30,6 +31,7 @@ interface IPropsTypes {
 }
 
 export const EditProjectForm = ({ id, data }: IPropsTypes) => {
+  const t = useTranslations("projects.form");
   const {
     control,
     handleSubmit,
@@ -100,9 +102,9 @@ export const EditProjectForm = ({ id, data }: IPropsTypes) => {
     <form className={styles["train-form"]}>
       <InputBox
         control={control as any}
-        label="Proje Adı"
+        label={t("nameLabel")}
         name="name"
-        placeholder="Proje adı giriniz"
+        placeholder={t("namePlaceholder")}
         required
         maxLength={120}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -110,9 +112,9 @@ export const EditProjectForm = ({ id, data }: IPropsTypes) => {
       />
       <InputBox
         control={control as any}
-        label="Proje Kodu"
+        label={t("codeLabel")}
         name="code"
-        placeholder="Proje kodu giriniz"
+        placeholder={t("codePlaceholder")}
         required
         maxLength={50}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -120,18 +122,18 @@ export const EditProjectForm = ({ id, data }: IPropsTypes) => {
       />
       <SelectBox
         control={control as any}
-        label="Durum"
+        label={t("statusLabel")}
         name="status"
-        placeholder="Durum seçiniz"
+        placeholder={t("statusPlaceholder")}
         required
         options={PROJECT_STATUS_OPTIONS}
       />
       <TextAreaBox
         control={control as any}
-        label="Açıklama"
+        label={t("descriptionLabel")}
         {...register("desc")}
         rows={5}
-        placeholder="Açıklama giriniz"
+        placeholder={t("descriptionPlaceholder")}
         maxLength={400}
         visibleLimit
         textareaClassName={styles["text-input"]}
@@ -166,11 +168,7 @@ export const EditProjectForm = ({ id, data }: IPropsTypes) => {
 
       <div>
         <FontAwesomeIcon icon={faCircleInfo} className={styles["alert-icon"]} />
-        <span className={styles["info-text"]} >
-          Proje bilgilerini güncellemek ilişkili kayıtları ve raporları
-          etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden
-          emin olun.
-        </span>
+        <span className={styles["info-text"]}>{t("editInfo")}</span>
       </div>
 
       <div className={styles["btn-group"]}>
@@ -178,7 +176,7 @@ export const EditProjectForm = ({ id, data }: IPropsTypes) => {
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label="İptal"
+          label={t("cancel")}
           disabled={isSubmitting}
         />
 
@@ -186,7 +184,7 @@ export const EditProjectForm = ({ id, data }: IPropsTypes) => {
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label="Kaydet"
+          label={t("save")}
           disabled={isSubmitting}
         />
       </div>

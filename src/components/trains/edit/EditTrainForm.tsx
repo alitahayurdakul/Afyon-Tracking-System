@@ -24,6 +24,7 @@ import { useDispatch } from "react-redux";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { formatDate } from "@/utils/formDate";
 import { SelectBox } from "@/components/formElements/SelectBox";
+import { useTranslations } from "next-intl";
 
 interface IPropsTypes {
   id: string;
@@ -31,6 +32,7 @@ interface IPropsTypes {
 }
 
 export const EditTrainForm = ({ id, data }: IPropsTypes) => {
+  const t = useTranslations("trains.form");
   const {
     control,
     handleSubmit,
@@ -211,11 +213,7 @@ export const EditTrainForm = ({ id, data }: IPropsTypes) => {
 
       <div>
         <FontAwesomeIcon icon={faCircleInfo} className={styles["alert-icon"]} />
-        <span className={styles["info-text"]}>
-          Tren bilgilerini güncellemek filo envanterini ve ilişkili iş
-          akışlarını otomatik olarak etkiler. Kaydetmeden önce değişiklikleri
-          kontrol ettiğinizden emin olun.
-        </span>
+        <span className={styles["info-text"]}>{t("editInfo")}</span>
       </div>
 
       <div className={styles["btn-group"]}>
@@ -223,14 +221,14 @@ export const EditTrainForm = ({ id, data }: IPropsTypes) => {
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label="İptal"
+          label={t("cancel")}
           disabled={isSubmitting}
         />
         <Button
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label="Kaydet"
+          label={t("save")}
           disabled={isSubmitting}
         />
       </div>

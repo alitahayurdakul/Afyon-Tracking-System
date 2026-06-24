@@ -1,0 +1,27 @@
+{
+  "title": "Stage Management",
+  "description": "Configure and order the stages.",
+  "addButton": "Add New Stage",
+  "search": "Search...",
+  "columns": {
+    "name": "Stage Name",
+    "creator": "Created By",
+    "editor": "Updated By",
+    "actions": "Actions"
+  },
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "modal": {
+    "create": "Create New Stage",
+    "edit": "Update Stage Details"
+  },
+  "form": {
+    "selectedStages": "Selected Stages",
+    "selectedMaterials": "Selected Materials",
+    "cancel": "Cancel",
+    "save": "Save",
+    "editInfo": "Updating stage details may affect related process records. Make sure to review the changes before saving."
+  }
+}

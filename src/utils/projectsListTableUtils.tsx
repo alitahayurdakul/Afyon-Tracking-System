@@ -36,14 +36,16 @@ export const projectsTableColumns: ICommonTableColumnsTypes = [
   },
 ];
 
-export const createProjectsTableColumns = () => {
+export const createProjectsTableColumns = (
+  t?: (key: string) => string,
+) => {
   const columns = projectsTableColumns;
 
   return [
     ...columns.map((column: ICommonTableColumnsType) => ({
       accessorKey: column.name,
       header: () => {
-        return <div>{column.label}</div>;
+        return <div>{t ? t(`columns.${column.name}`) : column.label}</div>;
       },
       cell: ({ row }: { row: { original: IProjectType } }) => {
         const r = row.original;

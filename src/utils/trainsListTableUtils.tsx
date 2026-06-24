@@ -29,14 +29,16 @@ export const trainsTableColumns: ICommonTableColumnsTypes = [
   },
 ];
 
-export const createTrainsTableColumns = () => {
+export const createTrainsTableColumns = (
+  t?: (key: string) => string,
+) => {
   const columns = trainsTableColumns;
 
   return [
     ...columns.map((column: ICommonTableColumnsType) => ({
       accessorKey: column.name,
       header: () => {
-        return <div>{column.label}</div>;
+        return <div>{t ? t(`columns.${column.name}`) : column.label}</div>;
       },
       cell: ({ row }: any) => {
         const r = row.original;
