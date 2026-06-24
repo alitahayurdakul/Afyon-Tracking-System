@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faBell,
@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "@/styles/components/common/Topbar.module.scss";
 
 import { CreateFleetModal } from "../createFleetModal/CreateFleetModal";
+import LanguageSelector from "../NewLanguageSelectBox";
 
 library.add(faSearch, faBell, faGear, faCirclePlus);
 
@@ -32,6 +33,7 @@ export const Topbar = ({ showCreateButton = false }: TopbarProps) => {
       <div className={styles["topbar-right"]}>
         <div className={styles["status-group"]}>
           <div className={styles["action-icons"]}>
+            <LanguageSelector />
             <FontAwesomeIcon icon="bell" className={styles["nav-icon"]} />
             <FontAwesomeIcon icon="gear" className={styles["nav-icon"]} />
           </div>
