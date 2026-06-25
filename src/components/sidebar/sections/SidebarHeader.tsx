@@ -6,7 +6,7 @@ import logo from "@/assets/images/logo.png";
 import styles from "@/styles/components/sidebar/sections/TopSection.module.scss";
 
 export const SidebarHeader = () => {
-  const t = useTranslations("sidebar");
+  const t = useTranslations("layout");
   return (
     <div className={styles["sidebar-header"]}>
       <div className={styles["icon-container"]}>
@@ -20,7 +20,7 @@ export const SidebarHeader = () => {
         />
       </div>
       <div className={styles["text-container"]}>
-        <p className={styles["subtitle"]}>{t("headerTitle")}</p>
+        <p className={styles["subtitle"]}>{t("sidebar.headerTitle")}</p>
       </div>
     </div>
   );

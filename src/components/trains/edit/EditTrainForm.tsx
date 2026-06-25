@@ -32,7 +32,7 @@ interface IPropsTypes {
 }
 
 export const EditTrainForm = ({ id, data }: IPropsTypes) => {
-  const t = useTranslations("trains.form");
+  const t = useTranslations("trains");
   const {
     control,
     handleSubmit,
@@ -213,7 +213,7 @@ export const EditTrainForm = ({ id, data }: IPropsTypes) => {
 
       <div>
         <FontAwesomeIcon icon={faCircleInfo} className={styles["alert-icon"]} />
-        <span className={styles["info-text"]}>{t("editInfo")}</span>
+        <span className={styles["info-text"]}>{t("form.editInfo")}</span>
       </div>
 
       <div className={styles["btn-group"]}>
@@ -221,14 +221,14 @@ export const EditTrainForm = ({ id, data }: IPropsTypes) => {
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label={t("cancel")}
+          label={t("form.cancel")}
           disabled={isSubmitting}
         />
         <Button
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label={t("save")}
+          label={t("form.save")}
           disabled={isSubmitting}
         />
       </div>

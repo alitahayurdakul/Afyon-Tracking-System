@@ -25,7 +25,7 @@ import SelectedItemList from "@/components/common/SelectedItemList";
 import { useTranslations } from "next-intl";
 
 export const CreateStageForm = () => {
-  const t = useTranslations("stages.form");
+  const t = useTranslations("stages");
   const {
     control,
     handleSubmit,
@@ -260,7 +260,7 @@ export const CreateStageForm = () => {
             name="subStages"
             selectedItems={selectedStages}
             setValue={setValue}
-            title={t("selectedStages")}
+            title={t("form.selectedStages")}
           />
         )}
 
@@ -272,7 +272,7 @@ export const CreateStageForm = () => {
             name="materialList"
             selectedItems={selectedMaterials}
             setValue={setValue}
-            title={t("selectedMaterials")}
+            title={t("form.selectedMaterials")}
           />
         )}
 
@@ -281,7 +281,7 @@ export const CreateStageForm = () => {
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label={t("cancel")}
+          label={t("form.cancel")}
           disabled={isSubmitting}
         />
 
@@ -289,7 +289,7 @@ export const CreateStageForm = () => {
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label={t("save")}
+          label={t("form.save")}
           disabled={isSubmitting}
         />
       </div>

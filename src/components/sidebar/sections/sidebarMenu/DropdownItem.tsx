@@ -15,7 +15,7 @@ interface IPropsTypes {
 }
 
 export const DropdownItem = ({ item }: IPropsTypes) => {
-  const t = useTranslations("sidebar");
+  const t = useTranslations("layout");
   const pathname = stripLocale(usePathname());
   const isActive = item?.subItems?.filter(
     (item: ISidebarItemTypes) => item.url === pathname,
@@ -33,7 +33,7 @@ export const DropdownItem = ({ item }: IPropsTypes) => {
         onClick={() => setManualOpen(!isOpen)}
       >
         <FontAwesomeIcon icon={item.icon} className={styles["icon"]} />
-        <span className={styles["name"]}>{item.key ? t(item.key) : item.name}</span>
+        <span className={styles["name"]}>{item.key ? t(`sidebar.${item.key}`) : item.name}</span>
         {isOpen ? (
           <ChevronUp className={styles["arrow-icon"]} />
         ) : (
@@ -58,7 +58,7 @@ export const DropdownItem = ({ item }: IPropsTypes) => {
 };
 
 export const SingleItem = ({ item }: IPropsTypes) => {
-  const t = useTranslations("sidebar");
+  const t = useTranslations("layout");
   const pathname = stripLocale(usePathname());
   const isActive = pathname === item.url;
   return (
@@ -69,7 +69,7 @@ export const SingleItem = ({ item }: IPropsTypes) => {
       })}
     >
       <FontAwesomeIcon icon={item.icon} className={styles["icon"]} />
-      <span className={styles["name"]}>{item.key ? t(item.key) : item.name}</span>
+      <span className={styles["name"]}>{item.key ? t(`sidebar.${item.key}`) : item.name}</span>
     </Link>
   );
 };

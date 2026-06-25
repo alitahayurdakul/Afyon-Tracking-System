@@ -33,7 +33,7 @@ interface IPropsTypes {
 }
 
 export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
-  const t = useTranslations("subStages.form");
+  const t = useTranslations("subStages");
   const {
     control,
     handleSubmit,
@@ -121,9 +121,9 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
     <form className={styles["train-form"]}>
       <InputBox
         control={control as any}
-        label={t("nameLabel")}
+        label={t("form.nameLabel")}
         name="name"
-        placeholder={t("namePlaceholder")}
+        placeholder={t("form.namePlaceholder")}
         required
         maxLength={100}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -131,9 +131,9 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
       />
       <SelectBox
         control={control as any}
-        label={t("materialsLabel")}
+        label={t("form.materialsLabel")}
         name="materials"
-        placeholder={t("materialsPlaceholder")}
+        placeholder={t("form.materialsPlaceholder")}
         required
         options={materialOptions}
         isSearchable
@@ -147,16 +147,16 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
           name="materials"
           selectedItems={selectedMaterials}
           setValue={setValue}
-          title={t("selectedMaterials")}
+          title={t("form.selectedMaterials")}
         />
       )}
 
       <TextAreaBox
         control={control as any}
-        label={t("descriptionLabel")}
+        label={t("form.descriptionLabel")}
         {...register("desc")}
         rows={5}
-        placeholder={t("descriptionPlaceholder")}
+        placeholder={t("form.descriptionPlaceholder")}
         maxLength={400}
         visibleLimit
         textareaClassName={styles["text-input"]}
@@ -193,7 +193,7 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
 
       <div>
         <FontAwesomeIcon icon={faCircleInfo} className={styles["alert-icon"]} />
-        <span className={styles["info-text"]}>{t("editInfo")}</span>
+        <span className={styles["info-text"]}>{t("form.editInfo")}</span>
       </div>
 
       <div className={styles["btn-group"]}>
@@ -201,7 +201,7 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label={t("cancel")}
+          label={t("form.cancel")}
           disabled={isSubmitting}
         />
 
@@ -209,7 +209,7 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label={t("save")}
+          label={t("form.save")}
           disabled={isSubmitting}
         />
       </div>

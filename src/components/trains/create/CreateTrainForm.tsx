@@ -24,7 +24,7 @@ import { SelectBox } from "@/components/formElements/SelectBox";
 import { useTranslations } from "next-intl";
 
 export const CreateTrainForm = () => {
-  const t = useTranslations("trains.form");
+  const t = useTranslations("trains");
   const {
     control,
     handleSubmit,
@@ -187,14 +187,14 @@ export const CreateTrainForm = () => {
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label={t("cancel")}
+          label={t("form.cancel")}
           disabled={isSubmitting}
         />
         <Button
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label={t("save")}
+          label={t("form.save")}
           disabled={isSubmitting}
         />
       </div>

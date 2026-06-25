@@ -31,7 +31,7 @@ interface IPropsTypes {
 }
 
 export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
-  const t = useTranslations("stages.form");
+  const t = useTranslations("stages");
   const {
     control,
     handleSubmit,
@@ -265,11 +265,11 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
         return null;
       })}
       {selectedStages && selectedStages.length > 0 && (
-        <SelectedItemList name="subStages" selectedItems={selectedStages} setValue={setValue} title={t("selectedStages")} />
+        <SelectedItemList name="subStages" selectedItems={selectedStages} setValue={setValue} title={t("form.selectedStages")} />
       )}
 
       {selectedMaterials && selectedMaterials.length > 0 && (
-        <SelectedItemList name="materialList" selectedItems={selectedMaterials} setValue={setValue} title={t("selectedMaterials")} />
+        <SelectedItemList name="materialList" selectedItems={selectedMaterials} setValue={setValue} title={t("form.selectedMaterials")} />
       )}
 
       <div>
@@ -286,7 +286,7 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label={t("cancel")}
+          label={t("form.cancel")}
           disabled={isSubmitting}
         />
 
@@ -294,7 +294,7 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label={t("save")}
+          label={t("form.save")}
           disabled={isSubmitting}
         />
       </div>
