@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
-import StageDetailModalContent from "@/components/activeProcessDetail/stageDetailModal/StageDetailModalContent";
+import StageDetailModalContent from "@/components/activeProcessDetail/StageDetailModal/StageDetailModalContent";
 import { ACTIVE_STAGE_DETAIL_MODAL } from "@/consts/modals";
 import { useAddQueryParam } from "@/utils/searchParams";
 

@@ -89,7 +89,7 @@ export const EditTrainForm = ({ id, data }: IPropsTypes) => {
         });
         dispatch(
           addToastify({
-            message: "Başarıyla güncellendi",
+            message: t("form.notifications.editSuccess"),
             type: "success",
             icon: "close",
             id: "editTrain" + Date.now(),
@@ -100,7 +100,7 @@ export const EditTrainForm = ({ id, data }: IPropsTypes) => {
       } catch (err) {
         dispatch(
           addToastify({
-            message: (err as Error)?.message || "Hata oluştu",
+            message: (err as Error)?.message || t("form.notifications.error"),
             type: "error",
             icon: "close",
             id: "editTrainError" + Date.now(),
@@ -138,9 +138,9 @@ export const EditTrainForm = ({ id, data }: IPropsTypes) => {
             <React.Fragment key={index}>
               <InputBox
                 control={control as any}
-                label={item.label as string}
+                label={t(`form.fields.${item.name}.label`)}
                 name={item.name}
-                placeholder={item.label}
+                placeholder={t(`form.fields.${item.name}.placeholder`)}
                 required={item.isRequired}
                 maxLength={item.maxLength}
                 spacesRule={
@@ -162,11 +162,11 @@ export const EditTrainForm = ({ id, data }: IPropsTypes) => {
             <React.Fragment key={index}>
               <TextAreaBox
                 control={control as any}
-                label="Açıklama"
+                label={t(`form.fields.${item.name}.label`)}
                 {...register(item.name as keyof ITrainFormDataTypes)}
                 required={item.isRequired}
                 rows={item.maxRows}
-                placeholder="Açıklama giriniz"
+                placeholder={t(`form.fields.${item.name}.placeholder`)}
                 maxLength={item.maxLength}
                 visibleLimit
                 textareaClassName={styles["text-input"]}
@@ -182,9 +182,9 @@ export const EditTrainForm = ({ id, data }: IPropsTypes) => {
           <InputBox
             key={field.id}
             control={control as any}
-            label={`Vagon ${index + 1} Adı`}
+            label={t("form.wagon.label", { index: index + 1 })}
             name={`wagonDetails.${index}.name` as any}
-            placeholder={`Vagon ${index + 1} adı giriniz`}
+            placeholder={t("form.wagon.placeholder", { index: index + 1 })}
             required
             inputClassName={styles["text-input"]}
             className={styles["half-input-container"]}
@@ -194,19 +194,19 @@ export const EditTrainForm = ({ id, data }: IPropsTypes) => {
 
       <section className={styles["activity-section"]}>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>Oluşturan:</span>
+          <span className={styles["activity-label"]}>{t("form.activity.creator")}</span>
           <span className={styles["activity-value"]}>{data?.creator ?? "-"}</span>
         </div>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>Oluşturulma Tarihi:</span>
+          <span className={styles["activity-label"]}>{t("form.activity.createdAt")}</span>
           <span className={styles["activity-value"]}>{formatDate(data?.createdAt) ?? "-"}</span>
         </div>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>Son Güncelleyen:</span>
+          <span className={styles["activity-label"]}>{t("form.activity.editor")}</span>
           <span className={styles["activity-value"]}>{data?.editor ?? "-"}</span>
         </div>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>Son Güncellenme Tarihi:</span>
+          <span className={styles["activity-label"]}>{t("form.activity.updatedAt")}</span>
           <span className={styles["activity-value"]}>{formatDate(data?.updatedAt) ?? "-"}</span>
         </div>
       </section>

@@ -21,6 +21,26 @@
   "form": {
     "cancel": "Cancel",
     "save": "Save",
-    "editInfo": "Updating train details may affect the fleet inventory and related workflows. Make sure to review the changes before saving."
+    "editInfo": "Updating train details may affect the fleet inventory and related workflows. Make sure to review the changes before saving.",
+    "fields": {
+      "trainSetNo": { "label": "Train No", "placeholder": "Enter train no" },
+      "desc": { "label": "Description", "placeholder": "Enter description" },
+      "wagonsCount": { "label": "Wagon Count", "placeholder": "Enter wagon count" }
+    },
+    "wagon": {
+      "label": "Wagon {index} Name",
+      "placeholder": "Enter wagon {index} name"
+    },
+    "activity": {
+      "creator": "Created By:",
+      "createdAt": "Created Date:",
+      "editor": "Last Updated By:",
+      "updatedAt": "Last Updated Date:"
+    },
+    "notifications": {
+      "createSuccess": "Created successfully",
+      "editSuccess": "Updated successfully",
+      "error": "An error occurred"
+    }
   }
 }
