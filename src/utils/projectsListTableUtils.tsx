@@ -6,6 +6,7 @@ import {
   ICommonTableColumnsType,
   ICommonTableColumnsTypes,
 } from "@/types/tableColumnTypes";
+import { TFunction } from "@/types/commonTypes";
 
 import { formatDate } from "./formDate";
 
@@ -37,7 +38,7 @@ export const projectsTableColumns: ICommonTableColumnsTypes = [
 ];
 
 export const createProjectsTableColumns = (
-  t?: (key: string) => string,
+  t?: TFunction,
 ) => {
   const columns = projectsTableColumns;
 
