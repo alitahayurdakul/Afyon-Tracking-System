@@ -1,9 +1,9 @@
 'use client';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import clsx from 'clsx';
-import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 import styles from "@/styles/components/sidebar/sections/sidebarMenu/SidebarMenu.module.scss";
 import { ISidebarItemTypes } from "@/types/sidebarTypes";

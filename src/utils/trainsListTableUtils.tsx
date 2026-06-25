@@ -1,10 +1,10 @@
 import { TrainsTableActionsCol } from "@/components/trains/TrainsTableActionsCol";
 import styles from "@/styles/components/trains/TrainsListTableUtils.module.scss";
+import { TFunction } from "@/types/commonTypes";
 import {
   ICommonTableColumnsType,
   ICommonTableColumnsTypes,
 } from "@/types/tableColumnTypes";
-import { TFunction } from "@/types/commonTypes";
 
 import { formatDate } from "./formDate";
 export const trainsTableColumns: ICommonTableColumnsTypes = [

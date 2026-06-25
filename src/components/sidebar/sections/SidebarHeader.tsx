@@ -1,6 +1,6 @@
 "use client";
-import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 import logo from "@/assets/images/logo.png";
 import styles from "@/styles/components/sidebar/sections/TopSection.module.scss";

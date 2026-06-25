@@ -1,11 +1,11 @@
 import { SubStagesTableActionsCol } from "@/components/subStages/SubStagesTableActionsCol";
 import styles from "@/styles/components/subStages/SubStagesListTableUtils.module.scss";
+import { TFunction } from "@/types/commonTypes";
 import { ISubStageType } from "@/types/subStagesTypes";
 import {
   ICommonTableColumnsType,
   ICommonTableColumnsTypes,
 } from "@/types/tableColumnTypes";
-import { TFunction } from "@/types/commonTypes";
 
 import { formatDate } from "./formDate";
 

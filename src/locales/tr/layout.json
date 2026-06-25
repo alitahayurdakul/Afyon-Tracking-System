@@ -15,5 +15,27 @@
     "userManagement": "Kullanıcı Yönetimi",
     "users": "Kullanıcılar",
     "roles": "Roller"
+  },
+  "fleetForm": {
+    "header": "Yeni Süreç Başlat",
+    "form": {
+      "labels": {
+        "project": "Proje",
+        "trains": "Tren",
+        "wagon": "Vagon",
+        "additionInfo": "Ek Bilgi",
+        "workflows": "İş Akışları"
+      },
+      "placeholders": {
+        "project": "Proje seçiniz",
+        "trains": "Tren seçiniz",
+        "wagon": "Vagon seçiniz",
+        "additionInfo": "Ek bilgi giriniz",
+        "workflows": "İş Akışı seçiniz"
+      },
+      "notifications": {
+        "success": "Yeni süreç başarıyla oluşturuldu. Oluşturulan süreç sayfasına yönlendiriliyorsunuz."
+      }
+    }
   }
 }

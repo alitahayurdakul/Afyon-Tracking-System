@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "next-intl";
 import React from "react";
 
 import { useGetActiveProcessesDataQuery } from "@/api/queries/useGetProcessesQueries";
@@ -16,19 +17,27 @@ export const ActiveProcessGrid = () => {
   const { data, isLoading, isError } =
     useGetActiveProcessesDataQuery<IActiveProcessesTypes>();
 
-  return (<>
+  const t = useTranslations("activeProcess");
+
+  return (
+    <>
       <LoadingChecker isLoading={isLoading}>
-        <ErrorChecker isError={isError || !data} noData={data && data.length < 1} noDataLabel="Aktif süreç bulunmamaktadır.">
-          <div className={styles["unit-grid"]}>{data &&
-            data.length > 0 &&
-            data?.map((unit: IActiveProcessType, index: number) => (
-              <React.Fragment key={index}>
-                <ActiveProcessCard unit={unit} />
-              </React.Fragment>
-            ))}
-            </div>
+        <ErrorChecker
+          isError={isError || !data}
+          noData={data && data.length < 1}
+          noDataLabel={t("noDataLabel")}
+        >
+          <div className={styles["unit-grid"]}>
+            {data &&
+              data.length > 0 &&
+              data?.map((unit: IActiveProcessType, index: number) => (
+                <React.Fragment key={index}>
+                  <ActiveProcessCard unit={unit} />
+                </React.Fragment>
+              ))}
+          </div>
         </ErrorChecker>
       </LoadingChecker>
-  </>  
+    </>
   );
 };

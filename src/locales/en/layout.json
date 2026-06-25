@@ -15,5 +15,27 @@
     "userManagement": "User Management",
     "users": "Users",
     "roles": "Roles"
+  },
+  "fleetForm": {
+    "header": "Start New Process",
+    "form": {
+      "labels": {
+        "project": "Project",
+        "trains": "Train",
+        "wagon": "Wagon",
+        "additionInfo": "Additional Information",
+        "workflows": "Workflows"
+      },
+      "placeholders": {
+        "project": "Select a project",
+        "trains": "Select a train",
+        "wagon": "Select a wagon",
+        "additionInfo": "Enter additional information",
+        "workflows": "Select a workflow"
+      },
+      "notifications": {
+        "success": "The new process has been created successfully. You are being redirected to the created process page."
+      }
+    }
   }
 }

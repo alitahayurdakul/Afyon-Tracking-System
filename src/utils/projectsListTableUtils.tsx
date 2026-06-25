@@ -1,12 +1,12 @@
 import { ProjectsTableActionsCol } from "@/components/projects/ProjectsTableActionsCol";
 import { PROJECT_STATUS_LABEL_MAP } from "@/consts/projectsConsts";
 import styles from "@/styles/components/projects/ProjectsListTableUtils.module.scss";
+import { TFunction } from "@/types/commonTypes";
 import { IProjectType } from "@/types/projectsTypes";
 import {
   ICommonTableColumnsType,
   ICommonTableColumnsTypes,
 } from "@/types/tableColumnTypes";
-import { TFunction } from "@/types/commonTypes";
 
 import { formatDate } from "./formDate";
 

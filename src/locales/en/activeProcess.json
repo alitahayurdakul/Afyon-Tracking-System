@@ -1,0 +1,14 @@
+{
+  "title": "Factory Process Management Dashboard",
+  "subtitle": "Monitor workflows and operational processes in real time",
+  "card": {
+    "wagon": "Wagon",
+    "addition-info": "Information",
+    "status": "Status",
+    "ongoing-stages": "Stages in Progress",
+    "progress": "STAGE {progress}"
+  },
+  "select-placeholder": "Select a project",
+  "active-unit-count": "ACTIVE UNITS",
+  "noDataLabel": "No active processes found."
+}
