@@ -110,9 +110,9 @@ export const CreateTrainForm = () => {
             <React.Fragment key={index}>
               <InputBox
                 control={control as any}
-                label={item.label as string}
+                label={t(`form.fields.${item.name}.label`)}
                 name={item.name}
-                placeholder={item.label}
+                placeholder={t(`form.fields.${item.name}.placeholder`)}
                 required={item.isRequired}
                 maxLength={item.maxLength}
                 spacesRule={
@@ -152,11 +152,11 @@ export const CreateTrainForm = () => {
             <React.Fragment key={index}>
               <TextAreaBox
                 control={control as any}
-                label="Açıklama"
+                label={t(`form.fields.${item.name}.label`)}
                 {...register(item.name as keyof ITrainFormDataTypes)}
                 required={item.isRequired}
                 rows={item.maxRows}
-                placeholder="Açıklama giriniz"
+                placeholder={t(`form.fields.${item.name}.placeholder`)}
                 maxLength={item.maxLength}
                 visibleLimit
                 textareaClassName={styles["text-input"]}
@@ -172,9 +172,9 @@ export const CreateTrainForm = () => {
           <InputBox
             key={field.id}
             control={control as any}
-            label={`Vagon ${index + 1} Adı`}
+            label={t("form.wagon.label", { index: index + 1 })}
             name={`wagonDetails.${index}.name` as any}
-            placeholder={`Vagon ${index + 1} adı giriniz`}
+            placeholder={t("form.wagon.placeholder", { index: index + 1 })}
             required
             inputClassName={styles["text-input"]}
             className={styles["half-input-container"]}

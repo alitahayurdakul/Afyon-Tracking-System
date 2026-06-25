@@ -21,6 +21,26 @@
   "form": {
     "cancel": "İptal",
     "save": "Kaydet",
-    "editInfo": "Tren bilgilerini güncellemek filo envanterini ve ilişkili iş akışlarını etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden emin olun."
+    "editInfo": "Tren bilgilerini güncellemek filo envanterini ve ilişkili iş akışlarını etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden emin olun.",
+    "fields": {
+      "trainSetNo": { "label": "Tren No", "placeholder": "Tren No giriniz" },
+      "desc": { "label": "Açıklama", "placeholder": "Açıklama giriniz" },
+      "wagonsCount": { "label": "Vagon Sayısı", "placeholder": "Vagon sayısı giriniz" }
+    },
+    "wagon": {
+      "label": "Vagon {index} Adı",
+      "placeholder": "Vagon {index} adı giriniz"
+    },
+    "activity": {
+      "creator": "Oluşturan:",
+      "createdAt": "Oluşturulma Tarihi:",
+      "editor": "Son Güncelleyen:",
+      "updatedAt": "Son Güncellenme Tarihi:"
+    },
+    "notifications": {
+      "createSuccess": "Başarıyla oluşturuldu",
+      "editSuccess": "Başarıyla güncellendi",
+      "error": "Hata oluştu"
+    }
   }
 }

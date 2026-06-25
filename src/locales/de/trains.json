@@ -21,6 +21,26 @@
   "form": {
     "cancel": "Abbrechen",
     "save": "Speichern",
-    "editInfo": "Das Aktualisieren der Zugdetails kann den Flottenbestand und zugehörige Arbeitsabläufe beeinflussen. Überprüfen Sie die Änderungen vor dem Speichern."
+    "editInfo": "Das Aktualisieren der Zugdetails kann den Flottenbestand und zugehörige Arbeitsabläufe beeinflussen. Überprüfen Sie die Änderungen vor dem Speichern.",
+    "fields": {
+      "trainSetNo": { "label": "Zugnummer", "placeholder": "Zugnummer eingeben" },
+      "desc": { "label": "Beschreibung", "placeholder": "Beschreibung eingeben" },
+      "wagonsCount": { "label": "Wagenanzahl", "placeholder": "Wagenanzahl eingeben" }
+    },
+    "wagon": {
+      "label": "Name von Wagen {index}",
+      "placeholder": "Namen von Wagen {index} eingeben"
+    },
+    "activity": {
+      "creator": "Erstellt von:",
+      "createdAt": "Erstellungsdatum:",
+      "editor": "Zuletzt aktualisiert von:",
+      "updatedAt": "Letztes Aktualisierungsdatum:"
+    },
+    "notifications": {
+      "createSuccess": "Erfolgreich erstellt",
+      "editSuccess": "Erfolgreich aktualisiert",
+      "error": "Ein Fehler ist aufgetreten"
+    }
   }
 }
