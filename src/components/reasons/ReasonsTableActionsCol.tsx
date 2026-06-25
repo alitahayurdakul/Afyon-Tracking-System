@@ -1,5 +1,6 @@
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 import { useDispatch } from "react-redux";
 
 import { axiosInstance } from "@/api/axiosInstance";
@@ -12,7 +13,6 @@ import stylesDeletePopover from "@/styles/components/common/TableDeletePopover.m
 
 import { PopoverBody } from "../Popover";
 import { EditReasonsModal } from "./edit/EditReasonsModal";
-import { useTranslations } from "next-intl";
 
 export const ReasonsTableActionsCol = ({ id }: { id: string }) => {
   const dispatch = useDispatch();

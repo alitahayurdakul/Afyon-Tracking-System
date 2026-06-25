@@ -1,5 +1,6 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { CREATE_REASON_MODAL } from "@/consts/modals";
@@ -8,7 +9,6 @@ import { useAddQueryParam } from "@/utils/searchParams";
 
 import { Modal } from "../../common/Modal";
 import { CreateReasonForm } from "./CreateReasonForm";
-import { useTranslations } from "next-intl";
 
 export const CreateReasonsModal = () => {
   const addQueryParam = useAddQueryParam();

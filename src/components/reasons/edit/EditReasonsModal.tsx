@@ -1,5 +1,6 @@
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { useGetReasonDetailDataQuery } from "@/api/queries/useGetReasonsQueries";
@@ -9,7 +10,6 @@ import { useAddQueryParam } from "@/utils/searchParams";
 
 import { Modal } from "../../common/Modal";
 import { EditReasonForm } from "./EditReasonForm";
-import { useTranslations } from "next-intl";
 
 export const EditReasonsModal = ({ id }: { id: string }) => {
   const addQueryParam = useAddQueryParam();

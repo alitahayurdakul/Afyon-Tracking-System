@@ -2,6 +2,7 @@
 
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 
 import { useGetReasonsDataQuery } from "@/api/queries/useGetReasonsQueries";
 import styles from "@/styles/components/common/TableListBody.module.scss";
@@ -9,7 +10,6 @@ import { createReasonsTableColumns } from "@/utils/reasonsListTableUtils";
 
 import { Table } from "../common/Table";
 import { CreateReasonsModal } from "./create/CreateReasonsModal";
-import { useTranslations } from "next-intl";
 
 export const ReasonsListBody = () => {
   const t = useTranslations("delayReasons");

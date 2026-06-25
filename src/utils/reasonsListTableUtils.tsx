@@ -1,5 +1,6 @@
 import { ReasonsTableActionsCol } from "@/components/reasons/ReasonsTableActionsCol";
 import styles from "@/styles/components/reasons/ReasonsListTableUtils.module.scss";
+import { TFunction } from "@/types/commonTypes";
 import { IReasonType } from "@/types/reasonsTypes";
 import {
   ICommonTableColumnsType,
@@ -7,7 +8,6 @@ import {
 } from "@/types/tableColumnTypes";
 
 import { formatDate } from "./formDate";
-import { TFunction } from "@/types/commonTypes";
 
 export const reasonsTableColumns: ICommonTableColumnsTypes = [
   {
