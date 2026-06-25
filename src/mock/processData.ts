@@ -9,7 +9,7 @@ export const mockMainStages: MainStage[] = [
   {
     id: "depoya-giris",
     name: "Depoya Giriş",
-    status: "completed",
+    status: "1",
     start: "15.06.2026 12:14",
     end: "15.06.2026 12:43",
     elapsed: "00:28:59",
@@ -17,7 +17,7 @@ export const mockMainStages: MainStage[] = [
   {
     id: "manevra",
     name: "Manevra",
-    status: "pending",
+    status: "3",
     start: null,
     end: null,
     elapsed: null,
@@ -25,7 +25,7 @@ export const mockMainStages: MainStage[] = [
   {
     id: "ikmal",
     name: "İkmal",
-    status: "active",
+    status: "2",
     start: "15.06.2026 12:43",
     end: null,
     elapsed: null,
@@ -33,7 +33,7 @@ export const mockMainStages: MainStage[] = [
   {
     id: "muayene",
     name: "Muayene",
-    status: "pending",
+    status: "3",
     start: null,
     end: null,
     elapsed: null,
@@ -41,7 +41,7 @@ export const mockMainStages: MainStage[] = [
   {
     id: "bakim",
     name: "Bakım",
-    status: "active",
+    status: "2",
     start: "15.06.2026 13:05",
     end: null,
     elapsed: null,
@@ -49,7 +49,7 @@ export const mockMainStages: MainStage[] = [
   {
     id: "test",
     name: "Test",
-    status: "completed",
+    status: "1",
     start: "15.06.2026 13:20",
     end: "15.06.2026 13:50",
     elapsed: "00:30:12",
@@ -57,7 +57,7 @@ export const mockMainStages: MainStage[] = [
   {
     id: "teslim",
     name: "Teslim",
-    status: "pending",
+    status: "3",
     start: null,
     end: null,
     elapsed: null,
@@ -144,7 +144,7 @@ export const mockStageDetail: StageDetail = {
     {
       id: "ikmal",
       name: "İkmal",
-      status: "completed",
+      status: "1",
       start: "2026-06-15T09:14:03.041Z",
       end: "2026-06-15T09:15:03.041Z",
       delayReasons: [],
@@ -155,7 +155,7 @@ export const mockStageDetail: StageDetail = {
     {
       id: "muayene",
       name: "Muayene",
-      status: "completed",
+      status: "1",
       start: "2026-06-15T09:14:03.041Z",
       end: "2026-06-15T09:17:03.041Z",
       delayReasons: [],
@@ -166,7 +166,7 @@ export const mockStageDetail: StageDetail = {
     {
       id: "bakim",
       name: "Bakım",
-      status: "active",
+      status: "2",
       start: "2026-06-15T09:14:03.041Z",
       end: null,
       delayReasons: [
@@ -186,7 +186,7 @@ export const mockStageDetail: StageDetail = {
     {
       id: "sub-test",
       name: "Test",
-      status: "active",
+      status: "2",
       start: null,
       end: null,
       delayReasons: [],
@@ -197,7 +197,7 @@ export const mockStageDetail: StageDetail = {
     {
       id: "sub-teslim",
       name: "Teslim",
-      status: "pending",
+      status: "3",
       start: null,
       end: null,
       delayReasons: [],

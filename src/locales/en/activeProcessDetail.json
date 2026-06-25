@@ -1,0 +1,35 @@
+{
+  "process-flow": "Process Flow",
+  "status": {
+    "completed": "Completed",
+    "active": "Active",
+    "pending": "Pending"
+  },
+  "progress-process": "{progress} completed",
+  "open-detail": "Open Details",
+  "start-date": "Start Date",
+  "end-date": "End Date",
+  "not-yet-started": "Not Yet Started",
+  "pending": "In Progress",
+  "complete-process": "Complete Process",
+  "total-elapsed-time": "TOTAL ELAPSED TIME",
+  "active-projects": "Active Projects",
+  "active-projects-select-explaining": "Select a train to view live workflow progress.",
+  "processId": "Process ID",
+  "section": {
+    "time-section-header": "TIME INFORMATION",
+    "delay-reason": "DELAY REASONS",
+    "materials": "MATERIALS AND SERIAL NUMBERS",
+    "explaining": "DESCRIPTION",
+    "files": "FILES"
+  },
+  "elapsed-time": "Elapsed Time",
+  "serial-number-placeholder": "Serial number",
+  "explaining-placeholder": "Enter a description.",
+  "file-placeholder": "Click to upload a file.",
+  "buttons": {
+    "save-changes": "Save Changes",
+    "complete-stage": "Complete Stage"
+  },
+  "stage-modal-header": "Stage Details"
+}
