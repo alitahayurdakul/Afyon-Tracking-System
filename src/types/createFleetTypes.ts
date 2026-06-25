@@ -1,4 +1,7 @@
 export interface ICreateFleetFormDataTypes {
+  projectId: string;
   trainId: string;
-  process: string;
+  workflows: string;
+  wagonId: string;
+  additionInfo?: string;
 }

@@ -15,5 +15,27 @@
     "userManagement": "Benutzerverwaltung",
     "users": "Benutzer",
     "roles": "Rollen"
+  },
+  "fleetForm": {
+    "header": "Neuen Prozess starten",
+    "form": {
+      "labels": {
+        "project": "Projekt",
+        "trains": "Zug",
+        "wagon": "Waggon",
+        "additionInfo": "Zusätzliche Informationen",
+        "workflows": "Arbeitsabläufe"
+      },
+      "placeholders": {
+        "project": "Projekt auswählen",
+        "trains": "Zug auswählen",
+        "wagon": "Waggon auswählen",
+        "additionInfo": "Zusätzliche Informationen eingeben",
+        "workflows": "Arbeitsablauf auswählen"
+      },
+      "notifications": {
+        "success": "Der neue Prozess wurde erfolgreich erstellt. Sie werden zur erstellten Prozessseite weitergeleitet."
+      }
+    }
   }
 }

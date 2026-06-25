@@ -25,6 +25,7 @@ import { URL_PAGES } from "@/consts/url";
 import { InputSpaceEnums } from "@/types/formEnums";
 import { InputBox } from "../formElements/InputBox";
 import { optionsConverters } from "@/types/optionsConverter";
+import { useTranslations } from "next-intl";
 
 export const CreateFleetForm = () => {
   const {
@@ -39,9 +40,11 @@ export const CreateFleetForm = () => {
     resolver: yupResolver(CreateFleetFormValidation()),
     defaultValues: {
       trainId: "",
-      process: "",
+      workflows: "",
     },
   });
+
+  const t = useTranslations("layout.fleetForm");
 
   const { data: workflowsData } =
     useGetWorkflowsDataQuery<IWorkflowResponseTypes[]>();
@@ -70,41 +73,42 @@ export const CreateFleetForm = () => {
   const VAGONS = [
     {
       value: "TCB",
-      label: "TCB"
+      label: "TCB",
     },
     {
       value: "TCF",
-      label: "TCF"
-    }
-  ]
+      label: "TCF",
+    },
+  ];
 
   const onSubmit: SubmitHandler<ICreateFleetFormDataTypes> = useCallback(
     async (data) => {
       const params = {
         locomotiveNo: data.trainId,
         creator: "admin",
-        processId: data.process,
+        processId: data.workflows,
       };
-      const { data: responseData } = await axiosInstance.post(
-        CLIENT_END_POINTS.processes.create,
-        {
-          type: ProcessQueryTypes.createProcess,
-          params,
-        },
-      );
+
+      // const { data: responseData } = await axiosInstance.post(
+      //   CLIENT_END_POINTS.processes.create,
+      //   {
+      //     type: ProcessQueryTypes.createProcess,
+      //     params,
+      //   },
+      // );
       dispatch(
         addToastify({
-          message: "Yeni süreç başarıyla başlatıldı.",
+          message: t("form.notifications.success"),
           type: "success",
           icon: "close",
           id: "startNewProcess" + Date.now(),
         }),
       );
-      if (responseData.data && responseData.data.process._id) {
-        router.push(
-          `${URL_PAGES.activeProcesses}/${responseData.data.process._id}`,
-        );
-      }
+      // if (responseData.data && responseData.data.process._id) {
+      //   router.push(
+      //     `${URL_PAGES.activeProcesses}/${responseData.data.process._id}`,
+      //   );
+      // }
     },
     [trainDatas],
   );
@@ -120,8 +124,8 @@ export const CreateFleetForm = () => {
                 options={trainOptions || []}
                 control={control as any}
                 required={item.isRequired}
-                label={item.label}
-                placeholder={`${item.label} seçiniz`}
+                label={t(`form.labels.${item.label as string}`)}
+                placeholder={t(`form.placeholders.${item.label as string}`)}
                 formLabelClassName={styles["form-label"]}
                 isSearchable
                 isClearable
@@ -132,7 +136,7 @@ export const CreateFleetForm = () => {
             </React.Fragment>
           );
         }
-           if (item.name === "vagonId") {
+        if (item.name === "wagonId") {
           return (
             <React.Fragment key={index}>
               <SelectBox
@@ -140,8 +144,8 @@ export const CreateFleetForm = () => {
                 options={VAGONS || []}
                 control={control as any}
                 required={item.isRequired}
-                label={item.label}
-                placeholder={`${item.label} seçiniz`}
+                label={t(`form.labels.${item.label as string}`)}
+                placeholder={t(`form.placeholders.${item.label as string}`)}
                 formLabelClassName={styles["form-label"]}
                 isSearchable
                 isClearable
@@ -160,8 +164,8 @@ export const CreateFleetForm = () => {
                 options={item.options || []}
                 control={control as any}
                 required={item.isRequired}
-                label={item.label}
-                placeholder={`${item.label} seçiniz`}
+                label={t(`form.labels.${item.label as string}`)}
+                placeholder={t(`form.placeholders.${item.label as string}`)}
                 formLabelClassName={styles["form-label"]}
                 isSearchable
                 isClearable
@@ -180,8 +184,8 @@ export const CreateFleetForm = () => {
                 options={workflowOptions || []}
                 control={control as any}
                 required={item.isRequired}
-                label={item.label}
-                placeholder={`${item.label} seçiniz`}
+                label={t(`form.labels.${item.label as string}`)}
+                placeholder={t(`form.placeholders.${item.label as string}`)}
                 formLabelClassName={styles["form-label"]}
                 isSearchable
                 isClearable
@@ -197,10 +201,10 @@ export const CreateFleetForm = () => {
             <React.Fragment key={index}>
               <InputBox
                 control={control as any}
-                label="Sebep Başlığı"
                 name="name"
-                placeholder="Ek bilgi girebilirsiniz"
-                required
+                label={t(`form.labels.${item.label as string}`)}
+                placeholder={t(`form.placeholders.${item.label as string}`)}
+                required={item.isRequired}
                 maxLength={100}
                 spacesRule={InputSpaceEnums.limitMaxOneSpace}
                 inputClassName={styles["text-input"]}

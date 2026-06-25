@@ -4,7 +4,7 @@ export const CREATE_FLEET_FORM_CONSTS: IFormFieldsType = [
   {
     name: "projectId",
     type: "select",
-    label: "Proje",
+    label: "project",
     options: [
       { value: "PROJECT-22000", label: "PROJECT-22000" },
       { value: "PROJECT-22001", label: "PROJECT-22001" },
@@ -15,25 +15,25 @@ export const CREATE_FLEET_FORM_CONSTS: IFormFieldsType = [
   {
     name: "trainId",
     type: "select",
-    label: "Tren",
+    label: "trains",
     isRequired: true,
   },
   {
-    name: "vagonId",
+    name: "wagonId",
     type: "select",
-    label: "Vagon",
+    label: "wagon",
     isRequired: true,
   },
   {
     name: "additionInfo",
     type: "input",
-    label: "Ek Bilgi",
+    label: "additionInfo",
     isRequired: false,
   },
   {
     name: "workflows",
     type: "select",
-    label: "Kayıtlı İş Akışları",
+    label: "workflows",
     isRequired: true,
     isMultiselect: false,
   },

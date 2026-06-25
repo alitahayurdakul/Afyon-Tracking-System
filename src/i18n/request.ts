@@ -12,7 +12,6 @@ export default getRequestConfig(async ({ requestLocale }) => {
   }
 
   const files = [
-    "example",
     "activeProcessDetail", 
     "activeProcess",
     "layout",

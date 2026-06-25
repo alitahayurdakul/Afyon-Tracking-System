@@ -2,13 +2,23 @@ import * as Yup from "yup";
 
 import { ICreateFleetFormDataTypes } from "@/types/createFleetTypes";
 
-export function CreateFleetFormValidation(): Yup.ObjectSchema<ICreateFleetFormDataTypes> {
+export function CreateFleetFormValidation(): Yup.ObjectSchema<
+  Omit<ICreateFleetFormDataTypes, "additionInfo">
+> {
   const baseShape = {
+    projectId: Yup.string()
+      .trim()
+      .typeError("Bu alan zorunludur")
+      .required("Bu alan zorunludur"),
+    wagonId: Yup.string()
+      .trim()
+      .typeError("Bu alan zorunludur")
+      .required("Bu alan zorunludur"),
     trainId: Yup.string()
       .trim()
       .typeError("Bu alan zorunludur")
       .required("Bu alan zorunludur"),
-    process: Yup.string()
+    workflows: Yup.string()
       .trim()
       .typeError("Bu alan zorunludur")
       .required("Bu alan zorunludur"),
