@@ -18,7 +18,7 @@
         "actions": "İŞLEMLER"
     },
     "modal": {
-        "create-headers": "Yeni Gecikme Nedeni Oluştur",
+        "create-headers": "Gecikme Nedeni Ekle",
         "edit-header": "Gecikme Nedeni Bilgilerini Güncelle"
     },
     "form": {

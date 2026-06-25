@@ -1,0 +1,59 @@
+{
+  "header": "Materialliste",
+  "description": "Verwalten Sie Lagerbestände und Materialinformationen zentral.",
+  "search": "Suchen...",
+  "delete-question": "Möchten Sie dieses Material wirklich löschen?",
+  "yes": "Ja",
+  "no": "Nein",
+  "buttons": {
+    "create": "Neues Material hinzufügen",
+    "edit": "Aktualisieren",
+    "delete": "Löschen"
+  },
+  "table": {
+    "name": "MATERIALNAME",
+    "code": "MATERIALCODE",
+    "creator": "ERSTELLT VON",
+    "editor": "AKTUALISIERT VON",
+    "actions": "AKTIONEN"
+  },
+  "modal": {
+    "create-headers": "Neues Material hinzufügen",
+    "edit-header": "Materialinformationen aktualisieren"
+  },
+  "form": {
+    "labels": {
+      "name": "MATERIALNAME",
+      "code": "MATERIALCODE",
+      "description": "BESCHREIBUNG",
+      "creator": "Erstellt von",
+      "createdDate": "Erstellungsdatum",
+      "editor": "Zuletzt aktualisiert von",
+      "editedDate": "Datum der letzten Aktualisierung"
+    },
+    "placeholders": {
+      "name": "Materialnamen eingeben",
+      "code": "Materialcode eingeben",
+      "description": "Beschreibung eingeben."
+    },
+    "buttons": {
+      "cancel": "Abbrechen",
+      "save": "Speichern"
+    }
+  },
+  "notifications": {
+    "delete": {
+      "success": "Das Material wurde erfolgreich gelöscht.",
+      "error": "Löschen fehlgeschlagen."
+    },
+    "create": {
+      "success": "Das Material wurde erfolgreich erstellt.",
+      "error": "Erstellen fehlgeschlagen."
+    },
+    "edit": {
+      "success": "Das Material wurde erfolgreich aktualisiert.",
+      "error": "Aktualisierung fehlgeschlagen.",
+      "warning-message": "Das Aktualisieren von Materialinformationen kann sich auf zugehörige Lagerbestände und Berichte auswirken. Bitte überprüfen Sie Ihre Änderungen vor dem Speichern."
+    }
+  }
+}
