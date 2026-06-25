@@ -8,10 +8,12 @@ import { useAddQueryParam } from "@/utils/searchParams";
 
 import { Modal } from "../../common/Modal";
 import { CreateReasonForm } from "./CreateReasonForm";
+import { useTranslations } from "next-intl";
 
 export const CreateReasonsModal = () => {
   const addQueryParam = useAddQueryParam();
   const [open, setOpen] = useState<boolean | undefined>(false);
+  const t = useTranslations("delayReasons");
 
   return (
     <>
@@ -24,14 +26,14 @@ export const CreateReasonsModal = () => {
         }}
       >
         <FontAwesomeIcon icon={faPlus} />
-        Yeni Sebep Ekle
+        {t("buttons.create")}
       </button>
 
       <Modal
         name={CREATE_REASON_MODAL}
         width={"900px"}
         height={"auto"}
-        title="Yeni Sebep Oluştur"
+        title={t("modal.create-headers")}
         isCloseOutside={false}
         isCloseEsc={false}
         enableParams={true}

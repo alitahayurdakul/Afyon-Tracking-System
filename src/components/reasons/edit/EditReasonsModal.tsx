@@ -9,11 +9,13 @@ import { useAddQueryParam } from "@/utils/searchParams";
 
 import { Modal } from "../../common/Modal";
 import { EditReasonForm } from "./EditReasonForm";
+import { useTranslations } from "next-intl";
 
 export const EditReasonsModal = ({ id }: { id: string }) => {
   const addQueryParam = useAddQueryParam();
   const [open, setOpen] = useState<boolean | undefined>(false);
   const { data, isFetching } = useGetReasonDetailDataQuery(id);
+  const t = useTranslations("delayReasons");
 
   return (
     <>
@@ -26,7 +28,7 @@ export const EditReasonsModal = ({ id }: { id: string }) => {
         }}
       >
         <FontAwesomeIcon icon={faPen} />
-        <span>Güncelle</span>
+        <span>{t("buttons.edit")}</span>
       </button>
       {!isFetching && (
         <Modal

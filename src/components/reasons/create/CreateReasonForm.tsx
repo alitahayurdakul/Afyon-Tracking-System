@@ -18,6 +18,7 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { ReasonQueryTypes } from "@/app/api/reasons/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import { useTranslations } from "next-intl";
 
 export const CreateReasonForm = () => {
   const {
@@ -34,6 +35,7 @@ export const CreateReasonForm = () => {
     },
   });
 
+  const t = useTranslations("delayReasons");
   const dispatch = useDispatch();
   const removeModal = useRemoveQueryParamModal();
 
@@ -55,7 +57,7 @@ export const CreateReasonForm = () => {
         });
         dispatch(
           addToastify({
-            message: "Başarıyla oluşturuldu",
+            message: t("notifications.create.success"),
             type: "success",
             icon: "close",
             id: "createReason" + Date.now(),
@@ -67,7 +69,7 @@ export const CreateReasonForm = () => {
       } catch (err) {
         dispatch(
           addToastify({
-            message: (err as Error)?.message || "Oluşturma başarısız",
+            message: (err as Error)?.message || t("notifications.create.error"),
             type: "error",
             icon: "close",
             id: "createReason" + Date.now(),
@@ -82,9 +84,9 @@ export const CreateReasonForm = () => {
     <form className={styles["train-form"]}>
       <InputBox
         control={control as any}
-        label="Sebep Başlığı"
+        label={t("form.labels.name")}
         name="name"
-        placeholder="Sebep başlığı giriniz"
+        placeholder={t("form.placeholders.name")}
         required
         maxLength={100}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -92,11 +94,11 @@ export const CreateReasonForm = () => {
       />
       <TextAreaBox
         control={control as any}
-        label="Açıklama"
+        label={t("form.labels.description")}
         {...register("desc")}
         required
         rows={5}
-        placeholder="Açıklama giriniz"
+        placeholder={t("form.placeholders.description")}
         maxLength={400}
         visibleLimit
         textareaClassName={styles["text-input"]}
@@ -106,7 +108,7 @@ export const CreateReasonForm = () => {
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label="İptal"
+          label={t("form.buttons.cancel")}
           disabled={isSubmitting}
         />
 
@@ -114,7 +116,7 @@ export const CreateReasonForm = () => {
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label="Kaydet"
+          label={t("form.buttons.save")}
           disabled={isSubmitting}
         />
       </div>

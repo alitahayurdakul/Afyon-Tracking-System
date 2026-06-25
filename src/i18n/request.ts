@@ -19,6 +19,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
     "subStages",
     "trains",
     "projects",
+    "delayReasons"
   ];
   const messages: Record<string, any> = {};
 

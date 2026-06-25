@@ -7,38 +7,39 @@ import {
 } from "@/types/tableColumnTypes";
 
 import { formatDate } from "./formDate";
+import { TFunction } from "@/types/commonTypes";
 
 export const reasonsTableColumns: ICommonTableColumnsTypes = [
   {
     name: "name",
-    label: "Sebep Başlığı",
+    label: "name",
   },
   {
     name: "desc",
-    label: "Açıklama",
+    label: "description",
   },
   {
     name: "creator",
-    label: "Oluşturan",
+    label: "creator",
   },
   {
     name: "editor",
-    label: "Güncelleyen",
+    label: "editor",
   },
   {
     name: "actions",
-    label: "İşlemler",
+    label: "actions",
   },
 ];
 
-export const createReasonsTableColumns = () => {
+export const createReasonsTableColumns = (t: TFunction) => {
   const columns = reasonsTableColumns;
 
   return [
     ...columns.map((column: ICommonTableColumnsType) => ({
       accessorKey: column.name,
       header: () => {
-        return <div>{column.label}</div>;
+        return <div>{t(`table.${column.label}`)}</div>;
       },
       cell: ({ row }: { row: { original: IReasonType } }) => {
         const r = row.original;

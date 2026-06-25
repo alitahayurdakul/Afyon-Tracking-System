@@ -21,6 +21,7 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { ReasonQueryTypes } from "@/app/api/reasons/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import { useTranslations } from "next-intl";
 
 interface IPropsTypes {
   id: string;
@@ -40,7 +41,7 @@ export const EditReasonForm = ({ id, data }: IPropsTypes) => {
       desc: data?.description ?? "",
     },
   });
-
+  const t = useTranslations("delayReasons");
   const dispatch = useDispatch();
   const removeModal = useRemoveQueryParamModal();
 
@@ -63,7 +64,7 @@ export const EditReasonForm = ({ id, data }: IPropsTypes) => {
         });
         dispatch(
           addToastify({
-            message: "Başarıyla güncellendi",
+            message: t("notifications.edit.success"),
             type: "success",
             icon: "close",
             id: "editReason" + Date.now(),
@@ -74,7 +75,7 @@ export const EditReasonForm = ({ id, data }: IPropsTypes) => {
       } catch (err) {
         dispatch(
           addToastify({
-            message: (err as Error)?.message || "Güncelleme başarısız",
+            message: (err as Error)?.message || t("notifications.edit.error"),
             type: "error",
             icon: "close",
             id: "editReason" + Date.now(),
@@ -89,9 +90,9 @@ export const EditReasonForm = ({ id, data }: IPropsTypes) => {
     <form className={styles["train-form"]}>
       <InputBox
         control={control as any}
-        label="Sebep Başlığı"
+        label={t("form.labels.name")}
         name="name"
-        placeholder="Sebep başlığı giriniz"
+        placeholder={t("form.placeholders.name")}
         required
         maxLength={100}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -99,11 +100,11 @@ export const EditReasonForm = ({ id, data }: IPropsTypes) => {
       />
       <TextAreaBox
         control={control as any}
-        label="Açıklama"
+        label={t("form.labels.description")}
         {...register("desc")}
         required
         rows={5}
-        placeholder="Açıklama giriniz"
+        placeholder={t("form.placeholders.description")}
         maxLength={400}
         visibleLimit
         textareaClassName={styles["text-input"]}
@@ -111,26 +112,26 @@ export const EditReasonForm = ({ id, data }: IPropsTypes) => {
 
       <section className={styles["activity-section"]}>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>Oluşturan:</span>
+          <span className={styles["activity-label"]}>{t("form.labels.creator")}:</span>
           <span className={styles["activity-value"]}>
             {data?.creator || "Admin"}
           </span>
         </div>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>Oluşturulma Tarihi:</span>
+          <span className={styles["activity-label"]}>{t("form.labels.createdDate")}:</span>
           <span className={styles["activity-value"]}>
             {formatDate(data?.createdAt) ?? "-"}
           </span>
         </div>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>Son Güncelleyen:</span>
+          <span className={styles["activity-label"]}>{t("form.labels.editor")}:</span>
           <span className={styles["activity-value"]}>
             {data?.editor ?? "-"}
           </span>
         </div>
         <div className={styles["activity-row"]}>
           <span className={styles["activity-label"]}>
-            Son Güncellenme Tarihi:
+            {t("form.labels.editedDate")}:
           </span>
           <span className={styles["activity-value"]}>
             {formatDate(data?.updatedAt) ?? "-"}
@@ -141,10 +142,8 @@ export const EditReasonForm = ({ id, data }: IPropsTypes) => {
       <div>
         <FontAwesomeIcon icon={faCircleInfo} className={styles["alert-icon"]} />
 
-        <span className={styles["info-text"]} >
-          Sebep bilgilerini güncellemek ilişkili gecikme kayıtlarını ve
-          raporları etkileyebilir. Kaydetmeden önce değişiklikleri kontrol
-          ettiğinizden emin olun.
+        <span className={styles["info-text"]}>
+          {t("notifications.edit.warning-message")}
         </span>
       </div>
 
@@ -153,7 +152,7 @@ export const EditReasonForm = ({ id, data }: IPropsTypes) => {
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label="İptal"
+          label={t("form.buttons.cancel")}
           disabled={isSubmitting}
         />
 
@@ -161,7 +160,7 @@ export const EditReasonForm = ({ id, data }: IPropsTypes) => {
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label="Kaydet"
+          label={t("form.buttons.save")}
           disabled={isSubmitting}
         />
       </div>
