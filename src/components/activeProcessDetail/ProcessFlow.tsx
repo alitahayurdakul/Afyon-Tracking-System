@@ -15,7 +15,7 @@ export default function ProcessFlow() {
   const [selectedStage, setSelectedStage] = useState<MainStage | null>(null);
   const t = useTranslations("activeProcessDetail");
 
-  const completedCount = stages.filter((s) => getStatus(s.status.toString()) === "completed").length;
+  const completedCount = stages.filter((s) => getStatus(s.status) === "completed").length;
   const progressPercent = Math.round((completedCount / stages.length) * 100);
 
   return (

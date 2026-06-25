@@ -144,7 +144,7 @@ export const mockStageDetail: StageDetail = {
     {
       id: "ikmal",
       name: "İkmal",
-      status: "completed",
+      status: "1",
       start: "2026-06-15T09:14:03.041Z",
       end: "2026-06-15T09:15:03.041Z",
       delayReasons: [],
@@ -155,7 +155,7 @@ export const mockStageDetail: StageDetail = {
     {
       id: "muayene",
       name: "Muayene",
-      status: "completed",
+      status: "1",
       start: "2026-06-15T09:14:03.041Z",
       end: "2026-06-15T09:17:03.041Z",
       delayReasons: [],
@@ -166,7 +166,7 @@ export const mockStageDetail: StageDetail = {
     {
       id: "bakim",
       name: "Bakım",
-      status: "active",
+      status: "2",
       start: "2026-06-15T09:14:03.041Z",
       end: null,
       delayReasons: [
@@ -186,7 +186,7 @@ export const mockStageDetail: StageDetail = {
     {
       id: "sub-test",
       name: "Test",
-      status: "active",
+      status: "2",
       start: null,
       end: null,
       delayReasons: [],
@@ -197,7 +197,7 @@ export const mockStageDetail: StageDetail = {
     {
       id: "sub-teslim",
       name: "Teslim",
-      status: "pending",
+      status: "3",
       start: null,
       end: null,
       delayReasons: [],

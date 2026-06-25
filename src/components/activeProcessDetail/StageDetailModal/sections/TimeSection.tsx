@@ -1,6 +1,7 @@
 import styles from "@/components/activeProcessDetail/StageDetailModal/StageDetailModal.module.scss";
 import { formatDate } from "@/utils/formDate";
 import { getElapsedTime } from "@/utils/getElapsedTime";
+import { useTranslations } from "next-intl";
 
 interface IPropsTypes {
   startDate: string | null;
@@ -8,27 +9,28 @@ interface IPropsTypes {
 }
 
 const TimeSection = ({ startDate, endDate }: IPropsTypes) => {
+  const t = useTranslations("activeProcessDetail");
   const date = new Date().toISOString();
 
   return (
     <section className={styles.section}>
-      <h3>Zaman bilgileri</h3>
+      <h3>{t("section.time-section-header")}</h3>
       <div className={styles.timeRow}>
         <div className={styles.timeCol}>
           <label>
-            <b>Başlangıç</b>
+            <b>{t("start-date")}</b>
           </label>
           <label>{formatDate(startDate)}</label>
         </div>
         <div className={styles.timeCol}>
           <label>
-            <b>Bitiş</b>
+            <b>{t("end-date")}</b>
           </label>
           <label>{formatDate(endDate)}</label>
         </div>
         <div className={styles.timeCol}>
           <label>
-            <b>Geçen Süre</b>
+            <b>{t("elapsed-time")}</b>
           </label>
           <label>
             {startDate ? getElapsedTime(startDate ?? "", endDate ?? date) : "-"}

@@ -1,13 +1,11 @@
 import { useTranslations } from "next-intl";
 
 import { STATUS } from "@/consts/options";
-import { StageStatus } from "@/types/activeProcessDetailTypes";
-import { IStatusType } from "@/types/commonTypes";
+import { IStatusType, TFunction } from "@/types/commonTypes";
 
 import styles from "./StatusChip.module.scss";
 
-export default function StatusChip({ status }: { status: number | string }) {
-  const t = useTranslations("activeProcessDetail");
+export default function StatusChip({ status, t }: { status: number | string, t: TFunction }) {
   
   const statusInfo: IStatusType | undefined =
     STATUS.find((s: IStatusType) => s.code === status);

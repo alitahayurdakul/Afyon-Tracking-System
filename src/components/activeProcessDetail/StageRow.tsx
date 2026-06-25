@@ -25,7 +25,7 @@ export default function StageRow({
 }: StageRowProps) {
 
   const nodeLabel =
-    getStatus(stage.status.toString()) === "completed"
+    getStatus(stage.status) === "completed"
       ? "✓"
       : index + 1;
   const t = useTranslations("activeProcessDetail");
@@ -34,30 +34,30 @@ export default function StageRow({
     <div className={styles.row}>
       {!isLast && (
         <div
-          className={`${styles.connector} ${styles[getStatus(stage.status.toString())]}`}
+          className={`${styles.connector} ${styles[getStatus(stage.status)]}`}
         />
       )}
 
       <div
-        className={`${styles.node} ${styles[getStatus(stage.status.toString())]}`}
+        className={`${styles.node} ${styles[getStatus(stage.status)]}`}
       >
         {nodeLabel}
       </div>
 
       <div
-        className={`${styles.card} ${styles[getStatus(stage.status.toString())]}`}
+        className={`${styles.card} ${styles[getStatus(stage.status)]}`}
         onClick={() => onOpenDetail(stage)}
       >
         <div className={styles.cardLeft}>
           <span className={styles.cardName}>
             {stage.name}
-            {getStatus(stage.status.toString()) && stage.elapsed && (
+            {getStatus(stage.status) && stage.elapsed && (
               <span className={styles.durationChip}>{stage.elapsed}</span>
             )}
           </span>
 
           <div className={styles.cardMeta}>
-            {getStatus(stage.status.toString()) === "completed" && (
+            {getStatus(stage.status) === "completed" && (
               <>
                 <span>
                   {t("start-date")}: {stage.start}
@@ -67,7 +67,7 @@ export default function StageRow({
                 </span>
               </>
             )}
-            {getStatus(stage.status.toString()) === "active" && (
+            {getStatus(stage.status) === "active" && (
               <>
                 <span>
                   {t("start-date")} {stage.start}
@@ -75,14 +75,14 @@ export default function StageRow({
                 <span>{t("pending")}</span>
               </>
             )}
-            {getStatus(stage.status.toString()) === "pending" && (
+            {getStatus(stage.status) === "pending" && (
               <span>{t("not-yet-started")}</span>
             )}
           </div>
         </div>
 
         <div className={styles.cardRight}>
-          <StatusChip status={stage.status as string} />
+          <StatusChip status={stage.status as string} t={t}/>
           <StageDetailModal id={stage.id} />
         </div>
       </div>
