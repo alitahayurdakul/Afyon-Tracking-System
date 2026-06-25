@@ -6,6 +6,7 @@ import { Button } from "@/components/formElements/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ProjectFormValidation } from "@/utils/validations/projectFormValidation";
+import { useTranslations } from "next-intl";
 import React, { useCallback } from "react";
 import { TextAreaBox } from "@/components/formElements/TextAreaBox";
 import { InputBox } from "@/components/formElements/InputBox";
@@ -22,6 +23,7 @@ import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { PROJECT_STATUS_OPTIONS } from "@/consts/projectsConsts";
 
 export const CreateProjectForm = () => {
+  const t = useTranslations("projects");
   const {
     control,
     handleSubmit,
@@ -93,9 +95,9 @@ export const CreateProjectForm = () => {
     <form className={styles["train-form"]}>
       <InputBox
         control={control as any}
-        label="Proje Adı"
+        label={t("form.nameLabel")}
         name="name"
-        placeholder="Proje adı giriniz"
+        placeholder={t("form.namePlaceholder")}
         required
         maxLength={120}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -103,9 +105,9 @@ export const CreateProjectForm = () => {
       />
       <InputBox
         control={control as any}
-        label="Proje Kodu"
+        label={t("form.codeLabel")}
         name="code"
-        placeholder="Proje kodu giriniz"
+        placeholder={t("form.codePlaceholder")}
         required
         maxLength={50}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -113,18 +115,18 @@ export const CreateProjectForm = () => {
       />
       <SelectBox
         control={control as any}
-        label="Durum"
+        label={t("form.statusLabel")}
         name="status"
-        placeholder="Durum seçiniz"
+        placeholder={t("form.statusPlaceholder")}
         required
         options={PROJECT_STATUS_OPTIONS}
       />
       <TextAreaBox
         control={control as any}
-        label="Açıklama"
+        label={t("form.descriptionLabel")}
         {...register("desc")}
         rows={5}
-        placeholder="Açıklama giriniz"
+        placeholder={t("form.descriptionPlaceholder")}
         maxLength={400}
         visibleLimit
         textareaClassName={styles["text-input"]}
@@ -134,7 +136,7 @@ export const CreateProjectForm = () => {
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label="İptal"
+          label={t("form.cancel")}
           disabled={isSubmitting}
         />
 
@@ -142,7 +144,7 @@ export const CreateProjectForm = () => {
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label="Kaydet"
+          label={t("form.save")}
           disabled={isSubmitting}
         />
       </div>

@@ -27,3 +27,11 @@ export const DEFlag = () => (
     <rect width="5" height="1" y="2" fill="#FFCE00" />
   </svg>
 );
+
+export const RUFlag = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6" width="22" height="15">
+    <rect width="9" height="6" fill="#fff" />
+    <rect width="9" height="4" y="2" fill="#0039A6" />
+    <rect width="9" height="2" y="4" fill="#D52B1E" />
+  </svg>
+);

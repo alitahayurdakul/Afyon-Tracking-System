@@ -1,5 +1,6 @@
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { useGetProjectDetailDataQuery } from "@/api/queries/useGetProjectsQueries";
@@ -11,6 +12,7 @@ import { Modal } from "../../common/Modal";
 import { EditProjectForm } from "./EditProjectForm";
 
 export const EditProjectsModal = ({ id }: { id: string }) => {
+  const t = useTranslations("projects");
   const addQueryParam = useAddQueryParam();
   const [open, setOpen] = useState<boolean | undefined>(false);
   const { data, isFetching } = useGetProjectDetailDataQuery(id);
@@ -26,14 +28,14 @@ export const EditProjectsModal = ({ id }: { id: string }) => {
         }}
       >
         <FontAwesomeIcon icon={faPen} />
-        <span>Güncelle</span>
+        <span>{t("actions.edit")}</span>
       </button>
       {!isFetching && (
         <Modal
           name={`${EDIT_PROJECT_MODAL}_${id}`}
           width={"900px"}
           height={"auto"}
-          title="Proje Bilgilerini Güncelle"
+          title={t("modal.edit")}
           isCloseOutside={false}
           isCloseEsc={false}
           enableParams={true}

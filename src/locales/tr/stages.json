@@ -1,0 +1,27 @@
+{
+  "title": "Aşamalar Yönetimi",
+  "description": "Aşamaları yapılandır ve sırala.",
+  "addButton": "Yeni Aşama Ekle",
+  "search": "Arama...",
+  "columns": {
+    "name": "Aşama Adı",
+    "creator": "Oluşturan",
+    "editor": "Güncelleyen",
+    "actions": "İşlemler"
+  },
+  "actions": {
+    "edit": "Güncelle",
+    "delete": "Sil"
+  },
+  "modal": {
+    "create": "Yeni Aşama Oluştur",
+    "edit": "Aşama Bilgilerini Güncelle"
+  },
+  "form": {
+    "selectedStages": "Seçilen Aşamalar",
+    "selectedMaterials": "Seçilen Malzemeler",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "editInfo": "Aşama bilgilerini güncellemek ilişkili süreç kayıtlarını etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden emin olun."
+  }
+}

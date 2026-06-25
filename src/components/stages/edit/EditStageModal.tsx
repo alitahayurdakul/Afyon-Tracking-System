@@ -1,5 +1,6 @@
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 
 import { useGetWorkflowDetailDataQuery } from "@/api/queries/useGetWorkflowsQueries";
@@ -15,6 +16,7 @@ import { Modal } from "../../common/Modal";
 import { EditStageForm } from "./EditStageForm";
 
 export const EditWorkflowModal = ({ id }: { id: string }) => {
+  const t = useTranslations("stages");
   const addQueryParam = useAddQueryParam();
   const [open, setOpen] = useState<boolean | undefined>(false);
   const { data, isLoading, isError, isFetching, refetch } =
@@ -47,7 +49,7 @@ export const EditWorkflowModal = ({ id }: { id: string }) => {
         }}
       >
         <FontAwesomeIcon icon={faPen} />
-        <span>Güncelle</span>
+        <span>{t("actions.edit")}</span>
       </button>
 
       {!isFetching && (
@@ -55,7 +57,7 @@ export const EditWorkflowModal = ({ id }: { id: string }) => {
           name={`EDIT_STAGE_MODAL_${id}`}
           width={"900px"}
           height={"auto"}
-          title="Aşama Bilgilerini Güncelle"
+          title={t("modal.edit")}
           isCloseOutside={false}
           isCloseEsc={false}
           enableParams={true}

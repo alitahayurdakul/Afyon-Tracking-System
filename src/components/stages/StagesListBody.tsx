@@ -4,6 +4,7 @@ import {
   faSearch
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 
 import { useGetWorkflowsDataQuery } from "@/api/queries/useGetWorkflowsQueries";
 import styles from "@/styles/components/common/TableListBody.module.scss";
@@ -14,6 +15,7 @@ import { Table } from "../common/Table";
 import { CreateStageModal } from "./create/CreateStageModal";
 
 export const StagesListBody = () => {
+  const t = useTranslations("stages");
   const { data, isLoading, isError, isFetching, refetch } = useGetWorkflowsDataQuery<IWorkflowResponseTypes[]>();
 
   return (
@@ -21,11 +23,9 @@ export const StagesListBody = () => {
       <div className={styles["page-top"]}>
         <div>
 
-          <h2>Aşamalar Yönetimi</h2>
+          <h2>{t("title")}</h2>
 
-          <p>
-            Aşamaları yapılandır ve sırala.
-          </p>
+          <p>{t("description")}</p>
         </div>
 
         <CreateStageModal />
@@ -35,7 +35,7 @@ export const StagesListBody = () => {
       <div className={styles.toolbar}>
         <div className={styles["search-input"]}>
           <FontAwesomeIcon icon={faSearch} />
-          <input placeholder="Arama..." />
+          <input placeholder={t("search")} />
         </div>
       </div>
 
@@ -44,7 +44,7 @@ export const StagesListBody = () => {
           className={styles["table-class"]}
           loading={false}
           data={data ?? []}
-          columns={createStagesTableColumns()}
+          columns={createStagesTableColumns(t)}
         />
       </div>
     </section>
