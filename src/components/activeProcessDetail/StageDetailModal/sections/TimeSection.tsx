@@ -1,7 +1,8 @@
+import { useTranslations } from "next-intl";
+
 import styles from "@/components/activeProcessDetail/StageDetailModal/StageDetailModal.module.scss";
 import { formatDate } from "@/utils/formDate";
 import { getElapsedTime } from "@/utils/getElapsedTime";
-import { useTranslations } from "next-intl";
 
 interface IPropsTypes {
   startDate: string | null;
