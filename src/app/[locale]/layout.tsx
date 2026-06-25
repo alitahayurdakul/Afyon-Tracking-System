@@ -66,7 +66,7 @@ export default async function LocaleLayout({
   const cookieStore = await cookies();
   // const consent = cookieStore.get("cookie-consent");
 
-  if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
+  if (!routing.locales.includes(locale as  "tr" | "en" | "de" | "ru")) {
     notFound();
   }
 
