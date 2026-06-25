@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { useGetSubStagesDataQuery } from "@/api/queries/useGetSubStagesQueries";
@@ -7,6 +8,7 @@ import { Modal } from "@/components/common/Modal";
 import { ACTIVE_STAGE_DETAIL_MODAL } from "@/consts/modals";
 import { StageDetail, SubStage } from "@/types/activeProcessDetailTypes";
 import { IOptionType } from "@/types/formTypes";
+import { getStatus } from "@/utils/getStatus";
 
 import StatusChip from "../StatusChip";
 import DelayReasonGroup from "./DelayReasonGroup";
@@ -15,8 +17,6 @@ import MaterialList from "./MaterialList";
 import TimeSection from "./sections/TimeSection";
 import styles from "./StageDetailModal.module.scss";
 import Stepper from "./Stepper";
-import { useTranslations } from "next-intl";
-import { getStatus } from "@/utils/getStatus";
 
 interface StageDetailModalProps {
   id: string;
