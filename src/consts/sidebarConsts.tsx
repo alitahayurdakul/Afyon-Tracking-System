@@ -1,7 +1,6 @@
 import {
   faBoxesStacked,
   faCircleExclamation,
-  faClockRotateLeft,
   faDiagramProject,
   faFilter,
   faFolderTree,

@@ -1,11 +1,13 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import React from "react";
 
 import styles from "@/styles/components/Breadcrumb.module.scss";
 
 interface IBreadcrumbItem {
-  name: string;
+  labelKey?: string;
   link?: string;
+  label?: string;
 }
 
 interface IPropsTypes {
@@ -13,14 +15,17 @@ interface IPropsTypes {
 }
 
 const Breadcrumb = ({ data }: IPropsTypes) => {
+  const t = useTranslations("layout.breadcrumb");
+  
   return (
     <div className={styles.breadcrumb}>
       {data.map((item: IBreadcrumbItem, index: number) => {
+        const text = item.labelKey ? t(item.labelKey) : item.label;
         if (index === data.length - 1) {
           return (
             <React.Fragment key={index}>
               <span>
-                <b>{item.name}</b>
+                <b>{text}</b>
               </span>
             </React.Fragment>
           );
@@ -29,9 +34,9 @@ const Breadcrumb = ({ data }: IPropsTypes) => {
           <React.Fragment key={index}>
             <span>
               {item.link ? (
-                <Link href={item.link}>{item.name}</Link>
+                <Link href={item.link}>{text}</Link>
               ) : (
-                item.name
+                text
               )}{" "}
               {">"}{" "}
             </span>

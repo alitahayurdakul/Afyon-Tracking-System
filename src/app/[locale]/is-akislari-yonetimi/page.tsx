@@ -7,7 +7,7 @@ export default function Workflows() {
   return (
     <div className={styles["page-container"]}>
       <Topbar />
-      <Breadcrumb data={[{ name: "İş Akışları" }]} />
+      <Breadcrumb data={[{ labelKey: "workflows" }]} />
       <WorkflowsListBody />
     </div>
   );

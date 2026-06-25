@@ -37,5 +37,20 @@
         "success": "The new process has been created successfully. You are being redirected to the created process page."
       }
     }
+  },
+  "breadcrumb": {
+    "active-process": "Factory Process Management Dashboard",
+    "active-process-detail": "Active Process Details",
+    "workflows": "Workflow Management",
+    "workflow-history": "Workflow History",
+    "stages": "Stage Management",
+    "materials": "Material Management",
+    "projects": "Project Management",
+    "sub-stages": "Sub-Stage Management",
+    "trains": "Train Management",
+    "delay-reason": "Delay Reason Management",
+    "users": "User Management",
+    "roles": "Role Management"
   }
+
 }
