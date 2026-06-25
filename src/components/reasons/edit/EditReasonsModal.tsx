@@ -1,5 +1,6 @@
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { useGetReasonDetailDataQuery } from "@/api/queries/useGetReasonsQueries";
@@ -14,6 +15,7 @@ export const EditReasonsModal = ({ id }: { id: string }) => {
   const addQueryParam = useAddQueryParam();
   const [open, setOpen] = useState<boolean | undefined>(false);
   const { data, isFetching } = useGetReasonDetailDataQuery(id);
+  const t = useTranslations("delayReasons");
 
   return (
     <>
@@ -26,7 +28,7 @@ export const EditReasonsModal = ({ id }: { id: string }) => {
         }}
       >
         <FontAwesomeIcon icon={faPen} />
-        <span>Güncelle</span>
+        <span>{t("buttons.edit")}</span>
       </button>
       {!isFetching && (
         <Modal

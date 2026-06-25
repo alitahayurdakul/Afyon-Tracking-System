@@ -1,0 +1,57 @@
+{
+  "header": "Verzögerungsgründe",
+  "description": "Verwalten Sie Verzögerungsgründe zentral",
+  "search": "Suchen...",
+  "delete-question": "Möchten Sie diesen Grund wirklich löschen?",
+  "yes": "Ja",
+  "no": "Nein",
+  "buttons": {
+    "create": "Neuen Grund hinzufügen",
+    "edit": "Aktualisieren",
+    "delete": "Löschen"
+  },
+  "table": {
+    "name": "GRUNDTITEL",
+    "description": "BESCHREIBUNG",
+    "creator": "ERSTELLT VON",
+    "editor": "AKTUALISIERT VON",
+    "actions": "AKTIONEN"
+  },
+  "modal": {
+    "create-headers": "Neuen Verzögerungsgrund erstellen",
+    "edit-header": "Informationen zum Verzögerungsgrund aktualisieren"
+  },
+  "form": {
+    "labels": {
+      "name": "GRUNDTITEL",
+      "description": "BESCHREIBUNG",
+      "creator": "Erstellt von",
+      "createdDate": "Erstellungsdatum",
+      "editor": "Zuletzt aktualisiert von",
+      "editedDate": "Datum der letzten Aktualisierung"
+    },
+    "placeholders": {
+      "name": "Grundtitel eingeben",
+      "description": "Beschreibung eingeben"
+    },
+    "buttons": {
+      "cancel": "Abbrechen",
+      "save": "Speichern"
+    }
+  },
+  "notifications": {
+    "delete": {
+      "success": "Der Verzögerungsgrund wurde erfolgreich gelöscht.",
+      "error": "Löschen fehlgeschlagen."
+    },
+    "create": {
+      "success": "Der Verzögerungsgrund wurde erfolgreich erstellt.",
+      "error": "Erstellen fehlgeschlagen."
+    },
+    "edit": {
+      "success": "Der Verzögerungsgrund wurde erfolgreich aktualisiert.",
+      "error": "Aktualisierung fehlgeschlagen.",
+      "warning-message": "Das Aktualisieren der Grundinformationen kann sich auf zugehörige Verzögerungsaufzeichnungen und Berichte auswirken. Bitte überprüfen Sie Ihre Änderungen vor dem Speichern."
+    }
+  }
+}

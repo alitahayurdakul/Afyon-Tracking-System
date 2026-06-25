@@ -1,0 +1,57 @@
+{
+    "header": "Gecikme Nedenleri",
+    "description": "Gecikme sebeplerini merkezi olarak yönetin",
+    "search": "Arama...",
+    "delete-question": "Sebebi silmek istediğinize emin misiniz?",
+    "yes": "Evet",
+    "no": "Hayır",
+    "buttons": {
+        "create": "Yeni Sebep Ekle",
+        "edit": "Güncelle",
+        "delete": "Sil"
+    },
+    "table": {
+        "name": "SEBEP BAĞLIĞI",
+        "description": "AÇIKLAMA",
+        "creator": "OLUŞTURAN",
+        "editor": "GÜNCELLEYEN",
+        "actions": "İŞLEMLER"
+    },
+    "modal": {
+        "create-headers": "Yeni Gecikme Nedeni Oluştur",
+        "edit-header": "Gecikme Nedeni Bilgilerini Güncelle"
+    },
+    "form": {
+        "labels": {
+            "name": "SEBEP BAĞLIĞI",
+            "description": "AÇIKLAMA",
+            "creator": "Oluşturan",
+            "createdDate": "Oluşturulma Tarihi",
+            "editor": "Son Güncelleyen",
+            "editedDate": "Son Güncelleme Tarihi"
+        },
+        "placeholders": {
+            "name": "Sebep Başlığı giriniz",
+            "description": "Açıklama giriniz"
+        },
+        "buttons": {
+            "cancel": "İptal",
+            "save": "Kaydet"
+        }
+    },
+    "notifications": {
+        "delete": {
+            "success": "Gecikme sebebi başarıyla silindi.",
+            "error": "Silme işlemi başarısız."
+        },
+        "create": {
+            "success": "Gecikme sebebi başarıyla oluşturuldu.",
+            "error": "Ekleme işlemi başarısız."
+        },
+        "edit": {
+            "success": "Gecikme sebebi başarıyla güncellendi.",
+            "error": "Güncelleme işlemi başarısız.",
+            "warning-message": "Sebep bilgilerini güncellemek ilişkili gecikme kayıtlarını ve raporları etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden emin olun."
+        }
+    }
+}

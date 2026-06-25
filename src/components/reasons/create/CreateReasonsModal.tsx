@@ -1,5 +1,6 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { CREATE_REASON_MODAL } from "@/consts/modals";
@@ -12,6 +13,7 @@ import { CreateReasonForm } from "./CreateReasonForm";
 export const CreateReasonsModal = () => {
   const addQueryParam = useAddQueryParam();
   const [open, setOpen] = useState<boolean | undefined>(false);
+  const t = useTranslations("delayReasons");
 
   return (
     <>
@@ -24,14 +26,14 @@ export const CreateReasonsModal = () => {
         }}
       >
         <FontAwesomeIcon icon={faPlus} />
-        Yeni Sebep Ekle
+        {t("buttons.create")}
       </button>
 
       <Modal
         name={CREATE_REASON_MODAL}
         width={"900px"}
         height={"auto"}
-        title="Yeni Sebep Oluştur"
+        title={t("modal.create-headers")}
         isCloseOutside={false}
         isCloseEsc={false}
         enableParams={true}
