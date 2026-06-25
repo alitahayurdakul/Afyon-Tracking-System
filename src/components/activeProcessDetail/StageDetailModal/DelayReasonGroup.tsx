@@ -18,7 +18,6 @@ export default function DelayReasonGroup({
   disabled,
   onChange
 }: DelayReasonGroupProps) {
-  console.log(selectedList);
 
   const handleChange = (value: IOptionType["value"], checked: boolean) => {
     const updated = checked

@@ -1,5 +1,7 @@
 "use client";
 /* eslint-disable */
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import styles from "@/styles/components/workflowList/WorkflowForm.module.scss";
 import { Button } from "@/components/formElements/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -269,6 +271,15 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
       {selectedMaterials && selectedMaterials.length > 0 && (
         <SelectedItemList name="materialList" selectedItems={selectedMaterials} setValue={setValue} title={t("selectedMaterials")} />
       )}
+
+      <div>
+        <FontAwesomeIcon icon={faCircleInfo} className={styles["alert-icon"]} />
+        <span className={styles["info-text"]}>
+          Aşama bilgilerini güncellemek ilişkili süreç kayıtlarını
+          etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden
+          emin olun.
+        </span>
+      </div>
 
       <div className={styles["btn-group"]}>
         <Button

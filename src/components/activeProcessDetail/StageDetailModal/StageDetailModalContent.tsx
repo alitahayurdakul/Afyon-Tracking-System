@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { useGetSubStagesDataQuery } from "@/api/queries/useGetSubStagesQueries";
@@ -7,6 +8,7 @@ import { Modal } from "@/components/common/Modal";
 import { ACTIVE_STAGE_DETAIL_MODAL } from "@/consts/modals";
 import { StageDetail, SubStage } from "@/types/activeProcessDetailTypes";
 import { IOptionType } from "@/types/formTypes";
+import { getStatus } from "@/utils/getStatus";
 
 import StatusChip from "../StatusChip";
 import DelayReasonGroup from "./DelayReasonGroup";
@@ -32,6 +34,7 @@ export default function StageDetailModalContent({
   open,
   setOpen,
 }: StageDetailModalProps) {
+  const t = useTranslations("activeProcessDetail");
   const {
     data: stageDetail,
     isLoading,
@@ -45,7 +48,7 @@ export default function StageDetailModalContent({
   if (subStagesData !== prevSubStagesData) {
     setPrevSubStagesData(subStagesData);
     const index = subStagesData?.findIndex(
-      (s: SubStage) => s.status === "active",
+      (s: SubStage) => getStatus(s.status) === "active",
     );
     if (index !== undefined && index !== -1) {
       setActiveIndex(index);
@@ -72,7 +75,7 @@ export default function StageDetailModalContent({
 
   if (!activeSubStageData) return null;
 
-  const isLocked = activeSubStageData.status !== "active";
+  const isLocked = getStatus(activeSubStageData.status) !== "active";
 
   const completeStage = () => {
     if (activeIndex < subStagesData.length - 1) {
@@ -85,7 +88,7 @@ export default function StageDetailModalContent({
       name={`${ACTIVE_STAGE_DETAIL_MODAL}_${id}`}
       width="900px"
       height="auto"
-      title={`Aşama detayı — ${activeSubStageData?.name || ""}`}
+      title={`${t("stage-modal-header")} — ${activeSubStageData?.name || ""}`}
       isCloseOutside={false}
       isCloseEsc={false}
       enableParams={true}
@@ -96,7 +99,7 @@ export default function StageDetailModalContent({
         <div className={styles.header}>
           <div className={styles.headerLeft}>
             <span className={styles.title}>{activeSubStageData.name}</span>
-            <StatusChip status={activeSubStageData.status} />
+            <StatusChip status={getStatus(activeSubStageData.status)} t={t} />
           </div>
         </div>
 
@@ -112,7 +115,7 @@ export default function StageDetailModalContent({
             startDate={activeSubStageData.start}
           />
           <section className={styles.section}>
-            <h3>Gecikme nedenleri</h3>
+            <h3>{t("section.delay-reason")}</h3>
             <DelayReasonGroup
               selectedList={newSubStageData.selectedList}
               disabled={isLocked}
@@ -124,7 +127,7 @@ export default function StageDetailModalContent({
           {activeSubStageData.materials &&
             activeSubStageData.materials.length > 0 && (
               <section className={styles.section}>
-                <h3>Malzemeler ve seri numaraları</h3>
+                <h3>{t("section.materials")}</h3>
 
                 <MaterialList
                   materials={activeSubStageData.materials}
@@ -135,18 +138,18 @@ export default function StageDetailModalContent({
             )}
 
           <section className={styles.section}>
-            <h3>Açıklama</h3>
+            <h3>{t("section.explaining")}</h3>
             <textarea
               value={activeSubStageData.description}
               disabled={isLocked}
               className={styles.textarea}
-              placeholder="Açıklama giriniz..."
+              placeholder={t("explaining-placeholder")}
               onChange={(e) => console.log(e.target.value)}
             />
           </section>
 
           <section className={styles.section}>
-            <h3>Görseller</h3>
+            <h3>{t("section.files")}</h3>
             <ImageUploader
               images={activeSubStageData.images}
               disabled={isLocked}
@@ -156,18 +159,18 @@ export default function StageDetailModalContent({
         </div>
 
         <div className={styles.footer}>
-          {activeSubStageData.status === "active" && (
-            <button className={styles.completeBtn} onClick={completeStage}>
-              Değişiklikleri Kaydet
+          {getStatus(activeSubStageData.status) === "active" && (
+            <button className={styles.saveBtn} onClick={completeStage}>
+              {t("buttons.save-changes")}
             </button>
           )}
 
           <button
             className={styles.completeBtn}
-            disabled={activeSubStageData.status !== "active"}
+            disabled={getStatus(activeSubStageData.status) !== "active"}
             onClick={completeStage}
           >
-            Aşamayı tamamla
+            {t("buttons.complete-stage")}
           </button>
         </div>
       </div>

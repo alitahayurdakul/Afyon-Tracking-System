@@ -1,13 +1,18 @@
-import { StageStatus } from "@/types/activeProcessDetailTypes";
+import { useTranslations } from "next-intl";
+
+import { STATUS } from "@/consts/options";
+import { IStatusType, TFunction } from "@/types/commonTypes";
 
 import styles from "./StatusChip.module.scss";
 
-const LABELS: Record<StageStatus, string> = {
-  completed: "Tamamlandı",
-  active: "Aktif",
-  pending: "Bekliyor",
-};
+export default function StatusChip({ status, t }: { status: number | string, t: TFunction }) {
+  
+  const statusInfo: IStatusType | undefined =
+    STATUS.find((s: IStatusType) => s.code === status);
 
-export default function StatusChip({ status }: { status: StageStatus }) {
-  return <span className={`${styles.chip} ${styles[status]}`}>{LABELS[status]}</span>;
+  return (
+    <span className={`${styles.chip} ${styles[statusInfo?.valueKey ?? ""]}`}>
+      {statusInfo?.valueKey ? t(`status.${statusInfo.valueKey}`) : "-"}
+    </span>
+  );
 }

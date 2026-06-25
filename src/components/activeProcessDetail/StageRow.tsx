@@ -1,4 +1,10 @@
+import { useTranslations } from "next-intl";
+import { useCallback } from "react";
+
+import { STATUS } from "@/consts/options";
 import { MainStage } from "@/types/activeProcessDetailTypes";
+import { IStatusType } from "@/types/commonTypes";
+import { getStatus } from "@/utils/getStatus";
 
 import styles from "./ProcessFlow.module.scss";
 import StageDetailModal from "./stageDetailModal/StageDetailModal";
@@ -11,46 +17,72 @@ interface StageRowProps {
   onOpenDetail: (stage: MainStage) => void;
 }
 
-export default function StageRow({ stage, index, isLast, onOpenDetail }: StageRowProps) {
-  const nodeLabel = stage.status === "completed" ? "✓" : index + 1;
+export default function StageRow({
+  stage,
+  index,
+  isLast,
+  onOpenDetail,
+}: StageRowProps) {
+
+  const nodeLabel =
+    getStatus(stage.status) === "completed"
+      ? "✓"
+      : index + 1;
+  const t = useTranslations("activeProcessDetail");
 
   return (
     <div className={styles.row}>
-      {!isLast && <div className={`${styles.connector} ${styles[stage.status]}`} />}
-
-      <div className={`${styles.node} ${styles[stage.status]}`}>{nodeLabel}</div>
+      {!isLast && (
+        <div
+          className={`${styles.connector} ${styles[getStatus(stage.status)]}`}
+        />
+      )}
 
       <div
-        className={`${styles.card} ${styles[stage.status]}`}
+        className={`${styles.node} ${styles[getStatus(stage.status)]}`}
+      >
+        {nodeLabel}
+      </div>
+
+      <div
+        className={`${styles.card} ${styles[getStatus(stage.status)]}`}
         onClick={() => onOpenDetail(stage)}
       >
         <div className={styles.cardLeft}>
           <span className={styles.cardName}>
             {stage.name}
-            {stage.status === "completed" && stage.elapsed && (
+            {getStatus(stage.status) && stage.elapsed && (
               <span className={styles.durationChip}>{stage.elapsed}</span>
             )}
           </span>
 
           <div className={styles.cardMeta}>
-            {stage.status === "completed" && (
+            {getStatus(stage.status) === "completed" && (
               <>
-                <span>Başlangıç: {stage.start}</span>
-                <span>Bitiş: {stage.end}</span>
+                <span>
+                  {t("start-date")}: {stage.start}
+                </span>
+                <span>
+                  {t("end-date")}: {stage.end}
+                </span>
               </>
             )}
-            {stage.status === "active" && (
+            {getStatus(stage.status) === "active" && (
               <>
-                <span>Başlangıç: {stage.start}</span>
-                <span>Sürüyor</span>
+                <span>
+                  {t("start-date")} {stage.start}
+                </span>
+                <span>{t("pending")}</span>
               </>
             )}
-            {stage.status === "pending" && <span>Henüz başlamadı</span>}
+            {getStatus(stage.status) === "pending" && (
+              <span>{t("not-yet-started")}</span>
+            )}
           </div>
         </div>
 
         <div className={styles.cardRight}>
-          <StatusChip status={stage.status} />
+          <StatusChip status={stage.status as string} t={t}/>
           <StageDetailModal id={stage.id} />
         </div>
       </div>

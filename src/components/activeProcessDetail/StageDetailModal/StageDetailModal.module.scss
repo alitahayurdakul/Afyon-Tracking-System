@@ -205,12 +205,29 @@
   border-top: 0.5px solid #d3d1c7;
   display: flex;
   justify-content: flex-end;
+  gap: 5px;
+}
+
+.saveBtn{
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: var(--active);;
+  color: #fff;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:disabled {
+    background: #d3d1c7;
+    cursor: not-allowed;
+  }
 }
 
 .completeBtn {
   padding: 8px 16px;
   border-radius: 8px;
-  background: #1d9e75;
+  background: var(--on-sale-badge);
   color: #fff;
   border: none;
   font-size: 14px;
