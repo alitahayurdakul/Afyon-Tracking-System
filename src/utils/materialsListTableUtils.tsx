@@ -1,5 +1,6 @@
 import { MaterialsTableActionsCol } from "@/components/materials/MaterialsTableActionsCol";
 import styles from "@/styles/components/materials/MaterialsListTableUtils.module.scss";
+import { TFunction } from "@/types/commonTypes";
 import { IMaterialType } from "@/types/materialsTypes";
 import {
   ICommonTableColumnsType,
@@ -11,38 +12,38 @@ import { formatDate } from "./formDate";
 export const materialsTableColumns: ICommonTableColumnsTypes = [
   {
     name: "name",
-    label: "Malzeme Adı",
+    label: "name",
   },
   {
     name: "code",
-    label: "Malzeme Kodu",
+    label: "code",
   },
   {
     name: "stock",
-    label: "Stok",
+    label: "stock",
   },
   {
     name: "creator",
-    label: "Oluşturan",
+    label: "creator",
   },
   {
     name: "editor",
-    label: "Güncelleyen",
+    label: "editor",
   },
   {
     name: "actions",
-    label: "İşlemler",
+    label: "actions",
   },
 ];
 
-export const createMaterialsTableColumns = () => {
+export const createMaterialsTableColumns = (t: TFunction) => {
   const columns = materialsTableColumns;
 
   return [
     ...columns.map((column: ICommonTableColumnsType) => ({
       accessorKey: column.name,
       header: () => {
-        return <div>{column.label}</div>;
+        return <div>{t(`table.${column.label}`)}</div>;
       },
       cell: ({ row }: { row: { original: IMaterialType } }) => {
         const r = row.original;

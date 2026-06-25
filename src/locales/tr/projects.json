@@ -3,7 +3,7 @@
   "description": "Projeleri ve durumlarını merkezi olarak yönetin.",
   "addButton": "Yeni Proje Ekle",
   "search": "Arama...",
-  "columns": {
+  "table": {
     "name": "Proje Adı",
     "code": "Proje Kodu",
     "status": "Durum",

@@ -1,0 +1,60 @@
+{
+  "title": "Users",
+  "description": "Manage system users and their roles centrally.",
+  "addButton": "Add New User",
+  "search": "Search...",
+  "table": {
+    "id": "ID",
+    "fullname": "Full Name",
+    "email": "Email",
+    "phone": "Phone",
+    "department": "Department",
+    "role": "Role",
+    "status": "Status",
+    "actions": "Actions"
+  },
+  "status": {
+    "active": "Active",
+    "passive": "Passive"
+  },
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "deletePopover": {
+    "question": "Are you sure you want to delete this user?",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "modal": {
+    "create": "Create New User",
+    "edit": "Update User Details"
+  },
+  "form": {
+    "fullnameLabel": "Full Name",
+    "fullnamePlaceholder": "Enter full name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "example@company.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter password",
+    "phoneLabel": "Phone",
+    "phonePlaceholder": "+90 5XX XXX XX XX",
+    "departmentLabel": "Department",
+    "departmentPlaceholder": "Select department",
+    "roleLabel": "Role",
+    "rolePlaceholder": "Select role",
+    "statusLabel": "Status",
+    "statusPlaceholder": "Select status",
+    "cancel": "Cancel",
+    "save": "Save",
+    "editInfo": "Updating user details may affect access and authorization flows. Make sure to review the changes before saving."
+  },
+  "notifications": {
+    "createSuccess": "User created successfully",
+    "createError": "Failed to create user",
+    "editSuccess": "User updated successfully",
+    "editError": "Failed to update user",
+    "deleteSuccess": "User deleted",
+    "deleteError": "Failed to delete user"
+  }
+}

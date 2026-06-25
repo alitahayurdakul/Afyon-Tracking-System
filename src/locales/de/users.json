@@ -1,0 +1,60 @@
+{
+  "title": "Benutzer",
+  "description": "Verwalten Sie Systembenutzer und ihre Rollen zentral.",
+  "addButton": "Neuen Benutzer hinzufügen",
+  "search": "Suche...",
+  "table": {
+    "id": "ID",
+    "fullname": "Vollständiger Name",
+    "email": "E-Mail",
+    "phone": "Telefon",
+    "department": "Abteilung",
+    "role": "Rolle",
+    "status": "Status",
+    "actions": "Aktionen"
+  },
+  "status": {
+    "active": "Aktiv",
+    "passive": "Passiv"
+  },
+  "actions": {
+    "edit": "Bearbeiten",
+    "delete": "Löschen"
+  },
+  "deletePopover": {
+    "question": "Möchten Sie diesen Benutzer wirklich löschen?",
+    "yes": "Ja",
+    "no": "Nein"
+  },
+  "modal": {
+    "create": "Neuen Benutzer erstellen",
+    "edit": "Benutzerdetails aktualisieren"
+  },
+  "form": {
+    "fullnameLabel": "Vollständiger Name",
+    "fullnamePlaceholder": "Vollständigen Namen eingeben",
+    "emailLabel": "E-Mail",
+    "emailPlaceholder": "beispiel@firma.com",
+    "passwordLabel": "Passwort",
+    "passwordPlaceholder": "Passwort eingeben",
+    "phoneLabel": "Telefon",
+    "phonePlaceholder": "+90 5XX XXX XX XX",
+    "departmentLabel": "Abteilung",
+    "departmentPlaceholder": "Abteilung auswählen",
+    "roleLabel": "Rolle",
+    "rolePlaceholder": "Rolle auswählen",
+    "statusLabel": "Status",
+    "statusPlaceholder": "Status auswählen",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "editInfo": "Das Aktualisieren der Benutzerdetails kann den Zugriff und die Autorisierung beeinflussen. Überprüfen Sie die Änderungen vor dem Speichern."
+  },
+  "notifications": {
+    "createSuccess": "Benutzer erfolgreich erstellt",
+    "createError": "Benutzer konnte nicht erstellt werden",
+    "editSuccess": "Benutzer erfolgreich aktualisiert",
+    "editError": "Benutzer konnte nicht aktualisiert werden",
+    "deleteSuccess": "Benutzer gelöscht",
+    "deleteError": "Benutzer konnte nicht gelöscht werden"
+  }
+}

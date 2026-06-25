@@ -1,0 +1,60 @@
+{
+  "title": "Пользователи",
+  "description": "Централизованно управляйте пользователями системы и их ролями.",
+  "addButton": "Добавить пользователя",
+  "search": "Поиск...",
+  "table": {
+    "id": "ID",
+    "fullname": "ФИО",
+    "email": "Эл. почта",
+    "phone": "Телефон",
+    "department": "Отдел",
+    "role": "Роль",
+    "status": "Статус",
+    "actions": "Действия"
+  },
+  "status": {
+    "active": "Активный",
+    "passive": "Неактивный"
+  },
+  "actions": {
+    "edit": "Изменить",
+    "delete": "Удалить"
+  },
+  "deletePopover": {
+    "question": "Вы уверены, что хотите удалить этого пользователя?",
+    "yes": "Да",
+    "no": "Нет"
+  },
+  "modal": {
+    "create": "Создать нового пользователя",
+    "edit": "Обновить данные пользователя"
+  },
+  "form": {
+    "fullnameLabel": "ФИО",
+    "fullnamePlaceholder": "Введите ФИО",
+    "emailLabel": "Эл. почта",
+    "emailPlaceholder": "example@company.com",
+    "passwordLabel": "Пароль",
+    "passwordPlaceholder": "Введите пароль",
+    "phoneLabel": "Телефон",
+    "phonePlaceholder": "+90 5XX XXX XX XX",
+    "departmentLabel": "Отдел",
+    "departmentPlaceholder": "Выберите отдел",
+    "roleLabel": "Роль",
+    "rolePlaceholder": "Выберите роль",
+    "statusLabel": "Статус",
+    "statusPlaceholder": "Выберите статус",
+    "cancel": "Отмена",
+    "save": "Сохранить",
+    "editInfo": "Изменение данных пользователя может повлиять на доступ и авторизацию. Перед сохранением убедитесь, что изменения проверены."
+  },
+  "notifications": {
+    "createSuccess": "Пользователь успешно создан",
+    "createError": "Не удалось создать пользователя",
+    "editSuccess": "Пользователь успешно обновлён",
+    "editError": "Не удалось обновить пользователя",
+    "deleteSuccess": "Пользователь удалён",
+    "deleteError": "Не удалось удалить пользователя"
+  }
+}

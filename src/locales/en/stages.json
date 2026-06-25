@@ -3,7 +3,7 @@
   "description": "Configure and order the stages.",
   "addButton": "Add New Stage",
   "search": "Search...",
-  "columns": {
+  "table": {
     "name": "Stage Name",
     "creator": "Created By",
     "editor": "Updated By",

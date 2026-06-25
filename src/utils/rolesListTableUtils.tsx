@@ -1,5 +1,6 @@
 import { RolesTableActionsCol } from "@/components/roles/RolesTableActionsCol";
 import styles from "@/styles/components/roles/RolesListTableUtils.module.scss";
+import { TFunction } from "@/types/commonTypes";
 import { IRoleType } from "@/types/rolesTypes";
 import {
   ICommonTableColumnsType,
@@ -7,11 +8,11 @@ import {
 } from "@/types/tableColumnTypes";
 
 export const rolesTableColumns: ICommonTableColumnsTypes = [
-  { name: "roleName", label: "Rol Adı" },
-  { name: "roleDescription", label: "Açıklama" },
-  { name: "permissions", label: "Yetkiler" },
-  { name: "editor", label: "Güncelleyen" },
-  { name: "actions", label: "İşlemler" },
+  { name: "roleName", label: "roleName" },
+  { name: "roleDescription", label: "roleDescription" },
+  { name: "permissions", label: "permissions" },
+  { name: "editor", label: "editor" },
+  { name: "actions", label: "actions" },
 ];
 
 const resolvePermissionLabels = (
@@ -23,6 +24,7 @@ const resolvePermissionLabels = (
 };
 
 export const createRolesTableColumns = (
+  t: TFunction,
   permissionsMap: Map<string, string> = new Map(),
 ) => {
   const columns = rolesTableColumns;
@@ -30,7 +32,7 @@ export const createRolesTableColumns = (
   return [
     ...columns.map((column: ICommonTableColumnsType) => ({
       accessorKey: column.name,
-      header: () => <div>{column.label}</div>,
+      header: () => <div>{t(`table.${column.label}`)}</div>,
       cell: ({ row }: { row: { original: IRoleType } }) => {
         const r = row.original;
 

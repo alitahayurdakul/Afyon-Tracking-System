@@ -1,0 +1,49 @@
+{
+  "title": "Material List",
+  "description": "Manage warehouse materials and stock information centrally.",
+  "addButton": "Add New Material",
+  "search": "Search...",
+  "table": {
+    "name": "Material Name",
+    "code": "Material Code",
+    "stock": "Stock",
+    "creator": "Created By",
+    "editor": "Updated By",
+    "actions": "Actions"
+  },
+  "actions": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "modal": {
+    "create": "Create New Material",
+    "edit": "Update Material Details"
+  },
+  "form": {
+    "nameLabel": "Material Name",
+    "namePlaceholder": "Enter material name",
+    "codeLabel": "Material Code",
+    "codePlaceholder": "Enter material code",
+    "unitLabel": "Unit",
+    "unitPlaceholder": "e.g. Piece, Liter, Kg",
+    "stockLabel": "Stock Quantity",
+    "stockPlaceholder": "Enter stock quantity",
+    "descriptionLabel": "Description",
+    "descriptionPlaceholder": "Enter description",
+    "cancel": "Cancel",
+    "save": "Save",
+    "editInfo": "Updating material details may affect related stock records and reports. Make sure to review the changes before saving.",
+    "activity": {
+      "creator": "Created By:",
+      "createdAt": "Created Date:",
+      "editor": "Last Updated By:",
+      "updatedAt": "Last Updated Date:"
+    },
+    "notifications": {
+      "createSuccess": "Created successfully",
+      "createError": "Failed to create",
+      "editSuccess": "Updated successfully",
+      "editError": "Failed to update"
+    }
+  }
+}

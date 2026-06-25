@@ -1,0 +1,45 @@
+{
+  "title": "Rollen",
+  "description": "Verwalten Sie Rollen und die zugehörigen Berechtigungen.",
+  "addButton": "Neue Rolle hinzufügen",
+  "search": "Suche...",
+  "table": {
+    "roleName": "Rollenname",
+    "roleDescription": "Beschreibung",
+    "permissions": "Berechtigungen",
+    "editor": "Aktualisiert von",
+    "actions": "Aktionen"
+  },
+  "actions": {
+    "edit": "Bearbeiten",
+    "delete": "Löschen"
+  },
+  "deletePopover": {
+    "question": "Möchten Sie diese Rolle wirklich löschen?",
+    "yes": "Ja",
+    "no": "Nein"
+  },
+  "modal": {
+    "create": "Neue Rolle erstellen",
+    "edit": "Rollendetails aktualisieren"
+  },
+  "form": {
+    "roleNameLabel": "Rollenname",
+    "roleNamePlaceholder": "Rollenname eingeben",
+    "descriptionLabel": "Beschreibung",
+    "descriptionPlaceholder": "Beschreibung eingeben",
+    "permissionsLabel": "Berechtigungen",
+    "permissionsPlaceholder": "Berechtigung auswählen",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "editInfo": "Das Aktualisieren der Rollendetails und Berechtigungen kann zugehörige Benutzer beeinflussen. Überprüfen Sie die Änderungen vor dem Speichern."
+  },
+  "notifications": {
+    "createSuccess": "Rolle erfolgreich erstellt",
+    "createError": "Rolle konnte nicht erstellt werden",
+    "editSuccess": "Rolle erfolgreich aktualisiert",
+    "editError": "Rolle konnte nicht aktualisiert werden",
+    "deleteSuccess": "Rolle gelöscht",
+    "deleteError": "Rolle konnte nicht gelöscht werden"
+  }
+}

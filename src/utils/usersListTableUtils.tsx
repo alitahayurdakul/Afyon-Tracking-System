@@ -1,5 +1,6 @@
 import { UsersTableActionsCol } from "@/components/users/UsersTableActionsCol";
 import styles from "@/styles/components/users/UsersListTableUtils.module.scss";
+import { TFunction } from "@/types/commonTypes";
 import {
   ICommonTableColumnsType,
   ICommonTableColumnsTypes,
@@ -7,23 +8,23 @@ import {
 import { IUserType } from "@/types/usersTypes";
 
 export const usersTableColumns: ICommonTableColumnsTypes = [
-  { name: "_id", label: "ID" },
-  { name: "fullname", label: "Ad Soyad" },
-  { name: "email", label: "E-posta" },
-  { name: "phone", label: "Telefon" },
-  { name: "department", label: "Departman" },
-  { name: "role", label: "Rol" },
-  { name: "isActive", label: "Durum" },
-  { name: "actions", label: "İşlemler" },
+  { name: "_id", label: "id" },
+  { name: "fullname", label: "fullname" },
+  { name: "email", label: "email" },
+  { name: "phone", label: "phone" },
+  { name: "department", label: "department" },
+  { name: "role", label: "role" },
+  { name: "isActive", label: "status" },
+  { name: "actions", label: "actions" },
 ];
 
-export const createUsersTableColumns = () => {
+export const createUsersTableColumns = (t: TFunction) => {
   const columns = usersTableColumns;
 
   return [
     ...columns.map((column: ICommonTableColumnsType) => ({
       accessorKey: column.name,
-      header: () => <div>{column.label}</div>,
+      header: () => <div>{t(`table.${column.label}`)}</div>,
       cell: ({ row }: { row: { original: IUserType } }) => {
         const r = row.original;
 
@@ -64,7 +65,7 @@ export const createUsersTableColumns = () => {
                   : styles["badge-passive"]
               }
             >
-              {r.isActive ? "Aktif" : "Pasif"}
+              {r.isActive ? t("status.active") : t("status.passive")}
             </div>
           );
         }

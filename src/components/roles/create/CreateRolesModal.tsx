@@ -1,5 +1,6 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { CREATE_ROLE_MODAL } from "@/consts/modals";
@@ -10,6 +11,7 @@ import { Modal } from "../../common/Modal";
 import { CreateRoleForm } from "./CreateRoleForm";
 
 export const CreateRolesModal = () => {
+  const t = useTranslations("roles");
   const addQueryParam = useAddQueryParam();
   const [open, setOpen] = useState<boolean | undefined>(false);
 
@@ -22,14 +24,14 @@ export const CreateRolesModal = () => {
         }}
       >
         <FontAwesomeIcon icon={faPlus} />
-        Yeni Rol Ekle
+        {t("addButton")}
       </button>
 
       <Modal
         name={CREATE_ROLE_MODAL}
         width={"900px"}
         height={"auto"}
-        title="Yeni Rol Oluştur"
+        title={t("modal.create")}
         isCloseOutside={false}
         isCloseEsc={false}
         enableParams={true}

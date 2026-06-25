@@ -3,7 +3,7 @@
   "description": "Verwalten Sie die mit Phasen verknüpften Unterphasen zentral.",
   "addButton": "Neue Unterphase hinzufügen",
   "search": "Suche...",
-  "columns": {
+  "table": {
     "name": "Unterphasenname",
     "materials": "Materialien",
     "creator": "Erstellt von",

@@ -3,7 +3,7 @@
   "description": "Phasen konfigurieren und sortieren.",
   "addButton": "Neue Phase hinzufügen",
   "search": "Suche...",
-  "columns": {
+  "table": {
     "name": "Phasenname",
     "creator": "Erstellt von",
     "editor": "Aktualisiert von",

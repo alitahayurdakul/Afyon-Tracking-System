@@ -17,34 +17,30 @@ import { formatDate } from "./formDate";
 export const stagesTableColumns: ICommonTableColumnsTypes = [
   {
     name: "name",
-    label: "Aşama Adı",
+    label: "name",
   },
   {
     name: "creator",
-    label: "Oluşturan",
+    label: "creator",
   },
   {
     name: "editor",
-    label: "Güncelleyen",
+    label: "editor",
   },
   {
     name: "actions",
-    label: "İşlemler",
+    label: "actions",
   },
 ];
 
-export const createStagesTableColumns = (
-  t?: TFunction,
-) => {
+export const createStagesTableColumns = (t: TFunction) => {
   const columns = stagesTableColumns;
 
   return [
     ...columns.map((column: ICommonTableColumnsType) => ({
       accessorKey: column.name,
       header: () => {
-        return (
-          <div>{t ? t(`columns.${column.name}`) : column.label}</div>
-        );
+        return <div>{t(`table.${column.label}`)}</div>;
       },
       cell: ({ row }: any) => {
         if (column.name === "name") {

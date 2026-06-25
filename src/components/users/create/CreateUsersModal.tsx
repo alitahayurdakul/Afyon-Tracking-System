@@ -1,5 +1,6 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { CREATE_USER_MODAL } from "@/consts/modals";
@@ -10,6 +11,7 @@ import { Modal } from "../../common/Modal";
 import { CreateUserForm } from "./CreateUserForm";
 
 export const CreateUsersModal = () => {
+  const t = useTranslations("users");
   const addQueryParam = useAddQueryParam();
   const [open, setOpen] = useState<boolean | undefined>(false);
 
@@ -24,14 +26,14 @@ export const CreateUsersModal = () => {
         }}
       >
         <FontAwesomeIcon icon={faPlus} />
-        Yeni Kullanıcı Ekle
+        {t("addButton")}
       </button>
 
       <Modal
         name={CREATE_USER_MODAL}
         width={"900px"}
         height={"auto"}
-        title="Yeni Kullanıcı Oluştur"
+        title={t("modal.create")}
         isCloseOutside={false}
         isCloseEsc={false}
         enableParams={true}

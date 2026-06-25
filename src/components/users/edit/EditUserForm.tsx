@@ -26,6 +26,7 @@ import {
   USER_ACTIVE_OPTIONS,
 } from "@/consts/usersConsts";
 import { useGetRolesDataQuery } from "@/api/queries/useGetRolesQueries";
+import { useTranslations } from "next-intl";
 
 interface IPropsTypes {
   id: string;
@@ -33,6 +34,7 @@ interface IPropsTypes {
 }
 
 export const EditUserForm = ({ id, data }: IPropsTypes) => {
+  const t = useTranslations("users");
   const {
     control,
     handleSubmit,
@@ -82,7 +84,7 @@ export const EditUserForm = ({ id, data }: IPropsTypes) => {
         });
         dispatch(
           addToastify({
-            message: "Kullanıcı başarıyla güncellendi",
+            message: t("notifications.editSuccess"),
             type: "success",
             icon: "close",
             id: "editUser" + Date.now(),
@@ -93,7 +95,7 @@ export const EditUserForm = ({ id, data }: IPropsTypes) => {
       } catch (err) {
         dispatch(
           addToastify({
-            message: extractApiError(err, "Kullanıcı güncellenemedi"),
+            message: extractApiError(err, t("notifications.editError")),
             type: "error",
             icon: "close",
             id: "editUser" + Date.now(),
@@ -108,9 +110,9 @@ export const EditUserForm = ({ id, data }: IPropsTypes) => {
     <form className={styles["train-form"]}>
       <InputBox
         control={control as any}
-        label="Ad Soyad"
+        label={t("form.fullnameLabel")}
         name="fullname"
-        placeholder="Ad soyad giriniz"
+        placeholder={t("form.fullnamePlaceholder")}
         required
         maxLength={100}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -118,9 +120,9 @@ export const EditUserForm = ({ id, data }: IPropsTypes) => {
       />
       <InputBox
         control={control as any}
-        label="E-posta"
+        label={t("form.emailLabel")}
         name="email"
-        placeholder="ornek@firma.com"
+        placeholder={t("form.emailPlaceholder")}
         required
         maxLength={120}
         spacesRule={InputSpaceEnums.noSpaces}
@@ -128,9 +130,9 @@ export const EditUserForm = ({ id, data }: IPropsTypes) => {
       />
       <InputBox
         control={control as any}
-        label="Telefon"
+        label={t("form.phoneLabel")}
         name="phone"
-        placeholder="+90 5XX XXX XX XX"
+        placeholder={t("form.phonePlaceholder")}
         required
         maxLength={20}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -138,25 +140,25 @@ export const EditUserForm = ({ id, data }: IPropsTypes) => {
       />
       <SelectBox
         control={control as any}
-        label="Departman"
+        label={t("form.departmentLabel")}
         name="department"
-        placeholder="Departman seçiniz"
+        placeholder={t("form.departmentPlaceholder")}
         required
         options={USER_DEPARTMENT_OPTIONS}
       />
       <SelectBox
         control={control as any}
-        label="Rol"
+        label={t("form.roleLabel")}
         name="role"
-        placeholder="Rol seçiniz"
+        placeholder={t("form.rolePlaceholder")}
         required
         options={roleOptions}
       />
       <SelectBox
         control={control as any}
-        label="Durum"
+        label={t("form.statusLabel")}
         name="isActive"
-        placeholder="Durum seçiniz"
+        placeholder={t("form.statusPlaceholder")}
         required
         options={USER_ACTIVE_OPTIONS}
       />
@@ -164,9 +166,7 @@ export const EditUserForm = ({ id, data }: IPropsTypes) => {
       <div>
         <FontAwesomeIcon icon={faCircleInfo} className={styles["alert-icon"]} />
         <span className={styles["info-text"]}>
-          Kullanıcı bilgilerini güncellemek erişim ve yetkilendirme akışını
-          etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden
-          emin olun.
+          {t("form.editInfo")}
         </span>
       </div>
 
@@ -175,14 +175,14 @@ export const EditUserForm = ({ id, data }: IPropsTypes) => {
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label="İptal"
+          label={t("form.cancel")}
           disabled={isSubmitting}
         />
         <Button
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label="Kaydet"
+          label={t("form.save")}
           disabled={isSubmitting}
         />
       </div>

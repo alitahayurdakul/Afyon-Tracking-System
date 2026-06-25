@@ -12,36 +12,34 @@ import { formatDate } from "./formDate";
 export const subStagesTableColumns: ICommonTableColumnsTypes = [
   {
     name: "name",
-    label: "Alt Aşama Adı",
+    label: "name",
   },
   {
     name: "materials",
-    label: "Malzemeler",
+    label: "materials",
   },
   {
     name: "creator",
-    label: "Oluşturan",
+    label: "creator",
   },
   {
     name: "editor",
-    label: "Güncelleyen",
+    label: "editor",
   },
   {
     name: "actions",
-    label: "İşlemler",
+    label: "actions",
   },
 ];
 
-export const createSubStagesTableColumns = (
-  t?: TFunction,
-) => {
+export const createSubStagesTableColumns = (t: TFunction) => {
   const columns = subStagesTableColumns;
 
   return [
     ...columns.map((column: ICommonTableColumnsType) => ({
       accessorKey: column.name,
       header: () => {
-        return <div>{t ? t(`columns.${column.name}`) : column.label}</div>;
+        return <div>{t(`table.${column.label}`)}</div>;
       },
       cell: ({ row }: { row: { original: ISubStageType } }) => {
         const r = row.original;

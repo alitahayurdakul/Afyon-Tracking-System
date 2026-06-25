@@ -18,8 +18,10 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { MaterialQueryTypes } from "@/app/api/materials/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import { useTranslations } from "next-intl";
 
 export const CreateMaterialForm = () => {
+  const t = useTranslations("materials.form");
   const {
     control,
     handleSubmit,
@@ -61,7 +63,7 @@ export const CreateMaterialForm = () => {
         });
         dispatch(
           addToastify({
-            message: "Başarıyla oluşturuldu",
+            message: t("notifications.createSuccess"),
             type: "success",
             icon: "close",
             id: "createMaterial" + Date.now(),
@@ -75,7 +77,7 @@ export const CreateMaterialForm = () => {
           err.response?.data?.error ||
           err.response?.data?.message ||
           err?.message ||
-          "Oluşturma başarısız";
+          t("notifications.createError");
         dispatch(
           addToastify({
             message: errorMessage,
@@ -93,9 +95,9 @@ export const CreateMaterialForm = () => {
     <form className={styles["train-form"]}>
       <InputBox
         control={control as any}
-        label="Malzeme Adı"
+        label={t("nameLabel")}
         name="name"
-        placeholder="Malzeme adı giriniz"
+        placeholder={t("namePlaceholder")}
         required
         maxLength={100}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -103,9 +105,9 @@ export const CreateMaterialForm = () => {
       />
       <InputBox
         control={control as any}
-        label="Malzeme Kodu"
+        label={t("codeLabel")}
         name="code"
-        placeholder="Malzeme kodu giriniz"
+        placeholder={t("codePlaceholder")}
         required
         maxLength={50}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -113,9 +115,9 @@ export const CreateMaterialForm = () => {
       />
       <InputBox
         control={control as any}
-        label="Birim"
+        label={t("unitLabel")}
         name="unit"
-        placeholder="Örn: Adet, Litre, Kg"
+        placeholder={t("unitPlaceholder")}
         required
         maxLength={20}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -123,9 +125,9 @@ export const CreateMaterialForm = () => {
       />
       <InputBox
         control={control as any}
-        label="Stok Miktarı"
+        label={t("stockLabel")}
         name="stock"
-        placeholder="Stok miktarı giriniz"
+        placeholder={t("stockPlaceholder")}
         required
         maxLength={10}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -133,10 +135,10 @@ export const CreateMaterialForm = () => {
       />
       <TextAreaBox
         control={control as any}
-        label="Açıklama"
+        label={t("descriptionLabel")}
         {...register("desc")}
         rows={5}
-        placeholder="Açıklama giriniz"
+        placeholder={t("descriptionPlaceholder")}
         maxLength={400}
         visibleLimit
         textareaClassName={styles["text-input"]}
@@ -146,7 +148,7 @@ export const CreateMaterialForm = () => {
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label="İptal"
+          label={t("cancel")}
           disabled={isSubmitting}
         />
 
@@ -154,7 +156,7 @@ export const CreateMaterialForm = () => {
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label="Kaydet"
+          label={t("save")}
           disabled={isSubmitting}
         />
       </div>

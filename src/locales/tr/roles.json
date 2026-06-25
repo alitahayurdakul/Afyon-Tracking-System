@@ -1,0 +1,45 @@
+{
+  "title": "Roller",
+  "description": "Rolleri ve sahip oldukları yetkileri yönetin.",
+  "addButton": "Yeni Rol Ekle",
+  "search": "Arama...",
+  "table": {
+    "roleName": "Rol Adı",
+    "roleDescription": "Açıklama",
+    "permissions": "Yetkiler",
+    "editor": "Güncelleyen",
+    "actions": "İşlemler"
+  },
+  "actions": {
+    "edit": "Güncelle",
+    "delete": "Sil"
+  },
+  "deletePopover": {
+    "question": "Rolü silmek istediğinize emin misiniz?",
+    "yes": "Evet",
+    "no": "Hayır"
+  },
+  "modal": {
+    "create": "Yeni Rol Oluştur",
+    "edit": "Rol Bilgilerini Güncelle"
+  },
+  "form": {
+    "roleNameLabel": "Rol Adı",
+    "roleNamePlaceholder": "Rol adı giriniz",
+    "descriptionLabel": "Açıklama",
+    "descriptionPlaceholder": "Açıklama giriniz",
+    "permissionsLabel": "Yetkiler",
+    "permissionsPlaceholder": "Yetki seçiniz",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "editInfo": "Rol bilgilerini ve yetkilerini güncellemek ilişkili kullanıcıları etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden emin olun."
+  },
+  "notifications": {
+    "createSuccess": "Rol başarıyla oluşturuldu",
+    "createError": "Rol oluşturulamadı",
+    "editSuccess": "Rol başarıyla güncellendi",
+    "editError": "Rol güncellenemedi",
+    "deleteSuccess": "Rol silindi",
+    "deleteError": "Rol silinemedi"
+  }
+}

@@ -1,6 +1,7 @@
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { useGetUserDetailDataQuery } from "@/api/queries/useGetUsersQueries";
@@ -13,6 +14,7 @@ import { Modal } from "../../common/Modal";
 import { EditUserForm } from "./EditUserForm";
 
 export const EditUsersModal = ({ id }: { id: string }) => {
+  const t = useTranslations("users");
   const addQueryParam = useAddQueryParam();
   const [open, setOpen] = useState<boolean | undefined>(false);
   const { data, isFetching } = useGetUserDetailDataQuery(id);
@@ -28,14 +30,14 @@ export const EditUsersModal = ({ id }: { id: string }) => {
         }}
       >
         <FontAwesomeIcon icon={faPen} />
-        <span>Güncelle</span>
+        <span>{t("actions.edit")}</span>
       </button>
       {!isFetching && (
         <Modal
           name={`${EDIT_USER_MODAL}_${id}`}
           width={"900px"}
           height={"auto"}
-          title="Kullanıcı Bilgilerini Güncelle"
+          title={t("modal.edit")}
           isCloseOutside={false}
           isCloseEsc={false}
           enableParams={true}
