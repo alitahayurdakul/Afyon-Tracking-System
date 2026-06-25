@@ -1,6 +1,8 @@
 "use client";
 /* eslint-disable */
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import styles from "@/styles/components/roles/RoleForm.module.scss";
 import { Button } from "@/components/formElements/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -133,6 +135,16 @@ export const EditRoleForm = ({ id, data }: IPropsTypes) => {
         multiselect
         options={permissionOptions}
       />
+
+      <div>
+        <FontAwesomeIcon icon={faCircleInfo} className={styles["alert-icon"]} />
+        <span className={styles["info-text"]}>
+          Rol bilgilerini ve yetkilerini güncellemek ilişkili kullanıcıları
+          etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden
+          emin olun.
+        </span>
+      </div>
+
       <div className={styles["btn-group"]}>
         <Button
           clickFn={removeModal}

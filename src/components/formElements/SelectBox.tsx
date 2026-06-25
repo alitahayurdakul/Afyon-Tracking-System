@@ -334,7 +334,7 @@ export const SelectBox = forwardRef<Ref, SelectBoxProps>(
                   color: "var(--text-primary)",
                   borderRadius: "var(--form-border-radius)",
                   border: `1px solid ${borderColor}`,
-                  boxShadow: isActive ? `0 0 0 2px ${activeColor}` : "none",
+                  boxShadow: isActive ? `0 0 0 1px ${activeColor}` : "none",
                   backgroundColor: "var(--white)",
                   "&:hover": {
                     borderColor: fieldState.error
