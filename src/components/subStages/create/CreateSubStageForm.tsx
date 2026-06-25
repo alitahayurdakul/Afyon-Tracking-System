@@ -6,6 +6,7 @@ import { Button } from "@/components/formElements/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { SubStageFormValidation } from "@/utils/validations/subStageFormValidation";
+import { useTranslations } from "next-intl";
 import React, { useCallback, useMemo } from "react";
 import { TextAreaBox } from "@/components/formElements/TextAreaBox";
 import { InputBox } from "@/components/formElements/InputBox";
@@ -24,6 +25,7 @@ import { useGetMaterialsDataQuery } from "@/api/queries/useGetMaterialsQueries";
 import SelectedItemList from "@/components/common/SelectedItemList";
 
 export const CreateSubStageForm = () => {
+  const t = useTranslations("subStages");
   const {
     control,
     handleSubmit,
@@ -109,9 +111,9 @@ export const CreateSubStageForm = () => {
     <form className={styles["train-form"]}>
       <InputBox
         control={control as any}
-        label="Alt Aşama Adı"
+        label={t("form.nameLabel")}
         name="name"
-        placeholder="Alt aşama adı giriniz"
+        placeholder={t("form.namePlaceholder")}
         required
         maxLength={100}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -119,9 +121,9 @@ export const CreateSubStageForm = () => {
       />
       <SelectBox
         control={control as any}
-        label="Malzemeler"
+        label={t("form.materialsLabel")}
         name="materials"
-        placeholder="Malzeme seçiniz"
+        placeholder={t("form.materialsPlaceholder")}
         required
         options={materialOptions}
         isSearchable
@@ -135,16 +137,16 @@ export const CreateSubStageForm = () => {
           name="materials"
           selectedItems={selectedMaterials}
           setValue={setValue}
-          title="Seçilen Malzemeler"
+          title={t("form.selectedMaterials")}
         />
       )}
 
       <TextAreaBox
         control={control as any}
-        label="Açıklama"
+        label={t("form.descriptionLabel")}
         {...register("desc")}
         rows={5}
-        placeholder="Açıklama giriniz"
+        placeholder={t("form.descriptionPlaceholder")}
         maxLength={400}
         visibleLimit
         textareaClassName={styles["text-input"]}
@@ -154,7 +156,7 @@ export const CreateSubStageForm = () => {
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label="İptal"
+          label={t("form.cancel")}
           disabled={isSubmitting}
         />
 
@@ -162,7 +164,7 @@ export const CreateSubStageForm = () => {
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label="Kaydet"
+          label={t("form.save")}
           disabled={isSubmitting}
         />
       </div>

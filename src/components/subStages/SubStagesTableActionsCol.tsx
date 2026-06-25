@@ -1,5 +1,6 @@
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 import { useDispatch } from "react-redux";
 
 import { axiosInstance } from "@/api/axiosInstance";
@@ -14,6 +15,7 @@ import { PopoverBody } from "../Popover";
 import { EditSubStagesModal } from "./edit/EditSubStagesModal";
 
 export const SubStagesTableActionsCol = ({ id }: { id: string }) => {
+  const t = useTranslations("subStages");
   const dispatch = useDispatch();
 
   const onDeleteHandler = async () => {
@@ -57,7 +59,7 @@ export const SubStagesTableActionsCol = ({ id }: { id: string }) => {
         triggerBody={
           <button className={styles["delete-btn"]}>
             <FontAwesomeIcon icon={faTrash} />
-            <span>Sil</span>
+            <span>{t("actions.delete")}</span>
           </button>
         }
         contentBody={

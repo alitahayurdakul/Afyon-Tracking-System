@@ -24,12 +24,14 @@ import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { StageFormValidation } from "@/utils/validations/stageFormValidation";
 import SelectedItemList from "@/components/common/SelectedItemList";
 import { STAGE_FORM_CONSTS } from "@/consts/stagesConsts";
+import { useTranslations } from "next-intl";
 interface IPropsTypes {
   id: string;
   stageData?: IStageType;
 }
 
 export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
+  const t = useTranslations("stages");
   const {
     control,
     handleSubmit,
@@ -263,11 +265,11 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
         return null;
       })}
       {selectedStages && selectedStages.length > 0 && (
-        <SelectedItemList name="subStages" selectedItems={selectedStages} setValue={setValue} title="Seçilen Aşamalar" />
+        <SelectedItemList name="subStages" selectedItems={selectedStages} setValue={setValue} title={t("form.selectedStages")} />
       )}
 
       {selectedMaterials && selectedMaterials.length > 0 && (
-        <SelectedItemList name="materialList" selectedItems={selectedMaterials} setValue={setValue} title="Seçilen Malzemeler" />
+        <SelectedItemList name="materialList" selectedItems={selectedMaterials} setValue={setValue} title={t("form.selectedMaterials")} />
       )}
 
       <div>
@@ -284,7 +286,7 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label="İptal"
+          label={t("form.cancel")}
           disabled={isSubmitting}
         />
 
@@ -292,7 +294,7 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label="Kaydet"
+          label={t("form.save")}
           disabled={isSubmitting}
         />
       </div>

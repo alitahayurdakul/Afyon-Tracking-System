@@ -2,6 +2,7 @@
 
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 
 import { useGetProjectsDataQuery } from "@/api/queries/useGetProjectsQueries";
 import styles from "@/styles/components/common/TableListBody.module.scss";
@@ -11,6 +12,7 @@ import { Table } from "../common/Table";
 import { CreateProjectsModal } from "./create/CreateProjectsModal";
 
 export const ProjectsListBody = () => {
+  const t = useTranslations("projects");
   const { data, isLoading } = useGetProjectsDataQuery();
   const rows = data?.projects ?? [];
 
@@ -18,8 +20,8 @@ export const ProjectsListBody = () => {
     <section className={styles["pipeline-page"]}>
       <div className={styles["page-top"]}>
         <div>
-          <h2>Projeler</h2>
-          <p>Projeleri ve durumlarını merkezi olarak yönetin.</p>
+          <h2>{t("title")}</h2>
+          <p>{t("description")}</p>
         </div>
 
         <CreateProjectsModal />
@@ -28,7 +30,7 @@ export const ProjectsListBody = () => {
       <div className={styles.toolbar}>
         <div className={styles["search-input"]}>
           <FontAwesomeIcon icon={faSearch} />
-          <input placeholder="Arama..." />
+          <input placeholder={t("search")} />
         </div>
       </div>
 
@@ -37,7 +39,7 @@ export const ProjectsListBody = () => {
           className={styles["table-class"]}
           loading={isLoading}
           data={rows}
-          columns={createProjectsTableColumns()}
+          columns={createProjectsTableColumns(t)}
         />
       </div>
     </section>

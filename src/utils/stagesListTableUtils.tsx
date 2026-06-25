@@ -7,6 +7,7 @@ import {
   ICommonTableColumnsTypes,
   ICommonTableColumnsType
 } from "@/types/tableColumnTypes";
+import { TFunction } from "@/types/commonTypes";
 
 // import styles from "@/styles/components/table/CommonDashboardTable.module.scss";
 import styles from "@/styles/components/stages/StagesListTableUtils.module.scss";
@@ -32,7 +33,9 @@ export const stagesTableColumns: ICommonTableColumnsTypes = [
   },
 ];
 
-export const createStagesTableColumns = () => {
+export const createStagesTableColumns = (
+  t?: TFunction,
+) => {
   const columns = stagesTableColumns;
 
   return [
@@ -40,7 +43,7 @@ export const createStagesTableColumns = () => {
       accessorKey: column.name,
       header: () => {
         return (
-          <div>{column.label}</div>
+          <div>{t ? t(`columns.${column.name}`) : column.label}</div>
         );
       },
       cell: ({ row }: any) => {

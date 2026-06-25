@@ -1,5 +1,6 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { CREATE_SUB_STAGE_MODAL } from "@/consts/modals";
@@ -10,6 +11,7 @@ import { Modal } from "../../common/Modal";
 import { CreateSubStageForm } from "./CreateSubStageForm";
 
 export const CreateSubStagesModal = () => {
+  const t = useTranslations("subStages");
   const addQueryParam = useAddQueryParam();
   const [open, setOpen] = useState<boolean | undefined>(false);
 
@@ -24,14 +26,14 @@ export const CreateSubStagesModal = () => {
         }}
       >
         <FontAwesomeIcon icon={faPlus} />
-        Yeni Alt Aşama Ekle
+        {t("addButton")}
       </button>
 
       <Modal
         name={CREATE_SUB_STAGE_MODAL}
         width={"900px"}
         height={"auto"}
-        title="Yeni Alt Aşama Oluştur"
+        title={t("modal.create")}
         isCloseOutside={false}
         isCloseEsc={false}
         enableParams={true}

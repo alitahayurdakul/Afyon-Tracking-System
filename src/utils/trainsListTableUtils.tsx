@@ -4,6 +4,7 @@ import {
   ICommonTableColumnsType,
   ICommonTableColumnsTypes,
 } from "@/types/tableColumnTypes";
+import { TFunction } from "@/types/commonTypes";
 
 import { formatDate } from "./formDate";
 export const trainsTableColumns: ICommonTableColumnsTypes = [
@@ -29,14 +30,16 @@ export const trainsTableColumns: ICommonTableColumnsTypes = [
   },
 ];
 
-export const createTrainsTableColumns = () => {
+export const createTrainsTableColumns = (
+  t?: TFunction,
+) => {
   const columns = trainsTableColumns;
 
   return [
     ...columns.map((column: ICommonTableColumnsType) => ({
       accessorKey: column.name,
       header: () => {
-        return <div>{column.label}</div>;
+        return <div>{t ? t(`columns.${column.name}`) : column.label}</div>;
       },
       cell: ({ row }: any) => {
         const r = row.original;

@@ -1,0 +1,19 @@
+{
+  "sidebar": {
+    "headerTitle": "AFYON WORKFLOW MANAGEMENT SYSTEM",
+    "dashboard": "Home",
+    "statistics": "Statistics",
+    "compare": "Compare",
+    "activeProcesses": "Active Processes",
+    "workflows": "Workflows",
+    "stages": "Stages",
+    "subStages": "Sub Stages",
+    "projects": "Projects",
+    "trains": "Trains",
+    "delayReasons": "Delay Reasons",
+    "materials": "Material List",
+    "userManagement": "User Management",
+    "users": "Users",
+    "roles": "Roles"
+  }
+}

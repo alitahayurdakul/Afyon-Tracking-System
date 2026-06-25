@@ -2,6 +2,7 @@
 
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 
 import { useGetTrainsDataQuery } from "@/api/queries/useGetTrainsQueries";
 import styles from "@/styles/components/common/TableListBody.module.scss";
@@ -11,6 +12,7 @@ import { Table } from "../common/Table";
 import { CreateTrainsModal } from "./create/CreateTrainsModal";
 
 export const TrainsListBody = () => {
+  const t = useTranslations("trains");
   const { data, isLoading, isError, isFetching, refetch } =
     useGetTrainsDataQuery();
 
@@ -22,9 +24,9 @@ export const TrainsListBody = () => {
       <div className={styles["page-top"]}>
         <div>
 
-          <h2>Tren Filosu</h2>
+          <h2>{t("title")}</h2>
 
-          <p>Filonuzu merkezi olarak yönetin.</p>
+          <p>{t("description")}</p>
         </div>
 
         <CreateTrainsModal />
@@ -33,7 +35,7 @@ export const TrainsListBody = () => {
       <div className={styles.toolbar}>
         <div className={styles["search-input"]}>
           <FontAwesomeIcon icon={faSearch} />
-          <input placeholder="Arama..." />
+          <input placeholder={t("search")} />
         </div>
       </div>
 
@@ -42,7 +44,7 @@ export const TrainsListBody = () => {
           className={styles["table-class"]}
           loading={isLoading}
           data={rows}
-          columns={createTrainsTableColumns()}
+          columns={createTrainsTableColumns(t)}
         />
       </div>
     </section>

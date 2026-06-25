@@ -1,6 +1,6 @@
 import { routing } from "@/i18n/routing";
 
-export type ILanguagesTypes = "tr" | "en" | "de";
+export type ILanguagesTypes = "tr" | "en" | "de" | "ru";
 
 type AllPaths = keyof typeof routing.pathnames;
 

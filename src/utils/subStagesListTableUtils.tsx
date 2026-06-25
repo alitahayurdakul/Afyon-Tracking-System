@@ -5,6 +5,7 @@ import {
   ICommonTableColumnsType,
   ICommonTableColumnsTypes,
 } from "@/types/tableColumnTypes";
+import { TFunction } from "@/types/commonTypes";
 
 import { formatDate } from "./formDate";
 
@@ -31,14 +32,16 @@ export const subStagesTableColumns: ICommonTableColumnsTypes = [
   },
 ];
 
-export const createSubStagesTableColumns = () => {
+export const createSubStagesTableColumns = (
+  t?: TFunction,
+) => {
   const columns = subStagesTableColumns;
 
   return [
     ...columns.map((column: ICommonTableColumnsType) => ({
       accessorKey: column.name,
       header: () => {
-        return <div>{column.label}</div>;
+        return <div>{t ? t(`columns.${column.name}`) : column.label}</div>;
       },
       cell: ({ row }: { row: { original: ISubStageType } }) => {
         const r = row.original;

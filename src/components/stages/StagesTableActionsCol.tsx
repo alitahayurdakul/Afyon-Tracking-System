@@ -1,5 +1,6 @@
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 import React from "react";
 import { useDispatch } from "react-redux";
 
@@ -15,6 +16,7 @@ import { PopoverBody } from "../Popover";
 import { EditWorkflowModal } from "./edit/EditStageModal";
 
 export const StagesTableActionsCol = ({ id }: { id: string }) => {
+  const t = useTranslations("stages");
   const dispatch = useDispatch();
 
   const onDeleteHandler = async () => {
@@ -56,7 +58,7 @@ export const StagesTableActionsCol = ({ id }: { id: string }) => {
         triggerBody={
           <button className={styles["delete-btn"]}>
             <FontAwesomeIcon icon={faTrash} />
-            <span>Sil</span>
+            <span>{t("actions.delete")}</span>
           </button>
         }
         contentBody={
