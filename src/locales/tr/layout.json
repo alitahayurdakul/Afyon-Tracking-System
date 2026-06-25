@@ -37,5 +37,19 @@
         "success": "Yeni süreç başarıyla oluşturuldu. Oluşturulan süreç sayfasına yönlendiriliyorsunuz."
       }
     }
+  },
+  "breadcrumb": {
+    "active-process": "Fabrika Süreç Yönetim Paneli",
+    "active-process-detail": "Aktif Süreç Detayı",
+    "workflows": "İş Akışları Yönetimi",
+    "workflow-history": "İş Akışları Geçmişi",
+    "stages": "Aşamalar Yönetimi",
+    "materials": "Malzeme Yönetimi",
+    "projects": "Proje Yönetimi",
+    "sub-stages": "Alt Aşama Yönetimi",
+    "trains": "Tren Yönetimi",
+    "delay-reason": "Gecikme Nedenleri Yönetimi",
+    "users": "Kullanıcı Yönetimi",
+    "roles": "Rol Yönetimi"
   }
 }
