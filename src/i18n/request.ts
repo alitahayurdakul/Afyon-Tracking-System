@@ -11,7 +11,14 @@ export default getRequestConfig(async ({ requestLocale }) => {
     locale = routing.defaultLocale;
   }
 
-  const files = ["example", "stages", "subStages", "trains", "projects"];
+  const files = [
+    "example",
+    "sidebar",
+    "stages",
+    "subStages",
+    "trains",
+    "projects",
+  ];
   const messages: Record<string, any> = {};
 
   for (const file of files) {

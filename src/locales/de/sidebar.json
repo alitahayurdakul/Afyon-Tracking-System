@@ -1,0 +1,17 @@
+{
+  "headerTitle": "AFYON WORKFLOW-MANAGEMENTSYSTEM",
+  "dashboard": "Startseite",
+  "statistics": "Statistiken",
+  "compare": "Vergleichen",
+  "activeProcesses": "Aktive Prozesse",
+  "workflows": "Arbeitsabläufe",
+  "stages": "Phasen",
+  "subStages": "Unterphasen",
+  "projects": "Projekte",
+  "trains": "Züge",
+  "delayReasons": "Verzögerungsgründe",
+  "materials": "Materialliste",
+  "userManagement": "Benutzerverwaltung",
+  "users": "Benutzer",
+  "roles": "Rollen"
+}

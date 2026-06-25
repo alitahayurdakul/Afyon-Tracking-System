@@ -1,0 +1,17 @@
+{
+  "headerTitle": "СИСТЕМА УПРАВЛЕНИЯ РАБОЧИМИ ПРОЦЕССАМИ AFYON",
+  "dashboard": "Главная",
+  "statistics": "Статистика",
+  "compare": "Сравнить",
+  "activeProcesses": "Активные процессы",
+  "workflows": "Рабочие процессы",
+  "stages": "Этапы",
+  "subStages": "Подэтапы",
+  "projects": "Проекты",
+  "trains": "Поезда",
+  "delayReasons": "Причины задержек",
+  "materials": "Список материалов",
+  "userManagement": "Управление пользователями",
+  "users": "Пользователи",
+  "roles": "Роли"
+}

@@ -1,0 +1,17 @@
+{
+  "headerTitle": "AFYON İŞ AKIŞI YÖNETİM SİSTEMİ",
+  "dashboard": "Anasayfa",
+  "statistics": "İstatistikler",
+  "compare": "Karşılaştır",
+  "activeProcesses": "Aktif Süreçler",
+  "workflows": "İş Akışları",
+  "stages": "Aşamalar",
+  "subStages": "Alt Aşamalar",
+  "projects": "Projeler",
+  "trains": "Trenler",
+  "delayReasons": "Gecikme Sebepleri",
+  "materials": "Malzeme Listesi",
+  "userManagement": "Kullanıcı Yönetimi",
+  "users": "Kullanıcılar",
+  "roles": "Roller"
+}
