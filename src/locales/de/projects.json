@@ -31,5 +31,10 @@
     "cancel": "Abbrechen",
     "save": "Speichern",
     "editInfo": "Das Aktualisieren der Projektdetails kann zugehörige Datensätze und Berichte beeinflussen. Überprüfen Sie die Änderungen vor dem Speichern."
+  },
+  "deletePopover": {
+    "question": "Möchten Sie dieses Projekt wirklich löschen?",
+    "yes": "Ja",
+    "no": "Nein"
   }
 }

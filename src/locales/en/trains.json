@@ -23,9 +23,18 @@
     "save": "Save",
     "editInfo": "Updating train details may affect the fleet inventory and related workflows. Make sure to review the changes before saving.",
     "fields": {
-      "trainSetNo": { "label": "Train No", "placeholder": "Enter train no" },
-      "desc": { "label": "Description", "placeholder": "Enter description" },
-      "wagonsCount": { "label": "Wagon Count", "placeholder": "Enter wagon count" }
+      "trainSetNo": {
+        "label": "Train No",
+        "placeholder": "Enter train no"
+      },
+      "desc": {
+        "label": "Description",
+        "placeholder": "Enter description"
+      },
+      "wagonsCount": {
+        "label": "Wagon Count",
+        "placeholder": "Enter wagon count"
+      }
     },
     "wagon": {
       "label": "Wagon {index} Name",
@@ -42,5 +51,10 @@
       "editSuccess": "Updated successfully",
       "error": "An error occurred"
     }
+  },
+  "deletePopover": {
+    "question": "Are you sure you want to delete this train?",
+    "yes": "Yes",
+    "no": "No"
   }
 }
