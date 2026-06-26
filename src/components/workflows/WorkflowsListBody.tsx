@@ -4,6 +4,7 @@ import {
   faSearch
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 
 import { useGetWorkflowsDataQuery } from "@/api/queries/useGetWorkflowsQueries";
 import styles from "@/styles/components/common/TableListBody.module.scss";
@@ -14,6 +15,7 @@ import { Table } from "../common/Table";
 import { CreateWorkflowModal } from "./create/CreateWorkflowModal";
 
 export const WorkflowsListBody = () => {
+  const t = useTranslations("workflows");
   const { data, isLoading, isError, isFetching, refetch } = useGetWorkflowsDataQuery<IWorkflowResponseTypes[]>();
 
   return (
@@ -21,10 +23,10 @@ export const WorkflowsListBody = () => {
       <div className={styles["page-top"]}>
         <div>
 
-          <h2>İş Akışları Yönetimi</h2>
+          <h2>{t("header")}</h2>
 
           <p>
-            İş akışlarını yapılandır ve sırala. Otomatik görevleri tanımla.
+            {t("description")}
           </p>
         </div>
 
@@ -35,7 +37,7 @@ export const WorkflowsListBody = () => {
       <div className={styles.toolbar}>
         <div className={styles["search-input"]}>
           <FontAwesomeIcon icon={faSearch} />
-          <input placeholder="Arama..." />
+          <input placeholder={t("search")} />
         </div>
       </div>
 
@@ -44,7 +46,7 @@ export const WorkflowsListBody = () => {
           className={styles["table-class"]}
           loading={false}
           data={data ?? []}
-          columns={createWorkflowTableColumns()}
+          columns={createWorkflowTableColumns(t)}
         />
       </div>
     </section>

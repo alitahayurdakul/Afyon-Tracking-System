@@ -1,0 +1,59 @@
+{
+    "header": "İş Akışı Yönetimi",
+    "description": "İş akışlarını yapılandır ve sırala. Otomatik görevleri tanımla.",
+    "search": "Arama...",
+    "delete-question": "İş akışını silmek istediğinize emin misiniz?",
+    "yes": "Evet",
+    "no": "Hayır",
+    "buttons": {
+        "create": "Yeni İş Akışı Ekle",
+        "edit": "Güncelle",
+        "delete": "Sil"
+    },
+    "table": {
+        "name": "İş AKIŞI ADI",
+        "creator": "OLUŞTURAN",
+        "editor": "GÜNCELLEYEN",
+        "actions": "İŞLEMLER"
+    },
+    "modal": {
+        "create-headers": "Yeni İş Akışı Ekle",
+        "edit-header": "İş Akışı Bilgilerini Güncelle"
+    },
+    "form": {
+        "labels": {
+            "name": "İŞ AKIŞI ADI",
+            "description": "AÇIKLAMA",
+            "creator": "Oluşturan",
+            "createdDate": "Oluşturulma Tarihi",
+            "editor": "Son Güncelleyen",
+            "editedDate": "Son Güncelleme Tarihi",
+            "selectedStages": "Seçilen Aşamalar",
+            "stage": "AŞAMA"
+        },
+        "placeholders": {
+            "name": "İş Akışı adını giriniz",
+            "description": "Açıklama giriniz",
+            "stage": "Aşama seçiniz"
+        },
+        "buttons": {
+            "cancel": "İptal",
+            "save": "Kaydet"
+        }
+    },
+    "notifications": {
+        "delete": {
+            "success": "İş akışı başarıyla silindi.",
+            "error": "Silme işlemi başarısız."
+        },
+        "create": {
+            "success": "İş akışı başarıyla oluşturuldu.",
+            "error": "Ekleme işlemi başarısız."
+        },
+        "edit": {
+            "success": "İş akışı başarıyla güncellendi.",
+            "error": "Güncelleme işlemi başarısız.",
+            "warning-message": "İş akışı bilgilerini güncellemek ilişkili raporları etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden emin olun."
+        }
+    }
+}

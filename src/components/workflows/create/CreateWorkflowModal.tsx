@@ -1,5 +1,6 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { CREATE_WORKFLOW_MODAL } from "@/consts/modals";
@@ -12,6 +13,7 @@ import { CreateWorkflowForm } from "./CreateWorkflowForm";
 export const CreateWorkflowModal = () => {
   const addQueryParam = useAddQueryParam();
   const [open, setOpen] = useState<boolean | undefined>(false);
+  const t = useTranslations("workflows");
 
   return (
     <>
@@ -24,14 +26,14 @@ export const CreateWorkflowModal = () => {
         }}
       >
         <FontAwesomeIcon icon={faPlus} />
-        Yeni İş Akışı Ekle
+        {t("buttons.create")}
       </button>
 
       <Modal
         name={CREATE_WORKFLOW_MODAL}
         width={"900px"}
         height={"auto"}
-        title="Yeni İş Akışı Oluştur"
+        title={t("modal.create-headers")}
         isCloseOutside={false}
         isCloseEsc={false}
         enableParams={true}

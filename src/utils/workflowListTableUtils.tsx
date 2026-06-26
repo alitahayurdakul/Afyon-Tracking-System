@@ -7,27 +7,28 @@ import {
 import styles from "@/styles/components/stages/StagesListTableUtils.module.scss";
 import { WorkflowTableActionsCol } from "@/components/workflows/WorkflowTableActionsCol";
 import { formatDate } from "./formDate";
+import { TFunction } from "@/types/commonTypes";
 
 export const workflowTableColumns: ICommonTableColumnsTypes = [
   {
     name: "name",
-    label: "İş Akışı Adı",
+    label: "name",
   },
   {
     name: "creator",
-    label: "Oluşturan",
+    label: "creator",
   },
   {
     name: "editor",
-    label: "Güncelleyen",
+    label: "editor",
   },
   {
     name: "actions",
-    label: "İşlemler",
+    label: "actions",
   },
 ];
 
-export const createWorkflowTableColumns = () => {
+export const createWorkflowTableColumns = (t: TFunction) => {
   const columns = workflowTableColumns;
 
   return [
@@ -35,7 +36,7 @@ export const createWorkflowTableColumns = () => {
       accessorKey: column.name,
       header: () => {
         return (
-          <div>{column.label}</div>
+          <div>{t(`table.${column.label}`)}</div>
         );
       },
       cell: ({ row }: any) => {

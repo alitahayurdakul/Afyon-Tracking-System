@@ -4,7 +4,7 @@ export const WORKFLOW_FORM_CONSTS: IFormFieldsType = [
   {
     name: "name",
     type: "input",
-    label: "İş Akışı Adı",
+    label: "name",
     isRequired: true,
     maxLength: 100,
     // regex: /[^A-Za-zçğışöüÖÜŞZÇĞİ ]/g,
@@ -12,7 +12,7 @@ export const WORKFLOW_FORM_CONSTS: IFormFieldsType = [
   {
     name: "description",
     type: "textarea",
-    label: "Açıklama",
+    label: "description",
     isRequired: true,
     maxLength: 400,
     maxRows: 5,
@@ -20,7 +20,7 @@ export const WORKFLOW_FORM_CONSTS: IFormFieldsType = [
   {
     name: "stages",
     type: "select",
-    label: "Aşama",
+    label: "stage",
     isRequired: true,
   },
 ];
@@ -29,7 +29,7 @@ export const EDIT_WORKFLOW_FORM_CONSTS: IFormFieldsType = [
   {
     name: "name",
     type: "input",
-    label: "İş Akışı Adı",
+    label: "name",
     isRequired: true,
     maxLength: 100,
     regex: /[^A-Za-zçğışöüÖÜŞZÇĞİ ]/g,
@@ -37,7 +37,7 @@ export const EDIT_WORKFLOW_FORM_CONSTS: IFormFieldsType = [
   {
     name: "description",
     type: "textarea",
-    label: "Açıklama",
+    label: "description",
     isRequired: true,
     maxLength: 400,
     maxRows: 5,
@@ -45,7 +45,7 @@ export const EDIT_WORKFLOW_FORM_CONSTS: IFormFieldsType = [
   {
     name: "stages",
     type: "select",
-    label: "Aşama",
+    label: "stage",
     isRequired: true,
   },
 ];

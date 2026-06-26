@@ -1,0 +1,59 @@
+{
+  "header": "Workflow Management",
+  "description": "Configure and organize workflows. Define automated tasks.",
+  "search": "Search...",
+  "delete-question": "Are you sure you want to delete this workflow?",
+  "yes": "Yes",
+  "no": "No",
+  "buttons": {
+    "create": "Add New Workflow",
+    "edit": "Update",
+    "delete": "Delete"
+  },
+  "table": {
+    "name": "WORKFLOW NAME",
+    "creator": "CREATED BY",
+    "editor": "UPDATED BY",
+    "actions": "ACTIONS"
+  },
+  "modal": {
+    "create-headers": "Add New Workflow",
+    "edit-header": "Update Workflow Information"
+  },
+  "form": {
+    "labels": {
+      "name": "WORKFLOW NAME",
+      "description": "DESCRIPTION",
+      "creator": "Created By",
+      "createdDate": "Creation Date",
+      "editor": "Last Updated By",
+      "editedDate": "Last Updated Date",
+      "selectedStages": "Selected Stages",
+      "stage": "STAGE"
+    },
+    "placeholders": {
+      "name": "Enter the workflow name",
+      "description": "Enter a description.",
+      "stage": "Select a stage."
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "save": "Save"
+    }
+  },
+  "notifications": {
+    "delete": {
+      "success": "The workflow was deleted successfully.",
+      "error": "Failed to delete the workflow."
+    },
+    "create": {
+      "success": "The workflow was created successfully.",
+      "error": "Failed to create the workflow."
+    },
+    "edit": {
+      "success": "The workflow was updated successfully.",
+      "error": "Failed to update the workflow.",
+      "warning-message": "Updating workflow information may affect related reports. Please review your changes before saving."
+    }
+  }
+}
