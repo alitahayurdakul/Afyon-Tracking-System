@@ -19,7 +19,6 @@ export default getRequestConfig(async ({ requestLocale }) => {
     "subStages",
     "trains",
     "projects",
-    "materials",
     "roles",
     "users",
     "delayReasons"

@@ -1,6 +1,5 @@
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { CREATE_MATERIAL_MODAL } from "@/consts/modals";
@@ -11,7 +10,6 @@ import { Modal } from "../../common/Modal";
 import { CreateMaterialForm } from "./CreateMaterialForm";
 
 export const CreateMaterialsModal = () => {
-  const t = useTranslations("materials");
   const addQueryParam = useAddQueryParam();
   const [open, setOpen] = useState<boolean | undefined>(false);
 
@@ -26,14 +24,14 @@ export const CreateMaterialsModal = () => {
         }}
       >
         <FontAwesomeIcon icon={faPlus} />
-        {t("addButton")}
+        Yeni Malzeme Ekle
       </button>
 
       <Modal
         name={CREATE_MATERIAL_MODAL}
         width={"900px"}
         height={"auto"}
-        title={t("modal.create")}
+        title="Yeni Malzeme Oluştur"
         isCloseOutside={false}
         isCloseEsc={false}
         enableParams={true}

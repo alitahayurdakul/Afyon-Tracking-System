@@ -21,7 +21,6 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { MaterialQueryTypes } from "@/app/api/materials/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import { useTranslations } from "next-intl";
 
 interface IPropsTypes {
   id: string;
@@ -29,7 +28,6 @@ interface IPropsTypes {
 }
 
 export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
-  const t = useTranslations("materials.form");
   const {
     control,
     handleSubmit,
@@ -71,7 +69,7 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
         });
         dispatch(
           addToastify({
-            message: t("notifications.editSuccess"),
+            message: "Başarıyla güncellendi",
             type: "success",
             icon: "close",
             id: "editMaterial" + Date.now(),
@@ -84,7 +82,7 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
           err.response?.data?.error ||
           err.response?.data?.message ||
           err?.message ||
-          t("notifications.editError");
+          "Güncelleme başarısız";
         dispatch(
           addToastify({
             message: errorMessage,
@@ -102,9 +100,9 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
     <form className={styles["train-form"]}>
       <InputBox
         control={control as any}
-        label={t("nameLabel")}
+        label="Malzeme Adı"
         name="name"
-        placeholder={t("namePlaceholder")}
+        placeholder="Malzeme adı giriniz"
         required
         maxLength={100}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -112,9 +110,9 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
       />
       <InputBox
         control={control as any}
-        label={t("codeLabel")}
+        label="Malzeme Kodu"
         name="code"
-        placeholder={t("codePlaceholder")}
+        placeholder="Malzeme kodu giriniz"
         required
         maxLength={50}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -122,9 +120,9 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
       />
       <InputBox
         control={control as any}
-        label={t("unitLabel")}
+        label="Birim"
         name="unit"
-        placeholder={t("unitPlaceholder")}
+        placeholder="Örn: Adet, Litre, Kg"
         required
         maxLength={20}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -132,9 +130,9 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
       />
       <InputBox
         control={control as any}
-        label={t("stockLabel")}
+        label="Stok Miktarı"
         name="stock"
-        placeholder={t("stockPlaceholder")}
+        placeholder="Stok miktarı giriniz"
         required
         maxLength={10}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -142,10 +140,10 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
       />
       <TextAreaBox
         control={control as any}
-        label={t("descriptionLabel")}
+        label="Açıklama"
         {...register("desc")}
         rows={5}
-        placeholder={t("descriptionPlaceholder")}
+        placeholder="Açıklama giriniz"
         maxLength={400}
         visibleLimit
         textareaClassName={styles["text-input"]}
@@ -153,24 +151,24 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
 
       <section className={styles["activity-section"]}>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>{t("activity.creator")}</span>
+          <span className={styles["activity-label"]}>Oluşturan:</span>
           <span className={styles["activity-value"]}>
             {data?.creator || "Admin"}
           </span>
         </div>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>{t("activity.createdAt")}</span>
+          <span className={styles["activity-label"]}>Oluşturulma Tarihi:</span>
           <span className={styles["activity-value"]}>
             {formatDate(data?.createdAt) ?? "-"}
           </span>
         </div>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>{t("activity.editor")}</span>
+          <span className={styles["activity-label"]}>Son Güncelleyen:</span>
           <span className={styles["activity-value"]}>{data?.editor ?? "-"}</span>
         </div>
         <div className={styles["activity-row"]}>
           <span className={styles["activity-label"]}>
-            {t("activity.updatedAt")}
+            Son Güncellenme Tarihi:
           </span>
           <span className={styles["activity-value"]}>
             {formatDate(data?.updatedAt) ?? "-"}
@@ -181,7 +179,9 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
       <div>
         <FontAwesomeIcon icon={faCircleInfo} className={styles["alert-icon"]} />
         <span className={styles["info-text"]} >
-          {t("editInfo")}
+          Malzeme bilgilerini güncellemek ilişkili stok kayıtlarını ve raporları
+          etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden
+          emin olun.
         </span>
       </div>
 
@@ -190,7 +190,7 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label={t("cancel")}
+          label="İptal"
           disabled={isSubmitting}
         />
 
@@ -198,7 +198,7 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label={t("save")}
+          label="Kaydet"
           disabled={isSubmitting}
         />
       </div>
