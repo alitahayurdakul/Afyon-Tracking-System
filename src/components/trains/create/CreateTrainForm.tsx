@@ -68,7 +68,6 @@ export const CreateTrainForm = () => {
 
   const onSubmit: SubmitHandler<ITrainFormDataTypes> = useCallback(
     async (data) => {
-      console.log(data);
       // try {
       //   const params = {
       //     ...data,

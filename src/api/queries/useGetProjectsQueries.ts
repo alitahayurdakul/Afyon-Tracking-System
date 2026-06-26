@@ -6,12 +6,15 @@ import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 
-import { mockProjects, mockProjectsResponse } from "@/mock/managementData";
+import { ProjectQueryTypes } from "@/app/api/projects/route";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { mockProjects } from "@/mock/managementData";
 import { RootState } from "@/redux/store";
 import {
-  IProjectResponseDataTypes,
   IProjectType,
 } from "@/types/projectsTypes";
+
+import { axiosInstance } from "../axiosInstance";
 
 export const useGetProjectsDataQuery = () => {
   const trigger = useSelector(
@@ -22,14 +25,12 @@ export const useGetProjectsDataQuery = () => {
     queryKey: [`getProjectsAllDatas`, trigger],
     refetchOnWindowFocus: false,
     enabled: true,
-    queryFn: async (): Promise<IProjectResponseDataTypes> => {
-      // TODO(api): Backend hazır olduğunda mock dönüşü kaldırıp gerçek isteği aktif edin.
-      // const { data } = await axiosInstance.post<IProjectResponseDataTypes>(
-      //   CLIENT_END_POINTS.project.getAll,
-      //   { type: ProjectQueryTypes.getAllProjects },
-      // );
-      // return data;
-      return mockProjectsResponse;
+    queryFn: async (): Promise<IProjectType[]> => {
+      const { data } = await axiosInstance.post<IProjectType[]>(
+        CLIENT_END_POINTS.project.getAll,
+        { type: ProjectQueryTypes.getAllProjects },
+      );
+      return data;
     },
   });
 };

@@ -30,7 +30,12 @@
     "descriptionPlaceholder": "Enter description",
     "cancel": "Cancel",
     "save": "Save",
-    "editInfo": "Updating project details may affect related records and reports. Make sure to review the changes before saving."
+    "editInfo": "Updating project details may affect related records and reports. Make sure to review the changes before saving.",
+     "status": {
+      "active": "Active",
+      "passive": "Passive",
+      "completed": "Completed"
+    }
   },
   "deletePopover": {
     "question": "Are you sure you want to delete this project?",

@@ -15,6 +15,7 @@ export interface IOptionType {
   flagMedium?: string;
   // for currency
   isDefault?:boolean;
+  color?: string;
 }
 
 export interface IFormFieldType {
