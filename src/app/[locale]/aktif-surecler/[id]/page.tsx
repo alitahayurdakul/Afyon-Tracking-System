@@ -1,7 +1,6 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useTranslations } from "next-intl";
 import { useMemo } from "react";
 
 import {
@@ -10,9 +9,7 @@ import {
 } from "@/api/queries/useGetProcessesQueries";
 import InfoProcessContainer from "@/components/activeProcessDetail/InfoProcessContainer";
 import { ProgressionContainer } from "@/components/activeProcessDetail/ProgressionContainer";
-import Breadcrumb from "@/components/Breadcrumb";
 import { Topbar } from "@/components/common/Topbar";
-import { URL_PAGES } from "@/consts/url";
 import styles from "@/styles/pages/PageCommonContainer.module.scss";
 import { IOptionType } from "@/types/formTypes";
 import {
@@ -23,7 +20,6 @@ import {
 
 export default function ActiveProcessDetailPage() {
   const id = useParams().id;
-  const t = useTranslations("layout.breadcrumb");
 
   const { data, isLoading, isError, refetch } =
     useActiveProcessDetailDataQuery<ProcessResponse>();
@@ -47,10 +43,6 @@ export default function ActiveProcessDetailPage() {
   return (
     <div className={`${styles["page-container"]} ${styles["active-process-detail"]}`}>
       <Topbar showCreateButton={true} />
-      <Breadcrumb data={[
-        { labelKey: "active-process", link: URL_PAGES.activeProcesses },
-        { label: `${t("active-process-detail")} - ${id ?? "-"}`},
-      ]}/>
       <ProgressionContainer
         data={data}
         isLoading={isLoading}
