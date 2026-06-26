@@ -26,6 +26,7 @@ import { WorkflowQueryTypes } from "@/app/api/workflows/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import SelectedItemList from "@/components/common/SelectedItemList";
+import { useTranslations } from "next-intl";
 interface IPropsTypes {
   id: string;
   workflowData?: IWorkflowFormTypes;
@@ -53,7 +54,7 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
 
   const { data, isLoading, isError, isFetching, refetch } =
     useGetStagesDataQuery<IStageResponseDataTypes>();
-
+  const t = useTranslations("workflows");
   const dispatch = useDispatch();
 
   const removeModal = useRemoveQueryParamModal();
@@ -87,7 +88,7 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
       });
       dispatch(
         addToastify({
-          message: "Başarılı",
+          message: t("notifications.edit.success"),
           type: "success",
           icon: "close",
           id: "contactePage" + Date.now(),
@@ -162,9 +163,9 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
             <React.Fragment key={index}>
               <InputBox
                 control={control as any}
-                label={item.label as string}
+                label={t(`form.labels.${item.label}`)}
                 name={item.name}
-                placeholder={item.label}
+                placeholder={t(`form.placeholders.${item.label}`)}
                 required={item.isRequired}
                 maxLength={item.maxLength}
                 spacesRule={
@@ -185,11 +186,11 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
             <React.Fragment key={index}>
               <TextAreaBox
                 control={control as any}
-                label="Açıklama"
+                label={t(`form.labels.${item.label}`)}
                 {...register(item.name as keyof IWorkflowFormDataTypes)}
                 required={item.isRequired}
                 rows={item.maxRows}
-                placeholder="Açıklama giriniz"
+                placeholder={t(`form.placeholders.${item.label}`)}
                 maxLength={item.maxLength}
                 visibleLimit
                 textareaClassName={styles["text-input"]}
@@ -206,8 +207,8 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
                 // className={styles["row"]}
                 control={control as any}
                 required={item.isRequired}
-                label="Aşama"
-                placeholder="Aşama seçiniz"
+                label={t(`form.labels.${item.label}`)}
+                placeholder={t(`form.placeholders.${item.label}`)}
                 formLabelClassName={styles["form-label"]}
                 isSearchable
                 isClearable
@@ -220,7 +221,7 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
         return null;
       })}
       {selectedStages && selectedStages.length > 0 && (
-        <SelectedItemList name="stages" selectedItems={selectedStages} setValue={setValue} title="Seçilen Aşamalar" />
+        <SelectedItemList name="stages" selectedItems={selectedStages} setValue={setValue} title={t("form.labels.selectedStages")}/>
       )}
 
       <div className={styles["btn-group"]}>
@@ -228,7 +229,7 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label="İptal"
+          label={t("form.buttons.cancel")}
           disabled={isSubmitting}
         />
 
@@ -236,7 +237,7 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label="Kaydet"
+          label={t("form.buttons.save")}
           disabled={isSubmitting}
         />
       </div>

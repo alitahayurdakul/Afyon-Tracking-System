@@ -1,5 +1,6 @@
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 import React from "react";
 import { useDispatch } from "react-redux";
 
@@ -16,6 +17,7 @@ import { EditWorkflowModal } from "./edit/EditWorkflowModal";
 
 export const WorkflowTableActionsCol = ({ id }: { id: string }) => {
   const dispatch = useDispatch();
+  const t = useTranslations("workflows");
 
   const onDeleteHandler = async () => {
     try {
@@ -25,25 +27,23 @@ export const WorkflowTableActionsCol = ({ id }: { id: string }) => {
       });
       dispatch(
         addToastify({
-          message: "Başarılı",
+          message: t("notifications.delete.success"),
           type: "success",
           icon: "close",
           id: "contactePage" + Date.now(),
         }),
       );
       dispatch(addTriggerTable());
-    }
-    catch (err) {
+    } catch (err) {
       dispatch(
         addToastify({
-          message: "Silme işlemi başarısız.",
+          message: t("notifications.delete.error"),
           type: "error",
           icon: "close",
           id: "contactePage" + Date.now(),
         }),
       );
     }
-
   };
 
   return (
@@ -56,20 +56,20 @@ export const WorkflowTableActionsCol = ({ id }: { id: string }) => {
         triggerBody={
           <button className={styles["delete-btn"]}>
             <FontAwesomeIcon icon={faTrash} />
-            <span>Sil</span>
+            <span>{t("buttons.delete")}</span>
           </button>
         }
         contentBody={
           <div className={stylesDeletePopover["content"]}>
             <p className={stylesDeletePopover["text"]}>
-              Aşamayı silmek istediğinize emin misiniz?
+              {t("delete-question")}
             </p>
           </div>
         }
         closeContainer={
           <div className={stylesDeletePopover["btn-container"]}>
-            <button>Hayır</button>
-            <button onClick={onDeleteHandler}>Evet</button>
+            <button>{t("no")}</button>
+            <button onClick={onDeleteHandler}>{t("yes")}</button>
           </div>
         }
       />

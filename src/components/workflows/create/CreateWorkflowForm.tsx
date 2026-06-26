@@ -23,6 +23,7 @@ import { WorkflowQueryTypes } from "@/app/api/workflows/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import SelectedItemList from "@/components/common/SelectedItemList";
+import { useTranslations } from "next-intl";
 
 export const CreateWorkflowForm = () => {
   const {
@@ -43,6 +44,8 @@ export const CreateWorkflowForm = () => {
       stages: [],
     },
   });
+
+  const t = useTranslations("workflows");
 
   const { data, isLoading, isError, isFetching, refetch } =
     useGetStagesDataQuery<IStageResponseDataTypes>();
@@ -82,7 +85,7 @@ export const CreateWorkflowForm = () => {
         );
         dispatch(
           addToastify({
-            message: "Ekleme işlemi başarılı.",
+            message: t("notifications.create.success"),
             type: "success",
             icon: "close",
             id: "createWorkflowCreate" + Date.now(),
@@ -93,7 +96,7 @@ export const CreateWorkflowForm = () => {
       } catch (err) {
         dispatch(
           addToastify({
-            message: "Silme işlemi sırasında bir sorun ile karşılaşıldı.",
+            message: t("notifications.create.error"),
             type: "error",
             icon: "close",
             id: "createWorkflowDelete" + Date.now(),
@@ -122,9 +125,9 @@ export const CreateWorkflowForm = () => {
             <React.Fragment key={index}>
               <InputBox
                 control={control as any}
-                label={item.label as string}
+                label={t(`form.labels.${item.label}`)}
                 name={item.name}
-                placeholder={item.label}
+                placeholder={t(`form.placeholders.${item.label}`)}
                 required={item.isRequired}
                 maxLength={item.maxLength}
                 spacesRule={
@@ -145,11 +148,11 @@ export const CreateWorkflowForm = () => {
             <React.Fragment key={index}>
               <TextAreaBox
                 control={control as any}
-                label="Açıklama"
+                label={t(`form.labels.${item.label}`)}
                 {...register(item.name as keyof IWorkflowFormDataTypes)}
                 required={item.isRequired}
                 rows={item.maxRows}
-                placeholder="Açıklama giriniz"
+                placeholder={t(`form.placeholders.${item.label}`)}
                 maxLength={item.maxLength}
                 visibleLimit
                 textareaClassName={styles["text-input"]}
@@ -166,8 +169,8 @@ export const CreateWorkflowForm = () => {
                 // className={styles["row"]}
                 control={control as any}
                 required={item.isRequired}
-                label="Aşama"
-                placeholder="Aşama seçiniz"
+                label={t(`form.labels.${item.label}`)}
+                placeholder={t(`form.placeholders.${item.label}`)}
                 formLabelClassName={styles["form-label"]}
                 isSearchable
                 multiselect
@@ -179,16 +182,23 @@ export const CreateWorkflowForm = () => {
         }
         return null;
       })}
-      {selectedStages && Array.isArray(selectedStages) && selectedStages.length > 0 && (
-        <SelectedItemList name="stages" selectedItems={selectedStages} setValue={setValue} title="Seçilen Aşamalar" />
-      )}
+      {selectedStages &&
+        Array.isArray(selectedStages) &&
+        selectedStages.length > 0 && (
+          <SelectedItemList
+            name="stages"
+            selectedItems={selectedStages}
+            setValue={setValue}
+            title={t("form.labels.selectedStages")}
+          />
+        )}
 
       <div className={styles["btn-group"]}>
         <Button
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label="İptal"
+          label={t("form.buttons.cancel")}
           disabled={isSubmitting}
         />
 
@@ -196,7 +206,7 @@ export const CreateWorkflowForm = () => {
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label="Kaydet"
+          label={t("form.buttons.save")}
           disabled={isSubmitting}
         />
       </div>
