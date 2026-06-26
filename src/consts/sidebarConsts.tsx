@@ -20,19 +20,19 @@ import { URL_PAGES } from "./url";
 
 export const SIDEBAR_ITEMS: ISidebarItemsTypes = [
   {
-    name: "Dashboard",
+    default: "Dashboard",
     key: "dashboard",
     icon: faHouse,
     url: "/",
     subItems: [
       {
-        name: "İstatistikler",
+        default: "İstatistikler",
         key: "statistics",
         icon: faFilter,
         url: URL_PAGES.statistics,
       },
       {
-        name: "Karşılaştır",
+        default: "Karşılaştır",
         key: "compare",
         icon: faScaleBalanced,
         url: "/karsilastir",
@@ -40,71 +40,71 @@ export const SIDEBAR_ITEMS: ISidebarItemsTypes = [
     ],
   },
   {
-    name: "Aktif Süreçler",
+    default: "Aktif Süreçler",
     key: "activeProcesses",
     icon: faDiagramProject,
     url: URL_PAGES.activeProcesses,
   },
   // {
-  //   name: "Geçmiş Süreçler",
+  //   default: "Geçmiş Süreçler",
   //   icon: faClockRotateLeft,
   //   url: URL_PAGES.workflowHistory,
   // },
   {
-    name: "İş Akışları",
+    default: "İş Akışları",
     key: "workflows",
     icon: faDiagramProject,
     url: URL_PAGES.workflows,
   },
   {
-    name: "Aşamalar",
+    default: "Aşamalar",
     key: "stages",
     icon: faLayerGroup,
     url: URL_PAGES.stages,
   },
   {
-    name: "Alt Aşamalar",
+    default: "Alt Aşamalar",
     key: "subStages",
     icon: faSitemap,
     url: URL_PAGES.subStages,
   },
   {
-    name: "Projeler",
+    default: "Projeler",
     key: "projects",
     icon: faFolderTree,
     url: URL_PAGES.projects,
   },
   {
-    name: "Trenler",
+    default: "Trenler",
     key: "trains",
     icon: faTrain,
     url: URL_PAGES.trains,
   },
   {
-    name: "Gecikme Sebepleri",
+    default: "Gecikme Sebepleri",
     key: "delayReasons",
     icon: faCircleExclamation,
     url: URL_PAGES.delayReasons,
   },
   {
-    name: "Malzeme Listesi",
+    default: "Malzeme Listesi",
     key: "materials",
     icon: faBoxesStacked,
     url: URL_PAGES.materials,
   },
   {
-    name: "Kullanıcı Yönetimi",
+    default: "Kullanıcı Yönetimi",
     key: "userManagement",
     icon: faUsersGear,
     subItems: [
       {
-        name: "Kullanıcılar",
+        default: "Kullanıcılar",
         key: "users",
         icon: faUsers,
         url: URL_PAGES.users,
       },
       {
-        name: "Roller",
+        default: "Roller",
         key: "roles",
         icon: faUserShield,
         url: URL_PAGES.roles,

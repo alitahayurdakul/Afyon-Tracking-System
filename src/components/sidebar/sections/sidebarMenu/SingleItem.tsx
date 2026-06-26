@@ -23,7 +23,7 @@ export const SingleItem = ({ item }: IPropsTypes) => {
   return (
     <Link href={item.url ?? ""} className={clsx(styles["single-item"], { [styles["active-single-item"]]: isActive })}>
        <FontAwesomeIcon icon={item.icon} className={styles["icon"]} />
-      <span className={styles["name"]}>{item.key ? t(`sidebar.${item.key}`) : item.name}</span>
+      <span className={styles["name"]}>{item.key ? t(`sidebar.${item.key}`) : item.default}</span>
     </Link>
   );
 };

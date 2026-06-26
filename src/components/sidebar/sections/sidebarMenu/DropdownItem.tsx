@@ -33,7 +33,7 @@ export const DropdownItem = ({ item }: IPropsTypes) => {
         onClick={() => setManualOpen(!isOpen)}
       >
         <FontAwesomeIcon icon={item.icon} className={styles["icon"]} />
-        <span className={styles["name"]}>{item.key ? t(`sidebar.${item.key}`) : item.name}</span>
+        <span className={styles["name"]}>{item.key ? t(`sidebar.${item.key}`) : item.default}</span>
         {isOpen ? (
           <ChevronUp className={styles["arrow-icon"]} />
         ) : (
@@ -69,7 +69,7 @@ export const SingleItem = ({ item }: IPropsTypes) => {
       })}
     >
       <FontAwesomeIcon icon={item.icon} className={styles["icon"]} />
-      <span className={styles["name"]}>{item.key ? t(`sidebar.${item.key}`) : item.name}</span>
+      <span className={styles["name"]}>{item.key ? t(`sidebar.${item.key}`) : item.default}</span>
     </Link>
   );
 };
