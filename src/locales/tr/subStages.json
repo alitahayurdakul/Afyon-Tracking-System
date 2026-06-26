@@ -29,5 +29,10 @@
     "cancel": "İptal",
     "save": "Kaydet",
     "editInfo": "Alt aşama bilgilerini güncellemek ilişkili süreç kayıtlarını etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden emin olun."
+  },
+  "deletePopover": {
+    "question": "Alt aşamayı silmek istediğinize emin misiniz?",
+    "yes": "Evet",
+    "no": "Hayır"
   }
 }

@@ -31,5 +31,10 @@
     "cancel": "İptal",
     "save": "Kaydet",
     "editInfo": "Proje bilgilerini güncellemek ilişkili kayıtları ve raporları etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden emin olun."
+  },
+  "deletePopover": {
+    "question": "Projeyi silmek istediğinize emin misiniz?",
+    "yes": "Evet",
+    "no": "Hayır"
   }
 }

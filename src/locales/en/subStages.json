@@ -29,5 +29,10 @@
     "cancel": "Cancel",
     "save": "Save",
     "editInfo": "Updating sub stage details may affect related process records. Make sure to review the changes before saving."
+  },
+  "deletePopover": {
+    "question": "Are you sure you want to delete this sub-stage?",
+    "yes": "Yes",
+    "no": "No"
   }
 }
