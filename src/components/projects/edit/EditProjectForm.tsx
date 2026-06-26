@@ -41,7 +41,7 @@ export const EditProjectForm = ({ id, data }: IPropsTypes) => {
     resolver: yupResolver(ProjectFormValidation()),
     defaultValues: {
       name: data?.name ?? "",
-      code: data?.code ?? "",
+      code: data?.projectCode ?? "",
       status: data?.status ?? "",
       desc: data?.description ?? "",
     },
@@ -154,7 +154,7 @@ export const EditProjectForm = ({ id, data }: IPropsTypes) => {
         </div>
         <div className={styles["activity-row"]}>
           <span className={styles["activity-label"]}>Son Güncelleyen:</span>
-          <span className={styles["activity-value"]}>{data?.editor ?? "-"}</span>
+          <span className={styles["activity-value"]}>{data?.lastUpdatedBy ?? "-"}</span>
         </div>
         <div className={styles["activity-row"]}>
           <span className={styles["activity-label"]}>
