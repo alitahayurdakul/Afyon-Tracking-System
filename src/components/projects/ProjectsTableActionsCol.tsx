@@ -65,14 +65,14 @@ export const ProjectsTableActionsCol = ({ id }: { id: string }) => {
         contentBody={
           <div className={stylesDeletePopover["content"]}>
             <p className={stylesDeletePopover["text"]}>
-              Projeyi silmek istediğinize emin misiniz?
+              {t("deletePopover.question")}
             </p>
           </div>
         }
         closeContainer={
           <div className={stylesDeletePopover["btn-container"]}>
-            <button>Hayır</button>
-            <button onClick={onDeleteHandler}>Evet</button>
+            <button>{t("deletePopover.no")}</button>
+            <button onClick={onDeleteHandler}>{t("deletePopover.yes")}</button>
           </div>
         }
       />

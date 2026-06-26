@@ -23,5 +23,10 @@
     "cancel": "İptal",
     "save": "Kaydet",
     "editInfo": "Aşama bilgilerini güncellemek ilişkili süreç kayıtlarını etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden emin olun."
+  },
+  "deletePopover": {
+    "question": "Aşamayı silmek istediğinize emin misiniz?",
+    "yes": "Evet",
+    "no": "Hayır"
   }
 }
