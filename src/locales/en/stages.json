@@ -22,7 +22,36 @@
     "selectedMaterials": "Selected Materials",
     "cancel": "Cancel",
     "save": "Save",
-    "editInfo": "Updating stage details may affect related process records. Make sure to review the changes before saving."
+    "editInfo": "Updating stage details may affect related process records. Make sure to review the changes before saving.",
+    "fields": {
+      "name": {
+        "label": "Workflow Name",
+        "placeholder": "Enter workflow name"
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Enter description"
+      },
+      "hasSubStage": {
+        "label": "Has sub-stage."
+      },
+      "subStages": {
+        "label": "Sub-stage",
+        "placeholder": "Select sub-stage"
+      },
+      "materialList": {
+        "label": "Material List",
+        "placeholder": "Select material"
+      }
+    },
+    "notifications": {
+      "createSuccess": "Created successfully",
+      "createError": "Failed to create",
+      "editSuccess": "Updated successfully",
+      "editError": "Failed to update",
+      "deleteSuccess": "Deleted successfully",
+      "deleteError": "Failed to delete"
+    }
   },
   "deletePopover": {
     "question": "Are you sure you want to delete this stage?",

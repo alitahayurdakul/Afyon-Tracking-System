@@ -28,7 +28,21 @@
     "descriptionPlaceholder": "Enter description",
     "cancel": "Cancel",
     "save": "Save",
-    "editInfo": "Updating sub stage details may affect related process records. Make sure to review the changes before saving."
+    "editInfo": "Updating sub stage details may affect related process records. Make sure to review the changes before saving.",
+    "activity": {
+      "creator": "Created By:",
+      "createdAt": "Created Date:",
+      "editor": "Last Updated By:",
+      "updatedAt": "Last Updated Date:"
+    },
+    "notifications": {
+      "createSuccess": "Created successfully",
+      "createError": "Failed to create",
+      "editSuccess": "Updated successfully",
+      "editError": "Failed to update",
+      "deleteSuccess": "Deleted successfully",
+      "deleteError": "Failed to delete"
+    }
   },
   "deletePopover": {
     "question": "Are you sure you want to delete this sub-stage?",

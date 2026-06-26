@@ -63,7 +63,7 @@ export const CreateProjectForm = () => {
         });
         dispatch(
           addToastify({
-            message: "Başarıyla oluşturuldu",
+            message: t("form.notifications.createSuccess"),
             type: "success",
             icon: "close",
             id: "createProject" + Date.now(),
@@ -77,7 +77,7 @@ export const CreateProjectForm = () => {
           err.response?.data?.error ||
           err.response?.data?.message ||
           err?.message ||
-          "Oluşturma başarısız";
+          t("form.notifications.createError");
         dispatch(
           addToastify({
             message: errorMessage,
