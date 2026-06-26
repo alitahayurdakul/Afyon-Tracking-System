@@ -3,7 +3,7 @@
   "description": "Aşamalara bağlı alt aşamaları merkezi olarak yönetin.",
   "addButton": "Yeni Alt Aşama Ekle",
   "search": "Arama...",
-  "columns": {
+  "table": {
     "name": "Alt Aşama Adı",
     "materials": "Malzemeler",
     "creator": "Oluşturan",

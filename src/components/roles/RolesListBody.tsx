@@ -2,6 +2,7 @@
 
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 
 import { useGetRolesDataQuery } from "@/api/queries/useGetRolesQueries";
 import { PERMISSION_LABEL_MAP } from "@/consts/permissionsConsts";
@@ -12,6 +13,7 @@ import { Table } from "../common/Table";
 import { CreateRolesModal } from "./create/CreateRolesModal";
 
 export const RolesListBody = () => {
+  const t = useTranslations("roles");
   const { data, isLoading } = useGetRolesDataQuery();
   const rows = data?.roles ?? [];
 
@@ -19,8 +21,8 @@ export const RolesListBody = () => {
     <section className={styles["pipeline-page"]}>
       <div className={styles["page-top"]}>
         <div>
-          <h2>Roller</h2>
-          <p>Rolleri ve sahip oldukları yetkileri yönetin.</p>
+          <h2>{t("title")}</h2>
+          <p>{t("description")}</p>
         </div>
 
         <CreateRolesModal />
@@ -29,7 +31,7 @@ export const RolesListBody = () => {
       <div className={styles.toolbar}>
         <div className={styles["search-input"]}>
           <FontAwesomeIcon icon={faSearch} />
-          <input placeholder="Arama..." />
+          <input placeholder={t("search")} />
         </div>
       </div>
 
@@ -38,7 +40,7 @@ export const RolesListBody = () => {
           className={styles["table-class"]}
           loading={isLoading}
           data={rows}
-          columns={createRolesTableColumns(PERMISSION_LABEL_MAP)}
+          columns={createRolesTableColumns(t, PERMISSION_LABEL_MAP)}
         />
       </div>
     </section>

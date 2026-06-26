@@ -3,7 +3,7 @@
   "description": "Manage the sub stages linked to stages centrally.",
   "addButton": "Add New Sub Stage",
   "search": "Search...",
-  "columns": {
+  "table": {
     "name": "Sub Stage Name",
     "materials": "Materials",
     "creator": "Created By",

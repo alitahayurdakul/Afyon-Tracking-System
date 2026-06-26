@@ -13,40 +13,38 @@ import { formatDate } from "./formDate";
 export const projectsTableColumns: ICommonTableColumnsTypes = [
   {
     name: "name",
-    label: "Proje Adı",
+    label: "name",
   },
   {
     name: "code",
-    label: "Proje Kodu",
+    label: "code",
   },
   {
     name: "status",
-    label: "Durum",
+    label: "status",
   },
   {
     name: "creator",
-    label: "Oluşturan",
+    label: "creator",
   },
   {
     name: "editor",
-    label: "Güncelleyen",
+    label: "editor",
   },
   {
     name: "actions",
-    label: "İşlemler",
+    label: "actions",
   },
 ];
 
-export const createProjectsTableColumns = (
-  t?: TFunction,
-) => {
+export const createProjectsTableColumns = (t: TFunction) => {
   const columns = projectsTableColumns;
 
   return [
     ...columns.map((column: ICommonTableColumnsType) => ({
       accessorKey: column.name,
       header: () => {
-        return <div>{t ? t(`columns.${column.name}`) : column.label}</div>;
+        return <div>{t(`table.${column.label}`)}</div>;
       },
       cell: ({ row }: { row: { original: IProjectType } }) => {
         const r = row.original;

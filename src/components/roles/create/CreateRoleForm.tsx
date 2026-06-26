@@ -21,8 +21,10 @@ import { RoleQueryTypes } from "@/app/api/roles/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { PERMISSION_OPTIONS } from "@/consts/permissionsConsts";
 import { extractApiError } from "@/utils/extractApiError";
+import { useTranslations } from "next-intl";
 
 export const CreateRoleForm = () => {
+  const t = useTranslations("roles");
   const {
     control,
     handleSubmit,
@@ -64,7 +66,7 @@ export const CreateRoleForm = () => {
         });
         dispatch(
           addToastify({
-            message: "Rol başarıyla oluşturuldu",
+            message: t("notifications.createSuccess"),
             type: "success",
             icon: "close",
             id: "createRole" + Date.now(),
@@ -76,7 +78,7 @@ export const CreateRoleForm = () => {
       } catch (err) {
         dispatch(
           addToastify({
-            message: extractApiError(err, "Rol oluşturulamadı"),
+            message: extractApiError(err, t("notifications.createError")),
             type: "error",
             icon: "close",
             id: "createRole" + Date.now(),
@@ -91,9 +93,9 @@ export const CreateRoleForm = () => {
     <form className={styles["train-form"]}>
       <InputBox
         control={control as any}
-        label="Rol Adı"
+        label={t("form.roleNameLabel")}
         name="roleName"
-        placeholder="Rol adı giriniz"
+        placeholder={t("form.roleNamePlaceholder")}
         required
         maxLength={100}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -101,20 +103,20 @@ export const CreateRoleForm = () => {
       />
       <TextAreaBox
         control={control as any}
-        label="Açıklama"
+        label={t("form.descriptionLabel")}
         {...register("roleDescription")}
         required
         rows={5}
-        placeholder="Açıklama giriniz"
+        placeholder={t("form.descriptionPlaceholder")}
         maxLength={400}
         visibleLimit
         textareaClassName={styles["text-input"]}
       />
       <SelectBox
         control={control as any}
-        label="Yetkiler"
+        label={t("form.permissionsLabel")}
         name="permissions"
-        placeholder="Yetki seçiniz"
+        placeholder={t("form.permissionsPlaceholder")}
         required
         multiselect
         options={permissionOptions}
@@ -124,14 +126,14 @@ export const CreateRoleForm = () => {
           clickFn={removeModal}
           type="simple"
           className={styles["cancel-btn"]}
-          label="İptal"
+          label={t("form.cancel")}
           disabled={isSubmitting}
         />
         <Button
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label="Kaydet"
+          label={t("form.save")}
           disabled={isSubmitting}
         />
       </div>

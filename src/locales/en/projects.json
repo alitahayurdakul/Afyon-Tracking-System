@@ -3,7 +3,7 @@
   "description": "Manage projects and their statuses centrally.",
   "addButton": "Add New Project",
   "search": "Search...",
-  "columns": {
+  "table": {
     "name": "Project Name",
     "code": "Project Code",
     "status": "Status",

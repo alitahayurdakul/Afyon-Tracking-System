@@ -3,7 +3,7 @@
   "description": "Aşamaları yapılandır ve sırala.",
   "addButton": "Yeni Aşama Ekle",
   "search": "Arama...",
-  "columns": {
+  "table": {
     "name": "Aşama Adı",
     "creator": "Oluşturan",
     "editor": "Güncelleyen",

@@ -25,8 +25,10 @@ import {
 import { useGetRolesDataQuery } from "@/api/queries/useGetRolesQueries";
 import { useMemo } from "react";
 import { extractApiError } from "@/utils/extractApiError";
+import { useTranslations } from "next-intl";
 
 export const CreateUserForm = () => {
+  const t = useTranslations("users");
   const {
     control,
     handleSubmit,
@@ -76,7 +78,7 @@ export const CreateUserForm = () => {
         });
         dispatch(
           addToastify({
-            message: "Kullanıcı başarıyla oluşturuldu",
+            message: t("notifications.createSuccess"),
             type: "success",
             icon: "close",
             id: "createUser" + Date.now(),
@@ -88,7 +90,7 @@ export const CreateUserForm = () => {
       } catch (err) {
         dispatch(
           addToastify({
-            message: extractApiError(err, "Kullanıcı oluşturulamadı"),
+            message: extractApiError(err, t("notifications.createError")),
             type: "error",
             icon: "close",
             id: "createUser" + Date.now(),
@@ -103,9 +105,9 @@ export const CreateUserForm = () => {
     <form className={styles["train-form"]}>
       <InputBox
         control={control as any}
-        label="Ad Soyad"
+        label={t("form.fullnameLabel")}
         name="fullname"
-        placeholder="Ad soyad giriniz"
+        placeholder={t("form.fullnamePlaceholder")}
         required
         maxLength={100}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -113,9 +115,9 @@ export const CreateUserForm = () => {
       />
       <InputBox
         control={control as any}
-        label="E-posta"
+        label={t("form.emailLabel")}
         name="email"
-        placeholder="ornek@firma.com"
+        placeholder={t("form.emailPlaceholder")}
         required
         maxLength={120}
         spacesRule={InputSpaceEnums.noSpaces}
@@ -123,9 +125,9 @@ export const CreateUserForm = () => {
       />
       <InputBox
         control={control as any}
-        label="Şifre"
+        label={t("form.passwordLabel")}
         name="pwd"
-        placeholder="Şifre giriniz"
+        placeholder={t("form.passwordPlaceholder")}
         required
         type="password"
         maxLength={64}
@@ -134,9 +136,9 @@ export const CreateUserForm = () => {
       />
       <InputBox
         control={control as any}
-        label="Telefon"
+        label={t("form.phoneLabel")}
         name="phone"
-        placeholder="+90 5XX XXX XX XX"
+        placeholder={t("form.phonePlaceholder")}
         required
         maxLength={20}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -144,25 +146,25 @@ export const CreateUserForm = () => {
       />
       <SelectBox
         control={control as any}
-        label="Departman"
+        label={t("form.departmentLabel")}
         name="department"
-        placeholder="Departman seçiniz"
+        placeholder={t("form.departmentPlaceholder")}
         required
         options={USER_DEPARTMENT_OPTIONS}
       />
       <SelectBox
         control={control as any}
-        label="Rol"
+        label={t("form.roleLabel")}
         name="role"
-        placeholder="Rol seçiniz"
+        placeholder={t("form.rolePlaceholder")}
         required
         options={roleOptions}
       />
       <SelectBox
         control={control as any}
-        label="Durum"
+        label={t("form.statusLabel")}
         name="isActive"
-        placeholder="Durum seçiniz"
+        placeholder={t("form.statusPlaceholder")}
         required
         options={USER_ACTIVE_OPTIONS}
       />
@@ -171,14 +173,14 @@ export const CreateUserForm = () => {
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label="İptal"
+          label={t("form.cancel")}
           disabled={isSubmitting}
         />
         <Button
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label="Kaydet"
+          label={t("form.save")}
           disabled={isSubmitting}
         />
       </div>

@@ -1,0 +1,45 @@
+{
+  "title": "Роли",
+  "description": "Управляйте ролями и их правами доступа.",
+  "addButton": "Добавить роль",
+  "search": "Поиск...",
+  "table": {
+    "roleName": "Название роли",
+    "roleDescription": "Описание",
+    "permissions": "Права",
+    "editor": "Обновил",
+    "actions": "Действия"
+  },
+  "actions": {
+    "edit": "Изменить",
+    "delete": "Удалить"
+  },
+  "deletePopover": {
+    "question": "Вы уверены, что хотите удалить эту роль?",
+    "yes": "Да",
+    "no": "Нет"
+  },
+  "modal": {
+    "create": "Создать новую роль",
+    "edit": "Обновить данные роли"
+  },
+  "form": {
+    "roleNameLabel": "Название роли",
+    "roleNamePlaceholder": "Введите название роли",
+    "descriptionLabel": "Описание",
+    "descriptionPlaceholder": "Введите описание",
+    "permissionsLabel": "Права",
+    "permissionsPlaceholder": "Выберите право",
+    "cancel": "Отмена",
+    "save": "Сохранить",
+    "editInfo": "Изменение данных роли и прав может повлиять на связанных пользователей. Перед сохранением убедитесь, что изменения проверены."
+  },
+  "notifications": {
+    "createSuccess": "Роль успешно создана",
+    "createError": "Не удалось создать роль",
+    "editSuccess": "Роль успешно обновлена",
+    "editError": "Не удалось обновить роль",
+    "deleteSuccess": "Роль удалена",
+    "deleteError": "Не удалось удалить роль"
+  }
+}

@@ -1,6 +1,7 @@
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
+import { useTranslations } from "next-intl";
 import { useDispatch } from "react-redux";
 
 import { axiosInstance } from "@/api/axiosInstance";
@@ -17,6 +18,7 @@ import { PopoverBody } from "../Popover";
 import { EditRolesModal } from "./edit/EditRolesModal";
 
 export const RolesTableActionsCol = ({ id }: { id: string }) => {
+  const t = useTranslations("roles");
   const dispatch = useDispatch();
 
   const onDeleteHandler = async () => {
@@ -27,7 +29,7 @@ export const RolesTableActionsCol = ({ id }: { id: string }) => {
       });
       dispatch(
         addToastify({
-          message: "Rol silindi",
+          message: t("notifications.deleteSuccess"),
           type: "success",
           icon: "close",
           id: "deleteRole" + Date.now(),
@@ -37,7 +39,7 @@ export const RolesTableActionsCol = ({ id }: { id: string }) => {
     } catch (err) {
       dispatch(
         addToastify({
-          message: extractApiError(err, "Rol silinemedi"),
+          message: extractApiError(err, t("notifications.deleteError")),
           type: "error",
           icon: "close",
           id: "deleteRole" + Date.now(),
@@ -55,20 +57,20 @@ export const RolesTableActionsCol = ({ id }: { id: string }) => {
         triggerBody={
           <button className={clsx(styles["delete-btn"], compactStyles["compact-btn"])}>
             <FontAwesomeIcon icon={faTrash} />
-            <span>Sil</span>
+            <span>{t("actions.delete")}</span>
           </button>
         }
         contentBody={
           <div className={stylesDeletePopover["content"]}>
             <p className={stylesDeletePopover["text"]}>
-              Rolü silmek istediğinize emin misiniz?
+              {t("deletePopover.question")}
             </p>
           </div>
         }
         closeContainer={
           <div className={stylesDeletePopover["btn-container"]}>
-            <button>Hayır</button>
-            <button onClick={onDeleteHandler}>Evet</button>
+            <button>{t("deletePopover.no")}</button>
+            <button onClick={onDeleteHandler}>{t("deletePopover.yes")}</button>
           </div>
         }
       />

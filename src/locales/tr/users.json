@@ -1,0 +1,60 @@
+{
+  "title": "Kullanıcılar",
+  "description": "Sistem kullanıcılarını ve rollerini merkezi olarak yönetin.",
+  "addButton": "Yeni Kullanıcı Ekle",
+  "search": "Arama...",
+  "table": {
+    "id": "ID",
+    "fullname": "Ad Soyad",
+    "email": "E-posta",
+    "phone": "Telefon",
+    "department": "Departman",
+    "role": "Rol",
+    "status": "Durum",
+    "actions": "İşlemler"
+  },
+  "status": {
+    "active": "Aktif",
+    "passive": "Pasif"
+  },
+  "actions": {
+    "edit": "Güncelle",
+    "delete": "Sil"
+  },
+  "deletePopover": {
+    "question": "Kullanıcıyı silmek istediğinize emin misiniz?",
+    "yes": "Evet",
+    "no": "Hayır"
+  },
+  "modal": {
+    "create": "Yeni Kullanıcı Oluştur",
+    "edit": "Kullanıcı Bilgilerini Güncelle"
+  },
+  "form": {
+    "fullnameLabel": "Ad Soyad",
+    "fullnamePlaceholder": "Ad soyad giriniz",
+    "emailLabel": "E-posta",
+    "emailPlaceholder": "ornek@firma.com",
+    "passwordLabel": "Şifre",
+    "passwordPlaceholder": "Şifre giriniz",
+    "phoneLabel": "Telefon",
+    "phonePlaceholder": "+90 5XX XXX XX XX",
+    "departmentLabel": "Departman",
+    "departmentPlaceholder": "Departman seçiniz",
+    "roleLabel": "Rol",
+    "rolePlaceholder": "Rol seçiniz",
+    "statusLabel": "Durum",
+    "statusPlaceholder": "Durum seçiniz",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "editInfo": "Kullanıcı bilgilerini güncellemek erişim ve yetkilendirme akışını etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden emin olun."
+  },
+  "notifications": {
+    "createSuccess": "Kullanıcı başarıyla oluşturuldu",
+    "createError": "Kullanıcı oluşturulamadı",
+    "editSuccess": "Kullanıcı başarıyla güncellendi",
+    "editError": "Kullanıcı güncellenemedi",
+    "deleteSuccess": "Kullanıcı silindi",
+    "deleteError": "Kullanıcı silinemedi"
+  }
+}

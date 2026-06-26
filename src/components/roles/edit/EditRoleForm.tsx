@@ -26,6 +26,7 @@ import {
   PERMISSION_LABEL_MAP,
 } from "@/consts/permissionsConsts";
 import { extractApiError } from "@/utils/extractApiError";
+import { useTranslations } from "next-intl";
 
 interface IPropsTypes {
   id: string;
@@ -33,6 +34,7 @@ interface IPropsTypes {
 }
 
 export const EditRoleForm = ({ id, data }: IPropsTypes) => {
+  const t = useTranslations("roles");
   const permissionOptions = useMemo(
     () =>
       PERMISSION_OPTIONS.map((p) => ({
@@ -81,7 +83,7 @@ export const EditRoleForm = ({ id, data }: IPropsTypes) => {
         });
         dispatch(
           addToastify({
-            message: "Rol başarıyla güncellendi",
+            message: t("notifications.editSuccess"),
             type: "success",
             icon: "close",
             id: "editRole" + Date.now(),
@@ -92,7 +94,7 @@ export const EditRoleForm = ({ id, data }: IPropsTypes) => {
       } catch (err) {
         dispatch(
           addToastify({
-            message: extractApiError(err, "Rol güncellenemedi"),
+            message: extractApiError(err, t("notifications.editError")),
             type: "error",
             icon: "close",
             id: "editRole" + Date.now(),
@@ -107,9 +109,9 @@ export const EditRoleForm = ({ id, data }: IPropsTypes) => {
     <form className={styles["train-form"]}>
       <InputBox
         control={control as any}
-        label="Rol Adı"
+        label={t("form.roleNameLabel")}
         name="roleName"
-        placeholder="Rol adı giriniz"
+        placeholder={t("form.roleNamePlaceholder")}
         required
         maxLength={100}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -117,20 +119,20 @@ export const EditRoleForm = ({ id, data }: IPropsTypes) => {
       />
       <TextAreaBox
         control={control as any}
-        label="Açıklama"
+        label={t("form.descriptionLabel")}
         {...register("roleDescription")}
         required
         rows={5}
-        placeholder="Açıklama giriniz"
+        placeholder={t("form.descriptionPlaceholder")}
         maxLength={400}
         visibleLimit
         textareaClassName={styles["text-input"]}
       />
       <SelectBox
         control={control as any}
-        label="Yetkiler"
+        label={t("form.permissionsLabel")}
         name="permissions"
-        placeholder="Yetki seçiniz"
+        placeholder={t("form.permissionsPlaceholder")}
         required
         multiselect
         options={permissionOptions}
@@ -139,9 +141,7 @@ export const EditRoleForm = ({ id, data }: IPropsTypes) => {
       <div>
         <FontAwesomeIcon icon={faCircleInfo} className={styles["alert-icon"]} />
         <span className={styles["info-text"]}>
-          Rol bilgilerini ve yetkilerini güncellemek ilişkili kullanıcıları
-          etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden
-          emin olun.
+          {t("form.editInfo")}
         </span>
       </div>
 
@@ -150,14 +150,14 @@ export const EditRoleForm = ({ id, data }: IPropsTypes) => {
           clickFn={removeModal}
           type="simple"
           className={styles["cancel-btn"]}
-          label="İptal"
+          label={t("form.cancel")}
           disabled={isSubmitting}
         />
         <Button
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label="Kaydet"
+          label={t("form.save")}
           disabled={isSubmitting}
         />
       </div>
