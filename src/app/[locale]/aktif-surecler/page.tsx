@@ -10,7 +10,7 @@ export default function ActiveProcessPage() {
     <div className={styles["page-container"]}>
       <Topbar showCreateButton={true}/>
       <Breadcrumb data={[
-        { name: "Depo Gösterge Paneli" }
+        { labelKey: "active-process" }
       ]}/>
        <ActiveProcessesHeader />
       <ActiveProcessGrid />

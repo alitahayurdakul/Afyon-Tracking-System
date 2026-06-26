@@ -12,14 +12,6 @@ export function MaterialFormValidation(): Yup.ObjectSchema<IMaterialFormDataType
       .trim()
       .typeError("Bu alan zorunludur")
       .required("Bu alan zorunludur"),
-    unit: Yup.string()
-      .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
-    stock: Yup.string()
-      .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
     desc: Yup.string().trim().default(""),
   });
 }

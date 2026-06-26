@@ -1,6 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useMemo } from "react";
 
 import {
@@ -22,6 +23,7 @@ import {
 
 export default function ActiveProcessDetailPage() {
   const id = useParams().id;
+  const t = useTranslations("layout.breadcrumb");
 
   const { data, isLoading, isError, refetch } =
     useActiveProcessDetailDataQuery<ProcessResponse>();
@@ -46,8 +48,8 @@ export default function ActiveProcessDetailPage() {
     <div className={`${styles["page-container"]} ${styles["active-process-detail"]}`}>
       <Topbar showCreateButton={true} />
       <Breadcrumb data={[
-        { name: "Depo Gösterge Paneli", link: URL_PAGES.activeProcesses },
-        { name: `Aktif Süreç Detayı - ${id ?? "-"}` },
+        { labelKey: "active-process", link: URL_PAGES.activeProcesses },
+        { label: `${t("active-process-detail")} - ${id ?? "-"}`},
       ]}/>
       <ProgressionContainer
         data={data}

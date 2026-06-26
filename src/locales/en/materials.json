@@ -1,0 +1,59 @@
+{
+  "header": "Material List",
+  "description": "Manage warehouse materials and inventory information centrally.",
+  "search": "Search...",
+  "delete-question": "Are you sure you want to delete this material?",
+  "yes": "Yes",
+  "no": "No",
+  "buttons": {
+    "create": "Add New Material",
+    "edit": "Update",
+    "delete": "Delete"
+  },
+  "table": {
+    "name": "MATERIAL NAME",
+    "code": "MATERIAL CODE",
+    "creator": "CREATED BY",
+    "editor": "UPDATED BY",
+    "actions": "ACTIONS"
+  },
+  "modal": {
+    "create-headers": "Add New Material",
+    "edit-header": "Update Material Information"
+  },
+  "form": {
+    "labels": {
+      "name": "MATERIAL NAME",
+      "code": "MATERIAL CODE",
+      "description": "DESCRIPTION",
+      "creator": "Created By",
+      "createdDate": "Creation Date",
+      "editor": "Last Updated By",
+      "editedDate": "Last Updated Date"
+    },
+    "placeholders": {
+      "name": "Enter the material name",
+      "code": "Enter the material code",
+      "description": "Enter a description."
+    },
+    "buttons": {
+      "cancel": "Cancel",
+      "save": "Save"
+    }
+  },
+  "notifications": {
+    "delete": {
+      "success": "The material was deleted successfully.",
+      "error": "Failed to delete the material."
+    },
+    "create": {
+      "success": "The material was created successfully.",
+      "error": "Failed to create the material."
+    },
+    "edit": {
+      "success": "The material was updated successfully.",
+      "error": "Failed to update the material.",
+      "warning-message": "Updating material information may affect related inventory records and reports. Please review your changes before saving."
+    }
+  }
+}

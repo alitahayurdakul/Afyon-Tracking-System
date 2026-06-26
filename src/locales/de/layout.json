@@ -37,5 +37,19 @@
         "success": "Der neue Prozess wurde erfolgreich erstellt. Sie werden zur erstellten Prozessseite weitergeleitet."
       }
     }
+  },
+  "breadcrumb": {
+    "active-process": "Dashboard für Fabrikprozessmanagement",
+    "active-process-detail": "Details zum aktiven Prozess",
+    "workflows": "Workflow-Verwaltung",
+    "workflow-history": "Workflow-Verlauf",
+    "stages": "Phasenverwaltung",
+    "materials": "Materialverwaltung",
+    "projects": "Projektverwaltung",
+    "sub-stages": "Unterphasenverwaltung",
+    "trains": "Zugverwaltung",
+    "delay-reason": "Verwaltung der Verzögerungsgründe",
+    "users": "Benutzerverwaltung",
+    "roles": "Rollenverwaltung"
   }
 }

@@ -21,6 +21,7 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { MaterialQueryTypes } from "@/app/api/materials/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import { useTranslations } from "next-intl";
 
 interface IPropsTypes {
   id: string;
@@ -38,12 +39,10 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
     defaultValues: {
       name: data?.name ?? "",
       code: data?.code ?? "",
-      unit: data?.unit ?? "",
-      stock: data?.stock != null ? String(data.stock) : "",
       desc: data?.description ?? "",
     },
   });
-
+  const t = useTranslations("materials");
   const dispatch = useDispatch();
   const removeModal = useRemoveQueryParamModal();
 
@@ -58,8 +57,6 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
           id,
           name: formData.name,
           code: formData.code,
-          unit: formData.unit,
-          stock: Number(formData.stock),
           description: formData.desc,
           editor: "Admin",
         };
@@ -69,10 +66,10 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
         });
         dispatch(
           addToastify({
-            message: "Başarıyla güncellendi",
+            message: t("notifications.edit.success"),
             type: "success",
             icon: "close",
-            id: "editMaterial" + Date.now(),
+            id: "editMaterialSuccess" + Date.now(),
           }),
         );
         dispatch(addTriggerTable());
@@ -82,13 +79,14 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
           err.response?.data?.error ||
           err.response?.data?.message ||
           err?.message ||
-          "Güncelleme başarısız";
+          t("notifications.edit.error");
+
         dispatch(
           addToastify({
             message: errorMessage,
             type: "error",
             icon: "close",
-            id: "editMaterial" + Date.now(),
+            id: "editMaterialError" + Date.now(),
           }),
         );
       }
@@ -100,9 +98,9 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
     <form className={styles["train-form"]}>
       <InputBox
         control={control as any}
-        label="Malzeme Adı"
+        label={t("form.labels.name")}
         name="name"
-        placeholder="Malzeme adı giriniz"
+        placeholder={t("form.placeholders.name")}
         required
         maxLength={100}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -110,40 +108,20 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
       />
       <InputBox
         control={control as any}
-        label="Malzeme Kodu"
+        label={t("form.labels.code")}
         name="code"
-        placeholder="Malzeme kodu giriniz"
+        placeholder={t("form.placeholders.code")}
         required
         maxLength={50}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
         inputClassName={styles["text-input"]}
       />
-      <InputBox
-        control={control as any}
-        label="Birim"
-        name="unit"
-        placeholder="Örn: Adet, Litre, Kg"
-        required
-        maxLength={20}
-        spacesRule={InputSpaceEnums.limitMaxOneSpace}
-        inputClassName={styles["text-input"]}
-      />
-      <InputBox
-        control={control as any}
-        label="Stok Miktarı"
-        name="stock"
-        placeholder="Stok miktarı giriniz"
-        required
-        maxLength={10}
-        spacesRule={InputSpaceEnums.limitMaxOneSpace}
-        inputClassName={styles["text-input"]}
-      />
       <TextAreaBox
         control={control as any}
-        label="Açıklama"
+        label={t("form.labels.description")}
         {...register("desc")}
         rows={5}
-        placeholder="Açıklama giriniz"
+        placeholder={t("form.placeholders.description")}
         maxLength={400}
         visibleLimit
         textareaClassName={styles["text-input"]}
@@ -151,24 +129,24 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
 
       <section className={styles["activity-section"]}>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>Oluşturan:</span>
+          <span className={styles["activity-label"]}>{t("form.labels.creator")}:</span>
           <span className={styles["activity-value"]}>
-            {data?.creator || "Admin"}
+            {data?.creator || "-"}
           </span>
         </div>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>Oluşturulma Tarihi:</span>
+          <span className={styles["activity-label"]}>{t("form.labels.createdDate")}:</span>
           <span className={styles["activity-value"]}>
             {formatDate(data?.createdAt) ?? "-"}
           </span>
         </div>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>Son Güncelleyen:</span>
+          <span className={styles["activity-label"]}>{t("form.labels.editor")}:</span>
           <span className={styles["activity-value"]}>{data?.editor ?? "-"}</span>
         </div>
         <div className={styles["activity-row"]}>
           <span className={styles["activity-label"]}>
-            Son Güncellenme Tarihi:
+            {t("form.labels.editedDate")}:
           </span>
           <span className={styles["activity-value"]}>
             {formatDate(data?.updatedAt) ?? "-"}
@@ -179,9 +157,7 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
       <div>
         <FontAwesomeIcon icon={faCircleInfo} className={styles["alert-icon"]} />
         <span className={styles["info-text"]} >
-          Malzeme bilgilerini güncellemek ilişkili stok kayıtlarını ve raporları
-          etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden
-          emin olun.
+          {t("notifications.edit.warning-message")}
         </span>
       </div>
 
@@ -190,7 +166,7 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label="İptal"
+          label={t("form.buttons.cancel")}
           disabled={isSubmitting}
         />
 
@@ -198,7 +174,7 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label="Kaydet"
+          label={t("form.buttons.save")}
           disabled={isSubmitting}
         />
       </div>

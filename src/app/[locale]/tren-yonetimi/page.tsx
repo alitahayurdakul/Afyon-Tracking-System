@@ -7,7 +7,7 @@ export default function TrainsPage() {
     return(
         <div className={styles["page-container"]} >
             <Topbar />
-            <Breadcrumb data={[{ name: "Trains" }]} />
+            <Breadcrumb data={[{ labelKey: "trains" }]} />
             <TrainsListBody />
         </div>
     )

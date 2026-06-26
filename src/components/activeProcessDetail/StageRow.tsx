@@ -7,7 +7,7 @@ import { IStatusType } from "@/types/commonTypes";
 import { getStatus } from "@/utils/getStatus";
 
 import styles from "./ProcessFlow.module.scss";
-import StageDetailModal from "./StageDetailModal/StageDetailModal";
+import StageDetailModal from "./stageDetail/StageDetailModal";
 import StatusChip from "./StatusChip";
 
 interface StageRowProps {

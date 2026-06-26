@@ -1,5 +1,6 @@
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { useGetMaterialDetailDataQuery } from "@/api/queries/useGetMaterialsQueries";
@@ -14,6 +15,7 @@ export const EditMaterialsModal = ({ id }: { id: string }) => {
   const addQueryParam = useAddQueryParam();
   const [open, setOpen] = useState<boolean | undefined>(false);
   const { data, isFetching } = useGetMaterialDetailDataQuery(id);
+  const t = useTranslations("materials");
 
   return (
     <>
@@ -26,14 +28,14 @@ export const EditMaterialsModal = ({ id }: { id: string }) => {
         }}
       >
         <FontAwesomeIcon icon={faPen} />
-        <span>Güncelle</span>
+        <span>{t("buttons.edit")}</span>
       </button>
       {!isFetching && (
         <Modal
           name={`${EDIT_MATERIAL_MODAL}_${id}`}
           width={"900px"}
           height={"auto"}
-          title="Malzeme Bilgilerini Güncelle"
+          title={t("modal.edit-header")}
           isCloseOutside={false}
           isCloseEsc={false}
           enableParams={true}

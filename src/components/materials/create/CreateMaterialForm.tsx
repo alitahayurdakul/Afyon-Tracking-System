@@ -18,6 +18,7 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { MaterialQueryTypes } from "@/app/api/materials/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import { useTranslations } from "next-intl";
 
 export const CreateMaterialForm = () => {
   const {
@@ -31,12 +32,11 @@ export const CreateMaterialForm = () => {
     defaultValues: {
       name: "",
       code: "",
-      unit: "",
-      stock: "",
       desc: "",
     },
   });
 
+  const t = useTranslations("materials");
   const dispatch = useDispatch();
   const removeModal = useRemoveQueryParamModal();
 
@@ -50,8 +50,6 @@ export const CreateMaterialForm = () => {
         const params = {
           name: data.name,
           code: data.code,
-          unit: data.unit,
-          stock: Number(data.stock),
           description: data.desc,
           editor: "Admin",
         };
@@ -61,10 +59,10 @@ export const CreateMaterialForm = () => {
         });
         dispatch(
           addToastify({
-            message: "Başarıyla oluşturuldu",
+            message: t("notifications.create.success"),
             type: "success",
             icon: "close",
-            id: "createMaterial" + Date.now(),
+            id: "createMaterialSuccess" + Date.now(),
           }),
         );
         dispatch(addTriggerTable());
@@ -75,13 +73,13 @@ export const CreateMaterialForm = () => {
           err.response?.data?.error ||
           err.response?.data?.message ||
           err?.message ||
-          "Oluşturma başarısız";
+          t("notifications.create.error");
         dispatch(
           addToastify({
             message: errorMessage,
             type: "error",
             icon: "close",
-            id: "createMaterial" + Date.now(),
+            id: "createMaterialError" + Date.now(),
           }),
         );
       }
@@ -93,9 +91,9 @@ export const CreateMaterialForm = () => {
     <form className={styles["train-form"]}>
       <InputBox
         control={control as any}
-        label="Malzeme Adı"
+        label={t("form.labels.name")}
         name="name"
-        placeholder="Malzeme adı giriniz"
+        placeholder={t("form.placeholders.name")}
         required
         maxLength={100}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
@@ -103,40 +101,20 @@ export const CreateMaterialForm = () => {
       />
       <InputBox
         control={control as any}
-        label="Malzeme Kodu"
+        label={t("form.labels.code")}
         name="code"
-        placeholder="Malzeme kodu giriniz"
+        placeholder={t("form.placeholders.code")}
         required
         maxLength={50}
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
         inputClassName={styles["text-input"]}
       />
-      <InputBox
-        control={control as any}
-        label="Birim"
-        name="unit"
-        placeholder="Örn: Adet, Litre, Kg"
-        required
-        maxLength={20}
-        spacesRule={InputSpaceEnums.limitMaxOneSpace}
-        inputClassName={styles["text-input"]}
-      />
-      <InputBox
-        control={control as any}
-        label="Stok Miktarı"
-        name="stock"
-        placeholder="Stok miktarı giriniz"
-        required
-        maxLength={10}
-        spacesRule={InputSpaceEnums.limitMaxOneSpace}
-        inputClassName={styles["text-input"]}
-      />
       <TextAreaBox
         control={control as any}
-        label="Açıklama"
+        label={t("form.labels.description")}
         {...register("desc")}
         rows={5}
-        placeholder="Açıklama giriniz"
+        placeholder={t("form.placeholders.description")}
         maxLength={400}
         visibleLimit
         textareaClassName={styles["text-input"]}
@@ -146,7 +124,7 @@ export const CreateMaterialForm = () => {
           clickFn={onCancel}
           type="simple"
           className={styles["cancel-btn"]}
-          label="İptal"
+          label={t("form.buttons.cancel")}
           disabled={isSubmitting}
         />
 
@@ -154,7 +132,7 @@ export const CreateMaterialForm = () => {
           clickFn={handleSubmit(onSubmit)}
           type="simple"
           className={styles["submit-btn"]}
-          label="Kaydet"
+          label={t("form.buttons.save")}
           disabled={isSubmitting}
         />
       </div>

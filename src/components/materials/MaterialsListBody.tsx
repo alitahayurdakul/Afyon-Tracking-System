@@ -2,6 +2,7 @@
 
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 
 import { useGetMaterialsDataQuery } from "@/api/queries/useGetMaterialsQueries";
 import styles from "@/styles/components/common/TableListBody.module.scss";
@@ -11,6 +12,7 @@ import { Table } from "../common/Table";
 import { CreateMaterialsModal } from "./create/CreateMaterialsModal";
 
 export const MaterialsListBody = () => {
+  const t = useTranslations("materials");
   const { data, isLoading } = useGetMaterialsDataQuery();
   const rows = data?.materials ?? [];
 
@@ -18,8 +20,8 @@ export const MaterialsListBody = () => {
     <section className={styles["pipeline-page"]}>
       <div className={styles["page-top"]}>
         <div>
-          <h2>Malzeme Listesi</h2>
-          <p>Depo malzemelerini ve stok bilgilerini merkezi olarak yönetin.</p>
+          <h2>{t("header")}</h2>
+          <p>{t("description")}</p>
         </div>
 
         <CreateMaterialsModal />
@@ -28,7 +30,7 @@ export const MaterialsListBody = () => {
       <div className={styles.toolbar}>
         <div className={styles["search-input"]}>
           <FontAwesomeIcon icon={faSearch} />
-          <input placeholder="Arama..." />
+          <input placeholder={t("search")} />
         </div>
       </div>
 
@@ -37,7 +39,7 @@ export const MaterialsListBody = () => {
           className={styles["table-class"]}
           loading={isLoading}
           data={rows}
-          columns={createMaterialsTableColumns()}
+          columns={createMaterialsTableColumns(t)}
         />
       </div>
     </section>
