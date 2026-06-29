@@ -1,19 +1,15 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-// import { axiosInstance } from "@/api/axiosInstance";
-// import { CLIENT_END_POINTS } from "@/consts/endpoints";
-// import { WagonQueryTypes } from "@/app/api/wagons/route";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 
-import { mockWagons, mockWagonsResponse } from "@/mock/managementData";
+import { axiosInstance } from "@/api/axiosInstance";
+import { WagonQueryTypes } from "@/app/api/wagons/route";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
-import {
-  IWagonResponseDataTypes,
-  IWagonType,
-} from "@/types/wagonsTypes";
+import { IWagonsType, IWagonType } from "@/types/wagonsTypes";
 
-export const useGetWagonsDataQuery = () => {
+export const useGetWagonsDataQuery = <T>() => {
   const trigger = useSelector(
     (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
   );
@@ -22,14 +18,12 @@ export const useGetWagonsDataQuery = () => {
     queryKey: [`getWagonsAllDatas`, trigger],
     refetchOnWindowFocus: false,
     enabled: true,
-    queryFn: async (): Promise<IWagonResponseDataTypes> => {
-      // TODO(api): Backend hazır olduğunda mock dönüşü kaldırıp gerçek isteği aktif edin.
-      // const { data } = await axiosInstance.post<IWagonResponseDataTypes>(
-      //   CLIENT_END_POINTS.wagon.getAll,
-      //   { type: WagonQueryTypes.getAllWagons },
-      // );
-      // return data;
-      return mockWagonsResponse;
+    queryFn: async (): Promise<IWagonsType> => {
+      const { data } = await axiosInstance.post<IWagonsType>(
+        CLIENT_END_POINTS.wagon.getAll,
+        { type: WagonQueryTypes.getAllWagons },
+      );
+      return data;
     },
   });
 };
@@ -44,13 +38,11 @@ export const useGetWagonDetailDataQuery = (id: string) => {
     refetchOnWindowFocus: false,
     enabled: splittedId === id,
     queryFn: async (): Promise<IWagonType | undefined> => {
-      // TODO(api): Backend hazır olduğunda mock dönüşü kaldırıp gerçek isteği aktif edin.
-      // const { data } = await axiosInstance.post<IWagonType>(
-      //   CLIENT_END_POINTS.wagon.getDetail,
-      //   { type: WagonQueryTypes.getDetailWagon, id },
-      // );
-      // return data;
-      return mockWagons.find((wagon) => wagon._id === id);
+      const { data } = await axiosInstance.post<IWagonType>(
+        CLIENT_END_POINTS.wagon.getDetail,
+        { type: WagonQueryTypes.getDetailWagon, id },
+      );
+      return data;
     },
   });
 };

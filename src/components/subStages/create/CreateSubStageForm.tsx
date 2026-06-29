@@ -119,6 +119,17 @@ export const CreateSubStageForm = () => {
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
         inputClassName={styles["text-input"]}
       />
+
+      <TextAreaBox
+        control={control as any}
+        label={t("form.descriptionLabel")}
+        {...register("desc")}
+        rows={5}
+        placeholder={t("form.descriptionPlaceholder")}
+        maxLength={400}
+        visibleLimit
+        textareaClassName={styles["text-input"]}
+      />
       <SelectBox
         control={control as any}
         label={t("form.materialsLabel")}
@@ -141,16 +152,6 @@ export const CreateSubStageForm = () => {
         />
       )}
 
-      <TextAreaBox
-        control={control as any}
-        label={t("form.descriptionLabel")}
-        {...register("desc")}
-        rows={5}
-        placeholder={t("form.descriptionPlaceholder")}
-        maxLength={400}
-        visibleLimit
-        textareaClassName={styles["text-input"]}
-      />
       <div className={styles["btn-group"]}>
         <Button
           clickFn={onCancel}
