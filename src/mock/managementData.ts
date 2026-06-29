@@ -21,7 +21,43 @@ import {
   ISubStageType,
 } from "@/types/subStagesTypes";
 import { IUserResponseDataTypes, IUserType } from "@/types/usersTypes";
+import { IWagonResponseDataTypes, IWagonType } from "@/types/wagonsTypes";
 import { IWorkflowResponseTypes } from "@/types/workflowTypes";
+
+/* --------------------------------- Vagonlar -------------------------------- */
+
+export const mockWagons: IWagonType[] = [
+  {
+    _id: "wagon-1",
+    name: "Vagon A1",
+    description: "Yolcu vagonu, birinci sınıf.",
+    creator: "Admin",
+    createdAt: "2026-05-10T09:00:00.000Z",
+    updatedAt: "2026-05-10T09:00:00.000Z",
+  },
+  {
+    _id: "wagon-2",
+    name: "Vagon B2",
+    description: "Yük vagonu, kapalı tip.",
+    creator: "Admin",
+    editor: "Admin",
+    createdAt: "2026-05-12T11:30:00.000Z",
+    updatedAt: "2026-06-01T08:15:00.000Z",
+  },
+  {
+    _id: "wagon-3",
+    name: "Vagon C3",
+    description: "Sarnıç vagonu, sıvı taşımacılığı için.",
+    creator: "Admin",
+    createdAt: "2026-05-20T14:45:00.000Z",
+    updatedAt: "2026-05-20T14:45:00.000Z",
+  },
+];
+
+export const mockWagonsResponse: IWagonResponseDataTypes = {
+  count: mockWagons.length,
+  wagons: mockWagons,
+};
 
 /* ----------------------------- Gecikme Sebepleri ---------------------------- */
 

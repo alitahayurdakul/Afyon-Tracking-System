@@ -8,6 +8,7 @@ import {
   faLayerGroup,
   faScaleBalanced,
   faSitemap,
+  faTrailer,
   faTrain,
   faUsers,
   faUsersGear,
@@ -79,6 +80,12 @@ export const SIDEBAR_ITEMS: ISidebarItemsTypes = [
     key: "trains",
     icon: faTrain,
     url: URL_PAGES.trains,
+  },
+  {
+    default: "Vagonlar",
+    key: "wagons",
+    icon: faTrailer,
+    url: URL_PAGES.wagons,
   },
   {
     default: "Gecikme Sebepleri",

@@ -1,0 +1,57 @@
+{
+    "header": "Vagon Yönetimi",
+    "description": "Vagonları merkezi olarak yönetin",
+    "search": "Arama...",
+    "delete-question": "Vagonu silmek istediğinize emin misiniz?",
+    "yes": "Evet",
+    "no": "Hayır",
+    "buttons": {
+        "create": "Yeni Vagon Ekle",
+        "edit": "Güncelle",
+        "delete": "Sil"
+    },
+    "table": {
+        "name": "VAGON ADI",
+        "description": "AÇIKLAMA",
+        "creator": "OLUŞTURAN",
+        "editor": "GÜNCELLEYEN",
+        "actions": "İŞLEMLER"
+    },
+    "modal": {
+        "create-headers": "Vagon Ekle",
+        "edit-header": "Vagon Bilgilerini Güncelle"
+    },
+    "form": {
+        "labels": {
+            "name": "VAGON ADI",
+            "description": "AÇIKLAMA",
+            "creator": "Oluşturan",
+            "createdDate": "Oluşturulma Tarihi",
+            "editor": "Son Güncelleyen",
+            "editedDate": "Son Güncelleme Tarihi"
+        },
+        "placeholders": {
+            "name": "Vagon adı giriniz",
+            "description": "Açıklama giriniz"
+        },
+        "buttons": {
+            "cancel": "İptal",
+            "save": "Kaydet"
+        }
+    },
+    "notifications": {
+        "delete": {
+            "success": "Vagon başarıyla silindi.",
+            "error": "Silme işlemi başarısız."
+        },
+        "create": {
+            "success": "Vagon başarıyla oluşturuldu.",
+            "error": "Ekleme işlemi başarısız."
+        },
+        "edit": {
+            "success": "Vagon başarıyla güncellendi.",
+            "error": "Güncelleme işlemi başarısız.",
+            "warning-message": "Vagon bilgilerini güncellemek ilişkili kayıtları etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden emin olun."
+        }
+    }
+}
