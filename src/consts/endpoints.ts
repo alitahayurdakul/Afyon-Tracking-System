@@ -68,8 +68,13 @@ export const END_POINTS = {
     getAll: `${apiUrl}/api/roles`,
     getDetail: (id: string) => `${apiUrl}/api/roles/${id}`,
   },
+  auth: {
+    login: `${apiUrl}/auth`,
+    refresh: `${apiUrl}/refresh`,
+    logout: `${apiUrl}/logout`,
+  },
   user: {
-    create: `${apiUrl}/api/users`,
+    create: `${apiUrl}/register`,
     edit: (id: string) => `${apiUrl}/api/users/${id}`,
     delete: (id: string) => `${apiUrl}/api/users/${id}`,
     getAll: `${apiUrl}/api/users`,
@@ -162,6 +167,11 @@ export const CLIENT_END_POINTS = {
     delete: "/api/roles",
     getAll: "/api/roles",
     getDetail: "/api/roles",
+  },
+  auth: {
+    login: "/api/auth/login",
+    refresh: "/api/auth/refresh",
+    logout: "/api/auth/logout",
   },
   user: {
     create: "/api/users",

@@ -17,6 +17,18 @@
     "users": "Пользователи",
     "roles": "Роли"
   },
+  "login": {
+    "brandTitle": "Система управления рабочими процессами Afyon",
+    "title": "Безопасный вход",
+    "subtitle": "Введите учётные данные для доступа к системе.",
+    "emailLabel": "Эл. почта",
+    "emailPlaceholder": "example@company.com",
+    "passwordLabel": "Пароль",
+    "submit": "Войти",
+    "submitting": "Вход...",
+    "success": "Вход выполнен успешно",
+    "error": "Ошибка входа"
+  },
   "fleetForm": {
     "header": "Запустить новый процесс",
     "form": {

@@ -4,12 +4,15 @@ import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 
+import { useLogoutMutation } from "@/api/queries/useAuthQueries";
 import styles from "@/styles/components/sidebar/sections/SidebarBottom.module.scss";
 
 export const SidebarBottom = () => {
   const router = useRouter();
+  const { mutateAsync: logout } = useLogoutMutation();
 
-  const onLogout = () => {
+  const onLogout = async () => {
+    await logout();
     router.push("/login");
   };
 

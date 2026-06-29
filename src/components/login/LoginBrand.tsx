@@ -1,9 +1,12 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 import logo from "@/assets/images/logo.png";
 import styles from "@/styles/components/common/AuthBrand.module.scss";
 
 export const LoginBrand = () => {
+  const t = useTranslations("layout.login");
+
   return (
     <div className={styles.brand}>
       <div className={styles.logo}>
@@ -16,7 +19,7 @@ export const LoginBrand = () => {
           priority
         />
       </div>
-      <h1 className={styles.title}>Afyon İş Akışı Yönetim Sistemi</h1>
+      <h1 className={styles.title}>{t("brandTitle")}</h1>
     </div>
   );
 };

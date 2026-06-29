@@ -17,6 +17,18 @@
     "users": "Kullanıcılar",
     "roles": "Roller"
   },
+  "login": {
+    "brandTitle": "Afyon İş Akışı Yönetim Sistemi",
+    "title": "Güvenli Giriş",
+    "subtitle": "Sisteme erişmek için kimlik bilgilerinizi giriniz.",
+    "emailLabel": "E-posta",
+    "emailPlaceholder": "ornek@firma.com",
+    "passwordLabel": "Şifre",
+    "submit": "Giriş Yap",
+    "submitting": "Giriş yapılıyor...",
+    "success": "Giriş başarılı",
+    "error": "Giriş başarısız"
+  },
   "fleetForm": {
     "header": "Yeni Süreç Başlat",
     "form": {
