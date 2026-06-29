@@ -47,6 +47,13 @@ export const END_POINTS = {
     process: (query: string) =>
       `${apiUrl}/api/processes/process-statistics?${query}`,
   },
+  wagon: {
+    create: `${apiUrl}/api/wagons`,
+    edit: (id: string) => `${apiUrl}/api/wagons/${id}`,
+    delete: (id: string) => `${apiUrl}/api/wagons/${id}`,
+    getAll: `${apiUrl}/api/wagons`,
+    getDetail: (id: string) => `${apiUrl}/api/wagons/${id}`,
+  },
   reason: {
     create: `${apiUrl}/api/reasons`,
     edit: (id: string) => `${apiUrl}/api/reasons/${id}`,
@@ -135,6 +142,13 @@ export const CLIENT_END_POINTS = {
     getProcessesOptions: "/api/processesOptions",
   },
   statistics: "/api/statistics",
+  wagon: {
+    create: "/api/wagons",
+    edit: "/api/wagons",
+    delete: "/api/wagons",
+    getAll: "/api/wagons",
+    getDetail: "/api/wagons",
+  },
   reason: {
     create: "/api/reasons",
     edit: "/api/reasons",

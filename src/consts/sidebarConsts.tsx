@@ -12,6 +12,7 @@ import {
   faUsers,
   faUsersGear,
   faUserShield,
+  faTrailer,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { ISidebarItemsTypes } from "@/types/sidebarTypes";
@@ -79,6 +80,12 @@ export const SIDEBAR_ITEMS: ISidebarItemsTypes = [
     key: "trains",
     icon: faTrain,
     url: URL_PAGES.trains,
+  },
+  {
+    default: "Vagonlar",
+    key: "wagons",
+    icon: faTrailer,
+    url: URL_PAGES.wagons,
   },
   {
     default: "Gecikme Sebepleri",
