@@ -8,11 +8,11 @@ import {
   faLayerGroup,
   faScaleBalanced,
   faSitemap,
+  faTrailer,
   faTrain,
   faUsers,
   faUsersGear,
   faUserShield,
-  faTrailer,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { ISidebarItemsTypes } from "@/types/sidebarTypes";
