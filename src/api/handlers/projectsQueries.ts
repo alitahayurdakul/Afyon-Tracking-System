@@ -73,6 +73,7 @@ async function getProjects(): Promise<Response> {
     }
     return createJsonError("Failed to fetch projects", 400);
   } catch (err: unknown) {
+    console.log("errr", err)
     return createJsonError(extractErrorMessage(err), 500);
   }
 }

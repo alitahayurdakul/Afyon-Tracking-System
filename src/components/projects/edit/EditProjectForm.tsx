@@ -10,7 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { IProjectFormDataTypes, IProjectType } from "@/types/projectsTypes";
 import { ProjectFormValidation } from "@/utils/validations/projectFormValidation";
 import { useTranslations } from "next-intl";
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { TextAreaBox } from "@/components/formElements/TextAreaBox";
 import { InputBox } from "@/components/formElements/InputBox";
 import { SelectBox } from "@/components/formElements/SelectBox";
@@ -24,6 +24,7 @@ import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { ProjectQueryTypes } from "@/app/api/projects/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { PROJECT_STATUS_OPTIONS } from "@/consts/projectsConsts";
+import { IOptionType } from "@/types/formTypes";
 
 interface IPropsTypes {
   id: string;
@@ -47,6 +48,15 @@ export const EditProjectForm = ({ id, data }: IPropsTypes) => {
     },
   });
 
+  const options = useCallback(() => {
+      return PROJECT_STATUS_OPTIONS.map((s: IOptionType) => {
+        return {
+          value: s.value,
+          label: t(`form.status.${s.label}`),
+        };
+      });
+    }, [t, PROJECT_STATUS_OPTIONS]);
+
   const dispatch = useDispatch();
   const removeModal = useRemoveQueryParamModal();
 
@@ -60,7 +70,7 @@ export const EditProjectForm = ({ id, data }: IPropsTypes) => {
         const params = {
           id,
           name: formData.name,
-          code: formData.code,
+          projectCode: formData.code,
           status: formData.status,
           description: formData.desc,
           editor: "Admin",
@@ -126,7 +136,7 @@ export const EditProjectForm = ({ id, data }: IPropsTypes) => {
         name="status"
         placeholder={t("form.statusPlaceholder")}
         required
-        options={PROJECT_STATUS_OPTIONS}
+        options={options()}
       />
       <TextAreaBox
         control={control as any}

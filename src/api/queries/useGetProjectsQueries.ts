@@ -1,14 +1,10 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-// import { axiosInstance } from "@/api/axiosInstance";
-// import { CLIENT_END_POINTS } from "@/consts/endpoints";
-// import { ProjectQueryTypes } from "@/app/api/projects/route";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 
 import { ProjectQueryTypes } from "@/app/api/projects/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { mockProjects } from "@/mock/managementData";
 import { RootState } from "@/redux/store";
 import {
   IProjectType,
@@ -45,13 +41,11 @@ export const useGetProjectDetailDataQuery = (id: string) => {
     refetchOnWindowFocus: false,
     enabled: splittedId === id,
     queryFn: async (): Promise<IProjectType | undefined> => {
-      // TODO(api): Backend hazır olduğunda mock dönüşü kaldırıp gerçek isteği aktif edin.
-      // const { data } = await axiosInstance.post<IProjectType>(
-      //   CLIENT_END_POINTS.project.getDetail,
-      //   { type: ProjectQueryTypes.getDetailProject, id },
-      // );
-      // return data;
-      return mockProjects.find((project) => project._id === id);
+      const { data } = await axiosInstance.post<IProjectType>(
+        CLIENT_END_POINTS.project.getDetail,
+        { type: ProjectQueryTypes.getDetailProject, id },
+      );
+      return data;
     },
   });
 };
