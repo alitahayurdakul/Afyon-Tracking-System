@@ -154,7 +154,7 @@ export const EditProjectForm = ({ id, data }: IPropsTypes) => {
         </div>
         <div className={styles["activity-row"]}>
           <span className={styles["activity-label"]}>{t("form.activity.editor")}</span>
-          <span className={styles["activity-value"]}>{data?.editor ?? "-"}</span>
+          <span className={styles["activity-value"]}>{data?.lastUpdatedBy ?? "-"}</span>
         </div>
         <div className={styles["activity-row"]}>
           <span className={styles["activity-label"]}>

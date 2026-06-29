@@ -44,7 +44,8 @@
       "editError": "Failed to update",
       "deleteSuccess": "Deleted successfully",
       "deleteError": "Failed to delete"
-     "status": {
+    },
+    "status": {
       "active": "Active",
       "passive": "Passive",
       "completed": "Completed"
