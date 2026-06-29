@@ -51,7 +51,7 @@ export const CreateMaterialForm = () => {
           name: data.name,
           materialCode: data.code,
           description: data.desc,
-          editor: "Admin",
+          creator: "Admin",
         };
         await axiosInstance.post(CLIENT_END_POINTS.material.create, {
           type: MaterialQueryTypes.createMaterial,
