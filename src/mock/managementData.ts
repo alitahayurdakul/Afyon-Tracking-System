@@ -5,14 +5,6 @@
  * API'ler hazır olduğunda ilgili query hook'larındaki mock dönüşü kaldırıp
  * yorum satırındaki gerçek `axiosInstance` çağrısını aktif etmek yeterlidir.
  */
-
-import {
-  IMaterialResponseDataTypes,
-  IMaterialType,
-} from "@/types/materialsTypes";
-import {
-  IProjectType,
-} from "@/types/projectsTypes";
 import { IReasonResponseDataTypes, IReasonType } from "@/types/reasonsTypes";
 import { IRoleResponseDataTypes, IRoleType } from "@/types/rolesTypes";
 import { IStageResponseDataTypes, IStageType } from "@/types/stagesTypes";
@@ -257,44 +249,6 @@ export const mockWorkflows: IWorkflowResponseTypes[] = [
     updatedAt: "2026-04-10T09:00:00.000Z",
   },
 ];
-
-/* ------------------------------ Malzeme Listesi ----------------------------- */
-
-export const mockMaterials: IMaterialType[] = [
-  {
-    _id: "material-1",
-    name: "Fren Balatası",
-    code: "FRN-001",
-    description: "Tren fren sistemi için yedek balata.",
-    creator: "Admin",
-    createdAt: "2026-05-01T09:00:00.000Z",
-    updatedAt: "2026-05-01T09:00:00.000Z",
-  },
-  {
-    _id: "material-2",
-    name: "Motor Yağı",
-    code: "MTR-015",
-    description: "İkmal aşamasında kullanılan motor yağı.",
-    creator: "Admin",
-    editor: "Admin",
-    createdAt: "2026-05-03T10:30:00.000Z",
-    updatedAt: "2026-05-22T12:00:00.000Z",
-  },
-  {
-    _id: "material-3",
-    name: "Hava Filtresi",
-    code: "FLT-007",
-    description: "Periyodik bakımda değiştirilen hava filtresi.",
-    creator: "Admin",
-    createdAt: "2026-05-08T08:00:00.000Z",
-    updatedAt: "2026-05-08T08:00:00.000Z",
-  },
-];
-
-export const mockMaterialsResponse: IMaterialResponseDataTypes = {
-  count: mockMaterials.length,
-  materials: mockMaterials,
-};
 
 /* ------------------------------- Alt Aşamalar ------------------------------ */
 

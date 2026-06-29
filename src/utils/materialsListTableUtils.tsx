@@ -15,7 +15,7 @@ export const materialsTableColumns: ICommonTableColumnsTypes = [
     label: "name",
   },
   {
-    name: "code",
+    name: "materialCode",
     label: "code",
   },
   {
@@ -44,17 +44,10 @@ export const createMaterialsTableColumns = (t:TFunction) => {
       cell: ({ row }: { row: { original: IMaterialType } }) => {
         const r = row.original;
 
-        if (column.name === "name") {
+        if (column.name === "materialCode" || column.name === "name") {
           return (
             <div className={styles["reason-desc"]}>
-              <p>{r.name || "-"}</p>
-            </div>
-          );
-        }
-        if (column.name === "code") {
-          return (
-            <div className={styles["reason-desc"]}>
-              <p>{r.code || "-"}</p>
+              <p>{r[column.name] || "-"}</p>
             </div>
           );
         }
@@ -68,13 +61,10 @@ export const createMaterialsTableColumns = (t:TFunction) => {
         }
         if (column.name === "editor") {
           const isUnedited = !r.updatedAt || r.createdAt === r.updatedAt;
-          if (isUnedited) {
-            return <div>-</div>;
-          }
           return (
             <div>
-              <p className={styles["creator-name"]}>{r.editor || "Admin"}</p>
-              <p className={styles["creator-date"]}>{formatDate(r.updatedAt)}</p>
+              <p className={styles["creator-name"]}>{!isUnedited ? r.editor : "-"}</p>
+              <p className={styles["creator-date"]}>{!isUnedited ? formatDate(r.updatedAt) : "-"}</p>
             </div>
           );
         }

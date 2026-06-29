@@ -58,7 +58,7 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
   const { data: materialsData } = useGetMaterialsDataQuery();
   const materialOptions = useMemo(
     () =>
-      (materialsData?.materials ?? []).map((material) => ({
+      (materialsData ?? []).map((material) => ({
         label: material.name,
         value: material._id,
       })),
