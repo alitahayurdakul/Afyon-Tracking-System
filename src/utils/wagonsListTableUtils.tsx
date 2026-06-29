@@ -11,7 +11,7 @@ import { formatDate } from "./formDate";
 
 export const wagonsTableColumns: ICommonTableColumnsTypes = [
   {
-    name: "name",
+    name: "wagonNo",
     label: "name",
   },
   {
@@ -44,10 +44,10 @@ export const createWagonsTableColumns = (t: TFunction) => {
       cell: ({ row }: { row: { original: IWagonType } }) => {
         const w = row.original;
 
-        if (column.name === "name") {
+        if (column.name === "wagonNo") {
           return (
             <div className={styles["wagon-desc"]}>
-              <p>{w.name || "-"}</p>
+              <p>{w.wagonNo || "-"}</p>
             </div>
           );
         }
@@ -61,24 +61,20 @@ export const createWagonsTableColumns = (t: TFunction) => {
         if (column.name === "creator") {
           return (
             <div>
-              <p className={styles["creator-name"]}>{w.creator || "Admin"}</p>
+              <p className={styles["creator-name"]}>{w.creator ?? "-"}</p>
               <p className={styles["creator-date"]}>
-                {formatDate(w.createdAt)}
+                {formatDate(w.createdAt) ?? "-"}
               </p>
             </div>
           );
         }
         if (column.name === "editor") {
-          const isUnedited =
-            !w.updatedAt || w.createdAt === w.updatedAt;
-          if (isUnedited) {
-            return <div>-</div>;
-          }
+          const isUnedited = !w.updatedAt || w.createdAt === w.updatedAt;
           return (
             <div>
-              <p className={styles["creator-name"]}>{w.editor || "Admin"}</p>
+              <p className={styles["creator-name"]}>{w.editor ?? "-"}</p>
               <p className={styles["creator-date"]}>
-                {formatDate(w.updatedAt)}
+                {!isUnedited ? formatDate(w.updatedAt) : "-"}
               </p>
             </div>
           );

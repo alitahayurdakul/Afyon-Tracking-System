@@ -7,6 +7,7 @@ import {
 } from "@/types/materialsTypes";
 import {
   createJsonError,
+  createJsonOnlyData,
   createJsonSuccess,
   extractErrorMessage,
 } from "./responseHelpers";
@@ -67,17 +68,9 @@ async function editMaterial(params: Record<string, any>): Promise<Response> {
 
 async function getMaterials(): Promise<Response> {
   try {
-    const response = await axiosInstance.get(END_POINTS.material.getAll);
-    if (response.status === 200) {
-      const raw = response.data;
-      const materials: IMaterialType[] = Array.isArray(raw)
-        ? raw
-        : (raw?.materials ?? raw?.data ?? []);
-      const responseData: IMaterialResponseDataTypes = {
-        count: materials.length,
-        materials,
-      };
-      return Response.json(responseData);
+    const response = await axiosInstance.get<IMaterialResponseDataTypes>(END_POINTS.material.getAll);
+    if (response.status === 200) {    
+      return createJsonOnlyData(response.data.materials || []);
     }
     return createJsonError("Failed to fetch materials", 400);
   } catch (err: unknown) {

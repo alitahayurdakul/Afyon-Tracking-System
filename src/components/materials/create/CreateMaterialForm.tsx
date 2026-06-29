@@ -6,7 +6,7 @@ import { Button } from "@/components/formElements/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { MaterialFormValidation } from "@/utils/validations/materialFormValidation";
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { TextAreaBox } from "@/components/formElements/TextAreaBox";
 import { InputBox } from "@/components/formElements/InputBox";
 import { InputSpaceEnums } from "@/types/formEnums";
@@ -49,9 +49,9 @@ export const CreateMaterialForm = () => {
       try {
         const params = {
           name: data.name,
-          code: data.code,
+          materialCode: data.code,
           description: data.desc,
-          editor: "Admin",
+          creator: "Admin",
         };
         await axiosInstance.post(CLIENT_END_POINTS.material.create, {
           type: MaterialQueryTypes.createMaterial,
