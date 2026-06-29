@@ -21,6 +21,7 @@ import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { ProjectQueryTypes } from "@/app/api/projects/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { PROJECT_STATUS_OPTIONS } from "@/consts/projectsConsts";
+import { IOptionType } from "@/types/formTypes";
 
 export const CreateProjectForm = () => {
   const t = useTranslations("projects");
@@ -40,6 +41,15 @@ export const CreateProjectForm = () => {
     },
   });
 
+  const options = useCallback(() => {
+    return PROJECT_STATUS_OPTIONS.map((s: IOptionType) => {
+      return {
+        value: s.value,
+        label: t(`form.status.${s.label}`),
+      };
+    });
+  }, [t, PROJECT_STATUS_OPTIONS]);
+
   const dispatch = useDispatch();
   const removeModal = useRemoveQueryParamModal();
 
@@ -52,10 +62,10 @@ export const CreateProjectForm = () => {
       try {
         const params = {
           name: data.name,
-          code: data.code,
+          projectCode: data.code,
           status: data.status,
           description: data.desc,
-          editor: "Admin",
+          creator: "Admin",
         };
         await axiosInstance.post(CLIENT_END_POINTS.project.create, {
           type: ProjectQueryTypes.createProject,
@@ -119,7 +129,7 @@ export const CreateProjectForm = () => {
         name="status"
         placeholder={t("form.statusPlaceholder")}
         required
-        options={PROJECT_STATUS_OPTIONS}
+        options={options()}
       />
       <TextAreaBox
         control={control as any}

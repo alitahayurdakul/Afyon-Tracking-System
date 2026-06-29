@@ -300,39 +300,3 @@ export const mockSubStagesResponse: ISubStageResponseDataTypes = {
   count: mockSubStages.length,
   subStages: mockSubStages,
 };
-
-/* --------------------------------- Projeler -------------------------------- */
-
-export const mockProjects: IProjectType[] = [
-  {
-    _id: "project-1",
-    name: "Afyon Depo Modernizasyonu",
-    projectCode: "PRJ-2026-001",
-    status: "IN_PROGRESS",
-    description: "Depo bakım süreçlerinin dijitalleştirilmesi projesi.",
-    creator: "Admin",
-    createdAt: "2026-03-01T09:00:00.000Z",
-    updatedAt: "2026-05-20T09:00:00.000Z",
-  },
-  {
-    _id: "project-2",
-    name: "Filo Takip Entegrasyonu",
-    projectCode: "PRJ-2026-002",
-    status: "ACTIVE",
-    description: "Tren filosu takip sisteminin entegrasyonu.",
-    creator: "Admin",
-    createdAt: "2026-04-12T10:00:00.000Z",
-    updatedAt: "2026-04-12T10:00:00.000Z",
-  },
-  {
-    _id: "project-3",
-    name: "Periyodik Bakım Otomasyonu",
-    projectCode: "PRJ-2025-014",
-    status: "COMPLETED",
-    description: "Periyodik bakım planlamasının otomatikleştirilmesi.",
-    creator: "Admin",
-    lastUpdatedBy: "Admin",
-    createdAt: "2025-11-01T09:00:00.000Z",
-    updatedAt: "2026-02-15T16:00:00.000Z",
-  },
-];
