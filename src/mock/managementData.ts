@@ -11,7 +11,6 @@ import {
   IMaterialType,
 } from "@/types/materialsTypes";
 import {
-  IProjectResponseDataTypes,
   IProjectType,
 } from "@/types/projectsTypes";
 import { IReasonResponseDataTypes, IReasonType } from "@/types/reasonsTypes";
@@ -308,7 +307,7 @@ export const mockProjects: IProjectType[] = [
   {
     _id: "project-1",
     name: "Afyon Depo Modernizasyonu",
-    code: "PRJ-2026-001",
+    projectCode: "PRJ-2026-001",
     status: "IN_PROGRESS",
     description: "Depo bakım süreçlerinin dijitalleştirilmesi projesi.",
     creator: "Admin",
@@ -318,8 +317,8 @@ export const mockProjects: IProjectType[] = [
   {
     _id: "project-2",
     name: "Filo Takip Entegrasyonu",
-    code: "PRJ-2026-002",
-    status: "PLANNED",
+    projectCode: "PRJ-2026-002",
+    status: "ACTIVE",
     description: "Tren filosu takip sisteminin entegrasyonu.",
     creator: "Admin",
     createdAt: "2026-04-12T10:00:00.000Z",
@@ -328,17 +327,12 @@ export const mockProjects: IProjectType[] = [
   {
     _id: "project-3",
     name: "Periyodik Bakım Otomasyonu",
-    code: "PRJ-2025-014",
+    projectCode: "PRJ-2025-014",
     status: "COMPLETED",
     description: "Periyodik bakım planlamasının otomatikleştirilmesi.",
     creator: "Admin",
-    editor: "Admin",
+    lastUpdatedBy: "Admin",
     createdAt: "2025-11-01T09:00:00.000Z",
     updatedAt: "2026-02-15T16:00:00.000Z",
   },
 ];
-
-export const mockProjectsResponse: IProjectResponseDataTypes = {
-  count: mockProjects.length,
-  projects: mockProjects,
-};

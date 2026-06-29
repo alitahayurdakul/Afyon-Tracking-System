@@ -1,7 +1,8 @@
 import { ProjectsTableActionsCol } from "@/components/projects/ProjectsTableActionsCol";
-import { PROJECT_STATUS_LABEL_MAP } from "@/consts/projectsConsts";
+import { PROJECT_STATUS_OPTIONS } from "@/consts/projectsConsts";
 import styles from "@/styles/components/projects/ProjectsListTableUtils.module.scss";
 import { TFunction } from "@/types/commonTypes";
+import { IOptionType } from "@/types/formTypes";
 import { IProjectType } from "@/types/projectsTypes";
 import {
   ICommonTableColumnsType,
@@ -16,7 +17,7 @@ export const projectsTableColumns: ICommonTableColumnsTypes = [
     label: "name",
   },
   {
-    name: "code",
+    name: "projectCode",
     label: "code",
   },
   {
@@ -28,7 +29,7 @@ export const projectsTableColumns: ICommonTableColumnsTypes = [
     label: "creator",
   },
   {
-    name: "editor",
+    name: "lastUpdatedBy",
     label: "editor",
   },
   {
@@ -56,17 +57,18 @@ export const createProjectsTableColumns = (t: TFunction) => {
             </div>
           );
         }
-        if (column.name === "code") {
+        if (column.name === "projectCode") {
           return (
             <div className={styles["reason-desc"]}>
-              <p>{r.code || "-"}</p>
+              <p>{r.projectCode || "-"}</p>
             </div>
           );
         }
         if (column.name === "status") {
+          const activeStatus = PROJECT_STATUS_OPTIONS.find((status: IOptionType) => r.status === status.value);
           return (
             <div className={styles["reason-desc"]}>
-              <p>{PROJECT_STATUS_LABEL_MAP.get(r.status) || "-"}</p>
+              <p style={{color: `var(--${activeStatus?.color})`}}>{t(`form.status.${activeStatus?.label}`) || "-"}</p>
             </div>
           );
         }
@@ -78,15 +80,11 @@ export const createProjectsTableColumns = (t: TFunction) => {
             </div>
           );
         }
-        if (column.name === "editor") {
-          const isUnedited = !r.updatedAt || r.createdAt === r.updatedAt;
-          if (isUnedited) {
-            return <div>-</div>;
-          }
+        if (column.name === "lastUpdatedBy") {
           return (
             <div>
-              <p className={styles["creator-name"]}>{r.editor || "Admin"}</p>
-              <p className={styles["creator-date"]}>{formatDate(r.updatedAt)}</p>
+              <p className={styles["creator-name"]}>{r.lastUpdatedBy ?? "Admin"}</p>
+              <p className={styles["creator-date"]}>{formatDate(r.updatedAt) ?? "-"}</p>
             </div>
           );
         }

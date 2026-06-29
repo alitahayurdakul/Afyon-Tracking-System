@@ -14,12 +14,7 @@ import { InputSpaceEnums } from "@/types/formEnums";
 import { TextAreaBox } from "@/components/formElements/TextAreaBox";
 import { useRemoveQueryParamModal } from "@/utils/searchParams";
 import { useDispatch } from "react-redux";
-import { addToastify } from "@/redux/slices/toastSlice";
 import { ITrainFormDataTypes } from "@/types/trainsTypes";
-import { axiosInstance } from "@/api/axiosInstance";
-import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { TrainQueryTypes } from "@/app/api/trains/route";
-import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { SelectBox } from "@/components/formElements/SelectBox";
 import { useTranslations } from "next-intl";
 
@@ -68,7 +63,6 @@ export const CreateTrainForm = () => {
 
   const onSubmit: SubmitHandler<ITrainFormDataTypes> = useCallback(
     async (data) => {
-      console.log(data);
       // try {
       //   const params = {
       //     ...data,

@@ -41,7 +41,7 @@ export const EditProjectForm = ({ id, data }: IPropsTypes) => {
     resolver: yupResolver(ProjectFormValidation()),
     defaultValues: {
       name: data?.name ?? "",
-      code: data?.code ?? "",
+      code: data?.projectCode ?? "",
       status: data?.status ?? "",
       desc: data?.description ?? "",
     },

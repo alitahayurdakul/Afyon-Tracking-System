@@ -1,4 +1,4 @@
-export type ProjectStatus = "PLANNED" | "IN_PROGRESS" | "COMPLETED";
+export type ProjectStatus = "ACTIVE" | "IN_PROGRESS" | "COMPLETED";
 
 export interface IProjectFormDataTypes {
   name: string;
@@ -10,16 +10,11 @@ export interface IProjectFormDataTypes {
 export interface IProjectType {
   _id: string;
   name: string;
-  code: string;
+  projectCode?: string;
   status: ProjectStatus;
   description: string;
   creator?: string;
-  editor?: string;
+  lastUpdatedBy?: string;
   createdAt: string;
   updatedAt?: string;
-}
-
-export interface IProjectResponseDataTypes {
-  count: number;
-  projects: IProjectType[];
 }

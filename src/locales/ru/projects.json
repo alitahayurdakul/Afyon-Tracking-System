@@ -44,6 +44,10 @@
       "editError": "Не удалось обновить",
       "deleteSuccess": "Успешно удалено",
       "deleteError": "Не удалось удалить"
+    "status": {
+      "active": "Активный",
+      "passive": "Неактивный",
+      "completed": "Завершён"
     }
   },
   "deletePopover": {

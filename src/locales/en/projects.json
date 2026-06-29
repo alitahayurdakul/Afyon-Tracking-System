@@ -44,6 +44,10 @@
       "editError": "Failed to update",
       "deleteSuccess": "Deleted successfully",
       "deleteError": "Failed to delete"
+     "status": {
+      "active": "Active",
+      "passive": "Passive",
+      "completed": "Completed"
     }
   },
   "deletePopover": {

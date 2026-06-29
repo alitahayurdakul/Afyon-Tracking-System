@@ -2,11 +2,11 @@
 import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
 import {
-  IProjectResponseDataTypes,
   IProjectType,
 } from "@/types/projectsTypes";
 import {
   createJsonError,
+  createJsonOnlyData,
   createJsonSuccess,
   extractErrorMessage,
 } from "./responseHelpers";
@@ -69,15 +69,7 @@ async function getProjects(): Promise<Response> {
   try {
     const response = await axiosInstance.get(END_POINTS.project.getAll);
     if (response.status === 200) {
-      const raw = response.data;
-      const projects: IProjectType[] = Array.isArray(raw)
-        ? raw
-        : (raw?.projects ?? raw?.data ?? []);
-      const responseData: IProjectResponseDataTypes = {
-        count: projects.length,
-        projects,
-      };
-      return Response.json(responseData);
+      return createJsonOnlyData(response.data.projects || []);
     }
     return createJsonError("Failed to fetch projects", 400);
   } catch (err: unknown) {

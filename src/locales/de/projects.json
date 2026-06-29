@@ -45,6 +45,11 @@
       "deleteSuccess": "Erfolgreich gelöscht",
       "deleteError": "Löschen fehlgeschlagen"
     }
+    "status": {
+  "active": "Aktiv",
+  "passive": "Inaktiv",
+  "completed": "Abgeschlossen"
+}
   },
   "deletePopover": {
     "question": "Möchten Sie dieses Projekt wirklich löschen?",

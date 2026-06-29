@@ -44,6 +44,10 @@
       "editError": "Güncelleme başarısız",
       "deleteSuccess": "Başarıyla silindi",
       "deleteError": "Silme işlemi başarısız"
+    "status": {
+      "active": "Aktif",
+      "passive": "Pasif",
+      "completed": "Tamamlandı"
     }
   },
   "deletePopover": {
