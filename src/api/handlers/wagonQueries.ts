@@ -6,6 +6,8 @@ import {
   IWagonType,
 } from "@/types/wagonsTypes";
 
+import { createJsonOnlyData } from "./responseHelpers";
+
 export const wagonHandlers = {
   createWagon,
   deleteWagon,
@@ -16,6 +18,7 @@ export const wagonHandlers = {
 
 async function createWagon(params: Record<string, any>): Promise<Response> {
   try {
+    console.log(params);
     const response = await axiosInstance.post(END_POINTS.wagon.create, params);
     if (response.status === 201) {
       return Response.json({ success: true, data: response.data });
@@ -95,17 +98,9 @@ async function editWagon(params: Record<string, any>): Promise<Response> {
 
 async function getWagons(): Promise<Response> {
   try {
-    const response = await axiosInstance.get(END_POINTS.wagon.getAll);
+    const response = await axiosInstance.get<IWagonResponseDataTypes>(END_POINTS.wagon.getAll);
     if (response.status === 200) {
-      const raw = response.data;
-      const wagons: IWagonType[] = Array.isArray(raw)
-        ? raw
-        : (raw?.wagons ?? raw?.data ?? []);
-      const responseData: IWagonResponseDataTypes = {
-        count: wagons.length,
-        wagons,
-      };
-      return Response.json(responseData);
+      return createJsonOnlyData(response.data.wagons || []);
     }
     return Response.json(
       { success: false, error: "Failed to fetch wagons" },
@@ -125,7 +120,7 @@ async function getWagonDetail(id: string): Promise<Response> {
       END_POINTS.wagon.getDetail(id),
     );
     if (response.status === 200) {
-      return Response.json(response.data || []);
+      return createJsonOnlyData(response.data || []);
     }
     return Response.json(
       { success: false, error: "Failed to fetch wagon detail" },

@@ -37,7 +37,7 @@ export const EditWagonForm = ({ id, data }: IPropsTypes) => {
   } = useForm<IWagonFormDataTypes>({
     resolver: yupResolver(WagonFormValidation()),
     defaultValues: {
-      name: data?.name ?? "",
+      name: data?.wagonNo ?? "",
       desc: data?.description ?? "",
     },
   });
@@ -54,7 +54,7 @@ export const EditWagonForm = ({ id, data }: IPropsTypes) => {
       try {
         const params = {
           id,
-          name: formData.name,
+          wagonNo: formData.name,
           description: formData.desc,
           editor: "Admin",
         };

@@ -6,7 +6,7 @@ import { Button } from "@/components/formElements/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { WagonFormValidation } from "@/utils/validations/wagonFormValidation";
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { TextAreaBox } from "@/components/formElements/TextAreaBox";
 import { InputBox } from "@/components/formElements/InputBox";
 import { InputSpaceEnums } from "@/types/formEnums";
@@ -47,9 +47,9 @@ export const CreateWagonForm = () => {
     async (data) => {
       try {
         const params = {
-          name: data.name,
+          wagonNo: data.name,
           description: data.desc,
-          editor: "Admin",
+          creator: "Admin",
         };
         await axiosInstance.post(CLIENT_END_POINTS.wagon.create, {
           type: WagonQueryTypes.createWagon,
@@ -60,7 +60,7 @@ export const CreateWagonForm = () => {
             message: t("notifications.create.success"),
             type: "success",
             icon: "close",
-            id: "createWagon" + Date.now(),
+            id: "createWagonSuccess" + Date.now(),
           }),
         );
         dispatch(addTriggerTable());
@@ -72,7 +72,7 @@ export const CreateWagonForm = () => {
             message: (err as Error)?.message || t("notifications.create.error"),
             type: "error",
             icon: "close",
-            id: "createWagon" + Date.now(),
+            id: "createWagonError" + Date.now(),
           }),
         );
       }

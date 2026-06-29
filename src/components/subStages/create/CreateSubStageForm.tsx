@@ -48,7 +48,7 @@ export const CreateSubStageForm = () => {
   const { data: materialsData } = useGetMaterialsDataQuery();
   const materialOptions = useMemo(
     () =>
-      (materialsData?.materials ?? []).map((material) => ({
+      (materialsData ?? []).map((material) => ({
         label: material.name,
         value: material._id,
       })),
@@ -79,7 +79,7 @@ export const CreateSubStageForm = () => {
         });
         dispatch(
           addToastify({
-            message: t("form.notifications.createSuccess"),
+            message: "Başarıyla oluşturuldu",
             type: "success",
             icon: "close",
             id: "createSubStage" + Date.now(),
@@ -93,7 +93,7 @@ export const CreateSubStageForm = () => {
           err.response?.data?.error ||
           err.response?.data?.message ||
           err?.message ||
-          t("form.notifications.createError");
+          "Oluşturma başarısız";
         dispatch(
           addToastify({
             message: errorMessage,
@@ -119,6 +119,17 @@ export const CreateSubStageForm = () => {
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
         inputClassName={styles["text-input"]}
       />
+
+      <TextAreaBox
+        control={control as any}
+        label={t("form.descriptionLabel")}
+        {...register("desc")}
+        rows={5}
+        placeholder={t("form.descriptionPlaceholder")}
+        maxLength={400}
+        visibleLimit
+        textareaClassName={styles["text-input"]}
+      />
       <SelectBox
         control={control as any}
         label={t("form.materialsLabel")}
@@ -141,16 +152,6 @@ export const CreateSubStageForm = () => {
         />
       )}
 
-      <TextAreaBox
-        control={control as any}
-        label={t("form.descriptionLabel")}
-        {...register("desc")}
-        rows={5}
-        placeholder={t("form.descriptionPlaceholder")}
-        maxLength={400}
-        visibleLimit
-        textareaClassName={styles["text-input"]}
-      />
       <div className={styles["btn-group"]}>
         <Button
           clickFn={onCancel}

@@ -14,7 +14,7 @@ import { CreateMaterialsModal } from "./create/CreateMaterialsModal";
 export const MaterialsListBody = () => {
   const t = useTranslations("materials");
   const { data, isLoading } = useGetMaterialsDataQuery();
-  const rows = data?.materials ?? [];
+  console.log(data);
 
   return (
     <section className={styles["pipeline-page"]}>
@@ -38,7 +38,7 @@ export const MaterialsListBody = () => {
         <Table
           className={styles["table-class"]}
           loading={isLoading}
-          data={rows}
+          data={data ?? []}
           columns={createMaterialsTableColumns(t)}
         />
       </div>

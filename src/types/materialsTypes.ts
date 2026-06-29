@@ -7,13 +7,15 @@ export interface IMaterialFormDataTypes {
 export interface IMaterialType {
   _id: string;
   name: string;
-  code: string;
+  materialCode: string;
   description: string;
   creator?: string;
   editor?: string;
   createdAt: string;
   updatedAt?: string;
 }
+
+export type IMaterialsType = Array<IMaterialType>
 
 export interface IMaterialResponseDataTypes {
   count: number;

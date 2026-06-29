@@ -75,16 +75,17 @@ export const createProjectsTableColumns = (t: TFunction) => {
         if (column.name === "creator") {
           return (
             <div>
-              <p className={styles["creator-name"]}>{r.creator || "Admin"}</p>
+              <p className={styles["creator-name"]}>{r[column.name] ?? "-"}</p>
               <p className={styles["creator-date"]}>{formatDate(r.createdAt)}</p>
             </div>
           );
         }
         if (column.name === "lastUpdatedBy") {
+                 const isUnedited = !r.updatedAt || r.createdAt === r.updatedAt;
           return (
             <div>
-              <p className={styles["creator-name"]}>{r.lastUpdatedBy ?? "Admin"}</p>
-              <p className={styles["creator-date"]}>{formatDate(r.updatedAt) ?? "-"}</p>
+              <p className={styles["creator-name"]}>{r[column.name] ?? "-"}</p>
+              <p className={styles["creator-date"]}>{!isUnedited ? formatDate(r.updatedAt) : "-"}</p>
             </div>
           );
         }
