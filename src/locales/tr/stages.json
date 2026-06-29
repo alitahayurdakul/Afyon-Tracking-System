@@ -22,7 +22,36 @@
     "selectedMaterials": "Seçilen Malzemeler",
     "cancel": "İptal",
     "save": "Kaydet",
-    "editInfo": "Aşama bilgilerini güncellemek ilişkili süreç kayıtlarını etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden emin olun."
+    "editInfo": "Aşama bilgilerini güncellemek ilişkili süreç kayıtlarını etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden emin olun.",
+    "fields": {
+      "name": {
+        "label": "İş Akışı Adı",
+        "placeholder": "İş akışı adı giriniz"
+      },
+      "description": {
+        "label": "Açıklama",
+        "placeholder": "Açıklama giriniz"
+      },
+      "hasSubStage": {
+        "label": "Alt aşama bulunmaktadır."
+      },
+      "subStages": {
+        "label": "Alt Aşama",
+        "placeholder": "Alt aşama seçiniz"
+      },
+      "materialList": {
+        "label": "Malzeme Listesi",
+        "placeholder": "Malzeme seçiniz"
+      }
+    },
+    "notifications": {
+      "createSuccess": "Başarıyla oluşturuldu",
+      "createError": "Oluşturma başarısız",
+      "editSuccess": "Başarıyla güncellendi",
+      "editError": "Güncelleme başarısız",
+      "deleteSuccess": "Başarıyla silindi",
+      "deleteError": "Silme işlemi başarısız"
+    }
   },
   "deletePopover": {
     "question": "Aşamayı silmek istediğinize emin misiniz?",

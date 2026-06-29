@@ -97,7 +97,7 @@ export const CreateStageForm = () => {
         );
         dispatch(
           addToastify({
-            message: "Ekleme işlemi başarılı.",
+            message: t("form.notifications.createSuccess"),
             type: "success",
             icon: "close",
             id: "createWorkflowCreate" + Date.now(),
@@ -108,7 +108,7 @@ export const CreateStageForm = () => {
       } catch (err) {
         dispatch(
           addToastify({
-            message: "Silme işlemi sırasında bir sorun ile karşılaşıldı.",
+            message: t("form.notifications.createError"),
             type: "error",
             icon: "close",
             id: "createWorkflowDelete" + Date.now(),
@@ -135,9 +135,9 @@ export const CreateStageForm = () => {
             <React.Fragment key={index}>
               <InputBox
                 control={control as any}
-                label={item.label as string}
+                label={t(`form.fields.${item.name}.label`)}
                 name={item.name}
-                placeholder={item.label}
+                placeholder={t(`form.fields.${item.name}.placeholder`)}
                 required={item.isRequired}
                 maxLength={item.maxLength}
                 spacesRule={
@@ -158,11 +158,11 @@ export const CreateStageForm = () => {
             <React.Fragment key={index}>
               <TextAreaBox
                 control={control as any}
-                label="Açıklama"
+                label={t(`form.fields.${item.name}.label`)}
                 {...register(item.name as keyof IStageFormDataTypes)}
                 required={item.isRequired}
                 rows={item.maxRows}
-                placeholder="Açıklama giriniz"
+                placeholder={t(`form.fields.${item.name}.placeholder`)}
                 maxLength={item.maxLength}
                 visibleLimit
                 textareaClassName={styles["text-input"]}
@@ -180,7 +180,7 @@ export const CreateStageForm = () => {
                 className={styles["checkbox-container"]}
                 classNameInput={styles["checkbox-input"]}
                 classNameLabel={styles["checkbox-label"]}
-                label={item.label}
+                label={t(`form.fields.${item.name}.label`)}
                 required={false}
               />
             </React.Fragment>
@@ -207,8 +207,8 @@ export const CreateStageForm = () => {
                 }
                 control={control as any}
                 required={item.isRequired}
-                label="Aşama"
-                placeholder="Alt Aşama seçiniz"
+                label={t("form.fields.subStages.label")}
+                placeholder={t("form.fields.subStages.placeholder")}
                 formLabelClassName={styles["form-label"]}
                 isSearchable
                 multiselect
@@ -239,8 +239,8 @@ export const CreateStageForm = () => {
                 }
                 control={control as any}
                 required={item.isRequired}
-                label={item.label}
-                placeholder="Malzeme seçiniz"
+                label={t("form.fields.materialList.label")}
+                placeholder={t("form.fields.materialList.placeholder")}
                 formLabelClassName={styles["form-label"]}
                 isSearchable
                 multiselect

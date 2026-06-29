@@ -90,7 +90,7 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
         });
         dispatch(
           addToastify({
-            message: "Başarıyla güncellendi",
+            message: t("form.notifications.editSuccess"),
             type: "success",
             icon: "close",
             id: "editSubStage" + Date.now(),
@@ -103,7 +103,7 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
           err.response?.data?.error ||
           err.response?.data?.message ||
           err?.message ||
-          "Güncelleme başarısız";
+          t("form.notifications.editError");
         dispatch(
           addToastify({
             message: errorMessage,
@@ -164,26 +164,26 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
 
       <section className={styles["activity-section"]}>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>Oluşturan:</span>
+          <span className={styles["activity-label"]}>{t("form.activity.creator")}</span>
           <span className={styles["activity-value"]}>
             {data?.creator || "Admin"}
           </span>
         </div>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>Oluşturulma Tarihi:</span>
+          <span className={styles["activity-label"]}>{t("form.activity.createdAt")}</span>
           <span className={styles["activity-value"]}>
             {formatDate(data?.createdAt) ?? "-"}
           </span>
         </div>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>Son Güncelleyen:</span>
+          <span className={styles["activity-label"]}>{t("form.activity.editor")}</span>
           <span className={styles["activity-value"]}>
             {data?.editor ?? "-"}
           </span>
         </div>
         <div className={styles["activity-row"]}>
           <span className={styles["activity-label"]}>
-            Son Güncellenme Tarihi:
+            {t("form.activity.updatedAt")}
           </span>
           <span className={styles["activity-value"]}>
             {formatDate(data?.updatedAt) ?? "-"}

@@ -31,6 +31,19 @@
     "cancel": "İptal",
     "save": "Kaydet",
     "editInfo": "Proje bilgilerini güncellemek ilişkili kayıtları ve raporları etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden emin olun.",
+    "activity": {
+      "creator": "Oluşturan:",
+      "createdAt": "Oluşturulma Tarihi:",
+      "editor": "Son Güncelleyen:",
+      "updatedAt": "Son Güncellenme Tarihi:"
+    },
+    "notifications": {
+      "createSuccess": "Başarıyla oluşturuldu",
+      "createError": "Oluşturma başarısız",
+      "editSuccess": "Başarıyla güncellendi",
+      "editError": "Güncelleme başarısız",
+      "deleteSuccess": "Başarıyla silindi",
+      "deleteError": "Silme işlemi başarısız"
     "status": {
       "active": "Aktif",
       "passive": "Pasif",

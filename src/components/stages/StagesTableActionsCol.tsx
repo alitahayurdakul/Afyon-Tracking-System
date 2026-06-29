@@ -27,7 +27,7 @@ export const StagesTableActionsCol = ({ id }: { id: string }) => {
       });
       dispatch(
         addToastify({
-          message: "Başarılı",
+          message: t("form.notifications.deleteSuccess"),
           type: "success",
           icon: "close",
           id: "contactePage" + Date.now(),
@@ -38,7 +38,7 @@ export const StagesTableActionsCol = ({ id }: { id: string }) => {
     catch (err) {
       dispatch(
         addToastify({
-          message: "Silme işlemi başarısız.",
+          message: t("form.notifications.deleteError"),
           type: "error",
           icon: "close",
           id: "contactePage" + Date.now(),

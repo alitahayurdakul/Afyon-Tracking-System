@@ -163,9 +163,9 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
             <React.Fragment key={index}>
               <InputBox
                 control={control as any}
-                label={item.label as string}
+                label={t(`form.fields.${item.name}.label`)}
                 name={item.name}
-                placeholder={item.label}
+                placeholder={t(`form.fields.${item.name}.placeholder`)}
                 required={item.isRequired}
                 maxLength={item.maxLength}
                 spacesRule={
@@ -186,11 +186,11 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
             <React.Fragment key={index}>
               <TextAreaBox
                 control={control as any}
-                label="Açıklama"
+                label={t(`form.fields.${item.name}.label`)}
                 {...register(item.name as keyof IStageFormDataTypes)}
                 required={item.isRequired}
                 rows={item.maxRows}
-                placeholder="Açıklama giriniz"
+                placeholder={t(`form.fields.${item.name}.placeholder`)}
                 maxLength={item.maxLength}
                 visibleLimit
                 textareaClassName={styles["text-input"]}
@@ -219,8 +219,8 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
                 }
                 control={control as any}
                 required={item.isRequired}
-                label="Aşama"
-                placeholder="Alt Aşama seçiniz"
+                label={t("form.fields.subStages.label")}
+                placeholder={t("form.fields.subStages.placeholder")}
                 formLabelClassName={styles["form-label"]}
                 isSearchable
                 multiselect
@@ -251,8 +251,8 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
                 }
                 control={control as any}
                 required={item.isRequired}
-                label={item.label}
-                placeholder="Malzeme seçiniz"
+                label={t("form.fields.materialList.label")}
+                placeholder={t("form.fields.materialList.placeholder")}
                 formLabelClassName={styles["form-label"]}
                 isSearchable
                 multiselect
@@ -274,11 +274,7 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
 
       <div>
         <FontAwesomeIcon icon={faCircleInfo} className={styles["alert-icon"]} />
-        <span className={styles["info-text"]}>
-          Aşama bilgilerini güncellemek ilişkili süreç kayıtlarını
-          etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden
-          emin olun.
-        </span>
+        <span className={styles["info-text"]}>{t("form.editInfo")}</span>
       </div>
 
       <div className={styles["btn-group"]}>

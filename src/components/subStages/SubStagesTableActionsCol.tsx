@@ -26,7 +26,7 @@ export const SubStagesTableActionsCol = ({ id }: { id: string }) => {
       });
       dispatch(
         addToastify({
-          message: "Silme başarılı",
+          message: t("form.notifications.deleteSuccess"),
           type: "success",
           icon: "close",
           id: "deleteSubStage" + Date.now(),
@@ -38,7 +38,7 @@ export const SubStagesTableActionsCol = ({ id }: { id: string }) => {
         err.response?.data?.error ||
         err.response?.data?.message ||
         err?.message ||
-        "Silme başarısız";
+        t("form.notifications.deleteError");
       dispatch(
         addToastify({
           message: errorMessage,
