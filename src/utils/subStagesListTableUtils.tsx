@@ -1,7 +1,10 @@
+import React from "react";
+
+import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
 import { SubStagesTableActionsCol } from "@/components/subStages/SubStagesTableActionsCol";
 import styles from "@/styles/components/subStages/SubStagesListTableUtils.module.scss";
 import { TFunction } from "@/types/commonTypes";
-import { ISubStageType } from "@/types/subStagesTypes";
+import { ISubStageMaterial, ISubStageType } from "@/types/subStagesTypes";
 import {
   ICommonTableColumnsType,
   ICommonTableColumnsTypes,
@@ -13,6 +16,10 @@ export const subStagesTableColumns: ICommonTableColumnsTypes = [
   {
     name: "name",
     label: "name",
+  },
+  {
+    name: "description",
+    label: "description"
   },
   {
     name: "materials",
@@ -51,16 +58,27 @@ export const createSubStagesTableColumns = (t: TFunction) => {
             </div>
           );
         }
+        if (column.name === "description") {
+          return (
+            <DynamicTextWithTooltip
+                text={r.description}
+              />
+          );
+        }
         if (column.name === "materials") {
           const materials = r.materials ?? [];
           return (
-            <div className={styles["reason-desc"]}>
-              <p>
-                {materials.length > 0
-                  ? materials.map((material) => material.label).join(", ")
-                  : "-"}
-              </p>
-            </div>
+            <DynamicTextWithTooltip
+                contentBody={
+                  <ul className={styles["wagon-list-container"]}>
+                    {materials.map((material: ISubStageMaterial, index: number) => (
+                      <React.Fragment key={index}>
+                        <li>{material.name}</li>
+                      </React.Fragment>
+                    ))}
+                  </ul>
+                }
+              />
           );
         }
         if (column.name === "creator") {
@@ -78,8 +96,8 @@ export const createSubStagesTableColumns = (t: TFunction) => {
           }
           return (
             <div>
-              <p className={styles["creator-name"]}>{r.editor || "Admin"}</p>
-              <p className={styles["creator-date"]}>{formatDate(r.updatedAt)}</p>
+              <p className={styles["creator-name"]}>{r.lastUpdatedBy || "-"}</p>
+              <p className={styles["creator-date"]}>{!isUnedited ? formatDate(r.updatedAt) : "-"}</p>
             </div>
           );
         }

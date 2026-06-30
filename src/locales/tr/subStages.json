@@ -6,6 +6,7 @@
   "table": {
     "name": "Alt Aşama Adı",
     "materials": "Malzemeler",
+    "description": "Açıklama",
     "creator": "Oluşturan",
     "editor": "Güncelleyen",
     "actions": "İşlemler"

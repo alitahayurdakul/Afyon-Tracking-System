@@ -6,6 +6,7 @@
   "table": {
     "name": "Sub Stage Name",
     "materials": "Materials",
+    "description": "Description",
     "creator": "Created By",
     "editor": "Updated By",
     "actions": "Actions"

@@ -7,7 +7,11 @@ import styles from "@/styles/components/subStages/SubStageForm.module.scss";
 import { Button } from "@/components/formElements/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ISubStageFormDataTypes, ISubStageType } from "@/types/subStagesTypes";
+import {
+  ISubStageFormDataTypes,
+  ISubStageMaterial,
+  ISubStageType,
+} from "@/types/subStagesTypes";
 import { SubStageFormValidation } from "@/utils/validations/subStageFormValidation";
 import { useTranslations } from "next-intl";
 import React, { useCallback, useMemo } from "react";
@@ -24,7 +28,10 @@ import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { SubStageQueryTypes } from "@/app/api/sub-stages/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { IOptionType } from "@/types/formTypes";
-import { useGetMaterialsDataQuery } from "@/api/queries/useGetMaterialsQueries";
+import {
+  useGetMaterialsDataQuery,
+  useGetMaterialsOptionsDataQuery,
+} from "@/api/queries/useGetMaterialsQueries";
 import SelectedItemList from "@/components/common/SelectedItemList";
 
 interface IPropsTypes {
@@ -45,9 +52,9 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
     resolver: yupResolver(SubStageFormValidation()),
     defaultValues: {
       name: data?.name ?? "",
-      materials: (data?.materials ?? []).map((material) => ({
-        label: material.label,
-        value: material.value,
+      materials: (data?.materials ?? []).map((material: ISubStageMaterial) => ({
+        label: material.name,
+        value: material._id,
       })),
       desc: data?.description ?? "",
     },
@@ -55,15 +62,7 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
 
   const dispatch = useDispatch();
   const removeModal = useRemoveQueryParamModal();
-  const { data: materialsData } = useGetMaterialsDataQuery();
-  const materialOptions = useMemo(
-    () =>
-      (materialsData ?? []).map((material) => ({
-        label: material.name,
-        value: material._id,
-      })),
-    [materialsData],
-  );
+  const { data: materialOptions } = useGetMaterialsOptionsDataQuery();
 
   const selectedMaterials = watch("materials");
 
@@ -77,12 +76,11 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
         const params = {
           id,
           name: formData.name,
-          materials: formData.materials.map((material: IOptionType) => ({
-            value: material.value,
-            label: material.label,
-          })),
+          materialIds: formData.materials.map(
+            (material: IOptionType) => material.value,
+          ),
           description: formData.desc,
-          editor: "Admin",
+          lastUpdatedBy: "Ali",
         };
         await axiosInstance.post(CLIENT_END_POINTS.subStage.edit, {
           type: SubStageQueryTypes.editSubStage,
@@ -135,7 +133,7 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
         name="materials"
         placeholder={t("form.materialsPlaceholder")}
         required
-        options={materialOptions}
+        options={materialOptions ?? []}
         isSearchable
         isClearable
         multiselect
@@ -164,21 +162,27 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
 
       <section className={styles["activity-section"]}>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>{t("form.activity.creator")}</span>
+          <span className={styles["activity-label"]}>
+            {t("form.activity.creator")}
+          </span>
           <span className={styles["activity-value"]}>
             {data?.creator || "Admin"}
           </span>
         </div>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>{t("form.activity.createdAt")}</span>
+          <span className={styles["activity-label"]}>
+            {t("form.activity.createdAt")}
+          </span>
           <span className={styles["activity-value"]}>
             {formatDate(data?.createdAt) ?? "-"}
           </span>
         </div>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>{t("form.activity.editor")}</span>
+          <span className={styles["activity-label"]}>
+            {t("form.activity.editor")}
+          </span>
           <span className={styles["activity-value"]}>
-            {data?.editor ?? "-"}
+            {data?.lastUpdatedBy ?? "-"}
           </span>
         </div>
         <div className={styles["activity-row"]}>

@@ -21,7 +21,7 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { SubStageQueryTypes } from "@/app/api/sub-stages/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import { useGetMaterialsDataQuery } from "@/api/queries/useGetMaterialsQueries";
+import { useGetMaterialsDataQuery, useGetMaterialsOptionsDataQuery } from "@/api/queries/useGetMaterialsQueries";
 import SelectedItemList from "@/components/common/SelectedItemList";
 
 export const CreateSubStageForm = () => {
@@ -45,15 +45,7 @@ export const CreateSubStageForm = () => {
 
   const dispatch = useDispatch();
   const removeModal = useRemoveQueryParamModal();
-  const { data: materialsData } = useGetMaterialsDataQuery();
-  const materialOptions = useMemo(
-    () =>
-      (materialsData ?? []).map((material) => ({
-        label: material.name,
-        value: material._id,
-      })),
-    [materialsData],
-  );
+  const {data: materialOptions} = useGetMaterialsOptionsDataQuery();
 
   const selectedMaterials = watch("materials");
 
@@ -66,13 +58,11 @@ export const CreateSubStageForm = () => {
       try {
         const params = {
           name: data.name,
-          materials: data.materials.map((material: IOptionType) => ({
-            value: material.value,
-            label: material.label,
-          })),
+          materialIds: data.materials.map((material: IOptionType) => material.value),
           description: data.desc,
           editor: "Admin",
         };
+
         await axiosInstance.post(CLIENT_END_POINTS.subStage.create, {
           type: SubStageQueryTypes.createSubStage,
           params,
@@ -136,7 +126,7 @@ export const CreateSubStageForm = () => {
         name="materials"
         placeholder={t("form.materialsPlaceholder")}
         required
-        options={materialOptions}
+        options={materialOptions ?? []}
         isSearchable
         isClearable
         multiselect

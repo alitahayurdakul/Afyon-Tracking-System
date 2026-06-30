@@ -1,3 +1,4 @@
+import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
 import { ReasonsTableActionsCol } from "@/components/reasons/ReasonsTableActionsCol";
 import styles from "@/styles/components/reasons/ReasonsListTableUtils.module.scss";
 import { TFunction } from "@/types/commonTypes";
@@ -8,7 +9,6 @@ import {
 } from "@/types/tableColumnTypes";
 
 import { formatDate } from "./formDate";
-import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
 
 export const reasonsTableColumns: ICommonTableColumnsTypes = [
   {

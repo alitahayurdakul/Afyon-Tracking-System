@@ -7,10 +7,9 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { MaterialQueryTypes } from "@/app/api/materials/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
-import {
-  IMaterialsType,
-  IMaterialType,
-} from "@/types/materialsTypes";
+import { IOptionType } from "@/types/formTypes";
+import { IMaterialsType, IMaterialType } from "@/types/materialsTypes";
+import { optionsConverters } from "@/types/optionsConverter";
 
 export const useGetMaterialsDataQuery = () => {
   const trigger = useSelector(
@@ -46,6 +45,32 @@ export const useGetMaterialDetailDataQuery = (id: string) => {
         { type: MaterialQueryTypes.getDetailMaterial, id },
       );
       return data;
+    },
+  });
+};
+
+export const useGetMaterialsOptionsDataQuery = () => {
+  const trigger = useSelector(
+    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+  );
+
+  return useQuery({
+    queryKey: [`getMaterialsAllDatas`, trigger],
+    refetchOnWindowFocus: false,
+    enabled: true,
+    queryFn: async (): Promise<IOptionType[]> => {
+      const { data } = await axiosInstance.post<IMaterialsType>(
+        CLIENT_END_POINTS.material.getAll,
+        { type: MaterialQueryTypes.getAllMaterials },
+      );
+
+      const materialOptions: IOptionType[] = optionsConverters(
+        data || [],
+        "_id",
+        "name",
+      );
+
+      return materialOptions;
     },
   });
 };
