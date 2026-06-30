@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 
 import { useGetReasonsDataQuery } from "@/api/queries/useGetReasonsQueries";
 import styles from "@/styles/components/common/TableListBody.module.scss";
+import { IReasonsType } from "@/types/reasonsTypes";
 import { createReasonsTableColumns } from "@/utils/reasonsListTableUtils";
 
 import { Table } from "../common/Table";
@@ -13,8 +14,7 @@ import { CreateReasonsModal } from "./create/CreateReasonsModal";
 
 export const ReasonsListBody = () => {
   const t = useTranslations("delayReasons");
-  const { data, isLoading } = useGetReasonsDataQuery();
-  const rows = data?.reasons ?? [];
+  const { data, isLoading } = useGetReasonsDataQuery<IReasonsType>();
 
   return (
     <section className={styles["pipeline-page"]}>
@@ -38,7 +38,7 @@ export const ReasonsListBody = () => {
         <Table
           className={styles["table-class"]}
           loading={isLoading}
-          data={rows}
+          data={data}
           columns={createReasonsTableColumns(t)}
         />
       </div>
