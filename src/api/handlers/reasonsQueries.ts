@@ -1,10 +1,8 @@
- 
 import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
-import {
-  IReasonResponseDataTypes,
-  IReasonType,
-} from "@/types/reasonsTypes";
+import { IReasonsType, IReasonType } from "@/types/reasonsTypes";
+
+import { createJsonOnlyData } from "./responseHelpers";
 
 export const reasonHandlers = {
   createReason,
@@ -95,17 +93,11 @@ async function editReason(params: Record<string, any>): Promise<Response> {
 
 async function getReasons(): Promise<Response> {
   try {
-    const response = await axiosInstance.get(END_POINTS.reason.getAll);
+    const response = await axiosInstance.get<IReasonsType>(
+      END_POINTS.reason.getAll,
+    );
     if (response.status === 200) {
-      const raw = response.data;
-      const reasons: IReasonType[] = Array.isArray(raw)
-        ? raw
-        : (raw?.reasons ?? raw?.data ?? []);
-      const responseData: IReasonResponseDataTypes = {
-        count: reasons.length,
-        reasons,
-      };
-      return Response.json(responseData);
+      return createJsonOnlyData(response.data || []);
     }
     return Response.json(
       { success: false, error: "Failed to fetch reasons" },
@@ -125,7 +117,7 @@ async function getReasonDetail(id: string): Promise<Response> {
       END_POINTS.reason.getDetail(id),
     );
     if (response.status === 200) {
-      return Response.json(response.data || []);
+      return createJsonOnlyData(response.data || []);
     }
     return Response.json(
       { success: false, error: "Failed to fetch reason detail" },

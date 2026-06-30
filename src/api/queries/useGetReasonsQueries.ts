@@ -1,19 +1,15 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-// import { axiosInstance } from "@/api/axiosInstance";
-// import { CLIENT_END_POINTS } from "@/consts/endpoints";
-// import { ReasonQueryTypes } from "@/app/api/reasons/route";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 
-import { mockReasons, mockReasonsResponse } from "@/mock/managementData";
+import { axiosInstance } from "@/api/axiosInstance";
+import { ReasonQueryTypes } from "@/app/api/reasons/route";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
-import {
-  IReasonResponseDataTypes,
-  IReasonType,
-} from "@/types/reasonsTypes";
+import { IReasonsType, IReasonType } from "@/types/reasonsTypes";
 
-export const useGetReasonsDataQuery = () => {
+export const useGetReasonsDataQuery = <T>() => {
   const trigger = useSelector(
     (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
   );
@@ -22,14 +18,12 @@ export const useGetReasonsDataQuery = () => {
     queryKey: [`getReasonsAllDatas`, trigger],
     refetchOnWindowFocus: false,
     enabled: true,
-    queryFn: async (): Promise<IReasonResponseDataTypes> => {
-      // TODO(api): Backend hazır olduğunda mock dönüşü kaldırıp gerçek isteği aktif edin.
-      // const { data } = await axiosInstance.post<IReasonResponseDataTypes>(
-      //   CLIENT_END_POINTS.reason.getAll,
-      //   { type: ReasonQueryTypes.getAllReasons },
-      // );
-      // return data;
-      return mockReasonsResponse;
+    queryFn: async (): Promise<IReasonsType> => {
+      const { data } = await axiosInstance.post<IReasonsType>(
+        CLIENT_END_POINTS.reason.getAll,
+        { type: ReasonQueryTypes.getAllReasons },
+      );
+      return data;
     },
   });
 };
@@ -44,13 +38,11 @@ export const useGetReasonDetailDataQuery = (id: string) => {
     refetchOnWindowFocus: false,
     enabled: splittedId === id,
     queryFn: async (): Promise<IReasonType | undefined> => {
-      // TODO(api): Backend hazır olduğunda mock dönüşü kaldırıp gerçek isteği aktif edin.
-      // const { data } = await axiosInstance.post<IReasonType>(
-      //   CLIENT_END_POINTS.reason.getDetail,
-      //   { type: ReasonQueryTypes.getDetailReason, id },
-      // );
-      // return data;
-      return mockReasons.find((reason) => reason._id === id);
+      const { data } = await axiosInstance.post<IReasonType>(
+        CLIENT_END_POINTS.reason.getDetail,
+        { type: ReasonQueryTypes.getDetailReason, id },
+      );
+      return data;
     },
   });
 };
