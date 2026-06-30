@@ -95,7 +95,13 @@ async function getRoles(http: AxiosInstance): Promise<Response> {
     );
   } catch (err: any) {
     return Response.json(
-      { success: false, error: err?.message },
+      {
+        success: false,
+        error:
+          err?.response?.data?.message ||
+          err?.response?.data?.error ||
+          err?.message,
+      },
       { status: err?.response?.status || 500 },
     );
   }

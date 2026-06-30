@@ -7,4 +7,5 @@ export interface IInputField {
   placeholder: string;
   icon: string;
   autoComplete?: string;
+  togglePassword?: boolean;
 }

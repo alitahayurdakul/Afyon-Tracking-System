@@ -1,7 +1,10 @@
 "use client";
 import { useMutation } from "@tanstack/react-query";
-// import axios from "axios";
-// import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { clearAuth,setAccessToken } from "@/redux/slices/authSlice";
 
 interface LoginPayload {
   email: string;
@@ -13,39 +16,45 @@ interface LoginResponse {
   role?: { roleName: string; permissions: string[] };
 }
 
-// Backend hazır olduğunda kullanılacak instance.
-// const authAxios = axios.create({ withCredentials: true });
+const authAxios = axios.create({ withCredentials: true });
 
 export const useLoginMutation = () => {
-  return useMutation({
-    mutationFn: async (payload: LoginPayload): Promise<LoginResponse> => {
-      // TODO(api): Backend hazır olduğunda mock dönüşü kaldırıp gerçek isteği aktif edin.
-      // const { data } = await authAxios.post<LoginResponse>(
-      //   CLIENT_END_POINTS.auth.login,
-      //   payload,
-      // );
-      // return data;
+  const dispatch = useDispatch();
 
-      // Şimdilik mock: backend olmadığı için her zaman başarılı kabul edilir.
-      await new Promise((resolve) => setTimeout(resolve, 600));
-      return {
-        accessToken: "mock-access-token",
-        role: { roleName: "Admin", permissions: [] },
-      };
+  return useMutation({
+    mutationFn: async (payload: LoginPayload) => {
+      const { data } = await authAxios.post<LoginResponse>(
+        CLIENT_END_POINTS.auth.login,
+        payload,
+      );
+      return data;
     },
-    onSuccess: () => {
-      // TODO(api): Token saklama (ör. authSlice / cookie) backend hazır olunca eklenecek.
-      // dispatch(setAccessToken(data.accessToken));
+    onSuccess: (data) => {
+      dispatch(setAccessToken(data.accessToken));
     },
   });
 };
 
 export const useLogoutMutation = () => {
+  const dispatch = useDispatch();
+
   return useMutation({
     mutationFn: async () => {
-      // TODO(api): Backend hazır olduğunda gerçek logout isteğini aktif edin.
-      // await authAxios.get(CLIENT_END_POINTS.auth.logout);
-      await new Promise((resolve) => setTimeout(resolve, 300));
+      await authAxios.get(CLIENT_END_POINTS.auth.logout);
+    },
+    onSettled: () => {
+      dispatch(clearAuth());
     },
   });
+};
+
+export const refreshAccessToken = async (): Promise<string | null> => {
+  try {
+    const { data } = await authAxios.get<{ accessToken: string }>(
+      CLIENT_END_POINTS.auth.refresh,
+    );
+    return data?.accessToken ?? null;
+  } catch {
+    return null;
+  }
 };

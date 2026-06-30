@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -11,6 +11,7 @@ import { addToastify } from "@/redux/slices/toastSlice";
 import styles from "@/styles/components/login/LoginCard.module.scss";
 
 export const LoginCard = () => {
+  const t = useTranslations("layout.login");
   const router = useRouter();
   const dispatch = useDispatch();
   const { mutateAsync, isPending } = useLoginMutation();
@@ -24,7 +25,7 @@ export const LoginCard = () => {
       await mutateAsync({ email, pwd });
       dispatch(
         addToastify({
-          message: "Giriş başarılı",
+          message: t("success"),
           type: "success",
           icon: "close",
           id: "login" + Date.now(),
@@ -38,7 +39,7 @@ export const LoginCard = () => {
             err?.response?.data?.error ||
             err?.response?.data?.message ||
             err?.message ||
-            "Giriş başarısız",
+            t("error"),
           type: "error",
           icon: "close",
           id: "login" + Date.now(),
@@ -50,22 +51,20 @@ export const LoginCard = () => {
   return (
     <div className={styles.card}>
       <div className={styles.header}>
-        <h2 className={styles.title}>Güvenli Giriş</h2>
-        <p className={styles.description}>
-          Sisteme erişmek için kimlik bilgilerinizi giriniz.
-        </p>
+        <h2 className={styles.title}>{t("title")}</h2>
+        <p className={styles.description}>{t("subtitle")}</p>
       </div>
 
       <form className={styles.form} onSubmit={onSubmit}>
         <div className={styles["field-group"]}>
           <label htmlFor="email" className={styles.label}>
-            E-posta
+            {t("emailLabel")}
           </label>
           <InputField
             id="email"
             name="email"
             type="email"
-            placeholder="ornek@firma.com"
+            placeholder={t("emailPlaceholder")}
             icon="mail"
             autoComplete="email"
             value={email}
@@ -75,7 +74,7 @@ export const LoginCard = () => {
 
         <div className={styles["field-group"]}>
           <label htmlFor="password" className={styles.label}>
-            Şifre
+            {t("passwordLabel")}
           </label>
           <InputField
             id="password"
@@ -84,30 +83,14 @@ export const LoginCard = () => {
             placeholder="••••••••"
             icon="lock"
             autoComplete="current-password"
+            togglePassword
             value={pwd}
             onChange={(e) => setPwd(e.target.value)}
           />
-
-          <div className={styles["options-row"]}>
-            <div className={styles.remember}>
-              <input
-                id="remember"
-                name="remember"
-                type="checkbox"
-                className={styles.checkbox}
-              />
-              <label htmlFor="remember" className={styles["remember-label"]}>
-                Beni Hatırla
-              </label>
-            </div>
-            <Link href="/forgot-password" className={styles.forgot}>
-              Şifremi Unuttum
-            </Link>
-          </div>
         </div>
 
         <button type="submit" className={styles.submit} disabled={isPending}>
-          <span>{isPending ? "Giriş yapılıyor..." : "Giriş Yap"}</span>
+          <span>{isPending ? t("submitting") : t("submit")}</span>
           <span className={`material-symbols-outlined ${styles["submit-icon"]}`}>
             login
           </span>

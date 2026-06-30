@@ -17,6 +17,18 @@
     "users": "Users",
     "roles": "Roles"
   },
+  "login": {
+    "brandTitle": "Afyon Workflow Management System",
+    "title": "Secure Login",
+    "subtitle": "Enter your credentials to access the system.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "example@company.com",
+    "passwordLabel": "Password",
+    "submit": "Log In",
+    "submitting": "Logging in...",
+    "success": "Login successful",
+    "error": "Login failed"
+  },
   "fleetForm": {
     "header": "Start New Process",
     "form": {
