@@ -12,7 +12,7 @@ interface WagonCellProps {
   contentBody?: React.ReactNode;
 }
 
-export function WagonCell({ text, contentBody }: WagonCellProps) {
+export function DynamicTextWithTooltip({ text, contentBody }: WagonCellProps) {
   const textRef = useRef<HTMLDivElement>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const content = text ?? contentBody;

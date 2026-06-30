@@ -83,6 +83,7 @@ export const CreateTrainForm = () => {
         );
         reset();
         dispatch(addTriggerTable());
+        removeModal();
       } catch (err) {
         dispatch(
           addToastify({

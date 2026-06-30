@@ -8,6 +8,7 @@ import {
 } from "@/types/tableColumnTypes";
 
 import { formatDate } from "./formDate";
+import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
 
 export const reasonsTableColumns: ICommonTableColumnsTypes = [
   {
@@ -53,9 +54,7 @@ export const createReasonsTableColumns = (t: TFunction) => {
         }
         if (column.name === "desc") {
           return (
-            <div className={styles["reason-desc"]}>
-              <p>{r.description || "-"}</p>
-            </div>
+            <DynamicTextWithTooltip text={r.description}/>
           );
         }
         if (column.name === "creator") {
