@@ -7,7 +7,7 @@ import { SubmitHandler, useForm, useFieldArray } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { TrainFormValidation } from "@/utils/validations/trainFormValidation";
 import React, { useCallback, useEffect } from "react";
-import { IFormFieldType } from "@/types/formTypes";
+import { IFormFieldType, IOptionType } from "@/types/formTypes";
 import { TRAIN_FORM_CONSTS } from "@/consts/trainsConsts";
 import { InputBox } from "@/components/formElements/InputBox";
 import { InputSpaceEnums } from "@/types/formEnums";
@@ -17,6 +17,13 @@ import { useDispatch } from "react-redux";
 import { ITrainFormDataTypes } from "@/types/trainsTypes";
 import { SelectBox } from "@/components/formElements/SelectBox";
 import { useTranslations } from "next-intl";
+import { axiosInstance } from "@/api/axiosInstance";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { TrainQueryTypes } from "@/app/api/trains/route";
+import { addToastify } from "@/redux/slices/toastSlice";
+import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import SelectedItemList from "@/components/common/SelectedItemList";
+import { useGetWagonsOptionsQuery } from "@/api/queries/useGetWagonsQueries";
 
 export const CreateTrainForm = () => {
   const t = useTranslations("trains");
@@ -33,29 +40,15 @@ export const CreateTrainForm = () => {
     defaultValues: {
       trainSetNo: "",
       desc: "",
-      wagonDetails: [],
+      wagons: [],
     },
   });
 
+  const { data, isLoading } = useGetWagonsOptionsQuery<IOptionType[]>();
+
   const dispatch = useDispatch();
   const removeModal = useRemoveQueryParamModal();
-  const wagonsCount = watch("wagonsCount");
-
-  const { fields } = useFieldArray({
-    control,
-    name: "wagonDetails",
-  });
-
-  useEffect(() => {
-    const count = Number(wagonsCount);
-    if (!count || count < 1) {
-      setValue("wagonDetails", []);
-      return;
-    }
-    const current = watch("wagonDetails") || [];
-    const next = Array.from({ length: count }, (_, i) => current[i] ?? { name: "" });
-    setValue("wagonDetails", next);
-  }, [wagonsCount]);
+  const selectedWagons = watch("wagons");
 
   const onCancel = () => {
     removeModal();
@@ -63,35 +56,43 @@ export const CreateTrainForm = () => {
 
   const onSubmit: SubmitHandler<ITrainFormDataTypes> = useCallback(
     async (data) => {
-      // try {
-      //   const params = {
-      //     ...data,
-      //     creator: "Admin",
-      //   };
-      //   await axiosInstance.post(CLIENT_END_POINTS.train.create, {
-      //     type: TrainQueryTypes.createTrain,
-      //     params,
-      //   });
-      //   dispatch(
-      //     addToastify({
-      //       message: "Başarıyla oluşturuldu",
-      //       type: "success",
-      //       icon: "close",
-      //       id: "createTrain" + Date.now(),
-      //     }),
-      //   );
-      //   reset();
-      //   dispatch(addTriggerTable());
-      // } catch (err) {
-      //   dispatch(
-      //     addToastify({
-      //       message: (err as Error)?.message || "Hata oluştu",
-      //       type: "error",
-      //       icon: "close",
-      //       id: "createTrainError" + Date.now(),
-      //     }),
-      //   );
-      // }
+      try {
+        const wagons = data.wagons.map((option: IOptionType, index) => {
+          return{
+            order: index + 1,
+            id: option.value
+          }
+        })
+        const params = {
+          trainName: data.trainSetNo ?? "",
+          wagons,
+          desc: data.desc,
+          creator: "Admin",
+        };
+        await axiosInstance.post(CLIENT_END_POINTS.train.create, {
+          type: TrainQueryTypes.createTrain,
+          params,
+        });
+        dispatch(
+          addToastify({
+            message: "Başarıyla oluşturuldu",
+            type: "success",
+            icon: "close",
+            id: "createTrain" + Date.now(),
+          }),
+        );
+        reset();
+        dispatch(addTriggerTable());
+      } catch (err) {
+        dispatch(
+          addToastify({
+            message: (err as Error)?.message || "Hata oluştu",
+            type: "error",
+            icon: "close",
+            id: "createTrainError" + Date.now(),
+          }),
+        );
+      }
     },
     [],
   );
@@ -104,9 +105,9 @@ export const CreateTrainForm = () => {
             <React.Fragment key={index}>
               <InputBox
                 control={control as any}
-                label={t(`form.fields.${item.name}.label`)}
+                label={t(`form.fields.${item.label}.label`)}
                 name={item.name}
-                placeholder={t(`form.fields.${item.name}.placeholder`)}
+                placeholder={t(`form.fields.${item.label}.placeholder`)}
                 required={item.isRequired}
                 maxLength={item.maxLength}
                 spacesRule={
@@ -127,12 +128,13 @@ export const CreateTrainForm = () => {
             <React.Fragment key={index}>
               <SelectBox
                 name={item.name}
-                options={item.options || []}
+                options={data || []}
                 control={control as any}
                 required={item.isRequired}
-                label={item.label}
-                placeholder={item.placeholder}
+                label={t(`form.fields.${item.label}.label`)}
+                placeholder={t(`form.fields.${item.label}.placeholder`)}
                 formLabelClassName={styles["form-label"]}
+                multiselect={item.isMultiselect}
                 isSearchable
                 isClearable
                 hideSelectedOptions
@@ -146,11 +148,11 @@ export const CreateTrainForm = () => {
             <React.Fragment key={index}>
               <TextAreaBox
                 control={control as any}
-                label={t(`form.fields.${item.name}.label`)}
+                label={t(`form.fields.${item.label}.label`)}
                 {...register(item.name as keyof ITrainFormDataTypes)}
                 required={item.isRequired}
                 rows={item.maxRows}
-                placeholder={t(`form.fields.${item.name}.placeholder`)}
+                placeholder={t(`form.fields.${item.label}.placeholder`)}
                 maxLength={item.maxLength}
                 visibleLimit
                 textareaClassName={styles["text-input"]}
@@ -158,23 +160,18 @@ export const CreateTrainForm = () => {
             </React.Fragment>
           );
         }
+
         return null;
       })}
 
-      <div className={styles["inputbox-group"]}>
-        {fields.map((field, index) => (
-          <InputBox
-            key={field.id}
-            control={control as any}
-            label={t("form.wagon.label", { index: index + 1 })}
-            name={`wagonDetails.${index}.name` as any}
-            placeholder={t("form.wagon.placeholder", { index: index + 1 })}
-            required
-            inputClassName={styles["text-input"]}
-            className={styles["half-input-container"]}
-          />
-        ))}
-      </div>
+      {selectedWagons && selectedWagons.length > 0 && (
+        <SelectedItemList
+          name="wagons"
+          selectedItems={selectedWagons}
+          setValue={setValue}
+          title={t("form.fields.selectedWagons")}
+        />
+      )}
 
       <div className={styles["btn-group"]}>
         <Button

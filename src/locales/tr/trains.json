@@ -6,6 +6,7 @@
   "columns": {
     "trainSetNo": "Tren No",
     "info": "TREN BİLGİSİ",
+    "wagons": "VAGONLAR",
     "creator": "Oluşturan",
     "editor": "Güncelleyen",
     "actions": "İşlemler"
@@ -31,10 +32,11 @@
         "label": "Açıklama",
         "placeholder": "Açıklama giriniz"
       },
-      "wagonsCount": {
-        "label": "Vagon Sayısı",
-        "placeholder": "Vagon sayısı giriniz"
-      }
+      "wagons": {
+        "label": "Vagon",
+        "placeholder": "Vagon seçiniz"
+      },
+      "selectedWagons": "Seçilen Vagonlar"
     },
     "wagon": {
       "label": "Vagon {index} Adı",

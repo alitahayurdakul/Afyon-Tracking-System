@@ -13,6 +13,8 @@ export interface IReasonType {
   updatedAt?: string;
 }
 
+export type IReasonsType = Array<IReasonType>;
+
 export interface IReasonResponseDataTypes {
   count: number;
   reasons: IReasonType[];

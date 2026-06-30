@@ -40,40 +40,23 @@ export const TRAIN_FORM_CONSTS: IFormFieldsType = [
   {
     name: "trainSetNo",
     type: "input",
-    label: "Tren No",
+    label: "trainSetNo",
     isRequired: true,
     maxLength: 100,
   },
-  // {
-  //   name: "trainModel",
-  //   type: "select",
-  //   label: "Model",
-  //   placeholder: "Model seçiniz",
-  //   options: TRAIN_MODELS,
-  //   isRequired: true,
-  // },
-  // {
-  //   name: "year",
-  //   type: "select",
-  //   label: "Üretim Yılı",
-  //   placeholder: "Üretim Yılını Seçiniz",
-  //   options: getYearsOptions(true),
-  //   isRequired: true,
-  // },
   {
     name: "desc",
     type: "textarea",
-    label: "Açıklama",
+    label: "desc",
     isRequired: false,
     maxLength: 400,
     maxRows: 5,
   },
   {
-    name: "wagonsCount",
-    type: "input",
-    label: "Vagon Sayısı",
-    isRequired: true,
-    onlyNumber: true
+    name: "wagons",
+    type: "select",
+    label: "wagons",
+    isMultiselect: true
   }
 ];
 

@@ -5,50 +5,12 @@
  * API'ler hazır olduğunda ilgili query hook'larındaki mock dönüşü kaldırıp
  * yorum satırındaki gerçek `axiosInstance` çağrısını aktif etmek yeterlidir.
  */
-import { IReasonResponseDataTypes, IReasonType } from "@/types/reasonsTypes";
 import { IStageResponseDataTypes, IStageType } from "@/types/stagesTypes";
 import {
   ISubStageResponseDataTypes,
   ISubStageType,
 } from "@/types/subStagesTypes";
-import { IWagonResponseDataTypes, IWagonType } from "@/types/wagonsTypes";
-import { IUserResponseDataTypes, IUserType } from "@/types/usersTypes";
 import { IWorkflowResponseTypes } from "@/types/workflowTypes";
-
-/* ----------------------------- Gecikme Sebepleri ---------------------------- */
-
-export const mockReasons: IReasonType[] = [
-  {
-    _id: "reason-1",
-    name: "Malzeme Eksikliği",
-    description: "İlgili aşama için gerekli malzeme depoda bulunmuyor.",
-    creator: "Admin",
-    createdAt: "2026-05-10T09:00:00.000Z",
-    updatedAt: "2026-05-10T09:00:00.000Z",
-  },
-  {
-    _id: "reason-2",
-    name: "Personel Yetersizliği",
-    description: "Vardiyada yeterli operatör bulunmadığı için gecikme yaşandı.",
-    creator: "Admin",
-    editor: "Admin",
-    createdAt: "2026-05-12T11:30:00.000Z",
-    updatedAt: "2026-06-01T08:15:00.000Z",
-  },
-  {
-    _id: "reason-3",
-    name: "Ekipman Arızası",
-    description: "Kullanılan ekipmanda teknik arıza meydana geldi.",
-    creator: "Admin",
-    createdAt: "2026-05-20T14:45:00.000Z",
-    updatedAt: "2026-05-20T14:45:00.000Z",
-  },
-];
-
-export const mockReasonsResponse: IReasonResponseDataTypes = {
-  count: mockReasons.length,
-  reasons: mockReasons,
-};
 
 /* --------------------------------- Aşamalar -------------------------------- */
 

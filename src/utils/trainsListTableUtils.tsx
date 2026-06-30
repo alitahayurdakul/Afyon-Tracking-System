@@ -1,3 +1,6 @@
+import React from "react";
+
+import { WagonCell } from "@/components/common/DynamicTextWithTooltip";
 import { TrainsTableActionsCol } from "@/components/trains/TrainsTableActionsCol";
 import styles from "@/styles/components/trains/TrainsListTableUtils.module.scss";
 import { TFunction } from "@/types/commonTypes";
@@ -5,41 +8,41 @@ import {
   ICommonTableColumnsType,
   ICommonTableColumnsTypes,
 } from "@/types/tableColumnTypes";
+import { IWagonType } from "@/types/wagonsTypes";
 
 import { formatDate } from "./formDate";
+
 export const trainsTableColumns: ICommonTableColumnsTypes = [
   {
     name: "trainSetNo",
-    label: "Tren No",
+    label: "trainSetNo",
   },
   {
-    name: "info",
-    label: "TREN BİLGİSİ",
+    name: "wagons",
+    label: "wagons",
   },
   {
     name: "creator",
-    label: "Oluşturan",
+    label: "creator",
   },
   {
     name: "editor",
-    label: "Güncelleyen",
+    label: "editor",
   },
   {
     name: "actions",
-    label: "İşlemler",
+    label: "actions",
   },
 ];
 
-export const createTrainsTableColumns = (
-  t?: TFunction,
-) => {
+export const createTrainsTableColumns = (t: TFunction) => {
   const columns = trainsTableColumns;
 
   return [
     ...columns.map((column: ICommonTableColumnsType) => ({
       accessorKey: column.name,
       header: () => {
-        return <div>{t ? t(`columns.${column.name}`) : column.label}</div>;
+        return <div>{t(`columns.${column.label}`)}</div>;
       },
       cell: ({ row }: any) => {
         const r = row.original;
@@ -49,14 +52,6 @@ export const createTrainsTableColumns = (
             <div className={styles["train-name"]}>
               <p>{r.trainSetNo || "-"}</p>
               <p>{r.desc || "-"}</p>
-            </div>
-          );
-        }
-        if (column.name === "info") {
-          return (
-            <div className={styles["train-info"]}>
-              <p className={styles["info-model"]}>{r.trainModel || "-"}</p>
-              <p className={styles["info-year"]}>{r.year || "-"}</p>
             </div>
           );
         }
@@ -81,8 +76,26 @@ export const createTrainsTableColumns = (
           );
         }
 
+        if (column.name === "wagons") {
+          return (
+            <div className={styles["train-infos"]}>
+              <WagonCell
+                contentBody={
+                  <ul className={styles["wagon-list-container"]}>
+                    {r.wagons.map((wagon: IWagonType, index: number) => (
+                      <React.Fragment key={index}>
+                        <li>{wagon.wagonNo}</li>
+                      </React.Fragment>
+                    ))}
+                  </ul>
+                }
+              />
+            </div>
+          );
+        }
+
         if (column.name === "actions") {
-          return <TrainsTableActionsCol id={r.trainSetNo} />;
+          return <TrainsTableActionsCol id={r._id} />;
         }
 
         return <div>-</div>;

@@ -8,7 +8,7 @@ import { TrainQueryTypes } from "@/app/api/trains/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
 import {
-  ITrainResponseDataTypes,
+  ITrainsType,
   ITrainType,
 } from "@/types/trainsTypes";
 
@@ -22,7 +22,7 @@ export const useGetTrainsDataQuery = () => {
     refetchOnWindowFocus: false,
     enabled: true,
     queryFn: async () => {
-      const { data } = await axiosInstance.post<ITrainResponseDataTypes>(
+      const { data } = await axiosInstance.post<ITrainsType>(
         CLIENT_END_POINTS.train.getAll,
         {
           type: TrainQueryTypes.getAllTrains,

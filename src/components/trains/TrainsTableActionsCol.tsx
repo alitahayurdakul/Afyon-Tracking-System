@@ -29,7 +29,7 @@ export const TrainsTableActionsCol = ({ id }: { id: string }) => {
           message:id + "Başarıyla silindi",
           type: "success",
           icon: "close",
-          id: "deleteTrain" + Date.now(),
+          id: "deleteTrainSuccess" + Date.now(),
         }),
       );
       dispatch(addTriggerTable());

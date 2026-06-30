@@ -2,26 +2,27 @@
   "title": "Zugverwaltung",
   "description": "Verwalten Sie Ihre Flotte zentral.",
   "addButton": "Neuen Zug hinzufügen",
-  "search": "Suche...",
+  "search": "Suchen...",
   "columns": {
     "trainSetNo": "Zugnummer",
-    "info": "ZUGINFO",
+    "info": "ZUGINFORMATIONEN",
+    "wagons": "WAGGONS",
     "creator": "Erstellt von",
     "editor": "Aktualisiert von",
     "actions": "Aktionen"
   },
   "actions": {
-    "edit": "Bearbeiten",
+    "edit": "Aktualisieren",
     "delete": "Löschen"
   },
   "modal": {
     "create": "Neuen Zug erstellen",
-    "edit": "Zugdetails aktualisieren"
+    "edit": "Zuginformationen aktualisieren"
   },
   "form": {
     "cancel": "Abbrechen",
     "save": "Speichern",
-    "editInfo": "Das Aktualisieren der Zugdetails kann den Flottenbestand und zugehörige Arbeitsabläufe beeinflussen. Überprüfen Sie die Änderungen vor dem Speichern.",
+    "editInfo": "Die Aktualisierung von Zuginformationen kann sich auf den Flottenbestand und zugehörige Workflows auswirken. Bitte überprüfen Sie Ihre Änderungen vor dem Speichern.",
     "fields": {
       "trainSetNo": {
         "label": "Zugnummer",
@@ -31,20 +32,21 @@
         "label": "Beschreibung",
         "placeholder": "Beschreibung eingeben"
       },
-      "wagonsCount": {
-        "label": "Wagenanzahl",
-        "placeholder": "Wagenanzahl eingeben"
-      }
+      "wagons": {
+        "label": "Waggon",
+        "selectWagons": "Waggons auswählen"
+      },
+      "selectedWagons": "Ausgewählte Waggons"
     },
     "wagon": {
-      "label": "Name von Wagen {index}",
-      "placeholder": "Namen von Wagen {index} eingeben"
+      "label": "Name des Waggons {index}",
+      "placeholder": "Name des Waggons {index} eingeben"
     },
     "activity": {
       "creator": "Erstellt von:",
       "createdAt": "Erstellungsdatum:",
       "editor": "Zuletzt aktualisiert von:",
-      "updatedAt": "Letztes Aktualisierungsdatum:"
+      "updatedAt": "Datum der letzten Aktualisierung:"
     },
     "notifications": {
       "createSuccess": "Erfolgreich erstellt",
