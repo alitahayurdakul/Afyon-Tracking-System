@@ -16,9 +16,6 @@ export const TrainsListBody = () => {
   const { data, isLoading, isError, isFetching, refetch } =
     useGetTrainsDataQuery();
 
-  const rows = data?.trains ?? [];
-
-
   return (
     <section className={styles["pipeline-page"]}>
       <div className={styles["page-top"]}>
@@ -43,7 +40,7 @@ export const TrainsListBody = () => {
         <Table
           className={styles["table-class"]}
           loading={isLoading}
-          data={rows}
+          data={data}
           columns={createTrainsTableColumns(t)}
         />
       </div>

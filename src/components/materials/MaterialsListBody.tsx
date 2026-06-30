@@ -14,7 +14,6 @@ import { CreateMaterialsModal } from "./create/CreateMaterialsModal";
 export const MaterialsListBody = () => {
   const t = useTranslations("materials");
   const { data, isLoading } = useGetMaterialsDataQuery();
-  console.log(data);
 
   return (
     <section className={styles["pipeline-page"]}>

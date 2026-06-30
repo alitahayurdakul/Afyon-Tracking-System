@@ -4,8 +4,10 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { useGetTrainDetailDataQuery } from "@/api/queries/useGetTrainsQueries";
+import { useGetWagonsOptionsQuery } from "@/api/queries/useGetWagonsQueries";
 import { EDIT_TRAIN_MODAL } from "@/consts/modals";
 import styles from "@/styles/components/common/TableListBody.module.scss";
+import { IOptionType } from "@/types/formTypes";
 import { useAddQueryParam } from "@/utils/searchParams";
 
 import { Modal } from "../../common/Modal";
@@ -17,6 +19,8 @@ export const EditTrainsModal = ({ id }: { id: string }) => {
   const [open, setOpen] = useState<boolean | undefined>(false);
 
   const { data, isLoading } = useGetTrainDetailDataQuery(id);
+  const { data: wagonOptions, isLoading: wagonsLoading } =
+    useGetWagonsOptionsQuery<IOptionType[]>();
 
   return (
     <>
@@ -31,7 +35,7 @@ export const EditTrainsModal = ({ id }: { id: string }) => {
         <FontAwesomeIcon icon={faPen} />
         <span>{t("actions.edit")}</span>
       </button>
-      {!isLoading && (
+      {!isLoading && !wagonsLoading && (
         <Modal
           name={`${EDIT_TRAIN_MODAL}_${id}`}
           width={"900px"}
@@ -43,7 +47,7 @@ export const EditTrainsModal = ({ id }: { id: string }) => {
           open={open}
           setOpen={setOpen}
         >
-          <EditTrainForm id={id} data={data} />
+          <EditTrainForm id={id} data={data} wagonOptions = {wagonOptions} />
         </Modal>
       )}
     </>

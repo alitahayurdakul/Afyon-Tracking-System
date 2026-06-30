@@ -18,7 +18,6 @@ export const wagonHandlers = {
 
 async function createWagon(params: Record<string, any>): Promise<Response> {
   try {
-    console.log(params);
     const response = await axiosInstance.post(END_POINTS.wagon.create, params);
     if (response.status === 201) {
       return Response.json({ success: true, data: response.data });

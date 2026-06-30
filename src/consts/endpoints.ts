@@ -17,10 +17,10 @@ export const END_POINTS = {
   },
   train: {
     create: `${apiUrl}/api/trains`,
-    edit: (trainSetNo: string) => `${apiUrl}/api/trains/${trainSetNo}`,
-    delete: (trainSetNo: string) => `${apiUrl}/api/trains/${trainSetNo}`,
+    edit: (trainId: string) => `${apiUrl}/api/trains/${trainId}`,
+    delete: (trainId: string) => `${apiUrl}/api/trains/${trainId}`,
     getAll: `${apiUrl}/api/trains`,
-    getDetail: (trainSetNo: string) => `${apiUrl}/api/trains/${trainSetNo}`,
+    getDetail: (trainId: string) => `${apiUrl}/api/trains/${trainId}`,
   },
   process: {
     create: (processId: string) =>

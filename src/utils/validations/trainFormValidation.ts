@@ -8,20 +8,10 @@ export function TrainFormValidation(): Yup.ObjectSchema<ITrainFormDataTypes> {
       .trim()
       .typeError("Bu alan zorunludur")
       .required("Bu alan zorunludur"),
-    wagonsCount: Yup.string()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
-    desc: Yup.string().trim().default(""),
-    wagonDetails: Yup.array()
-      .of(
-        Yup.object().shape({
-          name: Yup.string()
-            .trim()
-            .typeError("Bu alan zorunludur")
-            .required("Bu alan zorunludur"),
-        })
-      )
-      .default([]),
+    wagons: Yup.array()
+        .min(1, "Please select at least one option")
+        .required("Selection is required"),
+    desc: Yup.string().trim().default("")
   };
 
   return Yup.object().shape(baseShape);
