@@ -6,6 +6,7 @@
   "table": {
     "name": "Название подэтапа",
     "materials": "Материалы",
+    "description": "Описание",
     "creator": "Создал",
     "editor": "Обновил",
     "actions": "Действия"

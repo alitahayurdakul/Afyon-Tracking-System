@@ -1,17 +1,13 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-// import { axiosInstance } from "@/api/axiosInstance";
-// import { CLIENT_END_POINTS } from "@/consts/endpoints";
-// import { SubStageQueryTypes } from "@/app/api/sub-stages/route";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 
-import { mockSubStages, mockSubStagesResponse } from "@/mock/managementData";
+import { axiosInstance } from "@/api/axiosInstance";
+import { SubStageQueryTypes } from "@/app/api/sub-stages/route";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
-import {
-  ISubStageResponseDataTypes,
-  ISubStageType,
-} from "@/types/subStagesTypes";
+import { ISubStageType } from "@/types/subStagesTypes";
 
 export const useGetSubStagesListDataQuery = () => {
   const trigger = useSelector(
@@ -22,14 +18,12 @@ export const useGetSubStagesListDataQuery = () => {
     queryKey: [`getSubStagesAllDatas`, trigger],
     refetchOnWindowFocus: false,
     enabled: true,
-    queryFn: async (): Promise<ISubStageResponseDataTypes> => {
-      // TODO(api): Backend hazır olduğunda mock dönüşü kaldırıp gerçek isteği aktif edin.
-      // const { data } = await axiosInstance.post<ISubStageResponseDataTypes>(
-      //   CLIENT_END_POINTS.subStage.getAll,
-      //   { type: SubStageQueryTypes.getAllSubStages },
-      // );
-      // return data;
-      return mockSubStagesResponse;
+    queryFn: async (): Promise<ISubStageType[]> => {
+      const { data } = await axiosInstance.post<ISubStageType[]>(
+        CLIENT_END_POINTS.subStage.getAll,
+        { type: SubStageQueryTypes.getAllSubStages },
+      );
+      return data;
     },
   });
 };
@@ -44,13 +38,11 @@ export const useGetSubStageDetailDataQuery = (id: string) => {
     refetchOnWindowFocus: false,
     enabled: splittedId === id,
     queryFn: async (): Promise<ISubStageType | undefined> => {
-      // TODO(api): Backend hazır olduğunda mock dönüşü kaldırıp gerçek isteği aktif edin.
-      // const { data } = await axiosInstance.post<ISubStageType>(
-      //   CLIENT_END_POINTS.subStage.getDetail,
-      //   { type: SubStageQueryTypes.getDetailSubStage, id },
-      // );
-      // return data;
-      return mockSubStages.find((subStage) => subStage._id === id);
+      const { data } = await axiosInstance.post<ISubStageType>(
+        CLIENT_END_POINTS.subStage.getDetail,
+        { type: SubStageQueryTypes.getDetailSubStage, id },
+      );
+      return data;
     },
   });
 };

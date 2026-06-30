@@ -88,11 +88,11 @@ export const END_POINTS = {
     getDetail: (id: string) => `${apiUrl}/api/materials/${id}`,
   },
   subStage: {
-    create: `${apiUrl}/api/sub-stages`,
-    edit: (id: string) => `${apiUrl}/api/sub-stages/${id}`,
-    delete: (id: string) => `${apiUrl}/api/sub-stages/${id}`,
-    getAll: `${apiUrl}/api/sub-stages`,
-    getDetail: (id: string) => `${apiUrl}/api/sub-stages/${id}`,
+    create: `${apiUrl}/api/substages`,
+    edit: (id: string) => `${apiUrl}/api/substages/${id}`,
+    delete: (id: string) => `${apiUrl}/api/substages/${id}`,
+    getAll: `${apiUrl}/api/substages`,
+    getDetail: (id: string) => `${apiUrl}/api/substages/${id}`,
   },
   project: {
     create: `${apiUrl}/api/projects`,

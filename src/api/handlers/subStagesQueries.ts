@@ -7,6 +7,7 @@ import {
 } from "@/types/subStagesTypes";
 import {
   createJsonError,
+  createJsonOnlyData,
   createJsonSuccess,
   extractErrorMessage,
 } from "./responseHelpers";
@@ -67,17 +68,9 @@ async function editSubStage(params: Record<string, any>): Promise<Response> {
 
 async function getSubStages(): Promise<Response> {
   try {
-    const response = await axiosInstance.get(END_POINTS.subStage.getAll);
+    const response = await axiosInstance.get<ISubStageResponseDataTypes>(END_POINTS.subStage.getAll);
     if (response.status === 200) {
-      const raw = response.data;
-      const subStages: ISubStageType[] = Array.isArray(raw)
-        ? raw
-        : (raw?.subStages ?? raw?.data ?? []);
-      const responseData: ISubStageResponseDataTypes = {
-        count: subStages.length,
-        subStages,
-      };
-      return Response.json(responseData);
+      return createJsonOnlyData(response.data.subStages ?? []);
     }
     return createJsonError("Failed to fetch sub stages", 400);
   } catch (err: unknown) {
@@ -91,7 +84,7 @@ async function getSubStageDetail(id: string): Promise<Response> {
       END_POINTS.subStage.getDetail(id),
     );
     if (response.status === 200) {
-      return Response.json(response.data || []);
+      return createJsonOnlyData(response.data);
     }
     return createJsonError("Failed to fetch sub stage detail", 400);
   } catch (err: unknown) {

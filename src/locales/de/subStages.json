@@ -6,6 +6,7 @@
   "table": {
     "name": "Unterphasenname",
     "materials": "Materialien",
+    "description": "Beschreibung",
     "creator": "Erstellt von",
     "editor": "Aktualisiert von",
     "actions": "Aktionen"

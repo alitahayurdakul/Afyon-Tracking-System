@@ -1,8 +1,10 @@
 import { IOptionType } from "./formTypes";
 
 export interface ISubStageMaterial {
-  value: string;
-  label: string;
+  description: string;
+  materialCode: string;
+  name: string;
+  _id: string;
 }
 
 export interface ISubStageFormDataTypes {
@@ -14,12 +16,13 @@ export interface ISubStageFormDataTypes {
 export interface ISubStageType {
   _id: string;
   name: string;
-  materials: ISubStageMaterial[];
+  materials?: ISubStageMaterial[];
   description: string;
   creator?: string;
-  editor?: string;
+  lastUpdatedBy?: string;
   createdAt: string;
   updatedAt?: string;
+  isActive: boolean;
 }
 
 export interface ISubStageResponseDataTypes {
