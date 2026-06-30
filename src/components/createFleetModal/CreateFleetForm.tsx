@@ -54,7 +54,7 @@ export const CreateFleetForm = () => {
   const router = useRouter();
   const removeModal = useRemoveQueryParamModal();
 
-  const trainDatas = trainsResponse?.trains ?? [];
+  const trainDatas = trainsResponse ?? [];
 
   const trainOptions = useMemo(
     () => optionsConverters(trainDatas || [], "trainSetNo", "trainSetNo"),

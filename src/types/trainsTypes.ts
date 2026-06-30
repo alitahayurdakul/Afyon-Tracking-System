@@ -1,12 +1,18 @@
+import { IOptionType } from "./formTypes";
+
 export interface IWagonDetail {
-  name: string;
+  _id: string;
+  wagonNo: string;
+  trainIds: string[];
+  description: string;
+  order: number;
+  isActive: boolean;
 }
 
 export interface ITrainFormDataTypes {
   trainSetNo: string;
-  wagonsCount: string;
   desc: string;
-  wagonDetails: IWagonDetail[];
+  wagons: IOptionType[];
 }
 
 export interface ITrainType {
@@ -19,10 +25,7 @@ export interface ITrainType {
   editor?: string;
   createdAt: string;
   updatedAt?: string;
-  wagonDetails?: IWagonDetail[];
+  wagons?: IWagonDetail[];
 }
 
-export interface ITrainResponseDataTypes {
-  count: number;
-  trains: Array<ITrainType>;
-}
+export type ITrainsType = Array<ITrainType>;

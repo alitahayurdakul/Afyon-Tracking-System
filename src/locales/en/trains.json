@@ -5,44 +5,46 @@
   "search": "Search...",
   "columns": {
     "trainSetNo": "Train No",
-    "info": "TRAIN INFO",
+    "info": "TRAIN INFORMATION",
+    "wagons": "WAGONS",
     "creator": "Created By",
     "editor": "Updated By",
     "actions": "Actions"
   },
   "actions": {
-    "edit": "Edit",
+    "edit": "Update",
     "delete": "Delete"
   },
   "modal": {
     "create": "Create New Train",
-    "edit": "Update Train Details"
+    "edit": "Update Train Information"
   },
   "form": {
     "cancel": "Cancel",
     "save": "Save",
-    "editInfo": "Updating train details may affect the fleet inventory and related workflows. Make sure to review the changes before saving.",
+    "editInfo": "Updating train information may affect fleet inventory and related workflows. Please review your changes before saving.",
     "fields": {
       "trainSetNo": {
         "label": "Train No",
-        "placeholder": "Enter train no"
+        "placeholder": "Enter the train number"
       },
       "desc": {
         "label": "Description",
-        "placeholder": "Enter description"
+        "placeholder": "Enter a description"
       },
-      "wagonsCount": {
-        "label": "Wagon Count",
-        "placeholder": "Enter wagon count"
-      }
+      "wagons": {
+        "label": "Wagon",
+        "placeholder": "Select wagons"
+      },
+      "selectedWagons": "Selected Wagons"
     },
     "wagon": {
       "label": "Wagon {index} Name",
-      "placeholder": "Enter wagon {index} name"
+      "placeholder": "Enter the name of wagon {index}"
     },
     "activity": {
       "creator": "Created By:",
-      "createdAt": "Created Date:",
+      "createdAt": "Creation Date:",
       "editor": "Last Updated By:",
       "updatedAt": "Last Updated Date:"
     },

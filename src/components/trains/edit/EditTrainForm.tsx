@@ -5,12 +5,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import styles from "@/styles/components/trains/TrainForm.module.scss";
 import { Button } from "@/components/formElements/Button";
-import { SubmitHandler, useForm, useFieldArray } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ITrainFormDataTypes, ITrainType } from "@/types/trainsTypes";
+import {
+  ITrainFormDataTypes,
+  ITrainType,
+  IWagonDetail,
+} from "@/types/trainsTypes";
 import { TrainFormValidation } from "@/utils/validations/trainFormValidation";
-import React, { useCallback, useEffect } from "react";
-import { IFormFieldType } from "@/types/formTypes";
+import React, { useCallback } from "react";
+import { IFormFieldType, IOptionType } from "@/types/formTypes";
 import { TRAIN_FORM_CONSTS } from "@/consts/trainsConsts";
 import { InputBox } from "@/components/formElements/InputBox";
 import { InputSpaceEnums } from "@/types/formEnums";
@@ -25,13 +29,15 @@ import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { formatDate } from "@/utils/formDate";
 import { SelectBox } from "@/components/formElements/SelectBox";
 import { useTranslations } from "next-intl";
+import SelectedItemList from "@/components/common/SelectedItemList";
 
 interface IPropsTypes {
   id: string;
   data?: ITrainType;
+  wagonOptions?: IOptionType[];
 }
 
-export const EditTrainForm = ({ id, data }: IPropsTypes) => {
+export const EditTrainForm = ({ id, data, wagonOptions }: IPropsTypes) => {
   const t = useTranslations("trains");
   const {
     control,
@@ -46,30 +52,20 @@ export const EditTrainForm = ({ id, data }: IPropsTypes) => {
     defaultValues: {
       trainSetNo: data?.trainSetNo || "",
       desc: data?.desc || "",
-      wagonsCount: data?.wagonDetails ? String(data.wagonDetails.length) : "",
-      wagonDetails: data?.wagonDetails ?? [],
+      wagons: data?.wagons
+        ? data?.wagons.map((wagon: IWagonDetail) => {
+            return {
+              value: wagon._id,
+              label: wagon.wagonNo,
+            };
+          })
+        : [],
     },
   });
 
   const dispatch = useDispatch();
   const removeModal = useRemoveQueryParamModal();
-  const wagonsCount = watch("wagonsCount");
-
-  const { fields } = useFieldArray({
-    control,
-    name: "wagonDetails",
-  });
-
-  useEffect(() => {
-    const count = Number(wagonsCount);
-    if (!count || count < 1) {
-      setValue("wagonDetails", []);
-      return;
-    }
-    const current = watch("wagonDetails") || [];
-    const next = Array.from({ length: count }, (_, i) => current[i] ?? { name: "" });
-    setValue("wagonDetails", next);
-  }, [wagonsCount]);
+  const selectedWagons = watch("wagons");
 
   const onCancel = () => {
     removeModal();
@@ -78,10 +74,18 @@ export const EditTrainForm = ({ id, data }: IPropsTypes) => {
   const onSubmit: SubmitHandler<ITrainFormDataTypes> = useCallback(
     async (formData) => {
       try {
+        const wagons = formData.wagons.map((option: IOptionType, index) => {
+          return {
+            order: index + 1,
+            id: option.value,
+          };
+        });
         const params = {
-          ...formData,
-          id,
-          editor: "Admin",
+          id: data?._id,
+          trainName: formData.trainSetNo ?? "",
+          wagons,
+          desc: formData?.desc ?? "",
+          creator: "Admin",
         };
         await axiosInstance.post(CLIENT_END_POINTS.train.edit, {
           type: TrainQueryTypes.editTrain,
@@ -119,7 +123,7 @@ export const EditTrainForm = ({ id, data }: IPropsTypes) => {
             <React.Fragment key={index}>
               <SelectBox
                 name={item.name}
-                options={item.options || []}
+                options={wagonOptions || []}
                 control={control as any}
                 required={item.isRequired}
                 label={item.label}
@@ -128,6 +132,7 @@ export const EditTrainForm = ({ id, data }: IPropsTypes) => {
                 isSearchable
                 isClearable
                 hideSelectedOptions
+                multiselect
               />
             </React.Fragment>
           );
@@ -150,7 +155,7 @@ export const EditTrainForm = ({ id, data }: IPropsTypes) => {
                 }
                 regex={item?.regex}
                 onlyNumber={item?.onlyNumber}
-                disabled={item.name === "trainSetNo"}
+                // disabled={item.name === "trainSetNo"}
                 inputClassName={styles["text-input"]}
               />
             </React.Fragment>
@@ -176,38 +181,47 @@ export const EditTrainForm = ({ id, data }: IPropsTypes) => {
         }
         return null;
       })}
-
-      <div className={styles["inputbox-group"]}>
-        {fields.map((field, index) => (
-          <InputBox
-            key={field.id}
-            control={control as any}
-            label={t("form.wagon.label", { index: index + 1 })}
-            name={`wagonDetails.${index}.name` as any}
-            placeholder={t("form.wagon.placeholder", { index: index + 1 })}
-            required
-            inputClassName={styles["text-input"]}
-            className={styles["half-input-container"]}
-          />
-        ))}
-      </div>
+      {selectedWagons && selectedWagons.length > 0 && (
+        <SelectedItemList
+          name="wagons"
+          selectedItems={selectedWagons}
+          setValue={setValue}
+          title={t("form.fields.selectedWagons")}
+        />
+      )}
 
       <section className={styles["activity-section"]}>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>{t("form.activity.creator")}</span>
-          <span className={styles["activity-value"]}>{data?.creator ?? "-"}</span>
+          <span className={styles["activity-label"]}>
+            {t("form.activity.creator")}
+          </span>
+          <span className={styles["activity-value"]}>
+            {data?.creator ?? "-"}
+          </span>
         </div>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>{t("form.activity.createdAt")}</span>
-          <span className={styles["activity-value"]}>{formatDate(data?.createdAt) ?? "-"}</span>
+          <span className={styles["activity-label"]}>
+            {t("form.activity.createdAt")}
+          </span>
+          <span className={styles["activity-value"]}>
+            {formatDate(data?.createdAt) ?? "-"}
+          </span>
         </div>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>{t("form.activity.editor")}</span>
-          <span className={styles["activity-value"]}>{data?.editor ?? "-"}</span>
+          <span className={styles["activity-label"]}>
+            {t("form.activity.editor")}
+          </span>
+          <span className={styles["activity-value"]}>
+            {data?.editor ?? "-"}
+          </span>
         </div>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>{t("form.activity.updatedAt")}</span>
-          <span className={styles["activity-value"]}>{formatDate(data?.updatedAt) ?? "-"}</span>
+          <span className={styles["activity-label"]}>
+            {t("form.activity.updatedAt")}
+          </span>
+          <span className={styles["activity-value"]}>
+            {formatDate(data?.updatedAt) ?? "-"}
+          </span>
         </div>
       </section>
 

@@ -49,7 +49,6 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
   const onCancel = () => {
     removeModal();
   };
-  console.log(data);
 
   const onSubmit: SubmitHandler<IMaterialFormDataTypes> = useCallback(
     async (formData) => {
