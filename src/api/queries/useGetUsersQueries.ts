@@ -7,10 +7,7 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { UserQueryTypes } from "@/app/api/users/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
-import {
-  IUserResponseDataTypes,
-  IUserType,
-} from "@/types/usersTypes";
+import { IUsersType, IUserType } from "@/types/usersTypes";
 
 export const useGetUsersDataQuery = () => {
   const trigger = useSelector(
@@ -22,13 +19,10 @@ export const useGetUsersDataQuery = () => {
     refetchOnWindowFocus: false,
     enabled: true,
     queryFn: async () => {
-      const { data } = await axiosInstance.post<IUserResponseDataTypes>(
+      const { data } = await axiosInstance.post<IUsersType>(
         CLIENT_END_POINTS.user.getAll,
-        {
-          type: UserQueryTypes.getAllUsers,
-        },
+        { type: UserQueryTypes.getAllUsers },
       );
-
       return data;
     },
   });
@@ -46,12 +40,8 @@ export const useGetUserDetailDataQuery = (id: string) => {
     queryFn: async () => {
       const { data } = await axiosInstance.post<IUserType>(
         CLIENT_END_POINTS.user.getDetail,
-        {
-          type: UserQueryTypes.getDetailUser,
-          id,
-        },
+        { type: UserQueryTypes.getDetailUser, id },
       );
-
       return data;
     },
   });

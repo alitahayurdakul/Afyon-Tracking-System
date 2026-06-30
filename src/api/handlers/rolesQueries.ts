@@ -1,8 +1,12 @@
- 
-import { AxiosInstance } from "axios";
-
+import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
-import { IRoleResponseDataTypes, IRoleType } from "@/types/rolesTypes";
+import { IRolesType, IRoleType } from "@/types/rolesTypes";
+
+import {
+  createJsonError,
+  createJsonOnlyData,
+  extractErrorMessage,
+} from "./responseHelpers";
 
 export const roleHandlers = {
   createRole,
@@ -12,12 +16,9 @@ export const roleHandlers = {
   getRoleDetail,
 };
 
-async function createRole(
-  params: Record<string, any>,
-  http: AxiosInstance,
-): Promise<Response> {
+async function createRole(params: Record<string, any>): Promise<Response> {
   try {
-    const response = await http.post(END_POINTS.role.create, params);
+    const response = await axiosInstance.post(END_POINTS.role.create, params);
     if (response.status === 200 || response.status === 201) {
       return Response.json({ success: true, data: response.data });
     }
@@ -28,17 +29,17 @@ async function createRole(
   } catch (err: any) {
     return Response.json(
       { success: false, error: err?.response?.data?.message || err?.message },
-      { status: err?.response?.status || 500 },
+      { status: 500 },
     );
   }
 }
 
-async function deleteRole(id: string, http: AxiosInstance): Promise<Response> {
+async function deleteRole(id: string): Promise<Response> {
   try {
     if (id) {
-      const response = await http.delete(END_POINTS.role.delete(id));
+      const response = await axiosInstance.delete(END_POINTS.role.delete(id));
       if (response.status === 200 || response.status === 204) {
-        return Response.json(response.data || { success: true });
+        return createJsonOnlyData(response.data || { success: true });
       }
     }
     return Response.json(
@@ -47,19 +48,21 @@ async function deleteRole(id: string, http: AxiosInstance): Promise<Response> {
     );
   } catch (err: any) {
     return Response.json(
-      { success: false, error: err?.response?.data?.message || err?.message },
-      { status: err?.response?.status || 500 },
+      {
+        success: false,
+        error: err?.response?.data?.message || err?.message,
+      },
+      { status: 500 },
     );
   }
 }
 
-async function editRole(
-  params: Record<string, any>,
-  http: AxiosInstance,
-): Promise<Response> {
+async function editRole(params: Record<string, any>): Promise<Response> {
   try {
     const { id, ...rest } = params;
-    const response = await http.put(END_POINTS.role.edit(id), rest);
+    const response = await axiosInstance.put(END_POINTS.role.edit(id), {
+      ...rest,
+    });
     if (response.status === 200 || response.status === 201) {
       return Response.json({ success: true, data: response.data });
     }
@@ -69,61 +72,39 @@ async function editRole(
     );
   } catch (err: any) {
     return Response.json(
-      { success: false, error: err?.response?.data?.message || err?.message },
-      { status: err?.response?.status || 500 },
-    );
-  }
-}
-
-async function getRoles(http: AxiosInstance): Promise<Response> {
-  try {
-    const response = await http.get(END_POINTS.role.getAll);
-    if (response.status === 200) {
-      const raw = response.data;
-      const roles: IRoleType[] = Array.isArray(raw)
-        ? raw
-        : (raw?.roles ?? raw?.data ?? []);
-      const payload: IRoleResponseDataTypes = {
-        count: roles.length,
-        roles,
-      };
-      return Response.json(payload);
-    }
-    return Response.json(
-      { success: false, error: "Failed to fetch roles" },
-      { status: 200 },
-    );
-  } catch (err: any) {
-    return Response.json(
       {
         success: false,
-        error:
-          err?.response?.data?.message ||
-          err?.response?.data?.error ||
-          err?.message,
+        error: err?.response?.data?.message || err?.message,
       },
-      { status: err?.response?.status || 500 },
+      { status: 500 },
     );
   }
 }
 
-async function getRoleDetail(
-  id: string,
-  http: AxiosInstance,
-): Promise<Response> {
+async function getRoles(): Promise<Response> {
   try {
-    const response = await http.get<IRoleType>(END_POINTS.role.getDetail(id));
+    const response = await axiosInstance.get<IRolesType>(
+      END_POINTS.role.getAll,
+    );
     if (response.status === 200) {
-      return Response.json(response.data);
+      return createJsonOnlyData(response.data || []);
     }
-    return Response.json(
-      { success: false, error: "Failed to fetch role detail" },
-      { status: 200 },
-    );
+    return createJsonError("Failed to fetch roles", 400);
   } catch (err: any) {
-    return Response.json(
-      { success: false, error: err?.message },
-      { status: err?.response?.status || 500 },
+    return createJsonError(extractErrorMessage(err), 500);
+  }
+}
+
+async function getRoleDetail(id: string): Promise<Response> {
+  try {
+    const response = await axiosInstance.get<IRoleType>(
+      END_POINTS.role.getDetail(id),
     );
+    if (response.status === 200) {
+      return createJsonOnlyData(response.data || []);
+    }
+    return createJsonError("Failed to fetch role detail", 400);
+  } catch (err: any) {
+    return createJsonError(extractErrorMessage(err), 500);
   }
 }

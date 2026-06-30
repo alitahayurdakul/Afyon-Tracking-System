@@ -9,7 +9,7 @@ import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
 import { IReasonsType, IReasonType } from "@/types/reasonsTypes";
 
-export const useGetReasonsDataQuery = <T>() => {
+export const useGetReasonsDataQuery = () => {
   const trigger = useSelector(
     (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
   );

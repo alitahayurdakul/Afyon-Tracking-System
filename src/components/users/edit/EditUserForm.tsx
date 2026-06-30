@@ -57,7 +57,7 @@ export const EditUserForm = ({ id, data }: IPropsTypes) => {
   const { data: rolesData } = useGetRolesDataQuery();
   const roleOptions = useMemo(
     () =>
-      (rolesData?.roles ?? []).map((r) => ({
+      (rolesData ?? []).map((r) => ({
         label: r.roleName,
         value: r._id,
       })),

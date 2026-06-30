@@ -44,7 +44,7 @@ export const CreateTrainForm = () => {
     },
   });
 
-  const { data, isLoading } = useGetWagonsOptionsQuery<IOptionType[]>();
+  const { data, isLoading } = useGetWagonsOptionsQuery();
 
   const dispatch = useDispatch();
   const removeModal = useRemoveQueryParamModal();
@@ -75,7 +75,7 @@ export const CreateTrainForm = () => {
         });
         dispatch(
           addToastify({
-            message: "Başarıyla oluşturuldu",
+            message: t("form.notifications.createSuccess"),
             type: "success",
             icon: "close",
             id: "createTrain" + Date.now(),
@@ -86,7 +86,7 @@ export const CreateTrainForm = () => {
       } catch (err) {
         dispatch(
           addToastify({
-            message: (err as Error)?.message || "Hata oluştu",
+            message: (err as Error)?.message || t("form.notifications.error"),
             type: "error",
             icon: "close",
             id: "createTrainError" + Date.now(),

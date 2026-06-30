@@ -26,7 +26,7 @@ export const TrainsTableActionsCol = ({ id }: { id: string }) => {
       });
       dispatch(
         addToastify({
-          message:id + "Başarıyla silindi",
+          message: t("form.notifications.deleteSuccess"),
           type: "success",
           icon: "close",
           id: "deleteTrainSuccess" + Date.now(),
@@ -36,7 +36,7 @@ export const TrainsTableActionsCol = ({ id }: { id: string }) => {
     } catch (err) {
       dispatch(
         addToastify({
-          message: (err as Error)?.message || "Hata oluştu",
+          message: (err as Error)?.message || t("form.notifications.error"),
           type: "error",
           icon: "close",
           id: "deleteTrainError" + Date.now(),

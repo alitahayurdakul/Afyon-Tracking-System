@@ -37,6 +37,8 @@ export interface IUserType {
   updatedAt?: string;
 }
 
+export type IUsersType = Array<IUserType>;
+
 export interface IUserResponseDataTypes {
   count: number;
   users: IUserType[];

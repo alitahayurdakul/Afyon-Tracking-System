@@ -7,7 +7,7 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { RoleQueryTypes } from "@/app/api/roles/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
-import { IRoleResponseDataTypes, IRoleType } from "@/types/rolesTypes";
+import { IRolesType, IRoleType } from "@/types/rolesTypes";
 
 export const useGetRolesDataQuery = () => {
   const trigger = useSelector(
@@ -19,7 +19,7 @@ export const useGetRolesDataQuery = () => {
     refetchOnWindowFocus: false,
     enabled: true,
     queryFn: async () => {
-      const { data } = await axiosInstance.post<IRoleResponseDataTypes>(
+      const { data } = await axiosInstance.post<IRolesType>(
         CLIENT_END_POINTS.role.getAll,
         { type: RoleQueryTypes.getAllRoles },
       );

@@ -15,6 +15,8 @@ export interface IRoleType {
   updatedAt?: string;
 }
 
+export type IRolesType = Array<IRoleType>;
+
 export interface IRoleResponseDataTypes {
   count: number;
   roles: IRoleType[];

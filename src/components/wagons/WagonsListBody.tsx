@@ -6,7 +6,6 @@ import { useTranslations } from "next-intl";
 
 import { useGetWagonsDataQuery } from "@/api/queries/useGetWagonsQueries";
 import styles from "@/styles/components/common/TableListBody.module.scss";
-import { IWagonsType } from "@/types/wagonsTypes";
 import { createWagonsTableColumns } from "@/utils/wagonsListTableUtils";
 
 import { Table } from "../common/Table";
@@ -14,7 +13,7 @@ import { CreateWagonsModal } from "./create/CreateWagonsModal";
 
 export const WagonsListBody = () => {
   const t = useTranslations("wagons");
-  const { data, isLoading } = useGetWagonsDataQuery<IWagonsType>();
+  const { data, isLoading } = useGetWagonsDataQuery();
 
   return (
     <section className={styles["pipeline-page"]}>

@@ -84,7 +84,7 @@ async function getMaterialDetail(id: string): Promise<Response> {
       END_POINTS.material.getDetail(id),
     );
     if (response.status === 200) {
-      return Response.json(response.data || []);
+      return createJsonOnlyData(response.data || []);
     }
     return createJsonError("Failed to fetch material detail", 400);
   } catch (err: unknown) {

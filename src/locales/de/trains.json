@@ -51,6 +51,7 @@
     "notifications": {
       "createSuccess": "Erfolgreich erstellt",
       "editSuccess": "Erfolgreich aktualisiert",
+      "deleteSuccess": "Erfolgreich gelöscht",
       "error": "Ein Fehler ist aufgetreten"
     }
   },

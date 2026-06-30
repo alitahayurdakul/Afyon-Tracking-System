@@ -83,7 +83,7 @@ async function getProjectDetail(id: string): Promise<Response> {
       END_POINTS.project.getDetail(id),
     );
     if (response.status === 200) {
-      return Response.json(response.data || []);
+      return createJsonOnlyData(response.data || []);
     }
     return createJsonError("Failed to fetch project detail", 400);
   } catch (err: unknown) {

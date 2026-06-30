@@ -14,7 +14,6 @@ import { CreateUsersModal } from "./create/CreateUsersModal";
 export const UsersListBody = () => {
   const t = useTranslations("users");
   const { data, isLoading } = useGetUsersDataQuery();
-  const rows = data?.users ?? [];
 
   return (
     <section className={styles["pipeline-page"]}>
@@ -38,7 +37,7 @@ export const UsersListBody = () => {
         <Table
           className={styles["table-class"]}
           loading={isLoading}
-          data={rows}
+          data={data ?? []}
           columns={createUsersTableColumns(t)}
         />
       </div>
