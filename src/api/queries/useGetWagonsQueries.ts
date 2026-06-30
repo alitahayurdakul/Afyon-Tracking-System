@@ -55,7 +55,7 @@ export const useGetWagonsOptionsQuery = <T>() => {
   );
 
   return useQuery({
-    queryKey: [`getWagonsAllDatas`, trigger],
+    queryKey: [`getWagonsAllOptions`, trigger],
     refetchOnWindowFocus: false,
     enabled: true,
     queryFn: async (): Promise<IOptionType[]> => {

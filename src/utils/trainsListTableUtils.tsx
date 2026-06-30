@@ -1,6 +1,6 @@
 import React from "react";
 
-import { WagonCell } from "@/components/common/DynamicTextWithTooltip";
+import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
 import { TrainsTableActionsCol } from "@/components/trains/TrainsTableActionsCol";
 import styles from "@/styles/components/trains/TrainsListTableUtils.module.scss";
 import { TFunction } from "@/types/commonTypes";
@@ -79,7 +79,7 @@ export const createTrainsTableColumns = (t: TFunction) => {
         if (column.name === "wagons") {
           return (
             <div className={styles["train-infos"]}>
-              <WagonCell
+              <DynamicTextWithTooltip
                 contentBody={
                   <ul className={styles["wagon-list-container"]}>
                     {r.wagons.map((wagon: IWagonType, index: number) => (
