@@ -32,17 +32,16 @@
         "label": "Açıklama",
         "placeholder": "Açıklama giriniz"
       },
-      "hasSubStage": {
-        "label": "Alt aşama bulunmaktadır."
-      },
       "subStages": {
         "label": "Alt Aşama",
         "placeholder": "Alt aşama seçiniz"
-      },
-      "materialList": {
-        "label": "Malzeme Listesi",
-        "placeholder": "Malzeme seçiniz"
       }
+    },
+    "activity": {
+      "creator": "Oluşturan:",
+      "createdAt": "Oluşturulma Tarihi:",
+      "editor": "Son Güncelleyen:",
+      "updatedAt": "Son Güncellenme Tarihi:"
     },
     "notifications": {
       "createSuccess": "Başarıyla oluşturuldu",

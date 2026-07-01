@@ -4,7 +4,7 @@ export const STAGE_FORM_CONSTS: IFormFieldsType = [
   {
     name: "name",
     type: "input",
-    label: "İş Akışı Adı",
+    label: "name",
     isRequired: true,
     maxLength: 100,
     // regex: /[^A-Za-zçğışöüÖÜŞZÇĞİ ]/g,
@@ -12,27 +12,16 @@ export const STAGE_FORM_CONSTS: IFormFieldsType = [
   {
     name: "description",
     type: "textarea",
-    label: "Açıklama",
+    label: "description",
     isRequired: true,
     maxLength: 400,
     maxRows: 5,
   },
   {
-    name: "hasSubStage",
-    type: "checkbox",
-    label: "Alt aşama bulunmaktadır."
-  },
-  {
     name: "subStages",
     type: "select",
-    label: "Alt Aşama",
+    label: "subStages",
     // isRequired: true,
-  },
-  {
-    name: "materialList",
-    type: "select",
-    label: "Malzeme Listesi",
-    isMultiselect: true
   }
 ];
 

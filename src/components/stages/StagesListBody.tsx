@@ -6,8 +6,9 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
 
-import { useGetWorkflowsDataQuery } from "@/api/queries/useGetWorkflowsQueries";
+import { useGetStagesDataQuery } from "@/api/queries/useGetStagesQueries";
 import styles from "@/styles/components/common/TableListBody.module.scss";
+import { IStagesTypes } from "@/types/stagesTypes";
 import { IWorkflowResponseTypes } from "@/types/workflowTypes";
 import { createStagesTableColumns } from "@/utils/stagesListTableUtils";
 
@@ -16,20 +17,16 @@ import { CreateStageModal } from "./create/CreateStageModal";
 
 export const StagesListBody = () => {
   const t = useTranslations("stages");
-  const { data, isLoading, isError, isFetching, refetch } = useGetWorkflowsDataQuery<IWorkflowResponseTypes[]>();
+  const { data, isLoading, isError, isFetching, refetch } = useGetStagesDataQuery<IStagesTypes[]>();
 
   return (
     <section className={styles["pipeline-page"]}>
       <div className={styles["page-top"]}>
         <div>
-
           <h2>{t("title")}</h2>
-
           <p>{t("description")}</p>
         </div>
-
         <CreateStageModal />
-        
       </div>
 
       <div className={styles.toolbar}>

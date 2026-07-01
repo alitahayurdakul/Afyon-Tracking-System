@@ -1,11 +1,11 @@
 import { IOptionType } from "./formTypes";
+import { IMaterialType } from "./materialsTypes";
+import { ISubStageType } from "./subStagesTypes";
 
 export interface IStageFormDataTypes {
   name: string;
   description: string;
-  hasSubStage?: boolean;
   subStages?: IOptionType[];
-  materialList?: IOptionType[];
 }
 
 export interface IStageType{
@@ -14,13 +14,12 @@ export interface IStageType{
   description: string;
   creator: string;
   editor?: string;
-
   isActive?: boolean;
   plannedOrder?: number;
-
+  materials?: IMaterialType[];
   createdAt: string; // ISO date string
   updatedAt?: string; // ISO date string
-  subStages?: IStageType[] | IOptionType[];
+  subStages?: ISubStageType[] | IOptionType[];
 }
 
 export interface IStageResponseDataTypes {

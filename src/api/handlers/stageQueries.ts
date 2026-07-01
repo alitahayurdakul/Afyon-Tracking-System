@@ -3,11 +3,7 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
 import { IStageResponseDataTypes, IStageType } from "@/types/stagesTypes";
 
-// interface ApiResponse<T = any> {
-//   success: boolean;
-//   data?: T;
-//   error?: string;
-// }
+import { createJsonError, createJsonOnlyData, createJsonSuccess, extractErrorMessage } from "./responseHelpers";
 
 export const stageHandlers = {
   createStage,
@@ -21,17 +17,11 @@ async function createStage(params: Record<string, any>): Promise<Response> {
   try {
     const response = await axiosInstance.post(END_POINTS.stage.create, params);
     if (response.status === 201) {
-      return Response.json({ success: true, data: response.data });
+      return createJsonSuccess(response.data, 201);
     }
-    return Response.json(
-      { success: false, error: "Failed to create stage" },
-      { status: 200 },
-    );
+    return createJsonError("Failed to create sub stage", 400);
   } catch (err: any) {
-    return Response.json(
-      { success: false, error: err.message },
-      { status: 500 },
-    );
+    return createJsonError(extractErrorMessage(err), 500);
   }
 }
 
@@ -64,18 +54,12 @@ async function editStage(params: Record<string, any>): Promise<Response> {
         ...rest
       },
     );
-    if (response.status === 201) {
-      return Response.json({ success: true, data: response.data });
+    if (response.status === 200) {
+      return createJsonSuccess(response.data, 201);
     }
-    return Response.json(
-      { success: false, error: "Failed to create stage" },
-      { status: 200 },
-    );
+    return createJsonError("Failed to edit stage", 400);
   } catch (err: any) {
-    return Response.json(
-      { success: false, error: err.message },
-      { status: 500 },
-    );
+    return createJsonError(extractErrorMessage(err), 500);
   }
 }
 
@@ -85,17 +69,11 @@ async function getStages(): Promise<Response> {
       END_POINTS.stage.getAll,
     );
     if (response.status === 200) {
-      return Response.json(response.data || []);
+      return createJsonOnlyData(response.data.stages || []);
     }
-    return Response.json(
-      { success: false, error: "Failed to create workflow" },
-      { status: 200 },
-    );
+    return createJsonError("Failed to fetch sub stage detail", 400);
   } catch (err: any) {
-    return Response.json(
-      { success: false, error: err.message },
-      { status: 500 },
-    );
+    return createJsonError(extractErrorMessage(err), 500);
   }
 }
 
@@ -105,16 +83,10 @@ async function getStageDetail(id: string): Promise<Response> {
       END_POINTS.stage.getDetail(id),
     );
     if (response.status === 200) {
-      return Response.json(response.data || []);
+      return createJsonOnlyData(response.data || []);
     }
-    return Response.json(
-      { success: false, error: "Failed to create workflow" },
-      { status: 200 },
-    );
+    return createJsonError("Failed to fetch sub stage detail", 400);
   } catch (err: any) {
-    return Response.json(
-      { success: false, error: err.message },
-      { status: 500 },
-    );
+    return createJsonError(extractErrorMessage(err), 500);
   }
 }

@@ -1,15 +1,11 @@
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
-import { useGetWorkflowDetailDataQuery } from "@/api/queries/useGetWorkflowsQueries";
+import { useGetStageDetailDataQuery } from "@/api/queries/useGetStagesQueries";
 import styles from "@/styles/components/common/TableListBody.module.scss";
-import {
-  IStageType,
-  IWorkflowFormTypes,
-  IWorkflowResponseTypes,
-} from "@/types/workflowTypes";
+import { IStageType } from "@/types/stagesTypes";
 import { useAddQueryParam } from "@/utils/searchParams";
 
 import { Modal } from "../../common/Modal";
@@ -19,24 +15,9 @@ export const EditWorkflowModal = ({ id }: { id: string }) => {
   const t = useTranslations("stages");
   const addQueryParam = useAddQueryParam();
   const [open, setOpen] = useState<boolean | undefined>(false);
-  const { data, isLoading, isError, isFetching, refetch } =
-    useGetWorkflowDetailDataQuery<IWorkflowResponseTypes>(id);
 
-  const transformedData: IWorkflowFormTypes | undefined = useMemo(() => {
-    if (!data) return undefined;
-
-    return {
-      ...data,
-      stages: ((data.stages as any[]) ?? []).map((stage: any, index: number) => ({
-        value: stage?.stageInfo?._id ?? stage?.value ?? `stage-${index}`,
-        label: stage?.stageInfo?.name ?? stage?.label ?? "-",
-      })),
-    };
-  }, [data]);
-
-  // const convertedWorksflowData = useCallback(() => {
-  //   const newWorkflowsData =
-  // },[data])
+  const { data, isLoading, isError, isFetching } =
+    useGetStageDetailDataQuery<IStageType>(id);
 
   return (
     <>
@@ -64,7 +45,7 @@ export const EditWorkflowModal = ({ id }: { id: string }) => {
           open={open}
           setOpen={setOpen}
         >
-          <EditStageForm id={id} stageData={transformedData} />
+          <EditStageForm id={id} stageData={data} />
         </Modal>
       )}
     </>

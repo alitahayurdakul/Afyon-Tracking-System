@@ -91,9 +91,6 @@ export const createSubStagesTableColumns = (t: TFunction) => {
         }
         if (column.name === "editor") {
           const isUnedited = !r.updatedAt || r.createdAt === r.updatedAt;
-          if (isUnedited) {
-            return <div>-</div>;
-          }
           return (
             <div>
               <p className={styles["creator-name"]}>{r.lastUpdatedBy || "-"}</p>

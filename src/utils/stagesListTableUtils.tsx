@@ -47,7 +47,7 @@ export const createStagesTableColumns = (t: TFunction) => {
           return (
             <div className={styles["stage-name"]}>
               <p>{row.original[column.name] || "-"}</p>
-              <p>{row.original.desc || "-"}</p>
+              <p>{row.original.description || "-"}</p>
             </div>
           );
         }
@@ -55,7 +55,7 @@ export const createStagesTableColumns = (t: TFunction) => {
           return (
             <div>
               <p className={styles["creator-name"]}>
-                {/*row.original[column.name] ||*/ "Admin"}
+                {row.original[column.name] ?? "-"}
               </p>
               <p className={styles["creator-date"]}>
                 {formatDate(row.original.createdAt) || "-"}
@@ -64,14 +64,13 @@ export const createStagesTableColumns = (t: TFunction) => {
           );
         }
         if (column.name === "editor") {
+          const isUnedited = !row.original.updatedAt || row.original.createdAt === row.original.updatedAt;
           return (
             <div>
-              <p className={styles["creator-name"]}>
-                {/*row.original.editor || */ "Admin"}
-              </p>
-              <p className={styles["creator-date"]}>
-                {formatDate(row.original.updatedAt) || "-"}
-              </p>
+              <div>
+              <p className={styles["creator-name"]}>{row.original.editor || "-"}</p>
+              <p className={styles["creator-date"]}>{!isUnedited ? formatDate(row.original.updatedAt) : "-"}</p>
+            </div>
             </div>
           );
         }

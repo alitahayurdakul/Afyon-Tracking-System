@@ -14,17 +14,21 @@ import { TextAreaBox } from "@/components/formElements/TextAreaBox";
 import { useRemoveQueryParamModal } from "@/utils/searchParams";
 import { useDispatch } from "react-redux";
 import { addToastify } from "@/redux/slices/toastSlice";
-import { WORKFLOW_FORM_CONSTS } from "@/consts/workflowConsts";
 import { SelectBox } from "@/components/formElements/SelectBox";
 import { axiosInstance } from "@/api/axiosInstance";
 import { useGetStagesDataQuery } from "@/api/queries/useGetStagesQueries";
-import { IStageFormDataTypes, IStageResponseDataTypes, IStageType } from "@/types/stagesTypes";
+import { IStageFormDataTypes, IStageType } from "@/types/stagesTypes";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { StageFormValidation } from "@/utils/validations/stageFormValidation";
 import SelectedItemList from "@/components/common/SelectedItemList";
 import { STAGE_FORM_CONSTS } from "@/consts/stagesConsts";
 import { useTranslations } from "next-intl";
+import { optionsConverters } from "@/types/optionsConverter";
+import { useGetSubStagesOptionsListDataQuery } from "@/api/queries/useGetSubStagesManageQueries";
+import { StageQueryTypes } from "@/app/api/stages/route";
+import { formatDate } from "@/utils/formDate";
+
 interface IPropsTypes {
   id: string;
   stageData?: IStageType;
@@ -47,113 +51,72 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
     defaultValues: {
       name: stageData?.name,
       description: stageData?.description,
-      subStages: [],
-      materialList: []
+      subStages: optionsConverters(stageData?.subStages, "_id", "name"),
     },
   });
-  const hasSubStage = stageData?.subStages && stageData?.subStages.length > 0; 
 
-  const { data, isLoading, isError, isFetching, refetch } =
-    useGetStagesDataQuery<IStageResponseDataTypes>();
+  const {
+    data: subStagesOptions,
+    isLoading,
+    isError,
+    isFetching,
+    refetch,
+  } = useGetSubStagesOptionsListDataQuery<IOptionType[]>();
 
   const dispatch = useDispatch();
 
   const removeModal = useRemoveQueryParamModal();
 
   const onCancel = () => {
-    // close modal
     removeModal();
   };
 
   const onSubmit: SubmitHandler<IStageFormDataTypes> = useCallback(
     async (data) => {
-      const { subStages, ...rest } = data;
-      // const newStages = stages.map((stage: IOptionType, index: number) => {
-      //   return {
-      //     stageInfo: stage.value,
-      //     plannedOrder: index + 1,
-      //   };
-      // });
+      try {
+        const { subStages, ...rest } = data;
+        const subStageIds = subStages?.map(
+          (subStage: IOptionType) => subStage.value,
+        );
 
-      // const params = {
-      //   ...rest,
-      //   creator: "admin",
-      //   stages: newStages,
-      // };
-      // const response = await axiosInstance.post(CLIENT_END_POINTS.workflow.edit, {
-      //   type: WorkflowQueryTypes.editWorkflow,
-      //   params: {
-      //     ...params,
-      //     id,
-      //   },
-      // });
-      // dispatch(
-      //   addToastify({
-      //     message: "Başarılı",
-      //     type: "success",
-      //     icon: "close",
-      //     id: "contactePage" + Date.now(),
-      //   }),
-      // );
-      //  dispatch(addTriggerTable());
-      // //   try {
-      // //     if (!isEqualValues) {
-      // //       dispatch(
-      // //         addToastify({
-      // //           message: t("form.notifications.error"),
-      // //           type: "error",
-      // //           icon: "close",
-      // //           id: "contactFormError" + Date.now(),
-      // //         }),
-      // //       );
-      // //       return;
-      // //     }
+        const params = {
+          ...rest,
+          editor: "admin",
+          subStageIds,
+        };
 
-      // //     const response = await axiosInstance.post<any>(
-      // //       CLIENT_END_POINTS.career,
-      // //       {
-      // //         params: data,
-      // //       },
-      // //     );
+        await axiosInstance.post(CLIENT_END_POINTS.stage.edit, {
+          type: StageQueryTypes.editStage,
+          params: {
+            ...params,
+            id,
+          },
+        });
 
-      // //     if (response.status === 200) {
-      // //       dispatch(
-      // //         addToastify({
-      // //           message: t("form.notifications.success"),
-      // //           type: "success",
-      // //           icon: "close",
-      // //           id: "contactePage" + Date.now(),
-      // //         }),
-      // //       );
-      // //       reset();
-      // //     }
-      // //   } catch (err) {
-      // //     dispatch(
-      // //       addToastify({
-      // //         message: (err as Error)?.message || t("form.notifications.error"),
-      // //         type: "error",
-      // //         icon: "close",
-      // //         id: "contactFormError" + Date.now(),
-      // //       }),
-      // //     );
-      // //   } finally {
-      // //     setTriggeredCaptcha(prev => prev + 1);
-      // //     setIsEqualValues(false);
-      // //   }
+        dispatch(
+          addToastify({
+            message: t("form.notifications.editSuccess"),
+            type: "success",
+            icon: "close",
+            id: "editStageSuccess" + Date.now(),
+          }),
+        );
+        dispatch(addTriggerTable());
+        reset();
+      } catch (err) {
+        dispatch(
+          addToastify({
+            message: t("form.notifications.editError"),
+            type: "error",
+            icon: "close",
+            id: "editStageError" + Date.now(),
+          }),
+        );
+      }
     },
     [],
   );
-
-  const options = useCallback(() => {
-    const newOptions = data?.stages?.map((stage: any, index: number) => ({
-      value: stage?._id ?? stage?.value ?? `stage-${index}`,
-      label: stage?.name ?? stage?.label ?? "-",
-    }));
-    return newOptions;
-  }, [data]);
-
   const selectedStages = watch("subStages");
-  const selectedMaterials = watch("materialList");
 
   return (
     <form className={styles["stage-form"]}>
@@ -198,25 +161,12 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
             </React.Fragment>
           );
         }
-         if (item.name === "subStages" && hasSubStage) {
+        if (item.name === "subStages") {
           return (
             <React.Fragment key={index}>
               <SelectBox
                 name={item.name}
-                options={
-                  // options()
-                  [
-                    {
-                      value: "1",
-                      label: "Sub 1",
-                    },
-                    {
-                      value: "2",
-                      label: "Sub 2",
-                    },
-                  ]
-                  // || []
-                }
+                options={subStagesOptions ?? []}
                 control={control as any}
                 required={item.isRequired}
                 label={t("form.fields.subStages.label")}
@@ -230,47 +180,52 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
             </React.Fragment>
           );
         }
-        if (item.name === "materialList" && !hasSubStage) {
-          return (
-            <React.Fragment key={index}>
-              <SelectBox
-                name={item.name}
-                options={
-                  // options()
-                  [
-                    {
-                      value: "1",
-                      label: "Material 1",
-                    },
-                    {
-                      value: "2",
-                      label: "Material 2",
-                    },
-                  ]
-                  // || []
-                }
-                control={control as any}
-                required={item.isRequired}
-                label={t("form.fields.materialList.label")}
-                placeholder={t("form.fields.materialList.placeholder")}
-                formLabelClassName={styles["form-label"]}
-                isSearchable
-                multiselect
-                isClearable
-                hideSelectedOptions
-              />
-            </React.Fragment>
-          );
-        }
+
         return null;
       })}
       {selectedStages && selectedStages.length > 0 && (
-        <SelectedItemList name="subStages" selectedItems={selectedStages} setValue={setValue} title={t("form.selectedStages")} />
+        <SelectedItemList
+          name="subStages"
+          selectedItems={selectedStages}
+          setValue={setValue}
+          title={t("form.selectedStages")}
+        />
       )}
 
-      {selectedMaterials && selectedMaterials.length > 0 && (
-        <SelectedItemList name="materialList" selectedItems={selectedMaterials} setValue={setValue} title={t("form.selectedMaterials")} />
-      )}
+            <section className={styles["activity-section"]}>
+        <div className={styles["activity-row"]}>
+          <span className={styles["activity-label"]}>
+            {t("form.activity.creator")}
+          </span>
+          <span className={styles["activity-value"]}>
+            {stageData?.creator || "Admin"}
+          </span>
+        </div>
+        <div className={styles["activity-row"]}>
+          <span className={styles["activity-label"]}>
+            {t("form.activity.createdAt")}
+          </span>
+          <span className={styles["activity-value"]}>
+            {formatDate(stageData?.createdAt) ?? "-"}
+          </span>
+        </div>
+        <div className={styles["activity-row"]}>
+          <span className={styles["activity-label"]}>
+            {t("form.activity.editor")}
+          </span>
+          <span className={styles["activity-value"]}>
+            {stageData?.editor ?? "-"}
+          </span>
+        </div>
+        <div className={styles["activity-row"]}>
+          <span className={styles["activity-label"]}>
+            {t("form.activity.updatedAt")}
+          </span>
+          <span className={styles["activity-value"]}>
+            {formatDate(stageData?.updatedAt) ?? "-"}
+          </span>
+        </div>
+      </section>
 
       <div>
         <FontAwesomeIcon icon={faCircleInfo} className={styles["alert-icon"]} />

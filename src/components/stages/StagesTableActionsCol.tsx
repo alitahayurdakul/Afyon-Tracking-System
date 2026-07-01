@@ -1,11 +1,10 @@
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
-import React from "react";
 import { useDispatch } from "react-redux";
 
 import { axiosInstance } from "@/api/axiosInstance";
-import { WorkflowQueryTypes } from "@/app/api/workflows/route";
+import { StageQueryTypes } from "@/app/api/stages/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
@@ -21,8 +20,8 @@ export const StagesTableActionsCol = ({ id }: { id: string }) => {
 
   const onDeleteHandler = async () => {
     try {
-      const data = await axiosInstance.post(CLIENT_END_POINTS.workflow.delete, {
-        type: WorkflowQueryTypes.deleteWorkflow,
+       await axiosInstance.post(CLIENT_END_POINTS.stage.delete, {
+        type: StageQueryTypes.deleteStage,
         id,
       });
       dispatch(
