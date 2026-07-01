@@ -58,7 +58,7 @@ export const createTrainsTableColumns = (t: TFunction) => {
         if (column.name === "creator") {
           return (
             <div>
-              <p className={styles["creator-name"]}>{r.creator || "Admin"}</p>
+              <p className={styles["creator-name"]}>{r.creator ?? "-"}</p>
               <p className={styles["creator-date"]}>
                 {formatDate(r.createdAt)}
               </p>
@@ -68,7 +68,7 @@ export const createTrainsTableColumns = (t: TFunction) => {
         if (column.name === "editor") {
           return (
             <div>
-              <p className={styles["creator-name"]}>{r.editor || "Admin"}</p>
+              <p className={styles["creator-name"]}>{r.editor ?? "-"}</p>
               <p className={styles["creator-date"]}>
                 {formatDate(r.updatedAt)}
               </p>

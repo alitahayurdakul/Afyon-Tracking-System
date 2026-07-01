@@ -22,9 +22,7 @@ export const WorkflowsListBody = () => {
     <section className={styles["pipeline-page"]}>
       <div className={styles["page-top"]}>
         <div>
-
           <h2>{t("header")}</h2>
-
           <p>
             {t("description")}
           </p>

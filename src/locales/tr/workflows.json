@@ -14,7 +14,8 @@
         "name": "İş AKIŞI ADI",
         "creator": "OLUŞTURAN",
         "editor": "GÜNCELLEYEN",
-        "actions": "İŞLEMLER"
+        "actions": "İŞLEMLER",
+        "stages": "AŞAMALAR"
     },
     "modal": {
         "create-headers": "Yeni İş Akışı Ekle",

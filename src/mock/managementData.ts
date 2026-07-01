@@ -94,36 +94,3 @@ export const mockUsersResponse: IUserResponseDataTypes = {
   count: mockUsers.length,
   users: mockUsers,
 };
-
-/* ------------------------------- İş Akışları ------------------------------- */
-
-export const mockWorkflows: IWorkflowResponseTypes[] = [
-  {
-    _id: "workflow-1",
-    name: "Standart Bakım Akışı",
-    description: "Depoya giriş, manevra, ikmal ve muayene aşamalarını içerir.",
-    creator: "Admin",
-    isActive: true,
-    stages: [
-      { label: "Depoya Giriş", value: "stage-1" },
-      { label: "Manevra", value: "stage-2" },
-      { label: "İkmal", value: "stage-3" },
-      { label: "Muayene", value: "stage-4" },
-    ],
-    createdAt: "2026-04-01T09:00:00.000Z",
-    updatedAt: "2026-04-01T09:00:00.000Z",
-  },
-  {
-    _id: "workflow-2",
-    name: "Hızlı İkmal Akışı",
-    description: "Sadece ikmal odaklı kısa akış.",
-    creator: "Admin",
-    isActive: true,
-    stages: [
-      { label: "Depoya Giriş", value: "stage-1" },
-      { label: "İkmal", value: "stage-3" },
-    ],
-    createdAt: "2026-04-10T09:00:00.000Z",
-    updatedAt: "2026-04-10T09:00:00.000Z",
-  },
-];

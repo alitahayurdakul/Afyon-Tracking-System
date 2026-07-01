@@ -21,7 +21,7 @@ export const WorkflowTableActionsCol = ({ id }: { id: string }) => {
 
   const onDeleteHandler = async () => {
     try {
-      const data = await axiosInstance.post(CLIENT_END_POINTS.workflow.delete, {
+      await axiosInstance.post(CLIENT_END_POINTS.workflow.delete, {
         type: WorkflowQueryTypes.deleteWorkflow,
         id,
       });

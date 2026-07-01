@@ -20,13 +20,15 @@ import { WORKFLOW_FORM_CONSTS } from "@/consts/workflowConsts";
 import { SelectBox } from "@/components/formElements/SelectBox";
 import { WorkflowFormValidation } from "@/utils/validations/workflowFormValidation";
 import { axiosInstance } from "@/api/axiosInstance";
-import { useGetStagesDataQuery } from "@/api/queries/useGetStagesQueries";
-import { IStageResponseDataTypes, IStageType } from "@/types/stagesTypes";
+import {
+  useGetStagesOptionsDataQuery,
+} from "@/api/queries/useGetStagesQueries";
 import { WorkflowQueryTypes } from "@/app/api/workflows/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import SelectedItemList from "@/components/common/SelectedItemList";
 import { useTranslations } from "next-intl";
+import { formatDate } from "@/utils/formDate";
 interface IPropsTypes {
   id: string;
   workflowData?: IWorkflowFormTypes;
@@ -40,8 +42,6 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
     watch,
     setValue,
     reset,
-    // clearErrors,
-    // setFocus,
     formState: { isSubmitting, errors },
   } = useForm<IWorkflowFormDataTypes>({
     resolver: yupResolver(WorkflowFormValidation()),
@@ -52,106 +52,63 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
     },
   });
 
-  const { data, isLoading, isError, isFetching, refetch } =
-    useGetStagesDataQuery<IStageResponseDataTypes>();
+  const { data: stagesOptions } = useGetStagesOptionsDataQuery<IOptionType[]>();
+
   const t = useTranslations("workflows");
   const dispatch = useDispatch();
 
   const removeModal = useRemoveQueryParamModal();
 
   const onCancel = () => {
-    // close modal
     removeModal();
   };
 
   const onSubmit: SubmitHandler<IWorkflowFormDataTypes> = useCallback(
     async (data) => {
-      const { stages, ...rest } = data;
-      const newStages = stages.map((stage: IOptionType, index: number) => {
-        return {
-          stageInfo: stage.value,
-          plannedOrder: index + 1,
+      try {
+        const { stages, ...rest } = data;
+        const newStages = stages.map((stage: IOptionType, index: number) => {
+          return {
+            stageInfo: stage.value,
+            plannedOrder: index + 1,
+          };
+        });
+
+        const params = {
+          ...rest,
+          creator: "admin",
+          stages: newStages,
         };
-      });
-
-      const params = {
-        ...rest,
-        creator: "admin",
-        stages: newStages,
-      };
-      const response = await axiosInstance.post(CLIENT_END_POINTS.workflow.edit, {
-        type: WorkflowQueryTypes.editWorkflow,
-        params: {
-          ...params,
-          id,
-        },
-      });
-      dispatch(
-        addToastify({
-          message: t("notifications.edit.success"),
-          type: "success",
-          icon: "close",
-          id: "contactePage" + Date.now(),
-        }),
-      );
-       dispatch(addTriggerTable());
-      //   try {
-      //     if (!isEqualValues) {
-      //       dispatch(
-      //         addToastify({
-      //           message: t("form.notifications.error"),
-      //           type: "error",
-      //           icon: "close",
-      //           id: "contactFormError" + Date.now(),
-      //         }),
-      //       );
-      //       return;
-      //     }
-
-      //     const response = await axiosInstance.post<any>(
-      //       CLIENT_END_POINTS.career,
-      //       {
-      //         params: data,
-      //       },
-      //     );
-
-      //     if (response.status === 200) {
-      //       dispatch(
-      //         addToastify({
-      //           message: t("form.notifications.success"),
-      //           type: "success",
-      //           icon: "close",
-      //           id: "contactePage" + Date.now(),
-      //         }),
-      //       );
-      //       reset();
-      //     }
-      //   } catch (err) {
-      //     dispatch(
-      //       addToastify({
-      //         message: (err as Error)?.message || t("form.notifications.error"),
-      //         type: "error",
-      //         icon: "close",
-      //         id: "contactFormError" + Date.now(),
-      //       }),
-      //     );
-      //   } finally {
-      //     setTriggeredCaptcha(prev => prev + 1);
-      //     setIsEqualValues(false);
-      //   }
+        await axiosInstance.post(CLIENT_END_POINTS.workflow.edit, {
+          type: WorkflowQueryTypes.editWorkflow,
+          params: {
+            ...params,
+            id,
+          },
+        });
+        dispatch(
+          addToastify({
+            message: t("notifications.edit.success"),
+            type: "success",
+            icon: "close",
+            id: "editWorkflowSuccess" + Date.now(),
+          }),
+        );
+        dispatch(addTriggerTable());
+        reset();
+      } catch (err) {
+        dispatch(
+          addToastify({
+            message: (err as Error)?.message || t("form.notifications.edit.error"),
+            type: "error",
+            icon: "close",
+            id: "editWorkflowError" + Date.now(),
+          }),
+        );
+      }
     },
     [],
   );
-
-  const options = useCallback(() => {
-    const newOptions = data?.stages?.map((stage: any, index: number) => ({
-      // Aşama verisi hem {_id, name} hem de {value, label} şeklinde gelebilir;
-      // değer boş gelirse benzersizliği korumak için index'i key olarak kullan.
-      value: stage?._id ?? stage?.value ?? `stage-${index}`,
-      label: stage?.name ?? stage?.label ?? "-",
-    }));
-    return newOptions;
-  }, [data]);
 
   const selectedStages = watch("stages");
 
@@ -203,7 +160,7 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
             <React.Fragment key={index}>
               <SelectBox
                 name={item.name}
-                options={options() || []}
+                options={stagesOptions || []}
                 // className={styles["row"]}
                 control={control as any}
                 required={item.isRequired}
@@ -221,8 +178,41 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
         return null;
       })}
       {selectedStages && selectedStages.length > 0 && (
-        <SelectedItemList name="stages" selectedItems={selectedStages} setValue={setValue} title={t("form.labels.selectedStages")}/>
+        <SelectedItemList
+          name="stages"
+          selectedItems={selectedStages}
+          setValue={setValue}
+          title={t("form.labels.selectedStages")}
+        />
       )}
+      <section className={styles["activity-section"]}>
+        <div className={styles["activity-row"]}>
+          <span className={styles["activity-label"]}>{t("form.labels.creator")}:</span>
+          <span className={styles["activity-value"]}>
+            {workflowData?.creator || "Admin"}
+          </span>
+        </div>
+        <div className={styles["activity-row"]}>
+          <span className={styles["activity-label"]}>{t("form.labels.createdDate")}:</span>
+          <span className={styles["activity-value"]}>
+            {formatDate(workflowData?.createdAt) ?? "-"}
+          </span>
+        </div>
+        <div className={styles["activity-row"]}>
+          <span className={styles["activity-label"]}>{t("form.labels.editor")}:</span>
+          <span className={styles["activity-value"]}>
+            {workflowData?.editor ?? "-"}
+          </span>
+        </div>
+        <div className={styles["activity-row"]}>
+          <span className={styles["activity-label"]}>
+            {t("form.labels.editedDate")}:
+          </span>
+          <span className={styles["activity-value"]}>
+            {formatDate(workflowData?.updatedAt) ?? "-"}
+          </span>
+        </div>
+      </section>
 
       <div className={styles["btn-group"]}>
         <Button
