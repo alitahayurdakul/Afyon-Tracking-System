@@ -39,7 +39,7 @@ async function deleteTrain(id: string): Promise<Response> {
     if (id) {
       const response = await axiosInstance.delete(END_POINTS.train.delete(id));
       if (response.status === 200 || response.status === 204) {
-        return Response.json(response.data || { success: true });
+        return createJsonOnlyData(response.data || { success: true });
       }
     }
     return Response.json(

@@ -3,13 +3,19 @@
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
 
 import { useLogoutMutation } from "@/api/queries/useAuthQueries";
+import { RootState } from "@/redux/store";
 import styles from "@/styles/components/sidebar/sections/SidebarBottom.module.scss";
 
 export const SidebarBottom = () => {
   const router = useRouter();
   const { mutateAsync: logout } = useLogoutMutation();
+  const user = useSelector((state: RootState) => state.auth.user);
+
+  const displayName = user?.fullname || user?.email || "-";
+  const displayRole = user?.role?.roleName || "-";
 
   const onLogout = async () => {
     await logout();
@@ -23,8 +29,8 @@ export const SidebarBottom = () => {
           <ProfileSvg />
         </div>
         <div className={styles["user-info"]}>
-          <span className={styles["name"]}>Ali Taha Yurdakul</span>
-          <span className={styles["role"]}>Sistem Yöneticisi</span>
+          <span className={styles["name"]}>{displayName}</span>
+          <span className={styles["role"]}>{displayRole}</span>
         </div>
       </div>
 

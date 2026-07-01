@@ -51,6 +51,7 @@
     "notifications": {
       "createSuccess": "Успешно создано",
       "editSuccess": "Успешно обновлено",
+      "deleteSuccess": "Успешно удалено",
       "error": "Произошла ошибка"
     }
   },

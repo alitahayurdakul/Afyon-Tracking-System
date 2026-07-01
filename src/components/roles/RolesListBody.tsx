@@ -15,7 +15,6 @@ import { CreateRolesModal } from "./create/CreateRolesModal";
 export const RolesListBody = () => {
   const t = useTranslations("roles");
   const { data, isLoading } = useGetRolesDataQuery();
-  const rows = data?.roles ?? [];
 
   return (
     <section className={styles["pipeline-page"]}>
@@ -39,7 +38,7 @@ export const RolesListBody = () => {
         <Table
           className={styles["table-class"]}
           loading={isLoading}
-          data={rows}
+          data={data ?? []}
           columns={createRolesTableColumns(t, PERMISSION_LABEL_MAP)}
         />
       </div>

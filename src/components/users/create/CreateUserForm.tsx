@@ -52,7 +52,7 @@ export const CreateUserForm = () => {
   const { data: rolesData } = useGetRolesDataQuery();
   const roleOptions = useMemo(
     () =>
-      (rolesData?.roles ?? []).map((r) => ({
+      (rolesData ?? []).map((r) => ({
         label: r.roleName,
         value: r._id,
       })),

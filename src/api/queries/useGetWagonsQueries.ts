@@ -11,7 +11,7 @@ import { IOptionType } from "@/types/formTypes";
 import { optionsConverters } from "@/types/optionsConverter";
 import { IWagonsType, IWagonType } from "@/types/wagonsTypes";
 
-export const useGetWagonsDataQuery = <T>() => {
+export const useGetWagonsDataQuery = () => {
   const trigger = useSelector(
     (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
   );
@@ -49,7 +49,7 @@ export const useGetWagonDetailDataQuery = (id: string) => {
   });
 };
 
-export const useGetWagonsOptionsQuery = <T>() => {
+export const useGetWagonsOptionsQuery = () => {
   const trigger = useSelector(
     (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
   );

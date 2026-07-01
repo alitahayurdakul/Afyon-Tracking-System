@@ -7,7 +7,6 @@ import { useGetTrainDetailDataQuery } from "@/api/queries/useGetTrainsQueries";
 import { useGetWagonsOptionsQuery } from "@/api/queries/useGetWagonsQueries";
 import { EDIT_TRAIN_MODAL } from "@/consts/modals";
 import styles from "@/styles/components/common/TableListBody.module.scss";
-import { IOptionType } from "@/types/formTypes";
 import { useAddQueryParam } from "@/utils/searchParams";
 
 import { Modal } from "../../common/Modal";
@@ -20,7 +19,7 @@ export const EditTrainsModal = ({ id }: { id: string }) => {
 
   const { data, isLoading } = useGetTrainDetailDataQuery(id);
   const { data: wagonOptions, isLoading: wagonsLoading } =
-    useGetWagonsOptionsQuery<IOptionType[]>();
+    useGetWagonsOptionsQuery();
 
   return (
     <>

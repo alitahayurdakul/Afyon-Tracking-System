@@ -1,7 +1,6 @@
 import { NextRequest } from "next/server";
 
 import { roleHandlers } from "@/api/handlers/rolesQueries";
-import { createServerAxios } from "@/api/serverAxios";
 
 export enum RoleQueryTypes {
   getAllRoles = "GET_ALL_ROLES",
@@ -14,19 +13,18 @@ export enum RoleQueryTypes {
 export async function POST(request: NextRequest) {
   const body = await request.json();
   const { id, params, type } = body;
-  const http = createServerAxios(request);
 
   switch (type) {
     case RoleQueryTypes.createRole:
-      return await roleHandlers.createRole(params, http);
+      return await roleHandlers.createRole(params);
     case RoleQueryTypes.deleteRole:
-      return await roleHandlers.deleteRole(id, http);
+      return await roleHandlers.deleteRole(id);
     case RoleQueryTypes.editRole:
-      return await roleHandlers.editRole(params, http);
+      return await roleHandlers.editRole(params);
     case RoleQueryTypes.getAllRoles:
-      return await roleHandlers.getRoles(http);
+      return await roleHandlers.getRoles();
     case RoleQueryTypes.getDetailRole:
-      return await roleHandlers.getRoleDetail(id, http);
+      return await roleHandlers.getRoleDetail(id);
 
     default:
       return Response.json(

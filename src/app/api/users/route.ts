@@ -1,7 +1,6 @@
 import { NextRequest } from "next/server";
 
 import { userHandlers } from "@/api/handlers/usersQueries";
-import { createServerAxios } from "@/api/serverAxios";
 
 export enum UserQueryTypes {
   getAllUsers = "GET_ALL_USERS",
@@ -14,19 +13,18 @@ export enum UserQueryTypes {
 export async function POST(request: NextRequest) {
   const body = await request.json();
   const { id, params, type } = body;
-  const http = createServerAxios(request);
 
   switch (type) {
     case UserQueryTypes.createUser:
-      return await userHandlers.createUser(params, http);
+      return await userHandlers.createUser(params);
     case UserQueryTypes.deleteUser:
-      return await userHandlers.deleteUser(id, http);
+      return await userHandlers.deleteUser(id);
     case UserQueryTypes.editUser:
-      return await userHandlers.editUser(params, http);
+      return await userHandlers.editUser(params);
     case UserQueryTypes.getAllUsers:
-      return await userHandlers.getUsers(http);
+      return await userHandlers.getUsers();
     case UserQueryTypes.getDetailUser:
-      return await userHandlers.getUserDetail(id, http);
+      return await userHandlers.getUserDetail(id);
 
     default:
       return Response.json(
