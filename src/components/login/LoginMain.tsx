@@ -1,5 +1,6 @@
 import styles from "@/styles/components/login/LoginMain.module.scss";
 
+import LanguageSelector from "../NewLanguageSelectBox";
 import { LoginBrand } from "./LoginBrand";
 import { LoginCard } from "./LoginCard";
 
@@ -10,6 +11,10 @@ export const LoginMain = () => {
         <div className={styles["blob-primary"]} />
         <div className={styles["blob-secondary"]} />
         <div className={styles.dots} />
+      </div>
+
+      <div className={styles["lang-switch"]}>
+        <LanguageSelector />
       </div>
 
       <div className={styles.container}>

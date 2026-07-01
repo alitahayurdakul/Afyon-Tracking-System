@@ -1,12 +1,11 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-// import { axiosInstance } from "@/api/axiosInstance";
-// import { CLIENT_END_POINTS } from "@/consts/endpoints";
-// import { UserQueryTypes } from "@/app/api/users/route";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 
-import { mockUsers, mockUsersResponse } from "@/mock/managementData";
+import { axiosInstance } from "@/api/axiosInstance";
+import { UserQueryTypes } from "@/app/api/users/route";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
 import {
   IUserResponseDataTypes,
@@ -22,14 +21,15 @@ export const useGetUsersDataQuery = () => {
     queryKey: [`getUsersAllDatas`, trigger],
     refetchOnWindowFocus: false,
     enabled: true,
-    queryFn: async (): Promise<IUserResponseDataTypes> => {
-      // TODO(api): Backend hazır olduğunda mock dönüşü kaldırıp gerçek isteği aktif edin.
-      // const { data } = await axiosInstance.post<IUserResponseDataTypes>(
-      //   CLIENT_END_POINTS.user.getAll,
-      //   { type: UserQueryTypes.getAllUsers },
-      // );
-      // return data;
-      return mockUsersResponse;
+    queryFn: async () => {
+      const { data } = await axiosInstance.post<IUserResponseDataTypes>(
+        CLIENT_END_POINTS.user.getAll,
+        {
+          type: UserQueryTypes.getAllUsers,
+        },
+      );
+
+      return data;
     },
   });
 };
@@ -43,14 +43,16 @@ export const useGetUserDetailDataQuery = (id: string) => {
     queryKey: [`getUserDetailDatas_${id}`],
     refetchOnWindowFocus: false,
     enabled: splittedId === id,
-    queryFn: async (): Promise<IUserType | undefined> => {
-      // TODO(api): Backend hazır olduğunda mock dönüşü kaldırıp gerçek isteği aktif edin.
-      // const { data } = await axiosInstance.post<IUserType>(
-      //   CLIENT_END_POINTS.user.getDetail,
-      //   { type: UserQueryTypes.getDetailUser, id },
-      // );
-      // return data;
-      return mockUsers.find((user) => user._id === id);
+    queryFn: async () => {
+      const { data } = await axiosInstance.post<IUserType>(
+        CLIENT_END_POINTS.user.getDetail,
+        {
+          type: UserQueryTypes.getDetailUser,
+          id,
+        },
+      );
+
+      return data;
     },
   });
 };

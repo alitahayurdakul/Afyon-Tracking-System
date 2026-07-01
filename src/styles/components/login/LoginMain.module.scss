@@ -52,6 +52,13 @@
   opacity: 0.15;
 }
 
+.lang-switch {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 20;
+}
+
 .container {
   width: 100%;
   max-width: 28rem;
