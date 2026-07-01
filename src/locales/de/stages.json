@@ -32,17 +32,16 @@
         "label": "Beschreibung",
         "placeholder": "Beschreibung eingeben"
       },
-      "hasSubStage": {
-        "label": "Enthält Unterphase."
-      },
       "subStages": {
         "label": "Unterphase",
         "placeholder": "Unterphase auswählen"
-      },
-      "materialList": {
-        "label": "Materialliste",
-        "placeholder": "Material auswählen"
       }
+    },
+    "activity": {
+      "creator": "Erstellt von:",
+      "createdAt": "Erstellungsdatum:",
+      "editor": "Zuletzt aktualisiert von:",
+      "updatedAt": "Letztes Aktualisierungsdatum:"
     },
     "notifications": {
       "createSuccess": "Erfolgreich erstellt",

@@ -7,6 +7,8 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { SubStageQueryTypes } from "@/app/api/sub-stages/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
+import { IOptionType } from "@/types/formTypes";
+import { optionsConverters } from "@/types/optionsConverter";
 import { ISubStageType } from "@/types/subStagesTypes";
 
 export const useGetSubStagesListDataQuery = () => {
@@ -43,6 +45,25 @@ export const useGetSubStageDetailDataQuery = (id: string) => {
         { type: SubStageQueryTypes.getDetailSubStage, id },
       );
       return data;
+    },
+  });
+};
+
+export const useGetSubStagesOptionsListDataQuery = <T>() => {
+  const trigger = useSelector(
+    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+  );
+
+  return useQuery({
+    queryKey: [`getSubStagesOptionsAllDatas`, trigger],
+    refetchOnWindowFocus: false,
+    enabled: true,
+    queryFn: async (): Promise<T> => {
+      const { data } = await axiosInstance.post<ISubStageType[]>(
+        CLIENT_END_POINTS.subStage.getAll,
+        { type: SubStageQueryTypes.getAllSubStages },
+      );
+      return optionsConverters(data, "_id", "name") as T;
     },
   });
 };

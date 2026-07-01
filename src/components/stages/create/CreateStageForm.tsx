@@ -4,7 +4,7 @@ import styles from "@/styles/components/stages/StageForm.module.scss";
 import { Button } from "@/components/formElements/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback } from "react";
 import { IFormFieldType, IOptionType } from "@/types/formTypes";
 import { InputBox } from "@/components/formElements/InputBox";
 import { InputSpaceEnums } from "@/types/formEnums";
@@ -15,14 +15,14 @@ import { addToastify } from "@/redux/slices/toastSlice";
 import { SelectBox } from "@/components/formElements/SelectBox";
 import { axiosInstance } from "@/api/axiosInstance";
 import { IStageFormDataTypes } from "@/types/stagesTypes";
-import { WorkflowQueryTypes } from "@/app/api/workflows/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { STAGE_FORM_CONSTS } from "@/consts/stagesConsts";
 import { StageFormValidation } from "@/utils/validations/stageFormValidation";
-import { CheckBox } from "@/components/formElements/Checkbox";
 import SelectedItemList from "@/components/common/SelectedItemList";
 import { useTranslations } from "next-intl";
+import { useGetSubStagesOptionsListDataQuery } from "@/api/queries/useGetSubStagesManageQueries";
+import { StageQueryTypes } from "@/app/api/stages/route";
 
 export const CreateStageForm = () => {
   const t = useTranslations("stages");
@@ -45,27 +45,13 @@ export const CreateStageForm = () => {
     },
   });
 
-  const hasSubStage = watch("hasSubStage");
+  const { data: subStagesOptions } =
+    useGetSubStagesOptionsListDataQuery<IOptionType[]>();
   const selectedStages = watch("subStages");
-  const selectedMaterials = watch("materialList");
-
-  // const { data, isLoading, isError, isFetching, refetch } =
-  //   useGetStagesDataQuery<IStagesTypes>(); // should be subStagesData
-
-  useEffect(() => {
-    if (hasSubStage) {
-      setValue("materialList", []);
-    } else {
-      setValue("subStages", []);
-    }
-  }, [hasSubStage]);
-
   const dispatch = useDispatch();
-
   const removeModal = useRemoveQueryParamModal();
 
   const onCancel = () => {
-    // close modal
     removeModal();
   };
 
@@ -73,34 +59,26 @@ export const CreateStageForm = () => {
     async (data) => {
       try {
         const { subStages, ...rest } = data;
-        const newStages = subStages?.map(
-          (stage: IOptionType, index: number) => {
-            return {
-              stageInfo: stage.value,
-              plannedOrder: index + 1,
-            };
-          },
+        const newSubStages = subStages?.map(
+          (sStage: IOptionType) => sStage.value,
         );
 
         const params = {
           ...rest,
           creator: "admin",
-          subStages: newStages,
+          subStageIds: newSubStages,
         };
 
-        const response = await axiosInstance.post(
-          CLIENT_END_POINTS.workflow.create,
-          {
-            type: WorkflowQueryTypes.createWorkflow,
-            params,
-          },
-        );
+        await axiosInstance.post(CLIENT_END_POINTS.stage.create, {
+          type: StageQueryTypes.createStage,
+          params,
+        });
         dispatch(
           addToastify({
             message: t("form.notifications.createSuccess"),
             type: "success",
             icon: "close",
-            id: "createWorkflowCreate" + Date.now(),
+            id: "createStageSuccess" + Date.now(),
           }),
         );
         dispatch(addTriggerTable());
@@ -111,21 +89,13 @@ export const CreateStageForm = () => {
             message: t("form.notifications.createError"),
             type: "error",
             icon: "close",
-            id: "createWorkflowDelete" + Date.now(),
+            id: "createStageError" + Date.now(),
           }),
         );
       }
     },
     [],
   );
-
-  // const options = useCallback(() => {
-  //   const newOptions = data?.map((stage: IStageType) => ({
-  //     value: stage._id,
-  //     label: stage.name,
-  //   }));
-  //   return newOptions;
-  // }, [data]);
 
   return (
     <form className={styles["stage-form"]}>
@@ -170,41 +140,12 @@ export const CreateStageForm = () => {
             </React.Fragment>
           );
         }
-        if (item.type === "checkbox") {
-          return (
-            <React.Fragment key={index}>
-              <CheckBox
-                name={item.name}
-                control={control as any}
-                align="top"
-                className={styles["checkbox-container"]}
-                classNameInput={styles["checkbox-input"]}
-                classNameLabel={styles["checkbox-label"]}
-                label={t(`form.fields.${item.name}.label`)}
-                required={false}
-              />
-            </React.Fragment>
-          );
-        }
-        if (item.name === "subStages" && hasSubStage) {
+        if (item.name === "subStages") {
           return (
             <React.Fragment key={index}>
               <SelectBox
                 name={item.name}
-                options={
-                  // options()
-                  [
-                    {
-                      value: "1",
-                      label: "Sub 1",
-                    },
-                    {
-                      value: "2",
-                      label: "Sub 2",
-                    },
-                  ]
-                  // || []
-                }
+                options={subStagesOptions || []}
                 control={control as any}
                 required={item.isRequired}
                 label={t("form.fields.subStages.label")}
@@ -218,42 +159,10 @@ export const CreateStageForm = () => {
             </React.Fragment>
           );
         }
-        if (item.name === "materialList" && !hasSubStage) {
-          return (
-            <React.Fragment key={index}>
-              <SelectBox
-                name={item.name}
-                options={
-                  // options()
-                  [
-                    {
-                      value: "1",
-                      label: "Material 1",
-                    },
-                    {
-                      value: "2",
-                      label: "Material 2",
-                    },
-                  ]
-                  // || []
-                }
-                control={control as any}
-                required={item.isRequired}
-                label={t("form.fields.materialList.label")}
-                placeholder={t("form.fields.materialList.placeholder")}
-                formLabelClassName={styles["form-label"]}
-                isSearchable
-                multiselect
-                isClearable
-                hideSelectedOptions
-              />
-            </React.Fragment>
-          );
-        }
+
         return null;
       })}
-      {hasSubStage &&
-        selectedStages &&
+      {selectedStages &&
         Array.isArray(selectedStages) &&
         selectedStages.length > 0 && (
           <SelectedItemList
@@ -261,18 +170,6 @@ export const CreateStageForm = () => {
             selectedItems={selectedStages}
             setValue={setValue}
             title={t("form.selectedStages")}
-          />
-        )}
-
-      {!hasSubStage &&
-        selectedMaterials &&
-        Array.isArray(selectedMaterials) &&
-        selectedMaterials.length > 0 && (
-          <SelectedItemList
-            name="materialList"
-            selectedItems={selectedMaterials}
-            setValue={setValue}
-            title={t("form.selectedMaterials")}
           />
         )}
 

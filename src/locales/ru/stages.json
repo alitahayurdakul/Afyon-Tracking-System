@@ -32,17 +32,16 @@
         "label": "Описание",
         "placeholder": "Введите описание"
       },
-      "hasSubStage": {
-        "label": "Есть подэтап."
-      },
       "subStages": {
         "label": "Подэтап",
         "placeholder": "Выберите подэтап"
-      },
-      "materialList": {
-        "label": "Список материалов",
-        "placeholder": "Выберите материал"
       }
+    },
+     "activity": {
+      "creator": "Создал:",
+      "createdAt": "Дата создания:",
+      "editor": "Последнее изменение:",
+      "updatedAt": "Дата последнего изменения:"
     },
     "notifications": {
       "createSuccess": "Успешно создано",

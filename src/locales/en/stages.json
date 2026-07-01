@@ -32,17 +32,16 @@
         "label": "Description",
         "placeholder": "Enter description"
       },
-      "hasSubStage": {
-        "label": "Has sub-stage."
-      },
       "subStages": {
         "label": "Sub-stage",
         "placeholder": "Select sub-stage"
-      },
-      "materialList": {
-        "label": "Material List",
-        "placeholder": "Select material"
       }
+    },
+    "activity": {
+      "creator": "Created By:",
+      "createdAt": "Created Date:",
+      "editor": "Last Updated By:",
+      "updatedAt": "Last Updated Date:"
     },
     "notifications": {
       "createSuccess": "Created successfully",

@@ -95,56 +95,6 @@ export const mockUsersResponse: IUserResponseDataTypes = {
   users: mockUsers,
 };
 
-/* --------------------------------- Aşamalar -------------------------------- */
-
-export const mockStages: IStageType[] = [
-  {
-    _id: "stage-1",
-    name: "Depoya Giriş",
-    description: "Trenin depoya giriş aşaması.",
-    creator: "Admin",
-    isActive: true,
-    plannedOrder: 1,
-    createdAt: "2026-03-01T09:00:00.000Z",
-    updatedAt: "2026-03-01T09:00:00.000Z",
-  },
-  {
-    _id: "stage-2",
-    name: "Manevra",
-    description: "Manevra aşaması.",
-    creator: "Admin",
-    isActive: true,
-    plannedOrder: 2,
-    createdAt: "2026-03-01T09:00:00.000Z",
-    updatedAt: "2026-03-01T09:00:00.000Z",
-  },
-  {
-    _id: "stage-3",
-    name: "İkmal",
-    description: "İkmal aşaması.",
-    creator: "Admin",
-    isActive: true,
-    plannedOrder: 3,
-    createdAt: "2026-03-01T09:00:00.000Z",
-    updatedAt: "2026-03-01T09:00:00.000Z",
-  },
-  {
-    _id: "stage-4",
-    name: "Muayene",
-    description: "Muayene aşaması.",
-    creator: "Admin",
-    isActive: true,
-    plannedOrder: 4,
-    createdAt: "2026-03-01T09:00:00.000Z",
-    updatedAt: "2026-03-01T09:00:00.000Z",
-  },
-];
-
-export const mockStagesResponse: IStageResponseDataTypes = {
-  count: mockStages.length,
-  stages: mockStages,
-};
-
 /* ------------------------------- İş Akışları ------------------------------- */
 
 export const mockWorkflows: IWorkflowResponseTypes[] = [
