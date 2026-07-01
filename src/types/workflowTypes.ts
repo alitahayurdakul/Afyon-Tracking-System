@@ -28,11 +28,9 @@ export interface IWorkflowResponseTypes {
   name: string;
   description: string;
   creator: string;
-
   isActive: boolean;
-
   stages: IStageType[] | IOptionType[]; // replace with WorkflowStage[] when you define stage shape
-
   createdAt: string;
   updatedAt: string;
+  editor?: string;
 }

@@ -7,6 +7,9 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { StageQueryTypes } from "@/app/api/stages/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
+import { IOptionType } from "@/types/formTypes";
+import { optionsConverters } from "@/types/optionsConverter";
+import { IStagesTypes } from "@/types/stagesTypes";
 
 export const useGetStagesDataQuery = <T>() => {
   const trigger = useSelector(
@@ -44,6 +47,26 @@ export const useGetStageDetailDataQuery = <T>(id: string) => {
         { type: StageQueryTypes.getDetailStage, id },
       );
       return data;
+    },
+  });
+};
+
+export const useGetStagesOptionsDataQuery = <T>() => {
+  const trigger = useSelector(
+    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+  );
+  return useQuery({
+    queryKey: [`getStagesOptionsAllDatas`, trigger],
+    refetchOnWindowFocus: false,
+    enabled: true,
+    queryFn: async (): Promise<T> => {
+      const { data } = await axiosInstance.post<IStagesTypes[]>(
+        CLIENT_END_POINTS.stage.getAll,
+        { type: StageQueryTypes.getAllStages },
+      );
+      const options = optionsConverters(data, "_id", "name");
+
+      return options as T;
     },
   });
 };

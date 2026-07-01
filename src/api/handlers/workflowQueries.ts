@@ -3,6 +3,8 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
 import { IWorkflowResponseTypes } from "@/types/workflowTypes";
 
+import { createJsonError, createJsonOnlyData, extractErrorMessage } from "./responseHelpers";
+
 export const workflowHandlers = {
   createWorkflow,
   deleteWorkflow,
@@ -18,17 +20,11 @@ async function getAllWorkflows(): Promise<Response> {
     );
 
     if (response.status === 200) {
-      return Response.json(response.data || []);
+      return createJsonOnlyData(response.data || []);
     }
-    return Response.json(
-      { success: false, error: "Failed to create workflow" },
-      { status: 200 },
-    );
+    return createJsonError("Failed to fetch workflows", 400);
   } catch (err: any) {
-    return Response.json(
-      { success: false, error: err.message },
-      { status: 500 },
-    );
+    return createJsonError(extractErrorMessage(err), 500);
   }
 }
 
@@ -89,18 +85,12 @@ async function editWorkflow(params: Record<string, any>): Promise<Response> {
       ...rest,
     });
 
-    if (response.status === 201) {
+    if (response.status === 200) {
       return Response.json({ success: true, data: response.data });
     }
-    return Response.json(
-      { success: false, error: "Failed to create stage" },
-      { status: 200 },
-    );
+    return createJsonError("Failed to fetch projects", 400);
   } catch (err: any) {
-    return Response.json(
-      { success: false, error: err.message },
-      { status: 500 },
-    );
+    return createJsonError(extractErrorMessage(err), 500);
   }
 }
 
@@ -110,7 +100,7 @@ async function getWorkflowDetail(id: string): Promise<Response> {
       END_POINTS.workflow.getDetail(id),
     );
     if (response.status === 200) {
-      return Response.json(response.data || []);
+      return createJsonOnlyData(response.data || []);
     }
     return Response.json(
       { success: false, error: "Failed to create workflow" },

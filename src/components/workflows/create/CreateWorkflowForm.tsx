@@ -17,7 +17,7 @@ import { WORKFLOW_FORM_CONSTS } from "@/consts/workflowConsts";
 import { SelectBox } from "@/components/formElements/SelectBox";
 import { WorkflowFormValidation } from "@/utils/validations/workflowFormValidation";
 import { axiosInstance } from "@/api/axiosInstance";
-import { useGetStagesDataQuery } from "@/api/queries/useGetStagesQueries";
+import { useGetStagesDataQuery, useGetStagesOptionsDataQuery } from "@/api/queries/useGetStagesQueries";
 import { IStageResponseDataTypes, IStageType } from "@/types/stagesTypes";
 import { WorkflowQueryTypes } from "@/app/api/workflows/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
@@ -47,8 +47,8 @@ export const CreateWorkflowForm = () => {
 
   const t = useTranslations("workflows");
 
-  const { data, isLoading, isError, isFetching, refetch } =
-    useGetStagesDataQuery<IStageResponseDataTypes>();
+  const { data: stagesOptions, isLoading, isError, isFetching, refetch } =
+    useGetStagesOptionsDataQuery<IOptionType[]>();
 
   const dispatch = useDispatch();
 
@@ -88,7 +88,7 @@ export const CreateWorkflowForm = () => {
             message: t("notifications.create.success"),
             type: "success",
             icon: "close",
-            id: "createWorkflowCreate" + Date.now(),
+            id: "createWorkflowSuccess" + Date.now(),
           }),
         );
         dispatch(addTriggerTable());
@@ -99,21 +99,13 @@ export const CreateWorkflowForm = () => {
             message: t("notifications.create.error"),
             type: "error",
             icon: "close",
-            id: "createWorkflowDelete" + Date.now(),
+            id: "createWorkflowError" + Date.now(),
           }),
         );
       }
     },
     [],
   );
-
-  const options = useCallback(() => {
-    const newOptions = data?.stages.map((stage: IStageType) => ({
-      value: stage._id,
-      label: stage.name,
-    }));
-    return newOptions;
-  }, [data]);
 
   const selectedStages = watch("stages");
 
@@ -165,7 +157,7 @@ export const CreateWorkflowForm = () => {
             <React.Fragment key={index}>
               <SelectBox
                 name={item.name}
-                options={options() || []}
+                options={stagesOptions || []}
                 // className={styles["row"]}
                 control={control as any}
                 required={item.isRequired}

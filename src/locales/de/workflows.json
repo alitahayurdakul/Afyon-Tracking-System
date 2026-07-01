@@ -14,7 +14,8 @@
     "name": "WORKFLOW-NAME",
     "creator": "ERSTELLT VON",
     "editor": "AKTUALISIERT VON",
-    "actions": "AKTIONEN"
+    "actions": "AKTIONEN",
+    "stages": "PHASEN"
   },
   "modal": {
     "create-headers": "Neuen Workflow hinzufügen",

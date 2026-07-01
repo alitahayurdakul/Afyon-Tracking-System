@@ -14,7 +14,8 @@
     "name": "WORKFLOW NAME",
     "creator": "CREATED BY",
     "editor": "UPDATED BY",
-    "actions": "ACTIONS"
+    "actions": "ACTIONS",
+    "stages": "STAGES"
   },
   "modal": {
     "create-headers": "Add New Workflow",
