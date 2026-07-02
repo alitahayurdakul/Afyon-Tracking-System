@@ -3,28 +3,52 @@ export interface IStageEntryType {
     stageId: string;
     stageName: string;
     startedAt: string;
+    plannedOrder: number;
+    canSkip: boolean;
+    isSkipped: boolean;
 }
 
-export interface IActiveProcessType {
-    _id: string;
-    locomotiveNo: string;
-    fleetOwner: string;
-    workflowId?: string;
-    workflowName?: string;
-    creator: string;
-    status: "COMPLETED" | "ACTIVE" | string;
-    currentStageId: string | null;
-    completedAt: string;
-    startedAt: string;
-    createdAt: string;
-    updatedAt: string;
-    stageCount: number;
-    entryCount: number;
-    totalMinutes: number;
-    openStage: IStageEntryType | null;
-};
+export type statusType = "ACTIVE" | "COMPLETED" | "CANCELLED";
 
-export type IActiveProcessesTypes = Array<IActiveProcessType>;
+export interface IProcessType {
+  _id: string;
+  projectId: string;
+  projectName: string;
+  trainId: string;
+  locomotiveNo: string;
+  wagonId: string;
+  wagonNo: string;
+  description: string;
+  workflowId: string;
+  workflowName: string;
+  fleetOwner: string;
+  creator: string | null;
+  editor: string | null;
+  status: statusType;
+  currentStageId: string;
+  completedAt: string | null;
+  startedAt: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+  stageCount: number;
+  entryCount: number;
+  totalMinutes: number;
+  openStage: IStageEntryType;
+  completedStageCount: number;
+  activeStageCount: number;
+}
+
+export interface IOpenStage {
+  stageId: string;
+  stageName: string;
+  plannedOrder: number;
+  startedAt: string;
+  canSkip: boolean;
+  isSkipped: boolean;
+}
+
+export type IProcessesTypes = Array<IProcessType>;
 
 export type IdRef = {
     _id: string;

@@ -4,9 +4,9 @@
     "card": {
         "wagon": "Vagon",
         "addition-info": "Ek Bilgi",
-        "status": "Durum",
         "ongoing-stages": "Devam Eden Aşamalar",
-        "progress": "AŞAMA {progress}"
+        "progress": "AŞAMA {progress}",
+        "project": "Proje"
     },
     "select-placeholder": "Proje seçiniz",
     "active-unit-count": "AKTİF BİRİM",

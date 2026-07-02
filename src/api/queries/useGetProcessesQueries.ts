@@ -1,6 +1,6 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 
 import { axiosInstance } from "@/api/axiosInstance";
@@ -8,16 +8,23 @@ import { ProcessQueryTypes } from "@/app/api/processes/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
 
-export const useGetActiveProcessesDataQuery = <T>() => {
+export const useGetActiveProcessesDataQuery = <T>(status?: string) => {
+  const searchParams = useSearchParams();
+  const projectId = searchParams.get("projectId") || "";
+
   return useQuery({
-    queryKey: [`getActiveProcessAllDatas`],
+    queryKey: [`getActiveProcessAllDatas`, status, projectId],
     refetchOnWindowFocus: false,
     enabled: true,
     queryFn: async () => {
       const { data } = await axiosInstance.post<T>(
         CLIENT_END_POINTS.processes.getAllActive,
         {
-          type: ProcessQueryTypes.getAllActiveProcess
+          type: ProcessQueryTypes.getAllActiveProcess,
+          params: {
+            status,
+            projectId,
+          },
         },
       );
 

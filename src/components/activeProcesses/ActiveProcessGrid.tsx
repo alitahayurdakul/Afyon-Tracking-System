@@ -7,15 +7,15 @@ import { ErrorChecker } from "@/components/common/error/ErrorChecker";
 import { LoadingChecker } from "@/components/common/loaders/LoadingChecker";
 import styles from "@/styles/components/activeProcesses/ActiveProcessesGrid.module.scss";
 import {
-  IActiveProcessesTypes,
-  IActiveProcessType,
+  IProcessesTypes,
+  IProcessType,
 } from "@/types/processTypes";
 
 import { ActiveProcessCard } from "./ActiveProcessCard";
 
 export const ActiveProcessGrid = () => {
   const { data, isLoading, isError } =
-    useGetActiveProcessesDataQuery<IActiveProcessesTypes>();
+    useGetActiveProcessesDataQuery<IProcessesTypes>("ACTIVE");
 
   const t = useTranslations("activeProcess");
 
@@ -30,7 +30,7 @@ export const ActiveProcessGrid = () => {
           <div className={styles["unit-grid"]}>
             {data &&
               data.length > 0 &&
-              data?.map((unit: IActiveProcessType, index: number) => (
+              data?.map((unit: IProcessType, index: number) => (
                 <React.Fragment key={index}>
                   <ActiveProcessCard unit={unit} />
                 </React.Fragment>

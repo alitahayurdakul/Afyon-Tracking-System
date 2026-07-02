@@ -13,8 +13,8 @@ import { Topbar } from "@/components/common/Topbar";
 import styles from "@/styles/pages/PageCommonContainer.module.scss";
 import { IOptionType } from "@/types/formTypes";
 import {
-  IActiveProcessesTypes,
-  IActiveProcessType,
+  IProcessesTypes,
+  IProcessType,
   ProcessResponse,
 } from "@/types/processTypes";
 
@@ -25,11 +25,11 @@ export default function ActiveProcessDetailPage() {
     useActiveProcessDetailDataQuery<ProcessResponse>();
 
   const { data: allFleetsData } =
-    useGetActiveProcessesDataQuery<IActiveProcessesTypes>();
+    useGetActiveProcessesDataQuery<IProcessesTypes>();
 
   const trainsOptions = useMemo(() => {
     const trains =
-      allFleetsData?.map((fleet: IActiveProcessType) => {
+      allFleetsData?.map((fleet: IProcessType) => {
         return {
           value: fleet._id,
           label: fleet.locomotiveNo,

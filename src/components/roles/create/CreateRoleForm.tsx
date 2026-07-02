@@ -123,7 +123,7 @@ export const CreateRoleForm = () => {
       />
       <div className={styles["btn-group"]}>
         <Button
-          clickFn={removeModal}
+          clickFn={() => removeModal()}
           type="simple"
           className={styles["cancel-btn"]}
           label={t("form.cancel")}

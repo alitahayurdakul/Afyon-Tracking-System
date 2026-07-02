@@ -4,11 +4,11 @@
   "card": {
     "wagon": "Waggon",
     "addition-info": "Informationen",
-    "status": "Status",
     "ongoing-stages": "Laufende Phasen",
-    "progress": "PHASE {progress}"
+    "progress": "PHASE {progress}",
+    "project": "Projekt Name"
   },
-  "select-placeholder": "Projekt auswählen",
+  "select-placeholder": "Projekt",
   "active-unit-count": "AKTIVE EINHEITEN",
   "noDataLabel": "Es sind keine aktiven Prozesse vorhanden."
 }

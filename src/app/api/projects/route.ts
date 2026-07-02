@@ -12,7 +12,7 @@ export enum ProjectQueryTypes {
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { id, params, type } = body;
+  const { id, params, type, status } = body;
 
   switch (type) {
     case ProjectQueryTypes.createProject:
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     case ProjectQueryTypes.editProject:
       return await projectHandlers.editProject(params);
     case ProjectQueryTypes.getAllProjects:
-      return await projectHandlers.getProjects();
+      return await projectHandlers.getProjects(status);
     case ProjectQueryTypes.getDetailProject:
       return await projectHandlers.getProjectDetail(id);
 

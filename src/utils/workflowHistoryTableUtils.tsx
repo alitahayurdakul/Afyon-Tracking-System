@@ -2,7 +2,7 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import styles from "@/styles/components/workflowHistory/WorkflowHistoryTableUtils.module.scss";
-import { IActiveProcessType } from "@/types/processTypes";
+import { IProcessType } from "@/types/processTypes";
 import {
   ICommonTableColumnsType,
   ICommonTableColumnsTypes,
@@ -40,7 +40,7 @@ export const workflowHistoryTableColumns: ICommonTableColumnsTypes = [
 
 export const createWorkflowHistoryTableColumns = (
   selectedId?: string,
-  onRowClick?: (row: IActiveProcessType) => void,
+  onRowClick?: (row: IProcessType) => void,
 ) => {
   const columns = workflowHistoryTableColumns;
 
@@ -49,7 +49,7 @@ export const createWorkflowHistoryTableColumns = (
       accessorKey: column.name,
       header: () => <div>{column.label}</div>,
       cell: ({ row }: any) => {
-        const r: IActiveProcessType = row.original;
+        const r: IProcessType = row.original;
         const isSelected = selectedId === r._id;
 
         const wrap = (children: React.ReactNode) => (

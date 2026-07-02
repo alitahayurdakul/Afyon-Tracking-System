@@ -4,9 +4,9 @@
   "card": {
     "wagon": "Вагон",
     "addition-info": "Дополнительная информация",
-    "status": "Статус",
     "ongoing-stages": "Текущие этапы",
-    "progress": "ЭТАП {progress}"
+    "progress": "ЭТАП {progress}",
+    "project": "Проект"
   },
   "select-placeholder": "Выберите проект",
   "active-unit-count": "АКТИВНЫЕ ЕДИНИЦЫ",

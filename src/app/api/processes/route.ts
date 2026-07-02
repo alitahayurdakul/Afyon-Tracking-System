@@ -8,7 +8,6 @@ export enum ProcessQueryTypes {
   editProcess = "EDIT_PROCESS",
   deleteProcess = "DELETE_PROCESS",
   getDetailProcess = "GET_DETAIL_ACTIVE_PROCESS",
-  getAllProcess = "GET_ALL_PROCESS",
   editProcessDelayReasons = "EDIT_PROCESS_DELAY_REASONS",
 }
 
@@ -24,11 +23,9 @@ export async function POST(request: NextRequest) {
     case ProcessQueryTypes.editProcess:
       return await processHandlers.editProcess(params);
     case ProcessQueryTypes.getAllActiveProcess:
-      return await processHandlers.getActiveProcesses();
+      return await processHandlers.getActiveProcesses(params);
     case ProcessQueryTypes.getDetailProcess:
       return await processHandlers.getProcessDetail(id);
-    case ProcessQueryTypes.getAllProcess:
-      return await processHandlers.getAllProcesses();
     case ProcessQueryTypes.editProcessDelayReasons:
       return await processHandlers.editProcessDelayReasons(params);
 

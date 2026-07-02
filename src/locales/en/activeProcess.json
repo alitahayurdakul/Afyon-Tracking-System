@@ -4,9 +4,9 @@
   "card": {
     "wagon": "Wagon",
     "addition-info": "Information",
-    "status": "Status",
     "ongoing-stages": "Stages in Progress",
-    "progress": "STAGE {progress}"
+    "progress": "STAGE {progress}",
+    "project": "Project"
   },
   "select-placeholder": "Select a project",
   "active-unit-count": "ACTIVE UNITS",

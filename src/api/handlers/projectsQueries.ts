@@ -65,9 +65,9 @@ async function editProject(params: Record<string, any>): Promise<Response> {
   }
 }
 
-async function getProjects(): Promise<Response> {
+async function getProjects(status?: string): Promise<Response> {
   try {
-    const response = await axiosInstance.get(END_POINTS.project.getAll);
+    const response = await axiosInstance.get(END_POINTS.project.getAll(status));
     if (response.status === 200) {
       return createJsonOnlyData(response.data.projects || []);
     }
