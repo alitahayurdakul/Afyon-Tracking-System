@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import { ProjectQueryTypes } from "@/app/api/projects/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
+import { IOptionType } from "@/types/formTypes";
+import { optionsConverters } from "@/types/optionsConverter";
 import {
   IProjectType,
 } from "@/types/projectsTypes";
@@ -46,6 +48,25 @@ export const useGetProjectDetailDataQuery = (id: string) => {
         { type: ProjectQueryTypes.getDetailProject, id },
       );
       return data;
+    },
+  });
+};
+
+export const useGetProjectOptionsDataQuery = (status?: string) => {
+  const trigger = useSelector(
+    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+  );
+
+  return useQuery({
+    queryKey: [`getProjectsAllDatas`, trigger, status],
+    refetchOnWindowFocus: false,
+    enabled: true,
+    queryFn: async (): Promise<IOptionType[]> => {
+      const { data } = await axiosInstance.post<IProjectType[]>(
+        CLIENT_END_POINTS.project.getAll,
+        { type: ProjectQueryTypes.getAllProjects, status },
+      );
+      return optionsConverters(data, "_id", "name") as unknown as IOptionType[];
     },
   });
 };

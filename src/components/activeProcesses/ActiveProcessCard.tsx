@@ -5,13 +5,14 @@ import { useTranslations } from "next-intl";
 import DE22000 from "@/assets/images/DE-22000.jpg";
 import { URL_PAGES } from "@/consts/url";
 import styles from "@/styles/components/activeProcesses/ActiveProcessesGrid.module.scss";
-import { IActiveProcessType } from "@/types/processTypes";
+import { IProcessType } from "@/types/processTypes";
 import { getStageProgress } from "@/utils/activeProcessUtils";
 
-export const ActiveProcessCard = ({ unit }: { unit: IActiveProcessType }) => {
+import { DynamicTextWithTooltip } from "../common/DynamicTextWithTooltip";
+
+export const ActiveProcessCard = ({ unit }: { unit: IProcessType }) => {
   const t = useTranslations("activeProcess.card");
-  const { hasProgress, currentStep, total, percent } = getStageProgress(unit);
-  const stageName = unit.openStage?.stageName ?? null;
+  const { percent } = getStageProgress(unit);
 
   return (
     <Link
@@ -29,31 +30,31 @@ export const ActiveProcessCard = ({ unit }: { unit: IActiveProcessType }) => {
 
       <div className={styles["unit-body"]}>
         <div className={styles["status-row"]}>
+          <span className={styles["status-label"]}>{t("project")}:</span>
+          <span className={styles["tag"]}>{unit.projectName ?? "-"}</span>
+        </div>
+        <div className={styles["status-row"]}>
           <span className={styles["status-label"]}>{t("wagon")}:</span>
-          <span className={styles["tag"]}>1.Vagon</span>
+          <span className={styles["tag"]}>{unit.wagonNo ?? "-"}</span>
         </div>
         <div className={styles["status-row"]}>
           <span className={styles["status-label"]}>{t("addition-info")}:</span>
-          <span className={styles["tag"]}>123AE213</span>
+          <span className={styles["tag"]}>
+            <DynamicTextWithTooltip text={unit.description ?? "-"} textClassName={styles["tag"]} />
+          </span>
         </div>
-        {stageName && (
-          <div className={styles["status-row"]}>
-            <span className={styles["status-label"]}>{t("status")}:</span>
-            <span className={styles["status-tag"]}>{stageName}</span>
-          </div>
-        )}
 
         <div className={styles["status-row"]}>
           <span className={styles["status-label"]}>{t("ongoing-stages")}:</span>
-          <span className={styles["tag"]}>3</span>
+          <span className={styles["tag"]}>{unit.activeStageCount ?? "-"}</span>
         </div>
 
-        {hasProgress && (
+        {(
           <div className={styles["progress-block"]}>
             <div className={styles["progress-row"]}>
               <span className={styles["progress-label"]}>
                 {t.rich("progress", {
-                  progress: `${currentStep} / ${total}`,
+                  progress: `${unit.completedStageCount} / ${unit.stageCount}`,
                 })}
               </span>
               <span className={styles["progress-pct"]}>%{percent}</span>

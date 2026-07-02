@@ -1,3 +1,5 @@
+import { statusType } from "@/types/processTypes";
+
 const apiUrl = process.env.API_URL || "api";
 
 export const END_POINTS = {
@@ -23,14 +25,12 @@ export const END_POINTS = {
     getDetail: (trainId: string) => `${apiUrl}/api/trains/${trainId}`,
   },
   process: {
-    create: (processId: string) =>
-      `${apiUrl}/api/favorite-processes/${processId}/start-process`,
+    start: `${apiUrl}/api/processes/start`,
     edit: (id: string) => `${apiUrl}/api/favorite-processes/${id}`,
     delete: (id: string) => `${apiUrl}/api/favorite-processes/${id}`,
-    getAll: `${apiUrl}/api/processes`,
     getDetail: (id: string) => `${apiUrl}/api/processes/${id}`,
-    getAllByStatus: (status: "ACTIVE" | "COMPLETED" | "CANCELLED") =>
-      `${apiUrl}/api/processes?status=${status}`,
+    getAll: ({status, projectId}: { status?: string; projectId?: string }) =>
+      `${apiUrl}/api/processes${status ? `?projectId=${projectId}` : ''}${projectId ? `&status=${status}` : ''}`,
     editDelayReasons: (id: string) =>
       `${apiUrl}/api/processes/stage-entry/${id}/delay-reason`,
   },
@@ -98,7 +98,7 @@ export const END_POINTS = {
     create: `${apiUrl}/api/projects`,
     edit: (id: string) => `${apiUrl}/api/projects/${id}`,
     delete: (id: string) => `${apiUrl}/api/projects/${id}`,
-    getAll: `${apiUrl}/api/projects`,
+    getAll: (status?: string) => `${apiUrl}/api/projects${status ? `?status=${status}` : ''}`,
     getDetail: (id: string) => `${apiUrl}/api/projects/${id}`,
   },
 };

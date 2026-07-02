@@ -1,6 +1,7 @@
 // components/trains/WagonCell.tsx
 "use client";
 
+import clsx from "clsx";
 import React, { useEffect,useRef, useState } from "react";
 
 import styles from "@/styles/components/common/DynamicTextWithTooltip.module.scss";
@@ -10,9 +11,10 @@ import { TooltipBody } from "../TooltipBody";
 interface WagonCellProps {
   text?: string;
   contentBody?: React.ReactNode;
+  textClassName?: string;
 }
 
-export function DynamicTextWithTooltip({ text, contentBody }: WagonCellProps) {
+export function DynamicTextWithTooltip({ text, contentBody, textClassName }: WagonCellProps) {
   const textRef = useRef<HTMLDivElement>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const content = text ?? contentBody;
@@ -27,12 +29,14 @@ export function DynamicTextWithTooltip({ text, contentBody }: WagonCellProps) {
   return (
     <div className={styles["cell"]}>
       {!isOverflowing ? (
-        <div ref={textRef} className={styles["text"]}>
+        <div ref={textRef} className={clsx(styles["text"], {
+          [textClassName!]: !!textClassName,
+        })}>
           {content}
         </div>
       ) : (
         <TooltipBody
-          triggerBody={<div className={styles["trigger-text"]}>{content}</div>}
+          triggerBody={<div className={clsx(styles["trigger-text"], textClassName)}>{content}</div>}
           contentBody={<div className={styles["tooltip-content"]}>{content}</div>}
           contentClasses={styles["tooltip-container"]}
           stroke

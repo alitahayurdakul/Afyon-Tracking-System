@@ -1,7 +1,12 @@
 /* eslint-disable */
 import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
-import { createJsonError, createJsonOnlyData, createJsonSuccess, extractErrorMessage } from "./responseHelpers";
+import {
+  createJsonError,
+  createJsonOnlyData,
+  createJsonSuccess,
+  extractErrorMessage,
+} from "./responseHelpers";
 
 export const processHandlers = {
   createProcess,
@@ -9,27 +14,20 @@ export const processHandlers = {
   editProcess,
   getActiveProcesses,
   getProcessDetail,
-  getAllProcesses,
-  editProcessDelayReasons
+  editProcessDelayReasons,
 };
 
-async function createProcess(
-  params: Record<string, any>,
-): Promise<Response> {
+async function createProcess(params: Record<string, any>): Promise<Response> {
   try {
-    const { processId, ...rest } = params;
-    const response = await axiosInstance.post(
-      END_POINTS.process.create(processId || ""),
-      {
-        ...rest
-      },
-    );
+    const response = await axiosInstance.post(END_POINTS.process.start, {
+      ...params,
+    });
+
     if (response.status === 201) {
       return createJsonSuccess(response.data, 201);
     }
-    return createJsonError("Failed to create a process", 400);
+    return createJsonError("Failed to create a process", 200);
   } catch (err: unknown) {
-
     return createJsonError(extractErrorMessage(err), 500);
   }
 }
@@ -50,17 +48,12 @@ async function deleteProcess(id: string): Promise<Response> {
   }
 }
 
-async function editProcess(
-  params: Record<string, any>,
-): Promise<Response> {
+async function editProcess(params: Record<string, any>): Promise<Response> {
   try {
     const { id, ...rest } = params;
-    const response = await axiosInstance.put(
-      END_POINTS.process.edit(id),
-      {
-        ...rest,
-      },
-    );
+    const response = await axiosInstance.put(END_POINTS.process.edit(id), {
+      ...rest,
+    });
     if (response.status === 201) {
       return createJsonSuccess(response.data, 201);
     }
@@ -70,25 +63,12 @@ async function editProcess(
   }
 }
 
-async function getAllProcesses(): Promise<Response> {
+async function getActiveProcesses(
+  params: Record<string, any>,
+): Promise<Response> {
   try {
-    const response = await axiosInstance.get(
-      END_POINTS.process.getAll,
-    );
-    if (response.status === 200) {
-      return createJsonOnlyData(response.data || []);
-    }
-    return createJsonError("Failed to get all active workflows", 400);
-  } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), 500);
-  }
-}
-
-async function getActiveProcesses(): Promise<Response> {
-  try {
-    const response = await axiosInstance.get(
-      END_POINTS.process.getAllByStatus("ACTIVE"),
-    );
+    const {status, projectId} = params || {};
+    const response = await axiosInstance.get(END_POINTS.process.getAll({status, projectId}));
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
@@ -100,9 +80,7 @@ async function getActiveProcesses(): Promise<Response> {
 
 async function getProcessDetail(id: string): Promise<Response> {
   try {
-    const response = await axiosInstance.get(
-      END_POINTS.process.getDetail(id),
-    );
+    const response = await axiosInstance.get(END_POINTS.process.getDetail(id));
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
@@ -113,15 +91,15 @@ async function getProcessDetail(id: string): Promise<Response> {
 }
 
 async function editProcessDelayReasons(
-  params: Record<string, any>
+  params: Record<string, any>,
 ): Promise<Response> {
   try {
     const response = await axiosInstance.patch(
       END_POINTS.process.editDelayReasons(params.entryStageId),
       {
         delayReasonIds: params.delayReasonIds,
-        delayNote: ""
-      }
+        delayNote: "",
+      },
     );
     if (response.status === 200) {
       return Response.json({ success: true });

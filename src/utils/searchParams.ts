@@ -8,9 +8,9 @@ export const useRemoveQueryParamModal = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  return useCallback(() => {
+  return useCallback((name?: string) => {
     const params = new URLSearchParams(searchParams.toString());
-    params.delete("modal");
+    params.delete(name ?? "modal");
 
     const queryString = params.toString();
     const url = queryString ? `${pathname}?${queryString}` : pathname;
