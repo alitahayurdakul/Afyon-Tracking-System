@@ -2,7 +2,6 @@ import {
   DelayReasons,
   MainStage,
   StageDetail,
-  SubStage,
 } from "@/types/activeProcessDetailTypes";
 
 export const mockMainStages: MainStage[] = [

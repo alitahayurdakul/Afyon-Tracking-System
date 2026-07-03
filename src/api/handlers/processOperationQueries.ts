@@ -6,7 +6,7 @@ import { SubStage } from "@/types/activeProcessDetailTypes";
 
 export const processOperationsHandlers = {
   completeProcess,
-  getSubStages
+  getStageDetail
 };
 
 async function completeProcess(processId: string): Promise<Response> {
@@ -29,8 +29,9 @@ async function completeProcess(processId: string): Promise<Response> {
   }
 };
 
-async function getSubStages(): Promise<Response> {
+async function getStageDetail(id: string): Promise<Response> {
   try {
+    console.log(id);
     // const response = await axiosInstance.post(
     //   END_POINTS.processOperations.complete(processId || "")
     // );

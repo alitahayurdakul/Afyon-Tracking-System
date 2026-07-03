@@ -39,14 +39,6 @@ export default function InfoProcessContainer({
   const dispatch = useDispatch();
   const t = useTranslations("activeProcessDetail");
 
-  const stageId = useMemo(() => {
-    if (data && data?.entries.length !== data?.stages.length) {
-      const activeStageOrder = data?.entries?.length;
-      const nextStageId = data?.stages[activeStageOrder]._id;
-      return nextStageId;
-    }
-  }, [data]);
-
   const time = () => {
     if (data?.process) {
       const startTime = new Date(
@@ -118,7 +110,6 @@ export default function InfoProcessContainer({
   return (
     <aside className={styles.sidebar}>
       <div className={styles["sidebar-inner"]}>
-        {/* Aktif Projeler */}
         <section>
           <label className={styles["section-label"]}>{t("active-projects")}</label>
 

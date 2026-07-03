@@ -2,15 +2,15 @@ import { IStatusTypes } from "@/types/commonTypes";
 
 export const STATUS:IStatusTypes = [
     {
-        code: "1",
+        code: "COMPLETED",
         valueKey: "completed"
     },
     {
-        code: "2",
+        code: "ACTIVE",
         valueKey: "active"
     },
     {
-        code: "3",
+        code: "PENDING",
         valueKey: "pending"
     }
 ]

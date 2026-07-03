@@ -12,7 +12,8 @@ import styles from "../ProcessFlow.module.scss";
 export default function StageDetailModal({ id }: { id: string }) {
   const [open, setOpen] = useState<boolean | undefined>(false);
   const addQueryParam = useAddQueryParam();
-  const t = useTranslations("activeProcessDetail")
+  const t = useTranslations("activeProcessDetail");
+  
   return (
     <>
       <button

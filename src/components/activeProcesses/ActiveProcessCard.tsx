@@ -12,7 +12,7 @@ import { DynamicTextWithTooltip } from "../common/DynamicTextWithTooltip";
 
 export const ActiveProcessCard = ({ unit }: { unit: IProcessType }) => {
   const t = useTranslations("activeProcess.card");
-  const { percent } = getStageProgress(unit);
+  const { percent } = getStageProgress(unit.stageCount, unit.completedStageCount);
 
   return (
     <Link

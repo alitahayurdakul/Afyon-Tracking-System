@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
-import { useGetSubStagesDataQuery } from "@/api/queries/useGetSubStagesQueries";
+import { useGetStageDetailDataQuery } from "@/api/queries/useGetStageDetailDataQuery";
 import { Modal } from "@/components/common/Modal";
 import { ACTIVE_STAGE_DETAIL_MODAL } from "@/consts/modals";
 import { StageDetail, SubStage } from "@/types/activeProcessDetailTypes";
@@ -39,7 +39,7 @@ export default function StageDetailModalContent({
     data: stageDetail,
     isLoading,
     isError,
-  } = useGetSubStagesDataQuery<StageDetail>("");
+  } = useGetStageDetailDataQuery<StageDetail>(id);
 
   const subStagesData = stageDetail?.subStages;
   const [activeIndex, setActiveIndex] = useState<number>(0);

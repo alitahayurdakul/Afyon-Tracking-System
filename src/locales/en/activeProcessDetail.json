@@ -31,5 +31,6 @@
     "save-changes": "Save Changes",
     "complete-stage": "Complete Stage"
   },
-  "stage-modal-header": "Stage Details"
+  "stage-modal-header": "Stage Details",
+  "no-data-label": "Aktif süreç detayı bulunmamaktadır."
 }

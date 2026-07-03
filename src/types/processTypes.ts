@@ -103,11 +103,19 @@ export type IStage = {
     _id: string;
     name?: string;
     order?: number;
+    status: "ACTIVE" | "COMPLETED" | "PENDING" | string;
     [key: string]: unknown;
 };
+
+export type IProcessSummary = {
+    totalStages: number;
+    completedStageCount: number;
+    activeStageCount: number;
+}
 
 export type ProcessResponse = {
     entries: IProcessEntry[];
     process: IProcessInstance;
     stages: IStage[];
+    summary: IProcessSummary;
 };

@@ -16,7 +16,10 @@ import { CREATE_FLEET_FORM_CONSTS } from "@/consts/newFleetFormConsts";
 import { ICreateFleetFormDataTypes } from "@/types/createFleetTypes";
 import { ProcessQueryTypes } from "@/app/api/processes/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { useGetWorkflowsDataQuery, useGetWorkflowsOptionsDataQuery } from "@/api/queries/useGetWorkflowsQueries";
+import {
+  useGetWorkflowsDataQuery,
+  useGetWorkflowsOptionsDataQuery,
+} from "@/api/queries/useGetWorkflowsQueries";
 import { IWorkflowResponseTypes } from "@/types/workflowTypes";
 import { useRouter } from "next/navigation";
 import { CreateFleetFormValidation } from "@/utils/validations/createFleetFormValidation";
@@ -54,7 +57,7 @@ export const CreateFleetForm = () => {
   });
   const trainId = watch("trainId");
   const t = useTranslations("layout.fleetForm");
-  const {data: projectOptions} = useGetProjectOptionsDataQuery("ACTIVE");
+  const { data: projectOptions } = useGetProjectOptionsDataQuery("ACTIVE");
   const { data: trainData, isLoading } = useGetTrainsDataQuery();
   const { data: workflowOptions } =
     useGetWorkflowsOptionsDataQuery<IOptionType[]>();
@@ -65,7 +68,9 @@ export const CreateFleetForm = () => {
 
   const wagonOptions = useMemo(() => {
     if (trainId) {
-      const wagons = trainData?.find((train: ITrainType) => train._id === trainId)?.wagons || {};
+      const wagons =
+        trainData?.find((train: ITrainType) => train._id === trainId)?.wagons ||
+        {};
       return optionsConverters(wagons || [], "_id", "wagonNo");
     }
   }, [trainId, trainOptions]);
@@ -88,7 +93,7 @@ export const CreateFleetForm = () => {
         description: data.additionInfo,
       };
 
-      await axiosInstance.post(
+      const { data: responseData } = await axiosInstance.post(
         CLIENT_END_POINTS.processes.create,
         {
           type: ProcessQueryTypes.createProcess,
@@ -100,14 +105,14 @@ export const CreateFleetForm = () => {
           message: t("form.notifications.success"),
           type: "success",
           icon: "close",
-          id: "startNewProcess" + Date.now(),
+          id: "startNewProcessSuccess" + Date.now(),
         }),
       );
-      // if (responseData.data && responseData.data.process._id) {
-      //   router.push(
-      //     `${URL_PAGES.activeProcesses}/${responseData.data.process._id}`,
-      //   );
-      // }
+      if (responseData.data && responseData.data.process._id) {
+        router.push(
+          `${URL_PAGES.activeProcesses}/${responseData.data.process._id}`,
+        );
+      }
     },
     [trainOptions],
   );
