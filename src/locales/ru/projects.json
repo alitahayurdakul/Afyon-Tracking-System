@@ -35,6 +35,14 @@
       "active": "Активный",
       "passive": "Неактивный",
       "completed": "Завершён"
+    },
+    "notifications": {
+      "createSuccess": "Успешно создано",
+      "createError": "Не удалось создать",
+      "editSuccess": "Успешно обновлено",
+      "editError": "Не удалось обновить",
+      "deleteSuccess": "Успешно удалено",
+      "deleteError": "Не удалось удалить"
     }
   },
   "deletePopover": {

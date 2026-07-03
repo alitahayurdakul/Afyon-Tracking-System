@@ -5,6 +5,7 @@
   "search": "Search...",
   "table": {
     "name": "Stage Name",
+    "description": "Description",
     "creator": "Created By",
     "editor": "Updated By",
     "actions": "Actions"

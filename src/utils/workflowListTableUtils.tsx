@@ -18,6 +18,10 @@ export const workflowTableColumns: ICommonTableColumnsTypes = [
     label: "name",
   },
   {
+    name: "description",
+    label: "description",
+  },
+  {
     name: "stages",
     label: "stages",
   },
@@ -49,8 +53,20 @@ export const createWorkflowTableColumns = (t: TFunction) => {
         if (column.name === "name") {
           return (
             <div className={styles["stage-name"]}>
-              <p>{row.original[column.name] || "-"}</p>
-              <p>{row.original.description || "-"}</p>
+              <DynamicTextWithTooltip
+                text={row.original[column.name] || "-"}
+                lines={1}
+                textClassName={styles["title-text"]}
+              />
+            </div>
+          );
+        }
+        if (column.name === "description") {
+          return (
+            <div className={styles["desc-cell"]}>
+              <DynamicTextWithTooltip
+                text={row.original.description || "-"}
+              />
             </div>
           );
         }
@@ -75,7 +91,11 @@ export const createWorkflowTableColumns = (t: TFunction) => {
         if (column.name === "creator") {
           return (
             <div>
-              <p className={styles["creator-name"]}>{r.creator ?? "-"}</p>
+              <DynamicTextWithTooltip
+                text={r.creator ?? "-"}
+                lines={1}
+                textClassName={styles["creator-name"]}
+              />
               <p className={styles["creator-date"]}>
                 {formatDate(r.createdAt)}
               </p>
@@ -85,7 +105,11 @@ export const createWorkflowTableColumns = (t: TFunction) => {
         if (column.name === "editor") {
           return (
             <div>
-              <p className={styles["creator-name"]}>{r.editor ?? "-"}</p>
+              <DynamicTextWithTooltip
+                text={r.editor ?? "-"}
+                lines={1}
+                textClassName={styles["creator-name"]}
+              />
               <p className={styles["creator-date"]}>
                 {formatDate(r.updatedAt)}
               </p>

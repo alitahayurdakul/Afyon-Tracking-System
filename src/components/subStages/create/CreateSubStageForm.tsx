@@ -69,7 +69,7 @@ export const CreateSubStageForm = () => {
         });
         dispatch(
           addToastify({
-            message: "Başarıyla oluşturuldu",
+            message: t("form.notifications.createSuccess"),
             type: "success",
             icon: "close",
             id: "createSubStage" + Date.now(),
@@ -83,7 +83,7 @@ export const CreateSubStageForm = () => {
           err.response?.data?.error ||
           err.response?.data?.message ||
           err?.message ||
-          "Oluşturma başarısız";
+          t("form.notifications.createError");
         dispatch(
           addToastify({
             message: errorMessage,

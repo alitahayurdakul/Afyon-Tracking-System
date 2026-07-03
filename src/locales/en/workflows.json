@@ -12,6 +12,7 @@
   },
   "table": {
     "name": "WORKFLOW NAME",
+    "description": "DESCRIPTION",
     "creator": "CREATED BY",
     "editor": "UPDATED BY",
     "actions": "ACTIONS",

@@ -30,18 +30,12 @@ async function deleteStage(id: string): Promise<Response> {
     if (id) {
       const response = await axiosInstance.delete(END_POINTS.stage.delete(id));
       if (response.status === 200) {
-        return Response.json(response.data || []);
+        return createJsonOnlyData(response.data || []);
       }
     }
-    return Response.json(
-      { success: false, error: "Failed to delete stages" },
-      { status: 200 },
-    );
-  } catch (err: any) {
-    return Response.json(
-      { success: false, error: err.message },
-      { status: 500 },
-    );
+    return createJsonError("Failed to delete stage", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
   }
 }
 

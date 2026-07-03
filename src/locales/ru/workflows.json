@@ -12,9 +12,11 @@
   },
   "table": {
     "name": "НАЗВАНИЕ ПРОЦЕССА",
+    "description": "ОПИСАНИЕ",
     "creator": "СОЗДАЛ",
     "editor": "ОБНОВИЛ",
-    "actions": "ДЕЙСТВИЯ"
+    "actions": "ДЕЙСТВИЯ",
+    "stages": "ЭТАПЫ"
   },
   "modal": {
     "create-headers": "Добавить новый рабочий процесс",

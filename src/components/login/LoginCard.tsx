@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 
 import { useLoginMutation } from "@/api/queries/useAuthQueries";
 import { InputField } from "@/components/common/InputField";
+import { URL_PAGES } from "@/consts/url";
 import { addToastify } from "@/redux/slices/toastSlice";
 import styles from "@/styles/components/login/LoginCard.module.scss";
 
@@ -31,7 +32,8 @@ export const LoginCard = () => {
           id: "login" + Date.now(),
         }),
       );
-      router.push("/");
+      // router.push("/");
+      router.push(URL_PAGES.activeProcesses);
     } catch (err: any) {
       dispatch(
         addToastify({

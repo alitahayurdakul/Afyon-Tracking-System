@@ -5,6 +5,7 @@
   "search": "Arama...",
   "columns": {
     "trainSetNo": "Tren No",
+    "description": "Açıklama",
     "info": "TREN BİLGİSİ",
     "wagons": "VAGONLAR",
     "creator": "Oluşturan",

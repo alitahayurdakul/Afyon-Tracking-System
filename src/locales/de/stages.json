@@ -5,6 +5,7 @@
   "search": "Suche...",
   "table": {
     "name": "Phasenname",
+    "description": "Beschreibung",
     "creator": "Erstellt von",
     "editor": "Aktualisiert von",
     "actions": "Aktionen"

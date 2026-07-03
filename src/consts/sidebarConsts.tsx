@@ -2,11 +2,11 @@ import {
   faBoxesStacked,
   faCircleExclamation,
   faDiagramProject,
-  faFilter,
+  // faFilter,
   faFolderTree,
-  faHouse,
+  // faHouse,
   faLayerGroup,
-  faScaleBalanced,
+  // faScaleBalanced,
   faSitemap,
   faTrailer,
   faTrain,
@@ -20,26 +20,26 @@ import { ISidebarItemsTypes } from "@/types/sidebarTypes";
 import { URL_PAGES } from "./url";
 
 export const SIDEBAR_ITEMS: ISidebarItemsTypes = [
-  {
-    default: "Dashboard",
-    key: "dashboard",
-    icon: faHouse,
-    url: "/",
-    subItems: [
-      {
-        default: "İstatistikler",
-        key: "statistics",
-        icon: faFilter,
-        url: URL_PAGES.statistics,
-      },
-      {
-        default: "Karşılaştır",
-        key: "compare",
-        icon: faScaleBalanced,
-        url: "/karsilastir",
-      },
-    ],
-  },
+  // {
+  //   default: "Dashboard",
+  //   key: "dashboard",
+  //   icon: faHouse,
+  //   url: "/",
+  //   subItems: [
+  //     {
+  //       default: "İstatistikler",
+  //       key: "statistics",
+  //       icon: faFilter,
+  //       url: URL_PAGES.statistics,
+  //     },
+  //     {
+  //       default: "Karşılaştır",
+  //       key: "compare",
+  //       icon: faScaleBalanced,
+  //       url: "/karsilastir",
+  //     },
+  //   ],
+  // },
   {
     default: "Aktif Süreçler",
     key: "activeProcesses",

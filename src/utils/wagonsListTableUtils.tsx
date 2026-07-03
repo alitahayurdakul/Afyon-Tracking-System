@@ -1,3 +1,4 @@
+import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
 import { WagonsTableActionsCol } from "@/components/wagons/WagonsTableActionsCol";
 import styles from "@/styles/components/wagons/WagonsListTableUtils.module.scss";
 import { TFunction } from "@/types/commonTypes";
@@ -46,22 +47,29 @@ export const createWagonsTableColumns = (t: TFunction) => {
 
         if (column.name === "wagonNo") {
           return (
-            <div className={styles["wagon-desc"]}>
-              <p>{w.wagonNo || "-"}</p>
-            </div>
+            <DynamicTextWithTooltip
+              text={w.wagonNo || "-"}
+              lines={1}
+              textClassName={styles["name-text"]}
+            />
           );
         }
         if (column.name === "desc") {
           return (
-            <div className={styles["wagon-desc"]}>
-              <p>{w.description || "-"}</p>
-            </div>
+            <DynamicTextWithTooltip
+              text={w.description || "-"}
+              textClassName={styles["name-text"]}
+            />
           );
         }
         if (column.name === "creator") {
           return (
             <div>
-              <p className={styles["creator-name"]}>{w.creator ?? "-"}</p>
+              <DynamicTextWithTooltip
+                text={w.creator ?? "-"}
+                lines={1}
+                textClassName={styles["creator-name"]}
+              />
               <p className={styles["creator-date"]}>
                 {formatDate(w.createdAt) ?? "-"}
               </p>
@@ -72,7 +80,11 @@ export const createWagonsTableColumns = (t: TFunction) => {
           const isUnedited = !w.updatedAt || w.createdAt === w.updatedAt;
           return (
             <div>
-              <p className={styles["creator-name"]}>{w.editor ?? "-"}</p>
+              <DynamicTextWithTooltip
+                text={w.editor ?? "-"}
+                lines={1}
+                textClassName={styles["creator-name"]}
+              />
               <p className={styles["creator-date"]}>
                 {!isUnedited ? formatDate(w.updatedAt) : "-"}
               </p>

@@ -12,31 +12,50 @@ interface WagonCellProps {
   text?: string;
   contentBody?: React.ReactNode;
   textClassName?: string;
+  // Kaç satırdan sonra "..." ile kesileceği (varsayılan 2; tek satır için 1).
+  lines?: number;
 }
 
-export function DynamicTextWithTooltip({ text, contentBody, textClassName }: WagonCellProps) {
+export function DynamicTextWithTooltip({
+  text,
+  contentBody,
+  textClassName,
+  lines = 2,
+}: WagonCellProps) {
   const textRef = useRef<HTMLDivElement>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const content = text ?? contentBody;
+  const clampStyle = { WebkitLineClamp: lines };
 
   useEffect(() => {
     const el = textRef.current;
     if (el) {
       setIsOverflowing(el.scrollHeight > el.clientHeight + 2);
     }
-  }, [text]);
+  }, [text, lines]);
 
   return (
     <div className={styles["cell"]}>
       {!isOverflowing ? (
-        <div ref={textRef} className={clsx(styles["text"], {
-          [textClassName!]: !!textClassName,
-        })}>
+        <div
+          ref={textRef}
+          style={clampStyle}
+          className={clsx(styles["text"], {
+            [textClassName!]: !!textClassName,
+          })}
+        >
           {content}
         </div>
       ) : (
         <TooltipBody
-          triggerBody={<div className={clsx(styles["trigger-text"], textClassName)}>{content}</div>}
+          triggerBody={
+            <div
+              style={clampStyle}
+              className={clsx(styles["trigger-text"], textClassName)}
+            >
+              {content}
+            </div>
+          }
           contentBody={<div className={styles["tooltip-content"]}>{content}</div>}
           contentClasses={styles["tooltip-container"]}
           stroke

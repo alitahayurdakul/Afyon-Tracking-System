@@ -12,12 +12,17 @@ import { TFunction } from "@/types/commonTypes";
 // import styles from "@/styles/components/table/CommonDashboardTable.module.scss";
 import styles from "@/styles/components/stages/StagesListTableUtils.module.scss";
 import { StagesTableActionsCol } from "@/components/stages/StagesTableActionsCol";
+import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
 import { formatDate } from "./formDate";
 
 export const stagesTableColumns: ICommonTableColumnsTypes = [
   {
     name: "name",
     label: "name",
+  },
+  {
+    name: "description",
+    label: "description",
   },
   {
     name: "creator",
@@ -46,17 +51,31 @@ export const createStagesTableColumns = (t: TFunction) => {
         if (column.name === "name") {
           return (
             <div className={styles["stage-name"]}>
-              <p>{row.original[column.name] || "-"}</p>
-              <p>{row.original.description || "-"}</p>
+              <DynamicTextWithTooltip
+                text={row.original[column.name] || "-"}
+                lines={1}
+                textClassName={styles["title-text"]}
+              />
+            </div>
+          );
+        }
+        if (column.name === "description") {
+          return (
+            <div className={styles["desc-cell"]}>
+              <DynamicTextWithTooltip
+                text={row.original.description || "-"}
+              />
             </div>
           );
         }
         if (column.name === "creator") {
           return (
             <div>
-              <p className={styles["creator-name"]}>
-                {row.original[column.name] ?? "-"}
-              </p>
+              <DynamicTextWithTooltip
+                text={row.original[column.name] ?? "-"}
+                lines={1}
+                textClassName={styles["creator-name"]}
+              />
               <p className={styles["creator-date"]}>
                 {formatDate(row.original.createdAt) || "-"}
               </p>
@@ -67,10 +86,12 @@ export const createStagesTableColumns = (t: TFunction) => {
           const isUnedited = !row.original.updatedAt || row.original.createdAt === row.original.updatedAt;
           return (
             <div>
-              <div>
-              <p className={styles["creator-name"]}>{row.original.editor || "-"}</p>
+              <DynamicTextWithTooltip
+                text={row.original.editor || "-"}
+                lines={1}
+                textClassName={styles["creator-name"]}
+              />
               <p className={styles["creator-date"]}>{!isUnedited ? formatDate(row.original.updatedAt) : "-"}</p>
-            </div>
             </div>
           );
         }

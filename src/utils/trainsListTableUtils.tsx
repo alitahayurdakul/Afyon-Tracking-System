@@ -18,6 +18,10 @@ export const trainsTableColumns: ICommonTableColumnsTypes = [
     label: "trainSetNo",
   },
   {
+    name: "description",
+    label: "description",
+  },
+  {
     name: "wagons",
     label: "wagons",
   },
@@ -50,15 +54,29 @@ export const createTrainsTableColumns = (t: TFunction) => {
         if (column.name === "trainSetNo") {
           return (
             <div className={styles["train-name"]}>
-              <p>{r.trainSetNo || "-"}</p>
-              <p>{r.desc || "-"}</p>
+              <DynamicTextWithTooltip
+                text={r.trainSetNo || "-"}
+                lines={1}
+                textClassName={styles["title-text"]}
+              />
+            </div>
+          );
+        }
+        if (column.name === "description") {
+          return (
+            <div className={styles["desc-cell"]}>
+              <DynamicTextWithTooltip text={r.desc || "-"} />
             </div>
           );
         }
         if (column.name === "creator") {
           return (
             <div>
-              <p className={styles["creator-name"]}>{r.creator ?? "-"}</p>
+              <DynamicTextWithTooltip
+                text={r.creator ?? "-"}
+                lines={1}
+                textClassName={styles["creator-name"]}
+              />
               <p className={styles["creator-date"]}>
                 {formatDate(r.createdAt)}
               </p>
@@ -68,7 +86,11 @@ export const createTrainsTableColumns = (t: TFunction) => {
         if (column.name === "editor") {
           return (
             <div>
-              <p className={styles["creator-name"]}>{r.editor ?? "-"}</p>
+              <DynamicTextWithTooltip
+                text={r.editor ?? "-"}
+                lines={1}
+                textClassName={styles["creator-name"]}
+              />
               <p className={styles["creator-date"]}>
                 {formatDate(r.updatedAt)}
               </p>

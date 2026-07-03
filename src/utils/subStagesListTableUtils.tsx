@@ -53,9 +53,11 @@ export const createSubStagesTableColumns = (t: TFunction) => {
 
         if (column.name === "name") {
           return (
-            <div className={styles["reason-desc"]}>
-              <p>{r.name || "-"}</p>
-            </div>
+            <DynamicTextWithTooltip
+              text={r.name || "-"}
+              lines={1}
+              textClassName={styles["name-text"]}
+            />
           );
         }
         if (column.name === "description") {
@@ -84,7 +86,11 @@ export const createSubStagesTableColumns = (t: TFunction) => {
         if (column.name === "creator") {
           return (
             <div>
-              <p className={styles["creator-name"]}>{r.creator || "Admin"}</p>
+              <DynamicTextWithTooltip
+                text={r.creator || "Admin"}
+                lines={1}
+                textClassName={styles["creator-name"]}
+              />
               <p className={styles["creator-date"]}>{formatDate(r.createdAt)}</p>
             </div>
           );
@@ -93,7 +99,11 @@ export const createSubStagesTableColumns = (t: TFunction) => {
           const isUnedited = !r.updatedAt || r.createdAt === r.updatedAt;
           return (
             <div>
-              <p className={styles["creator-name"]}>{r.lastUpdatedBy || "-"}</p>
+              <DynamicTextWithTooltip
+                text={r.lastUpdatedBy || "-"}
+                lines={1}
+                textClassName={styles["creator-name"]}
+              />
               <p className={styles["creator-date"]}>{!isUnedited ? formatDate(r.updatedAt) : "-"}</p>
             </div>
           );

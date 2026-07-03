@@ -99,7 +99,7 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
       } catch (err) {
         dispatch(
           addToastify({
-            message: (err as Error)?.message || t("form.notifications.edit.error"),
+            message: (err as Error)?.message || t("notifications.edit.error"),
             type: "error",
             icon: "close",
             id: "editWorkflowError" + Date.now(),
