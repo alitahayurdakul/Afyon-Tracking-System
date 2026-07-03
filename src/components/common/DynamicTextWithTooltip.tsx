@@ -12,7 +12,6 @@ interface WagonCellProps {
   text?: string;
   contentBody?: React.ReactNode;
   textClassName?: string;
-  // Kaç satırdan sonra "..." ile kesileceği (varsayılan 2; tek satır için 1).
   lines?: number;
 }
 
