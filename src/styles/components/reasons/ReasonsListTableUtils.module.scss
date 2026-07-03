@@ -7,13 +7,10 @@
   }
 }
 
-// Açıklama hücresini sınırla ki uzun metin 2 satırda "..." ile kesilsin
-// (DynamicTextWithTooltip'in line-clamp'i genişlik kısıtı olmadan tetiklenmiyor).
 .desc-cell {
   max-width: 320px;
 }
 
-// DynamicTextWithTooltip içindeki metin için (p seçicileri div'i etkilemiyor).
 .name-text {
   color: var(--slate-90);
   font-size: 14px;

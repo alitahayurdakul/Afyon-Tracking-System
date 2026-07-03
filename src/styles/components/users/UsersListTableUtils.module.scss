@@ -1,10 +1,7 @@
-// Genişlik kısıtı; "..." kesmeyi içerideki DynamicTextWithTooltip yapıyor.
 .truncate-cell {
   max-width: 200px;
 }
 
-// E-posta tek kelime olduğu için kırılamıyor; break-all olmadan line-clamp
-// "..." üretemeden harf ortasından kırpıyor.
 .email-text {
   word-break: break-all;
 }

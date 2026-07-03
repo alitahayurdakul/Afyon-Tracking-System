@@ -39,7 +39,6 @@
   color: var(--slate-60);
 }
 
-// DynamicTextWithTooltip içindeki metin için (p seçicileri div'i etkilemiyor).
 .title-text {
   color: var(--slate-90);
   font-size: 18px !important;
@@ -51,7 +50,6 @@
   font-size: 14px;
 }
 
-// Açıklama kolonunu sınırla ki uzun metin 2 satırda "..." ile kesilsin.
 .desc-cell {
   max-width: 320px;
 }
