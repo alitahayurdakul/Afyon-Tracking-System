@@ -1,3 +1,4 @@
+import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
 import { RolesTableActionsCol } from "@/components/roles/RolesTableActionsCol";
 import styles from "@/styles/components/roles/RolesListTableUtils.module.scss";
 import { TFunction } from "@/types/commonTypes";
@@ -37,11 +38,20 @@ export const createRolesTableColumns = (
         const r = row.original;
 
         if (column.name === "roleName") {
-          return <p className={styles["primary-text"]}>{r.roleName || "-"}</p>;
+          return (
+            <DynamicTextWithTooltip
+              text={r.roleName || "-"}
+              lines={1}
+              textClassName={styles["primary-text"]}
+            />
+          );
         }
         if (column.name === "roleDescription") {
           return (
-            <div className={styles["muted"]}>{r.roleDescription || "-"}</div>
+            <DynamicTextWithTooltip
+              text={r.roleDescription || "-"}
+              textClassName={styles["muted"]}
+            />
           );
         }
         if (column.name === "permissions") {
@@ -60,7 +70,13 @@ export const createRolesTableColumns = (
           );
         }
         if (column.name === "editor") {
-          return <div className={styles["muted"]}>{r.editor || "-"}</div>;
+          return (
+            <DynamicTextWithTooltip
+              text={r.editor || "-"}
+              lines={1}
+              textClassName={styles["muted"]}
+            />
+          );
         }
         if (column.name === "actions") {
           return <RolesTableActionsCol id={r._id} />;

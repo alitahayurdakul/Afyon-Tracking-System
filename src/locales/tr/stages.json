@@ -5,6 +5,7 @@
   "search": "Arama...",
   "table": {
     "name": "Aşama Adı",
+    "description": "Açıklama",
     "creator": "Oluşturan",
     "editor": "Güncelleyen",
     "actions": "İşlemler"

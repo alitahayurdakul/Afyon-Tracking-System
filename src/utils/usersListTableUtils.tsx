@@ -1,3 +1,4 @@
+import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
 import { UsersTableActionsCol } from "@/components/users/UsersTableActionsCol";
 import styles from "@/styles/components/users/UsersListTableUtils.module.scss";
 import { TFunction } from "@/types/commonTypes";
@@ -29,32 +30,46 @@ export const createUsersTableColumns = (t: TFunction) => {
         const r = row.original;
 
         if (column.name === "_id") {
-          return <div className={styles["cell-mono"]}>{r._id}</div>;
+          return (
+            <DynamicTextWithTooltip
+              text={r._id}
+              lines={1}
+              textClassName={styles["cell-mono"]}
+            />
+          );
         }
         if (column.name === "fullname") {
           return (
-            <div>
-              <p className={styles["primary-text"]}>{r.fullname || "-"}</p>
-            </div>
+            <DynamicTextWithTooltip
+              text={r.fullname || "-"}
+              lines={1}
+              textClassName={styles["primary-text"]}
+            />
           );
         }
         if (column.name === "email") {
           return (
-            <div className={styles["truncate-cell"]} title={r.email}>
-              {r.email || "-"}
+            <div className={styles["truncate-cell"]}>
+              <DynamicTextWithTooltip
+                text={r.email || "-"}
+                lines={1}
+                textClassName={styles["email-text"]}
+              />
             </div>
           );
         }
         if (column.name === "phone") {
-          return <div>{r.phone || "-"}</div>;
+          return <DynamicTextWithTooltip text={r.phone || "-"} lines={1} />;
         }
         if (column.name === "department") {
-          return <div>{r.department || "-"}</div>;
+          return (
+            <DynamicTextWithTooltip text={r.department || "-"} lines={1} />
+          );
         }
         if (column.name === "role") {
           const roleLabel =
             typeof r.role === "string" ? r.role : r.role?.roleName;
-          return <div>{roleLabel || "-"}</div>;
+          return <DynamicTextWithTooltip text={roleLabel || "-"} lines={1} />;
         }
         if (column.name === "isActive") {
           return (

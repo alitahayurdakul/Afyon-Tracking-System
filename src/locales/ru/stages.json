@@ -5,6 +5,7 @@
   "search": "Поиск...",
   "table": {
     "name": "Название этапа",
+    "description": "Описание",
     "creator": "Создал",
     "editor": "Обновил",
     "actions": "Действия",
@@ -38,7 +39,7 @@
         "placeholder": "Выберите подэтап"
       }
     },
-     "activity": {
+    "activity": {
       "creator": "Создал:",
       "createdAt": "Дата создания:",
       "editor": "Последнее изменение:",

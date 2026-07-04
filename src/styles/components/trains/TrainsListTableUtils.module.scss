@@ -62,3 +62,17 @@
     color: var(--slate-90);
   }
 }
+.title-text {
+  color: var(--slate-90);
+  font-size: 18px !important;
+  font-weight: 700;
+}
+
+.subtitle-text {
+  color: var(--slate-50);
+  font-size: 14px;
+}
+
+.desc-cell {
+  max-width: 320px;
+}

@@ -5,6 +5,7 @@
   "search": "Suchen...",
   "columns": {
     "trainSetNo": "Zugnummer",
+    "description": "Beschreibung",
     "info": "ZUGINFORMATIONEN",
     "wagons": "WAGGONS",
     "creator": "Erstellt von",

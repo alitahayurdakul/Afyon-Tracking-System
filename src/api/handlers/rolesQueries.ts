@@ -5,6 +5,7 @@ import { IRolesType, IRoleType } from "@/types/rolesTypes";
 import {
   createJsonError,
   createJsonOnlyData,
+  createJsonSuccess,
   extractErrorMessage,
 } from "./responseHelpers";
 
@@ -20,17 +21,11 @@ async function createRole(params: Record<string, any>): Promise<Response> {
   try {
     const response = await axiosInstance.post(END_POINTS.role.create, params);
     if (response.status === 200 || response.status === 201) {
-      return Response.json({ success: true, data: response.data });
+      return createJsonSuccess(response.data, 201);
     }
-    return Response.json(
-      { success: false, error: "Failed to create role" },
-      { status: 200 },
-    );
-  } catch (err: any) {
-    return Response.json(
-      { success: false, error: err?.response?.data?.message || err?.message },
-      { status: 500 },
-    );
+    return createJsonError("Failed to create role", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
   }
 }
 
@@ -42,18 +37,9 @@ async function deleteRole(id: string): Promise<Response> {
         return createJsonOnlyData(response.data || { success: true });
       }
     }
-    return Response.json(
-      { success: false, error: "Failed to delete role" },
-      { status: 200 },
-    );
-  } catch (err: any) {
-    return Response.json(
-      {
-        success: false,
-        error: err?.response?.data?.message || err?.message,
-      },
-      { status: 500 },
-    );
+    return createJsonError("Failed to delete role", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
   }
 }
 
@@ -64,20 +50,11 @@ async function editRole(params: Record<string, any>): Promise<Response> {
       ...rest,
     });
     if (response.status === 200 || response.status === 201) {
-      return Response.json({ success: true, data: response.data });
+      return createJsonSuccess(response.data, 200);
     }
-    return Response.json(
-      { success: false, error: "Failed to edit role" },
-      { status: 200 },
-    );
-  } catch (err: any) {
-    return Response.json(
-      {
-        success: false,
-        error: err?.response?.data?.message || err?.message,
-      },
-      { status: 500 },
-    );
+    return createJsonError("Failed to edit role", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
   }
 }
 
@@ -90,7 +67,7 @@ async function getRoles(): Promise<Response> {
       return createJsonOnlyData(response.data || []);
     }
     return createJsonError("Failed to fetch roles", 400);
-  } catch (err: any) {
+  } catch (err: unknown) {
     return createJsonError(extractErrorMessage(err), 500);
   }
 }
@@ -104,7 +81,7 @@ async function getRoleDetail(id: string): Promise<Response> {
       return createJsonOnlyData(response.data || []);
     }
     return createJsonError("Failed to fetch role detail", 400);
-  } catch (err: any) {
+  } catch (err: unknown) {
     return createJsonError(extractErrorMessage(err), 500);
   }
 }

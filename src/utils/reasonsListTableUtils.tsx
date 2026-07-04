@@ -47,20 +47,28 @@ export const createReasonsTableColumns = (t: TFunction) => {
 
         if (column.name === "name") {
           return (
-            <div className={styles["reason-desc"]}>
-              <p>{r.name || "-"}</p>
-            </div>
+            <DynamicTextWithTooltip
+              text={r.name || "-"}
+              lines={1}
+              textClassName={styles["name-text"]}
+            />
           );
         }
         if (column.name === "desc") {
           return (
-            <DynamicTextWithTooltip text={r.description}/>
+            <div className={styles["desc-cell"]}>
+              <DynamicTextWithTooltip text={r.description || "-"} />
+            </div>
           );
         }
         if (column.name === "creator") {
           return (
             <div>
-              <p className={styles["creator-name"]}>{r.creator || "Admin"}</p>
+              <DynamicTextWithTooltip
+                text={r.creator || "Admin"}
+                lines={1}
+                textClassName={styles["creator-name"]}
+              />
               <p className={styles["creator-date"]}>
                 {formatDate(r.createdAt)}
               </p>
@@ -75,7 +83,11 @@ export const createReasonsTableColumns = (t: TFunction) => {
           }
           return (
             <div>
-              <p className={styles["creator-name"]}>{r.editor || "Admin"}</p>
+              <DynamicTextWithTooltip
+                text={r.editor || "Admin"}
+                lines={1}
+                textClassName={styles["creator-name"]}
+              />
               <p className={styles["creator-date"]}>
                 {formatDate(r.updatedAt)}
               </p>

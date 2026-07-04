@@ -5,6 +5,7 @@
   "search": "Search...",
   "columns": {
     "trainSetNo": "Train No",
+    "description": "Description",
     "info": "TRAIN INFORMATION",
     "wagons": "WAGONS",
     "creator": "Created By",

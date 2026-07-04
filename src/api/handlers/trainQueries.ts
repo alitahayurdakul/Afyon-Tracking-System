@@ -5,6 +5,7 @@ import { ITrainsType, ITrainType } from "@/types/trainsTypes";
 import {
   createJsonError,
   createJsonOnlyData,
+  createJsonSuccess,
   extractErrorMessage,
 } from "./responseHelpers";
 
@@ -20,17 +21,11 @@ async function createTrain(params: Record<string, any>): Promise<Response> {
   try {
     const response = await axiosInstance.post(END_POINTS.train.create, params);
     if (response.status === 201) {
-      return Response.json({ success: true, data: response.data });
+      return createJsonSuccess(response.data, 201);
     }
-    return Response.json(
-      { success: false, error: "Failed to create train" },
-      { status: 200 },
-    );
-  } catch (err: any) {
-    return Response.json(
-      { success: false, error: err.message },
-      { status: 500 },
-    );
+    return createJsonError("Failed to create train", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
   }
 }
 
@@ -42,53 +37,24 @@ async function deleteTrain(id: string): Promise<Response> {
         return createJsonOnlyData(response.data || { success: true });
       }
     }
-    return Response.json(
-      { success: false, error: "Failed to delete train" },
-      { status: 200 },
-    );
-  } catch (err: any) {
-    console.error("deleteTrain error:", {
-      url: END_POINTS.train.delete(id),
-      id,
-      status: err?.response?.status,
-      data: err?.response?.data,
-      message: err?.message,
-    });
-    return Response.json(
-      {
-        success: false,
-        error: err?.response?.data?.message || err?.message,
-      },
-      { status: 500 },
-    );
+    return createJsonError("Failed to delete train", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
   }
 }
 
 async function editTrain(params: Record<string, any>): Promise<Response> {
   try {
     const { id, ...rest } = params;
-    console.error("editTrain error:", {
-      url: END_POINTS.train.edit(params?.id),
-      params,
-    });
     const response = await axiosInstance.put(END_POINTS.train.edit(id), {
       ...rest,
     });
     if (response.status === 200 || response.status === 201) {
-      return Response.json({ success: true, data: response.data });
+      return createJsonSuccess(response.data, 200);
     }
-    return Response.json(
-      { success: false, error: "Failed to edit train" },
-      { status: 200 },
-    );
-  } catch (err: any) {
-    return Response.json(
-      {
-        success: false,
-        error: err?.response?.data?.message || err?.message,
-      },
-      { status: 500 },
-    );
+    return createJsonError("Failed to edit train", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
   }
 }
 
@@ -100,8 +66,8 @@ async function getTrains(): Promise<Response> {
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch projects", 400);
-  } catch (err: any) {
+    return createJsonError("Failed to fetch trains", 400);
+  } catch (err: unknown) {
     return createJsonError(extractErrorMessage(err), 500);
   }
 }
@@ -114,8 +80,8 @@ async function getTrainDetail(id: string): Promise<Response> {
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch projects", 400);
-  } catch (err: any) {
+    return createJsonError("Failed to fetch train detail", 400);
+  } catch (err: unknown) {
     return createJsonError(extractErrorMessage(err), 500);
   }
 }

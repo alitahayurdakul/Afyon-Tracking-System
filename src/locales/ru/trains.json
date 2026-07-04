@@ -5,6 +5,7 @@
   "search": "Поиск...",
   "columns": {
     "trainSetNo": "Номер поезда",
+    "description": "Описание",
     "info": "ИНФОРМАЦИЯ О ПОЕЗДЕ",
     "wagons": "ВАГОНЫ",
     "creator": "Создал",

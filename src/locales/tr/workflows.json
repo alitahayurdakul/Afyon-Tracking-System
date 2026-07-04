@@ -12,6 +12,7 @@
     },
     "table": {
         "name": "İş AKIŞI ADI",
+        "description": "AÇIKLAMA",
         "creator": "OLUŞTURAN",
         "editor": "GÜNCELLEYEN",
         "actions": "İŞLEMLER",

@@ -5,6 +5,7 @@ import { IUsersType, IUserType } from "@/types/usersTypes";
 import {
   createJsonError,
   createJsonOnlyData,
+  createJsonSuccess,
   extractErrorMessage,
 } from "./responseHelpers";
 
@@ -20,17 +21,11 @@ async function createUser(params: Record<string, any>): Promise<Response> {
   try {
     const response = await axiosInstance.post(END_POINTS.user.create, params);
     if (response.status === 200 || response.status === 201) {
-      return Response.json({ success: true, data: response.data });
+      return createJsonSuccess(response.data, 201);
     }
-    return Response.json(
-      { success: false, error: "Failed to create user" },
-      { status: 200 },
-    );
-  } catch (err: any) {
-    return Response.json(
-      { success: false, error: err?.response?.data?.message || err?.message },
-      { status: 500 },
-    );
+    return createJsonError("Failed to create user", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
   }
 }
 
@@ -42,18 +37,9 @@ async function deleteUser(id: string): Promise<Response> {
         return createJsonOnlyData(response.data || { success: true });
       }
     }
-    return Response.json(
-      { success: false, error: "Failed to delete user" },
-      { status: 200 },
-    );
-  } catch (err: any) {
-    return Response.json(
-      {
-        success: false,
-        error: err?.response?.data?.message || err?.message,
-      },
-      { status: 500 },
-    );
+    return createJsonError("Failed to delete user", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
   }
 }
 
@@ -64,20 +50,11 @@ async function editUser(params: Record<string, any>): Promise<Response> {
       ...rest,
     });
     if (response.status === 200 || response.status === 201) {
-      return Response.json({ success: true, data: response.data });
+      return createJsonSuccess(response.data, 200);
     }
-    return Response.json(
-      { success: false, error: "Failed to edit user" },
-      { status: 200 },
-    );
-  } catch (err: any) {
-    return Response.json(
-      {
-        success: false,
-        error: err?.response?.data?.message || err?.message,
-      },
-      { status: 500 },
-    );
+    return createJsonError("Failed to edit user", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
   }
 }
 
@@ -90,7 +67,7 @@ async function getUsers(): Promise<Response> {
       return createJsonOnlyData(response.data || []);
     }
     return createJsonError("Failed to fetch users", 400);
-  } catch (err: any) {
+  } catch (err: unknown) {
     return createJsonError(extractErrorMessage(err), 500);
   }
 }
@@ -104,7 +81,7 @@ async function getUserDetail(id: string): Promise<Response> {
       return createJsonOnlyData(response.data || []);
     }
     return createJsonError("Failed to fetch user detail", 400);
-  } catch (err: any) {
+  } catch (err: unknown) {
     return createJsonError(extractErrorMessage(err), 500);
   }
 }

@@ -1,3 +1,4 @@
+import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
 import { ProjectsTableActionsCol } from "@/components/projects/ProjectsTableActionsCol";
 import { PROJECT_STATUS_OPTIONS } from "@/consts/projectsConsts";
 import styles from "@/styles/components/projects/ProjectsListTableUtils.module.scss";
@@ -52,16 +53,20 @@ export const createProjectsTableColumns = (t: TFunction) => {
 
         if (column.name === "name") {
           return (
-            <div className={styles["reason-desc"]}>
-              <p>{r.name || "-"}</p>
-            </div>
+            <DynamicTextWithTooltip
+              text={r.name || "-"}
+              lines={1}
+              textClassName={styles["name-text"]}
+            />
           );
         }
         if (column.name === "projectCode") {
           return (
-            <div className={styles["reason-desc"]}>
-              <p>{r.projectCode || "-"}</p>
-            </div>
+            <DynamicTextWithTooltip
+              text={r.projectCode || "-"}
+              lines={1}
+              textClassName={styles["name-text"]}
+            />
           );
         }
         if (column.name === "status") {
@@ -75,16 +80,24 @@ export const createProjectsTableColumns = (t: TFunction) => {
         if (column.name === "creator") {
           return (
             <div>
-              <p className={styles["creator-name"]}>{r[column.name] ?? "-"}</p>
+              <DynamicTextWithTooltip
+                text={r[column.name] ?? "-"}
+                lines={1}
+                textClassName={styles["creator-name"]}
+              />
               <p className={styles["creator-date"]}>{formatDate(r.createdAt)}</p>
             </div>
           );
         }
         if (column.name === "lastUpdatedBy") {
-                 const isUnedited = !r.updatedAt || r.createdAt === r.updatedAt;
+          const isUnedited = !r.updatedAt || r.createdAt === r.updatedAt;
           return (
             <div>
-              <p className={styles["creator-name"]}>{r[column.name] ?? "-"}</p>
+              <DynamicTextWithTooltip
+                text={r[column.name] ?? "-"}
+                lines={1}
+                textClassName={styles["creator-name"]}
+              />
               <p className={styles["creator-date"]}>{!isUnedited ? formatDate(r.updatedAt) : "-"}</p>
             </div>
           );

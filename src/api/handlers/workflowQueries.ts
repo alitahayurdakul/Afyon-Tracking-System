@@ -3,7 +3,12 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
 import { IWorkflowResponseTypes } from "@/types/workflowTypes";
 
-import { createJsonError, createJsonOnlyData, extractErrorMessage } from "./responseHelpers";
+import {
+  createJsonError,
+  createJsonOnlyData,
+  createJsonSuccess,
+  extractErrorMessage,
+} from "./responseHelpers";
 
 export const workflowHandlers = {
   createWorkflow,
@@ -35,17 +40,11 @@ async function createWorkflow(params: Record<string, any>): Promise<Response> {
       params,
     );
     if (response.status === 201) {
-      return Response.json({ success: true, data: response.data });
+      return createJsonSuccess(response.data, 201);
     }
-    return Response.json(
-      { success: false, error: "Failed to create workflow" },
-      { status: 200 },
-    );
-  } catch (err: any) {
-    return Response.json(
-      { success: false, error: err.message },
-      { status: 500 },
-    );
+    return createJsonError("Failed to create workflow", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
   }
 }
 
@@ -56,18 +55,12 @@ async function deleteWorkflow(id: string): Promise<Response> {
         END_POINTS.workflow.delete(id),
       );
       if (response.status === 200) {
-        return Response.json(response.data || []);
+        return createJsonOnlyData(response.data || []);
       }
     }
-    return Response.json(
-      { success: false, error: "Failed to delete workflow" },
-      { status: 200 },
-    );
-  } catch (err: any) {
-    return Response.json(
-      { success: false, error: err.message },
-      { status: 500 },
-    );
+    return createJsonError("Failed to delete workflow", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
   }
 }
 
@@ -76,20 +69,17 @@ async function editWorkflow(params: Record<string, any>): Promise<Response> {
     const { id, ...rest } = params;
 
     if (!id) {
-      return Response.json({
-        success: false,
-        error: "Workflow ID is required",
-      });
+      return createJsonError("Workflow ID is required", 400);
     }
     const response = await axiosInstance.put(END_POINTS.workflow.edit(id), {
       ...rest,
     });
 
     if (response.status === 200) {
-      return Response.json({ success: true, data: response.data });
+      return createJsonSuccess(response.data, 200);
     }
-    return createJsonError("Failed to fetch projects", 400);
-  } catch (err: any) {
+    return createJsonError("Failed to edit workflow", 400);
+  } catch (err: unknown) {
     return createJsonError(extractErrorMessage(err), 500);
   }
 }
@@ -102,14 +92,8 @@ async function getWorkflowDetail(id: string): Promise<Response> {
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return Response.json(
-      { success: false, error: "Failed to create workflow" },
-      { status: 200 },
-    );
-  } catch (err: any) {
-    return Response.json(
-      { success: false, error: err.message },
-      { status: 500 },
-    );
+    return createJsonError("Failed to fetch workflow detail", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
   }
 }

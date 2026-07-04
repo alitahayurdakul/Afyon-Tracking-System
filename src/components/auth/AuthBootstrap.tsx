@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { refreshAccessToken } from "@/api/queries/useAuthQueries";
+import { URL_PAGES } from "@/consts/url";
 import { routing } from "@/i18n/routing";
 import {
   clearAuth,
@@ -15,7 +16,8 @@ import {
 import styles from "./Wrapper.module.scss";
 
 const PUBLIC_PATHS = ["/login", "/forgot-password"];
-const HOME_PATH = "/";
+// const HOME_PATH = "/";
+const HOME_PATH = URL_PAGES.activeProcesses;
 
 // The session is validated once per browser session via /refresh. Changing the
 // language remounts this component (the `[locale]` segment changes), but we must
