@@ -1,22 +1,22 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import React, { useState } from "react";
 
-import { mockMainStages } from "@/mock/processData";
-import { MainStage } from "@/types/activeProcessDetailTypes";
-import { getStatus } from "@/utils/getStatus";
+import { IProcessEntry, IStage, ProcessResponse } from "@/types/processTypes";
+import { getStageProgress } from "@/utils/activeProcessUtils";
 
 import styles from "./ProcessFlow.module.scss";
 import StageRow from "./StageRow";
 
-export default function ProcessFlow() {
-  const [stages] = useState<MainStage[]>(mockMainStages);
-  const [selectedStage, setSelectedStage] = useState<MainStage | null>(null);
+export default function ProcessFlow({ data }: { data?: ProcessResponse }) {
+  const [selectedStage, setSelectedStage] = useState<IStage | null>(null);
   const t = useTranslations("activeProcessDetail");
 
-  const completedCount = stages.filter((s) => getStatus(s.status) === "completed").length;
-  const progressPercent = Math.round((completedCount / stages.length) * 100);
+  const { percent } = getStageProgress(
+    data?.summary.totalStages,
+    data?.summary.completedStageCount,
+  );
 
   return (
     <div className={styles.wrap}>
@@ -25,13 +25,13 @@ export default function ProcessFlow() {
         <div className={styles.progress}>
           <span className={styles.progressText}>
             {t.rich("progress-process", {
-              progress: `${completedCount} / ${stages.length}`,
+              progress: `${data?.summary.completedStageCount} / ${data?.summary.totalStages}`,
             })}
           </span>
           <div className={styles.progressBar}>
             <div
               className={styles.progressFill}
-              style={{ width: `${progressPercent}%` }}
+              style={{ width: `${percent}%` }}
             />
           </div>
         </div>
@@ -53,14 +53,17 @@ export default function ProcessFlow() {
       </div>
 
       <div className={styles.track}>
-        {stages.map((stage, index) => (
-          <StageRow
-            key={stage.id}
-            stage={stage}
-            index={index}
-            isLast={index === stages.length - 1}
-            onOpenDetail={setSelectedStage}
-          />
+        {data?.stages.map((stage: IStage, index: number) => (
+          <React.Fragment key={stage._id}>
+            <StageRow
+              key={stage._id}
+              stage={stage}
+              index={index}
+              isLast={index === data?.stages.length - 1}
+              onOpenDetail={setSelectedStage}
+              entryForStage={data?.entries.find((entry: IProcessEntry) => entry.stageId._id === stage._id)}
+            />
+          </React.Fragment>
         ))}
       </div>
     </div>

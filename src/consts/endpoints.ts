@@ -135,7 +135,7 @@ export const CLIENT_END_POINTS = {
   },
   activeProcessOperation: {
     complete: "/api/activeProcessOperations",
-    getSubStages: "/api/activeProcessOperations"
+    getStageDetail: "/api/activeProcessOperations"
   },
   workflowHistory: {
     getAll: "/api/workflowHistory",

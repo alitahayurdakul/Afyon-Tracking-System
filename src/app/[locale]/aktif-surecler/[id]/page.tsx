@@ -1,6 +1,5 @@
 "use client";
 
-import { useParams } from "next/navigation";
 import { useMemo } from "react";
 
 import {
@@ -19,29 +18,29 @@ import {
 } from "@/types/processTypes";
 
 export default function ActiveProcessDetailPage() {
-  const id = useParams().id;
-
   const { data, isLoading, isError, refetch } =
     useActiveProcessDetailDataQuery<ProcessResponse>();
 
-  const { data: allFleetsData } =
+  const { data: activeProcessesData } =
     useGetActiveProcessesDataQuery<IProcessesTypes>();
 
   const trainsOptions = useMemo(() => {
     const trains =
-      allFleetsData?.map((fleet: IProcessType) => {
+      activeProcessesData?.map((process: IProcessType) => {
         return {
-          value: fleet._id,
-          label: fleet.locomotiveNo,
+          value: process._id,
+          label: `${process.locomotiveNo}${process.wagonNo ? ` - ${process.wagonNo}` : ""} ${process.description ? ` - ${process.description.split(" ")[0]}` : ""}`,
         };
       }) || [];
     return trains.filter(
       (train: IOptionType | undefined) => train !== undefined,
     ) as IOptionType[];
-  }, [allFleetsData]);
+  }, [activeProcessesData]);
 
   return (
-    <div className={`${styles["page-container"]} ${styles["active-process-detail"]}`}>
+    <div
+      className={`${styles["page-container"]} ${styles["active-process-detail"]}`}
+    >
       <Topbar showCreateButton={true} />
       <ProgressionContainer
         data={data}
