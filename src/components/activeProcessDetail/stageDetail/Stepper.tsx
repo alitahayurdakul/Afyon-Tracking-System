@@ -13,7 +13,7 @@ export default function Stepper({ subStages, activeIndex, onSelect }: StepperPro
   return (
     <div className={styles.stepper}>
       {subStages.map((sub, index) => {
-        const status = getStatus(sub.status, "value")
+        const status = getStatus(sub.status)
         return(
         <div
           key={sub._id}

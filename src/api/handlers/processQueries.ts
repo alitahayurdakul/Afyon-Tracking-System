@@ -16,6 +16,7 @@ export const processHandlers = {
   getProcessDetail,
   editProcessDelayReasons,
   getStageDetail,
+  startSubStage,
 };
 
 async function createProcess(params: Record<string, any>): Promise<Response> {
@@ -119,7 +120,10 @@ async function editProcessDelayReasons(
   }
 }
 
-async function getStageDetail(processId: string, stageId: string): Promise<Response> {
+async function getStageDetail(
+  processId: string,
+  stageId: string,
+): Promise<Response> {
   try {
     const response = await axiosInstance.get(
       END_POINTS.process.stageDetail(processId || "", stageId || ""),
@@ -130,6 +134,23 @@ async function getStageDetail(processId: string, stageId: string): Promise<Respo
 
     return createJsonError("Failed to get process detail", 400);
   } catch (err: any) {
+    console.log("errr", err);
+    return createJsonError(extractErrorMessage(err), 500);
+  }
+}
+
+async function startSubStage(params: Record<string, any>): Promise<Response> {
+  try {
+    const { processId, stageId, subStageId } = params;
+    const response = await axiosInstance.put(
+      END_POINTS.process.startSubStage(processId, stageId, subStageId),
+    );
+
+    if (response.status === 200) {
+      return createJsonSuccess(response.data, 200);
+    }
+    return createJsonError("Failed to start a sub stage", 400);
+  } catch (err: unknown) {
     return createJsonError(extractErrorMessage(err), 500);
   }
 }

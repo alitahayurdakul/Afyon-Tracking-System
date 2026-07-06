@@ -25,7 +25,7 @@ export default function MaterialList({ materials, disabled, onChange }: Material
           <input
             type="text"
             placeholder={t("serial-number-placeholder")}
-            value={material.serial}
+            value={material.serialNumber}
             disabled={disabled}
             onChange={(e) => updateSerial(material.name, e.target.value)}
           />

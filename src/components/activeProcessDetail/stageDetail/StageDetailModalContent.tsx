@@ -1,12 +1,21 @@
 "use client";
 
+import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
-import { useGetStageDetailDataQuery } from "@/api/queries/useGetStageDetailDataQuery";
+import {
+  useGetStageDetailDataQuery,
+  useStartSubStage,
+} from "@/api/queries/useGetStageDetailDataQuery";
 import { Modal } from "@/components/common/Modal";
+import { NewModal } from "@/components/common/NewModal";
 import { ACTIVE_STAGE_DETAIL_MODAL } from "@/consts/modals";
-import { DelayReasons, MaterialEntry, SubStage } from "@/types/activeProcessDetailTypes";
+import {
+  DelayReasons,
+  MaterialEntry,
+  SubStage,
+} from "@/types/activeProcessDetailTypes";
 import { IOptionType } from "@/types/formTypes";
 import { getStatus } from "@/utils/getStatus";
 
@@ -20,8 +29,6 @@ import Stepper from "./Stepper";
 
 interface StageDetailModalProps {
   id: string;
-  open?: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean | undefined>>;
   stageName: string;
 }
 
@@ -32,8 +39,6 @@ interface NewSubStageData {
 
 export default function StageDetailModalContent({
   id,
-  open,
-  setOpen,
   stageName,
 }: StageDetailModalProps) {
   const t = useTranslations("activeProcessDetail");
@@ -43,14 +48,20 @@ export default function StageDetailModalContent({
     isError,
   } = useGetStageDetailDataQuery<SubStage[]>(id);
 
+  const { id: processId } = useParams();
+
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [prevSubStagesData, setPrevSubStagesData] = useState(subStagesData);
-  console.log(subStagesData);
-
+  const {
+    mutate,
+    isPending,
+    isError: startSubStageError,
+    error,
+  } = useStartSubStage();
   if (subStagesData !== prevSubStagesData) {
     setPrevSubStagesData(subStagesData);
     const index = subStagesData?.findIndex(
-      (s: SubStage) => getStatus(s.status, "value") === "active",
+      (s: SubStage) => getStatus(s.status) === "active",
     );
     if (index !== undefined && index !== -1) {
       setActiveIndex(index);
@@ -79,11 +90,9 @@ export default function StageDetailModalContent({
     });
   }
 
-  console.log(newSubStageData);
-
   if (!activeSubStageData) return null;
 
-  const isLocked = getStatus(activeSubStageData.status, "value") !== "active";
+  const isLocked = getStatus(activeSubStageData.status) !== "active";
 
   const completeStage = () => {
     if (activeIndex < subStagesData.length - 1) {
@@ -97,32 +106,29 @@ export default function StageDetailModalContent({
     }
   };
 
-  const startStage = () => {
-    if (activeIndex < subStagesData.length - 1) {
-      setActiveIndex(activeIndex + 1);
-    }
+  const startStage = async () => {
+    const formData = {
+      processId: processId as string,
+      stageId: id,
+      subStageId: activeSubStageData._id,
+    };
+    mutate(formData);
   };
 
   return (
-    <Modal
+    <NewModal
       name={`${ACTIVE_STAGE_DETAIL_MODAL}_${id}`}
       width="900px"
       height="auto"
       title={`${t("stage-modal-header")} — ${stageName || ""}`}
       isCloseOutside={false}
       isCloseEsc={false}
-      enableParams={true}
-      open={open}
-      setOpen={setOpen}
     >
       <div className={styles.modal}>
         <div className={styles.header}>
           <div className={styles.headerLeft}>
             <span className={styles.title}>{activeSubStageData.name}</span>
-            <StatusChip
-              status={getStatus(activeSubStageData.status, "value")}
-              t={t}
-            />
+            <StatusChip status={getStatus(activeSubStageData.status)} t={t} />
           </div>
         </div>
 
@@ -133,10 +139,10 @@ export default function StageDetailModalContent({
         />
 
         <div className={styles.body}>
-          {/* <TimeSection
+          <TimeSection
             endDate={activeSubStageData.end}
             startDate={activeSubStageData.start}
-          /> */}
+          />
           <section className={styles.section}>
             <h3>{t("section.delay-reason")}</h3>
             <DelayReasonGroup
@@ -187,7 +193,7 @@ export default function StageDetailModalContent({
         </div>
 
         <div className={styles.footer}>
-          {getStatus(activeSubStageData.status, "value") === "active" && (
+          {getStatus(activeSubStageData.status) === "active" && (
             <>
               <button className={styles.saveBtn} onClick={saveStageChanges}>
                 {t("buttons.save-changes")}
@@ -198,13 +204,13 @@ export default function StageDetailModalContent({
             </>
           )}
 
-          {getStatus(activeSubStageData.status, "value") === "pending" && (
+          {getStatus(activeSubStageData.status) === "pending" && (
             <button className={styles.startBtn} onClick={startStage}>
               {t("buttons.start-stage")}
             </button>
           )}
         </div>
       </div>
-    </Modal>
+    </NewModal>
   );
 }

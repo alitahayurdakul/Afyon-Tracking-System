@@ -33,7 +33,10 @@ export const END_POINTS = {
       `${apiUrl}/api/processes${status ? `?projectId=${projectId}` : ""}${projectId ? `&status=${status}` : ""}`,
     editDelayReasons: (id: string) =>
       `${apiUrl}/api/processes/stage-entry/${id}/delay-reason`,
-    stageDetail: (processId: string, stageId: string) => `${apiUrl}/api/processes/${processId}/stages/${stageId}/substages`,
+    stageDetail: (processId: string, stageId: string) =>
+      `${apiUrl}/api/processes/${processId}/stages/${stageId}/substages`,
+    startSubStage: (processId: string, stageId: string, subStageId: string) =>
+      `${apiUrl}/api/substages/processes/${processId}/stages/${stageId}/substages/${subStageId}`,
   },
   processOperations: {
     complete: (processId: string) =>
@@ -135,6 +138,7 @@ export const CLIENT_END_POINTS = {
     getDetail: "/api/processes",
     editProcessDelayReasons: "/api/processes",
     getProcessStageDetail: "/api/processes",
+    startSubStage: "/api/processes"
   },
   activeProcessOperation: {
     complete: "/api/activeProcessOperations",

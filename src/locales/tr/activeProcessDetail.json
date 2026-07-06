@@ -33,5 +33,19 @@
     "start-stage": "Aşamayı Başlat"
   },
   "stage-modal-header": "Aşama Detayı",
-  "no-data-label": "Aktif süreç detayı bulunmamaktadır."
+  "no-data-label": "Aktif süreç detayı bulunmamaktadır.",
+  "notifications": {
+    "start": {
+      "success": "Alt aşama başarıyla başlatıldı.",
+      "error": "Alt aşama başlatılırken bir sorun ile karşılaşıldı."
+    },
+    "save": {
+      "success": "Alt aşama başarıyla kaydedildi.",
+      "error": "Alt aşama kaydedilirken bir sorun ile karşılaşıldı."
+    },
+    "complete": {
+      "success": "Alt aşama başarıyla tamamlandı.",
+      "error": "Alt aşama tamamlanırken bir sorun ile karşılaşıldı."
+    }
+  }
 }

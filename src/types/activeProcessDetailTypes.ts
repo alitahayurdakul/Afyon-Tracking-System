@@ -9,7 +9,7 @@ export interface MainStage {
 
 export interface MaterialEntry {
   name: string;
-  serial: string;
+  serialNumber: string;
   materialCode: string;
   _id: string;
   description: string;

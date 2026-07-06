@@ -228,11 +228,3 @@ export const mockMainStages: MainStage[] = [
 //     id: "5",
 //   },
 // ];
-
-export const materialOptions: string[] = [
-  "Filtre",
-  "Yağ",
-  "Conta",
-  "Civata",
-  "Şablon",
-];
