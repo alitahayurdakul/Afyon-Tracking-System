@@ -29,7 +29,8 @@
   "file-placeholder": "Click to upload a file.",
   "buttons": {
     "save-changes": "Save Changes",
-    "complete-stage": "Complete Stage"
+    "complete-stage": "Complete Stage",
+    "start-stage": "Start Stage"
   },
   "stage-modal-header": "Stage Details",
   "no-data-label": "Aktif süreç detayı bulunmamaktadır."

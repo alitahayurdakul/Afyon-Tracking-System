@@ -13,17 +13,17 @@ export default function Stepper({ subStages, activeIndex, onSelect }: StepperPro
   return (
     <div className={styles.stepper}>
       {subStages.map((sub, index) => {
-        const status = getStatus(sub.status)
+        const status = getStatus(sub.status, "value")
         return(
         <div
-          key={sub.id}
+          key={sub._id}
           className={`${styles.stepItem} ${styles[status]} ${
             index === activeIndex ? styles.selected : ""
           }`}
           onClick={() => onSelect(index)}
         >
           <div className={styles.stepCircle}>
-            {status === "completed" ? "✓" : index + 1}
+            {status === "1" ? "✓" : index + 1}
           </div>
           <span className={styles.stepLabel}>{sub.name}</span>
         </div>

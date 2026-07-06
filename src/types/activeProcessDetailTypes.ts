@@ -10,6 +10,9 @@ export interface MainStage {
 export interface MaterialEntry {
   name: string;
   serial: string;
+  materialCode: string;
+  _id: string;
+  description: string;
 }
 
 export interface DelayReasons{
@@ -18,7 +21,7 @@ export interface DelayReasons{
 }
 
 export interface SubStage {
-  id: string;
+  _id: string;
   name: string;
   status: string | number;
   start: string | null;
@@ -27,10 +30,4 @@ export interface SubStage {
   materials: MaterialEntry[];
   description: string;
   images: string[];
-}
-
-export interface StageDetail {
-  stageId: string;
-  stageName: string;
-  subStages: SubStage[];
 }

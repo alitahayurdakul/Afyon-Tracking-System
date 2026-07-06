@@ -9,11 +9,12 @@ export enum ProcessQueryTypes {
   deleteProcess = "DELETE_PROCESS",
   getDetailProcess = "GET_DETAIL_ACTIVE_PROCESS",
   editProcessDelayReasons = "EDIT_PROCESS_DELAY_REASONS",
+   getStageDetail = "GET_STAGE_DETAIL"
 }
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { id, params, type } = body;
+  const { id, processId, stageId, params, type } = body;
 
   switch (type) {
     case ProcessQueryTypes.createProcess:
@@ -28,6 +29,8 @@ export async function POST(request: NextRequest) {
       return await processHandlers.getProcessDetail(id);
     case ProcessQueryTypes.editProcessDelayReasons:
       return await processHandlers.editProcessDelayReasons(params);
+    case ProcessQueryTypes.getStageDetail:
+      return await processHandlers.getStageDetail(processId, stageId);
 
     default: {
       return Response.json(

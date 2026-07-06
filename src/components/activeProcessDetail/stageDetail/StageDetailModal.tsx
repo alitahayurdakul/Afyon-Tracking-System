@@ -9,7 +9,7 @@ import { useAddQueryParam } from "@/utils/searchParams";
 
 import styles from "../ProcessFlow.module.scss";
 
-export default function StageDetailModal({ id }: { id: string }) {
+export default function StageDetailModal({ id, stageName }: { id: string, stageName: string }) {
   const [open, setOpen] = useState<boolean | undefined>(false);
   const addQueryParam = useAddQueryParam();
   const t = useTranslations("activeProcessDetail");
@@ -27,7 +27,7 @@ export default function StageDetailModal({ id }: { id: string }) {
         {t("open-detail")}
       </button>
 
-      <StageDetailModalContent id={id} open={open} setOpen={setOpen} />
+      <StageDetailModalContent id={id} open={open} setOpen={setOpen} stageName={stageName} />
     </>
   );
 }

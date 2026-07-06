@@ -26,8 +26,8 @@
     "editInfo": "Updating stage details may affect related process records. Make sure to review the changes before saving.",
     "fields": {
       "name": {
-        "label": "Workflow Name",
-        "placeholder": "Enter workflow name"
+        "label": "Stage Name",
+        "placeholder": "Enter stage name"
       },
       "description": {
         "label": "Description",

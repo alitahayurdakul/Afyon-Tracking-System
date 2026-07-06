@@ -93,7 +93,7 @@ export default function StageRow({
 
         <div className={styles.cardRight}>
           <StatusChip status={stage.status as string} t={t} />
-          <StageDetailModal id={stage._id} />
+          <StageDetailModal id={stage._id} stageName={stage.name ?? ""} />
         </div>
       </div>
     </div>

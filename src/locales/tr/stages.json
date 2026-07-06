@@ -26,8 +26,8 @@
     "editInfo": "Aşama bilgilerini güncellemek ilişkili süreç kayıtlarını etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden emin olun.",
     "fields": {
       "name": {
-        "label": "İş Akışı Adı",
-        "placeholder": "İş akışı adı giriniz"
+        "label": "Aşama Adı",
+        "placeholder": "Aşama adı giriniz"
       },
       "description": {
         "label": "Açıklama",

@@ -1,29 +1,31 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 
-import { ProcessOperationsQueryTypes } from "@/app/api/activeProcessOperations/route";
+import { ProcessQueryTypes } from "@/app/api/processes/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 
 import { axiosInstance } from "../axiosInstance";
 
-export const useGetStageDetailDataQuery = <T>(subStageId: string) => {
-  const isEnabled = Boolean(subStageId && subStageId !== "");
-  const { id: stageId } = useParams();
+export const useGetStageDetailDataQuery = <T>(stageId: string) => {
+  const isEnabled = Boolean(stageId && stageId !== "");
+  const { id: processId } = useParams();
 
   return useQuery({
-    queryKey: [`getSubStageDetail_${subStageId}`],
+    queryKey: [`getProcessStageDetail_${stageId}`],
     refetchOnWindowFocus: false,
     enabled: isEnabled,
     queryFn: async () => {
-      const { data } = await axiosInstance.post<{ success: boolean; data: T }>(
-        CLIENT_END_POINTS.activeProcessOperation.getStageDetail,
+      const { data } = await axiosInstance.post<T>(
+        CLIENT_END_POINTS.processes.getProcessStageDetail,
         {
-          type: ProcessOperationsQueryTypes.getStageDetail,
-          id: stageId
+          type: ProcessQueryTypes.getStageDetail,
+          processId,
+          stageId,
         },
       );
 
-      return data.data;
+
+      return data;
     },
   });
 };

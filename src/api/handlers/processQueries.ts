@@ -15,6 +15,7 @@ export const processHandlers = {
   getActiveProcesses,
   getProcessDetail,
   editProcessDelayReasons,
+  getStageDetail,
 };
 
 async function createProcess(params: Record<string, any>): Promise<Response> {
@@ -67,8 +68,10 @@ async function getActiveProcesses(
   params: Record<string, any>,
 ): Promise<Response> {
   try {
-    const {status, projectId} = params || {};
-    const response = await axiosInstance.get(END_POINTS.process.getAll({status, projectId}));
+    const { status, projectId } = params || {};
+    const response = await axiosInstance.get(
+      END_POINTS.process.getAll({ status, projectId }),
+    );
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
@@ -113,5 +116,20 @@ async function editProcessDelayReasons(
       { success: false, error: err.message },
       { status: 500 },
     );
+  }
+}
+
+async function getStageDetail(processId: string, stageId: string): Promise<Response> {
+  try {
+    const response = await axiosInstance.get(
+      END_POINTS.process.stageDetail(processId || "", stageId || ""),
+    );
+    if (response.status === 200) {
+      return createJsonOnlyData(response.data.subStages);
+    }
+
+    return createJsonError("Failed to get process detail", 400);
+  } catch (err: any) {
+    return createJsonError(extractErrorMessage(err), 500);
   }
 }

@@ -29,7 +29,8 @@
   "file-placeholder": "Dosya yüklemek için tıklayın.",
   "buttons": {
     "save-changes": "Değişiklikleri Kaydet",
-    "complete-stage": "Aşamayı Tamamla"
+    "complete-stage": "Aşamayı Tamamla",
+    "start-stage": "Aşamayı Başlat"
   },
   "stage-modal-header": "Aşama Detayı",
   "no-data-label": "Aktif süreç detayı bulunmamaktadır."

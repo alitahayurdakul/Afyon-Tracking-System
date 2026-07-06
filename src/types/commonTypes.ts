@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 export interface IStatusType{
     code: number | string;
     valueKey: string;
+    value: string;
 };
 
 export type IStatusTypes = Array<IStatusType>;
