@@ -47,7 +47,8 @@
         "workflows": "Arbeitsablauf auswählen"
       },
       "notifications": {
-        "success": "Der neue Prozess wurde erfolgreich erstellt. Sie werden zur erstellten Prozessseite weitergeleitet."
+        "success": "Der neue Prozess wurde erfolgreich erstellt. Sie werden zur erstellten Prozessseite weitergeleitet.",
+        "error": "Der neue Prozess konnte nicht erstellt werden."
       }
     }
   },

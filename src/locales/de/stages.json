@@ -26,8 +26,8 @@
     "editInfo": "Das Aktualisieren der Phasendetails kann zugehörige Prozessdatensätze beeinflussen. Überprüfen Sie die Änderungen vor dem Speichern.",
     "fields": {
       "name": {
-        "label": "Workflow-Name",
-        "placeholder": "Workflow-Namen eingeben"
+        "label": "Phasenname",
+        "placeholder": "Phasenname eingeben"
       },
       "description": {
         "label": "Beschreibung",

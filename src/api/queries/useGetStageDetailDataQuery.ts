@@ -1,0 +1,91 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useDispatch, useSelector } from "react-redux";
+
+import { ProcessQueryTypes } from "@/app/api/processes/route";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { addToastify } from "@/redux/slices/toastSlice";
+import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import { RootState } from "@/redux/store";
+import { extractApiError } from "@/utils/extractApiError";
+
+import { axiosInstance } from "../axiosInstance";
+
+export const useGetStageDetailDataQuery = <T>(stageId: string) => {
+  const isEnabled = Boolean(stageId && stageId !== "");
+  const { id: processId } = useParams();
+
+  const trigger = useSelector(
+    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+  );
+
+  return useQuery({
+    queryKey: [`getProcessStageDetail_${stageId}`, trigger],
+    refetchOnWindowFocus: false,
+    enabled: isEnabled,
+    queryFn: async () => {
+      const { data } = await axiosInstance.post<T>(
+        CLIENT_END_POINTS.processes.getProcessStageDetail,
+        {
+          type: ProcessQueryTypes.getStageDetail,
+          processId,
+          stageId,
+        },
+      );
+
+      return data;
+    },
+  });
+};
+
+interface StartSubStage {
+  processId: string;
+  stageId: string;
+  subStageId: string;
+}
+
+const startSubStage = async (payload: StartSubStage): Promise<any> => {
+  const { data } = await axiosInstance.post<any>(
+    CLIENT_END_POINTS.processes.startSubStage,
+    {
+      params: payload,
+      type: ProcessQueryTypes.startSubStage,
+    },
+  );
+  return data;
+};
+
+export const useStartSubStage = () => {
+  const queryClient = useQueryClient();
+  const dispatch = useDispatch();
+  const t = useTranslations("activeProcessDetail");
+
+  return useMutation({
+    mutationFn: startSubStage,
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ["startSubStage", variables.processId],
+      });
+      dispatch(
+        addToastify({
+          message: t("notifications.start.success"),
+          type: "success",
+          icon: "close",
+          id: "startSubStageSuccess" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable());
+    },
+    onError: (err) => {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, "notifications.start.error"),
+          type: "error",
+          icon: "close",
+          id: "startSubStageError" + Date.now(),
+        }),
+      );
+    },
+  });
+};

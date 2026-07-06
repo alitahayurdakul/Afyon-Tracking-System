@@ -29,7 +29,23 @@
   "file-placeholder": "Click to upload a file.",
   "buttons": {
     "save-changes": "Save Changes",
-    "complete-stage": "Complete Stage"
+    "complete-stage": "Complete Stage",
+    "start-stage": "Start Stage"
   },
-  "stage-modal-header": "Stage Details"
+  "stage-modal-header": "Stage Details",
+  "no-data-label": "Aktif süreç detayı bulunmamaktadır.",
+  "notifications": {
+    "start": {
+      "success": "The sub-stage was started successfully.",
+      "error": "An error occurred while starting the sub-stage."
+    },
+    "save": {
+      "success": "The sub-stage was saved successfully.",
+      "error": "An error occurred while saving the sub-stage."
+    },
+    "complete": {
+      "success": "The sub-stage was completed successfully.",
+      "error": "An error occurred while completing the sub-stage."
+    }
+  }
 }

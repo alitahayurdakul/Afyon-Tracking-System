@@ -25,6 +25,7 @@ import { ProjectQueryTypes } from "@/app/api/projects/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { PROJECT_STATUS_OPTIONS } from "@/consts/projectsConsts";
 import { IOptionType } from "@/types/formTypes";
+import { extractApiError } from "@/utils/extractApiError";
 
 interface IPropsTypes {
   id: string;
@@ -90,14 +91,9 @@ export const EditProjectForm = ({ id, data }: IPropsTypes) => {
         dispatch(addTriggerTable());
         removeModal();
       } catch (err: any) {
-        const errorMessage =
-          err.response?.data?.error ||
-          err.response?.data?.message ||
-          err?.message ||
-          t("form.notifications.editError");
         dispatch(
           addToastify({
-            message: errorMessage,
+            message: extractApiError(err, t("form.notifications.editError")),
             type: "error",
             icon: "close",
             id: "editProject" + Date.now(),

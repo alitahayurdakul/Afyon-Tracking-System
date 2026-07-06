@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
@@ -9,24 +10,33 @@ import { useAddQueryParam } from "@/utils/searchParams";
 
 import styles from "../ProcessFlow.module.scss";
 
-export default function StageDetailModal({ id }: { id: string }) {
-  const [open, setOpen] = useState<boolean | undefined>(false);
+export default function StageDetailModal({
+  id,
+  stageName,
+}: {
+  id: string;
+  stageName: string;
+}) {
   const addQueryParam = useAddQueryParam();
-  const t = useTranslations("activeProcessDetail")
+  const t = useTranslations("activeProcessDetail");
+  const searchParams = useSearchParams();
+  const modalName = `${ACTIVE_STAGE_DETAIL_MODAL}_${id}`;
+  const isOpen = searchParams?.get("modal") === modalName;
+
   return (
     <>
       <button
         className={styles.detailBtn}
-        onClick={() => {
-          if (!open) {
-            addQueryParam("modal", `${ACTIVE_STAGE_DETAIL_MODAL}_${id}`);
-          }
-        }}
+        onClick={() => addQueryParam("modal", modalName)}
       >
         {t("open-detail")}
       </button>
-
-      <StageDetailModalContent id={id} open={open} setOpen={setOpen} />
+      {isOpen && (
+        <StageDetailModalContent
+          id={id}
+          stageName={stageName}
+        />
+      )}
     </>
   );
 }

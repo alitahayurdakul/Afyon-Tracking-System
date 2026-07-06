@@ -11,6 +11,7 @@ import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import styles from "@/styles/components/common/TableActionsCol.module.scss";
 import stylesDeletePopover from "@/styles/components/common/TableDeletePopover.module.scss";
+import { extractApiError } from "@/utils/extractApiError";
 
 import { PopoverBody } from "../Popover";
 import { EditWorkflowModal } from "./edit/EditWorkflowModal";
@@ -34,10 +35,10 @@ export const WorkflowTableActionsCol = ({ id }: { id: string }) => {
         }),
       );
       dispatch(addTriggerTable());
-    } catch (err) {
+    } catch (err: any) {
       dispatch(
         addToastify({
-          message: t("notifications.delete.error"),
+          message: extractApiError(err, t("notifications.delete.error")),
           type: "error",
           icon: "close",
           id: "contactePage" + Date.now(),

@@ -22,6 +22,7 @@ import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { MaterialQueryTypes } from "@/app/api/materials/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { useTranslations } from "next-intl";
+import { extractApiError } from "@/utils/extractApiError";
 
 interface IPropsTypes {
   id: string;
@@ -75,15 +76,9 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
         dispatch(addTriggerTable());
         removeModal();
       } catch (err: any) {
-        const errorMessage =
-          err.response?.data?.error ||
-          err.response?.data?.message ||
-          err?.message ||
-          t("notifications.edit.error");
-
         dispatch(
           addToastify({
-            message: errorMessage,
+            message: extractApiError(err, t("notifications.edit.error")),
             type: "error",
             icon: "close",
             id: "editMaterialError" + Date.now(),

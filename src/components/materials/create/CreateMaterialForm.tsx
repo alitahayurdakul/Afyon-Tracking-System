@@ -19,6 +19,7 @@ import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { MaterialQueryTypes } from "@/app/api/materials/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { useTranslations } from "next-intl";
+import { extractApiError } from "@/utils/extractApiError";
 
 export const CreateMaterialForm = () => {
   const {
@@ -69,14 +70,9 @@ export const CreateMaterialForm = () => {
         reset();
         removeModal();
       } catch (err: any) {
-        const errorMessage =
-          err.response?.data?.error ||
-          err.response?.data?.message ||
-          err?.message ||
-          t("notifications.create.error");
         dispatch(
           addToastify({
-            message: errorMessage,
+            message: extractApiError(err, t("notifications.create.error")),
             type: "error",
             icon: "close",
             id: "createMaterialError" + Date.now(),

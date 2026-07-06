@@ -29,14 +29,18 @@ export const END_POINTS = {
     edit: (id: string) => `${apiUrl}/api/favorite-processes/${id}`,
     delete: (id: string) => `${apiUrl}/api/favorite-processes/${id}`,
     getDetail: (id: string) => `${apiUrl}/api/processes/${id}`,
-    getAll: ({status, projectId}: { status?: string; projectId?: string }) =>
-      `${apiUrl}/api/processes${status ? `?projectId=${projectId}` : ''}${projectId ? `&status=${status}` : ''}`,
+    getAll: ({ status, projectId }: { status?: string; projectId?: string }) =>
+      `${apiUrl}/api/processes${status ? `?projectId=${projectId}` : ""}${projectId ? `&status=${status}` : ""}`,
     editDelayReasons: (id: string) =>
       `${apiUrl}/api/processes/stage-entry/${id}/delay-reason`,
+    stageDetail: (processId: string, stageId: string) =>
+      `${apiUrl}/api/processes/${processId}/stages/${stageId}/substages`,
+    startSubStage: (processId: string, stageId: string, subStageId: string) =>
+      `${apiUrl}/api/substages/processes/${processId}/stages/${stageId}/substages/${subStageId}`,
   },
   processOperations: {
     complete: (processId: string) =>
-      `${apiUrl}/api/processes/${processId}/complete`
+      `${apiUrl}/api/processes/${processId}/complete`,
   },
   workflowHistory: {
     getAll: `${apiUrl}/api/processes?status=COMPLETED`,
@@ -98,7 +102,8 @@ export const END_POINTS = {
     create: `${apiUrl}/api/projects`,
     edit: (id: string) => `${apiUrl}/api/projects/${id}`,
     delete: (id: string) => `${apiUrl}/api/projects/${id}`,
-    getAll: (status?: string) => `${apiUrl}/api/projects${status ? `?status=${status}` : ''}`,
+    getAll: (status?: string) =>
+      `${apiUrl}/api/projects${status ? `?status=${status}` : ""}`,
     getDetail: (id: string) => `${apiUrl}/api/projects/${id}`,
   },
 };
@@ -132,10 +137,11 @@ export const CLIENT_END_POINTS = {
     getAllActive: "/api/processes",
     getDetail: "/api/processes",
     editProcessDelayReasons: "/api/processes",
+    getProcessStageDetail: "/api/processes",
+    startSubStage: "/api/processes"
   },
   activeProcessOperation: {
     complete: "/api/activeProcessOperations",
-    getSubStages: "/api/activeProcessOperations"
   },
   workflowHistory: {
     getAll: "/api/workflowHistory",

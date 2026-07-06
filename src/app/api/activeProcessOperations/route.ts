@@ -3,8 +3,7 @@ import { NextRequest } from "next/server";
 import { processOperationsHandlers } from "@/api/handlers/processOperationQueries";
 
 export enum ProcessOperationsQueryTypes {
-  completeProcess = "COMPLETE_PROCESS",
-  getSubStages = "GET_SUB_STAGES"
+  completeProcess = "COMPLETE_PROCESS"
 }
 
 export async function POST(request: NextRequest) {
@@ -15,8 +14,6 @@ export async function POST(request: NextRequest) {
 
     case ProcessOperationsQueryTypes.completeProcess:
       return await processOperationsHandlers.completeProcess(id);
-    case ProcessOperationsQueryTypes.getSubStages:
-      return await processOperationsHandlers.getSubStages();
 
     default: {
       return Response.json(

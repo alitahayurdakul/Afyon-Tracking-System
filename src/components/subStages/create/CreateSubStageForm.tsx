@@ -23,6 +23,7 @@ import { SubStageQueryTypes } from "@/app/api/sub-stages/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { useGetMaterialsDataQuery, useGetMaterialsOptionsDataQuery } from "@/api/queries/useGetMaterialsQueries";
 import SelectedItemList from "@/components/common/SelectedItemList";
+import { extractApiError } from "@/utils/extractApiError";
 
 export const CreateSubStageForm = () => {
   const t = useTranslations("subStages");
@@ -79,14 +80,9 @@ export const CreateSubStageForm = () => {
         reset();
         removeModal();
       } catch (err: any) {
-        const errorMessage =
-          err.response?.data?.error ||
-          err.response?.data?.message ||
-          err?.message ||
-          t("form.notifications.createError");
         dispatch(
           addToastify({
-            message: errorMessage,
+            message: extractApiError(err, t("form.notifications.createError")),
             type: "error",
             icon: "close",
             id: "createSubStage" + Date.now(),

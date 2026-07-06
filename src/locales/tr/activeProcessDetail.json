@@ -29,7 +29,23 @@
   "file-placeholder": "Dosya yüklemek için tıklayın.",
   "buttons": {
     "save-changes": "Değişiklikleri Kaydet",
-    "complete-stage": "Aşamayı Tamamla"
+    "complete-stage": "Aşamayı Tamamla",
+    "start-stage": "Aşamayı Başlat"
   },
-  "stage-modal-header": "Aşama Detayı"
+  "stage-modal-header": "Aşama Detayı",
+  "no-data-label": "Aktif süreç detayı bulunmamaktadır.",
+  "notifications": {
+    "start": {
+      "success": "Alt aşama başarıyla başlatıldı.",
+      "error": "Alt aşama başlatılırken bir sorun ile karşılaşıldı."
+    },
+    "save": {
+      "success": "Alt aşama başarıyla kaydedildi.",
+      "error": "Alt aşama kaydedilirken bir sorun ile karşılaşıldı."
+    },
+    "complete": {
+      "success": "Alt aşama başarıyla tamamlandı.",
+      "error": "Alt aşama tamamlanırken bir sorun ile karşılaşıldı."
+    }
+  }
 }

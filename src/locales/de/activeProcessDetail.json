@@ -29,7 +29,23 @@
   "file-placeholder": "Klicken Sie hier, um eine Datei hochzuladen.",
   "buttons": {
     "save-changes": "Änderungen speichern",
-    "complete-stage": "Phase abschließen"
+    "complete-stage": "Phase abschließen",
+    "start-stage": "Phase starten"
   },
-  "stage-modal-header": "Details zur Phase"
+  "stage-modal-header": "Details zur Phase",
+  "no-data-label": "Keine Details zu aktiven Prozessen vorhanden.",
+  "notifications": {
+    "start": {
+      "success": "Die Unterphase wurde erfolgreich gestartet.",
+      "error": "Beim Starten der Unterphase ist ein Fehler aufgetreten."
+    },
+    "save": {
+      "success": "Die Unterphase wurde erfolgreich gespeichert.",
+      "error": "Beim Speichern der Unterphase ist ein Fehler aufgetreten."
+    },
+    "complete": {
+      "success": "Die Unterphase wurde erfolgreich abgeschlossen.",
+      "error": "Beim Abschließen der Unterphase ist ein Fehler aufgetreten."
+    }
+  }
 }

@@ -16,7 +16,10 @@ import { CREATE_FLEET_FORM_CONSTS } from "@/consts/newFleetFormConsts";
 import { ICreateFleetFormDataTypes } from "@/types/createFleetTypes";
 import { ProcessQueryTypes } from "@/app/api/processes/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { useGetWorkflowsDataQuery, useGetWorkflowsOptionsDataQuery } from "@/api/queries/useGetWorkflowsQueries";
+import {
+  useGetWorkflowsDataQuery,
+  useGetWorkflowsOptionsDataQuery,
+} from "@/api/queries/useGetWorkflowsQueries";
 import { IWorkflowResponseTypes } from "@/types/workflowTypes";
 import { useRouter } from "next/navigation";
 import { CreateFleetFormValidation } from "@/utils/validations/createFleetFormValidation";
@@ -32,6 +35,7 @@ import { optionsConverters } from "@/types/optionsConverter";
 import { useTranslations } from "next-intl";
 import { ITrainType } from "@/types/trainsTypes";
 import { useGetProjectOptionsDataQuery } from "@/api/queries/useGetProjectsQueries";
+import { extractApiError } from "@/utils/extractApiError";
 
 export const CreateFleetForm = () => {
   const {
@@ -54,7 +58,7 @@ export const CreateFleetForm = () => {
   });
   const trainId = watch("trainId");
   const t = useTranslations("layout.fleetForm");
-  const {data: projectOptions} = useGetProjectOptionsDataQuery("ACTIVE");
+  const { data: projectOptions } = useGetProjectOptionsDataQuery("ACTIVE");
   const { data: trainData, isLoading } = useGetTrainsDataQuery();
   const { data: workflowOptions } =
     useGetWorkflowsOptionsDataQuery<IOptionType[]>();
@@ -65,7 +69,9 @@ export const CreateFleetForm = () => {
 
   const wagonOptions = useMemo(() => {
     if (trainId) {
-      const wagons = trainData?.find((train: ITrainType) => train._id === trainId)?.wagons || {};
+      const wagons =
+        trainData?.find((train: ITrainType) => train._id === trainId)?.wagons ||
+        {};
       return optionsConverters(wagons || [], "_id", "wagonNo");
     }
   }, [trainId, trainOptions]);
@@ -80,34 +86,45 @@ export const CreateFleetForm = () => {
 
   const onSubmit: SubmitHandler<ICreateFleetFormDataTypes> = useCallback(
     async (data) => {
-      const params = {
-        projectId: data.projectId,
-        trainId: data.trainId,
-        wagonId: data.wagonId,
-        workflowId: data.workflows,
-        description: data.additionInfo,
-      };
+      try {
+        const params = {
+          projectId: data.projectId,
+          trainId: data.trainId,
+          wagonId: data.wagonId,
+          workflowId: data.workflows,
+          description: data.additionInfo,
+        };
 
-      await axiosInstance.post(
-        CLIENT_END_POINTS.processes.create,
-        {
-          type: ProcessQueryTypes.createProcess,
-          params,
-        },
-      );
-      dispatch(
-        addToastify({
-          message: t("form.notifications.success"),
-          type: "success",
-          icon: "close",
-          id: "startNewProcess" + Date.now(),
-        }),
-      );
-      // if (responseData.data && responseData.data.process._id) {
-      //   router.push(
-      //     `${URL_PAGES.activeProcesses}/${responseData.data.process._id}`,
-      //   );
-      // }
+        const { data: responseData } = await axiosInstance.post(
+          CLIENT_END_POINTS.processes.create,
+          {
+            type: ProcessQueryTypes.createProcess,
+            params,
+          },
+        );
+        dispatch(
+          addToastify({
+            message: t("form.notifications.success"),
+            type: "success",
+            icon: "close",
+            id: "startNewProcessSuccess" + Date.now(),
+          }),
+        );
+        if (responseData.data && responseData.data.process._id) {
+          router.push(
+            `${URL_PAGES.activeProcesses}/${responseData.data.process._id}`,
+          );
+        }
+      } catch (err: any) {
+        dispatch(
+          addToastify({
+            message: extractApiError(err, t("form.notifications.error")),
+            type: "error",
+            icon: "close",
+            id: "createProject" + Date.now(),
+          }),
+        );
+      }
     },
     [trainOptions],
   );

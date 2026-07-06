@@ -28,7 +28,7 @@ export const ProgressionContainer = ({ data, isLoading, isError }: IPropsTypes) 
           </h1>
           {!isLoading && data?.process?.workflowName ? (
             <span className={styles["process-pill"]}>
-              {String(data?.process?.workflowName)}
+              {data?.process?.workflowName.toString() ?? "-"}
             </span>
           ) : null}
         </div>
@@ -41,8 +41,8 @@ export const ProgressionContainer = ({ data, isLoading, isError }: IPropsTypes) 
         </p>
       </div>
       <LoadingChecker isLoading={isLoading} >
-        <ErrorChecker isError={isError || !data} noData={data && data?.entries.length < 1} noDataLabel="Aktif süreç detayı bulunmamaktadır.">
-            <ProcessFlow />
+        <ErrorChecker isError={isError || !data} noData={data && data?.entries.length < 1} noDataLabel={t("no-data-label")} >
+            <ProcessFlow data={data} />
         </ErrorChecker>
       </LoadingChecker>
     </div>

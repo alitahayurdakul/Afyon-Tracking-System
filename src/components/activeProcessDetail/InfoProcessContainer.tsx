@@ -24,6 +24,7 @@ import { URL_PAGES } from "@/consts/url";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { IOptionType } from "@/types/formTypes";
 import { ProcessResponse } from "@/types/processTypes";
+import { extractApiError } from "@/utils/extractApiError";
 
 export default function InfoProcessContainer({
   data,
@@ -38,14 +39,6 @@ export default function InfoProcessContainer({
   const router = useRouter();
   const dispatch = useDispatch();
   const t = useTranslations("activeProcessDetail");
-
-  const stageId = useMemo(() => {
-    if (data && data?.entries.length !== data?.stages.length) {
-      const activeStageOrder = data?.entries?.length;
-      const nextStageId = data?.stages[activeStageOrder]._id;
-      return nextStageId;
-    }
-  }, [data]);
 
   const time = () => {
     if (data?.process) {
@@ -97,9 +90,10 @@ export default function InfoProcessContainer({
         router.push(URL_PAGES.activeProcesses);
       }
     } catch (err) {
+      
       dispatch(
         addToastify({
-          message: (err as Error)?.message || "Hata oluştu",
+          message: extractApiError(err, "Hata meydana geldi"),
           type: "error",
           icon: "close",
           id: "editTrainError" + Date.now(),
@@ -118,7 +112,6 @@ export default function InfoProcessContainer({
   return (
     <aside className={styles.sidebar}>
       <div className={styles["sidebar-inner"]}>
-        {/* Aktif Projeler */}
         <section>
           <label className={styles["section-label"]}>{t("active-projects")}</label>
 

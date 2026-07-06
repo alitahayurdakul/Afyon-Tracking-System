@@ -1,12 +1,21 @@
 "use client";
 
+import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
-import { useGetSubStagesDataQuery } from "@/api/queries/useGetSubStagesQueries";
+import {
+  useGetStageDetailDataQuery,
+  useStartSubStage,
+} from "@/api/queries/useGetStageDetailDataQuery";
 import { Modal } from "@/components/common/Modal";
+import { NewModal } from "@/components/common/NewModal";
 import { ACTIVE_STAGE_DETAIL_MODAL } from "@/consts/modals";
-import { StageDetail, SubStage } from "@/types/activeProcessDetailTypes";
+import {
+  DelayReasons,
+  MaterialEntry,
+  SubStage,
+} from "@/types/activeProcessDetailTypes";
 import { IOptionType } from "@/types/formTypes";
 import { getStatus } from "@/utils/getStatus";
 
@@ -20,31 +29,35 @@ import Stepper from "./Stepper";
 
 interface StageDetailModalProps {
   id: string;
-  open?: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean | undefined>>;
+  stageName: string;
 }
 
 interface NewSubStageData {
-  selectedList: IOptionType["value"][];
-  materialList: never[]; // or whatever this should actually be
+  reasonList: IOptionType["value"][];
+  materialList: MaterialEntry[]; // or whatever this should actually be
 }
 
 export default function StageDetailModalContent({
   id,
-  open,
-  setOpen,
+  stageName,
 }: StageDetailModalProps) {
   const t = useTranslations("activeProcessDetail");
   const {
-    data: stageDetail,
+    data: subStagesData,
     isLoading,
     isError,
-  } = useGetSubStagesDataQuery<StageDetail>("");
+  } = useGetStageDetailDataQuery<SubStage[]>(id);
 
-  const subStagesData = stageDetail?.subStages;
+  const { id: processId } = useParams();
+
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [prevSubStagesData, setPrevSubStagesData] = useState(subStagesData);
-
+  const {
+    mutate,
+    isPending,
+    isError: startSubStageError,
+    error,
+  } = useStartSubStage();
   if (subStagesData !== prevSubStagesData) {
     setPrevSubStagesData(subStagesData);
     const index = subStagesData?.findIndex(
@@ -58,8 +71,10 @@ export default function StageDetailModalContent({
   const activeSubStageData = subStagesData?.[activeIndex];
 
   const [newSubStageData, setNewSubStageData] = useState<NewSubStageData>({
-    selectedList:
-      activeSubStageData?.delayReasons?.map((reason) => reason.id) || [],
+    reasonList:
+      activeSubStageData?.delayReasons?.map(
+        (reason: DelayReasons) => reason.id,
+      ) || [],
     materialList: [],
   });
   const [prevActiveIndex, setPrevActiveIndex] = useState(activeIndex);
@@ -67,8 +82,10 @@ export default function StageDetailModalContent({
   if (activeIndex !== prevActiveIndex) {
     setPrevActiveIndex(activeIndex);
     setNewSubStageData({
-      selectedList:
-        activeSubStageData?.delayReasons?.map((reason) => reason.id) || [],
+      reasonList:
+        activeSubStageData?.delayReasons?.map(
+          (reason: DelayReasons) => reason.id,
+        ) || [],
       materialList: [],
     });
   }
@@ -83,17 +100,29 @@ export default function StageDetailModalContent({
     }
   };
 
+  const saveStageChanges = () => {
+    if (activeIndex < subStagesData.length - 1) {
+      setActiveIndex(activeIndex + 1);
+    }
+  };
+
+  const startStage = async () => {
+    const formData = {
+      processId: processId as string,
+      stageId: id,
+      subStageId: activeSubStageData._id,
+    };
+    mutate(formData);
+  };
+
   return (
-    <Modal
+    <NewModal
       name={`${ACTIVE_STAGE_DETAIL_MODAL}_${id}`}
       width="900px"
       height="auto"
-      title={`${t("stage-modal-header")} — ${activeSubStageData?.name || ""}`}
+      title={`${t("stage-modal-header")} — ${stageName || ""}`}
       isCloseOutside={false}
       isCloseEsc={false}
-      enableParams={true}
-      open={open}
-      setOpen={setOpen}
     >
       <div className={styles.modal}>
         <div className={styles.header}>
@@ -117,10 +146,10 @@ export default function StageDetailModalContent({
           <section className={styles.section}>
             <h3>{t("section.delay-reason")}</h3>
             <DelayReasonGroup
-              selectedList={newSubStageData.selectedList}
+              reasonList={newSubStageData.reasonList}
               disabled={isLocked}
-              onChange={(selectedList) =>
-                setNewSubStageData((prev) => ({ ...prev, selectedList }))
+              onChange={(reasonList) =>
+                setNewSubStageData((prev) => ({ ...prev, reasonList }))
               }
             />
           </section>
@@ -132,7 +161,12 @@ export default function StageDetailModalContent({
                 <MaterialList
                   materials={activeSubStageData.materials}
                   disabled={isLocked}
-                  onChange={(materials) => console.log(materials)}
+                  onChange={(materials) => {
+                    setNewSubStageData((prev) => ({
+                      ...prev,
+                      materialList: materials,
+                    }));
+                  }}
                 />
               </section>
             )}
@@ -148,32 +182,35 @@ export default function StageDetailModalContent({
             />
           </section>
 
-          <section className={styles.section}>
+          {/* <section className={styles.section}>
             <h3>{t("section.files")}</h3>
             <ImageUploader
               images={activeSubStageData.images}
               disabled={isLocked}
               onChange={(images) => console.log(images)}
             />
-          </section>
+          </section>*/}
         </div>
 
         <div className={styles.footer}>
           {getStatus(activeSubStageData.status) === "active" && (
-            <button className={styles.saveBtn} onClick={completeStage}>
-              {t("buttons.save-changes")}
-            </button>
+            <>
+              <button className={styles.saveBtn} onClick={saveStageChanges}>
+                {t("buttons.save-changes")}
+              </button>
+              <button className={styles.completeBtn} onClick={completeStage}>
+                {t("buttons.complete-stage")}
+              </button>
+            </>
           )}
 
-          <button
-            className={styles.completeBtn}
-            disabled={getStatus(activeSubStageData.status) !== "active"}
-            onClick={completeStage}
-          >
-            {t("buttons.complete-stage")}
-          </button>
+          {getStatus(activeSubStageData.status) === "pending" && (
+            <button className={styles.startBtn} onClick={startStage}>
+              {t("buttons.start-stage")}
+            </button>
+          )}
         </div>
       </div>
-    </Modal>
+    </NewModal>
   );
 }

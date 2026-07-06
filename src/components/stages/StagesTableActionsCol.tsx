@@ -10,6 +10,7 @@ import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import styles from "@/styles/components/common/TableActionsCol.module.scss";
 import stylesDeletePopover from "@/styles/components/common/TableDeletePopover.module.scss";
+import { extractApiError } from "@/utils/extractApiError";
 
 import { PopoverBody } from "../Popover";
 import { EditWorkflowModal } from "./edit/EditStageModal";
@@ -37,7 +38,7 @@ export const StagesTableActionsCol = ({ id }: { id: string }) => {
     catch (err) {
       dispatch(
         addToastify({
-          message: t("form.notifications.deleteError"),
+          message: extractApiError(err, t("form.notifications.deleteError")),
           type: "error",
           icon: "close",
           id: "contactePage" + Date.now(),
