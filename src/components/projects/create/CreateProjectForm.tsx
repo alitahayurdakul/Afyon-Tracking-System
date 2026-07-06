@@ -22,6 +22,7 @@ import { ProjectQueryTypes } from "@/app/api/projects/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { PROJECT_STATUS_OPTIONS } from "@/consts/projectsConsts";
 import { IOptionType } from "@/types/formTypes";
+import { extractApiError } from "@/utils/extractApiError";
 
 export const CreateProjectForm = () => {
   const t = useTranslations("projects");
@@ -83,14 +84,9 @@ export const CreateProjectForm = () => {
         reset();
         removeModal();
       } catch (err: any) {
-        const errorMessage =
-          err.response?.data?.error ||
-          err.response?.data?.message ||
-          err?.message ||
-          t("form.notifications.createError");
         dispatch(
           addToastify({
-            message: errorMessage,
+            message: extractApiError(err, t("form.notifications.createError")),
             type: "error",
             icon: "close",
             id: "createProject" + Date.now(),

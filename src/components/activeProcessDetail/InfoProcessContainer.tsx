@@ -24,6 +24,7 @@ import { URL_PAGES } from "@/consts/url";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { IOptionType } from "@/types/formTypes";
 import { ProcessResponse } from "@/types/processTypes";
+import { extractApiError } from "@/utils/extractApiError";
 
 export default function InfoProcessContainer({
   data,
@@ -89,9 +90,10 @@ export default function InfoProcessContainer({
         router.push(URL_PAGES.activeProcesses);
       }
     } catch (err) {
+      
       dispatch(
         addToastify({
-          message: (err as Error)?.message || "Hata oluştu",
+          message: extractApiError(err, "Hata meydana geldi"),
           type: "error",
           icon: "close",
           id: "editTrainError" + Date.now(),

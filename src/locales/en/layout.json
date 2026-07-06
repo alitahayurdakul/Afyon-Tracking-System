@@ -47,7 +47,8 @@
         "workflows": "Select a workflow"
       },
       "notifications": {
-        "success": "The new process has been created successfully. You are being redirected to the created process page."
+        "success": "The new process has been created successfully. You are being redirected to the created process page.",
+        "error": "The new process cannot be created."
       }
     }
   },

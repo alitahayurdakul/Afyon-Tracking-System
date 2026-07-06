@@ -10,6 +10,7 @@ import { InputField } from "@/components/common/InputField";
 import { URL_PAGES } from "@/consts/url";
 import { addToastify } from "@/redux/slices/toastSlice";
 import styles from "@/styles/components/login/LoginCard.module.scss";
+import { extractApiError } from "@/utils/extractApiError";
 
 export const LoginCard = () => {
   const t = useTranslations("layout.login");
@@ -37,11 +38,7 @@ export const LoginCard = () => {
     } catch (err: any) {
       dispatch(
         addToastify({
-          message:
-            err?.response?.data?.error ||
-            err?.response?.data?.message ||
-            err?.message ||
-            t("error"),
+          message: extractApiError(err, t("error")),
           type: "error",
           icon: "close",
           id: "login" + Date.now(),

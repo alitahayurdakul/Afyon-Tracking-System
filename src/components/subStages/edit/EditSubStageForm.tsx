@@ -33,6 +33,7 @@ import {
   useGetMaterialsOptionsDataQuery,
 } from "@/api/queries/useGetMaterialsQueries";
 import SelectedItemList from "@/components/common/SelectedItemList";
+import { extractApiError } from "@/utils/extractApiError";
 
 interface IPropsTypes {
   id: string;
@@ -97,14 +98,9 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
         dispatch(addTriggerTable());
         removeModal();
       } catch (err: any) {
-        const errorMessage =
-          err.response?.data?.error ||
-          err.response?.data?.message ||
-          err?.message ||
-          t("form.notifications.editError");
         dispatch(
           addToastify({
-            message: errorMessage,
+            message: extractApiError(err, t("form.notifications.editError")),
             type: "error",
             icon: "close",
             id: "editSubStage" + Date.now(),

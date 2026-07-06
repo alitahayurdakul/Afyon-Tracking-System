@@ -47,7 +47,8 @@
         "workflows": "İş Akışı seçiniz"
       },
       "notifications": {
-        "success": "Yeni süreç başarıyla oluşturuldu. Oluşturulan süreç sayfasına yönlendiriliyorsunuz."
+        "success": "Yeni süreç başarıyla oluşturuldu. Oluşturulan süreç sayfasına yönlendiriliyorsunuz.",
+        "error": "Yeni süreç oluşturulamadı."
       }
     }
   },

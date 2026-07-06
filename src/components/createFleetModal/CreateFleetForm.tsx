@@ -35,6 +35,7 @@ import { optionsConverters } from "@/types/optionsConverter";
 import { useTranslations } from "next-intl";
 import { ITrainType } from "@/types/trainsTypes";
 import { useGetProjectOptionsDataQuery } from "@/api/queries/useGetProjectsQueries";
+import { extractApiError } from "@/utils/extractApiError";
 
 export const CreateFleetForm = () => {
   const {
@@ -85,32 +86,43 @@ export const CreateFleetForm = () => {
 
   const onSubmit: SubmitHandler<ICreateFleetFormDataTypes> = useCallback(
     async (data) => {
-      const params = {
-        projectId: data.projectId,
-        trainId: data.trainId,
-        wagonId: data.wagonId,
-        workflowId: data.workflows,
-        description: data.additionInfo,
-      };
+      try {
+        const params = {
+          projectId: data.projectId,
+          trainId: data.trainId,
+          wagonId: data.wagonId,
+          workflowId: data.workflows,
+          description: data.additionInfo,
+        };
 
-      const { data: responseData } = await axiosInstance.post(
-        CLIENT_END_POINTS.processes.create,
-        {
-          type: ProcessQueryTypes.createProcess,
-          params,
-        },
-      );
-      dispatch(
-        addToastify({
-          message: t("form.notifications.success"),
-          type: "success",
-          icon: "close",
-          id: "startNewProcessSuccess" + Date.now(),
-        }),
-      );
-      if (responseData.data && responseData.data.process._id) {
-        router.push(
-          `${URL_PAGES.activeProcesses}/${responseData.data.process._id}`,
+        const { data: responseData } = await axiosInstance.post(
+          CLIENT_END_POINTS.processes.create,
+          {
+            type: ProcessQueryTypes.createProcess,
+            params,
+          },
+        );
+        dispatch(
+          addToastify({
+            message: t("form.notifications.success"),
+            type: "success",
+            icon: "close",
+            id: "startNewProcessSuccess" + Date.now(),
+          }),
+        );
+        if (responseData.data && responseData.data.process._id) {
+          router.push(
+            `${URL_PAGES.activeProcesses}/${responseData.data.process._id}`,
+          );
+        }
+      } catch (err: any) {
+        dispatch(
+          addToastify({
+            message: extractApiError(err, t("form.notifications.error")),
+            type: "error",
+            icon: "close",
+            id: "createProject" + Date.now(),
+          }),
         );
       }
     },

@@ -10,6 +10,7 @@ import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import styles from "@/styles/components/common/TableActionsCol.module.scss";
 import stylesDeletePopover from "@/styles/components/common/TableDeletePopover.module.scss";
+import { extractApiError } from "@/utils/extractApiError";
 
 import { PopoverBody } from "../Popover";
 import { EditMaterialsModal } from "./edit/EditMaterialsModal";
@@ -34,15 +35,9 @@ export const MaterialsTableActionsCol = ({ id }: { id: string }) => {
       );
       dispatch(addTriggerTable());
     } catch (err: any) {
-      const errorMessage =
-        err.response?.data?.error ||
-        err.response?.data?.message ||
-        err?.message ||
-       t("notifications.delete.error");
-
       dispatch(
         addToastify({
-          message: errorMessage,
+          message: extractApiError(err, t("notifications.delete.error")),
           type: "error",
           icon: "close",
           id: "deleteMaterial" + Date.now(),

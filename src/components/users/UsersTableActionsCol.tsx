@@ -49,13 +49,17 @@ export const UsersTableActionsCol = ({ id }: { id: string }) => {
   };
 
   return (
-    <div className={clsx(styles["table-actions"], compactStyles["table-actions"])}>
+    <div
+      className={clsx(styles["table-actions"], compactStyles["table-actions"])}
+    >
       <EditUsersModal id={id} />
       <PopoverBody
         alignOffset={-73}
         align="start"
         triggerBody={
-          <button className={clsx(styles["delete-btn"], compactStyles["compact-btn"])}>
+          <button
+            className={clsx(styles["delete-btn"], compactStyles["compact-btn"])}
+          >
             <FontAwesomeIcon icon={faTrash} />
             <span>{t("actions.delete")}</span>
           </button>

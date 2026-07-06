@@ -10,6 +10,7 @@ import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import styles from "@/styles/components/common/TableActionsCol.module.scss";
 import stylesDeletePopover from "@/styles/components/common/TableDeletePopover.module.scss";
+import { extractApiError } from "@/utils/extractApiError";
 
 import { PopoverBody } from "../Popover";
 import { EditReasonsModal } from "./edit/EditReasonsModal";
@@ -36,7 +37,7 @@ export const ReasonsTableActionsCol = ({ id }: { id: string }) => {
     } catch (err) {
       dispatch(
         addToastify({
-          message: (err as Error)?.message || t("notifications.delete.error"),
+          message: extractApiError(err, t("notifications.delete.error")),
           type: "error",
           icon: "close",
           id: "deleteReason" + Date.now(),
