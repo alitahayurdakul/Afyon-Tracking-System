@@ -32,9 +32,12 @@ export const useGetReasonDetailDataQuery = (id: string) => {
   const searchParams = useSearchParams();
   const param = searchParams.get("modal");
   const splittedId = param?.split("_").pop();
+  const trigger = useSelector(
+    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+  );
 
   return useQuery({
-    queryKey: [`getReasonDetailDatas_${id}`],
+    queryKey: [`getReasonDetailDatas_${id}`, trigger],
     refetchOnWindowFocus: false,
     enabled: splittedId === id,
     queryFn: async (): Promise<IReasonType | undefined> => {

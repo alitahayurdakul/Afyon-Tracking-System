@@ -34,9 +34,12 @@ export const useGetMaterialDetailDataQuery = (id: string) => {
   const searchParams = useSearchParams();
   const param = searchParams.get("modal");
   const splittedId = param?.split("_").pop();
+  const trigger = useSelector(
+    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+  );
 
   return useQuery({
-    queryKey: [`getMaterialDetailDatas_${id}`],
+    queryKey: [`getMaterialDetailDatas_${id}`, trigger],
     refetchOnWindowFocus: false,
     enabled: splittedId === id,
     queryFn: async (): Promise<IMaterialType | undefined> => {
