@@ -65,7 +65,7 @@ export const useStartSubStage = () => {
     mutationFn: startSubStage,
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({
-        queryKey: ["startSubStage", variables.processId],
+        queryKey: ["startSubStage", variables.processId, variables.subStageId],
       });
       dispatch(
         addToastify({
@@ -84,6 +84,69 @@ export const useStartSubStage = () => {
           type: "error",
           icon: "close",
           id: "startSubStageError" + Date.now(),
+        }),
+      );
+    },
+  });
+};
+
+interface SaveSubStage {
+  processId: string;
+  stageId: string;
+  subStageId: string;
+  data: {
+    status: string;
+    description: string;
+    delayReasons: {
+      reasonId: string;
+      name?: string;
+    }[];
+    materials: {
+      materialId: string;
+      serialNumber: string;
+    }[];
+  };
+}
+
+const saveSubStage = async (payload: SaveSubStage): Promise<any> => {
+  const { data } = await axiosInstance.post<any>(
+    CLIENT_END_POINTS.processes.saveSubStage,
+    {
+      params: payload,
+      type: ProcessQueryTypes.saveSubStage,
+    },
+  );
+  return data;
+};
+
+export const useSaveSubStage = () => {
+  const queryClient = useQueryClient();
+  const dispatch = useDispatch();
+  const t = useTranslations("activeProcessDetail");
+
+  return useMutation({
+    mutationFn: saveSubStage,
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ["saveSubStage", variables.processId, variables.subStageId],
+      });
+      dispatch(
+        addToastify({
+          message: t("notifications.save.success"),
+          type: "success",
+          icon: "close",
+          id: "saveSubStageSuccess" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable());
+    },
+    onError: (err) => {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, "notifications.save.error"),
+          type: "error",
+          icon: "close",
+          id: "saveSubStageError" + Date.now(),
         }),
       );
     },

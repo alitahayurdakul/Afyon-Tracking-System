@@ -4,14 +4,13 @@ import { useGetReasonsDataQuery } from "@/api/queries/useGetReasonsQueries";
 import Option from "@/components/formElements/Option";
 import { DelayReasons } from "@/types/activeProcessDetailTypes";
 import { IOptionType } from "@/types/formTypes";
-import { IReasonsType } from "@/types/reasonsTypes";
 
 import styles from "./StageDetailModal.module.scss";
 
 interface DelayReasonGroupProps {
-  reasonList: IOptionType["value"][];
+  reasonList: DelayReasons[];
   disabled?: boolean;
-  onChange: (selectedList: IOptionType["value"][]) => void;
+  onChange: (selectedList: DelayReasons[]) => void;
 }
 
 export default function DelayReasonGroup({
@@ -23,10 +22,16 @@ export default function DelayReasonGroup({
   const {data: delayReasonsData} = useGetReasonsDataQuery();
 
   const handleChange = (value: IOptionType["value"], checked: boolean) => {
-    const updated = checked
-      ? [...reasonList, value]
-      : reasonList.filter((v) => v !== value);
-    onChange(updated);
+    if (checked) {
+      const selectedReason = delayReasonsData?.find((r) => r._id === value);
+      if (!selectedReason) return;
+      onChange([
+        ...reasonList,
+        { _id: selectedReason._id, name: selectedReason.name },
+      ]);
+    } else {
+      onChange(reasonList.filter((r) => r._id !== value));
+    }
   }
 
   return (
@@ -35,7 +40,7 @@ export default function DelayReasonGroup({
         <React.Fragment key={index}>
           <Option
             option={{ label: reason.name ?? "-", value: reason._id }}
-            isSelected={reasonList.includes(reason._id)}
+            isSelected={reasonList.some((r) => r._id === reason._id)}
             onChange={handleChange}
             isDisabled={disabled}
           />

@@ -34,7 +34,12 @@ const TimeSection = ({ startDate, endDate }: IPropsTypes) => {
             <b>{t("elapsed-time")}</b>
           </label>
           <label>
-            {startDate ? getElapsedTime(startDate ?? "", endDate ?? date) : "-"}
+            {startDate
+              ? getElapsedTime(
+                  startDate ?? "",
+                 endDate?.trim() || date,
+                )
+              : "-"}
           </label>
         </div>
       </div>

@@ -55,7 +55,7 @@ export const useGetMaterialsOptionsDataQuery = () => {
   );
 
   return useQuery({
-    queryKey: [`getMaterialsAllDatas`, trigger],
+    queryKey: [`getMaterialsOptionsDatas`, trigger],
     refetchOnWindowFocus: false,
     enabled: true,
     queryFn: async (): Promise<IOptionType[]> => {
