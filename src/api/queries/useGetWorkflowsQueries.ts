@@ -10,7 +10,9 @@ import { RootState } from "@/redux/store";
 import { optionsConverters } from "@/types/optionsConverter";
 
 export const useGetWorkflowsDataQuery = <T>() => {
-  const trigger = useSelector((state: RootState) => state.tableTrigger.triggerTrainTableTrigger);
+  const trigger = useSelector(
+    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+  );
   return useQuery({
     queryKey: [`getWorkflowsAllDatas`, trigger],
     refetchOnWindowFocus: false,
@@ -29,9 +31,12 @@ export const useGetWorkflowDetailDataQuery = <T>(id: string) => {
   const searchParams = useSearchParams();
   const param = searchParams.get("modal");
   const splittedId = param?.split("_").pop();
+  const trigger = useSelector(
+    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+  );
 
   return useQuery({
-    queryKey: [`getWorkflowDetail_${id}`],
+    queryKey: [`getWorkflowDetail_${id}`, trigger],
     refetchOnWindowFocus: false,
     enabled: splittedId === id,
     queryFn: async (): Promise<T> => {
@@ -45,7 +50,9 @@ export const useGetWorkflowDetailDataQuery = <T>(id: string) => {
 };
 
 export const useGetWorkflowsOptionsDataQuery = <T>() => {
-  const trigger = useSelector((state: RootState) => state.tableTrigger.triggerTrainTableTrigger);
+  const trigger = useSelector(
+    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+  );
   return useQuery({
     queryKey: [`getWorkflowsOptionsDatas`, trigger],
     refetchOnWindowFocus: false,

@@ -1,50 +1,31 @@
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
 
-import { useGetProjectDetailDataQuery } from "@/api/queries/useGetProjectsQueries";
 import { EDIT_PROJECT_MODAL } from "@/consts/modals";
 import styles from "@/styles/components/common/TableListBody.module.scss";
 import { useAddQueryParam } from "@/utils/searchParams";
 
-import { Modal } from "../../common/Modal";
-import { EditProjectForm } from "./EditProjectForm";
+import { useSearchParams } from "next/navigation";
+import { EditProjectModalWrapper } from "./EditProjectModalWrapper";
 
 export const EditProjectsModal = ({ id }: { id: string }) => {
   const t = useTranslations("projects");
   const addQueryParam = useAddQueryParam();
-  const [open, setOpen] = useState<boolean | undefined>(false);
-  const { data, isFetching } = useGetProjectDetailDataQuery(id);
+  const searchParams = useSearchParams();
+  const modalName = `${EDIT_PROJECT_MODAL}_${id}`;
+  const isOpen = searchParams.get("modal") === modalName;
 
   return (
     <>
       <button
         className={styles["edit-btn"]}
-        onClick={() => {
-          if (!open) {
-            addQueryParam("modal", `${EDIT_PROJECT_MODAL}_${id}`);
-          }
-        }}
+        onClick={() => addQueryParam("modal", `${EDIT_PROJECT_MODAL}_${id}`)}
       >
         <FontAwesomeIcon icon={faPen} />
         <span>{t("actions.edit")}</span>
       </button>
-      {!isFetching && (
-        <Modal
-          name={`${EDIT_PROJECT_MODAL}_${id}`}
-          width={"900px"}
-          height={"auto"}
-          title={t("modal.edit")}
-          isCloseOutside={false}
-          isCloseEsc={false}
-          enableParams={true}
-          open={open}
-          setOpen={setOpen}
-        >
-          <EditProjectForm id={id} data={data} />
-        </Modal>
-      )}
+      {isOpen && <EditProjectModalWrapper id={id} />}
     </>
   );
 };
