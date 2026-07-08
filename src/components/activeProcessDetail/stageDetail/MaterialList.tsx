@@ -8,12 +8,14 @@ interface MaterialListProps {
   materials: MaterialEntry[];
   disabled?: boolean;
   onChange: (materials: MaterialEntry[]) => void;
+  isOnlyText?: boolean;
 }
 
 export default function MaterialList({
   materials,
   disabled,
   onChange,
+  isOnlyText,
 }: MaterialListProps) {
   const t = useTranslations("activeProcessDetail");
 
@@ -28,14 +30,18 @@ export default function MaterialList({
       {materials.map((material) => (
         <div key={material._id} className={styles.materialRow}>
           <span className={styles.materialName}>{material.name}</span>
-          <input
-            name={material.materialCode}
-            type="text"
-            placeholder={t("serial-number-placeholder")}
-            value={material.serialNumber}
-            disabled={disabled}
-            onChange={(e) => updateSerial(material._id, e.target.value)}
-          />
+          {isOnlyText ? (
+            <span className={styles.serialNumber}>{material.serialNumber}</span>
+          ) : (
+            <input
+              name={material.materialCode}
+              type="text"
+              placeholder={t("serial-number-placeholder")}
+              value={material.serialNumber}
+              disabled={disabled}
+              onChange={(e) => updateSerial(material._id, e.target.value)}
+            />
+          )}
         </div>
       ))}
     </div>

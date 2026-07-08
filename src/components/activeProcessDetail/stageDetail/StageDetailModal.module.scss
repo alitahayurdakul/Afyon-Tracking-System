@@ -118,6 +118,15 @@
   font-size: 14px;
 }
 
+.reasonRow {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  color: #2c2c2a;
+  font-weight: 600;
+}
+
 .materialList {
   display: flex;
   flex-direction: column;
@@ -140,7 +149,13 @@
 }
 
 .materialName {
+  font-weight: 600;
   font-size: 13px;
+  color: #2c2c2a;
+}
+
+.serialNumber {
+  font-size: 14px;
   color: #2c2c2a;
 }
 
@@ -183,6 +198,11 @@
   color: #2c2c2a;
 }
 
+.descriptionText {
+  color: #2c2c2a;
+  font-size: 14px;
+}
+
 .uploadArea {
   border: 1px dashed #b4b2a9;
   border-radius: 8px;
@@ -210,16 +230,15 @@
 
 .footer {
   padding: 14px 20px;
-  border-top: 0.5px solid #d3d1c7;
   display: flex;
   justify-content: flex-end;
   gap: 5px;
 }
 
-.saveBtn{
+.saveBtn {
   padding: 8px 16px;
   border-radius: 8px;
-  background: var(--active);;
+  background: var(--active);
   color: #fff;
   border: none;
   font-size: 14px;

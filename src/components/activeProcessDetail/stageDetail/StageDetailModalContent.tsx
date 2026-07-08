@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import {
+  useCompleteSubStage,
   useGetStageDetailDataQuery,
   useSaveSubStage,
   useStartSubStage,
@@ -16,6 +17,7 @@ import {
   MaterialEntry,
   SubStage,
 } from "@/types/activeProcessDetailTypes";
+import { StatusEnums } from "@/utils/enum/commonEnums";
 import { getStatus } from "@/utils/getStatus";
 
 import StatusChip from "../StatusChip";
@@ -46,6 +48,7 @@ export default function StageDetailModalContent({
     isLoading,
     isError,
   } = useGetStageDetailDataQuery<SubStage[]>(id);
+  console.log("subStagesData", subStagesData);
 
   const { id: processId } = useParams();
 
@@ -65,6 +68,13 @@ export default function StageDetailModalContent({
     isError: saveSubStageError,
     error: saveError,
   } = useSaveSubStage();
+
+  const {
+    mutate: completeMutate,
+    isPending: completePending,
+    isError: completeSubStageError,
+    error: completeError,
+  } = useCompleteSubStage();
 
   if (subStagesData !== prevSubStagesData) {
     setPrevSubStagesData(subStagesData);
@@ -129,9 +139,30 @@ export default function StageDetailModalContent({
   const isLocked = getStatus(activeSubStageData.status) !== "active";
 
   const completeStage = () => {
-    if (activeIndex < subStagesData.length - 1) {
-      setActiveIndex(activeIndex + 1);
-    }
+    const formData = {
+      processId: processId as string,
+      stageId: id,
+      subStageId: activeSubStageData._id,
+      data: {
+        status: StatusEnums.completed,
+        description: newSubStageData.description,
+        delayReasons: newSubStageData.reasonList.map((reason: DelayReasons) => {
+          return {
+            reasonId: reason._id as string,
+            name: reason.name,
+          };
+        }),
+        materials: newSubStageData.materialList.map(
+          (material: MaterialEntry) => {
+            return {
+              materialId: material._id,
+              serialNumber: material.serialNumber,
+            };
+          },
+        ),
+      },
+    };
+    saveMutate(formData);
   };
 
   const saveStageChanges = () => {
@@ -140,7 +171,7 @@ export default function StageDetailModalContent({
       stageId: id,
       subStageId: activeSubStageData._id,
       data: {
-        status: "ACTIVE",
+        status: StatusEnums.active,
         description: newSubStageData.description,
         delayReasons: newSubStageData.reasonList.map((reason: DelayReasons) => {
           return {
@@ -203,6 +234,7 @@ export default function StageDetailModalContent({
             <DelayReasonGroup
               reasonList={newSubStageData.reasonList}
               disabled={isLocked}
+              isOnlyText={getStatus(activeSubStageData.status) === "completed"}
               onChange={(reasonList) =>
                 setNewSubStageData((prev) => ({ ...prev, reasonList }))
               }
@@ -215,6 +247,9 @@ export default function StageDetailModalContent({
                 <MaterialList
                   materials={newSubStageData.materialList}
                   disabled={isLocked}
+                  isOnlyText={
+                    getStatus(activeSubStageData.status) === "completed"
+                  }
                   onChange={(materials) => {
                     setNewSubStageData((prev) => ({
                       ...prev,
@@ -227,18 +262,24 @@ export default function StageDetailModalContent({
 
           <section className={styles.section}>
             <h3>{t("section.explaining")}</h3>
-            <textarea
-              value={newSubStageData.description}
-              disabled={isLocked}
-              className={styles.textarea}
-              placeholder={t("explaining-placeholder")}
-              onChange={(e) => {
-                setNewSubStageData((prev) => ({
-                  ...prev,
-                  description: e.target.value,
-                }));
-              }}
-            />
+            {getStatus(activeSubStageData.status) === "completed" ? (
+              <p className={styles.descriptionText}>
+                {newSubStageData.description}
+              </p>
+            ) : (
+              <textarea
+                value={newSubStageData.description}
+                disabled={isLocked}
+                className={styles.textarea}
+                placeholder={t("explaining-placeholder")}
+                onChange={(e) => {
+                  setNewSubStageData((prev) => ({
+                    ...prev,
+                    description: e.target.value,
+                  }));
+                }}
+              />
+            )}
           </section>
 
           {/* <section className={styles.section}>
@@ -251,7 +292,15 @@ export default function StageDetailModalContent({
           </section>*/}
         </div>
 
-        <div className={styles.footer}>
+        <div
+          className={styles.footer}
+          style={{
+            borderTop:
+              getStatus(activeSubStageData.status) === "completed"
+                ? "none"
+                : "0.5px solid #d3d1c7",
+          }}
+        >
           {getStatus(activeSubStageData.status) === "active" && (
             <>
               <button className={styles.saveBtn} onClick={saveStageChanges}>

@@ -35,7 +35,7 @@ export const END_POINTS = {
       `${apiUrl}/api/processes/stage-entry/${id}/delay-reason`,
     stageDetail: (processId: string, stageId: string) =>
       `${apiUrl}/api/processes/${processId}/stages/${stageId}/substages`,
-    startSaveSubStage: (processId: string, stageId: string, subStageId: string) =>
+    subStageOperation: (processId: string, stageId: string, subStageId: string) =>
       `${apiUrl}/api/substages/processes/${processId}/stages/${stageId}/substages/${subStageId}`,
   },
   processOperations: {
@@ -139,7 +139,7 @@ export const CLIENT_END_POINTS = {
     editProcessDelayReasons: "/api/processes",
     getProcessStageDetail: "/api/processes",
     startSubStage: "/api/processes",
-    saveSubStage: "/api/processes"
+    saveandCompleteSubStage: "/api/processes",
   },
   activeProcessOperation: {
     complete: "/api/activeProcessOperations",

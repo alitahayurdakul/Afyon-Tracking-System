@@ -17,7 +17,7 @@ export const processHandlers = {
   editProcessDelayReasons,
   getStageDetail,
   startSubStage,
-  saveSubStage,
+  saveandCompleteSubStage,
 };
 
 async function createProcess(params: Record<string, any>): Promise<Response> {
@@ -144,7 +144,7 @@ async function startSubStage(params: Record<string, any>): Promise<Response> {
   try {
     const { processId, stageId, subStageId } = params;
     const response = await axiosInstance.put(
-      END_POINTS.process.startSaveSubStage(processId, stageId, subStageId),
+      END_POINTS.process.subStageOperation(processId, stageId, subStageId),
     );
 
     if (response.status === 200) {
@@ -156,13 +156,13 @@ async function startSubStage(params: Record<string, any>): Promise<Response> {
   }
 }
 
-async function saveSubStage(params: Record<string, any>): Promise<Response> {
+async function saveandCompleteSubStage(params: Record<string, any>): Promise<Response> {
   try {
     const { processId, stageId, subStageId, data } = params;
     console.log("ddd", data);
 
     const response = await axiosInstance.put(
-      END_POINTS.process.startSaveSubStage(processId, stageId, subStageId),
+      END_POINTS.process.subStageOperation(processId, stageId, subStageId),
       { ...data },
     );
 

@@ -110,10 +110,10 @@ interface SaveSubStage {
 
 const saveSubStage = async (payload: SaveSubStage): Promise<any> => {
   const { data } = await axiosInstance.post<any>(
-    CLIENT_END_POINTS.processes.saveSubStage,
+    CLIENT_END_POINTS.processes.saveandCompleteSubStage,
     {
       params: payload,
-      type: ProcessQueryTypes.saveSubStage,
+      type: ProcessQueryTypes.saveandCompleteSubStage,
     },
   );
   return data;
@@ -147,6 +147,70 @@ export const useSaveSubStage = () => {
           type: "error",
           icon: "close",
           id: "saveSubStageError" + Date.now(),
+        }),
+      );
+    },
+  });
+};
+
+// COMPLETE SUB STAGE
+interface completeSubStage {
+  processId: string;
+  stageId: string;
+  subStageId: string;
+  data: {
+    status: string;
+    description: string;
+    delayReasons: {
+      reasonId: string;
+      name?: string;
+    }[];
+    materials: {
+      materialId: string;
+      serialNumber: string;
+    }[];
+  };
+}
+
+const completeSubStage = async (payload: completeSubStage): Promise<any> => {
+  const { data } = await axiosInstance.post<any>(
+    CLIENT_END_POINTS.processes.saveandCompleteSubStage,
+    {
+      params: payload,
+      type: ProcessQueryTypes.saveandCompleteSubStage,
+    },
+  );
+  return data;
+};
+
+export const useCompleteSubStage = () => {
+  const queryClient = useQueryClient();
+  const dispatch = useDispatch();
+  const t = useTranslations("activeProcessDetail");
+
+  return useMutation({
+    mutationFn: completeSubStage,
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ["completeSubStage", variables.processId, variables.subStageId],
+      });
+      dispatch(
+        addToastify({
+          message: t("notifications.complete.success"),
+          type: "success",
+          icon: "close",
+          id: "completeSubStageSuccess" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable());
+    },
+    onError: (err) => {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, "notifications.complete.error"),
+          type: "error",
+          icon: "close",
+          id: "completeSubStageError" + Date.now(),
         }),
       );
     },

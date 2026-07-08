@@ -10,16 +10,17 @@ import styles from "./StageDetailModal.module.scss";
 interface DelayReasonGroupProps {
   reasonList: DelayReasons[];
   disabled?: boolean;
+  isOnlyText?: boolean;
   onChange: (selectedList: DelayReasons[]) => void;
 }
 
 export default function DelayReasonGroup({
   reasonList,
   disabled,
-  onChange
+  onChange,
+  isOnlyText,
 }: DelayReasonGroupProps) {
-
-  const {data: delayReasonsData} = useGetReasonsDataQuery();
+  const { data: delayReasonsData } = useGetReasonsDataQuery();
 
   const handleChange = (value: IOptionType["value"], checked: boolean) => {
     if (checked) {
@@ -32,20 +33,33 @@ export default function DelayReasonGroup({
     } else {
       onChange(reasonList.filter((r) => r._id !== value));
     }
-  }
+  };
 
   return (
     <div className={styles.checkboxGroup}>
-      {delayReasonsData?.map((reason, index) => (
-        <React.Fragment key={index}>
-          <Option
-            option={{ label: reason.name ?? "-", value: reason._id }}
-            isSelected={reasonList.some((r) => r._id === reason._id)}
-            onChange={handleChange}
-            isDisabled={disabled}
-          />
-        </React.Fragment>
-      ))}
+      {isOnlyText &&
+        reasonList.map((reason, index) => (
+          <React.Fragment key={index}>
+            <div className={styles.reasonRow}>
+              <p>
+                {index + 1}-{")"}
+              </p>
+              <p>{reason.name}</p>
+            </div>
+          </React.Fragment>
+        ))}
+
+      {!isOnlyText &&
+        delayReasonsData?.map((reason, index) => (
+          <React.Fragment key={index}>
+            <Option
+              option={{ label: reason.name ?? "-", value: reason._id }}
+              isSelected={reasonList.some((r) => r._id === reason._id)}
+              onChange={handleChange}
+              isDisabled={disabled}
+            />
+          </React.Fragment>
+        ))}
     </div>
   );
 }

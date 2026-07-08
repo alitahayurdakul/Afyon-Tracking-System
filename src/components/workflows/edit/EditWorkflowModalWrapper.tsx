@@ -1,14 +1,14 @@
 import { useTranslations } from "next-intl";
-
-import { NewModal } from "@/components/common/NewModal";
-import { EDIT_WORKFLOW_MODAL } from "@/consts/modals";
+import { useMemo } from "react";
 
 import { useGetWorkflowDetailDataQuery } from "@/api/queries/useGetWorkflowsQueries";
+import { NewModal } from "@/components/common/NewModal";
+import { EDIT_WORKFLOW_MODAL } from "@/consts/modals";
 import {
   IWorkflowFormTypes,
   IWorkflowResponseTypes,
 } from "@/types/workflowTypes";
-import { useMemo } from "react";
+
 import { EditWorkflowForm } from "./EditWorkflowForm";
 
 export const EditWorkflowModalWrapper = ({ id }: { id: string }) => {
