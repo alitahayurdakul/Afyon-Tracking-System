@@ -30,8 +30,19 @@
   "buttons": {
     "save-changes": "Değişiklikleri Kaydet",
     "complete-stage": "Aşamayı Tamamla",
-    "start-stage": "Aşamayı Başlat"
+    "start-stage": "Aşamayı Başlat",
+    "edit": "Aşamayı Güncelle",
+    "complete-parent-stage": "Üst Aşamayı Tamamla",
+    "questions": {
+      "start": "Alt Aşamayı başlatmak istediğinize emin misiniz?",
+      "complete": "Alt Aşamayı tamamlamak istediğinize emin misiniz?",
+      "save": "Değişiklikleri kaydetmek istediğinize emin misiniz?",
+      "completeParentStage": "Üst aşamayı tamamlamak istediğinize emin misiniz?",
+      "edit": "Alt Aşamayı güncellemek istediğinize emin misiniz?"
+    }
   },
+  "yes": "Evet",
+  "no": "Hayır",
   "stage-modal-header": "Aşama Detayı",
   "no-data-label": "Aktif süreç detayı bulunmamaktadır.",
   "notifications": {

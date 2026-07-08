@@ -35,7 +35,7 @@
       },
       "wagons": {
         "label": "Вагон",
-        "selectWagons": "Выберите вагоны"
+        "placeholder": "Выберите вагоны"
       },
       "selectedWagons": "Выбранные вагоны"
     },

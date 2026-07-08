@@ -30,8 +30,19 @@
   "buttons": {
     "save-changes": "Änderungen speichern",
     "complete-stage": "Phase abschließen",
-    "start-stage": "Phase starten"
+    "start-stage": "Phase starten",
+    "edit": "Phase aktualisieren",
+    "complete-parent-stage": "Übergeordnete Phase abschließen",
+    "questions": {
+      "start": "Möchten Sie die Unterphase wirklich starten?",
+      "complete": "Möchten Sie die Unterphase wirklich abschließen?",
+      "save": "Möchten Sie die Änderungen wirklich speichern?",
+      "completeParentStage": "Möchten Sie die übergeordnete Phase wirklich abschließen?",
+      "edit": "Möchten Sie die Unterphase wirklich aktualisieren?"
+    }
   },
+  "yes": "Ja",
+  "no": "Nein",
   "stage-modal-header": "Details zur Phase",
   "no-data-label": "Keine Details zu aktiven Prozessen vorhanden.",
   "notifications": {

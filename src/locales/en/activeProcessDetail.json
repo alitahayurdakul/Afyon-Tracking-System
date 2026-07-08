@@ -30,8 +30,19 @@
   "buttons": {
     "save-changes": "Save Changes",
     "complete-stage": "Complete Stage",
-    "start-stage": "Start Stage"
+    "start-stage": "Start Stage",
+    "edit": "Update Stage",
+    "complete-parent-stage": "Complete Parent Stage",
+    "questions": {
+      "start": "Are you sure you want to start the sub-stage?",
+      "complete": "Are you sure you want to complete the sub-stage?",
+      "save": "Are you sure you want to save the changes?",
+      "completeParentStage": "Are you sure you want to complete the parent stage?",
+      "edit": "Are you sure you want to update the sub-stage?"
+    }
   },
+  "yes": "Yes",
+  "no": "No",
   "stage-modal-header": "Stage Details",
   "no-data-label": "Aktif süreç detayı bulunmamaktadır.",
   "notifications": {
