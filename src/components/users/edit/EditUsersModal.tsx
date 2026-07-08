@@ -1,6 +1,7 @@
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
@@ -12,41 +13,25 @@ import { useAddQueryParam } from "@/utils/searchParams";
 
 import { Modal } from "../../common/Modal";
 import { EditUserForm } from "./EditUserForm";
+import { EditUserModalWrapper } from "./EditUserModalWrapper";
 
 export const EditUsersModal = ({ id }: { id: string }) => {
   const t = useTranslations("users");
   const addQueryParam = useAddQueryParam();
-  const [open, setOpen] = useState<boolean | undefined>(false);
-  const { data, isFetching } = useGetUserDetailDataQuery(id);
+  const modalName = `${EDIT_USER_MODAL}_${id}`;
+  const searchParams = useSearchParams();
+  const isOpen = searchParams.get("modal") === modalName;
 
   return (
     <>
       <button
         className={clsx(styles["edit-btn"], compactStyles["compact-btn"])}
-        onClick={() => {
-          if (!open) {
-            addQueryParam("modal", `${EDIT_USER_MODAL}_${id}`);
-          }
-        }}
+        onClick={() => addQueryParam("modal", `${EDIT_USER_MODAL}_${id}`)}
       >
         <FontAwesomeIcon icon={faPen} />
         <span>{t("actions.edit")}</span>
       </button>
-      {!isFetching && (
-        <Modal
-          name={`${EDIT_USER_MODAL}_${id}`}
-          width={"900px"}
-          height={"auto"}
-          title={t("modal.edit")}
-          isCloseOutside={false}
-          isCloseEsc={false}
-          enableParams={true}
-          open={open}
-          setOpen={setOpen}
-        >
-          <EditUserForm id={id} data={data ?? undefined} />
-        </Modal>
-      )}
+      {isOpen && <EditUserModalWrapper id={id} />}
     </>
   );
 };

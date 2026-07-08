@@ -32,9 +32,12 @@ export const useGetRoleDetailDataQuery = (id: string) => {
   const searchParams = useSearchParams();
   const param = searchParams.get("modal");
   const splittedId = param?.split("_").pop();
+  const trigger = useSelector(
+    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+  );
 
   return useQuery({
-    queryKey: [`getRoleDetailDatas_${id}`],
+    queryKey: [`getRoleDetailDatas_${id}`, trigger],
     refetchOnWindowFocus: false,
     enabled: splittedId === id,
     queryFn: async () => {

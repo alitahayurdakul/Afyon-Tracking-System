@@ -7,6 +7,7 @@ import {
   createJsonSuccess,
   extractErrorMessage,
 } from "./responseHelpers";
+import { StatusEnums } from "@/utils/enum/commonEnums";
 
 export const processHandlers = {
   createProcess,
@@ -145,6 +146,9 @@ async function startSubStage(params: Record<string, any>): Promise<Response> {
     const { processId, stageId, subStageId } = params;
     const response = await axiosInstance.put(
       END_POINTS.process.subStageOperation(processId, stageId, subStageId),
+      {
+        status: StatusEnums.active
+      }
     );
 
     if (response.status === 200) {
