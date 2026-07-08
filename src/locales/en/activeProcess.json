@@ -9,6 +9,6 @@
     "project": "Project"
   },
   "select-placeholder": "Select a project",
-  "active-unit-count": "ACTIVE UNITS",
+  "active-unit-count": "Active Units",
   "noDataLabel": "No active processes found."
 }

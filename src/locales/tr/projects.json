@@ -9,7 +9,8 @@
     "status": "Durum",
     "creator": "Oluşturan",
     "editor": "Güncelleyen",
-    "actions": "İşlemler"
+    "actions": "İşlemler",
+    "description": "Açıklama"
   },
   "actions": {
     "edit": "Güncelle",

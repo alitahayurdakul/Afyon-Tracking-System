@@ -11,12 +11,12 @@
     "delete": "Delete"
   },
   "table": {
-    "name": "WORKFLOW NAME",
-    "description": "DESCRIPTION",
-    "creator": "CREATED BY",
-    "editor": "UPDATED BY",
-    "actions": "ACTIONS",
-    "stages": "STAGES"
+    "name": "Workflow Name",
+    "description": "Description",
+    "creator": "Created By",
+    "editor": "Updated By",
+    "actions": "Actions",
+    "stages": "Stages"
   },
   "modal": {
     "create-headers": "Add New Workflow",
@@ -24,8 +24,8 @@
   },
   "form": {
     "labels": {
-      "name": "WORKFLOW NAME",
-      "description": "DESCRIPTION",
+      "name": "Workflow Name",
+      "description": "Description",
       "creator": "Created By",
       "createdDate": "Creation Date",
       "editor": "Last Updated By",
@@ -34,9 +34,9 @@
       "stage": "STAGE"
     },
     "placeholders": {
-      "name": "Enter the workflow name",
-      "description": "Enter a description.",
-      "stage": "Select a stage."
+      "name": "Enter workflow name",
+      "description": "Enter description",
+      "stage": "Select a stage"
     },
     "buttons": {
       "cancel": "Cancel",

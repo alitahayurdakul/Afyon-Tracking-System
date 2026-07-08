@@ -17,11 +17,11 @@
   "active-projects-select-explaining": "Canlı iş akışı ilerlemesini görüntülemek için bir tren seçin.",
   "processId": "Süreç ID",
   "section": {
-    "time-section-header": "ZAMAN BİLGİLERİ",
-    "delay-reason": "GECİKME NEDENLERİ",
-    "materials": "MALZEMELER VE SERİ NUMARALARI",
-    "explaining": "AÇIKLAMA",
-    "files": "DOSYALAR"
+    "time-section-header": "Zaman Bilgileri",
+    "delay-reason": "Gecikme Nedenleri",
+    "materials": "Malzemeler ve Seri Numaları",
+    "explaining": "Açıklama",
+    "files": "Dosyalar"
   },
   "elapsed-time": "Geçen Süre",
   "serial-number-placeholder": "Seri numarası",
@@ -30,8 +30,19 @@
   "buttons": {
     "save-changes": "Değişiklikleri Kaydet",
     "complete-stage": "Aşamayı Tamamla",
-    "start-stage": "Aşamayı Başlat"
+    "start-stage": "Aşamayı Başlat",
+    "edit": "Aşamayı Güncelle",
+    "complete-parent-stage": "Üst Aşamayı Tamamla",
+    "questions": {
+      "start": "Alt Aşamayı başlatmak istediğinize emin misiniz?",
+      "complete": "Alt Aşamayı tamamlamak istediğinize emin misiniz?",
+      "save": "Değişiklikleri kaydetmek istediğinize emin misiniz?",
+      "completeParentStage": "Üst aşamayı tamamlamak istediğinize emin misiniz?",
+      "edit": "Alt Aşamayı güncellemek istediğinize emin misiniz?"
+    }
   },
+  "yes": "Evet",
+  "no": "Hayır",
   "stage-modal-header": "Aşama Detayı",
   "no-data-label": "Aktif süreç detayı bulunmamaktadır.",
   "notifications": {

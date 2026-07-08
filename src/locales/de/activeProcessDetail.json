@@ -9,19 +9,19 @@
   "open-detail": "Details öffnen",
   "start-date": "Startdatum",
   "end-date": "Enddatum",
-  "not-yet-started": "Noch nicht begonnen",
-  "pending": "In Bearbeitung",
+  "not-yet-started": "Noch nicht gestartet",
+  "pending": "Läuft",
   "complete-process": "Prozess abschließen",
-  "total-elapsed-time": "GESAMT VERGANGENE ZEIT",
+  "total-elapsed-time": "GESAMTVERGANGENE ZEIT",
   "active-projects": "Aktive Projekte",
   "active-projects-select-explaining": "Wählen Sie einen Zug aus, um den Live-Fortschritt des Workflows anzuzeigen.",
   "processId": "Prozess-ID",
   "section": {
-    "time-section-header": "ZEITINFORMATIONEN",
-    "delay-reason": "VERZÖGERUNGSGRÜNDE",
-    "materials": "MATERIALIEN UND SERIENNUMMERN",
-    "explaining": "BESCHREIBUNG",
-    "files": "DATEIEN"
+    "time-section-header": "Zeitinformationen",
+    "delay-reason": "Verzögerungsgründe",
+    "materials": "Materialien und Seriennummern",
+    "explaining": "Beschreibung",
+    "files": "Dateien"
   },
   "elapsed-time": "Verstrichene Zeit",
   "serial-number-placeholder": "Seriennummer",
@@ -30,9 +30,20 @@
   "buttons": {
     "save-changes": "Änderungen speichern",
     "complete-stage": "Phase abschließen",
-    "start-stage": "Phase starten"
+    "start-stage": "Phase starten",
+    "edit": "Phase aktualisieren",
+    "complete-parent-stage": "Übergeordnete Phase abschließen",
+    "questions": {
+      "start": "Möchten Sie die Unterphase wirklich starten?",
+      "complete": "Möchten Sie die Unterphase wirklich abschließen?",
+      "save": "Möchten Sie die Änderungen wirklich speichern?",
+      "completeParentStage": "Möchten Sie die übergeordnete Phase wirklich abschließen?",
+      "edit": "Möchten Sie die Unterphase wirklich aktualisieren?"
+    }
   },
-  "stage-modal-header": "Details zur Phase",
+  "yes": "Ja",
+  "no": "Nein",
+  "stage-modal-header": "Phasendetails",
   "no-data-label": "Keine Details zu aktiven Prozessen vorhanden.",
   "notifications": {
     "start": {

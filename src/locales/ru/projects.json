@@ -9,7 +9,8 @@
     "status": "Статус",
     "creator": "Создал",
     "editor": "Обновил",
-    "actions": "Действия"
+    "actions": "Действия",
+    "description": "Описание"
   },
   "actions": {
     "edit": "Изменить",

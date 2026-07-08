@@ -17,7 +17,7 @@ export const EditReasonModalWrapper = ({ id }: { id: string }) => {
           name={`${EDIT_REASON_MODAL}_${id}`}
           width={"900px"}
           height={"auto"}
-          title="Sebep Bilgilerini Güncelle"
+          title={t("modal.edit-header")}
           isCloseOutside={false}
           isCloseEsc={false}
         >

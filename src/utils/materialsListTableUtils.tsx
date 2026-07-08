@@ -20,6 +20,10 @@ export const materialsTableColumns: ICommonTableColumnsTypes = [
     label: "code",
   },
   {
+    name: "description",
+    label: "description",
+  },
+  {
     name: "creator",
     label: "creator",
   },
@@ -33,7 +37,7 @@ export const materialsTableColumns: ICommonTableColumnsTypes = [
   },
 ];
 
-export const createMaterialsTableColumns = (t:TFunction) => {
+export const createMaterialsTableColumns = (t: TFunction) => {
   const columns = materialsTableColumns;
 
   return [
@@ -49,9 +53,15 @@ export const createMaterialsTableColumns = (t:TFunction) => {
           return (
             <DynamicTextWithTooltip
               text={r[column.name] || "-"}
-              lines={1}
               textClassName={styles["name-text"]}
             />
+          );
+        }
+        if (column.name === "description") {
+          return (
+            <div className={styles["desc-cell"]}>
+              <DynamicTextWithTooltip text={row.original.description || "-"} />
+            </div>
           );
         }
         if (column.name === "creator") {
@@ -62,7 +72,9 @@ export const createMaterialsTableColumns = (t:TFunction) => {
                 lines={1}
                 textClassName={styles["creator-name"]}
               />
-              <p className={styles["creator-date"]}>{formatDate(r.createdAt)}</p>
+              <p className={styles["creator-date"]}>
+                {formatDate(r.createdAt)}
+              </p>
             </div>
           );
         }
@@ -75,7 +87,9 @@ export const createMaterialsTableColumns = (t:TFunction) => {
                 lines={1}
                 textClassName={styles["creator-name"]}
               />
-              <p className={styles["creator-date"]}>{!isUnedited ? formatDate(r.updatedAt) : "-"}</p>
+              <p className={styles["creator-date"]}>
+                {!isUnedited ? formatDate(r.updatedAt) : "-"}
+              </p>
             </div>
           );
         }
