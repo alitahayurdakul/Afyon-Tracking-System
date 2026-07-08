@@ -15,7 +15,8 @@
     "code": "MATERIAL CODE",
     "creator": "CREATED BY",
     "editor": "UPDATED BY",
-    "actions": "ACTIONS"
+    "actions": "Actions",
+    "description": "Description"
   },
   "modal": {
     "create-headers": "Add New Material",

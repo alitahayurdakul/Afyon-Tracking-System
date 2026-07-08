@@ -15,7 +15,8 @@
     "code": "КОД МАТЕРИАЛА",
     "creator": "СОЗДАЛ",
     "editor": "ОБНОВИЛ",
-    "actions": "ДЕЙСТВИЯ"
+    "actions": "ДЕЙСТВИЯ",
+    "description": "Описание"
   },
   "modal": {
     "create-headers": "Добавить новый материал",

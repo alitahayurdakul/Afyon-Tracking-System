@@ -15,7 +15,8 @@
     "code": "MATERIALCODE",
     "creator": "ERSTELLT VON",
     "editor": "AKTUALISIERT VON",
-    "actions": "AKTIONEN"
+    "actions": "AKTIONEN",
+    "description": "Beschreibung"
   },
   "modal": {
     "create-headers": "Neues Material hinzufügen",

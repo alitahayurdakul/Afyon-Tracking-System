@@ -1,59 +1,60 @@
 {
-    "header": "Malzeme Yönetimi",
-    "description": "Depo malzemelerini ve stok bilgilerini merkezi olarak yönetin.",
-    "search": "Arama...",
-    "delete-question": "Malzemeyi silmek istediğinize emin misiniz?",
-    "yes": "Evet",
-    "no": "Hayır",
+  "header": "Malzeme Yönetimi",
+  "description": "Depo malzemelerini ve stok bilgilerini merkezi olarak yönetin.",
+  "search": "Arama...",
+  "delete-question": "Malzemeyi silmek istediğinize emin misiniz?",
+  "yes": "Evet",
+  "no": "Hayır",
+  "buttons": {
+    "create": "Yeni Malzeme Ekle",
+    "edit": "Güncelle",
+    "delete": "Sil"
+  },
+  "table": {
+    "name": "Malzeme Adı",
+    "code": "Malzeme Kodu",
+    "creator": "OLUŞTURAN",
+    "editor": "GÜNCELLEYEN",
+    "actions": "İŞLEMLER",
+    "description": "Açıklama"
+  },
+  "modal": {
+    "create-headers": "Yeni Malzeme Ekle",
+    "edit-header": "Malzeme Bilgilerini Güncelle"
+  },
+  "form": {
+    "labels": {
+      "name": "MALZEME ADI",
+      "code": "MALZEME KODU",
+      "description": "AÇIKLAMA",
+      "creator": "Oluşturan",
+      "createdDate": "Oluşturulma Tarihi",
+      "editor": "Son Güncelleyen",
+      "editedDate": "Son Güncelleme Tarihi"
+    },
+    "placeholders": {
+      "name": "Malzeme adını giriniz",
+      "code": "Malzeme kodunu giriniz",
+      "description": "Açıklama giriniz."
+    },
     "buttons": {
-        "create": "Yeni Malzeme Ekle",
-        "edit": "Güncelle",
-        "delete": "Sil"
-    },
-    "table": {
-        "name": "MALZEME ADI",
-        "code": "MALZEME KODU",
-        "creator": "OLUŞTURAN",
-        "editor": "GÜNCELLEYEN",
-        "actions": "İŞLEMLER"
-    },
-    "modal": {
-        "create-headers": "Yeni Malzeme Ekle",
-        "edit-header": "Malzeme Bilgilerini Güncelle"
-    },
-    "form": {
-        "labels": {
-            "name": "MALZEME ADI",
-            "code": "MALZEME KODU",
-            "description": "AÇIKLAMA",
-            "creator": "Oluşturan",
-            "createdDate": "Oluşturulma Tarihi",
-            "editor": "Son Güncelleyen",
-            "editedDate": "Son Güncelleme Tarihi"
-        },
-        "placeholders": {
-            "name": "Malzeme adını giriniz",
-            "code": "Malzeme kodunu giriniz",
-            "description": "Açıklama giriniz."
-        },
-        "buttons": {
-            "cancel": "İptal",
-            "save": "Kaydet"
-        }
-    },
-    "notifications": {
-        "delete": {
-            "success": "Malzeme başarıyla silindi.",
-            "error": "Silme işlemi başarısız."
-        },
-        "create": {
-            "success": "Malzeme başarıyla oluşturuldu.",
-            "error": "Ekleme işlemi başarısız."
-        },
-        "edit": {
-            "success": "Malzeme başarıyla güncellendi.",
-            "error": "Güncelleme işlemi başarısız.",
-            "warning-message": "Malzeme bilgilerini güncellemek ilişkili stok kayıtlarını ve raporları etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden emin olun."
-        }
+      "cancel": "İptal",
+      "save": "Kaydet"
     }
+  },
+  "notifications": {
+    "delete": {
+      "success": "Malzeme başarıyla silindi.",
+      "error": "Silme işlemi başarısız."
+    },
+    "create": {
+      "success": "Malzeme başarıyla oluşturuldu.",
+      "error": "Ekleme işlemi başarısız."
+    },
+    "edit": {
+      "success": "Malzeme başarıyla güncellendi.",
+      "error": "Güncelleme işlemi başarısız.",
+      "warning-message": "Malzeme bilgilerini güncellemek ilişkili stok kayıtlarını ve raporları etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden emin olun."
+    }
+  }
 }

@@ -9,7 +9,8 @@
     "status": "Status",
     "creator": "Created By",
     "editor": "Updated By",
-    "actions": "Actions"
+    "actions": "Actions",
+    "description": "Description"
   },
   "actions": {
     "edit": "Edit",
