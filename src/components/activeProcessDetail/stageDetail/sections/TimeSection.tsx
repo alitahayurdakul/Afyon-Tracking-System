@@ -12,6 +12,7 @@ interface IPropsTypes {
 const TimeSection = ({ startDate, endDate }: IPropsTypes) => {
   const t = useTranslations("activeProcessDetail");
   const date = new Date().toISOString();
+  console.log("end",endDate, "start",startDate);
 
   return (
     <section className={styles.section}>
@@ -34,7 +35,12 @@ const TimeSection = ({ startDate, endDate }: IPropsTypes) => {
             <b>{t("elapsed-time")}</b>
           </label>
           <label>
-            {startDate ? getElapsedTime(startDate ?? "", endDate ?? date) : "-"}
+            {startDate
+              ? getElapsedTime(
+                  startDate ?? "",
+                 endDate?.trim() || date,
+                )
+              : "-"}
           </label>
         </div>
       </div>

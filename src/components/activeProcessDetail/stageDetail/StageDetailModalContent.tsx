@@ -5,10 +5,11 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import {
+  useCompleteSubStage,
   useGetStageDetailDataQuery,
+  useSaveSubStage,
   useStartSubStage,
 } from "@/api/queries/useGetStageDetailDataQuery";
-import { Modal } from "@/components/common/Modal";
 import { NewModal } from "@/components/common/NewModal";
 import { ACTIVE_STAGE_DETAIL_MODAL } from "@/consts/modals";
 import {
@@ -16,12 +17,11 @@ import {
   MaterialEntry,
   SubStage,
 } from "@/types/activeProcessDetailTypes";
-import { IOptionType } from "@/types/formTypes";
+import { StatusEnums } from "@/utils/enum/commonEnums";
 import { getStatus } from "@/utils/getStatus";
 
 import StatusChip from "../StatusChip";
 import DelayReasonGroup from "./DelayReasonGroup";
-import ImageUploader from "./ImageUploader";
 import MaterialList from "./MaterialList";
 import TimeSection from "./sections/TimeSection";
 import styles from "./StageDetailModal.module.scss";
@@ -33,8 +33,9 @@ interface StageDetailModalProps {
 }
 
 interface NewSubStageData {
-  reasonList: IOptionType["value"][];
+  reasonList: DelayReasons[];
   materialList: MaterialEntry[]; // or whatever this should actually be
+  description: string;
 }
 
 export default function StageDetailModalContent({
@@ -47,10 +48,12 @@ export default function StageDetailModalContent({
     isLoading,
     isError,
   } = useGetStageDetailDataQuery<SubStage[]>(id);
+  console.log("subStagesData", subStagesData);
 
   const { id: processId } = useParams();
 
   const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [prevActiveIndex, setPrevActiveIndex] = useState<number>(0);
   const [prevSubStagesData, setPrevSubStagesData] = useState(subStagesData);
   const {
     mutate,
@@ -58,6 +61,21 @@ export default function StageDetailModalContent({
     isError: startSubStageError,
     error,
   } = useStartSubStage();
+
+  const {
+    mutate: saveMutate,
+    isPending: savePending,
+    isError: saveSubStageError,
+    error: saveError,
+  } = useSaveSubStage();
+
+  const {
+    mutate: completeMutate,
+    isPending: completePending,
+    isError: completeSubStageError,
+    error: completeError,
+  } = useCompleteSubStage();
+
   if (subStagesData !== prevSubStagesData) {
     setPrevSubStagesData(subStagesData);
     const index = subStagesData?.findIndex(
@@ -72,21 +90,47 @@ export default function StageDetailModalContent({
 
   const [newSubStageData, setNewSubStageData] = useState<NewSubStageData>({
     reasonList:
-      activeSubStageData?.delayReasons?.map(
-        (reason: DelayReasons) => reason.id,
-      ) || [],
-    materialList: [],
+      activeSubStageData?.delayReasons?.map((reason: DelayReasons) => ({
+        _id: reason._id,
+        name: reason.name,
+      })) || [],
+    materialList: activeSubStageData?.materials ?? [],
+    description: activeSubStageData?.description ?? "",
   });
-  const [prevActiveIndex, setPrevActiveIndex] = useState(activeIndex);
 
+  if (subStagesData !== prevSubStagesData) {
+    setPrevSubStagesData(subStagesData);
+    const index = subStagesData?.findIndex(
+      (s: SubStage) => getStatus(s.status) === "active",
+    );
+    const resolvedIndex =
+      index !== undefined && index !== -1 ? index : activeIndex;
+
+    if (index !== undefined && index !== -1) {
+      setActiveIndex(index);
+    }
+
+    const loadedSubStage = subStagesData?.[resolvedIndex];
+    setNewSubStageData({
+      reasonList:
+        loadedSubStage?.delayReasons?.map((reason: DelayReasons) => ({
+          _id: reason._id,
+          name: reason.name,
+        })) || [],
+      materialList: loadedSubStage?.materials ?? [],
+      description: loadedSubStage?.description ?? "",
+    });
+  }
   if (activeIndex !== prevActiveIndex) {
     setPrevActiveIndex(activeIndex);
     setNewSubStageData({
       reasonList:
-        activeSubStageData?.delayReasons?.map(
-          (reason: DelayReasons) => reason.id,
-        ) || [],
-      materialList: [],
+        activeSubStageData?.delayReasons?.map((reason: DelayReasons) => ({
+          _id: reason._id,
+          name: reason.name,
+        })) || [],
+      materialList: activeSubStageData?.materials ?? [],
+      description: activeSubStageData?.description ?? "",
     });
   }
 
@@ -95,15 +139,57 @@ export default function StageDetailModalContent({
   const isLocked = getStatus(activeSubStageData.status) !== "active";
 
   const completeStage = () => {
-    if (activeIndex < subStagesData.length - 1) {
-      setActiveIndex(activeIndex + 1);
-    }
+    const formData = {
+      processId: processId as string,
+      stageId: id,
+      subStageId: activeSubStageData._id,
+      data: {
+        status: StatusEnums.completed,
+        description: newSubStageData.description,
+        delayReasons: newSubStageData.reasonList.map((reason: DelayReasons) => {
+          return {
+            reasonId: reason._id as string,
+            name: reason.name,
+          };
+        }),
+        materials: newSubStageData.materialList.map(
+          (material: MaterialEntry) => {
+            return {
+              materialId: material._id,
+              serialNumber: material.serialNumber,
+            };
+          },
+        ),
+      },
+    };
+    saveMutate(formData);
   };
 
   const saveStageChanges = () => {
-    if (activeIndex < subStagesData.length - 1) {
-      setActiveIndex(activeIndex + 1);
-    }
+    const formData = {
+      processId: processId as string,
+      stageId: id,
+      subStageId: activeSubStageData._id,
+      data: {
+        status: StatusEnums.active,
+        description: newSubStageData.description,
+        delayReasons: newSubStageData.reasonList.map((reason: DelayReasons) => {
+          return {
+            reasonId: reason._id as string,
+            name: reason.name,
+          };
+        }),
+        materials: newSubStageData.materialList.map(
+          (material: MaterialEntry) => {
+            return {
+              materialId: material._id,
+              serialNumber: material.serialNumber,
+            };
+          },
+        ),
+      },
+    };
+    saveMutate(formData);
   };
 
   const startStage = async () => {
@@ -148,6 +234,7 @@ export default function StageDetailModalContent({
             <DelayReasonGroup
               reasonList={newSubStageData.reasonList}
               disabled={isLocked}
+              isOnlyText={getStatus(activeSubStageData.status) === "completed"}
               onChange={(reasonList) =>
                 setNewSubStageData((prev) => ({ ...prev, reasonList }))
               }
@@ -157,10 +244,12 @@ export default function StageDetailModalContent({
             activeSubStageData.materials.length > 0 && (
               <section className={styles.section}>
                 <h3>{t("section.materials")}</h3>
-
                 <MaterialList
-                  materials={activeSubStageData.materials}
+                  materials={newSubStageData.materialList}
                   disabled={isLocked}
+                  isOnlyText={
+                    getStatus(activeSubStageData.status) === "completed"
+                  }
                   onChange={(materials) => {
                     setNewSubStageData((prev) => ({
                       ...prev,
@@ -173,13 +262,24 @@ export default function StageDetailModalContent({
 
           <section className={styles.section}>
             <h3>{t("section.explaining")}</h3>
-            <textarea
-              value={activeSubStageData.description}
-              disabled={isLocked}
-              className={styles.textarea}
-              placeholder={t("explaining-placeholder")}
-              onChange={(e) => console.log(e.target.value)}
-            />
+            {getStatus(activeSubStageData.status) === "completed" ? (
+              <p className={styles.descriptionText}>
+                {newSubStageData.description}
+              </p>
+            ) : (
+              <textarea
+                value={newSubStageData.description}
+                disabled={isLocked}
+                className={styles.textarea}
+                placeholder={t("explaining-placeholder")}
+                onChange={(e) => {
+                  setNewSubStageData((prev) => ({
+                    ...prev,
+                    description: e.target.value,
+                  }));
+                }}
+              />
+            )}
           </section>
 
           {/* <section className={styles.section}>
@@ -192,7 +292,15 @@ export default function StageDetailModalContent({
           </section>*/}
         </div>
 
-        <div className={styles.footer}>
+        <div
+          className={styles.footer}
+          style={{
+            borderTop:
+              getStatus(activeSubStageData.status) === "completed"
+                ? "none"
+                : "0.5px solid #d3d1c7",
+          }}
+        >
           {getStatus(activeSubStageData.status) === "active" && (
             <>
               <button className={styles.saveBtn} onClick={saveStageChanges}>

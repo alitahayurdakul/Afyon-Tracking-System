@@ -8,10 +8,7 @@ import { TrainQueryTypes } from "@/app/api/trains/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
 import { optionsConverters } from "@/types/optionsConverter";
-import {
-  ITrainsType,
-  ITrainType,
-} from "@/types/trainsTypes";
+import { ITrainsType, ITrainType } from "@/types/trainsTypes";
 
 export const useGetTrainsDataQuery = () => {
   const trigger = useSelector(
@@ -38,9 +35,12 @@ export const useGetTrainDetailDataQuery = (id: string) => {
   const searchParams = useSearchParams();
   const param = searchParams.get("modal");
   const splittedId = param?.split("_").pop();
+  const trigger = useSelector(
+    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+  );
 
   return useQuery({
-    queryKey: [`getTrainDetailDatas_${id}`],
+    queryKey: [`getTrainDetailDatas_${id}`, trigger],
     refetchOnWindowFocus: false,
     enabled: splittedId === id,
     queryFn: async () => {

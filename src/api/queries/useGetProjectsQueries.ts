@@ -8,9 +8,7 @@ import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
 import { IOptionType } from "@/types/formTypes";
 import { optionsConverters } from "@/types/optionsConverter";
-import {
-  IProjectType,
-} from "@/types/projectsTypes";
+import { IProjectType } from "@/types/projectsTypes";
 
 import { axiosInstance } from "../axiosInstance";
 
@@ -37,9 +35,12 @@ export const useGetProjectDetailDataQuery = (id: string) => {
   const searchParams = useSearchParams();
   const param = searchParams.get("modal");
   const splittedId = param?.split("_").pop();
+  const trigger = useSelector(
+    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+  );
 
   return useQuery({
-    queryKey: [`getProjectDetailDatas_${id}`],
+    queryKey: [`getProjectDetailDatas_${id}`, trigger],
     refetchOnWindowFocus: false,
     enabled: splittedId === id,
     queryFn: async (): Promise<IProjectType | undefined> => {

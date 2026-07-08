@@ -7,6 +7,7 @@ import {
   createJsonSuccess,
   extractErrorMessage,
 } from "./responseHelpers";
+import { StatusEnums } from "@/utils/enum/commonEnums";
 
 export const processHandlers = {
   createProcess,
@@ -17,6 +18,7 @@ export const processHandlers = {
   editProcessDelayReasons,
   getStageDetail,
   startSubStage,
+  saveandCompleteSubStage,
 };
 
 async function createProcess(params: Record<string, any>): Promise<Response> {
@@ -143,12 +145,35 @@ async function startSubStage(params: Record<string, any>): Promise<Response> {
   try {
     const { processId, stageId, subStageId } = params;
     const response = await axiosInstance.put(
-      END_POINTS.process.startSubStage(processId, stageId, subStageId),
+      END_POINTS.process.subStageOperation(processId, stageId, subStageId),
+      {
+        status: StatusEnums.active
+      }
     );
 
     if (response.status === 200) {
       return createJsonSuccess(response.data, 200);
     }
+    return createJsonError("Failed to start a sub stage", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
+  }
+}
+
+async function saveandCompleteSubStage(params: Record<string, any>): Promise<Response> {
+  try {
+    const { processId, stageId, subStageId, data } = params;
+    console.log("ddd", data);
+
+    const response = await axiosInstance.put(
+      END_POINTS.process.subStageOperation(processId, stageId, subStageId),
+      { ...data },
+    );
+
+    if (response.status === 200) {
+      return createJsonSuccess(200);
+    }
+
     return createJsonError("Failed to start a sub stage", 400);
   } catch (err: unknown) {
     return createJsonError(extractErrorMessage(err), 500);

@@ -1,19 +1,20 @@
 import { IStatusTypes } from "@/types/commonTypes";
+import { StatusEnums } from "@/utils/enum/commonEnums";
 
 export const STATUS:IStatusTypes = [
     {
         value: "1",
-        code: "COMPLETED",
+        code: StatusEnums.completed,
         valueKey: "completed"
     },
     {
         value: "2",
-        code: "ACTIVE",
+        code: StatusEnums.active,
         valueKey: "active"
     },
     {
         value: "3",
-        code: "PENDING",
+        code: StatusEnums.pending,
         valueKey: "pending"
     }
 ]

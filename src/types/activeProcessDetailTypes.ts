@@ -16,7 +16,7 @@ export interface MaterialEntry {
 }
 
 export interface DelayReasons{
-  id: string;
+  _id: string;
   name: string;
 }
 
