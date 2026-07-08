@@ -2,10 +2,11 @@
 
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 import {
   useCompleteSubStage,
+  useEditSubStage,
   useGetStageDetailDataQuery,
   useSaveSubStage,
   useStartSubStage,
@@ -49,7 +50,6 @@ export default function StageDetailModalContent({
     isLoading,
     isError,
   } = useGetStageDetailDataQuery<SubStage[]>(id);
-  console.log("subStagesData", subStagesData);
 
   const { id: processId } = useParams();
 
@@ -77,6 +77,13 @@ export default function StageDetailModalContent({
     error: completeError,
   } = useCompleteSubStage();
 
+  const {
+    mutate: editMutate,
+    isPending: editPending,
+    isError: editSubStageError,
+    error: editError,
+  } = useEditSubStage();
+
   if (subStagesData !== prevSubStagesData) {
     setPrevSubStagesData(subStagesData);
     const index = subStagesData?.findIndex(
@@ -86,6 +93,15 @@ export default function StageDetailModalContent({
       setActiveIndex(index);
     }
   }
+
+  const isAllCompleted = useMemo(
+    () =>
+      (subStagesData ?? []).length > 0 &&
+      subStagesData!.every(
+        (subStage: SubStage) => getStatus(subStage.status) === "completed",
+      ),
+    [subStagesData],
+  );
 
   const activeSubStageData = subStagesData?.[activeIndex];
 
@@ -193,6 +209,19 @@ export default function StageDetailModalContent({
     saveMutate(formData);
   };
 
+  const editCompletedSubStage = async () => {
+    const formData = {
+      processId: processId as string,
+      stageId: id,
+      subStageId: activeSubStageData._id,
+      data: {
+        status: StatusEnums.active,
+        start: activeSubStageData.start
+      },
+    };
+    editMutate(formData);
+  };
+
   const startStage = async () => {
     const formData = {
       processId: processId as string,
@@ -229,6 +258,7 @@ export default function StageDetailModalContent({
           <TimeSection
             endDate={activeSubStageData.end}
             startDate={activeSubStageData.start}
+            status={getStatus(activeSubStageData.status)}
           />
           <section className={styles.section}>
             <h3>{t("section.delay-reason")}</h3>
@@ -293,15 +323,7 @@ export default function StageDetailModalContent({
           </section>*/}
         </div>
 
-        <div
-          className={styles.footer}
-          style={{
-            borderTop:
-              getStatus(activeSubStageData.status) === "completed"
-                ? "none"
-                : "0.5px solid #d3d1c7",
-          }}
-        >
+        <div className={styles.footer}>
           {getStatus(activeSubStageData.status) === "active" && (
             <>
               <PopoverBody
@@ -371,6 +393,54 @@ export default function StageDetailModalContent({
                 <div className={styles["btn-container"]}>
                   <button>{t("no")}</button>
                   <button onClick={startStage}>{t("yes")}</button>
+                </div>
+              }
+            />
+          )}
+
+          {getStatus(activeSubStageData.status) === "completed" && (
+            <PopoverBody
+              alignOffset={-73}
+              align="start"
+              triggerBody={
+                <button className={styles.editBtn}>{t("buttons.edit")}</button>
+              }
+              contentBody={
+                <div className={styles["content"]}>
+                  <p className={styles["text"]}>
+                    {t("buttons.questions.edit")}
+                  </p>
+                </div>
+              }
+              closeContainer={
+                <div className={styles["btn-container"]}>
+                  <button>{t("no")}</button>
+                  <button onClick={editCompletedSubStage}>{t("yes")}</button>
+                </div>
+              }
+            />
+          )}
+
+          {isAllCompleted && (
+            <PopoverBody
+              alignOffset={-73}
+              align="start"
+              triggerBody={
+                <button className={styles.completeParentStageBtn}>
+                  {t("buttons.complete-parent-stage")}
+                </button>
+              }
+              contentBody={
+                <div className={styles["content"]}>
+                  <p className={styles["text"]}>
+                    {t("buttons.questions.completeParentStage")}
+                  </p>
+                </div>
+              }
+              closeContainer={
+                <div className={styles["btn-container"]}>
+                  <button>{t("no")}</button>
+                  <button onClick={() => console.log("run")}>{t("yes")}</button>
                 </div>
               }
             />

@@ -57,6 +57,14 @@
     "complete": {
       "success": "The sub-stage was completed successfully.",
       "error": "An error occurred while completing the sub-stage."
+    },
+    "edit": {
+      "success": "The sub-stage status was updated successfully.",
+      "error": "An error occurred while updating the sub-stage status."
+    },
+    "complete-parent-stage": {
+      "success": "The parent stage was completed successfully.",
+      "error": "An error occurred while completing the parent stage."
     }
   }
 }

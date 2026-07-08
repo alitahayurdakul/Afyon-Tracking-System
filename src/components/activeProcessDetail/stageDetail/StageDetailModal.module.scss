@@ -230,6 +230,7 @@
 
 .footer {
   padding: 14px 20px;
+  border-top: 0.5px solid #d3d1c7;
   display: flex;
   justify-content: flex-end;
   gap: 5px;
@@ -271,6 +272,38 @@
   padding: 8px 16px;
   border-radius: 8px;
   background: var(--active);
+  color: #fff;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:disabled {
+    background: #d3d1c7;
+    cursor: not-allowed;
+  }
+}
+
+.editBtn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: var(--blue-90);
+  color: #fff;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:disabled {
+    background: #d3d1c7;
+    cursor: not-allowed;
+  }
+}
+
+.completeParentStageBtn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: var(--on-sale-badge-dark);
   color: #fff;
   border: none;
   font-size: 14px;
