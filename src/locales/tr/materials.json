@@ -13,9 +13,9 @@
   "table": {
     "name": "Malzeme Adı",
     "code": "Malzeme Kodu",
-    "creator": "OLUŞTURAN",
-    "editor": "GÜNCELLEYEN",
-    "actions": "İŞLEMLER",
+    "creator": "Oluşturan",
+    "editor": "Güncelleyen",
+    "actions": "İşlemler",
     "description": "Açıklama"
   },
   "modal": {
@@ -24,9 +24,9 @@
   },
   "form": {
     "labels": {
-      "name": "MALZEME ADI",
-      "code": "MALZEME KODU",
-      "description": "AÇIKLAMA",
+      "name": "Malzeme Adı",
+      "code": "Malzeme Kodu",
+      "description": "Açıklama",
       "creator": "Oluşturan",
       "createdDate": "Oluşturulma Tarihi",
       "editor": "Son Güncelleyen",

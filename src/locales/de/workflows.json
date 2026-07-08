@@ -1,6 +1,6 @@
 {
   "header": "Workflow-Verwaltung",
-  "description": "Konfigurieren und organisieren Sie Workflows. Definieren Sie automatisierte Aufgaben.",
+  "description": "Konfigurieren und organisieren Sie Workflows. Definieren Sie automatische Aufgaben.",
   "search": "Suchen...",
   "delete-question": "Möchten Sie diesen Workflow wirklich löschen?",
   "yes": "Ja",
@@ -11,12 +11,12 @@
     "delete": "Löschen"
   },
   "table": {
-    "name": "WORKFLOW-NAME",
-    "description": "BESCHREIBUNG",
-    "creator": "ERSTELLT VON",
-    "editor": "AKTUALISIERT VON",
-    "actions": "AKTIONEN",
-    "stages": "PHASEN"
+    "name": "Workflow-Name",
+    "description": "Beschreibung",
+    "creator": "Erstellt von",
+    "editor": "Aktualisiert von",
+    "actions": "Aktionen",
+    "stages": "Phasen"
   },
   "modal": {
     "create-headers": "Neuen Workflow hinzufügen",
@@ -24,8 +24,8 @@
   },
   "form": {
     "labels": {
-      "name": "WORKFLOW-NAME",
-      "description": "BESCHREIBUNG",
+      "name": "Workflow-Name",
+      "description": "Beschreibung",
       "creator": "Erstellt von",
       "createdDate": "Erstellungsdatum",
       "editor": "Zuletzt aktualisiert von",
@@ -35,8 +35,8 @@
     },
     "placeholders": {
       "name": "Workflow-Namen eingeben",
-      "description": "Beschreibung eingeben.",
-      "stage": "Phase auswählen."
+      "description": "Beschreibung eingeben",
+      "stage": "Phase auswählen"
     },
     "buttons": {
       "cancel": "Abbrechen",
@@ -46,15 +46,15 @@
   "notifications": {
     "delete": {
       "success": "Der Workflow wurde erfolgreich gelöscht.",
-      "error": "Löschen fehlgeschlagen."
+      "error": "Der Workflow konnte nicht gelöscht werden."
     },
     "create": {
       "success": "Der Workflow wurde erfolgreich erstellt.",
-      "error": "Erstellen fehlgeschlagen."
+      "error": "Der Workflow konnte nicht erstellt werden."
     },
     "edit": {
       "success": "Der Workflow wurde erfolgreich aktualisiert.",
-      "error": "Aktualisierung fehlgeschlagen.",
+      "error": "Der Workflow konnte nicht aktualisiert werden.",
       "warning-message": "Das Aktualisieren von Workflow-Informationen kann sich auf zugehörige Berichte auswirken. Bitte überprüfen Sie Ihre Änderungen vor dem Speichern."
     }
   }

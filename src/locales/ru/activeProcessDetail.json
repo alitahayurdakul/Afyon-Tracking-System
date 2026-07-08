@@ -1,29 +1,29 @@
 {
   "process-flow": "Ход процесса",
   "status": {
-    "completed": "Завершено",
-    "active": "Активно",
-    "pending": "Ожидание"
+    "completed": "Завершён",
+    "active": "Активный",
+    "pending": "Ожидает"
   },
   "progress-process": "{progress} завершено",
   "open-detail": "Открыть детали",
   "start-date": "Дата начала",
   "end-date": "Дата окончания",
   "not-yet-started": "Ещё не начато",
-  "pending": "В процессе",
+  "pending": "Выполняется",
   "complete-process": "Завершить процесс",
-  "total-elapsed-time": "ОБЩЕЕ ЗАТРАЧЕННОЕ ВРЕМЯ",
+  "total-elapsed-time": "ОБЩЕЕ ПРОШЕДШЕЕ ВРЕМЯ",
   "active-projects": "Активные проекты",
-  "active-projects-select-explaining": "Выберите поезд, чтобы увидеть ход рабочего процесса в реальном времени.",
+  "active-projects-select-explaining": "Выберите поезд, чтобы просмотреть ход выполнения процесса в реальном времени.",
   "processId": "ID процесса",
   "section": {
-    "time-section-header": "ИНФОРМАЦИЯ О ВРЕМЕНИ",
-    "delay-reason": "ПРИЧИНЫ ЗАДЕРЖКИ",
-    "materials": "МАТЕРИАЛЫ И СЕРИЙНЫЕ НОМЕРА",
-    "explaining": "ОПИСАНИЕ",
-    "files": "ФАЙЛЫ"
+    "time-section-header": "Информация о времени",
+    "delay-reason": "Причины задержек",
+    "materials": "Материалы и серийные номера",
+    "explaining": "Описание",
+    "files": "Файлы"
   },
-  "elapsed-time": "Затраченное время",
+  "elapsed-time": "Прошедшее время",
   "serial-number-placeholder": "Серийный номер",
   "explaining-placeholder": "Введите описание.",
   "file-placeholder": "Нажмите, чтобы загрузить файл.",
@@ -43,7 +43,7 @@
   },
   "yes": "Да",
   "no": "Нет",
-  "stage-modal-header": "Детали этапа",
+  "stage-modal-header": "Сведения об этапе",
   "no-data-label": "Сведения об активных процессах отсутствуют.",
   "notifications": {
     "start": {

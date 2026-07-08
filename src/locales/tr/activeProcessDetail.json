@@ -17,11 +17,11 @@
   "active-projects-select-explaining": "Canlı iş akışı ilerlemesini görüntülemek için bir tren seçin.",
   "processId": "Süreç ID",
   "section": {
-    "time-section-header": "ZAMAN BİLGİLERİ",
-    "delay-reason": "GECİKME NEDENLERİ",
-    "materials": "MALZEMELER VE SERİ NUMARALARI",
-    "explaining": "AÇIKLAMA",
-    "files": "DOSYALAR"
+    "time-section-header": "Zaman Bilgileri",
+    "delay-reason": "Gecikme Nedenleri",
+    "materials": "Malzemeler ve Seri Numaları",
+    "explaining": "Açıklama",
+    "files": "Dosyalar"
   },
   "elapsed-time": "Geçen Süre",
   "serial-number-placeholder": "Seri numarası",

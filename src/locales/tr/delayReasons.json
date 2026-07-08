@@ -11,11 +11,11 @@
         "delete": "Sil"
     },
     "table": {
-        "name": "SEBEP BAĞLIĞI",
-        "description": "AÇIKLAMA",
-        "creator": "OLUŞTURAN",
-        "editor": "GÜNCELLEYEN",
-        "actions": "İŞLEMLER"
+        "name": "Sebep Başlığı",
+        "description": "Açıklama",
+        "creator": "Oluşturan",
+        "editor": "Güncelleyen",
+        "actions": "İşlemler"
     },
     "modal": {
         "create-headers": "Gecikme Nedeni Ekle",
@@ -23,8 +23,8 @@
     },
     "form": {
         "labels": {
-            "name": "SEBEP BAĞLIĞI",
-            "description": "AÇIKLAMA",
+            "name": "Sebep Başlığı",
+            "description": "Açıklama",
             "creator": "Oluşturan",
             "createdDate": "Oluşturulma Tarihi",
             "editor": "Son Güncelleyen",

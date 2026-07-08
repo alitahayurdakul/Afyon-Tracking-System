@@ -53,7 +53,6 @@ export const createMaterialsTableColumns = (t: TFunction) => {
           return (
             <DynamicTextWithTooltip
               text={r[column.name] || "-"}
-              lines={1}
               textClassName={styles["name-text"]}
             />
           );

@@ -6,8 +6,8 @@
   "columns": {
     "trainSetNo": "Zugnummer",
     "description": "Beschreibung",
-    "info": "ZUGINFORMATIONEN",
-    "wagons": "WAGGONS",
+    "info": "Zuginformationen",
+    "wagons": "Waggons",
     "creator": "Erstellt von",
     "editor": "Aktualisiert von",
     "actions": "Aktionen"

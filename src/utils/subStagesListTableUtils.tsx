@@ -55,7 +55,6 @@ export const createSubStagesTableColumns = (t: TFunction) => {
           return (
             <DynamicTextWithTooltip
               text={r.name || "-"}
-              lines={1}
               textClassName={styles["name-text"]}
             />
           );

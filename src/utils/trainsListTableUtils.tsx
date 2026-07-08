@@ -56,7 +56,6 @@ export const createTrainsTableColumns = (t: TFunction) => {
             <div className={styles["train-name"]}>
               <DynamicTextWithTooltip
                 text={r.trainSetNo || "-"}
-                lines={1}
                 textClassName={styles["title-text"]}
               />
             </div>
