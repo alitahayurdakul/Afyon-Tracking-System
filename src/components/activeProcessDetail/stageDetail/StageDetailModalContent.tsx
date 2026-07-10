@@ -377,13 +377,13 @@ export default function StageDetailModalContent({
                 align="start"
                 triggerBody={
                   <button className={styles.completeBtn}>
-                    {t("buttons.complete-stage")}
+                    {t("buttons.complete-sub-stage")}
                   </button>
                 }
                 contentBody={
                   <div className={styles["content"]}>
                     <p className={styles["text"]}>
-                      {t("buttons.questions.complete")}
+                      {t("buttons.questions.complete-sub-stage")}
                     </p>
                   </div>
                 }
@@ -403,13 +403,13 @@ export default function StageDetailModalContent({
               align="start"
               triggerBody={
                 <button className={styles.startBtn}>
-                  {t("buttons.start-stage")}
+                  {t("buttons.start-sub-stage")}
                 </button>
               }
               contentBody={
                 <div className={styles["content"]}>
                   <p className={styles["text"]}>
-                    {t("buttons.questions.start")}
+                    {t("buttons.questions.start-sub-stage")}
                   </p>
                 </div>
               }
@@ -454,13 +454,13 @@ export default function StageDetailModalContent({
               align="start"
               triggerBody={
                 <button className={styles.completeParentStageBtn}>
-                  {t("buttons.complete-parent-stage")}
+                  {t("buttons.complete-stage")}
                 </button>
               }
               contentBody={
                 <div className={styles["content"]}>
                   <p className={styles["text"]}>
-                    {t("buttons.questions.completeParentStage")}
+                    {t("buttons.questions.completeStage")}
                   </p>
                 </div>
               }

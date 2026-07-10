@@ -19,7 +19,8 @@ export const processHandlers = {
   getStageDetail,
   startSubStage,
   saveandCompleteSubStage,
-  completeStage
+  completeStage,
+  startStage,
 };
 
 async function createProcess(params: Record<string, any>): Promise<Response> {
@@ -188,6 +189,28 @@ async function completeStage(entryId: string): Promise<Response> {
     );
 
     if (response.status === 200) {
+      return createJsonSuccess(200);
+    }
+
+    return createJsonError("Failed to start a sub stage", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
+  }
+}
+
+async function startStage(params: Record<string, any>): Promise<Response> {
+  const { stageId, processId, operator } = params;
+  try {
+    const params = {
+      stageId,
+      operator,
+    };
+    const response = await axiosInstance.post(
+      END_POINTS.process.startStage(processId),
+      { ...params },
+    );
+
+    if (response.status === 201) {
       return createJsonSuccess(200);
     }
 

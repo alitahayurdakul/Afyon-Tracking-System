@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { useCallback } from "react";
 
+import { useStartStage } from "@/api/queries/useGetProcessesQueries";
 import { STATUS } from "@/consts/options";
 import { MainStage } from "@/types/activeProcessDetailTypes";
 import { IStatusType } from "@/types/commonTypes";
@@ -8,6 +9,7 @@ import { IProcessEntry, IStage } from "@/types/processTypes";
 import { formatDate } from "@/utils/formDate";
 import { getStatus } from "@/utils/getStatus";
 
+import { PopoverBody } from "../Popover";
 import styles from "./ProcessFlow.module.scss";
 import StageDetailModal from "./stageDetail/StageDetailModal";
 import StatusChip from "./StatusChip";
@@ -25,7 +27,7 @@ export default function StageRow({
   entryForStage,
   index,
   isLast,
-  onOpenDetail
+  onOpenDetail,
 }: StageRowProps) {
   const time = () => {
     const startTime = new Date(
@@ -41,6 +43,21 @@ export default function StageRow({
 
   const nodeLabel = getStatus(stage.status) === "completed" ? "✓" : index + 1;
   const t = useTranslations("activeProcessDetail");
+
+  const {
+    mutate,
+    isPending,
+    isError: startStageError,
+    error: startError,
+  } = useStartStage();
+
+  const startStage = async () => {
+    const payload = {
+      stageId: stage._id,
+      operator: "Admin",
+    };
+    mutate(payload);
+  };
 
   return (
     <div className={styles.row}>
@@ -93,7 +110,37 @@ export default function StageRow({
 
         <div className={styles.cardRight}>
           <StatusChip status={stage.status as string} t={t} />
-          <StageDetailModal id={stage._id} stageName={stage.name ?? ""} stageStatus = {stage.status} entryId = {entryForStage?._id ?? ""} />
+          {getStatus(stage.status) === "pending" ? (
+            <PopoverBody
+              alignOffset={-73}
+              align="start"
+              triggerBody={
+                <button className={styles.startBtn}>
+                  {t("buttons.start-stage")}
+                </button>
+              }
+              contentBody={
+                <div className={styles["content"]}>
+                  <p className={styles["text"]}>
+                    {t("buttons.questions.start-stage")}
+                  </p>
+                </div>
+              }
+              closeContainer={
+                <div className={styles["btn-container"]}>
+                  <button>{t("no")}</button>
+                  <button onClick={startStage}>{t("yes")}</button>
+                </div>
+              }
+            />
+          ) : (
+            <StageDetailModal
+              id={stage._id}
+              stageName={stage.name ?? ""}
+              stageStatus={stage.status}
+              entryId={entryForStage?._id ?? ""}
+            />
+          )}
         </div>
       </div>
     </div>

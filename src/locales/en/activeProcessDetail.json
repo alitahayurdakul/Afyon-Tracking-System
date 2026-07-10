@@ -29,16 +29,18 @@
   "file-placeholder": "Click to upload a file.",
   "buttons": {
     "save-changes": "Save Changes",
-    "complete-stage": "Complete Stage",
+    "complete-sub-stage": "Complete Sub-Stage",
     "start-stage": "Start Stage",
-    "edit": "Update Stage",
-    "complete-parent-stage": "Complete Parent Stage",
+    "start-sub-stage": "Start Sub-Stage",
+    "edit": "Update Sub-Stage",
+    "complete-stage": "Complete Parent Stage",
     "questions": {
-      "start": "Are you sure you want to start the sub-stage?",
-      "complete": "Are you sure you want to complete the sub-stage?",
+      "start-sub-stage": "Are you sure you want to start the sub-stage?",
+      "complete-sub-stage": "Are you sure you want to complete the sub-stage?",
       "save": "Are you sure you want to save the changes?",
-      "completeParentStage": "Are you sure you want to complete the parent stage?",
-      "edit": "Are you sure you want to update the sub-stage?"
+      "completeStage": "Are you sure you want to complete the parent stage?",
+      "edit": "Are you sure you want to update the sub-stage?",
+      "start-stage": "Are you sure you want to start the stage?"
     }
   },
   "yes": "Yes",
@@ -65,6 +67,10 @@
     "complete-parent-stage": {
       "success": "The parent stage was completed successfully.",
       "error": "An error occurred while completing the parent stage."
+    },
+    "start-stage": {
+      "success": "The stage was started successfully.",
+      "error": "An error occurred while starting the stage."
     }
   }
 }

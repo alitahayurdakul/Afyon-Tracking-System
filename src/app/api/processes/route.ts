@@ -12,7 +12,8 @@ export enum ProcessQueryTypes {
   getStageDetail = "GET_STAGE_DETAIL",
   startSubStage = "START_SUB_STAGE",
   saveandCompleteSubStage = "SAVE_AND_COMPLETE_SUB_STAGE",
-  completeStage = "COMPLETE_STAGE"
+  completeStage = "COMPLETE_STAGE",
+  startStage = "START_STAGE"
 }
 
 export async function POST(request: NextRequest) {
@@ -40,6 +41,8 @@ export async function POST(request: NextRequest) {
       return await processHandlers.saveandCompleteSubStage(params);
     case ProcessQueryTypes.completeStage:
       return await processHandlers.completeStage(entryId);
+    case ProcessQueryTypes.startStage:
+      return await processHandlers.startStage(params);
 
     default: {
       return Response.json(

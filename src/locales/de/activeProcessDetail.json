@@ -29,16 +29,18 @@
   "file-placeholder": "Klicken Sie hier, um eine Datei hochzuladen.",
   "buttons": {
     "save-changes": "Änderungen speichern",
-    "complete-stage": "Phase abschließen",
+    "complete-sub-stage": "Unterphase abschließen",
     "start-stage": "Phase starten",
-    "edit": "Phase aktualisieren",
-    "complete-parent-stage": "Übergeordnete Phase abschließen",
+    "start-sub-stage": "Unterphase starten",
+    "edit": "Unterphase aktualisieren",
+    "complete-stage": "Übergeordnete Phase abschließen",
     "questions": {
-      "start": "Möchten Sie die Unterphase wirklich starten?",
-      "complete": "Möchten Sie die Unterphase wirklich abschließen?",
+      "start-sub-stage": "Möchten Sie die Unterphase wirklich starten?",
+      "complete-sub-stage": "Möchten Sie die Unterphase wirklich abschließen?",
       "save": "Möchten Sie die Änderungen wirklich speichern?",
-      "completeParentStage": "Möchten Sie die übergeordnete Phase wirklich abschließen?",
-      "edit": "Möchten Sie die Unterphase wirklich aktualisieren?"
+      "completeStage": "Möchten Sie die übergeordnete Phase wirklich abschließen?",
+      "edit": "Möchten Sie die Unterphase wirklich aktualisieren?",
+      "start-stage": "Möchten Sie die Phase wirklich starten?"
     }
   },
   "yes": "Ja",
@@ -65,6 +67,10 @@
     "complete-parent-stage": {
       "success": "Die übergeordnete Phase wurde erfolgreich abgeschlossen.",
       "error": "Beim Abschließen der übergeordneten Phase ist ein Fehler aufgetreten."
+    },
+    "start-stage": {
+      "success": "Die Phase wurde erfolgreich gestartet.",
+      "error": "Beim Starten der Phase ist ein Fehler aufgetreten."
     }
   }
 }
