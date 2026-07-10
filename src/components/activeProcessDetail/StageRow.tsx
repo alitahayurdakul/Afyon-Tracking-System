@@ -1,11 +1,8 @@
 import { useTranslations } from "next-intl";
-import { useCallback } from "react";
 
 import { useStartStage } from "@/api/queries/useGetProcessesQueries";
-import { STATUS } from "@/consts/options";
-import { MainStage } from "@/types/activeProcessDetailTypes";
-import { IStatusType } from "@/types/commonTypes";
 import { IProcessEntry, IStage } from "@/types/processTypes";
+import { StatusEnums } from "@/utils/enum/commonEnums";
 import { formatDate } from "@/utils/formDate";
 import { getStatus } from "@/utils/getStatus";
 
@@ -41,7 +38,7 @@ export default function StageRow({
     return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
   };
 
-  const nodeLabel = getStatus(stage.status) === "completed" ? "✓" : index + 1;
+  const nodeLabel = getStatus(stage.status) === StatusEnums.completed ? "✓" : index + 1;
   const t = useTranslations("activeProcessDetail");
 
   const {
@@ -84,7 +81,7 @@ export default function StageRow({
           </span>
 
           <div className={styles.cardMeta}>
-            {getStatus(stage.status) === "completed" && (
+            {getStatus(stage.status) === StatusEnums.completed && (
               <>
                 <span>
                   {t("start-date")}: {formatDate(entryForStage?.startedAt)}

@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 
 import { useGetProjectOptionsDataQuery } from "@/api/queries/useGetProjectsQueries";
 import styles from "@/styles/components/activeProcesses/ActiveProcessesHeader.module.scss";
-import { StatusEnums } from "@/utils/enum/commonEnums";
+import { ResponseStatusEnums } from "@/utils/enum/commonEnums";
 import {
   useAddQueryParam,
   useRemoveQueryParamModal,
@@ -25,7 +25,7 @@ export const ActiveProcessesHeader = ({activeUnit}: {activeUnit: string}) => {
   });
   const t = useTranslations("activeProcess");
   const { data: projectOptions, isLoading } = useGetProjectOptionsDataQuery(
-    StatusEnums.active,
+    ResponseStatusEnums.active,
   );
 
   const addQueryParam = useAddQueryParam();

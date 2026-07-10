@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 
 import styles from "@/components/activeProcessDetail/stageDetail/StageDetailModal.module.scss";
+import { StatusEnums } from "@/utils/enum/commonEnums";
 import { formatDate } from "@/utils/formDate";
 import { getElapsedTime } from "@/utils/getElapsedTime";
 
@@ -28,7 +29,7 @@ const TimeSection = ({ startDate, endDate, status }: IPropsTypes) => {
           <label>
             <b>{t("end-date")}</b>
           </label>
-          <label>{status === "completed" ? formatDate(endDate) : "-"}</label>
+          <label>{status === StatusEnums.completed ? formatDate(endDate) : "-"}</label>
         </div>
         <div className={styles.timeCol}>
           <label>
@@ -38,7 +39,7 @@ const TimeSection = ({ startDate, endDate, status }: IPropsTypes) => {
             {startDate
               ? getElapsedTime(
                   startDate ?? "",
-                  (status === "completed" ? endDate?.trim() : date) as string,
+                  (status === StatusEnums.completed ? endDate?.trim() : date) as string,
                 )
               : "-"}
           </label>
