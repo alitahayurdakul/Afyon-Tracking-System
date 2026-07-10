@@ -11,6 +11,7 @@ import {
   useStartSubStage,
 } from "@/api/queries/useGetStageDetailDataQuery";
 import { NewModal } from "@/components/common/NewModal";
+import { PopoverBody } from "@/components/Popover";
 import { ACTIVE_STAGE_DETAIL_MODAL } from "@/consts/modals";
 import {
   DelayReasons,
@@ -303,19 +304,76 @@ export default function StageDetailModalContent({
         >
           {getStatus(activeSubStageData.status) === "active" && (
             <>
-              <button className={styles.saveBtn} onClick={saveStageChanges}>
-                {t("buttons.save-changes")}
-              </button>
-              <button className={styles.completeBtn} onClick={completeStage}>
-                {t("buttons.complete-stage")}
-              </button>
+              <PopoverBody
+                alignOffset={-73}
+                align="start"
+                triggerBody={
+                  <button className={styles.saveBtn}>
+                    {t("buttons.save-changes")}
+                  </button>
+                }
+                contentBody={
+                  <div className={styles["content"]}>
+                    <p className={styles["text"]}>
+                      {t("buttons.questions.save")}
+                    </p>
+                  </div>
+                }
+                closeContainer={
+                  <div className={styles["btn-container"]}>
+                    <button>{t("no")}</button>
+                    <button onClick={saveStageChanges}>{t("yes")}</button>
+                  </div>
+                }
+              />
+              <PopoverBody
+                alignOffset={-73}
+                align="start"
+                triggerBody={
+                  <button className={styles.completeBtn}>
+                    {t("buttons.complete-stage")}
+                  </button>
+                }
+                contentBody={
+                  <div className={styles["content"]}>
+                    <p className={styles["text"]}>
+                      {t("buttons.questions.complete")}
+                    </p>
+                  </div>
+                }
+                closeContainer={
+                  <div className={styles["btn-container"]}>
+                    <button>{t("no")}</button>
+                    <button onClick={completeStage}>{t("yes")}</button>
+                  </div>
+                }
+              />
             </>
           )}
 
           {getStatus(activeSubStageData.status) === "pending" && (
-            <button className={styles.startBtn} onClick={startStage}>
-              {t("buttons.start-stage")}
-            </button>
+            <PopoverBody
+              alignOffset={-73}
+              align="start"
+              triggerBody={
+                <button className={styles.startBtn}>
+                  {t("buttons.start-stage")}
+                </button>
+              }
+              contentBody={
+                <div className={styles["content"]}>
+                  <p className={styles["text"]}>
+                    {t("buttons.questions.start")}
+                  </p>
+                </div>
+              }
+              closeContainer={
+                <div className={styles["btn-container"]}>
+                  <button>{t("no")}</button>
+                  <button onClick={startStage}>{t("yes")}</button>
+                </div>
+              }
+            />
           )}
         </div>
       </div>

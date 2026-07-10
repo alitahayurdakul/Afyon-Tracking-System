@@ -1,6 +1,6 @@
 {
   "header": "Materialverwaltung",
-  "description": "Verwalten Sie Lagerbestände und Materialinformationen zentral.",
+  "description": "Verwalten Sie Lagermaterialien und Bestandsinformationen zentral.",
   "search": "Suchen...",
   "delete-question": "Möchten Sie dieses Material wirklich löschen?",
   "yes": "Ja",
@@ -11,11 +11,12 @@
     "delete": "Löschen"
   },
   "table": {
-    "name": "MATERIALNAME",
-    "code": "MATERIALCODE",
-    "creator": "ERSTELLT VON",
-    "editor": "AKTUALISIERT VON",
-    "actions": "AKTIONEN"
+    "name": "Materialname",
+    "code": "Materialcode",
+    "creator": "Erstellt von",
+    "editor": "Aktualisiert von",
+    "actions": "Aktionen",
+    "description": "Beschreibung"
   },
   "modal": {
     "create-headers": "Neues Material hinzufügen",
@@ -23,16 +24,16 @@
   },
   "form": {
     "labels": {
-      "name": "MATERIALNAME",
-      "code": "MATERIALCODE",
-      "description": "BESCHREIBUNG",
+      "name": "Materialname",
+      "code": "Materialcode",
+      "description": "Beschreibung",
       "creator": "Erstellt von",
       "createdDate": "Erstellungsdatum",
       "editor": "Zuletzt aktualisiert von",
       "editedDate": "Datum der letzten Aktualisierung"
     },
     "placeholders": {
-      "name": "Materialnamen eingeben",
+      "name": "Materialname eingeben",
       "code": "Materialcode eingeben",
       "description": "Beschreibung eingeben."
     },
@@ -44,16 +45,16 @@
   "notifications": {
     "delete": {
       "success": "Das Material wurde erfolgreich gelöscht.",
-      "error": "Löschen fehlgeschlagen."
+      "error": "Das Material konnte nicht gelöscht werden."
     },
     "create": {
       "success": "Das Material wurde erfolgreich erstellt.",
-      "error": "Erstellen fehlgeschlagen."
+      "error": "Das Material konnte nicht erstellt werden."
     },
     "edit": {
       "success": "Das Material wurde erfolgreich aktualisiert.",
-      "error": "Aktualisierung fehlgeschlagen.",
-      "warning-message": "Das Aktualisieren von Materialinformationen kann sich auf zugehörige Lagerbestände und Berichte auswirken. Bitte überprüfen Sie Ihre Änderungen vor dem Speichern."
+      "error": "Das Material konnte nicht aktualisiert werden.",
+      "warning-message": "Das Aktualisieren von Materialinformationen kann sich auf zugehörige Bestandsdaten und Berichte auswirken. Bitte überprüfen Sie Ihre Änderungen vor dem Speichern."
     }
   }
 }

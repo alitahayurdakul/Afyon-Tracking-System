@@ -53,7 +53,6 @@ export const createStagesTableColumns = (t: TFunction) => {
             <div className={styles["stage-name"]}>
               <DynamicTextWithTooltip
                 text={row.original[column.name] || "-"}
-                lines={1}
                 textClassName={styles["title-text"]}
               />
             </div>

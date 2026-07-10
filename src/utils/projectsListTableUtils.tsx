@@ -22,6 +22,10 @@ export const projectsTableColumns: ICommonTableColumnsTypes = [
     label: "code",
   },
   {
+    name: "description",
+    label: "description",
+  },
+  {
     name: "status",
     label: "status",
   },
@@ -55,7 +59,6 @@ export const createProjectsTableColumns = (t: TFunction) => {
           return (
             <DynamicTextWithTooltip
               text={r.name || "-"}
-              lines={1}
               textClassName={styles["name-text"]}
             />
           );
@@ -70,10 +73,14 @@ export const createProjectsTableColumns = (t: TFunction) => {
           );
         }
         if (column.name === "status") {
-          const activeStatus = PROJECT_STATUS_OPTIONS.find((status: IOptionType) => r.status === status.value);
+          const activeStatus = PROJECT_STATUS_OPTIONS.find(
+            (status: IOptionType) => r.status === status.value,
+          );
           return (
             <div className={styles["reason-desc"]}>
-              <p style={{color: `var(--${activeStatus?.color})`}}>{t(`form.status.${activeStatus?.label}`) || "-"}</p>
+              <p style={{ color: `var(--${activeStatus?.color})` }}>
+                {t(`form.status.${activeStatus?.label}`) || "-"}
+              </p>
             </div>
           );
         }
@@ -85,7 +92,16 @@ export const createProjectsTableColumns = (t: TFunction) => {
                 lines={1}
                 textClassName={styles["creator-name"]}
               />
-              <p className={styles["creator-date"]}>{formatDate(r.createdAt)}</p>
+              <p className={styles["creator-date"]}>
+                {formatDate(r.createdAt)}
+              </p>
+            </div>
+          );
+        }
+        if (column.name === "description") {
+          return (
+            <div className={styles["desc-cell"]}>
+              <DynamicTextWithTooltip text={row.original.description || "-"} />
             </div>
           );
         }
@@ -98,7 +114,9 @@ export const createProjectsTableColumns = (t: TFunction) => {
                 lines={1}
                 textClassName={styles["creator-name"]}
               />
-              <p className={styles["creator-date"]}>{!isUnedited ? formatDate(r.updatedAt) : "-"}</p>
+              <p className={styles["creator-date"]}>
+                {!isUnedited ? formatDate(r.updatedAt) : "-"}
+              </p>
             </div>
           );
         }

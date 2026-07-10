@@ -11,11 +11,11 @@
         "delete": "Sil"
     },
     "table": {
-        "name": "VAGON ADI",
-        "description": "AÇIKLAMA",
-        "creator": "OLUŞTURAN",
-        "editor": "GÜNCELLEYEN",
-        "actions": "İŞLEMLER"
+        "name": "Vagon Adı",
+        "description": "Açıklama",
+        "creator": "Oluşturan",
+        "editor": "Güncelleyen",
+        "actions": "İşlemler"
     },
     "modal": {
         "create-headers": "Vagon Ekle",
@@ -23,8 +23,8 @@
     },
     "form": {
         "labels": {
-            "name": "VAGON ADI",
-            "description": "AÇIKLAMA",
+            "name": "Vagon Adı",
+            "description": "Açıklama",
             "creator": "Oluşturan",
             "createdDate": "Oluşturulma Tarihi",
             "editor": "Son Güncelleyen",

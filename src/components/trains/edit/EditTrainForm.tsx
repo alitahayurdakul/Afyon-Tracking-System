@@ -126,7 +126,7 @@ export const EditTrainForm = ({ id, data, wagonOptions }: IPropsTypes) => {
                 options={wagonOptions || []}
                 control={control as any}
                 required={item.isRequired}
-                label={item.label}
+                label={t(`form.fields.${item.name}.label`)}
                 placeholder={item.placeholder}
                 formLabelClassName={styles["form-label"]}
                 isSearchable

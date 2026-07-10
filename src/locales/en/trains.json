@@ -6,8 +6,8 @@
   "columns": {
     "trainSetNo": "Train No",
     "description": "Description",
-    "info": "TRAIN INFORMATION",
-    "wagons": "WAGONS",
+    "info": "Train Information",
+    "wagons": "Wagons",
     "creator": "Created By",
     "editor": "Updated By",
     "actions": "Actions"

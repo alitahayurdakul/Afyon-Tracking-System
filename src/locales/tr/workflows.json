@@ -11,12 +11,12 @@
         "delete": "Sil"
     },
     "table": {
-        "name": "İş AKIŞI ADI",
-        "description": "AÇIKLAMA",
-        "creator": "OLUŞTURAN",
-        "editor": "GÜNCELLEYEN",
-        "actions": "İŞLEMLER",
-        "stages": "AŞAMALAR"
+        "name": "İş Akışı Adı",
+        "description": "Açıklama",
+        "creator": "Oluşturan",
+        "editor": "Güncelleyen",
+        "actions": "İşlemler",
+        "stages": "Aşamalar"
     },
     "modal": {
         "create-headers": "Yeni İş Akışı Ekle",
@@ -24,8 +24,8 @@
     },
     "form": {
         "labels": {
-            "name": "İŞ AKIŞI ADI",
-            "description": "AÇIKLAMA",
+            "name": "İş Akışı Adı",
+            "description": "Açıklama",
             "creator": "Oluşturan",
             "createdDate": "Oluşturulma Tarihi",
             "editor": "Son Güncelleyen",

@@ -9,6 +9,6 @@
     "project": "Projekt Name"
   },
   "select-placeholder": "Projekt",
-  "active-unit-count": "AKTIVE EINHEITEN",
+  "active-unit-count": "Aktive Einheiten",
   "noDataLabel": "Es sind keine aktiven Prozesse vorhanden."
 }

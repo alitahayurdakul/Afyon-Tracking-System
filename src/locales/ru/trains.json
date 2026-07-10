@@ -6,8 +6,8 @@
   "columns": {
     "trainSetNo": "Номер поезда",
     "description": "Описание",
-    "info": "ИНФОРМАЦИЯ О ПОЕЗДЕ",
-    "wagons": "ВАГОНЫ",
+    "info": "Информация о поезде",
+    "wagons": "Вагоны",
     "creator": "Создал",
     "editor": "Обновил",
     "actions": "Действия"
@@ -35,7 +35,7 @@
       },
       "wagons": {
         "label": "Вагон",
-        "selectWagons": "Выберите вагоны"
+        "placeholder": "Выберите вагоны"
       },
       "selectedWagons": "Выбранные вагоны"
     },

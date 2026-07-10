@@ -1,6 +1,6 @@
 {
   "header": "Delay Reason Management",
-  "description": "Manage delay reasons centrally",
+  "description": "Manage delay reasons centrally.",
   "search": "Search...",
   "delete-question": "Are you sure you want to delete this reason?",
   "yes": "Yes",
@@ -11,28 +11,28 @@
     "delete": "Delete"
   },
   "table": {
-    "name": "REASON TITLE",
-    "description": "DESCRIPTION",
-    "creator": "CREATED BY",
-    "editor": "UPDATED BY",
-    "actions": "ACTIONS"
+    "name": "Reason Title",
+    "description": "Description",
+    "creator": "Created By",
+    "editor": "Updated By",
+    "actions": "Actions"
   },
   "modal": {
-    "create-headers": "Create New Delay Reason",
+    "create-headers": "Add Delay Reason",
     "edit-header": "Update Delay Reason Information"
   },
   "form": {
     "labels": {
-      "name": "REASON TITLE",
-      "description": "DESCRIPTION",
+      "name": "Reason Title",
+      "description": "Description",
       "creator": "Created By",
       "createdDate": "Creation Date",
       "editor": "Last Updated By",
       "editedDate": "Last Updated Date"
     },
     "placeholders": {
-      "name": "Enter a reason title",
-      "description": "Enter a description"
+      "name": "Enter reason title",
+      "description": "Enter description"
     },
     "buttons": {
       "cancel": "Cancel",
@@ -51,7 +51,7 @@
     "edit": {
       "success": "The delay reason was updated successfully.",
       "error": "Failed to update the delay reason.",
-      "warning-message": "Updating reason information may affect related delay records and reports. Please review your changes before saving."
+      "warning-message": "Updating the delay reason may affect related delay records and reports. Please review your changes before saving."
     }
   }
 }

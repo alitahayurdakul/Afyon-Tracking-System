@@ -6,8 +6,8 @@
   "columns": {
     "trainSetNo": "Tren No",
     "description": "Açıklama",
-    "info": "TREN BİLGİSİ",
-    "wagons": "VAGONLAR",
+    "info": "Tren Bilgisi",
+    "wagons": "Vagonlar",
     "creator": "Oluşturan",
     "editor": "Güncelleyen",
     "actions": "İşlemler"

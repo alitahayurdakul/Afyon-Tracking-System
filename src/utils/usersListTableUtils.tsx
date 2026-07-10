@@ -42,7 +42,6 @@ export const createUsersTableColumns = (t: TFunction) => {
           return (
             <DynamicTextWithTooltip
               text={r.fullname || "-"}
-              lines={1}
               textClassName={styles["primary-text"]}
             />
           );

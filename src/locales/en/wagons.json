@@ -1,6 +1,6 @@
 {
   "header": "Wagon Management",
-  "description": "Manage wagons centrally",
+  "description": "Manage wagons centrally.",
   "search": "Search...",
   "delete-question": "Are you sure you want to delete this wagon?",
   "yes": "Yes",
@@ -11,28 +11,28 @@
     "delete": "Delete"
   },
   "table": {
-    "name": "WAGON NAME",
-    "description": "DESCRIPTION",
-    "creator": "CREATED BY",
-    "editor": "UPDATED BY",
-    "actions": "ACTIONS"
+    "name": "Wagon Name",
+    "description": "Description",
+    "creator": "Created By",
+    "editor": "Updated By",
+    "actions": "Actions"
   },
   "modal": {
-    "create-headers": "Create New Wagon",
+    "create-headers": "Add Wagon",
     "edit-header": "Update Wagon Information"
   },
   "form": {
     "labels": {
-      "name": "WAGON NAME",
-      "description": "DESCRIPTION",
+      "name": "Wagon Name",
+      "description": "Description",
       "creator": "Created By",
       "createdDate": "Creation Date",
       "editor": "Last Updated By",
       "editedDate": "Last Updated Date"
     },
     "placeholders": {
-      "name": "Enter a wagon name",
-      "description": "Enter a description"
+      "name": "Enter wagon name",
+      "description": "Enter description"
     },
     "buttons": {
       "cancel": "Cancel",

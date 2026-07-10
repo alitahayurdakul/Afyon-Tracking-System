@@ -9,19 +9,19 @@
   "open-detail": "Open Details",
   "start-date": "Start Date",
   "end-date": "End Date",
-  "not-yet-started": "Not Yet Started",
+  "not-yet-started": "Not Started Yet",
   "pending": "In Progress",
   "complete-process": "Complete Process",
   "total-elapsed-time": "TOTAL ELAPSED TIME",
   "active-projects": "Active Projects",
-  "active-projects-select-explaining": "Select a train to view live workflow progress.",
+  "active-projects-select-explaining": "Select a train to view the live workflow progress.",
   "processId": "Process ID",
   "section": {
-    "time-section-header": "TIME INFORMATION",
-    "delay-reason": "DELAY REASONS",
-    "materials": "MATERIALS AND SERIAL NUMBERS",
-    "explaining": "DESCRIPTION",
-    "files": "FILES"
+    "time-section-header": "Time Information",
+    "delay-reason": "Delay Reasons",
+    "materials": "Materials and Serial Numbers",
+    "explaining": "Description",
+    "files": "Files"
   },
   "elapsed-time": "Elapsed Time",
   "serial-number-placeholder": "Serial number",
@@ -30,10 +30,21 @@
   "buttons": {
     "save-changes": "Save Changes",
     "complete-stage": "Complete Stage",
-    "start-stage": "Start Stage"
+    "start-stage": "Start Stage",
+    "edit": "Update Stage",
+    "complete-parent-stage": "Complete Parent Stage",
+    "questions": {
+      "start": "Are you sure you want to start the sub-stage?",
+      "complete": "Are you sure you want to complete the sub-stage?",
+      "save": "Are you sure you want to save the changes?",
+      "completeParentStage": "Are you sure you want to complete the parent stage?",
+      "edit": "Are you sure you want to update the sub-stage?"
+    }
   },
+  "yes": "Yes",
+  "no": "No",
   "stage-modal-header": "Stage Details",
-  "no-data-label": "Aktif süreç detayı bulunmamaktadır.",
+  "no-data-label": "No active process details found.",
   "notifications": {
     "start": {
       "success": "The sub-stage was started successfully.",

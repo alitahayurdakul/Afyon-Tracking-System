@@ -1,21 +1,28 @@
 "use client";
 import { useTranslations } from "next-intl";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useGetActiveProcessesDataQuery } from "@/api/queries/useGetProcessesQueries";
 import { ErrorChecker } from "@/components/common/error/ErrorChecker";
 import { LoadingChecker } from "@/components/common/loaders/LoadingChecker";
 import styles from "@/styles/components/activeProcesses/ActiveProcessesGrid.module.scss";
-import {
-  IProcessesTypes,
-  IProcessType,
-} from "@/types/processTypes";
+import { IProcessesTypes, IProcessType } from "@/types/processTypes";
 
 import { ActiveProcessCard } from "./ActiveProcessCard";
 
-export const ActiveProcessGrid = () => {
+export const ActiveProcessGrid = ({
+  setActiveUnit,
+}: {
+  setActiveUnit: React.Dispatch<React.SetStateAction<string>>;
+}) => {
   const { data, isLoading, isError } =
     useGetActiveProcessesDataQuery<IProcessesTypes>("ACTIVE");
+
+  useEffect(() => {
+    if (data) {
+      setActiveUnit(data?.length.toString());
+    }
+  }, [setActiveUnit, data]);
 
   const t = useTranslations("activeProcess");
 

@@ -11,11 +11,12 @@
     "delete": "Delete"
   },
   "table": {
-    "name": "MATERIAL NAME",
-    "code": "MATERIAL CODE",
-    "creator": "CREATED BY",
-    "editor": "UPDATED BY",
-    "actions": "ACTIONS"
+    "name": "Material Name",
+    "code": "Material Code",
+    "creator": "Created By",
+    "editor": "Updated By",
+    "actions": "Actions",
+    "description": "Description"
   },
   "modal": {
     "create-headers": "Add New Material",
@@ -23,18 +24,18 @@
   },
   "form": {
     "labels": {
-      "name": "MATERIAL NAME",
-      "code": "MATERIAL CODE",
-      "description": "DESCRIPTION",
+      "name": "Material Name",
+      "code": "Material Code",
+      "description": "Description",
       "creator": "Created By",
       "createdDate": "Creation Date",
       "editor": "Last Updated By",
       "editedDate": "Last Updated Date"
     },
     "placeholders": {
-      "name": "Enter the material name",
-      "code": "Enter the material code",
-      "description": "Enter a description."
+      "name": "Enter material name",
+      "code": "Enter material code",
+      "description": "Enter description."
     },
     "buttons": {
       "cancel": "Cancel",

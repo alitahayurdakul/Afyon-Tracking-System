@@ -5,19 +5,16 @@ import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 
 import { useGetProjectOptionsDataQuery } from "@/api/queries/useGetProjectsQueries";
-import { usePathname, useRouter } from "@/i18n/routing";
 import styles from "@/styles/components/activeProcesses/ActiveProcessesHeader.module.scss";
-import { IFilterType } from "@/types/filterTypes";
-import { IOptionType } from "@/types/formTypes";
+import { StatusEnums } from "@/utils/enum/commonEnums";
 import {
   useAddQueryParam,
   useRemoveQueryParamModal,
 } from "@/utils/searchParams";
-import { toSearchParams } from "@/utils/toSearchParams";
 
 import { SelectBox } from "../formElements/SelectBox";
 
-export const ActiveProcessesHeader = () => {
+export const ActiveProcessesHeader = ({activeUnit}: {activeUnit: string}) => {
   const searchParams = useSearchParams();
 
   const projectId = searchParams.get("projectId") || "";
@@ -27,7 +24,9 @@ export const ActiveProcessesHeader = () => {
     },
   });
   const t = useTranslations("activeProcess");
-  const { data: projectOptions } = useGetProjectOptionsDataQuery("ACTIVE");
+  const { data: projectOptions, isLoading } = useGetProjectOptionsDataQuery(
+    StatusEnums.active,
+  );
 
   const addQueryParam = useAddQueryParam();
   const removeQueryParam = useRemoveQueryParamModal();
@@ -58,17 +57,18 @@ export const ActiveProcessesHeader = () => {
             options={projectOptions || []}
             control={control as any}
             placeholder={t("select-placeholder")}
-            formLabelClassName={styles["form-label"]}
             isSearchable
             isClearable
-            // loading={isLoading}
+            loading={isLoading}
             changeExtraFn={onChangeProjectSelect}
+            valueContainerStyles={{ fontSize: "14px" }}
+            controlStyles={{ width: "250px" }}
           />
         </div>
         <div className={styles["stat-box"]}>
           <div className={styles["stat-item"]}>
             <span className={styles["label"]}>{t("active-unit-count")}</span>
-            <span className={styles["value"]}>12</span>
+            <span className={styles["value"]}>{activeUnit ?? "-"}</span>
           </div>
         </div>
       </div>
