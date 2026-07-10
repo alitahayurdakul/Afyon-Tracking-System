@@ -20,7 +20,7 @@ import {
   MaterialEntry,
   SubStage,
 } from "@/types/activeProcessDetailTypes";
-import { StatusEnums } from "@/utils/enum/commonEnums";
+import { ResponseStatusEnums, StatusEnums } from "@/utils/enum/commonEnums";
 import { getStatus } from "@/utils/getStatus";
 
 import StatusChip from "../StatusChip";
@@ -110,7 +110,7 @@ export default function StageDetailModalContent({
     () =>
       (subStagesData ?? []).length > 0 &&
       subStagesData!.every(
-        (subStage: SubStage) => getStatus(subStage.status) === "completed",
+        (subStage: SubStage) => getStatus(subStage.status) === StatusEnums.completed,
       ),
     [subStagesData],
   );
@@ -173,7 +173,7 @@ export default function StageDetailModalContent({
       stageId: id,
       subStageId: activeSubStageData._id,
       data: {
-        status: StatusEnums.completed,
+        status: ResponseStatusEnums.completed,
         description: newSubStageData.description,
         delayReasons: newSubStageData.reasonList.map((reason: DelayReasons) => {
           return {
@@ -200,7 +200,7 @@ export default function StageDetailModalContent({
       stageId: id,
       subStageId: activeSubStageData._id,
       data: {
-        status: StatusEnums.active,
+        status: ResponseStatusEnums.active,
         description: newSubStageData.description,
         delayReasons: newSubStageData.reasonList.map((reason: DelayReasons) => {
           return {
@@ -227,7 +227,7 @@ export default function StageDetailModalContent({
       stageId: id,
       subStageId: activeSubStageData._id,
       data: {
-        status: StatusEnums.active,
+        status: ResponseStatusEnums.active,
         start: activeSubStageData.start,
       },
     };
@@ -281,7 +281,7 @@ export default function StageDetailModalContent({
             <DelayReasonGroup
               reasonList={newSubStageData.reasonList}
               disabled={isLocked}
-              isOnlyText={getStatus(activeSubStageData.status) === "completed"}
+              isOnlyText={getStatus(activeSubStageData.status) === StatusEnums.completed}
               onChange={(reasonList) =>
                 setNewSubStageData((prev) => ({ ...prev, reasonList }))
               }
@@ -295,7 +295,7 @@ export default function StageDetailModalContent({
                   materials={newSubStageData.materialList}
                   disabled={isLocked}
                   isOnlyText={
-                    getStatus(activeSubStageData.status) === "completed"
+                    getStatus(activeSubStageData.status) === StatusEnums.completed
                   }
                   onChange={(materials) => {
                     setNewSubStageData((prev) => ({
@@ -309,7 +309,7 @@ export default function StageDetailModalContent({
 
           <section className={styles.section}>
             <h3>{t("section.explaining")}</h3>
-            {getStatus(activeSubStageData.status) === "completed" ? (
+            {getStatus(activeSubStageData.status) === StatusEnums.completed ? (
               <p className={styles.descriptionText}>
                 {newSubStageData.description}
               </p>
@@ -343,7 +343,7 @@ export default function StageDetailModalContent({
           className={styles.footer}
           style={{
             borderTop:
-              getStatus(stageStatus) !== "completed"
+              getStatus(stageStatus) !== StatusEnums.completed
                 ? "0.5px solid #d3d1c7"
                 : "none",
           }}
@@ -422,8 +422,8 @@ export default function StageDetailModalContent({
             />
           )}
 
-          {getStatus(activeSubStageData.status) === "completed" &&
-            getStatus(stageStatus) !== "completed" && (
+          {getStatus(activeSubStageData.status) === StatusEnums.completed &&
+            getStatus(stageStatus) !== StatusEnums.completed && (
               <PopoverBody
                 alignOffset={-73}
                 align="start"
@@ -448,7 +448,7 @@ export default function StageDetailModalContent({
               />
             )}
 
-          {isAllCompleted && getStatus(stageStatus) !== "completed" && (
+          {isAllCompleted && getStatus(stageStatus) !== StatusEnums.completed && (
             <PopoverBody
               alignOffset={-73}
               align="start"
