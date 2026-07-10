@@ -278,31 +278,42 @@ export const SelectBox = forwardRef<Ref, SelectBoxProps>(
                 paddingBottom: "10px",
                 position: "absolute",
               }),
-              menuList: (base: any) => ({
-                ...base,
-                maxHeight: "200px",
-                paddingBottom: 1,
-                paddingTop: 0,
-                marginTop: 0,
-                width: "100%",
-                "::-webkit-scrollbar": {
-                  width: "5px",
-                  height: "60px",
-                },
-                "::-webkit-scrollbar *": {
-                  background: "transparent",
-                },
-                "::-webkit-scrollbar-track": {
-                  // background: "#f1f1f1"
-                },
-                "::-webkit-scrollbar-thumb": {
-                  borderRadius: "8px",
-                  background: "var(--base-grey-85, #4B5157)",
-                },
-                "::-webkit-scrollbar-thumb:hover": {
-                  background: "#555",
-                },
-              }),
+              menuList: (base: any, state: any) => {
+                const totalOptions = state.selectProps?.options?.length ?? 0;
+                const selectedCount = Array.isArray(state.selectProps?.value)
+                  ? state.selectProps.value.length
+                  : state.selectProps?.value
+                    ? 1
+                    : 0;
+                const allSelected = selectedCount >= totalOptions;
+                return {
+                  ...base,
+                  maxHeight: "200px",
+                  paddingBottom: 1,
+                  paddingTop: 0,
+                  marginTop: 0,
+                  width: "100%",
+                  padding: allSelected && hideSelectedOptions && "0!important",
+                  height: allSelected && hideSelectedOptions && "0!important",
+                  "::-webkit-scrollbar": {
+                    width: "5px",
+                    height: "60px",
+                  },
+                  "::-webkit-scrollbar *": {
+                    background: "transparent",
+                  },
+                  "::-webkit-scrollbar-track": {
+                    // background: "#f1f1f1"
+                  },
+                  "::-webkit-scrollbar-thumb": {
+                    borderRadius: "8px",
+                    background: "var(--base-grey-85, #4B5157)",
+                  },
+                  "::-webkit-scrollbar-thumb:hover": {
+                    background: "#555",
+                  },
+                };
+              },
               placeholder: (base: any) => ({
                 ...base,
                 color: "var(--text-muted)",
@@ -362,16 +373,24 @@ export const SelectBox = forwardRef<Ref, SelectBoxProps>(
               indicatorSeparator: (base: any) => ({
                 ...base,
               }),
-              menu: (base: any) => ({
+              menu: (base: any, state: any) => {
+                const totalOptions = state.selectProps?.options?.length ?? 0;
+                const selectedCount = Array.isArray(state.selectProps?.value)
+                  ? state.selectProps.value.length
+                  : state.selectProps?.value
+                    ? 1
+                    : 0;
+                const allSelected = selectedCount >= totalOptions;
+                return{
                 ...base,
                 marginTop: "4px",
-                border: "1px solid var(--border)",
+                border: allSelected ? "none" : "1px solid var(--border)",
                 borderRadius: "var(--form-border-radius)",
                 boxShadow: "var(--shadow-card)",
                 padding: 0,
                 backgroundColor: "var(--white)",
                 overflow: "hidden",
-              }),
+              }},
               option: (base: any, state: any) => {
                 return {
                   ...base,
