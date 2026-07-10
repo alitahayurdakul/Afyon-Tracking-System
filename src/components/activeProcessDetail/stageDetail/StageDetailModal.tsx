@@ -13,9 +13,13 @@ import styles from "../ProcessFlow.module.scss";
 export default function StageDetailModal({
   id,
   stageName,
+  entryId,
+  stageStatus
 }: {
   id: string;
   stageName: string;
+  entryId: string;
+  stageStatus: string
 }) {
   const addQueryParam = useAddQueryParam();
   const t = useTranslations("activeProcessDetail");
@@ -35,6 +39,8 @@ export default function StageDetailModal({
         <StageDetailModalContent
           id={id}
           stageName={stageName}
+          entryId={entryId}
+          stageStatus={stageStatus}
         />
       )}
     </>

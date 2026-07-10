@@ -19,6 +19,7 @@ export const processHandlers = {
   getStageDetail,
   startSubStage,
   saveandCompleteSubStage,
+  completeStage
 };
 
 async function createProcess(params: Record<string, any>): Promise<Response> {
@@ -136,7 +137,6 @@ async function getStageDetail(
 
     return createJsonError("Failed to get process detail", 400);
   } catch (err: any) {
-    console.log("errr", err);
     return createJsonError(extractErrorMessage(err), 500);
   }
 }
@@ -147,8 +147,8 @@ async function startSubStage(params: Record<string, any>): Promise<Response> {
     const response = await axiosInstance.put(
       END_POINTS.process.subStageOperation(processId, stageId, subStageId),
       {
-        status: StatusEnums.active
-      }
+        status: StatusEnums.active,
+      },
     );
 
     if (response.status === 200) {
@@ -160,14 +160,31 @@ async function startSubStage(params: Record<string, any>): Promise<Response> {
   }
 }
 
-async function saveandCompleteSubStage(params: Record<string, any>): Promise<Response> {
+async function saveandCompleteSubStage(
+  params: Record<string, any>,
+): Promise<Response> {
   try {
     const { processId, stageId, subStageId, data } = params;
-    console.log("ddd", data);
 
     const response = await axiosInstance.put(
       END_POINTS.process.subStageOperation(processId, stageId, subStageId),
       { ...data },
+    );
+
+    if (response.status === 200) {
+      return createJsonSuccess(200);
+    }
+
+    return createJsonError("Failed to start a sub stage", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
+  }
+}
+
+async function completeStage(entryId: string): Promise<Response> {
+  try {
+    const response = await axiosInstance.patch(
+      END_POINTS.process.completeStage(entryId),
     );
 
     if (response.status === 200) {

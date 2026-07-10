@@ -25,7 +25,7 @@ export default function StageRow({
   entryForStage,
   index,
   isLast,
-  onOpenDetail,
+  onOpenDetail
 }: StageRowProps) {
   const time = () => {
     const startTime = new Date(
@@ -93,7 +93,7 @@ export default function StageRow({
 
         <div className={styles.cardRight}>
           <StatusChip status={stage.status as string} t={t} />
-          <StageDetailModal id={stage._id} stageName={stage.name ?? ""} />
+          <StageDetailModal id={stage._id} stageName={stage.name ?? ""} stageStatus = {stage.status} entryId = {entryForStage?._id ?? ""} />
         </div>
       </div>
     </div>
