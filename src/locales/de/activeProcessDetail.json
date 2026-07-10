@@ -57,6 +57,14 @@
     "complete": {
       "success": "Die Unterphase wurde erfolgreich abgeschlossen.",
       "error": "Beim Abschließen der Unterphase ist ein Fehler aufgetreten."
+    },
+    "edit": {
+      "success": "Der Status der Unterphase wurde erfolgreich aktualisiert.",
+      "error": "Beim Aktualisieren des Status der Unterphase ist ein Fehler aufgetreten."
+    },
+    "complete-parent-stage": {
+      "success": "Die übergeordnete Phase wurde erfolgreich abgeschlossen.",
+      "error": "Beim Abschließen der übergeordneten Phase ist ein Fehler aufgetreten."
     }
   }
 }

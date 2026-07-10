@@ -57,6 +57,14 @@
     "complete": {
       "success": "Alt aşama başarıyla tamamlandı.",
       "error": "Alt aşama tamamlanırken bir sorun ile karşılaşıldı."
+    },
+    "edit": {
+      "success": "Alt aşama durumu başarıyla değiştirildi.",
+      "error": "Alt aşama durumu değiştirilirken bir sorun ile karşılaşıldı."
+    },
+    "complete-parent-stage": {
+      "success": "Üst aşama başarıyla tamamlandı.",
+      "error": "Üst aşama tamamlanırken bir sorun ile karşılaşıldı."
     }
   }
 }

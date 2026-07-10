@@ -7,12 +7,12 @@ import { getElapsedTime } from "@/utils/getElapsedTime";
 interface IPropsTypes {
   startDate: string | null;
   endDate?: string | null;
+  status: string;
 }
 
-const TimeSection = ({ startDate, endDate }: IPropsTypes) => {
+const TimeSection = ({ startDate, endDate, status }: IPropsTypes) => {
   const t = useTranslations("activeProcessDetail");
   const date = new Date().toISOString();
-  console.log("end",endDate, "start",startDate);
 
   return (
     <section className={styles.section}>
@@ -28,7 +28,7 @@ const TimeSection = ({ startDate, endDate }: IPropsTypes) => {
           <label>
             <b>{t("end-date")}</b>
           </label>
-          <label>{formatDate(endDate)}</label>
+          <label>{status === "completed" ? formatDate(endDate) : "-"}</label>
         </div>
         <div className={styles.timeCol}>
           <label>
@@ -38,7 +38,7 @@ const TimeSection = ({ startDate, endDate }: IPropsTypes) => {
             {startDate
               ? getElapsedTime(
                   startDate ?? "",
-                 endDate?.trim() || date,
+                  (status === "completed" ? endDate?.trim() : date) as string,
                 )
               : "-"}
           </label>
