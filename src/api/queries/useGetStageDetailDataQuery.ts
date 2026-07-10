@@ -271,3 +271,52 @@ export const useEditSubStage = () => {
     },
   });
 };
+
+interface CompleteStage {
+  entryId: string;
+}
+
+const completeStage = async (payload: CompleteStage): Promise<any> => {
+  const { data } = await axiosInstance.post<any>(
+    CLIENT_END_POINTS.processes.completeStage,
+    {
+      entryId: payload.entryId,
+      type: ProcessQueryTypes.completeStage,
+    },
+  );
+  return data;
+};
+
+export const useCompleteStage = () => {
+  const queryClient = useQueryClient();
+  const dispatch = useDispatch();
+  const t = useTranslations("activeProcessDetail");
+
+  return useMutation({
+    mutationFn: completeStage,
+    onSuccess: (data, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ["completeStage", variables.entryId],
+      });
+      dispatch(
+        addToastify({
+          message: t("notifications.complete-parent-stage.success"),
+          type: "success",
+          icon: "close",
+          id: "completeStageSuccess" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable());
+    },
+    onError: (err) => {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, "notifications.complete-parent-stage.error"),
+          type: "error",
+          icon: "close",
+          id: "completeStageError" + Date.now(),
+        }),
+      );
+    },
+  });
+};

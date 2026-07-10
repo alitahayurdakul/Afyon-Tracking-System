@@ -11,12 +11,14 @@ export enum ProcessQueryTypes {
   editProcessDelayReasons = "EDIT_PROCESS_DELAY_REASONS",
   getStageDetail = "GET_STAGE_DETAIL",
   startSubStage = "START_SUB_STAGE",
-  saveandCompleteSubStage = "SAVE_AND_COMPLETE_SUB_STAGE"
+  saveandCompleteSubStage = "SAVE_AND_COMPLETE_SUB_STAGE",
+  completeStage = "COMPLETE_STAGE",
+  startStage = "START_STAGE"
 }
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { id, processId, stageId, params, type } = body;
+  const { id, processId, stageId, params, type, entryId } = body;
 
   switch (type) {
     case ProcessQueryTypes.createProcess:
@@ -37,6 +39,10 @@ export async function POST(request: NextRequest) {
       return await processHandlers.startSubStage(params);
     case ProcessQueryTypes.saveandCompleteSubStage:
       return await processHandlers.saveandCompleteSubStage(params);
+    case ProcessQueryTypes.completeStage:
+      return await processHandlers.completeStage(entryId);
+    case ProcessQueryTypes.startStage:
+      return await processHandlers.startStage(params);
 
     default: {
       return Response.json(
