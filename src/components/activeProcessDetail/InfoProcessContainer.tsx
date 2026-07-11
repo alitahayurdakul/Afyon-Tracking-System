@@ -30,10 +30,12 @@ export default function InfoProcessContainer({
   data,
   trainsOptions,
   refetch,
+  isCompletedButtonActive,
 }: {
   data?: ProcessResponse;
   trainsOptions: IOptionType[];
   refetch: any;
+  isCompletedButtonActive: boolean;
 }) {
   const { id } = useParams();
   const router = useRouter();
@@ -90,7 +92,6 @@ export default function InfoProcessContainer({
         router.push(URL_PAGES.activeProcesses);
       }
     } catch (err) {
-      
       dispatch(
         addToastify({
           message: extractApiError(err, "Hata meydana geldi"),
@@ -113,7 +114,9 @@ export default function InfoProcessContainer({
     <aside className={styles.sidebar}>
       <div className={styles["sidebar-inner"]}>
         <section>
-          <label className={styles["section-label"]}>{t("active-projects")}</label>
+          <label className={styles["section-label"]}>
+            {t("active-projects")}
+          </label>
 
           <div className={styles["select-wrap"]}>
             <select
@@ -177,13 +180,15 @@ export default function InfoProcessContainer({
                 <p>2023</p>
               </div>
             </div> */}
-            <button
-              className={styles["complete-btn"]}
-              onClick={onCompleteProcess}
-            >
-              {t("complete-process")}
-              <FontAwesomeIcon icon="arrow-right" />
-            </button>
+            {isCompletedButtonActive && (
+              <button
+                className={styles["complete-btn"]}
+                onClick={onCompleteProcess}
+              >
+                {t("complete-process")}
+                <FontAwesomeIcon icon="arrow-right" />
+              </button>
+            )}
           </div>
         </section>
 

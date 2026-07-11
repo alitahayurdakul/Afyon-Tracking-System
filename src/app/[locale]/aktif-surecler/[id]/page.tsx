@@ -14,8 +14,11 @@ import { IOptionType } from "@/types/formTypes";
 import {
   IProcessesTypes,
   IProcessType,
+  IStage,
   ProcessResponse,
 } from "@/types/processTypes";
+import { getStatus } from "@/utils/getStatus";
+import { StatusEnums } from "@/utils/enum/commonEnums";
 
 export default function ActiveProcessDetailPage() {
   const { data, isLoading, isError, refetch } =
@@ -37,6 +40,14 @@ export default function ActiveProcessDetailPage() {
     ) as IOptionType[];
   }, [activeProcessesData]);
 
+  const isCompletedButtonActive = useMemo(() => {
+    const isEqualCount = data?.entries.length === data?.stages.length;
+    const isAllCompleted = data?.stages.every(
+      (stage: IStage) => getStatus(stage.status) === StatusEnums.completed,
+    );
+    return isEqualCount && isAllCompleted;
+  }, [data]);
+
   return (
     <div
       className={`${styles["page-container"]} ${styles["active-process-detail"]}`}
@@ -52,6 +63,7 @@ export default function ActiveProcessDetailPage() {
         data={data}
         trainsOptions={trainsOptions}
         refetch={refetch}
+        isCompletedButtonActive={isCompletedButtonActive ?? false}
       />
     </div>
   );
