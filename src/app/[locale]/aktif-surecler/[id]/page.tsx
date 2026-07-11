@@ -17,8 +17,8 @@ import {
   IStage,
   ProcessResponse,
 } from "@/types/processTypes";
-import { getStatus } from "@/utils/getStatus";
 import { StatusEnums } from "@/utils/enum/commonEnums";
+import { getStatus } from "@/utils/getStatus";
 
 export default function ActiveProcessDetailPage() {
   const { data, isLoading, isError, refetch } =
