@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
 
 import { useGetRolesDataQuery } from "@/api/queries/useGetRolesQueries";
-import { PERMISSION_LABEL_MAP } from "@/consts/permissionsConsts";
 import styles from "@/styles/components/common/TableListBody.module.scss";
 import { createRolesTableColumns } from "@/utils/rolesListTableUtils";
 
@@ -39,7 +38,7 @@ export const RolesListBody = () => {
           className={styles["table-class"]}
           loading={isLoading}
           data={data ?? []}
-          columns={createRolesTableColumns(t, PERMISSION_LABEL_MAP)}
+          columns={createRolesTableColumns(t)}
         />
       </div>
     </section>

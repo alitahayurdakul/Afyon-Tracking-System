@@ -1,0 +1,21 @@
+{
+  "activeProcess:read": "Aktive Prozesse anzeigen",
+  "activeProcess:write": "Aktive Prozesse erstellen und bearbeiten",
+  "activeProcess:delete": "Aktive Prozesse löschen",
+  "activeProcess:manage": "Aktive Prozesse verwalten",
+
+  "user:read": "Benutzer anzeigen",
+  "user:write": "Benutzer erstellen und bearbeiten",
+  "user:delete": "Benutzer löschen",
+  "user:manage": "Benutzer verwalten",
+
+  "role:read": "Rollen anzeigen",
+  "role:write": "Rollen erstellen und bearbeiten",
+  "role:delete": "Rollen löschen",
+  "role:manage": "Rollen verwalten",
+
+  "stage:read": "Phasen anzeigen",
+  "stage:write": "Phasen erstellen und bearbeiten",
+  "stage:delete": "Phasen löschen",
+  "stage:manage": "Phasen verwalten"
+}

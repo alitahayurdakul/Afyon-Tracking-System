@@ -21,12 +21,12 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RoleQueryTypes } from "@/app/api/roles/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import {
-  PERMISSION_OPTIONS,
-  PERMISSION_LABEL_MAP,
-} from "@/consts/permissionsConsts";
 import { extractApiError } from "@/utils/extractApiError";
 import { useTranslations } from "next-intl";
+import {
+  generatePermissionOptions,
+  PermissionOption,
+} from "@/consts/generatePermissionOptions";
 
 interface IPropsTypes {
   id: string;
@@ -35,21 +35,21 @@ interface IPropsTypes {
 
 export const EditRoleForm = ({ id, data }: IPropsTypes) => {
   const t = useTranslations("roles");
-  const permissionOptions = useMemo(
-    () =>
-      PERMISSION_OPTIONS.map((p) => ({
-        label: p.label,
-        value: String(p.value),
-      })),
-    [],
-  );
+  const tPermission = useTranslations("permissions");
 
   const defaultPermissions = useMemo(() => {
     return (data?.permissions ?? []).map((p) => ({
-      label: PERMISSION_LABEL_MAP.get(p) ?? p,
       value: p,
+      label: tPermission(p)
     }));
   }, [data]);
+
+  const roleOptions = useMemo(() => {
+    return generatePermissionOptions().map((p: PermissionOption) => ({
+      label: tPermission(p.label),
+      value: p.value,
+    }));
+  }, []);
 
   const {
     control,
@@ -135,14 +135,15 @@ export const EditRoleForm = ({ id, data }: IPropsTypes) => {
         placeholder={t("form.permissionsPlaceholder")}
         required
         multiselect
-        options={permissionOptions}
+        options={roleOptions ?? []}
+        isClearable
+        isSearchable
+        hideSelectedOptions
       />
 
       <div>
         <FontAwesomeIcon icon={faCircleInfo} className={styles["alert-icon"]} />
-        <span className={styles["info-text"]}>
-          {t("form.editInfo")}
-        </span>
+        <span className={styles["info-text"]}>{t("form.editInfo")}</span>
       </div>
 
       <div className={styles["btn-group"]}>

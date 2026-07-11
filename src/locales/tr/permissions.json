@@ -1,0 +1,21 @@
+{
+  "activeProcess:read": "Aktif Süreçleri Görüntüle",
+  "activeProcess:write": "Aktif Süreç Oluştur ve Düzenle",
+  "activeProcess:delete": "Aktif Süreçleri Sil",
+  "activeProcess:manage": "Aktif Süreçleri Yönet",
+
+  "user:read": "Kullanıcıları Görüntüle",
+  "user:write": "Kullanıcı Oluştur ve Düzenle",
+  "user:delete": "Kullanıcıları Sil",
+  "user:manage": "Kullanıcıları Yönet",
+
+  "role:read": "Rolleri Görüntüle",
+  "role:write": "Rol Oluştur ve Düzenle",
+  "role:delete": "Rolleri Sil",
+  "role:manage": "Rolleri Yönet",
+
+  "stage:read": "Aşamaları Görüntüle",
+  "stage:write": "Aşama Oluştur ve Düzenle",
+  "stage:delete": "Aşamaları Sil",
+  "stage:manage": "Aşamaları Yönet"
+}

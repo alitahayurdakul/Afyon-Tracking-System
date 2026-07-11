@@ -8,10 +8,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { PERMISSION_ACTION, PERMISSION_RESOURCE } from "@/consts/permissions";
 import styles from "@/styles/components/common/Topbar.module.scss";
+import { permission } from "@/utils/permission";
 
 import { CreateFleetModal } from "../createFleetModal/CreateFleetModal";
 import LanguageSelector from "../NewLanguageSelectBox";
+import { RoleWrapper } from "../RoleWrapper";
 
 library.add(faSearch, faBell, faGear, faCirclePlus);
 
@@ -39,7 +42,15 @@ export const Topbar = ({ showCreateButton = false }: TopbarProps) => {
           </div>
         </div>
 
-        {showCreateButton && <CreateFleetModal />}
+        {showCreateButton && (
+          <RoleWrapper
+            requiredPermissions={[
+              permission(PERMISSION_RESOURCE.ACTIVEPROCESS, PERMISSION_ACTION.MANAGE)
+            ]}
+          >
+            <CreateFleetModal />
+          </RoleWrapper>
+        )}
       </div>
     </header>
   );

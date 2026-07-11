@@ -8,11 +8,11 @@ import { EditRoleForm } from "./EditRoleForm";
 
 export const EditRoleModalWrapper = ({ id }: { id: string }) => {
   const t = useTranslations("roles");
-    const { data, isFetching, isLoading } = useGetRoleDetailDataQuery(id);
+  const { data, isFetching, isLoading } = useGetRoleDetailDataQuery(id);
 
   return (
     <>
-       {!isFetching && !isLoading && (
+      {!isFetching && !isLoading && (
         <NewModal
           name={`${EDIT_ROLE_MODAL}_${id}`}
           width={"900px"}
@@ -27,4 +27,3 @@ export const EditRoleModalWrapper = ({ id }: { id: string }) => {
     </>
   );
 };
-
