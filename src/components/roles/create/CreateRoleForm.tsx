@@ -6,7 +6,7 @@ import { Button } from "@/components/formElements/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { RoleFormValidation } from "@/utils/validations/roleFormValidation";
-import React, { useCallback, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { InputBox } from "@/components/formElements/InputBox";
 import { TextAreaBox } from "@/components/formElements/TextAreaBox";
 import { SelectBox } from "@/components/formElements/SelectBox";
@@ -19,12 +19,16 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RoleQueryTypes } from "@/app/api/roles/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import { PERMISSION_OPTIONS } from "@/consts/permissionsConsts";
 import { extractApiError } from "@/utils/extractApiError";
 import { useTranslations } from "next-intl";
+import {
+  generatePermissionOptions,
+  PermissionOption,
+} from "@/consts/generatePermissionOptions";
 
 export const CreateRoleForm = () => {
   const t = useTranslations("roles");
+  const tPermission = useTranslations("permissions");
   const {
     control,
     handleSubmit,
@@ -43,14 +47,12 @@ export const CreateRoleForm = () => {
   const dispatch = useDispatch();
   const removeModal = useRemoveQueryParamModal();
 
-  const permissionOptions = useMemo(
-    () =>
-      PERMISSION_OPTIONS.map((p) => ({
-        label: p.label,
-        value: String(p.value),
-      })),
-    [],
-  );
+  const roleOptions = useMemo(() => {
+    return generatePermissionOptions().map((p: PermissionOption) => ({
+      label: tPermission(p.label),
+      value: p.value,
+    }));
+  }, []);
 
   const onSubmit: SubmitHandler<IRoleFormDataTypes> = useCallback(
     async (data) => {
@@ -119,7 +121,7 @@ export const CreateRoleForm = () => {
         placeholder={t("form.permissionsPlaceholder")}
         required
         multiselect
-        options={permissionOptions}
+        options={roleOptions}
       />
       <div className={styles["btn-group"]}>
         <Button

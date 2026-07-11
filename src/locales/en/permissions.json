@@ -1,0 +1,21 @@
+{
+  "activeProcess:read": "View Active Processes",
+  "activeProcess:write": "Create and Edit Active Processes",
+  "activeProcess:delete": "Delete Active Processes",
+  "activeProcess:manage": "Manage Active Processes",
+
+  "user:read": "View Users",
+  "user:write": "Create and Edit Users",
+  "user:delete": "Delete Users",
+  "user:manage": "Manage Users",
+
+  "role:read": "View Roles",
+  "role:write": "Create and Edit Roles",
+  "role:delete": "Delete Roles",
+  "role:manage": "Manage Roles",
+
+  "stage:read": "View Stages",
+  "stage:write": "Create and Edit Stages",
+  "stage:delete": "Delete Stages",
+  "stage:manage": "Manage Stages"
+}

@@ -1,5 +1,8 @@
+import { useTranslations } from "next-intl";
+
 import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
 import { RolesTableActionsCol } from "@/components/roles/RolesTableActionsCol";
+import { Permission } from "@/consts/permissions";
 import styles from "@/styles/components/roles/RolesListTableUtils.module.scss";
 import { TFunction } from "@/types/commonTypes";
 import { IRoleType } from "@/types/rolesTypes";
@@ -16,19 +19,9 @@ export const rolesTableColumns: ICommonTableColumnsTypes = [
   { name: "actions", label: "actions" },
 ];
 
-const resolvePermissionLabels = (
-  list: string[] | undefined,
-  map: Map<string, string>,
-): string[] => {
-  if (!list) return [];
-  return list.map((p) => map.get(p) ?? p);
-};
-
-export const createRolesTableColumns = (
-  t: TFunction,
-  permissionsMap: Map<string, string> = new Map(),
-) => {
+export const createRolesTableColumns = (t: TFunction) => {
   const columns = rolesTableColumns;
+  const tPermission = useTranslations("permissions");
 
   return [
     ...columns.map((column: ICommonTableColumnsType) => ({
@@ -55,15 +48,16 @@ export const createRolesTableColumns = (
           );
         }
         if (column.name === "permissions") {
-          const labels = resolvePermissionLabels(r.permissions, permissionsMap);
-          if (labels.length === 0) {
+          const permissions =
+            r.permissions.map((permission: Permission) => permission) ?? [];
+          if (permissions.length === 0) {
             return <div className={styles["muted"]}>-</div>;
           }
           return (
             <div className={styles["permission-badges"]}>
-              {labels.map((label, i) => (
+              {permissions.map((permission: Permission, i: number) => (
                 <span key={i} className={styles["permission-badge"]}>
-                  {label}
+                  {tPermission(permission)}
                 </span>
               ))}
             </div>

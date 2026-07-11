@@ -1,3 +1,5 @@
+import { Permission } from "@/consts/permissions";
+
 export interface IRoleFormDataTypes {
   roleName: string;
   roleDescription: string;
@@ -8,7 +10,7 @@ export interface IRoleType {
   _id: string;
   roleName: string;
   roleDescription: string;
-  permissions: string[];
+  permissions: Permission[];
   creator?: string;
   editor?: string;
   createdAt: string;
