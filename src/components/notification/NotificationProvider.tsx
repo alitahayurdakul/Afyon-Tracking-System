@@ -1,24 +1,23 @@
 import * as Toast from "@radix-ui/react-toast";
+import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { clearToastify } from "@/redux/slices/toastSlice";
 import { RootState } from "@/redux/store";
+import styles from "@/styles/components/notifications/NotificationProvider.module.scss";
 
-import { ErrorNotificationElement } from "./error/ErrorNotification";
-import styles from "./NotificationProvider.module.scss";
-import { SuccessNotificationElement } from "./success/SuccessNotification";
+import { ErrorNotificationElement } from "./ErrorNotification";
+import { SuccessNotificationElement } from "./SuccessNotification";
 
 const NotificationProvider = () => {
   const toasts = useSelector((state: RootState) => state.toast.elements);
   const dispatch = useDispatch();
-  // const { pathname } = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     dispatch(clearToastify());
-  }, [dispatch, 
-    // pathname
-  ]);
+  }, [dispatch, pathname]);
 
   return (
     <Toast.Provider swipeDirection="right">

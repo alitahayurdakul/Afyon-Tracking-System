@@ -1,13 +1,13 @@
 import { useTranslations } from "next-intl";
 
 import { useStartStage } from "@/api/queries/useGetProcessesQueries";
+import styles from "@/styles/components/activeProcessDetail/ProcessFlow.module.scss";
 import { IProcessEntry, IStage } from "@/types/processTypes";
 import { StatusEnums } from "@/utils/enum/commonEnums";
 import { formatDate } from "@/utils/formDate";
 import { getStatus } from "@/utils/getStatus";
 
 import { PopoverBody } from "../Popover";
-import styles from "./ProcessFlow.module.scss";
 import StageDetailModal from "./stageDetail/StageDetailModal";
 import StatusChip from "./StatusChip";
 

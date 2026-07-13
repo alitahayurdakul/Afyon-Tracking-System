@@ -8,10 +8,9 @@ import {
   IToastElement,
   removeToastify
 } from "@/redux/slices/toastSlice";
+import errorStyles from "@/styles/components/notifications/ErrorNotification.module.scss";
+import styles from "@/styles/components/notifications/NotificationProvider.module.scss";
 import { getIcon } from "@/utils/toastUtils";
-
-import styles from "../NotificationProvider.module.scss";
-import errorStyles from "./ErrorNotification.module.scss";
 
 interface ErrorNotificationElementProps {
   toast: IToastElement;

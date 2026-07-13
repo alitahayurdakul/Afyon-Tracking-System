@@ -2,14 +2,13 @@
 
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
 
 import StageDetailModalContent from "@/components/activeProcessDetail/stageDetail/StageDetailModalContent";
 import { ACTIVE_STAGE_DETAIL_MODAL } from "@/consts/modals";
+import styles from "@/styles/components/activeProcessDetail/ProcessFlow.module.scss";
 import { IStage } from "@/types/processTypes";
 import { useAddQueryParam } from "@/utils/searchParams";
 
-import styles from "../ProcessFlow.module.scss";
 import QualityDetailModal from "./QualityDetailModal";
 
 export default function StageDetailModal({
