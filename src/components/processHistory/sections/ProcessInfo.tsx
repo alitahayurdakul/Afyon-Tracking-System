@@ -8,11 +8,12 @@ import {
   faTrain,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { IProcessInstance } from '@/types/processTypes'
+import { useTranslations } from "next-intl";
+
 import styles from "@/styles/components/processHistory/ModalContent.module.scss";
+import { IProcessInstance } from '@/types/processTypes'
 import { formatDate } from "@/utils/formDate";
 import { getElapsedTime } from "@/utils/getElapsedTime";
-import { useTranslations } from "next-intl";
 
 const ProcessInfo = ({processInfo}: {processInfo: IProcessInstance}) => {
     const t = useTranslations("processHistory");

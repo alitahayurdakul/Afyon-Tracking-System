@@ -1,7 +1,8 @@
-import { ProcessResponse } from "@/types/processTypes";
 import styles from "@/styles/components/processHistory/ModalContent.module.scss";
-import StagesInfo from "./sections/StagesInfo";
+import { ProcessResponse } from "@/types/processTypes";
+
 import ProcessInfo from "./sections/ProcessInfo";
+import StagesInfo from "./sections/StagesInfo";
 
 const ModalContent = ({ data }: { data?: ProcessResponse }) => {
   const processInfo = data?.process;
