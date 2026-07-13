@@ -15,7 +15,6 @@ export const processHandlers = {
   editProcess,
   getActiveProcesses,
   getProcessDetail,
-  editProcessDelayReasons,
   getStageDetail,
   startSubStage,
   saveandCompleteSubStage,
@@ -95,32 +94,6 @@ async function getProcessDetail(id: string): Promise<Response> {
     return createJsonError("Failed to get process detail", 400);
   } catch (err: any) {
     return createJsonError(extractErrorMessage(err), 500);
-  }
-}
-
-async function editProcessDelayReasons(
-  params: Record<string, any>,
-): Promise<Response> {
-  try {
-    const response = await axiosInstance.patch(
-      END_POINTS.process.editDelayReasons(params.entryStageId),
-      {
-        delayReasonIds: params.delayReasonIds,
-        delayNote: "",
-      },
-    );
-    if (response.status === 200) {
-      return Response.json({ success: true });
-    }
-    return Response.json(
-      { success: false, error: "Failed to edit process delay reasons" },
-      { status: 400 },
-    );
-  } catch (err: any) {
-    return Response.json(
-      { success: false, error: err.message },
-      { status: 500 },
-    );
   }
 }
 

@@ -20,11 +20,16 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { ProcessOperationsQueryTypes } from "@/app/api/activeProcessOperations/route";
 import DE22000 from "@/assets/images/DE-22000.jpg";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { PERMISSION_ACTION, PERMISSION_RESOURCE } from "@/consts/permissions";
 import { URL_PAGES } from "@/consts/url";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { IOptionType } from "@/types/formTypes";
 import { ProcessResponse } from "@/types/processTypes";
 import { extractApiError } from "@/utils/extractApiError";
+import { getPermission } from "@/utils/getPermission";
+
+import { PopoverBody } from "../Popover";
+import { RoleWrapper } from "../RoleWrapper";
 
 export default function InfoProcessContainer({
   data,
@@ -71,33 +76,29 @@ export default function InfoProcessContainer({
 
   const onCompleteProcess = async () => {
     try {
-      const { data: responseData } = await axiosInstance.post(
+      await axiosInstance.post(
         CLIENT_END_POINTS.activeProcessOperation.complete,
         {
           type: ProcessOperationsQueryTypes.completeProcess,
           id,
         },
       );
-
-      if (responseData.success) {
         dispatch(
           addToastify({
-            message:
-              "Süreç tamamlandı. Aktif süreçler ekranına yönlendiriliyorsunuz.",
+            message: t("notifications.complete-process.success"),
             type: "success",
             icon: "close",
-            id: "contactePage" + Date.now(),
+            id: "completeProcessSuccess" + Date.now(),
           }),
         );
         router.push(URL_PAGES.activeProcesses);
-      }
     } catch (err) {
       dispatch(
         addToastify({
-          message: extractApiError(err, "Hata meydana geldi"),
+          message: extractApiError(err, t("notifications.complete-process.error")),
           type: "error",
           icon: "close",
-          id: "editTrainError" + Date.now(),
+          id: "completeProcessError" + Date.now(),
         }),
       );
     }
@@ -180,15 +181,39 @@ export default function InfoProcessContainer({
                 <p>2023</p>
               </div>
             </div> */}
+            <RoleWrapper
+                        requiredPermissions={[
+                          getPermission(PERMISSION_RESOURCE.ACTIVEPROCESS, PERMISSION_ACTION.MANAGE)
+                        ]}
+                      >
             {isCompletedButtonActive && (
-              <button
-                className={styles["complete-btn"]}
-                onClick={onCompleteProcess}
-              >
-                {t("complete-process")}
-                <FontAwesomeIcon icon="arrow-right" />
-              </button>
+              <PopoverBody
+                alignOffset={-73}
+                align="start"
+                triggerBody={
+                  <button
+                    className={styles["complete-btn"]}
+                  >
+                    {t("buttons.complete-process")}
+                    <FontAwesomeIcon icon="arrow-right" />
+                  </button>
+                }
+                contentBody={
+                  <div className={styles["content"]}>
+                    <p className={styles["text"]}>
+                      {t("buttons.questions.complete-process")}
+                    </p>
+                  </div>
+                }
+                closeContainer={
+                  <div className={styles["btn-container"]}>
+                    <button>{t("no")}</button>
+                    <button onClick={onCompleteProcess}>{t("yes")}</button>
+                  </div>
+                }
+              />
             )}
+            </RoleWrapper>
           </div>
         </section>
 

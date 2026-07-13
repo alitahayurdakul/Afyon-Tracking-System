@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { PERMISSION_ACTION, PERMISSION_RESOURCE } from "@/consts/permissions";
 import styles from "@/styles/components/common/Topbar.module.scss";
-import { permission } from "@/utils/permission";
+import { getPermission } from "@/utils/getPermission";
 
 import { CreateFleetModal } from "../createFleetModal/CreateFleetModal";
 import LanguageSelector from "../NewLanguageSelectBox";
@@ -45,7 +45,10 @@ export const Topbar = ({ showCreateButton = false }: TopbarProps) => {
         {showCreateButton && (
           <RoleWrapper
             requiredPermissions={[
-              permission(PERMISSION_RESOURCE.ACTIVEPROCESS, PERMISSION_ACTION.MANAGE)
+              getPermission(
+                PERMISSION_RESOURCE.ACTIVEPROCESS,
+                PERMISSION_ACTION.MANAGE,
+              ),
             ]}
           >
             <CreateFleetModal />

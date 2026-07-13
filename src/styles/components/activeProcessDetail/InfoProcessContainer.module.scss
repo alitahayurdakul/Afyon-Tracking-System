@@ -292,3 +292,55 @@
 .crew-card:hover .chat-icon {
   opacity: 1;
 }
+
+// Are u sure questions styles
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  max-width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  border-radius: 4px;
+  padding: 0;
+
+  .text {
+    color: #2c2c2a;
+    font-size: 12px;
+    line-height: 17px;
+  }
+}
+
+.btn-container {
+  justify-content: flex-end;
+  display: flex;
+  gap: 5px;
+
+  button {
+    padding: 5px 10px;
+    border-radius: 7px;
+    border: 0;
+    font-size: 0.625rem;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: opacity 0.25s;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  button:first-child {
+    background-color: var(--base-grey-15);
+    color: var(--slate-90);
+  }
+
+  button:last-child {
+    background-color: var(--on-sale-badge);
+    color: var(--base-white);
+  }
+}

@@ -11,7 +11,6 @@
   "end-date": "End Date",
   "not-yet-started": "Not Started Yet",
   "pending": "In Progress",
-  "complete-process": "Complete Process",
   "total-elapsed-time": "TOTAL ELAPSED TIME",
   "active-projects": "Active Projects",
   "active-projects-select-explaining": "Select a train to view the live workflow progress.",
@@ -34,13 +33,15 @@
     "start-sub-stage": "Start Sub-Stage",
     "edit": "Update Sub-Stage",
     "complete-stage": "Complete Parent Stage",
+    "complete-process": "Complete Process",
     "questions": {
       "start-sub-stage": "Are you sure you want to start the sub-stage?",
       "complete-sub-stage": "Are you sure you want to complete the sub-stage?",
       "save": "Are you sure you want to save the changes?",
       "completeStage": "Are you sure you want to complete the parent stage?",
       "edit": "Are you sure you want to update the sub-stage?",
-      "start-stage": "Are you sure you want to start the stage?"
+      "start-stage": "Are you sure you want to start the stage?",
+      "complete-process": "Are you sure you want to complete the process?"
     }
   },
   "yes": "Yes",
@@ -71,6 +72,10 @@
     "start-stage": {
       "success": "The stage was started successfully.",
       "error": "An error occurred while starting the stage."
+    },
+    "complete-process": {
+      "success": "The process was completed successfully.",
+      "error": "An error occurred while completing the process."
     }
   }
 }

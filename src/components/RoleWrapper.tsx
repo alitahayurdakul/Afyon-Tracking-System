@@ -24,7 +24,6 @@ export const RoleWrapper = ({
   const role = useSelector((state: RootState) => state.auth.user?.role);
   const roleName = role?.roleName;
   const permissions = role?.permissions ?? [];
-  console.log(role);
 
   if (allowedRoles?.length) {
     if (!roleName || !allowedRoles.includes(roleName)) return <>{fallback}</>;
