@@ -1,0 +1,61 @@
+{
+  "title": "Profilverwaltung",
+  "description": "Verwalten Sie Ihre Profilinformationen.",
+  "cardTitles": {
+    "profile": "Profilinformationen",
+    "password": "Passwort ändern"
+  },
+  "form": {
+    "fields": {
+      "fullName": {
+        "label": "Vollständiger Name",
+        "placeholder": "Vollständigen Namen eingeben"
+      },
+      "email": {
+        "label": "E-Mail",
+        "placeholder": "E-Mail eingeben"
+      },
+      "phone": {
+        "label": "Telefon",
+        "placeholder": "Telefonnummer eingeben"
+      },
+      "role": {
+        "label": "Rolle",
+        "placeholder": "Rolle eingeben"
+      },
+      "department": {
+        "label": "Abteilung",
+        "placeholder": "Abteilung eingeben"
+      },
+      "isActive": {
+        "label": "Aktiver Benutzer"
+      },
+      "newPassword": {
+        "label": "Neues Passwort",
+        "placeholder": "Neues Passwort eingeben"
+      },
+      "repassword": {
+        "label": "Passwort bestätigen",
+        "placeholder": "Passwort erneut eingeben"
+      }
+    },
+    "buttons": {
+      "saveInfo": "Informationen speichern",
+      "editPassword": "Passwort aktualisieren"
+    },
+    "questions": {
+      "saveInfo": "Möchten Sie Ihre Profilinformationen wirklich aktualisieren?",
+      "editPassword": "Möchten Sie Ihr Passwort wirklich aktualisieren?"
+    },
+    "notifications": {
+      "saveInfo": {
+        "success": "Die Profilinformationen wurden erfolgreich aktualisiert.",
+        "error": "Beim Aktualisieren der Profilinformationen ist ein Fehler aufgetreten."
+      },
+      "editPassword": {
+        "success": "Das Passwort wurde erfolgreich aktualisiert.",
+        "error": "Beim Aktualisieren des Passworts ist ein Fehler aufgetreten."
+      }
+    }
+  }
+}

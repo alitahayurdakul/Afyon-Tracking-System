@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { AnimatePresence } from "framer-motion";
 import React, {
   forwardRef,
+  ReactElement,
   useCallback,
   useMemo,
   useRef,
@@ -28,7 +29,7 @@ import { ErrorLabel } from "./ErrorLabel";
 
 export interface SelectBoxProps extends UseControllerProps {
   name: string;
-  label?: string | false | null;
+  label?: string | false | null | ReactElement; 
   loading?: boolean;
   errorQuery?: boolean;
   className?: string;

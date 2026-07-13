@@ -1,0 +1,64 @@
+{
+  "title": "Profil Yönetimi",
+  "description": "Profil bilgilerini yönetin",
+  "cardTitles": {
+    "profile": "Profile Bilgileri",
+    "password": "Şifre Değiştir"
+  },
+  "form": {
+    "fields": {
+      "fullName": {
+        "label": "Ad Soyad",
+        "placeholder": "Adı Soyadı giriniz"
+      },
+      "email": {
+        "label": "E-posta",
+        "placeholder": "E-posta giriniz"
+      },
+      "phone": {
+        "label": "Telefon",
+        "placeholder": "Telefon giriniz"
+      },
+      "role": {
+        "label": "Rol",
+        "placeholder": "Rol giriniz"
+      },
+      "department": {
+        "label": "Departman",
+        "placeholder": "Departman giriniz"
+      },
+      "isActive": {
+        "label": "Aktif Kullanıcı"
+      },
+      "newPassword": {
+        "label": "Yeni Şifre",
+        "placeholder": "Yeni Şifre giriniz"
+      },
+      "repassword": {
+        "label": "Şifre Tekrarı",
+        "placeholder": "Şifre tekrar giriniz"
+      }
+    },
+    "buttons": {
+      "saveInfo": "Bilgileri Kaydet",
+      "editPassword": "Şifreyi Güncelle",
+      "saveSubmitting": "Kaydediliyor...",
+      "editSubmitting": "Güncelleniyor..."
+    },
+    "questions": {
+      "saveInfo": "Bilgilerinizi güncellemek istediğinize emin misiniz?",
+      "editPassword": "Şifrenizi Güncellemek istediğinize emin misiniz?"
+    },
+    "notifications": {
+      "saveInfo": {
+        "success": "Profil bilgileri başarıyla güncellendi.",
+        "error": "Profil bilgileri güncellenirken bir sorun ile karşılaşıldı."
+      },
+
+      "editPassword": {
+        "success": "Şifre başarıyla güncellendi.",
+        "error": "Şifre güncellenirken bir sorun ile karşılaşıldı."
+      }
+    }
+  }
+}

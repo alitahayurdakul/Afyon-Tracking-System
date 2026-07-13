@@ -14,5 +14,6 @@ export const URL_PAGES = {
     delayReasons: "/gecikme-nedenleri",
     login: "/login",
     materials: "/malzeme-yonetimi",
-    projects: "/proje-yonetimi"
+    projects: "/proje-yonetimi",
+    profile: "/profil"
 }

@@ -1,0 +1,61 @@
+{
+  "title": "Profile Management",
+  "description": "Manage your profile information.",
+  "cardTitles": {
+    "profile": "Profile Information",
+    "password": "Change Password"
+  },
+  "form": {
+    "fields": {
+      "fullName": {
+        "label": "Full Name",
+        "placeholder": "Enter full name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter email"
+      },
+      "phone": {
+        "label": "Phone",
+        "placeholder": "Enter phone number"
+      },
+      "role": {
+        "label": "Role",
+        "placeholder": "Enter role"
+      },
+      "department": {
+        "label": "Department",
+        "placeholder": "Enter department"
+      },
+      "isActive": {
+        "label": "Active User"
+      },
+      "newPassword": {
+        "label": "New Password",
+        "placeholder": "Enter new password"
+      },
+      "repassword": {
+        "label": "Confirm Password",
+        "placeholder": "Re-enter password"
+      }
+    },
+    "buttons": {
+      "saveInfo": "Save Information",
+      "editPassword": "Update Password"
+    },
+    "questions": {
+      "saveInfo": "Are you sure you want to update your profile information?",
+      "editPassword": "Are you sure you want to update your password?"
+    },
+    "notifications": {
+      "saveInfo": {
+        "success": "Profile information updated successfully.",
+        "error": "An error occurred while updating the profile information."
+      },
+      "editPassword": {
+        "success": "Password updated successfully.",
+        "error": "An error occurred while updating the password."
+      }
+    }
+  }
+}
