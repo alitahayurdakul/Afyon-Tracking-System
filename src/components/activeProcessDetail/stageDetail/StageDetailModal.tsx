@@ -6,20 +6,26 @@ import { useState } from "react";
 
 import StageDetailModalContent from "@/components/activeProcessDetail/stageDetail/StageDetailModalContent";
 import { ACTIVE_STAGE_DETAIL_MODAL } from "@/consts/modals";
+import { IStage } from "@/types/processTypes";
 import { useAddQueryParam } from "@/utils/searchParams";
 
 import styles from "../ProcessFlow.module.scss";
+import QualityDetailModal from "./QualityDetailModal";
 
 export default function StageDetailModal({
   id,
   stageName,
   entryId,
-  stageStatus
+  stageStatus,
+  isQuality,
+  stages,
 }: {
   id: string;
   stageName: string;
   entryId: string;
-  stageStatus: string
+  stageStatus: string;
+  isQuality?: boolean;
+  stages: IStage[];
 }) {
   const addQueryParam = useAddQueryParam();
   const t = useTranslations("activeProcessDetail");
@@ -35,14 +41,24 @@ export default function StageDetailModal({
       >
         {t("open-detail")}
       </button>
-      {isOpen && (
-        <StageDetailModalContent
-          id={id}
-          stageName={stageName}
-          entryId={entryId}
-          stageStatus={stageStatus}
-        />
-      )}
+      {isQuality
+        ? isOpen && (
+            <QualityDetailModal
+              id={id}
+              stageName={stageName}
+              entryId={entryId}
+              stageStatus={stageStatus}
+              stages={stages}
+            />
+          )
+        : isOpen && (
+            <StageDetailModalContent
+              id={id}
+              stageName={stageName}
+              entryId={entryId}
+              stageStatus={stageStatus}
+            />
+          )}
     </>
   );
 }
