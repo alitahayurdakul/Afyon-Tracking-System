@@ -48,10 +48,10 @@ export const END_POINTS = {
     complete: (processId: string) =>
       `${apiUrl}/api/processes/${processId}/complete`,
   },
-  workflowHistory: {
-    getAll: `${apiUrl}/api/processes?status=COMPLETED`,
-    getDetail: (id: string) => `${apiUrl}/api/processes/${id}`,
-  },
+  // workflowHistory: {
+  //   getAll: `${apiUrl}/api/processes?status=COMPLETED`,
+  //   getDetail: (id: string) => `${apiUrl}/api/processes/${id}`,
+  // },
   statistics: {
     stages: (query: string) => `${apiUrl}/api/processes/statistics?${query}`,
     process: (query: string) =>
@@ -152,10 +152,10 @@ export const CLIENT_END_POINTS = {
   activeProcessOperation: {
     complete: "/api/activeProcessOperations",
   },
-  workflowHistory: {
-    getAll: "/api/workflowHistory",
-    getDetail: "/api/workflowHistory",
-  },
+  // workflowHistory: {
+  //   getAll: "/api/workflowHistory",
+  //   getDetail: "/api/workflowHistory",
+  // },
   common: {
     getStages: "/api/stagesOptions",
     getTrainsOptions: "/api/trainsOptions",

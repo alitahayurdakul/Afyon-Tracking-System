@@ -1,62 +1,15 @@
-"use client";
-
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import React, { useState } from "react";
 
-import {
-  useCompleteStage,
-  useGetStageDetailDataQuery,
-} from "@/api/queries/useGetStageDetailDataQuery";
-import { PopoverBody } from "@/components/Popover";
-import {
-  DelayReasons,
-  MaterialEntry,
-  SubStage,
-} from "@/types/activeProcessDetailTypes";
+import styles from "@/components/activeProcessDetail/stageDetail/QualityDetailModal.module.scss";
+import { DelayReasons, MaterialEntry, SubStage } from "@/types/activeProcessDetailTypes";
 import { IStage } from "@/types/processTypes";
-import { StatusEnums } from "@/utils/enum/commonEnums";
 import { getStatus } from "@/utils/getStatus";
 
-import styles from "../QualityDetailModal.module.scss";
-
-const Chevron = ({ open, small }: { open: boolean; small?: boolean }) => (
-  <svg
-    className={`${styles.chevron} ${open ? styles.chevronOpen : ""} ${small ? styles.small : ""}`}
-    viewBox="0 0 24 24"
-    width={small ? 14 : 18}
-    height={small ? 14 : 18}
-  >
-    <path
-      d="M6 9l6 6 6-6"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
-export const QuantityDetailModalContent = ({
-  stages,
-  id,
-  entryId,
-  stageStatus,
-}: {
-  stages?: IStage[];
-  id: string;
-  entryId: string;
-  stageStatus: string;
-}) => {
+const StagesInfo = ({ stages }: { stages: IStage[] }) => {
   const [openStages, setOpenStages] = useState<Set<string>>(new Set());
   const [openSubStages, setOpenSubStages] = useState<Set<string>>(new Set());
-  const t = useTranslations("activeProcessDetail");
-  const {
-    data: subStagesData,
-    isLoading,
-    isError,
-  } = useGetStageDetailDataQuery<SubStage[]>(id);
-
+  const t = useTranslations("processHistory")
   const toggle = (
     set: Set<string>,
     setFn: (s: Set<string>) => void,
@@ -66,18 +19,6 @@ export const QuantityDetailModalContent = ({
     next.has(id) ? next.delete(id) : next.add(id);
     setFn(next);
   };
-
-  const {
-    mutate: completeStageMutate,
-    isPending: completeStagePending,
-    isError: completeStageisError,
-    error: completeStageError,
-  } = useCompleteStage();
-
-  const completeStage = async () => {
-    completeStageMutate({ entryId });
-  };
-
   return (
     <div className={styles.accordion}>
       {stages &&
@@ -191,40 +132,26 @@ export const QuantityDetailModalContent = ({
               </div>
             );
           })}
-      <div
-        className={styles.footer}
-        style={{
-          borderTop:
-            getStatus(stageStatus) !== StatusEnums.completed
-              ? "0.5px solid #d3d1c7"
-              : "none",
-        }}
-      >
-        {getStatus(stageStatus) === StatusEnums.active && (
-          <PopoverBody
-            alignOffset={-73}
-            align="start"
-            triggerBody={
-              <button className={styles.completeParentStageBtn}>
-                {t("buttons.complete-stage")}
-              </button>
-            }
-            contentBody={
-              <div className={styles["content"]}>
-                <p className={styles["text"]}>
-                  {t("buttons.questions.completeStage")}
-                </p>
-              </div>
-            }
-            closeContainer={
-              <div className={styles["btn-container"]}>
-                <button>{t("no")}</button>
-                <button onClick={completeStage}>{t("yes")}</button>
-              </div>
-            }
-          />
-        )}
-      </div>
     </div>
   );
 };
+
+const Chevron = ({ open, small }: { open: boolean; small?: boolean }) => (
+  <svg
+    className={`${styles.chevron} ${open ? styles.chevronOpen : ""} ${small ? styles.small : ""}`}
+    viewBox="0 0 24 24"
+    width={small ? 14 : 18}
+    height={small ? 14 : 18}
+  >
+    <path
+      d="M6 9l6 6 6-6"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export default StagesInfo;

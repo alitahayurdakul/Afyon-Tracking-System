@@ -15,7 +15,8 @@
     "materials": "Materialliste",
     "userManagement": "Benutzerverwaltung",
     "users": "Benutzer",
-    "roles": "Rollen"
+    "roles": "Rollen",
+    "processesHistory": "Prozessverlauf"
   },
   "login": {
     "brandTitle": "Afyon Workflow-Management-System",

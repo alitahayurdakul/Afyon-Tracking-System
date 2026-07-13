@@ -11,7 +11,7 @@
   "end-date": "Bitiş",
   "not-yet-started": "Henüz başlamadı",
   "pending": "Sürüyor",
-  "total-elapsed-time": "TOPLAM GEÇEN SÜRE",
+  "total-elapsed-time": "Toplam Geçen Süre",
   "active-projects": "Aktif Projeler",
   "active-projects-select-explaining": "Canlı iş akışı ilerlemesini görüntülemek için bir tren seçin.",
   "processId": "Süreç ID",
@@ -20,7 +20,8 @@
     "delay-reason": "Gecikme Nedenleri",
     "materials": "Malzemeler ve Seri Numaları",
     "explaining": "Açıklama",
-    "files": "Dosyalar"
+    "files": "Dosyalar",
+    "no-sub-stages": "Alt aşama bulunmuyor."
   },
   "elapsed-time": "Geçen Süre",
   "serial-number-placeholder": "Seri numarası",

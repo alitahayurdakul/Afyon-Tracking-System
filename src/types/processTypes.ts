@@ -98,6 +98,10 @@ export type IProcessInstance = {
   completedAt?: string | null;
   createdAt?: string;
   updatedAt?: string;
+  projectName?: string;
+  projectId?: string;
+  wagonNo?: string;
+  wagonId?: string;
   [key: string]: unknown;
 };
 

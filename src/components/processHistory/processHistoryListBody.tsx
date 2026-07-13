@@ -1,0 +1,46 @@
+"use client";
+
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
+
+import { useGetActiveProcessesDataQuery } from "@/api/queries/useGetProcessesQueries";
+import { useGetProjectsDataQuery } from "@/api/queries/useGetProjectsQueries";
+import styles from "@/styles/components/common/TableListBody.module.scss";
+import { IProcessesTypes } from "@/types/processTypes";
+import { createProcessHistoryTableColumns } from "@/utils/processHistoryTableUtils";
+
+import { Table } from "../common/Table";
+
+export const ProcessHistoryListBody = () => {
+  const t = useTranslations("processHistory");
+  const { data, isLoading } = useGetActiveProcessesDataQuery<IProcessesTypes>("COMPLETED");
+  console.log(data);
+
+  return (
+    <section className={styles["pipeline-page"]}>
+      <div className={styles["page-top"]}>
+        <div>
+          <h2>{t("title")}</h2>
+          <p>{t("description")}</p>
+        </div>
+      </div>
+
+      <div className={styles.toolbar}>
+        <div className={styles["search-input"]}>
+          <FontAwesomeIcon icon={faSearch} />
+          <input placeholder={t("search")} />
+        </div>
+      </div>
+
+      <div className={styles["table-card"]}>
+        <Table
+          className={styles["table-class"]}
+          loading={isLoading}
+          data={data || []}
+          columns={createProcessHistoryTableColumns(t)}
+        />
+      </div>
+    </section>
+  );
+};

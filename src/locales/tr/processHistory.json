@@ -1,0 +1,53 @@
+{
+  "title": "Geçmiş Süreçler Yönetimi",
+  "description": "Tüm Gemiş Süreçleri görüntüleyin.",
+  "search": "Arama...",
+  "status": {
+    "completed": "Tamamlandı",
+    "active": "Aktif",
+    "pending": "Bekliyor"
+  },
+  "table": {
+    "projectName": "Proje Adı",
+    "locomotiveNo": "Tren Numarası",
+    "wagonNo": "Vagon",
+    "workflowName": "İş Akışı Adı",
+    "totalDuration": "Toplam Geçen Süre",
+    "startedAt": "Başlama Zamanı",
+    "completedAt": "Bitiş Zamanı",
+    "actions": "İşlemler",
+    "description": "Açıklama"
+  },
+  "actions": {
+    "detail": "Detayı Görüntüle",
+    "delete": "Sil"
+  },
+  "modal": {
+    "detail": "Süreç Detayı"
+  },
+  "notifications": {
+    "deleteSuccess": "Başarıyla silindi",
+    "deleteError": "Silme işlemi başarısız"
+  },
+  "deletePopover": {
+    "question": "Süreci silmek istediğinize emin misiniz?",
+    "yes": "Evet",
+    "no": "Hayır"
+  },
+  "modalProcessInfo": {
+    "train": "Tren",
+    "wagon": "Vagon",
+    "timeline": "Zaman Çizelgesi",
+    "start": "Başlama",
+    "end": "Bitiş",
+    "totalDuration": "Toplam Süre"
+  },
+  "section": {
+    "time-section-header": "Zaman Bilgileri",
+    "delay-reason": "Gecikme Nedenleri",
+    "materials": "Malzemeler ve Seri Numaları",
+    "explaining": "Açıklama",
+    "files": "Dosyalar",
+    "no-sub-stages": "Alt aşama bulunmuyor."
+  }
+}
