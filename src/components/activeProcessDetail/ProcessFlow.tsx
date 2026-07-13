@@ -8,7 +8,7 @@ import { getStageProgress } from "@/utils/activeProcessUtils";
 import { StatusEnums } from "@/utils/enum/commonEnums";
 import { getStatus } from "@/utils/getStatus";
 
-import styles from "./ProcessFlow.module.scss";
+import styles from "@/styles/components/activeProcessDetail/ProcessFlow.module.scss";
 import StageRow from "./StageRow";
 
 export default function ProcessFlow({ data }: { data?: ProcessResponse }) {

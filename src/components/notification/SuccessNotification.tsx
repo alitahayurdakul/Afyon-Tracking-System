@@ -5,8 +5,8 @@ import { useDispatch } from "react-redux";
 import { IToastElement, removeToastify } from "@/redux/slices/toastSlice";
 import { getIcon, getLink } from "@/utils/toastUtils";
 
-import styles from "../NotificationProvider.module.scss";
-import successStyles from "./SuccessNotification.module.scss";
+import styles from "@/styles/components/notifications/NotificationProvider.module.scss";
+import successStyles from "@/styles/components/notifications/SuccessNotification.module.scss";
 
 interface SuccessNotificationElementProps {
   toast: IToastElement;

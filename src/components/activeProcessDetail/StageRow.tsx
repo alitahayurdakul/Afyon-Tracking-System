@@ -7,7 +7,7 @@ import { formatDate } from "@/utils/formDate";
 import { getStatus } from "@/utils/getStatus";
 
 import { PopoverBody } from "../Popover";
-import styles from "./ProcessFlow.module.scss";
+import styles from "@/styles/components/activeProcessDetail/ProcessFlow.module.scss";
 import StageDetailModal from "./stageDetail/StageDetailModal";
 import StatusChip from "./StatusChip";
 
