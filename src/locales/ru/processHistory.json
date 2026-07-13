@@ -1,0 +1,53 @@
+{
+  "title": "Управление историей процессов",
+  "description": "Просмотр всех завершённых процессов.",
+  "search": "Поиск...",
+  "status": {
+    "completed": "Завершён",
+    "active": "Активный",
+    "pending": "Ожидает"
+  },
+  "table": {
+    "projectName": "Название проекта",
+    "locomotiveNo": "Номер поезда",
+    "wagonNo": "Вагон",
+    "workflowName": "Название процесса",
+    "totalDuration": "Общее время выполнения",
+    "startedAt": "Время начала",
+    "completedAt": "Время завершения",
+    "actions": "Действия",
+    "description": "Описание"
+  },
+  "actions": {
+    "detail": "Просмотреть детали",
+    "delete": "Удалить"
+  },
+  "modal": {
+    "detail": "Сведения о процессе"
+  },
+  "notifications": {
+    "deleteSuccess": "Успешно удалено.",
+    "deleteError": "Не удалось удалить."
+  },
+  "deletePopover": {
+    "question": "Вы уверены, что хотите удалить этот процесс?",
+    "yes": "Да",
+    "no": "Нет"
+  },
+  "modalProcessInfo": {
+    "train": "Поезд",
+    "wagon": "Вагон",
+    "timeline": "Хронология",
+    "start": "Начало",
+    "end": "Завершение",
+    "totalDuration": "Общая продолжительность"
+  },
+  "section": {
+    "time-section-header": "Информация о времени",
+    "delay-reason": "Причины задержек",
+    "materials": "Материалы и серийные номера",
+    "explaining": "Описание",
+    "files": "Файлы",
+    "no-sub-stages": "Подэтапы отсутствуют."
+  }
+}

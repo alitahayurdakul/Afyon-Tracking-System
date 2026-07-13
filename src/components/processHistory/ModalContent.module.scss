@@ -1,0 +1,108 @@
+.modal-content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .projectRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 1.25rem;
+  }
+
+  .projectName {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .metaRow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 0;
+    border-top: 0.5px solid #e5e7eb;
+    border-bottom: 0.5px solid #e5e7eb;
+    margin-bottom: 1.25rem;
+  }
+
+  .metaItem {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #6b7280;
+
+    i {
+      font-size: 16px;
+    }
+
+    strong {
+      color: #111827;
+      font-weight: 500;
+    }
+  }
+
+  .divider {
+    width: 1px;
+    height: 14px;
+    background: #e5e7eb;
+  }
+
+  .sectionLabel {
+    font-size: 13px;
+    font-weight: 500;
+    color: #6b7280;
+    margin: 0 0 10px;
+  }
+
+  .metricsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .metricCard {
+    background: #f9fafb;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  .metricCardAccent {
+    background: #eff6ff;
+
+    .metricLabel,
+    .metricValue {
+      color: #1d4ed8;
+    }
+  }
+
+  .metricLabel {
+    font-size: 12px;
+    color: #6b7280;
+    margin: 0 0 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    i {
+      font-size: 14px;
+    }
+  }
+
+  .metricValue {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .metricSub {
+    font-size: 11px;
+    color: #9ca3af;
+    margin: 2px 0 0;
+  }
+}

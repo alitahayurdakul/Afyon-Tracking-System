@@ -1,0 +1,53 @@
+{
+  "title": "Verwaltung des Prozessverlaufs",
+  "description": "Alle abgeschlossenen Prozesse anzeigen.",
+  "search": "Suchen...",
+  "status": {
+    "completed": "Abgeschlossen",
+    "active": "Aktiv",
+    "pending": "Ausstehend"
+  },
+  "table": {
+    "projectName": "Projektname",
+    "locomotiveNo": "Zugnummer",
+    "wagonNo": "Wagen",
+    "workflowName": "Workflow-Name",
+    "totalDuration": "Gesamtzeit",
+    "startedAt": "Startzeit",
+    "completedAt": "Endzeit",
+    "actions": "Aktionen",
+    "description": "Beschreibung"
+  },
+  "actions": {
+    "detail": "Details anzeigen",
+    "delete": "Löschen"
+  },
+  "modal": {
+    "detail": "Prozessdetails"
+  },
+  "notifications": {
+    "deleteSuccess": "Erfolgreich gelöscht.",
+    "deleteError": "Löschen fehlgeschlagen."
+  },
+  "deletePopover": {
+    "question": "Möchten Sie diesen Prozess wirklich löschen?",
+    "yes": "Ja",
+    "no": "Nein"
+  },
+  "modalProcessInfo": {
+    "train": "Zug",
+    "wagon": "Wagen",
+    "timeline": "Zeitachse",
+    "start": "Start",
+    "end": "Ende",
+    "totalDuration": "Gesamtdauer"
+  },
+  "section": {
+    "time-section-header": "Zeitinformationen",
+    "delay-reason": "Verzögerungsgründe",
+    "materials": "Materialien und Seriennummern",
+    "explaining": "Beschreibung",
+    "files": "Dateien",
+    "no-sub-stages": "Keine Unterphasen vorhanden."
+  }
+}

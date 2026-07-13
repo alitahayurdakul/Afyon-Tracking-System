@@ -8,7 +8,7 @@ import {
 } from "./responseHelpers";
 
 export const processOperationsHandlers = {
-  completeProcess
+  completeProcess,
 };
 
 async function completeProcess(processId: string): Promise<Response> {
@@ -17,16 +17,10 @@ async function completeProcess(processId: string): Promise<Response> {
       END_POINTS.processOperations.complete(processId || ""),
     );
     if (response.status === 200) {
-      return Response.json({ success: true, data: response.data });
+      return createJsonOnlyData(response.data);
     }
-    return Response.json(
-      { success: false, error: "Failed to create activeWorkflow" },
-      { status: 200 },
-    );
+    return createJsonError("Failed to get all active processes", 400);
   } catch (err: any) {
-    return Response.json(
-      { success: false, error: err.message },
-      { status: 500 },
-    );
+    return createJsonError(extractErrorMessage(err), 500);
   }
 }

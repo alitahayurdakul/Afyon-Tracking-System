@@ -15,7 +15,8 @@
     "materials": "Malzeme Listesi",
     "userManagement": "Kullanıcı Yönetimi",
     "users": "Kullanıcılar",
-    "roles": "Roller"
+    "roles": "Roller",
+    "processesHistory": "Geçmiş Süreçler"
   },
   "login": {
     "brandTitle": "Afyon İş Akışı Yönetim Sistemi",

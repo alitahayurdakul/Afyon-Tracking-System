@@ -11,7 +11,6 @@
   "end-date": "Enddatum",
   "not-yet-started": "Noch nicht gestartet",
   "pending": "Läuft",
-  "complete-process": "Prozess abschließen",
   "total-elapsed-time": "GESAMTVERGANGENE ZEIT",
   "active-projects": "Aktive Projekte",
   "active-projects-select-explaining": "Wählen Sie einen Zug aus, um den Live-Fortschritt des Workflows anzuzeigen.",
@@ -34,13 +33,15 @@
     "start-sub-stage": "Unterphase starten",
     "edit": "Unterphase aktualisieren",
     "complete-stage": "Übergeordnete Phase abschließen",
+      "complete-process": "Prozess abschließen",
     "questions": {
       "start-sub-stage": "Möchten Sie die Unterphase wirklich starten?",
       "complete-sub-stage": "Möchten Sie die Unterphase wirklich abschließen?",
       "save": "Möchten Sie die Änderungen wirklich speichern?",
       "completeStage": "Möchten Sie die übergeordnete Phase wirklich abschließen?",
       "edit": "Möchten Sie die Unterphase wirklich aktualisieren?",
-      "start-stage": "Möchten Sie die Phase wirklich starten?"
+      "start-stage": "Möchten Sie die Phase wirklich starten?",
+      "complete-process": "Möchten Sie den Prozess wirklich abschließen?"
     }
   },
   "yes": "Ja",
@@ -71,6 +72,10 @@
     "start-stage": {
       "success": "Die Phase wurde erfolgreich gestartet.",
       "error": "Beim Starten der Phase ist ein Fehler aufgetreten."
+    },
+    "complete-process": {
+      "success": "Der Prozess wurde erfolgreich abgeschlossen.",
+      "error": "Beim Abschließen des Prozesses ist ein Fehler aufgetreten."
     }
   }
 }

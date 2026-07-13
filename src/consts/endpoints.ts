@@ -30,9 +30,7 @@ export const END_POINTS = {
     delete: (id: string) => `${apiUrl}/api/favorite-processes/${id}`,
     getDetail: (id: string) => `${apiUrl}/api/processes/${id}`,
     getAll: ({ status, projectId }: { status?: string; projectId?: string }) =>
-      `${apiUrl}/api/processes${status ? `?projectId=${projectId}` : ""}${projectId ? `&status=${status}` : ""}`,
-    editDelayReasons: (id: string) =>
-      `${apiUrl}/api/processes/stage-entry/${id}/delay-reason`,
+      `${apiUrl}/api/processes${projectId ? `?projectId=${projectId}` : ""}${status ? `${projectId ? "&" : "?"}status=${status}` : ""}`,
     stageDetail: (processId: string, stageId: string) =>
       `${apiUrl}/api/processes/${processId}/stages/${stageId}/substages`,
     subStageOperation: (
@@ -44,16 +42,16 @@ export const END_POINTS = {
     completeStage: (entryId: string) =>
       `${apiUrl}/api/processes/stage-entry/${entryId}/close`,
     startStage: (processId: string) =>
-      `${apiUrl}/api/processes/${processId}/start-stage`
+      `${apiUrl}/api/processes/${processId}/start-stage`,
   },
   processOperations: {
     complete: (processId: string) =>
       `${apiUrl}/api/processes/${processId}/complete`,
   },
-  workflowHistory: {
-    getAll: `${apiUrl}/api/processes?status=COMPLETED`,
-    getDetail: (id: string) => `${apiUrl}/api/processes/${id}`,
-  },
+  // workflowHistory: {
+  //   getAll: `${apiUrl}/api/processes?status=COMPLETED`,
+  //   getDetail: (id: string) => `${apiUrl}/api/processes/${id}`,
+  // },
   statistics: {
     stages: (query: string) => `${apiUrl}/api/processes/statistics?${query}`,
     process: (query: string) =>
@@ -154,10 +152,10 @@ export const CLIENT_END_POINTS = {
   activeProcessOperation: {
     complete: "/api/activeProcessOperations",
   },
-  workflowHistory: {
-    getAll: "/api/workflowHistory",
-    getDetail: "/api/workflowHistory",
-  },
+  // workflowHistory: {
+  //   getAll: "/api/workflowHistory",
+  //   getDetail: "/api/workflowHistory",
+  // },
   common: {
     getStages: "/api/stagesOptions",
     getTrainsOptions: "/api/trainsOptions",

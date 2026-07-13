@@ -5,7 +5,7 @@ import {
   PermissionResource,
 } from "@/consts/permissions";
 
-export const permission = (
+export const getPermission = (
   resource: PermissionResource,
   action: PermissionAction,
 ): Permission => `${resource}:${action}`;

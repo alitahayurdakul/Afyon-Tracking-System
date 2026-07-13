@@ -17,6 +17,8 @@ interface StageRowProps {
   isLast: boolean;
   entryForStage?: IProcessEntry;
   onOpenDetail: (stage: IStage) => void;
+  entriesEqStages?: boolean;
+  stages: IStage[]
 }
 
 export default function StageRow({
@@ -25,6 +27,8 @@ export default function StageRow({
   index,
   isLast,
   onOpenDetail,
+  entriesEqStages,
+  stages
 }: StageRowProps) {
   const time = () => {
     const startTime = new Date(
@@ -38,7 +42,8 @@ export default function StageRow({
     return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
   };
 
-  const nodeLabel = getStatus(stage.status) === StatusEnums.completed ? "✓" : index + 1;
+  const nodeLabel =
+    getStatus(stage.status) === StatusEnums.completed ? "✓" : index + 1;
   const t = useTranslations("activeProcessDetail");
 
   const {
@@ -112,9 +117,18 @@ export default function StageRow({
               alignOffset={-73}
               align="start"
               triggerBody={
-                <button className={styles.startBtn}>
-                  {t("buttons.start-stage")}
-                </button>
+                <div>
+                  {
+                      stage.stageId === "6a548d7444cc81ed74b22b6a" ?
+                      entriesEqStages ? <button className={styles.startBtn}>
+                      {t("buttons.start-stage")}
+                    </button> : <></>
+                      :
+                    <button className={styles.startBtn}>
+                      {t("buttons.start-stage")}
+                    </button>
+                  }
+                </div>
               }
               contentBody={
                 <div className={styles["content"]}>
@@ -136,6 +150,11 @@ export default function StageRow({
               stageName={stage.name ?? ""}
               stageStatus={stage.status}
               entryId={entryForStage?._id ?? ""}
+              isQuality={
+                stage.stageId === "6a548d7444cc81ed74b22b6a" &&
+                entriesEqStages
+              }
+              stages = {stages}
             />
           )}
         </div>

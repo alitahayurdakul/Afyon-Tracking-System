@@ -37,7 +37,7 @@ export const useGetActiveProcessesDataQuery = <T>(status?: string) => {
   });
 };
 
-export const useActiveProcessDetailDataQuery = <T>() => {
+export const useActiveProcessDetailDataQuery = <T>(processId?: string) => {
   const params = useParams();
   const { id } = params;
   const trigger = useSelector(
@@ -45,7 +45,7 @@ export const useActiveProcessDetailDataQuery = <T>() => {
   );
 
   return useQuery({
-    queryKey: [`getActiveProcessDetailDatas_${id}`, trigger],
+    queryKey: [`getActiveProcessDetailDatas_${processId ?? id}`, trigger],
     refetchOnWindowFocus: false,
     enabled: true,
     queryFn: async () => {
@@ -53,7 +53,7 @@ export const useActiveProcessDetailDataQuery = <T>() => {
         CLIENT_END_POINTS.processes.getDetail,
         {
           type: ProcessQueryTypes.getDetailProcess,
-          id,
+          id: processId ?? id,
         },
       );
 

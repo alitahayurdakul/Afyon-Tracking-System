@@ -11,8 +11,7 @@
   "end-date": "Bitiş",
   "not-yet-started": "Henüz başlamadı",
   "pending": "Sürüyor",
-  "complete-process": "Süreci Tamamla",
-  "total-elapsed-time": "TOPLAM GEÇEN SÜRE",
+  "total-elapsed-time": "Toplam Geçen Süre",
   "active-projects": "Aktif Projeler",
   "active-projects-select-explaining": "Canlı iş akışı ilerlemesini görüntülemek için bir tren seçin.",
   "processId": "Süreç ID",
@@ -21,7 +20,8 @@
     "delay-reason": "Gecikme Nedenleri",
     "materials": "Malzemeler ve Seri Numaları",
     "explaining": "Açıklama",
-    "files": "Dosyalar"
+    "files": "Dosyalar",
+    "no-sub-stages": "Alt aşama bulunmuyor."
   },
   "elapsed-time": "Geçen Süre",
   "serial-number-placeholder": "Seri numarası",
@@ -34,13 +34,15 @@
     "start-sub-stage": "Alt Aşamayı Başlat",
     "edit": "Alt Aşamayı Güncelle",
     "complete-stage": "Üst Aşamayı Tamamla",
+    "complete-process": "Süreci Tamamla",
     "questions": {
       "start-sub-stage": "Alt Aşamayı başlatmak istediğinize emin misiniz?",
       "complete-sub-stage": "Alt Aşamayı tamamlamak istediğinize emin misiniz?",
       "save": "Değişiklikleri kaydetmek istediğinize emin misiniz?",
       "completeStage": "Üst aşamayı tamamlamak istediğinize emin misiniz?",
       "edit": "Alt Aşamayı güncellemek istediğinize emin misiniz?",
-      "start-stage": "Aşamayı Başlatmak istediğinize emin misiniz?"
+      "start-stage": "Aşamayı Başlatmak istediğinize emin misiniz?",
+      "complete-process": "Süreci tamamlamak istediğinize emin misiniz?"
     }
   },
   "yes": "Evet",
@@ -69,6 +71,10 @@
       "error": "Üst aşama tamamlanırken bir sorun ile karşılaşıldı."
     },
     "start-stage": {
+      "success": "Aşama başarıyla başlatıldı.",
+      "error": "Aşama başlatılırken bir sorun ile karşılaşıldı."
+    },
+    "complete-process": {
       "success": "Aşama başarıyla başlatıldı.",
       "error": "Aşama başlatılırken bir sorun ile karşılaşıldı."
     }

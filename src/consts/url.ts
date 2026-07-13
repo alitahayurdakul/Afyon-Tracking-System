@@ -3,7 +3,7 @@ export const URL_PAGES = {
     statistics: "/istatistikler",
     compare: "/karsilastir",
     activeProcesses: "/aktif-surecler",
-    workflowHistory: "/gecmis-surecler",
+    processesHistory: "/gecmis-surecler",
     workflows: "/is-akislari-yonetimi",
     stages: "/asama-yonetimi",
     trains: "/tren-yonetimi",

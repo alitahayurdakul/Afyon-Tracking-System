@@ -46,6 +46,12 @@ export const SIDEBAR_ITEMS: ISidebarItemsTypes = [
     icon: faDiagramProject,
     url: URL_PAGES.activeProcesses,
   },
+  {
+    default: "Geçmiş Süreçler",
+    key: "processesHistory",
+    icon: faDiagramProject,
+    url: URL_PAGES.processesHistory,
+  },
   // {
   //   default: "Geçmiş Süreçler",
   //   icon: faClockRotateLeft,

@@ -5,6 +5,8 @@ import React, { useState } from "react";
 
 import { IProcessEntry, IStage, ProcessResponse } from "@/types/processTypes";
 import { getStageProgress } from "@/utils/activeProcessUtils";
+import { StatusEnums } from "@/utils/enum/commonEnums";
+import { getStatus } from "@/utils/getStatus";
 
 import styles from "./ProcessFlow.module.scss";
 import StageRow from "./StageRow";
@@ -17,6 +19,8 @@ export default function ProcessFlow({ data }: { data?: ProcessResponse }) {
     data?.summary.totalStages,
     data?.summary.completedStageCount,
   );
+
+  const slicesStages = data?.stages.slice(0, -1);
 
   return (
     <div className={styles.wrap}>
@@ -61,7 +65,14 @@ export default function ProcessFlow({ data }: { data?: ProcessResponse }) {
               index={index}
               isLast={index === data?.stages.length - 1}
               onOpenDetail={setSelectedStage}
-              entryForStage={data?.entries.find((entry: IProcessEntry) => entry.stageId._id === stage._id)}
+              entryForStage={data?.entries.find(
+                (entry: IProcessEntry) => entry.stageId._id === stage._id,
+              )}
+              entriesEqStages={slicesStages?.every(
+                (stage: IStage) =>
+                  getStatus(stage.status) === StatusEnums.completed,
+              )}
+              stages={slicesStages ?? []}
             />
           </React.Fragment>
         ))}

@@ -1,0 +1,246 @@
+.modal {
+  background: var(--white);
+  border-radius: 12px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stageItem {
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.stageHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 16px;
+  background: #f9fafb;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.stageOrder {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #1e3a8a;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.stageTitleWrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stageName {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.statusBadge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+
+  &.small {
+    padding: 1px 6px;
+    font-size: 10px;
+  }
+  &.active {
+    background: #dbeafe;
+    color: #1d4ed8;
+  }
+  &.pending {
+    background: #f3f4f6;
+    color: #6b7280;
+  }
+  &.completed {
+    background: #dcfce7;
+    color: #15803d;
+  }
+  &.skipped {
+    background: #fee2e2;
+    color: #b91c1c;
+  }
+}
+
+.chevron {
+  flex-shrink: 0;
+  color: #6b7280;
+  transition: transform 0.2s ease;
+  &.chevronOpen {
+    transform: rotate(180deg);
+  }
+  &.small {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.stageBody {
+  padding: 12px 16px 16px 52px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.stageDescription {
+  font-size: 13px;
+  color: #4b5563;
+  margin-bottom: 10px;
+}
+
+.empty {
+  font-size: 13px;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.subAccordion {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.subStageItem {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.subStageHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.subStageName {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.subStageBody {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 12px 12px 12px;
+  border-top: 1px solid #f0f0f0;
+  background: #fafafa;
+}
+
+.subStageDescription {
+  font-size: 12px;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.materialList {
+  list-style: disc;
+  padding-left: 18px;
+  font-size: 12px;
+  color: #374151;
+}
+
+.materialCode {
+  color: #9ca3af;
+}
+
+.footer {
+  padding: 14px 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.completeParentStageBtn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: var(--on-sale-badge-dark);
+  color: #fff;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:disabled {
+    background: #d3d1c7;
+    cursor: not-allowed;
+  }
+}
+
+// Are u sure questions styles
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  max-width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  border-radius: 4px;
+  padding: 0;
+
+  .text {
+    color: #2c2c2a;
+    font-size: 12px;
+    line-height: 17px;
+  }
+}
+
+.btn-container {
+  justify-content: flex-end;
+  display: flex;
+  gap: 5px;
+
+  button {
+    padding: 5px 10px;
+    border-radius: 7px;
+    border: 0;
+    font-size: 0.625rem;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: opacity 0.25s;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+  }
+
+  button:first-child {
+    background-color: var(--base-grey-15);
+    color: var(--slate-90);
+  }
+
+  button:last-child {
+    background-color: var(--on-sale-badge);
+    color: var(--base-white);
+  }
+}

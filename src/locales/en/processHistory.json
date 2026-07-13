@@ -1,0 +1,53 @@
+{
+  "title": "Process History Management",
+  "description": "View all completed processes.",
+  "search": "Search...",
+  "status": {
+    "completed": "Completed",
+    "active": "Active",
+    "pending": "Pending"
+  },
+  "table": {
+    "projectName": "Project Name",
+    "locomotiveNo": "Train Number",
+    "wagonNo": "Wagon",
+    "workflowName": "Workflow Name",
+    "totalDuration": "Total Elapsed Time",
+    "startedAt": "Start Time",
+    "completedAt": "End Time",
+    "actions": "Actions",
+    "description": "Description"
+  },
+  "actions": {
+    "detail": "View Details",
+    "delete": "Delete"
+  },
+  "modal": {
+    "detail": "Process Details"
+  },
+  "notifications": {
+    "deleteSuccess": "Deleted successfully.",
+    "deleteError": "Deletion failed."
+  },
+  "deletePopover": {
+    "question": "Are you sure you want to delete this process?",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "modalProcessInfo": {
+    "train": "Train",
+    "wagon": "Wagon",
+    "timeline": "Timeline",
+    "start": "Start",
+    "end": "End",
+    "totalDuration": "Total Duration"
+  },
+  "section": {
+    "time-section-header": "Time Information",
+    "delay-reason": "Delay Reasons",
+    "materials": "Materials and Serial Numbers",
+    "explaining": "Description",
+    "files": "Files",
+    "no-sub-stages": "No sub-stages available."
+  }
+}
