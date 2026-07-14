@@ -19,7 +19,8 @@
   },
   "actions": {
     "edit": "Güncelle",
-    "delete": "Sil"
+    "delete": "Sil",
+    "detail": "Detay"
   },
   "deletePopover": {
     "question": "Kullanıcıyı silmek istediğinize emin misiniz?",
