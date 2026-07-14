@@ -1,4 +1,7 @@
-export type IElementType = "input" | "select" | "textarea" | "captcha" | "file" | "checkbox" | "radio" | "phoneInput"
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { ReactNode } from "react";
+
+export type IElementType = "input" | "select" | "textarea" | "captcha" | "file" | "checkbox" | "radio" | "phoneInput" | "email" | "password"
 
 export interface IOptionType {
   count?: number;
@@ -34,7 +37,8 @@ export interface IFormFieldType {
   selectOptionsKey?: {
     valueKey: string;
     labelKey: string;
-  }
+  },
+  icon?: IconDefinition;
 }
 
 export type IFormFieldsType = Array<IFormFieldType>;

@@ -6,6 +6,7 @@ import {
   faFolderTree,
   // faHouse,
   faLayerGroup,
+  faPerson,
   // faScaleBalanced,
   faSitemap,
   faTrailer,
@@ -104,6 +105,12 @@ export const SIDEBAR_ITEMS: ISidebarItemsTypes = [
     key: "materials",
     icon: faBoxesStacked,
     url: URL_PAGES.materials,
+  },
+   {
+    default: "Profilim",
+    key: "profile",
+    icon: faPerson,
+    url: URL_PAGES.profile,
   },
   {
     default: "Kullanıcı Yönetimi",

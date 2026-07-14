@@ -16,7 +16,8 @@
     "userManagement": "Управление пользователями",
     "users": "Пользователи",
     "roles": "Роли",
-    "processesHistory": "История процессов"
+    "processesHistory": "История процессов",
+    "profile": "Профиль"
   },
   "login": {
     "brandTitle": "Система управления рабочими процессами Afyon",

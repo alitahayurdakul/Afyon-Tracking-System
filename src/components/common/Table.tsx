@@ -5,7 +5,7 @@ import {
   getCoreRowModel,
   getPaginationRowModel,
   Table as TypeReactTable,
-  useReactTable
+  useReactTable,
 } from "@tanstack/react-table";
 import clsx from "clsx";
 import React, { CSSProperties, useEffect, useRef, useState } from "react";
@@ -71,7 +71,7 @@ export const Table = <T,>({
   setIsReset,
   paginationToScrolledUp,
   setTableInstance,
-  isBlockDraggable
+  isBlockDraggable,
 }: TableProps<T>) => {
   const isPaginationAvailable = currentPage || pageSize;
 
@@ -83,10 +83,10 @@ export const Table = <T,>({
   const pageCount = !isPaginationAvailable
     ? undefined
     : totalPage
-    ? totalPage
-    : data
-    ? Math.ceil(data.length / (pageSize || DEFAULT_TABLE_PAGE_COUNT))
-    : DEFAULT_TABLE_PAGE_COUNT;
+      ? totalPage
+      : data
+        ? Math.ceil(data.length / (pageSize || DEFAULT_TABLE_PAGE_COUNT))
+        : DEFAULT_TABLE_PAGE_COUNT;
 
   const table = useReactTable({
     data: data || [],
@@ -99,8 +99,8 @@ export const Table = <T,>({
     initialState: {
       pagination: {
         pageSize: pageSize,
-        pageIndex: currentPage
-      }
+        pageIndex: currentPage,
+      },
       // columnPinning: columnPinning ? columnPinning : { left: [], right: [] }
     },
     enableRowSelection: true,
@@ -108,7 +108,7 @@ export const Table = <T,>({
     pageCount,
     getPaginationRowModel: isPaginationAvailable
       ? getPaginationRowModel()
-      : undefined
+      : undefined,
   });
 
   useEffect(() => {
@@ -129,7 +129,7 @@ export const Table = <T,>({
       setSelectedRows(
         selectedRows?.flatRows?.map((x) => {
           return { rowId: x.id, ...x.original };
-        })
+        }),
       );
     }
   }, [setSelectedRows, selectedRows, tableName]);
@@ -197,91 +197,93 @@ export const Table = <T,>({
 
   return (
     <>
-      <table
-        ref={scrollRef}
-        onScroll={onScroll}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseMove={(e) => {
-          if (isDragging) handleMouseMove(e);
-        }}
-        onMouseLeave={handleMouseUp}
-        {...{
-          style: {
-            width: table.getCenterTotalSize()
-          }
-        }}
-        className={clsx(styles["table"], className, {
-          [styles["dragging"]]: isDragging && draggableClassActive
-        })}
-      >
-        <thead
-          className={clsx(styles["head"], {
-            [styles["head-sticky"]]: stickyHeader
+      <div className={styles["table-wrapper"]}>
+        <table
+          ref={scrollRef}
+          onScroll={onScroll}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onMouseMove={(e) => {
+            if (isDragging) handleMouseMove(e);
+          }}
+          onMouseLeave={handleMouseUp}
+          {...{
+            style: {
+              width: table.getCenterTotalSize(),
+            },
+          }}
+          className={clsx(styles["table"], className, {
+            [styles["dragging"]]: isDragging && draggableClassActive,
           })}
         >
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
-                const { column } = header;
-
-                return (
-                  <th
-                    key={header.id}
-                    className={clsx(
-                      styles["headcol"],
-                      // column.columnDef.meta?.className ?? ""
-                    )}
-                    style={{
-                      ...getCommonPinningStyles(column),
-                      maxWidth: "unset",
-                      flexBasis: `${column.getSize()}`,
-                      flexGrow: 1,
-                      flexShrink: 0
-                    }}
-                  >
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                  </th>
-                );
-              })}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => {
-            return (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => {
-                  const { column } = cell;
+          <thead
+            className={clsx(styles["head"], {
+              [styles["head-sticky"]]: stickyHeader,
+            })}
+          >
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  const { column } = header;
 
                   return (
-                    <td
-                      style={{
-                        ...getCommonPinningStyles(column)
-                      }}
-                      key={cell.id}
-                    >
-                      {loading ? (
-                        <Skeleton />
-                      ) : (
-                        flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )
+                    <th
+                      key={header.id}
+                      className={clsx(
+                        styles["headcol"],
+                        // column.columnDef.meta?.className ?? ""
                       )}
-                    </td>
+                      style={{
+                        ...getCommonPinningStyles(column),
+                        maxWidth: "unset",
+                        flexBasis: `${column.getSize()}`,
+                        flexGrow: 1,
+                        flexShrink: 0,
+                      }}
+                    >
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext(),
+                          )}
+                    </th>
                   );
                 })}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            ))}
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row) => {
+              return (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => {
+                    const { column } = cell;
+
+                    return (
+                      <td
+                        style={{
+                          ...getCommonPinningStyles(column),
+                        }}
+                        key={cell.id}
+                      >
+                        {loading ? (
+                          <Skeleton />
+                        ) : (
+                          flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext(),
+                          )
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
       <>{paginationElement && paginationElement(table)}</>
       <>{extraButtonPanel && extraButtonPanel(table)}</>
     </>
@@ -304,12 +306,13 @@ const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
       : undefined,
     left: isPinned === "left" ? `${column.getStart("left")}px` : undefined,
     right: isPinned === "right" ? `${column.getAfter("right")}px` : undefined,
-    opacity: isPinned ? 1 : 1,
     position: isPinned ? "sticky" : "relative",
-    width: column.getSize(),
-    maxWidth: column.getSize(),
-    minWidth: column.getSize(),
-    maxHeight: column.getSize(),
-    zIndex: isPinned ? 1 : 0
+    zIndex: isPinned ? 1 : 0,
+    // width/maxWidth/minWidth sadece pinned kolonlarda gerekli (sticky offset için)
+    ...(isPinned && {
+      width: column.getSize(),
+      maxWidth: column.getSize(),
+      minWidth: column.getSize()
+    })
   };
 };
