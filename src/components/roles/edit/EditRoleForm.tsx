@@ -34,6 +34,7 @@ interface IPropsTypes {
 }
 
 export const EditRoleForm = ({ id, data }: IPropsTypes) => {
+  const tValidation = useTranslations("layout.validation-errors");
   const t = useTranslations("roles");
   const tPermission = useTranslations("permissions");
 
@@ -57,7 +58,7 @@ export const EditRoleForm = ({ id, data }: IPropsTypes) => {
     register,
     formState: { isSubmitting },
   } = useForm<IRoleFormDataTypes>({
-    resolver: yupResolver(RoleFormValidation()) as any,
+    resolver: yupResolver(RoleFormValidation(tValidation)) as any,
     defaultValues: {
       roleName: data?.roleName ?? "",
       roleDescription: data?.roleDescription ?? "",

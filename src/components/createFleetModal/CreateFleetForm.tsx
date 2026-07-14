@@ -38,6 +38,7 @@ import { useGetProjectOptionsDataQuery } from "@/api/queries/useGetProjectsQueri
 import { extractApiError } from "@/utils/extractApiError";
 
 export const CreateFleetForm = () => {
+  const tValidation = useTranslations("layout.validation-errors");
   const {
     control,
     handleSubmit,
@@ -47,7 +48,7 @@ export const CreateFleetForm = () => {
     setValue,
     formState: { isSubmitting },
   } = useForm<ICreateFleetFormDataTypes>({
-    resolver: yupResolver(CreateFleetFormValidation()),
+    resolver: yupResolver(CreateFleetFormValidation(tValidation)),
     defaultValues: {
       trainId: "",
       workflows: "",

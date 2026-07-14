@@ -1,20 +1,23 @@
 import * as Yup from "yup";
 
 import { IStageFormDataTypes } from "@/types/stagesTypes";
+import { TValidationTranslator } from "@/types/validationTypes";
 
-export function StageFormValidation(): Yup.ObjectSchema<IStageFormDataTypes> {
+export function StageFormValidation(
+  t: TValidationTranslator,
+): Yup.ObjectSchema<IStageFormDataTypes> {
   const baseShape = {
     name: Yup.string()
       .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .typeError(t("required"))
+      .required(t("required")),
     description: Yup.string()
       .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .typeError(t("required"))
+      .required(t("required")),
     subStages: Yup.array()
-      .min(1, "En az bir malzeme seçiniz")
-      .required("En az bir malzeme seçiniz"),
+      .min(1, t("minOneSelection"))
+      .required(t("minOneSelection")),
   };
 
   return Yup.object().shape(baseShape);

@@ -33,6 +33,7 @@ interface IPropsTypes {
 }
 
 export const EditProjectForm = ({ id, data }: IPropsTypes) => {
+  const tValidation = useTranslations("layout.validation-errors");
   const t = useTranslations("projects");
   const {
     control,
@@ -40,7 +41,7 @@ export const EditProjectForm = ({ id, data }: IPropsTypes) => {
     register,
     formState: { isSubmitting },
   } = useForm<IProjectFormDataTypes>({
-    resolver: yupResolver(ProjectFormValidation()),
+    resolver: yupResolver(ProjectFormValidation(tValidation)),
     defaultValues: {
       name: data?.name ?? "",
       code: data?.projectCode ?? "",

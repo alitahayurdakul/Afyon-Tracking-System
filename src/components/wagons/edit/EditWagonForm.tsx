@@ -29,13 +29,14 @@ interface IPropsTypes {
 }
 
 export const EditWagonForm = ({ id, data }: IPropsTypes) => {
+  const tValidation = useTranslations("layout.validation-errors");
   const {
     control,
     handleSubmit,
     register,
     formState: { isSubmitting, errors },
   } = useForm<IWagonFormDataTypes>({
-    resolver: yupResolver(WagonFormValidation()),
+    resolver: yupResolver(WagonFormValidation(tValidation)),
     defaultValues: {
       name: data?.wagonNo ?? "",
       desc: data?.description ?? "",

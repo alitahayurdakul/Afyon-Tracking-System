@@ -1,17 +1,20 @@
 import * as Yup from "yup";
 
 import { IRoleFormDataTypes } from "@/types/rolesTypes";
+import { TValidationTranslator } from "@/types/validationTypes";
 
-export function RoleFormValidation(): Yup.ObjectSchema<IRoleFormDataTypes> {
+export function RoleFormValidation(
+  t: TValidationTranslator,
+): Yup.ObjectSchema<IRoleFormDataTypes> {
   return Yup.object().shape({
     roleName: Yup.string()
       .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .typeError(t("required"))
+      .required(t("required")),
     roleDescription: Yup.string()
       .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .typeError(t("required"))
+      .required(t("required")),
     permissions: Yup.array()
       .of(
         Yup.object({
@@ -19,7 +22,7 @@ export function RoleFormValidation(): Yup.ObjectSchema<IRoleFormDataTypes> {
           value: Yup.string().required(),
         }).required(),
       )
-      .min(1, "En az bir yetki seçiniz")
-      .required("Bu alan zorunludur"),
+      .min(1, t("minOnePermission"))
+      .required(t("required")),
   });
 }

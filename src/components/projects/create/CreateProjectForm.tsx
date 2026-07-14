@@ -25,6 +25,7 @@ import { IOptionType } from "@/types/formTypes";
 import { extractApiError } from "@/utils/extractApiError";
 
 export const CreateProjectForm = () => {
+  const tValidation = useTranslations("layout.validation-errors");
   const t = useTranslations("projects");
   const {
     control,
@@ -33,7 +34,7 @@ export const CreateProjectForm = () => {
     reset,
     formState: { isSubmitting },
   } = useForm<IProjectFormDataTypes>({
-    resolver: yupResolver(ProjectFormValidation()),
+    resolver: yupResolver(ProjectFormValidation(tValidation)),
     defaultValues: {
       name: "",
       code: "",

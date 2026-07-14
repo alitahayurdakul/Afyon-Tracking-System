@@ -26,6 +26,7 @@ import SelectedItemList from "@/components/common/SelectedItemList";
 import { useTranslations } from "next-intl";
 
 export const CreateWorkflowForm = () => {
+  const tValidation = useTranslations("layout.validation-errors");
   const {
     control,
     handleSubmit,
@@ -37,7 +38,7 @@ export const CreateWorkflowForm = () => {
     // setFocus,
     formState: { isSubmitting, errors },
   } = useForm<IWorkflowFormDataTypes>({
-    resolver: yupResolver(WorkflowFormValidation()),
+    resolver: yupResolver(WorkflowFormValidation(tValidation)),
     defaultValues: {
       name: "",
       description: "",
@@ -46,7 +47,6 @@ export const CreateWorkflowForm = () => {
   });
 
   const t = useTranslations("workflows");
-
   const { data: stagesOptions, isLoading, isError, isFetching, refetch } =
     useGetStagesOptionsDataQuery<IOptionType[]>();
 

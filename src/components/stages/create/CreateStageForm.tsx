@@ -25,6 +25,7 @@ import { useGetSubStagesOptionsListDataQuery } from "@/api/queries/useGetSubStag
 import { StageQueryTypes } from "@/app/api/stages/route";
 
 export const CreateStageForm = () => {
+  const tValidation = useTranslations("layout.validation-errors");
   const t = useTranslations("stages");
   const {
     control,
@@ -37,7 +38,7 @@ export const CreateStageForm = () => {
     // setFocus,
     formState: { isSubmitting, errors },
   } = useForm<IStageFormDataTypes>({
-    resolver: yupResolver(StageFormValidation()),
+    resolver: yupResolver(StageFormValidation(tValidation)),
     defaultValues: {
       name: "",
       description: "",

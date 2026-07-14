@@ -41,6 +41,7 @@ interface IPropsTypes {
 }
 
 export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
+  const tValidation = useTranslations("layout.validation-errors");
   const t = useTranslations("subStages");
   const {
     control,
@@ -50,7 +51,7 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
     setValue,
     formState: { isSubmitting },
   } = useForm<ISubStageFormDataTypes>({
-    resolver: yupResolver(SubStageFormValidation()),
+    resolver: yupResolver(SubStageFormValidation(tValidation)),
     defaultValues: {
       name: data?.name ?? "",
       materials: (data?.materials ?? []).map((material: ISubStageMaterial) => ({

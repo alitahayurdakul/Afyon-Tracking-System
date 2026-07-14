@@ -27,6 +27,7 @@ import {
 } from "@/consts/generatePermissionOptions";
 
 export const CreateRoleForm = () => {
+  const tValidation = useTranslations("layout.validation-errors");
   const t = useTranslations("roles");
   const tPermission = useTranslations("permissions");
   const {
@@ -36,7 +37,7 @@ export const CreateRoleForm = () => {
     reset,
     formState: { isSubmitting },
   } = useForm<IRoleFormDataTypes>({
-    resolver: yupResolver(RoleFormValidation()) as any,
+    resolver: yupResolver(RoleFormValidation(tValidation)) as any,
     defaultValues: {
       roleName: "",
       roleDescription: "",

@@ -26,6 +26,7 @@ import SelectedItemList from "@/components/common/SelectedItemList";
 import { useGetWagonsOptionsQuery } from "@/api/queries/useGetWagonsQueries";
 
 export const CreateTrainForm = () => {
+  const tValidation = useTranslations("layout.validation-errors");
   const t = useTranslations("trains");
   const {
     control,
@@ -36,7 +37,7 @@ export const CreateTrainForm = () => {
     reset,
     formState: { isSubmitting, errors },
   } = useForm<ITrainFormDataTypes>({
-    resolver: yupResolver(TrainFormValidation()),
+    resolver: yupResolver(TrainFormValidation(tValidation)),
     defaultValues: {
       trainSetNo: "",
       desc: "",

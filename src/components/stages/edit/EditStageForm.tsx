@@ -35,6 +35,7 @@ interface IPropsTypes {
 }
 
 export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
+  const tValidation = useTranslations("layout.validation-errors");
   const t = useTranslations("stages");
   const {
     control,
@@ -47,7 +48,7 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
     // setFocus,
     formState: { isSubmitting, errors },
   } = useForm<IStageFormDataTypes>({
-    resolver: yupResolver(StageFormValidation()),
+    resolver: yupResolver(StageFormValidation(tValidation)),
     defaultValues: {
       name: stageData?.name,
       description: stageData?.description,

@@ -67,5 +67,14 @@
     "delay-reason": "Verwaltung der Verzögerungsgründe",
     "users": "Benutzerverwaltung",
     "roles": "Rollenverwaltung"
+  },
+  "validation-errors": {
+    "required": "Dieses Feld ist erforderlich",
+    "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+    "passwordMin": "Das Passwort muss mindestens {min} Zeichen lang sein",
+    "passwordsNotMatch": "Die Passwörter stimmen nicht überein",
+    "minOneSelection": "Bitte wählen Sie mindestens eine Option aus",
+    "minOneMaterial": "Bitte wählen Sie mindestens ein Material aus",
+    "minOnePermission": "Bitte wählen Sie mindestens eine Berechtigung aus"
   }
 }

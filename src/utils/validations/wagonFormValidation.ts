@@ -1,16 +1,19 @@
 import * as Yup from "yup";
 
+import { TValidationTranslator } from "@/types/validationTypes";
 import { IWagonFormDataTypes } from "@/types/wagonsTypes";
 
-export function WagonFormValidation(): Yup.ObjectSchema<IWagonFormDataTypes> {
+export function WagonFormValidation(
+  t: TValidationTranslator,
+): Yup.ObjectSchema<IWagonFormDataTypes> {
   return Yup.object().shape({
     name: Yup.string()
       .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .typeError(t("required"))
+      .required(t("required")),
     desc: Yup.string()
       .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .typeError(t("required"))
+      .required(t("required")),
   });
 }
