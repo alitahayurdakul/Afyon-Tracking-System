@@ -19,7 +19,8 @@
   },
   "actions": {
     "edit": "Bearbeiten",
-    "delete": "Löschen"
+    "delete": "Löschen",
+    "detail": "Details"
   },
   "deletePopover": {
     "question": "Möchten Sie diesen Benutzer wirklich löschen?",
