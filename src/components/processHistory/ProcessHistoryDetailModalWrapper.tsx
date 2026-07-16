@@ -1,7 +1,6 @@
 import { useTranslations } from "next-intl";
 
 import { useActiveProcessDetailDataQuery } from "@/api/queries/useGetProcessesQueries";
-import { useGetProjectDetailDataQuery } from "@/api/queries/useGetProjectsQueries";
 import { NewModal } from "@/components/common/NewModal";
 import { DETAIL_PROCESS_HISTORY_MODAL } from "@/consts/modals";
 import { ProcessResponse } from "@/types/processTypes";
@@ -12,7 +11,6 @@ export const ProcessHistoryDetailModalWrapper = ({ id }: { id: string }) => {
   const t = useTranslations("processHistory");
   const { data, isFetching, isLoading } =
     useActiveProcessDetailDataQuery<ProcessResponse>(id);
-  console.log(data);
 
   return (
     <>

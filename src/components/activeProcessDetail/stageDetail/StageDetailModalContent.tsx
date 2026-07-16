@@ -55,7 +55,6 @@ export default function StageDetailModalContent({
     isLoading,
     isError,
   } = useGetStageDetailDataQuery<SubStage[]>(id);
-  console.log(stageStatus);
 
   const { id: processId } = useParams();
 

@@ -1,6 +1,6 @@
 "use client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams, usePathname, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -43,11 +43,17 @@ export const useActiveProcessDetailDataQuery = <T>(processId?: string) => {
   const trigger = useSelector(
     (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
   );
+  const pathname = usePathname();
 
   return useQuery({
-    queryKey: [`getActiveProcessDetailDatas_${processId ?? id}`, trigger],
+    queryKey: [
+      `getActiveProcessDetailDatas`,
+      pathname,
+      processId ?? id,
+      trigger,
+    ],
     refetchOnWindowFocus: false,
-    enabled: true,
+    enabled: !!processId || !!id,
     queryFn: async () => {
       const { data } = await axiosInstance.post<T>(
         CLIENT_END_POINTS.processes.getDetail,

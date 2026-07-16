@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
 
 import { useGetActiveProcessesDataQuery } from "@/api/queries/useGetProcessesQueries";
-import { useGetProjectsDataQuery } from "@/api/queries/useGetProjectsQueries";
 import styles from "@/styles/components/common/TableListBody.module.scss";
 import { IProcessesTypes } from "@/types/processTypes";
 import { createProcessHistoryTableColumns } from "@/utils/processHistoryTableUtils";
@@ -15,7 +14,6 @@ import { Table } from "../common/Table";
 export const ProcessHistoryListBody = () => {
   const t = useTranslations("processHistory");
   const { data, isLoading } = useGetActiveProcessesDataQuery<IProcessesTypes>("COMPLETED");
-  console.log(data);
 
   return (
     <section className={styles["pipeline-page"]}>
