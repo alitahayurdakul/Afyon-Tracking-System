@@ -1,5 +1,5 @@
 import {
-  faBuilding,
+  // faBuilding,
   faEnvelope,
   faIdBadge,
   faPhone,
@@ -40,17 +40,23 @@ export const PROFILE_FORM_CONSTS: IFormFieldsType = [
     isRequired: true,
     icon: faIdBadge,
   },
-  {
-    name: "department",
-    type: "select",
-    label: "department",
-    isRequired: true,
-    icon: faBuilding,
-  },
-  { name: "status", type: "checkbox", label: "status" },
+  // {
+  //   name: "department",
+  //   type: "select",
+  //   label: "department",
+  //   isRequired: true,
+  //   icon: faBuilding,
+  // },
+  { name: "isActive", type: "checkbox", label: "isActive" },
 ];
 
 export const PASSWORD_FORM_CONSTS: IFormFieldsType = [
+  {
+    name: "currentPassword",
+    type: "input",
+    label: "currentPassword",
+    isRequired: true,
+  },
   {
     name: "password",
     type: "input",

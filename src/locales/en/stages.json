@@ -50,7 +50,10 @@
       "editSuccess": "Updated successfully",
       "editError": "Failed to update",
       "deleteSuccess": "Deleted successfully",
-      "deleteError": "Failed to delete"
+      "deleteError": "Failed to delete",
+      "blockedQualityStageEdit": "The quality stage cannot be edited.",
+      "blockedQualityStageDelete": "The quality stage cannot be deleted.",
+      "blockedQualityStage":"The quality stage cannot be edited or deleted."
     }
   },
   "deletePopover": {

@@ -3,7 +3,7 @@ export interface IUserFormDataTypes {
   email: string;
   pwd: string;
   phone: string;
-  department: string;
+  // department: string;
   role: string;
   isActive: boolean;
 }
@@ -12,7 +12,7 @@ export interface IUserEditFormDataTypes {
   fullname: string;
   email: string;
   phone: string;
-  department: string;
+  // department: string;
   role: string;
   isActive: boolean;
 }

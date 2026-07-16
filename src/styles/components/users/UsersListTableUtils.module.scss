@@ -3,6 +3,9 @@
 }
 
 .email-text {
+  // Table hücrelerindeki global "white-space: nowrap" satır kırmayı engelleyip
+  // line-clamp'ı ve tooltip tespitini devre dışı bırakıyor; burada geri açılır
+  white-space: normal;
   word-break: break-all;
 }
 

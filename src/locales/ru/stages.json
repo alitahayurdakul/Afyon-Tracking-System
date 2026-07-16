@@ -51,7 +51,10 @@
       "editSuccess": "Успешно обновлено",
       "editError": "Не удалось обновить",
       "deleteSuccess": "Успешно удалено",
-      "deleteError": "Не удалось удалить"
+      "deleteError": "Не удалось удалить",
+      "blockedQualityStageEdit": "Этап контроля качества нельзя редактировать.",
+      "blockedQualityStageDelete": "Этап контроля качества нельзя удалить.",
+      "blockedQualityStage":"Этап контроля качества нельзя редактировать или удалить."
     }
   },
   "deletePopover": {

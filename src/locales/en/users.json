@@ -46,6 +46,7 @@
     "rolePlaceholder": "Select role",
     "statusLabel": "Status",
     "statusPlaceholder": "Select status",
+    "isActiveLabel": "Active User",
     "cancel": "Cancel",
     "save": "Save",
     "editInfo": "Updating user details may affect access and authorization flows. Make sure to review the changes before saving."

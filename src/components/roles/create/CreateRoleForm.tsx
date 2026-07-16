@@ -48,7 +48,7 @@ export const CreateRoleForm = () => {
   const dispatch = useDispatch();
   const removeModal = useRemoveQueryParamModal();
 
-  const roleOptions = useMemo(() => {
+  const permissionOptions = useMemo(() => {
     return generatePermissionOptions().map((p: PermissionOption) => ({
       label: tPermission(p.label),
       value: p.value,
@@ -122,7 +122,7 @@ export const CreateRoleForm = () => {
         placeholder={t("form.permissionsPlaceholder")}
         required
         multiselect
-        options={roleOptions}
+        options={permissionOptions}
       />
       <div className={styles["btn-group"]}>
         <Button

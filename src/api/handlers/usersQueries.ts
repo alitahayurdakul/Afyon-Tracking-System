@@ -15,6 +15,7 @@ export const userHandlers = {
   editUser,
   getUsers,
   getUserDetail,
+  changePassword,
 };
 
 async function createUser(params: Record<string, any>): Promise<Response> {
@@ -53,6 +54,28 @@ async function editUser(params: Record<string, any>): Promise<Response> {
       return createJsonSuccess(response.data, 200);
     }
     return createJsonError("Failed to edit user", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
+  }
+}
+
+async function changePassword(
+  params: Record<string, any>,
+  authorization?: string | null,
+): Promise<Response> {
+  try {
+    const { id, ...rest } = params;
+    const response = await axiosInstance.put(
+      END_POINTS.user.changePassword(id),
+      { ...rest },
+      // Backend, isteği yapanın kendisi mi yoksa admin mi olduğunu token'dan
+      // ayırt ettiği için Authorization header'ı backend'e iletilir
+      authorization ? { headers: { Authorization: authorization } } : undefined,
+    );
+    if (response.status === 200) {
+      return createJsonSuccess(response.data, 200);
+    }
+    return createJsonError("Failed to change password", 400);
   } catch (err: unknown) {
     return createJsonError(extractErrorMessage(err), 500);
   }

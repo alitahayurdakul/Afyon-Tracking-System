@@ -8,6 +8,7 @@ export enum UserQueryTypes {
   editUser = "EDIT_USER",
   deleteUser = "DELETE_USER",
   getDetailUser = "GET_DETAIL_USER",
+  changePassword = "CHANGE_PASSWORD",
 }
 
 export async function POST(request: NextRequest) {
@@ -25,6 +26,11 @@ export async function POST(request: NextRequest) {
       return await userHandlers.getUsers();
     case UserQueryTypes.getDetailUser:
       return await userHandlers.getUserDetail(id);
+    case UserQueryTypes.changePassword:
+      return await userHandlers.changePassword(
+        params,
+        request.headers.get("authorization"),
+      );
 
     default:
       return Response.json(

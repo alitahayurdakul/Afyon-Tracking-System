@@ -45,7 +45,7 @@ export const EditRoleForm = ({ id, data }: IPropsTypes) => {
     }));
   }, [data]);
 
-  const roleOptions = useMemo(() => {
+  const permissionOptions = useMemo(() => {
     return generatePermissionOptions().map((p: PermissionOption) => ({
       label: tPermission(p.label),
       value: p.value,
@@ -136,7 +136,7 @@ export const EditRoleForm = ({ id, data }: IPropsTypes) => {
         placeholder={t("form.permissionsPlaceholder")}
         required
         multiselect
-        options={roleOptions ?? []}
+        options={permissionOptions ?? []}
         isClearable
         isSearchable
         hideSelectedOptions
