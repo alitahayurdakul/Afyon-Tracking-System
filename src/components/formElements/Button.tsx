@@ -60,8 +60,6 @@ export const Button = forwardRef<Ref, React.PropsWithChildren<ButtonProps>>(
       style,
       badge,
       children,
-      // Radix (Popover.Trigger asChild) gibi sarmalayıcıların enjekte ettiği
-      // onClick/aria propslarının butona ulaşması için kalanlar spread edilir
       ...rest
     },
     ref,
