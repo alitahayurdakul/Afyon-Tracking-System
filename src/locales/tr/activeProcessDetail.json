@@ -35,6 +35,7 @@
     "edit": "Alt Aşamayı Güncelle",
     "complete-stage": "Üst Aşamayı Tamamla",
     "complete-process": "Süreci Tamamla",
+    "complete-quality-stage": "Kalite Aşamasını Tamamla",
     "questions": {
       "start-sub-stage": "Alt Aşamayı başlatmak istediğinize emin misiniz?",
       "complete-sub-stage": "Alt Aşamayı tamamlamak istediğinize emin misiniz?",
@@ -42,7 +43,8 @@
       "completeStage": "Üst aşamayı tamamlamak istediğinize emin misiniz?",
       "edit": "Alt Aşamayı güncellemek istediğinize emin misiniz?",
       "start-stage": "Aşamayı Başlatmak istediğinize emin misiniz?",
-      "complete-process": "Süreci tamamlamak istediğinize emin misiniz?"
+      "complete-process": "Süreci tamamlamak istediğinize emin misiniz?",
+      "completeQualityStage": "Kalite aşamasını tamamlamak istediğinize emin misiniz? Bu işlemden sonra geri dönüş olmayacaktır."
     }
   },
   "yes": "Evet",

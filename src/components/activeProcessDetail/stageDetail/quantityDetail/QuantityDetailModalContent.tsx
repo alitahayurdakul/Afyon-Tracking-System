@@ -206,13 +206,13 @@ export const QuantityDetailModalContent = ({
             align="start"
             triggerBody={
               <button className={styles.completeParentStageBtn}>
-                {t("buttons.complete-stage")}
+                {t("buttons.complete-quality-stage")}
               </button>
             }
             contentBody={
               <div className={styles["content"]}>
                 <p className={styles["text"]}>
-                  {t("buttons.questions.completeStage")}
+                  {t("buttons.questions.completeQualityStage")}
                 </p>
               </div>
             }

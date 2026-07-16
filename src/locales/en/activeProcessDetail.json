@@ -34,6 +34,7 @@
     "edit": "Update Sub-Stage",
     "complete-stage": "Complete Parent Stage",
     "complete-process": "Complete Process",
+    "complete-quality-stage": "Complete Quality Stage",
     "questions": {
       "start-sub-stage": "Are you sure you want to start the sub-stage?",
       "complete-sub-stage": "Are you sure you want to complete the sub-stage?",
@@ -41,7 +42,9 @@
       "completeStage": "Are you sure you want to complete the parent stage?",
       "edit": "Are you sure you want to update the sub-stage?",
       "start-stage": "Are you sure you want to start the stage?",
-      "complete-process": "Are you sure you want to complete the process?"
+      "complete-process": "Are you sure you want to complete the process?",
+      "completeQualityStage": "Are you sure you want to complete the quality stage? This action cannot be undone."
+ 
     }
   },
   "yes": "Yes",

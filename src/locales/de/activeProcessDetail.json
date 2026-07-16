@@ -33,7 +33,8 @@
     "start-sub-stage": "Unterphase starten",
     "edit": "Unterphase aktualisieren",
     "complete-stage": "Übergeordnete Phase abschließen",
-      "complete-process": "Prozess abschließen",
+    "complete-process": "Prozess abschließen",
+    "complete-quality-stage": "Qualitätsphase abschließen",
     "questions": {
       "start-sub-stage": "Möchten Sie die Unterphase wirklich starten?",
       "complete-sub-stage": "Möchten Sie die Unterphase wirklich abschließen?",
@@ -41,7 +42,8 @@
       "completeStage": "Möchten Sie die übergeordnete Phase wirklich abschließen?",
       "edit": "Möchten Sie die Unterphase wirklich aktualisieren?",
       "start-stage": "Möchten Sie die Phase wirklich starten?",
-      "complete-process": "Möchten Sie den Prozess wirklich abschließen?"
+      "complete-process": "Möchten Sie den Prozess wirklich abschließen?",
+       "completeQualityStage": "Möchten Sie die Qualitätsphase wirklich abschließen? Diese Aktion kann nicht rückgängig gemacht werden."
     }
   },
   "yes": "Ja",
