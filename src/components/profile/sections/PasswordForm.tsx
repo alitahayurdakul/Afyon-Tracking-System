@@ -65,7 +65,6 @@ const PasswordForm = () => {
         }),
       );
       reset();
-      // Şifre değişince backend tüm oturumları sonlandırıyor; yeniden giriş gerekli
       dispatch(clearAuth());
       router.replace("/login");
     } catch (err) {

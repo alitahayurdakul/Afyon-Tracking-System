@@ -68,8 +68,6 @@ async function changePassword(
     const response = await axiosInstance.put(
       END_POINTS.user.changePassword(id),
       { ...rest },
-      // Backend, isteği yapanın kendisi mi yoksa admin mi olduğunu token'dan
-      // ayırt ettiği için Authorization header'ı backend'e iletilir
       authorization ? { headers: { Authorization: authorization } } : undefined,
     );
     if (response.status === 200) {
