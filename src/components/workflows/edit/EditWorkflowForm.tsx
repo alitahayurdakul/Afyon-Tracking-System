@@ -35,6 +35,7 @@ interface IPropsTypes {
 }
 
 export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
+  const tValidation = useTranslations("layout.validation-errors");
   const {
     control,
     handleSubmit,
@@ -44,7 +45,7 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
     reset,
     formState: { isSubmitting, errors },
   } = useForm<IWorkflowFormDataTypes>({
-    resolver: yupResolver(WorkflowFormValidation()),
+    resolver: yupResolver(WorkflowFormValidation(tValidation)),
     defaultValues: {
       name: workflowData?.name,
       description: workflowData?.description,

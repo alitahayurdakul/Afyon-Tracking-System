@@ -67,5 +67,14 @@
     "delay-reason": "Gecikme Nedenleri Yönetimi",
     "users": "Kullanıcı Yönetimi",
     "roles": "Rol Yönetimi"
+  },
+  "validation-errors": {
+    "required": "Bu alan zorunludur",
+    "invalidEmail": "Geçerli bir e-posta giriniz",
+    "passwordMin": "Şifre en az {min} karakter olmalı",
+    "passwordsNotMatch": "Şifreler eşleşmiyor",
+    "minOneSelection": "En az bir seçenek seçiniz",
+    "minOneMaterial": "En az bir malzeme seçiniz",
+    "minOnePermission": "En az bir yetki seçiniz"
   }
 }

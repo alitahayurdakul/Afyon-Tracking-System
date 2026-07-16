@@ -1,17 +1,20 @@
 import * as Yup from "yup";
 
 import { ITrainFormDataTypes } from "@/types/trainsTypes";
+import { TValidationTranslator } from "@/types/validationTypes";
 
-export function TrainFormValidation(): Yup.ObjectSchema<ITrainFormDataTypes> {
+export function TrainFormValidation(
+  t: TValidationTranslator,
+): Yup.ObjectSchema<ITrainFormDataTypes> {
   const baseShape = {
     trainSetNo: Yup.string()
       .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .typeError(t("required"))
+      .required(t("required")),
     wagons: Yup.array()
-        .min(1, "Please select at least one option")
-        .required("Selection is required"),
-    desc: Yup.string().trim().default("")
+      .min(1, t("minOneSelection"))
+      .required(t("minOneSelection")),
+    desc: Yup.string().trim().default(""),
   };
 
   return Yup.object().shape(baseShape);

@@ -1,30 +1,33 @@
 import * as Yup from "yup";
 
 import { IProfileFormTypes } from "@/types/profileTypes";
+import { TValidationTranslator } from "@/types/validationTypes";
 
-export function ProfileInfoFormValidation(): Yup.ObjectSchema<IProfileFormTypes> {
+export function ProfileInfoFormValidation(
+  t: TValidationTranslator,
+): Yup.ObjectSchema<IProfileFormTypes> {
   const baseShape = {
     fullName: Yup.string()
       .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .typeError(t("required"))
+      .required(t("required")),
     email: Yup.string()
       .trim()
-      .email("Geçerli bir e-posta giriniz")
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .email(t("invalidEmail"))
+      .typeError(t("required"))
+      .required(t("required")),
     phone: Yup.string()
       .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .typeError(t("required"))
+      .required(t("required")),
     department: Yup.string()
       .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .typeError(t("required"))
+      .required(t("required")),
     role: Yup.string()
       .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .typeError(t("required"))
+      .required(t("required")),
     isActive: Yup.boolean().required(),
   };
 

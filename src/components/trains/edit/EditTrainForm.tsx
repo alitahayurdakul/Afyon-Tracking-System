@@ -38,6 +38,7 @@ interface IPropsTypes {
 }
 
 export const EditTrainForm = ({ id, data, wagonOptions }: IPropsTypes) => {
+  const tValidation = useTranslations("layout.validation-errors");
   const t = useTranslations("trains");
   const {
     control,
@@ -48,7 +49,7 @@ export const EditTrainForm = ({ id, data, wagonOptions }: IPropsTypes) => {
     reset,
     formState: { isSubmitting, errors },
   } = useForm<ITrainFormDataTypes>({
-    resolver: yupResolver(TrainFormValidation()),
+    resolver: yupResolver(TrainFormValidation(tValidation)),
     defaultValues: {
       trainSetNo: data?.trainSetNo || "",
       desc: data?.desc || "",

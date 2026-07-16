@@ -28,6 +28,7 @@ import { extractApiError } from "@/utils/extractApiError";
 import { useTranslations } from "next-intl";
 
 export const CreateUserForm = () => {
+  const tValidation = useTranslations("layout.validation-errors");
   const t = useTranslations("users");
   const {
     control,
@@ -35,7 +36,7 @@ export const CreateUserForm = () => {
     reset,
     formState: { isSubmitting },
   } = useForm<IUserFormDataTypes>({
-    resolver: yupResolver(UserFormValidation()),
+    resolver: yupResolver(UserFormValidation(tValidation)),
     defaultValues: {
       fullname: "",
       email: "",

@@ -26,6 +26,7 @@ import SelectedItemList from "@/components/common/SelectedItemList";
 import { extractApiError } from "@/utils/extractApiError";
 
 export const CreateSubStageForm = () => {
+  const tValidation = useTranslations("layout.validation-errors");
   const t = useTranslations("subStages");
   const {
     control,
@@ -36,7 +37,7 @@ export const CreateSubStageForm = () => {
     setValue,
     formState: { isSubmitting },
   } = useForm<ISubStageFormDataTypes>({
-    resolver: yupResolver(SubStageFormValidation()),
+    resolver: yupResolver(SubStageFormValidation(tValidation)),
     defaultValues: {
       name: "",
       materials: [],

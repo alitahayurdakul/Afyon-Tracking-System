@@ -17,6 +17,7 @@ import { ProfileInfoFormValidation } from "@/utils/validations/profileFormValida
 
 const PasswordForm = () => {
   const t = useTranslations("profile");
+  const tValidation = useTranslations("layout.validation-errors");
   const {
     control,
     handleSubmit,
@@ -26,9 +27,8 @@ const PasswordForm = () => {
     reset,
     formState: { isSubmitting, errors },
   } = useForm<IPasswordFormTypes>({
-    resolver: yupResolver(PasswordFormValidation()),
+    resolver: yupResolver(PasswordFormValidation(tValidation)),
     defaultValues: {
-      
     },
   });
 

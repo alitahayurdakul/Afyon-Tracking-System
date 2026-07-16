@@ -1,61 +1,66 @@
 import * as Yup from "yup";
 
 import { IUserEditFormDataTypes, IUserFormDataTypes } from "@/types/usersTypes";
+import { TValidationTranslator } from "@/types/validationTypes";
 
-export function UserFormValidation(): Yup.ObjectSchema<IUserFormDataTypes> {
+export function UserFormValidation(
+  t: TValidationTranslator,
+): Yup.ObjectSchema<IUserFormDataTypes> {
   return Yup.object().shape({
     fullname: Yup.string()
       .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .typeError(t("required"))
+      .required(t("required")),
     email: Yup.string()
       .trim()
-      .email("Geçerli bir e-posta giriniz")
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .email(t("invalidEmail"))
+      .typeError(t("required"))
+      .required(t("required")),
     pwd: Yup.string()
-      .min(6, "Şifre en az 6 karakter olmalı")
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .min(6, t("passwordMin", { min: 6 }))
+      .typeError(t("required"))
+      .required(t("required")),
     phone: Yup.string()
       .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .typeError(t("required"))
+      .required(t("required")),
     department: Yup.string()
       .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .typeError(t("required"))
+      .required(t("required")),
     role: Yup.string()
       .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .typeError(t("required"))
+      .required(t("required")),
     isActive: Yup.boolean().required(),
   });
 }
 
-export function UserEditFormValidation(): Yup.ObjectSchema<IUserEditFormDataTypes> {
+export function UserEditFormValidation(
+  t: TValidationTranslator,
+): Yup.ObjectSchema<IUserEditFormDataTypes> {
   return Yup.object().shape({
     fullname: Yup.string()
       .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .typeError(t("required"))
+      .required(t("required")),
     email: Yup.string()
       .trim()
-      .email("Geçerli bir e-posta giriniz")
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .email(t("invalidEmail"))
+      .typeError(t("required"))
+      .required(t("required")),
     phone: Yup.string()
       .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .typeError(t("required"))
+      .required(t("required")),
     department: Yup.string()
       .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .typeError(t("required"))
+      .required(t("required")),
     role: Yup.string()
       .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .typeError(t("required"))
+      .required(t("required")),
     isActive: Yup.boolean().required(),
   });
 }

@@ -29,13 +29,14 @@ interface IPropsTypes {
 }
 
 export const EditReasonForm = ({ id, data }: IPropsTypes) => {
+  const tValidation = useTranslations("layout.validation-errors");
   const {
     control,
     handleSubmit,
     register,
     formState: { isSubmitting, errors },
   } = useForm<IReasonFormDataTypes>({
-    resolver: yupResolver(ReasonFormValidation()),
+    resolver: yupResolver(ReasonFormValidation(tValidation)),
     defaultValues: {
       name: data?.name ?? "",
       desc: data?.description ?? "",

@@ -21,6 +21,7 @@ import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { useTranslations } from "next-intl";
 
 export const CreateWagonForm = () => {
+  const tValidation = useTranslations("layout.validation-errors");
   const {
     control,
     handleSubmit,
@@ -28,7 +29,7 @@ export const CreateWagonForm = () => {
     reset,
     formState: { isSubmitting, errors },
   } = useForm<IWagonFormDataTypes>({
-    resolver: yupResolver(WagonFormValidation()),
+    resolver: yupResolver(WagonFormValidation(tValidation)),
     defaultValues: {
       name: "",
       desc: "",

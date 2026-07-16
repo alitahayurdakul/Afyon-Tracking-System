@@ -1,18 +1,21 @@
 import * as Yup from "yup";
 
 import { IPasswordFormTypes } from "@/types/profileTypes";
+import { TValidationTranslator } from "@/types/validationTypes";
 
-export function PasswordFormValidation(): Yup.ObjectSchema<IPasswordFormTypes> {
+export function PasswordFormValidation(
+  t: TValidationTranslator,
+): Yup.ObjectSchema<IPasswordFormTypes> {
   const baseShape = {
     password: Yup.string()
       .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur"),
+      .typeError(t("required"))
+      .required(t("required")),
     repassword: Yup.string()
       .trim()
-      .typeError("Bu alan zorunludur")
-      .required("Bu alan zorunludur")
-      .oneOf([Yup.ref("password")], "Şifreler eşleşmiyor"),
+      .typeError(t("required"))
+      .required(t("required"))
+      .oneOf([Yup.ref("password")], t("passwordsNotMatch")),
   };
 
   return Yup.object().shape(baseShape);

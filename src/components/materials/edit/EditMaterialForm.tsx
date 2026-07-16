@@ -30,13 +30,14 @@ interface IPropsTypes {
 }
 
 export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
+  const tValidation = useTranslations("layout.validation-errors");
   const {
     control,
     handleSubmit,
     register,
     formState: { isSubmitting, errors },
   } = useForm<IMaterialFormDataTypes>({
-    resolver: yupResolver(MaterialFormValidation()),
+    resolver: yupResolver(MaterialFormValidation(tValidation)),
     defaultValues: {
       name: data?.name ?? "",
       code: data?.materialCode ?? "",

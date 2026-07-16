@@ -67,6 +67,14 @@
     "delay-reason": "Delay Reason Management",
     "users": "User Management",
     "roles": "Role Management"
+  },
+  "validation-errors": {
+    "required": "This field is required",
+    "invalidEmail": "Please enter a valid email address",
+    "passwordMin": "Password must be at least {min} characters",
+    "passwordsNotMatch": "Passwords do not match",
+    "minOneSelection": "Please select at least one option",
+    "minOneMaterial": "Please select at least one material",
+    "minOnePermission": "Please select at least one permission"
   }
-
 }

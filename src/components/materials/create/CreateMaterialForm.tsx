@@ -22,6 +22,7 @@ import { useTranslations } from "next-intl";
 import { extractApiError } from "@/utils/extractApiError";
 
 export const CreateMaterialForm = () => {
+  const tValidation = useTranslations("layout.validation-errors");
   const {
     control,
     handleSubmit,
@@ -29,7 +30,7 @@ export const CreateMaterialForm = () => {
     reset,
     formState: { isSubmitting, errors },
   } = useForm<IMaterialFormDataTypes>({
-    resolver: yupResolver(MaterialFormValidation()),
+    resolver: yupResolver(MaterialFormValidation(tValidation)),
     defaultValues: {
       name: "",
       code: "",

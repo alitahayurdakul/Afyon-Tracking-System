@@ -34,13 +34,14 @@ interface IPropsTypes {
 }
 
 export const EditUserForm = ({ id, data }: IPropsTypes) => {
+  const tValidation = useTranslations("layout.validation-errors");
   const t = useTranslations("users");
   const {
     control,
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<IUserEditFormDataTypes>({
-    resolver: yupResolver(UserEditFormValidation()),
+    resolver: yupResolver(UserEditFormValidation(tValidation)),
     defaultValues: {
       fullname: data?.fullname ?? "",
       email: data?.email ?? "",

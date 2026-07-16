@@ -21,6 +21,7 @@ import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { useTranslations } from "next-intl";
 
 export const CreateReasonForm = () => {
+  const tValidation = useTranslations("layout.validation-errors");
   const {
     control,
     handleSubmit,
@@ -28,7 +29,7 @@ export const CreateReasonForm = () => {
     reset,
     formState: { isSubmitting, errors },
   } = useForm<IReasonFormDataTypes>({
-    resolver: yupResolver(ReasonFormValidation()),
+    resolver: yupResolver(ReasonFormValidation(tValidation)),
     defaultValues: {
       name: "",
       desc: "",
