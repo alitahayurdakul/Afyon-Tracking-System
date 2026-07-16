@@ -197,9 +197,10 @@ export const Table = <T,>({
 
   return (
     <>
-      <div className={styles["table-wrapper"]}>
-        <table
-          ref={scrollRef}
+      <div className={clsx(styles["table-wrapper"], {
+        [styles["dragging"]]: isDragging && draggableClassActive
+      }) }  
+      ref={scrollRef}
           onScroll={onScroll}
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
@@ -207,14 +208,15 @@ export const Table = <T,>({
             if (isDragging) handleMouseMove(e);
           }}
           onMouseLeave={handleMouseUp}
+          >
+       
+        <table
           {...{
             style: {
               width: table.getCenterTotalSize(),
             },
           }}
-          className={clsx(styles["table"], className, {
-            [styles["dragging"]]: isDragging && draggableClassActive,
-          })}
+          className={clsx(styles["table"], className)}
         >
           <thead
             className={clsx(styles["head"], {

@@ -72,3 +72,9 @@
     cursor: not-allowed;
   }
 }
+
+.text-input{
+  &:focus {
+    box-shadow: 0 0 0 1px var(--border-blue-70);
+  }
+}

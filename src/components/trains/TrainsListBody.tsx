@@ -39,6 +39,7 @@ export const TrainsListBody = () => {
       <div className={styles["table-card"]}>
         <Table
           className={styles["table-class"]}
+          draggableClassActive
           loading={isLoading}
           data={data}
           columns={createTrainsTableColumns(t)}
