@@ -55,6 +55,7 @@ export default function StageDetailModalContent({
     isLoading,
     isError,
   } = useGetStageDetailDataQuery<SubStage[]>(id);
+  console.log(stageStatus);
 
   const { id: processId } = useParams();
 
@@ -110,7 +111,8 @@ export default function StageDetailModalContent({
     () =>
       (subStagesData ?? []).length > 0 &&
       subStagesData!.every(
-        (subStage: SubStage) => getStatus(subStage.status) === StatusEnums.completed,
+        (subStage: SubStage) =>
+          getStatus(subStage.status) === StatusEnums.completed,
       ),
     [subStagesData],
   );
@@ -281,7 +283,9 @@ export default function StageDetailModalContent({
             <DelayReasonGroup
               reasonList={newSubStageData.reasonList}
               disabled={isLocked}
-              isOnlyText={getStatus(activeSubStageData.status) === StatusEnums.completed}
+              isOnlyText={
+                getStatus(activeSubStageData.status) === StatusEnums.completed
+              }
               onChange={(reasonList) =>
                 setNewSubStageData((prev) => ({ ...prev, reasonList }))
               }
@@ -295,7 +299,8 @@ export default function StageDetailModalContent({
                   materials={newSubStageData.materialList}
                   disabled={isLocked}
                   isOnlyText={
-                    getStatus(activeSubStageData.status) === StatusEnums.completed
+                    getStatus(activeSubStageData.status) ===
+                    StatusEnums.completed
                   }
                   onChange={(materials) => {
                     setNewSubStageData((prev) => ({
@@ -338,141 +343,145 @@ export default function StageDetailModalContent({
             />
           </section>*/}
         </div>
+        {getStatus(stageStatus) !== StatusEnums.completed && (
+          <div
+            className={styles.footer}
+            style={{
+              borderTop:
+                getStatus(stageStatus) !== StatusEnums.completed
+                  ? "0.5px solid #d3d1c7"
+                  : "none",
+            }}
+          >
+            {getStatus(activeSubStageData.status) === "active" && (
+              <>
+                <PopoverBody
+                  alignOffset={-73}
+                  align="start"
+                  triggerBody={
+                    <button className={styles.saveBtn}>
+                      {t("buttons.save-changes")}
+                    </button>
+                  }
+                  contentBody={
+                    <div className={styles["content"]}>
+                      <p className={styles["text"]}>
+                        {t("buttons.questions.save")}
+                      </p>
+                    </div>
+                  }
+                  closeContainer={
+                    <div className={styles["btn-container"]}>
+                      <button>{t("no")}</button>
+                      <button onClick={saveStageChanges}>{t("yes")}</button>
+                    </div>
+                  }
+                />
+                <PopoverBody
+                  alignOffset={-73}
+                  align="start"
+                  triggerBody={
+                    <button className={styles.completeBtn}>
+                      {t("buttons.complete-sub-stage")}
+                    </button>
+                  }
+                  contentBody={
+                    <div className={styles["content"]}>
+                      <p className={styles["text"]}>
+                        {t("buttons.questions.complete-sub-stage")}
+                      </p>
+                    </div>
+                  }
+                  closeContainer={
+                    <div className={styles["btn-container"]}>
+                      <button>{t("no")}</button>
+                      <button onClick={completeSubStage}>{t("yes")}</button>
+                    </div>
+                  }
+                />
+              </>
+            )}
 
-        <div
-          className={styles.footer}
-          style={{
-            borderTop:
-              getStatus(stageStatus) !== StatusEnums.completed
-                ? "0.5px solid #d3d1c7"
-                : "none",
-          }}
-        >
-          {getStatus(activeSubStageData.status) === "active" && (
-            <>
+            {getStatus(activeSubStageData.status) === "pending" && (
               <PopoverBody
                 alignOffset={-73}
                 align="start"
                 triggerBody={
-                  <button className={styles.saveBtn}>
-                    {t("buttons.save-changes")}
+                  <button className={styles.startBtn}>
+                    {t("buttons.start-sub-stage")}
                   </button>
                 }
                 contentBody={
                   <div className={styles["content"]}>
                     <p className={styles["text"]}>
-                      {t("buttons.questions.save")}
+                      {t("buttons.questions.start-sub-stage")}
                     </p>
                   </div>
                 }
                 closeContainer={
                   <div className={styles["btn-container"]}>
                     <button>{t("no")}</button>
-                    <button onClick={saveStageChanges}>{t("yes")}</button>
-                  </div>
-                }
-              />
-              <PopoverBody
-                alignOffset={-73}
-                align="start"
-                triggerBody={
-                  <button className={styles.completeBtn}>
-                    {t("buttons.complete-sub-stage")}
-                  </button>
-                }
-                contentBody={
-                  <div className={styles["content"]}>
-                    <p className={styles["text"]}>
-                      {t("buttons.questions.complete-sub-stage")}
-                    </p>
-                  </div>
-                }
-                closeContainer={
-                  <div className={styles["btn-container"]}>
-                    <button>{t("no")}</button>
-                    <button onClick={completeSubStage}>{t("yes")}</button>
-                  </div>
-                }
-              />
-            </>
-          )}
-
-          {getStatus(activeSubStageData.status) === "pending" && (
-            <PopoverBody
-              alignOffset={-73}
-              align="start"
-              triggerBody={
-                <button className={styles.startBtn}>
-                  {t("buttons.start-sub-stage")}
-                </button>
-              }
-              contentBody={
-                <div className={styles["content"]}>
-                  <p className={styles["text"]}>
-                    {t("buttons.questions.start-sub-stage")}
-                  </p>
-                </div>
-              }
-              closeContainer={
-                <div className={styles["btn-container"]}>
-                  <button>{t("no")}</button>
-                  <button onClick={startStage}>{t("yes")}</button>
-                </div>
-              }
-            />
-          )}
-
-          {getStatus(activeSubStageData.status) === StatusEnums.completed &&
-            getStatus(stageStatus) !== StatusEnums.completed && (
-              <PopoverBody
-                alignOffset={-73}
-                align="start"
-                triggerBody={
-                  <button className={styles.editBtn}>
-                    {t("buttons.edit")}
-                  </button>
-                }
-                contentBody={
-                  <div className={styles["content"]}>
-                    <p className={styles["text"]}>
-                      {t("buttons.questions.edit")}
-                    </p>
-                  </div>
-                }
-                closeContainer={
-                  <div className={styles["btn-container"]}>
-                    <button>{t("no")}</button>
-                    <button onClick={editCompletedSubStage}>{t("yes")}</button>
+                    <button onClick={startStage}>{t("yes")}</button>
                   </div>
                 }
               />
             )}
 
-          {isAllCompleted && getStatus(stageStatus) !== StatusEnums.completed && (
-            <PopoverBody
-              alignOffset={-73}
-              align="start"
-              triggerBody={
-                <button className={styles.completeParentStageBtn}>
-                  {t("buttons.complete-stage")}
-                </button>
-              }
-              contentBody={
-                <div className={styles["content"]}>
-                  <p className={styles["text"]}>
-                    {t("buttons.questions.completeStage")}
-                  </p>
-                </div>
-              }
-              closeContainer={
-                <div className={styles["btn-container"]}>
-                  <button>{t("no")}</button>
-                  <button onClick={completeStage}>{t("yes")}</button>
-                </div>
-              }
-            />
-          )}
-        </div>
+            {getStatus(activeSubStageData.status) === StatusEnums.completed &&
+              getStatus(stageStatus) !== StatusEnums.completed && (
+                <PopoverBody
+                  alignOffset={-73}
+                  align="start"
+                  triggerBody={
+                    <button className={styles.editBtn}>
+                      {t("buttons.edit")}
+                    </button>
+                  }
+                  contentBody={
+                    <div className={styles["content"]}>
+                      <p className={styles["text"]}>
+                        {t("buttons.questions.edit")}
+                      </p>
+                    </div>
+                  }
+                  closeContainer={
+                    <div className={styles["btn-container"]}>
+                      <button>{t("no")}</button>
+                      <button onClick={editCompletedSubStage}>
+                        {t("yes")}
+                      </button>
+                    </div>
+                  }
+                />
+              )}
+
+            {isAllCompleted &&
+              getStatus(stageStatus) !== StatusEnums.completed && (
+                <PopoverBody
+                  alignOffset={-73}
+                  align="start"
+                  triggerBody={
+                    <button className={styles.completeParentStageBtn}>
+                      {t("buttons.complete-stage")}
+                    </button>
+                  }
+                  contentBody={
+                    <div className={styles["content"]}>
+                      <p className={styles["text"]}>
+                        {t("buttons.questions.completeStage")}
+                      </p>
+                    </div>
+                  }
+                  closeContainer={
+                    <div className={styles["btn-container"]}>
+                      <button>{t("no")}</button>
+                      <button onClick={completeStage}>{t("yes")}</button>
+                    </div>
+                  }
+                />
+              )}
+          </div>
+        )}
       </div>
     </NewModal>
   );

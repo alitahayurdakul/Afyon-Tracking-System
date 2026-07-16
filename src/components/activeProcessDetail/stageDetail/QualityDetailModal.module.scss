@@ -175,6 +175,10 @@
   display: flex;
   justify-content: flex-end;
   gap: 5px;
+  position: sticky !important;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .completeParentStageBtn {
