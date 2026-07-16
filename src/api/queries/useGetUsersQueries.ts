@@ -28,7 +28,10 @@ export const useGetUsersDataQuery = () => {
   });
 };
 
-export const useGetUserDetailDataQuery = (id: string) => {
+export const useGetUserDetailDataQuery = (
+  id: string,
+  enabled: boolean = false,
+) => {
   const searchParams = useSearchParams();
   const param = searchParams.get("modal");
   const splittedId = param?.split("_").pop();
@@ -39,7 +42,7 @@ export const useGetUserDetailDataQuery = (id: string) => {
   return useQuery({
     queryKey: [`getUserDetailDatas_${id}`, trigger],
     refetchOnWindowFocus: false,
-    enabled: splittedId === id,
+    enabled: splittedId === id || enabled,
     queryFn: async () => {
       const { data } = await axiosInstance.post<IUserType>(
         CLIENT_END_POINTS.user.getDetail,

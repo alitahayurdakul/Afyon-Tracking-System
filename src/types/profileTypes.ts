@@ -1,5 +1,5 @@
 export interface IProfileFormTypes {
-    fullName: string;
+    fullname: string;
     email: string;
     phone: string;
     role: string;

@@ -7,6 +7,7 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { RoleQueryTypes } from "@/app/api/roles/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
+import { optionsConverters } from "@/types/optionsConverter";
 import { IRolesType, IRoleType } from "@/types/rolesTypes";
 
 export const useGetRolesDataQuery = () => {
@@ -46,6 +47,27 @@ export const useGetRoleDetailDataQuery = (id: string) => {
         { type: RoleQueryTypes.getDetailRole, id },
       );
       return data;
+    },
+  });
+};
+
+export const useGetRolesOptionsQuery = () => {
+  const trigger = useSelector(
+    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+  );
+
+  return useQuery({
+    queryKey: [`getRolesAllOptions`, trigger],
+    refetchOnWindowFocus: false,
+    enabled: true,
+    queryFn: async () => {
+      const { data } = await axiosInstance.post<IRolesType>(
+        CLIENT_END_POINTS.role.getAll,
+        { type: RoleQueryTypes.getAllRoles },
+      );
+
+      const options = optionsConverters(data, "_id", "roleName");
+      return options;
     },
   });
 };

@@ -7,7 +7,7 @@ export function ProfileInfoFormValidation(
   t: TValidationTranslator,
 ): Yup.ObjectSchema<IProfileFormTypes> {
   const baseShape = {
-    fullName: Yup.string()
+    fullname: Yup.string()
       .trim()
       .typeError(t("required"))
       .required(t("required")),

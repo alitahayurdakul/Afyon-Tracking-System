@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import React, { useCallback } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
+import { useGetRolesOptionsQuery } from "@/api/queries/useGetRolesQueries";
 import { Button } from "@/components/formElements/Button";
 import { CheckBox } from "@/components/formElements/Checkbox";
 import { InputBox } from "@/components/formElements/InputBox";
@@ -14,11 +15,14 @@ import styles from "@/styles/components/profile/ProfileWrapper.module.scss";
 import { InputSpaceEnums } from "@/types/formEnums";
 import { IFormFieldType } from "@/types/formTypes";
 import { IProfileFormTypes } from "@/types/profileTypes";
+import { IUserRoleRef, IUserType } from "@/types/usersTypes";
 import { ProfileInfoFormValidation } from "@/utils/validations/profileFormValidations";
 
-const ProfileInfoForm = () => {
+const ProfileInfoForm = ({ userInfo }: { userInfo?: IUserType }) => {
   const t = useTranslations("profile");
   const tValidation = useTranslations("layout.validation-errors");
+  const { data: roleOptions, isLoading } = useGetRolesOptionsQuery();
+
   const {
     control,
     handleSubmit,
@@ -30,9 +34,16 @@ const ProfileInfoForm = () => {
   } = useForm<IProfileFormTypes>({
     resolver: yupResolver(ProfileInfoFormValidation(tValidation)),
     defaultValues: {
-      fullName: "",
+      fullname: userInfo?.fullname,
+      email: userInfo?.email,
+      phone: userInfo?.phone,
+      isActive: userInfo?.isActive,
+      department: userInfo?.department,
+      role: (userInfo?.role as IUserRoleRef)._id,
     },
   });
+
+  console.log(userInfo?.isActive)
 
   const onSubmit: SubmitHandler<IProfileFormTypes> = useCallback(
     async (data) => {
@@ -78,6 +89,7 @@ const ProfileInfoForm = () => {
     },
     [],
   );
+
   return (
     <div className={styles.card}>
       <h3 className={styles.cardTitle}>{t("cardTitles.profile")}</h3>
@@ -120,7 +132,7 @@ const ProfileInfoForm = () => {
               <React.Fragment key={index}>
                 <SelectBox
                   name={item.name}
-                  options={[]}
+                  options={item.name === "role" ? (roleOptions ?? []) : []}
                   control={control as any}
                   required={item.isRequired}
                   label={
@@ -135,6 +147,7 @@ const ProfileInfoForm = () => {
                   isSearchable
                   isClearable
                   hideSelectedOptions
+                  loading={isLoading}
                 />
               </React.Fragment>
             );
@@ -149,6 +162,7 @@ const ProfileInfoForm = () => {
                   align="top"
                   className={styles["checkbox-container"]}
                   classNameInput={styles["checkbox-input"]}
+                  defaultChecked={userInfo?.isActive}
                   label={
                     <span className={styles["checkbox-label"]}>
                       {t("form.fields.isActive.label")}
