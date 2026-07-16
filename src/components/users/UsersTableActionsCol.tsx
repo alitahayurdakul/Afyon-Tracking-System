@@ -1,14 +1,12 @@
-import { faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useDispatch } from "react-redux";
 
 import { axiosInstance } from "@/api/axiosInstance";
 import { UserQueryTypes } from "@/app/api/users/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { URL_PAGES } from "@/consts/url";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import styles from "@/styles/components/common/TableActionsCol.module.scss";
@@ -54,14 +52,6 @@ export const UsersTableActionsCol = ({ id }: { id: string }) => {
     <div
       className={clsx(styles["table-actions"], compactStyles["table-actions"])}
     >
-      <Link
-        href={`${URL_PAGES.users}/${id}`}
-        className={clsx(styles["detail-btn"], compactStyles["compact-btn"])}
-        title={`${t("actions.detail")}_${id}`}
-      >
-        <FontAwesomeIcon icon={faUser} />
-        <span>{t("actions.detail")}</span>
-      </Link>
       <EditUsersModal id={id} />
       <PopoverBody
         alignOffset={-73}

@@ -1,7 +1,9 @@
 /* eslint-disable */
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
-import { DOMAttributes, forwardRef, useCallback } from "react";
+import { DOMAttributes, forwardRef, useCallback, useState } from "react";
 import { Control, useController, UseControllerProps } from "react-hook-form";
 
 import { CheckIcon } from "@/components/icons/CheckIcon";
@@ -57,7 +59,8 @@ interface InputBoxProps extends UseControllerProps {
   checkIconExtraClassName?: string;
   errorLabelClassName?: string;
   autoComplete?: string;
-  isLocaleTrUpperCase?: boolean; // If true, input value will be converted to uppercase in Turkish locale
+  isLocaleTrUpperCase?: boolean;
+  passwordToggle?: boolean;
 }
 
 export type Ref = HTMLInputElement;
@@ -65,6 +68,11 @@ export type Ref = HTMLInputElement;
 export const InputBox = forwardRef<Ref, InputBoxProps>(
   function InputBoxComponent(props, ref) {
     const { field, fieldState, formState } = useController(props);
+    const [showPassword, setShowPassword] = useState(false);
+    const inputType =
+      props.passwordToggle && props.type === "password" && showPassword
+        ? "text"
+        : props.type || "text";
 
     const {
       error: errorFormValidation,
@@ -236,7 +244,7 @@ export const InputBox = forwardRef<Ref, InputBoxProps>(
           <input
             id={props.name}
             pattern={props.onlyNumber ? "[0-9]*" : undefined}
-            type={props.type || "text"}
+            type={inputType}
             disabled={props?.disabled || props?.onlyInputDisabled}
             readOnly={props?.readonly}
             {...field}
@@ -257,6 +265,17 @@ export const InputBox = forwardRef<Ref, InputBoxProps>(
             autoComplete={props.autoComplete}
           />
           <div className={styles["extra-info-container"]}>
+            {props.passwordToggle && props.type === "password" && (
+              <button
+                type="button"
+                tabIndex={-1}
+                className={styles["password-toggle"]}
+                onClick={() => setShowPassword((prev) => !prev)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+              >
+                <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+              </button>
+            )}
             {props.infoIcon && (
               <motion.div
                 {...formAnimation}

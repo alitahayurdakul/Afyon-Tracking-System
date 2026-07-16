@@ -30,6 +30,10 @@
       "isActive": {
         "label": "Aktif Kullanıcı"
       },
+      "currentPassword": {
+        "label": "Mevcut Şifre",
+        "placeholder": "Mevcut şifrenizi giriniz"
+      },
       "newPassword": {
         "label": "Yeni Şifre",
         "placeholder": "Yeni Şifre giriniz"
@@ -47,7 +51,9 @@
     },
     "questions": {
       "saveInfo": "Bilgilerinizi güncellemek istediğinize emin misiniz?",
-      "editPassword": "Şifrenizi Güncellemek istediğinize emin misiniz?"
+      "editPassword": "Şifrenizi Güncellemek istediğinize emin misiniz?",
+      "yes": "Evet",
+      "no": "Hayır"
     },
     "notifications": {
       "saveInfo": {

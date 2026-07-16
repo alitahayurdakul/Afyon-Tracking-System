@@ -50,7 +50,10 @@
       "editSuccess": "Erfolgreich aktualisiert",
       "editError": "Aktualisierung fehlgeschlagen",
       "deleteSuccess": "Erfolgreich gelöscht",
-      "deleteError": "Löschen fehlgeschlagen"
+      "deleteError": "Löschen fehlgeschlagen",
+      "blockedQualityStageEdit": "Die Qualitätsphase kann nicht bearbeitet werden.",
+      "blockedQualityStageDelete": "Die Qualitätsphase kann nicht gelöscht werden.",
+      "blockedQualityStage":"Die Qualitätsphase kann nicht bearbeitet oder gelöscht werden."
     }
   },
   "deletePopover": {

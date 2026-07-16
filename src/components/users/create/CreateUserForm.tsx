@@ -18,12 +18,9 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { UserQueryTypes } from "@/app/api/users/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import {
-  USER_DEPARTMENT_OPTIONS,
-  USER_ACTIVE_OPTIONS,
-} from "@/consts/usersConsts";
-import { useGetRolesDataQuery } from "@/api/queries/useGetRolesQueries";
-import { useMemo } from "react";
+import { USER_DEPARTMENT_OPTIONS } from "@/consts/usersConsts";
+import { CheckBox } from "@/components/formElements/Checkbox";
+import { useGetRolesOptionsQuery } from "@/api/queries/useGetRolesQueries";
 import { extractApiError } from "@/utils/extractApiError";
 import { useTranslations } from "next-intl";
 
@@ -42,7 +39,7 @@ export const CreateUserForm = () => {
       email: "",
       pwd: "",
       phone: "",
-      department: "",
+      // department: "",
       role: "",
       isActive: true,
     },
@@ -50,15 +47,7 @@ export const CreateUserForm = () => {
 
   const dispatch = useDispatch();
   const removeModal = useRemoveQueryParamModal();
-  const { data: rolesData } = useGetRolesDataQuery();
-  const roleOptions = useMemo(
-    () =>
-      (rolesData ?? []).map((r) => ({
-        label: r.roleName,
-        value: r._id,
-      })),
-    [rolesData],
-  );
+  const { data: roleOptions } = useGetRolesOptionsQuery();
 
   const onCancel = () => removeModal();
 
@@ -70,7 +59,7 @@ export const CreateUserForm = () => {
           email: data.email.trim().toLowerCase(),
           pwd: data.pwd,
           phone: data.phone.trim(),
-          department: data.department,
+          // department: data.department,
           role: data.role,
         };
         await axiosInstance.post(CLIENT_END_POINTS.user.create, {
@@ -145,29 +134,28 @@ export const CreateUserForm = () => {
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
         inputClassName={styles["text-input"]}
       />
-      <SelectBox
+      {/* <SelectBox
         control={control as any}
         label={t("form.departmentLabel")}
         name="department"
         placeholder={t("form.departmentPlaceholder")}
         required
         options={USER_DEPARTMENT_OPTIONS}
-      />
+      /> */}
       <SelectBox
         control={control as any}
         label={t("form.roleLabel")}
         name="role"
         placeholder={t("form.rolePlaceholder")}
         required
-        options={roleOptions}
+        options={roleOptions ?? []}
       />
-      <SelectBox
-        control={control as any}
-        label={t("form.statusLabel")}
+      <CheckBox
         name="isActive"
-        placeholder={t("form.statusPlaceholder")}
-        required
-        options={USER_ACTIVE_OPTIONS}
+        control={control as any}
+        align="top"
+        label={t("form.isActiveLabel")}
+        required={false}
       />
       <div className={styles["btn-group"]}>
         <Button

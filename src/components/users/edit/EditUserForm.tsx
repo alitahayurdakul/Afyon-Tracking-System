@@ -10,7 +10,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { IUserEditFormDataTypes, IUserType } from "@/types/usersTypes";
 import { UserEditFormValidation } from "@/utils/validations/userFormValidation";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback } from "react";
 import { InputBox } from "@/components/formElements/InputBox";
 import { SelectBox } from "@/components/formElements/SelectBox";
 import { InputSpaceEnums } from "@/types/formEnums";
@@ -21,11 +21,9 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { UserQueryTypes } from "@/app/api/users/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import {
-  USER_DEPARTMENT_OPTIONS,
-  USER_ACTIVE_OPTIONS,
-} from "@/consts/usersConsts";
-import { useGetRolesDataQuery } from "@/api/queries/useGetRolesQueries";
+import { USER_DEPARTMENT_OPTIONS } from "@/consts/usersConsts";
+import { CheckBox } from "@/components/formElements/Checkbox";
+import { useGetRolesOptionsQuery } from "@/api/queries/useGetRolesQueries";
 import { useTranslations } from "next-intl";
 
 interface IPropsTypes {
@@ -46,7 +44,7 @@ export const EditUserForm = ({ id, data }: IPropsTypes) => {
       fullname: data?.fullname ?? "",
       email: data?.email ?? "",
       phone: data?.phone ?? "",
-      department: data?.department ?? "",
+      // department: data?.department ?? "",
       role:
         typeof data?.role === "string" ? data?.role : (data?.role?._id ?? ""),
       isActive: data?.isActive ?? true,
@@ -55,15 +53,7 @@ export const EditUserForm = ({ id, data }: IPropsTypes) => {
 
   const dispatch = useDispatch();
   const removeModal = useRemoveQueryParamModal();
-  const { data: rolesData } = useGetRolesDataQuery();
-  const roleOptions = useMemo(
-    () =>
-      (rolesData ?? []).map((r) => ({
-        label: r.roleName,
-        value: r._id,
-      })),
-    [rolesData],
-  );
+  const { data: roleOptions } = useGetRolesOptionsQuery();
 
   const onCancel = () => removeModal();
 
@@ -75,7 +65,7 @@ export const EditUserForm = ({ id, data }: IPropsTypes) => {
           fullname: formData.fullname.trim(),
           email: formData.email.trim().toLowerCase(),
           phone: formData.phone.trim(),
-          department: formData.department,
+          // department: formData.department,
           role: formData.role,
           isActive: formData.isActive,
         };
@@ -139,29 +129,28 @@ export const EditUserForm = ({ id, data }: IPropsTypes) => {
         spacesRule={InputSpaceEnums.limitMaxOneSpace}
         inputClassName={styles["text-input"]}
       />
-      <SelectBox
+      {/* <SelectBox
         control={control as any}
         label={t("form.departmentLabel")}
         name="department"
         placeholder={t("form.departmentPlaceholder")}
         required
         options={USER_DEPARTMENT_OPTIONS}
-      />
+      /> */}
       <SelectBox
         control={control as any}
         label={t("form.roleLabel")}
         name="role"
         placeholder={t("form.rolePlaceholder")}
         required
-        options={roleOptions}
+        options={roleOptions ?? []}
       />
-      <SelectBox
-        control={control as any}
-        label={t("form.statusLabel")}
+      <CheckBox
         name="isActive"
-        placeholder={t("form.statusPlaceholder")}
-        required
-        options={USER_ACTIVE_OPTIONS}
+        control={control as any}
+        align="top"
+        label={t("form.isActiveLabel")}
+        required={false}
       />
 
       <div>

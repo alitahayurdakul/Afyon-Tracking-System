@@ -20,7 +20,8 @@ export type TypeButtons =
 
 type SizeElement = "small" | "medium" | "large";
 
-interface ButtonProps {
+interface ButtonProps
+  extends Omit<React.ComponentPropsWithoutRef<"button">, "type"> {
   type?: TypeButtons;
   buttonType?: "button" | "submit" | "reset";
   clickFn?: (
@@ -59,15 +60,17 @@ export const Button = forwardRef<Ref, React.PropsWithChildren<ButtonProps>>(
       style,
       badge,
       children,
+      ...rest
     },
     ref,
   ) {
     return (
       <button
         ref={ref}
+        {...rest}
         style={style || {}}
         disabled={disabled}
-        onClick={clickFn}
+        onClick={clickFn ?? rest.onClick}
         className={clsx(
           styles["button"],
           styles[type],

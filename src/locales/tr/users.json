@@ -46,6 +46,7 @@
     "rolePlaceholder": "Rol seçiniz",
     "statusLabel": "Durum",
     "statusPlaceholder": "Durum seçiniz",
+    "isActiveLabel": "Aktif Kullanıcı",
     "cancel": "İptal",
     "save": "Kaydet",
     "editInfo": "Kullanıcı bilgilerini güncellemek erişim ve yetkilendirme akışını etkileyebilir. Kaydetmeden önce değişiklikleri kontrol ettiğinizden emin olun."

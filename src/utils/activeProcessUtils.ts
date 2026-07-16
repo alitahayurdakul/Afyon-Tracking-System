@@ -1,5 +1,3 @@
-import { IProcessType } from "@/types/processTypes";
-
 export type StageProgress = {
   percent: number;
 };

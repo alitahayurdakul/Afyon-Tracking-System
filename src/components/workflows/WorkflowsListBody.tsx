@@ -42,6 +42,7 @@ export const WorkflowsListBody = () => {
       <div className={styles["table-card"]}>
         <Table
           className={styles["table-class"]}
+          draggableClassActive
           loading={false}
           data={data ?? []}
           columns={createWorkflowTableColumns(t)}

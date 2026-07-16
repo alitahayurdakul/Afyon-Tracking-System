@@ -20,10 +20,10 @@ export function ProfileInfoFormValidation(
       .trim()
       .typeError(t("required"))
       .required(t("required")),
-    department: Yup.string()
-      .trim()
-      .typeError(t("required"))
-      .required(t("required")),
+    // department: Yup.string()
+    //   .trim()
+    //   .typeError(t("required"))
+    //   .required(t("required")),
     role: Yup.string()
       .trim()
       .typeError(t("required"))

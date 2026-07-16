@@ -30,6 +30,10 @@
       "isActive": {
         "label": "Active User"
       },
+      "currentPassword": {
+        "label": "Current Password",
+        "placeholder": "Enter your current password"
+      },
       "newPassword": {
         "label": "New Password",
         "placeholder": "Enter new password"
@@ -41,11 +45,15 @@
     },
     "buttons": {
       "saveInfo": "Save Information",
-      "editPassword": "Update Password"
+      "editPassword": "Update Password",
+      "saveSubmitting": "Saving...",
+      "editSubmitting": "Updating..."
     },
     "questions": {
       "saveInfo": "Are you sure you want to update your profile information?",
-      "editPassword": "Are you sure you want to update your password?"
+      "editPassword": "Are you sure you want to update your password?",
+      "yes": "Yes",
+      "no": "No"
     },
     "notifications": {
       "saveInfo": {

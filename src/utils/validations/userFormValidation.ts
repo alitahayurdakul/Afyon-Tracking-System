@@ -24,10 +24,10 @@ export function UserFormValidation(
       .trim()
       .typeError(t("required"))
       .required(t("required")),
-    department: Yup.string()
-      .trim()
-      .typeError(t("required"))
-      .required(t("required")),
+    // department: Yup.string()
+    //   .trim()
+    //   .typeError(t("required"))
+    //   .required(t("required")),
     role: Yup.string()
       .trim()
       .typeError(t("required"))
@@ -53,10 +53,10 @@ export function UserEditFormValidation(
       .trim()
       .typeError(t("required"))
       .required(t("required")),
-    department: Yup.string()
-      .trim()
-      .typeError(t("required"))
-      .required(t("required")),
+    // department: Yup.string()
+    //   .trim()
+    //   .typeError(t("required"))
+    //   .required(t("required")),
     role: Yup.string()
       .trim()
       .typeError(t("required"))

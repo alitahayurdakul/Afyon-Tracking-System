@@ -1,16 +1,15 @@
 import {
   faBoxesStacked,
   faCircleExclamation,
+  faClockRotateLeft,
   faDiagramProject,
-  // faFilter,
   faFolderTree,
-  // faHouse,
   faLayerGroup,
-  faPerson,
-  // faScaleBalanced,
+  faRoute,
   faSitemap,
   faTrailer,
   faTrain,
+  faUserCircle,
   faUsers,
   faUsersGear,
   faUserShield,
@@ -50,7 +49,7 @@ export const SIDEBAR_ITEMS: ISidebarItemsTypes = [
   {
     default: "Geçmiş Süreçler",
     key: "processesHistory",
-    icon: faDiagramProject,
+    icon: faClockRotateLeft,
     url: URL_PAGES.processesHistory,
   },
   // {
@@ -61,7 +60,7 @@ export const SIDEBAR_ITEMS: ISidebarItemsTypes = [
   {
     default: "İş Akışları",
     key: "workflows",
-    icon: faDiagramProject,
+    icon: faRoute,
     url: URL_PAGES.workflows,
   },
   {
@@ -109,7 +108,7 @@ export const SIDEBAR_ITEMS: ISidebarItemsTypes = [
    {
     default: "Profilim",
     key: "profile",
-    icon: faPerson,
+    icon: faUserCircle,
     url: URL_PAGES.profile,
   },
   {

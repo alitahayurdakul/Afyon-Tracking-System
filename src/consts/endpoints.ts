@@ -89,6 +89,7 @@ export const END_POINTS = {
     delete: (id: string) => `${apiUrl}/api/users/${id}`,
     getAll: `${apiUrl}/api/users`,
     getDetail: (id: string) => `${apiUrl}/api/users/${id}`,
+    changePassword: (id: string) => `${apiUrl}/api/users/${id}/password`,
   },
   material: {
     create: `${apiUrl}/api/materials`,
@@ -194,6 +195,7 @@ export const CLIENT_END_POINTS = {
     delete: "/api/users",
     getAll: "/api/users",
     getDetail: "/api/users",
+    changePassword: "/api/users",
   },
   material: {
     create: "/api/materials",

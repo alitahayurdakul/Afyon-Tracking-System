@@ -21,7 +21,18 @@ export const StagesTableActionsCol = ({ id }: { id: string }) => {
 
   const onDeleteHandler = async () => {
     try {
-       await axiosInstance.post(CLIENT_END_POINTS.stage.delete, {
+      if (id === "6a548d7444cc81ed74b22b6a") {
+        dispatch(
+          addToastify({
+            message: t("form.notifications.blockedQualityStageDelete"),
+            type: "error",
+            icon: "close",
+            id: "contactePage" + Date.now(),
+          }),
+        );
+        return;
+      }
+      await axiosInstance.post(CLIENT_END_POINTS.stage.delete, {
         type: StageQueryTypes.deleteStage,
         id,
       });

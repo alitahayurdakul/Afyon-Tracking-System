@@ -50,7 +50,10 @@
       "editSuccess": "Başarıyla güncellendi",
       "editError": "Güncelleme başarısız",
       "deleteSuccess": "Başarıyla silindi",
-      "deleteError": "Silme işlemi başarısız"
+      "deleteError": "Silme işlemi başarısız",
+      "blockedQualityStageEdit": "Kalite aşaması düzenlenemez.",
+      "blockedQualityStageDelete": "Kalite aşaması silinemez.",
+      "blockedQualityStage":"Kalite aşaması düzenlenemez veya silinemez."
     }
   },
   "deletePopover": {

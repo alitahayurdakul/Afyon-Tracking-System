@@ -2,20 +2,29 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslations } from "next-intl";
-import React, { useCallback } from "react";
+import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 
+import { axiosInstance } from "@/api/axiosInstance";
 import { useGetRolesOptionsQuery } from "@/api/queries/useGetRolesQueries";
+import { UserQueryTypes } from "@/app/api/users/route";
 import { Button } from "@/components/formElements/Button";
 import { CheckBox } from "@/components/formElements/Checkbox";
 import { InputBox } from "@/components/formElements/InputBox";
 import { SelectBox } from "@/components/formElements/SelectBox";
+import { PopoverBody } from "@/components/Popover";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { PROFILE_FORM_CONSTS } from "@/consts/profileConsts";
+import { addToastify } from "@/redux/slices/toastSlice";
+import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import stylesPopover from "@/styles/components/common/TableDeletePopover.module.scss";
 import styles from "@/styles/components/profile/ProfileWrapper.module.scss";
 import { InputSpaceEnums } from "@/types/formEnums";
 import { IFormFieldType } from "@/types/formTypes";
 import { IProfileFormTypes } from "@/types/profileTypes";
 import { IUserRoleRef, IUserType } from "@/types/usersTypes";
+import { extractApiError } from "@/utils/extractApiError";
 import { ProfileInfoFormValidation } from "@/utils/validations/profileFormValidations";
 
 const ProfileInfoForm = ({ userInfo }: { userInfo?: IUserType }) => {
@@ -26,11 +35,8 @@ const ProfileInfoForm = ({ userInfo }: { userInfo?: IUserType }) => {
   const {
     control,
     handleSubmit,
-    register,
-    watch,
-    setValue,
     reset,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting, dirtyFields },
   } = useForm<IProfileFormTypes>({
     resolver: yupResolver(ProfileInfoFormValidation(tValidation)),
     defaultValues: {
@@ -38,57 +44,58 @@ const ProfileInfoForm = ({ userInfo }: { userInfo?: IUserType }) => {
       email: userInfo?.email,
       phone: userInfo?.phone,
       isActive: userInfo?.isActive,
-      department: userInfo?.department,
+      // department: userInfo?.department,
       role: (userInfo?.role as IUserRoleRef)._id,
     },
   });
 
-  console.log(userInfo?.isActive)
+  const dispatch = useDispatch();
 
-  const onSubmit: SubmitHandler<IProfileFormTypes> = useCallback(
-    async (data) => {
-      console.log(data);
-      //   try {
-      //     const wagons = data.wagons.map((option: IOptionType, index) => {
-      //       return {
-      //         order: index + 1,
-      //         id: option.value,
-      //       };
-      //     });
-      //     const params = {
-      //       trainName: data.trainSetNo ?? "",
-      //       wagons,
-      //       desc: data.desc,
-      //       creator: "Admin",
-      //     };
-      //     await axiosInstance.post(CLIENT_END_POINTS.train.create, {
-      //       type: TrainQueryTypes.createTrain,
-      //       params,
-      //     });
-      //     dispatch(
-      //       addToastify({
-      //         message: t("form.notifications.createSuccess"),
-      //         type: "success",
-      //         icon: "close",
-      //         id: "createTrain" + Date.now(),
-      //       }),
-      //     );
-      //     reset();
-      //     dispatch(addTriggerTable());
-      //     removeModal();
-      //   } catch (err) {
-      //     dispatch(
-      //       addToastify({
-      //         message: (err as Error)?.message || t("form.notifications.error"),
-      //         type: "error",
-      //         icon: "close",
-      //         id: "createTrainError" + Date.now(),
-      //       }),
-      //     );
-      //   }
-    },
-    [],
-  );
+  const onSubmit: SubmitHandler<IProfileFormTypes> = async (data) => {
+    const changedFields: Record<string, unknown> = {};
+    (Object.keys(dirtyFields) as (keyof IProfileFormTypes)[]).forEach(
+      (key) => {
+        changedFields[key] =
+          typeof data[key] === "string"
+            ? (data[key] as string).trim()
+            : data[key];
+      },
+    );
+
+    if (Object.keys(changedFields).length === 0) return;
+    if (typeof changedFields.email === "string") {
+      changedFields.email = changedFields.email.toLowerCase();
+    }
+
+    try {
+      await axiosInstance.post(CLIENT_END_POINTS.user.edit, {
+        type: UserQueryTypes.editUser,
+        params: { id: userInfo?._id, ...changedFields },
+      });
+      dispatch(
+        addToastify({
+          message: t("form.notifications.saveInfo.success"),
+          type: "success",
+          icon: "close",
+          id: "profileInfo" + Date.now(),
+        }),
+      );
+      reset(data);
+      dispatch(addTriggerTable());
+    } catch (err) {
+      dispatch(
+        addToastify({
+          message: extractApiError(
+            err,
+            t("form.notifications.saveInfo.error"),
+          ),
+          type: "error",
+          icon: "close",
+          id: "profileInfoError" + Date.now(),
+        }),
+      );
+    }
+  };
 
   return (
     <div className={styles.card}>
@@ -161,7 +168,6 @@ const ProfileInfoForm = ({ userInfo }: { userInfo?: IUserType }) => {
                   control={control as any}
                   align="top"
                   className={styles["checkbox-container"]}
-                  classNameInput={styles["checkbox-input"]}
                   defaultChecked={userInfo?.isActive}
                   label={
                     <span className={styles["checkbox-label"]}>
@@ -178,16 +184,34 @@ const ProfileInfoForm = ({ userInfo }: { userInfo?: IUserType }) => {
         })}
 
         <div className={styles["btn-group"]}>
-          <Button
-            clickFn={handleSubmit(onSubmit)}
-            type="simple"
-            className={styles["submit-btn"]}
-            label={
-              isSubmitting
-                ? t("form.buttons.saveSubmitting")
-                : t("form.buttons.saveInfo")
+          <PopoverBody
+            triggerBody={
+              <Button
+                type="simple"
+                className={styles["submit-btn"]}
+                label={
+                  isSubmitting
+                    ? t("form.buttons.saveSubmitting")
+                    : t("form.buttons.saveInfo")
+                }
+                disabled={isSubmitting}
+              />
             }
-            disabled={isSubmitting}
+            contentBody={
+              <div className={stylesPopover["content"]}>
+                <p className={stylesPopover["text"]}>
+                  {t("form.questions.saveInfo")}
+                </p>
+              </div>
+            }
+            closeContainer={
+              <div className={stylesPopover["btn-container"]}>
+                <button>{t("form.questions.no")}</button>
+                <button onClick={handleSubmit(onSubmit)}>
+                  {t("form.questions.yes")}
+                </button>
+              </div>
+            }
           />
         </div>
       </form>

@@ -49,6 +49,9 @@
       td:first-child {
         border-left: none;
       }
+      &>td:last-child{
+        border-right: 0!important;
+      }
     }
 
     tr:nth-child(odd) {

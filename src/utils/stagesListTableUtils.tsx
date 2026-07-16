@@ -96,7 +96,9 @@ export const createStagesTableColumns = (t: TFunction) => {
         }
 
         if (column.name === "actions") {
-          return <StagesTableActionsCol id={row.original._id}/>
+          return row.original._id === "6a548d7444cc81ed74b22b6a" ? <div style={{ color: column.color ?? column.color }}>{t("form.notifications.blockedQualityStage")}</div> :
+          <StagesTableActionsCol id={row.original._id}/>
+
         }
 
         return <div style={{ color: column.color ?? column.color }}>-</div>;

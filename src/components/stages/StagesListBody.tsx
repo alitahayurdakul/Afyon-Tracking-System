@@ -39,6 +39,7 @@ export const StagesListBody = () => {
       <div className={styles["table-card"]}>
         <Table
           className={styles["table-class"]}
+          draggableClassActive
           loading={false}
           data={data ?? []}
           columns={createStagesTableColumns(t)}

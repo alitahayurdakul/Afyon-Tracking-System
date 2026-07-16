@@ -30,6 +30,10 @@
       "isActive": {
         "label": "Активный пользователь"
       },
+      "currentPassword": {
+        "label": "Текущий пароль",
+        "placeholder": "Введите текущий пароль"
+      },
       "newPassword": {
         "label": "Новый пароль",
         "placeholder": "Введите новый пароль"
@@ -41,11 +45,15 @@
     },
     "buttons": {
       "saveInfo": "Сохранить информацию",
-      "editPassword": "Обновить пароль"
+      "editPassword": "Обновить пароль",
+      "saveSubmitting": "Сохранение...",
+      "editSubmitting": "Обновление..."
     },
     "questions": {
       "saveInfo": "Вы уверены, что хотите обновить информацию своего профиля?",
-      "editPassword": "Вы уверены, что хотите обновить пароль?"
+      "editPassword": "Вы уверены, что хотите обновить пароль?",
+      "yes": "Да",
+      "no": "Нет"
     },
     "notifications": {
       "saveInfo": {
