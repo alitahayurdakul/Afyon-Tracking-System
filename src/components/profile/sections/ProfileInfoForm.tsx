@@ -52,7 +52,6 @@ const ProfileInfoForm = ({ userInfo }: { userInfo?: IUserType }) => {
   const dispatch = useDispatch();
 
   const onSubmit: SubmitHandler<IProfileFormTypes> = async (data) => {
-    // PUT /api/users/:id yalnızca değiştirilmek istenen alanları bekliyor
     const changedFields: Record<string, unknown> = {};
     (Object.keys(dirtyFields) as (keyof IProfileFormTypes)[]).forEach(
       (key) => {

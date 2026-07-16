@@ -59,8 +59,8 @@ interface InputBoxProps extends UseControllerProps {
   checkIconExtraClassName?: string;
   errorLabelClassName?: string;
   autoComplete?: string;
-  isLocaleTrUpperCase?: boolean; // If true, input value will be converted to uppercase in Turkish locale
-  passwordToggle?: boolean; // If true, renders an eye icon to show/hide the password value
+  isLocaleTrUpperCase?: boolean;
+  passwordToggle?: boolean;
 }
 
 export type Ref = HTMLInputElement;
