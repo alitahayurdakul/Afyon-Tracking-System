@@ -10,7 +10,7 @@ import { IFormFieldsType } from "@/types/formTypes";
 
 export const PROFILE_FORM_CONSTS: IFormFieldsType = [
   {
-    name: "fullName",
+    name: "fullname",
     type: "input",
     label: "fullName",
     isRequired: true,
