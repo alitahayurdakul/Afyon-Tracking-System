@@ -1,5 +1,4 @@
 "use client";
-import { useParams } from "next/navigation";
 import { useSelector } from "react-redux";
 
 import { useGetUserDetailDataQuery } from "@/api/queries/useGetUsersQueries";
@@ -11,8 +10,7 @@ import ProfileInfoForm from "./sections/ProfileInfoForm";
 
 const ProfileWrapper = () => {
   const userInfo = useSelector((state: RootState) => state.auth.user);
-  const params = useParams();
-  const id = (params.userId as string) ?? userInfo?.id;
+  const id = userInfo?.id ?? "";
 
   const { data, isLoading } = useGetUserDetailDataQuery(id, true);
 
