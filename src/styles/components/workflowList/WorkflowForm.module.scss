@@ -1,5 +1,5 @@
-.stage-form {
-  padding: 32px;
+.stage-form {  
+  padding: 32px 32px 0;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -44,6 +44,13 @@ textarea {
   display: flex;
   gap: 16px;
   justify-content: flex-end;
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+  margin: 0 -32px;
+  padding: 12px 32px 20px;
+  background-color: white;
+  border-top: 1px solid var(--slate-20);
 }
 
 .submit-btn {
@@ -72,7 +79,7 @@ textarea {
   border-radius: 14px;
   cursor: pointer;
 
-  background: transparent;
+  background: var(--slate-100);
   color: var(--slate-60);
 
   font-size: 14px;
@@ -82,7 +89,7 @@ textarea {
 }
 
 .cancel-btn:hover {
-  background: var(--slate-100);
+  background: var(--slate-20);
 }
 
 .activity-section {

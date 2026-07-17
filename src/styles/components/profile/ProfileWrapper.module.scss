@@ -39,6 +39,12 @@
   display: flex;
   gap: 16px;
   justify-content: flex-end;
+  position: sticky;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-block: 10px 15px;
+  background-color: white;
 }
 
 .checkbox-container {
