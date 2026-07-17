@@ -48,7 +48,7 @@ export const createUsersTableColumns = (t: TFunction) => {
         }
         if (column.name === "email") {
           return (
-            <div className={styles["truncate-cell"]}>
+            <div className={styles["truncate-cell"]} style={{minWidth: "150px"}}>
               <DynamicTextWithTooltip
                 text={r.email || "-"}
                 lines={1}
