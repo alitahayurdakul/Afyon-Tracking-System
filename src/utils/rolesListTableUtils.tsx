@@ -11,10 +11,13 @@ import {
   ICommonTableColumnsTypes,
 } from "@/types/tableColumnTypes";
 
+import { formatDate } from "./formDate";
+
 export const rolesTableColumns: ICommonTableColumnsTypes = [
   { name: "roleName", label: "roleName" },
   { name: "roleDescription", label: "roleDescription" },
   { name: "permissions", label: "permissions" },
+  { name: "creator", label: "creator" },
   { name: "editor", label: "editor" },
   { name: "actions", label: "actions" },
 ];
@@ -63,13 +66,36 @@ export const createRolesTableColumns = (t: TFunction) => {
             </div>
           );
         }
-        if (column.name === "editor") {
+        if (column.name === "creator") {
           return (
-            <DynamicTextWithTooltip
-              text={r.editor || "-"}
-              lines={1}
-              textClassName={styles["muted"]}
-            />
+            <div>
+              <DynamicTextWithTooltip
+                text={r.creator || "-"}
+                lines={1}
+                textClassName={styles["muted"]}
+              />
+              <p className={styles["creator-date"]}>
+                {formatDate(r.createdAt)}
+              </p>
+            </div>
+          );
+        }
+        if (column.name === "editor") {
+          const isUnedited = !r.updatedAt || r.createdAt === r.updatedAt;
+          if (isUnedited) {
+            return <div className={styles["muted"]}>-</div>;
+          }
+          return (
+            <div>
+              <DynamicTextWithTooltip
+                text={r.editor || "-"}
+                lines={1}
+                textClassName={styles["muted"]}
+              />
+              <p className={styles["creator-date"]}>
+                {formatDate(r.updatedAt)}
+              </p>
+            </div>
           );
         }
         if (column.name === "actions") {

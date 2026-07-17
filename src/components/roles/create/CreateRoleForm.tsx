@@ -25,6 +25,7 @@ import {
   generatePermissionOptions,
   PermissionOption,
 } from "@/consts/generatePermissionOptions";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 
 export const CreateRoleForm = () => {
   const tValidation = useTranslations("layout.validation-errors");
@@ -46,6 +47,7 @@ export const CreateRoleForm = () => {
   });
 
   const dispatch = useDispatch();
+  const currentUserName = useCurrentUserName();
   const removeModal = useRemoveQueryParamModal();
 
   const permissionOptions = useMemo(() => {
@@ -62,6 +64,7 @@ export const CreateRoleForm = () => {
           roleName: data.roleName.trim(),
           roleDescription: data.roleDescription.trim(),
           permissions: data.permissions.map((p) => p.value),
+          creator: currentUserName,
         };
         await axiosInstance.post(CLIENT_END_POINTS.role.create, {
           type: RoleQueryTypes.createRole,

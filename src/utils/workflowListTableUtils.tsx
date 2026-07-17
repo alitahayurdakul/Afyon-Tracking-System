@@ -102,6 +102,10 @@ export const createWorkflowTableColumns = (t: TFunction) => {
           );
         }
         if (column.name === "editor") {
+          const isUnedited = !r.updatedAt || r.createdAt === r.updatedAt;
+          if (isUnedited) {
+            return <div className={styles["creator-name"]}>-</div>;
+          }
           return (
             <div>
               <DynamicTextWithTooltip

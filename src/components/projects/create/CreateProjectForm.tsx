@@ -23,6 +23,7 @@ import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { PROJECT_STATUS_OPTIONS } from "@/consts/projectsConsts";
 import { IOptionType } from "@/types/formTypes";
 import { extractApiError } from "@/utils/extractApiError";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 
 export const CreateProjectForm = () => {
   const tValidation = useTranslations("layout.validation-errors");
@@ -53,6 +54,7 @@ export const CreateProjectForm = () => {
   }, [t, PROJECT_STATUS_OPTIONS]);
 
   const dispatch = useDispatch();
+  const currentUserName = useCurrentUserName();
   const removeModal = useRemoveQueryParamModal();
 
   const onCancel = () => {
@@ -67,7 +69,7 @@ export const CreateProjectForm = () => {
           projectCode: data.code,
           status: data.status,
           description: data.desc,
-          creator: "Admin",
+          creator: currentUserName,
         };
         await axiosInstance.post(CLIENT_END_POINTS.project.create, {
           type: ProjectQueryTypes.createProject,

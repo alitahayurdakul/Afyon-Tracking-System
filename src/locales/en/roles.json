@@ -7,6 +7,7 @@
     "roleName": "Role Name",
     "roleDescription": "Description",
     "permissions": "Permissions",
+    "creator": "Created By",
     "editor": "Updated By",
     "actions": "Actions"
   },

@@ -28,6 +28,7 @@ import { optionsConverters } from "@/types/optionsConverter";
 import { useGetSubStagesOptionsListDataQuery } from "@/api/queries/useGetSubStagesManageQueries";
 import { StageQueryTypes } from "@/app/api/stages/route";
 import { formatDate } from "@/utils/formDate";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 
 interface IPropsTypes {
   id: string;
@@ -65,6 +66,7 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
   } = useGetSubStagesOptionsListDataQuery<IOptionType[]>();
 
   const dispatch = useDispatch();
+  const currentUserName = useCurrentUserName();
 
   const removeModal = useRemoveQueryParamModal();
 
@@ -82,7 +84,7 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
 
         const params = {
           ...rest,
-          editor: "admin",
+          editor: currentUserName,
           subStageIds,
         };
 
@@ -104,6 +106,7 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
         );
         dispatch(addTriggerTable());
         reset();
+        removeModal();
       } catch (err) {
         dispatch(
           addToastify({
@@ -199,7 +202,7 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
             {t("form.activity.creator")}
           </span>
           <span className={styles["activity-value"]}>
-            {stageData?.creator || "Admin"}
+            {stageData?.creator || "-"}
           </span>
         </div>
         <div className={styles["activity-row"]}>

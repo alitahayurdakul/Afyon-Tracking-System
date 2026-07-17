@@ -27,6 +27,7 @@ import {
   generatePermissionOptions,
   PermissionOption,
 } from "@/consts/generatePermissionOptions";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 
 interface IPropsTypes {
   id: string;
@@ -67,6 +68,7 @@ export const EditRoleForm = ({ id, data }: IPropsTypes) => {
   });
 
   const dispatch = useDispatch();
+  const currentUserName = useCurrentUserName();
   const removeModal = useRemoveQueryParamModal();
 
   const onSubmit: SubmitHandler<IRoleFormDataTypes> = useCallback(
@@ -77,6 +79,7 @@ export const EditRoleForm = ({ id, data }: IPropsTypes) => {
           roleName: formData.roleName.trim(),
           roleDescription: formData.roleDescription.trim(),
           permissions: formData.permissions.map((p) => p.value),
+          editor: currentUserName,
         };
         await axiosInstance.post(CLIENT_END_POINTS.role.edit, {
           type: RoleQueryTypes.editRole,

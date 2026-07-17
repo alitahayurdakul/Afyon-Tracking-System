@@ -107,6 +107,9 @@ export const createProjectsTableColumns = (t: TFunction) => {
         }
         if (column.name === "lastUpdatedBy") {
           const isUnedited = !r.updatedAt || r.createdAt === r.updatedAt;
+          if (isUnedited) {
+            return <div className={styles["creator-name"]}>-</div>;
+          }
           return (
             <div>
               <DynamicTextWithTooltip
@@ -115,7 +118,7 @@ export const createProjectsTableColumns = (t: TFunction) => {
                 textClassName={styles["creator-name"]}
               />
               <p className={styles["creator-date"]}>
-                {!isUnedited ? formatDate(r.updatedAt) : "-"}
+                {formatDate(r.updatedAt)}
               </p>
             </div>
           );

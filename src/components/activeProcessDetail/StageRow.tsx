@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 import { useStartStage } from "@/api/queries/useGetProcessesQueries";
 import styles from "@/styles/components/activeProcessDetail/ProcessFlow.module.scss";
 import { IProcessEntry, IStage } from "@/types/processTypes";
@@ -45,6 +46,7 @@ export default function StageRow({
   const nodeLabel =
     getStatus(stage.status) === StatusEnums.completed ? "✓" : index + 1;
   const t = useTranslations("activeProcessDetail");
+  const currentUserName = useCurrentUserName();
 
   const {
     mutate,
@@ -56,7 +58,7 @@ export default function StageRow({
   const startStage = async () => {
     const payload = {
       stageId: stage._id,
-      operator: "Admin",
+      operator: currentUserName,
     };
     mutate(payload);
   };

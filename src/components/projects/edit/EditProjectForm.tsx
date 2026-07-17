@@ -26,6 +26,7 @@ import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { PROJECT_STATUS_OPTIONS } from "@/consts/projectsConsts";
 import { IOptionType } from "@/types/formTypes";
 import { extractApiError } from "@/utils/extractApiError";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 
 interface IPropsTypes {
   id: string;
@@ -60,6 +61,7 @@ export const EditProjectForm = ({ id, data }: IPropsTypes) => {
     }, [t, PROJECT_STATUS_OPTIONS]);
 
   const dispatch = useDispatch();
+  const currentUserName = useCurrentUserName();
   const removeModal = useRemoveQueryParamModal();
 
   const onCancel = () => {
@@ -75,7 +77,7 @@ export const EditProjectForm = ({ id, data }: IPropsTypes) => {
           projectCode: formData.code,
           status: formData.status,
           description: formData.desc,
-          editor: "Admin",
+          lastUpdatedBy: currentUserName,
         };
         await axiosInstance.post(CLIENT_END_POINTS.project.edit, {
           type: ProjectQueryTypes.editProject,
@@ -150,7 +152,7 @@ export const EditProjectForm = ({ id, data }: IPropsTypes) => {
         <div className={styles["activity-row"]}>
           <span className={styles["activity-label"]}>{t("form.activity.creator")}</span>
           <span className={styles["activity-value"]}>
-            {data?.creator || "Admin"}
+            {currentUserName}
           </span>
         </div>
         <div className={styles["activity-row"]}>

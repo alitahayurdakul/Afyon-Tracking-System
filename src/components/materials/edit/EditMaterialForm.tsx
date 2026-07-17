@@ -23,6 +23,7 @@ import { MaterialQueryTypes } from "@/app/api/materials/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { useTranslations } from "next-intl";
 import { extractApiError } from "@/utils/extractApiError";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 
 interface IPropsTypes {
   id: string;
@@ -46,6 +47,7 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
   });
   const t = useTranslations("materials");
   const dispatch = useDispatch();
+  const currentUserName = useCurrentUserName();
   const removeModal = useRemoveQueryParamModal();
 
   const onCancel = () => {
@@ -60,7 +62,7 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
           name: formData.name,
           code: formData.code,
           description: formData.desc,
-          editor: "Admin",
+          editor: currentUserName,
         };
         await axiosInstance.post(CLIENT_END_POINTS.material.edit, {
           type: MaterialQueryTypes.editMaterial,

@@ -23,6 +23,7 @@ import SelectedItemList from "@/components/common/SelectedItemList";
 import { useTranslations } from "next-intl";
 import { useGetSubStagesOptionsListDataQuery } from "@/api/queries/useGetSubStagesManageQueries";
 import { StageQueryTypes } from "@/app/api/stages/route";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 
 export const CreateStageForm = () => {
   const tValidation = useTranslations("layout.validation-errors");
@@ -50,6 +51,7 @@ export const CreateStageForm = () => {
     useGetSubStagesOptionsListDataQuery<IOptionType[]>();
   const selectedStages = watch("subStages");
   const dispatch = useDispatch();
+  const currentUserName = useCurrentUserName();
   const removeModal = useRemoveQueryParamModal();
 
   const onCancel = () => {
@@ -66,7 +68,7 @@ export const CreateStageForm = () => {
 
         const params = {
           ...rest,
-          creator: "admin",
+          creator: currentUserName,
           subStageIds: newSubStages,
         };
 
@@ -84,6 +86,7 @@ export const CreateStageForm = () => {
         );
         dispatch(addTriggerTable());
         reset();
+        removeModal();
       } catch (err) {
         dispatch(
           addToastify({

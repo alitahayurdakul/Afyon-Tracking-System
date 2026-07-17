@@ -19,6 +19,7 @@ import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { WagonQueryTypes } from "@/app/api/wagons/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { useTranslations } from "next-intl";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 
 export const CreateWagonForm = () => {
   const tValidation = useTranslations("layout.validation-errors");
@@ -38,6 +39,7 @@ export const CreateWagonForm = () => {
 
   const t = useTranslations("wagons");
   const dispatch = useDispatch();
+  const currentUserName = useCurrentUserName();
   const removeModal = useRemoveQueryParamModal();
 
   const onCancel = () => {
@@ -50,7 +52,7 @@ export const CreateWagonForm = () => {
         const params = {
           wagonNo: data.name,
           description: data.desc,
-          creator: "Admin",
+          creator: currentUserName,
         };
         await axiosInstance.post(CLIENT_END_POINTS.wagon.create, {
           type: WagonQueryTypes.createWagon,
