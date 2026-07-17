@@ -9,10 +9,13 @@ import { useDispatch } from "react-redux";
 import { axiosInstance } from "@/api/axiosInstance";
 import { useGetRolesOptionsQuery } from "@/api/queries/useGetRolesQueries";
 import { UserQueryTypes } from "@/app/api/users/route";
+import { ErrorChecker } from "@/components/common/error/ErrorChecker";
+import { LoadingChecker } from "@/components/common/loaders/LoadingChecker";
 import { Button } from "@/components/formElements/Button";
 import { CheckBox } from "@/components/formElements/Checkbox";
 import { InputBox } from "@/components/formElements/InputBox";
 import { SelectBox } from "@/components/formElements/SelectBox";
+import SpinnerIcon from "@/components/icons/SpinnerIcon";
 import { PopoverBody } from "@/components/Popover";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { PROFILE_FORM_CONSTS } from "@/consts/profileConsts";
@@ -27,10 +30,19 @@ import { IUserRoleRef, IUserType } from "@/types/usersTypes";
 import { extractApiError } from "@/utils/extractApiError";
 import { ProfileInfoFormValidation } from "@/utils/validations/profileFormValidations";
 
-const ProfileInfoForm = ({ userInfo }: { userInfo?: IUserType }) => {
+const ProfileInfoForm = ({
+  userInfo,
+  isLoading,
+  isError
+}: {
+  userInfo?: IUserType;
+  isLoading: boolean;
+  isError: boolean;
+}) => {
   const t = useTranslations("profile");
   const tValidation = useTranslations("layout.validation-errors");
-  const { data: roleOptions, isLoading } = useGetRolesOptionsQuery();
+  const { data: roleOptions, isLoading: roleLoading } =
+    useGetRolesOptionsQuery();
 
   const {
     control,
@@ -53,14 +65,12 @@ const ProfileInfoForm = ({ userInfo }: { userInfo?: IUserType }) => {
 
   const onSubmit: SubmitHandler<IProfileFormTypes> = async (data) => {
     const changedFields: Record<string, unknown> = {};
-    (Object.keys(dirtyFields) as (keyof IProfileFormTypes)[]).forEach(
-      (key) => {
-        changedFields[key] =
-          typeof data[key] === "string"
-            ? (data[key] as string).trim()
-            : data[key];
-      },
-    );
+    (Object.keys(dirtyFields) as (keyof IProfileFormTypes)[]).forEach((key) => {
+      changedFields[key] =
+        typeof data[key] === "string"
+          ? (data[key] as string).trim()
+          : data[key];
+    });
 
     if (Object.keys(changedFields).length === 0) return;
     if (typeof changedFields.email === "string") {
@@ -85,10 +95,7 @@ const ProfileInfoForm = ({ userInfo }: { userInfo?: IUserType }) => {
     } catch (err) {
       dispatch(
         addToastify({
-          message: extractApiError(
-            err,
-            t("form.notifications.saveInfo.error"),
-          ),
+          message: extractApiError(err, t("form.notifications.saveInfo.error")),
           type: "error",
           icon: "close",
           id: "profileInfoError" + Date.now(),
@@ -100,121 +107,132 @@ const ProfileInfoForm = ({ userInfo }: { userInfo?: IUserType }) => {
   return (
     <div className={styles.card}>
       <h3 className={styles.cardTitle}>{t("cardTitles.profile")}</h3>
-      <form className={styles.form}>
-        {PROFILE_FORM_CONSTS.map((item: IFormFieldType, index: number) => {
-          if (
-            item.type === "input" ||
-            item.type === "email" ||
-            item.type === "phoneInput"
-          ) {
-            return (
-              <React.Fragment key={index}>
-                <InputBox
-                  control={control as any}
-                  label={
-                    <>
-                      {item.icon && <FontAwesomeIcon icon={item.icon} />}{" "}
-                      {t(`form.fields.${item.label}.label`)}
-                    </>
-                  }
-                  name={item.name}
-                  placeholder={t(`form.fields.${item.label}.placeholder`)}
-                  required={item.isRequired}
-                  maxLength={item.maxLength}
-                  spacesRule={
-                    item.type === "email"
-                      ? InputSpaceEnums.noSpaces
-                      : InputSpaceEnums.limitMaxOneSpace
-                  }
-                  regex={item?.regex}
-                  onlyNumber={item?.onlyNumber}
-                  inputClassName={styles["text-input"]}
-                />
-              </React.Fragment>
-            );
-          }
-
-          if (item.type === "select") {
-            return (
-              <React.Fragment key={index}>
-                <SelectBox
-                  name={item.name}
-                  options={item.name === "role" ? (roleOptions ?? []) : []}
-                  control={control as any}
-                  required={item.isRequired}
-                  label={
-                    <>
-                      {item.icon && <FontAwesomeIcon icon={item.icon} />}{" "}
-                      {t(`form.fields.${item.label}.label`)}
-                    </>
-                  }
-                  placeholder={t(`form.fields.${item.label}.placeholder`)}
-                  formLabelClassName={styles["form-label"]}
-                  multiselect={item.isMultiselect}
-                  isSearchable
-                  isClearable
-                  hideSelectedOptions
-                  loading={isLoading}
-                />
-              </React.Fragment>
-            );
-          }
-
-          if (item.type === "checkbox") {
-            return (
-              <React.Fragment key={index}>
-                <CheckBox
-                  name={item.name}
-                  control={control as any}
-                  align="top"
-                  className={styles["checkbox-container"]}
-                  defaultChecked={userInfo?.isActive}
-                  label={
-                    <span className={styles["checkbox-label"]}>
-                      {t("form.fields.isActive.label")}
-                    </span>
-                  }
-                  required={false}
-                />
-              </React.Fragment>
-            );
-          }
-
-          return null;
-        })}
-
-        <div className={styles["btn-group"]}>
-          <PopoverBody
-            triggerBody={
-              <Button
-                type="simple"
-                className={styles["submit-btn"]}
-                label={
-                  isSubmitting
-                    ? t("form.buttons.saveSubmitting")
-                    : t("form.buttons.saveInfo")
-                }
-                disabled={isSubmitting}
-              />
+      <LoadingChecker
+        isLoading={isLoading}
+        icon={
+          <div style={{ textAlign: "center" }}>
+            <SpinnerIcon color={"var(--blue-90)"} />{" "}
+          </div>
+        }
+      >
+        <ErrorChecker isError={isError} errorLabel={t("error-label-profile")} errorClassName={styles["error-label"]} >
+        <form className={styles.form}>
+          {PROFILE_FORM_CONSTS.map((item: IFormFieldType, index: number) => {
+            if (
+              item.type === "input" ||
+              item.type === "email" ||
+              item.type === "phoneInput"
+            ) {
+              return (
+                <React.Fragment key={index}>
+                  <InputBox
+                    control={control as any}
+                    label={
+                      <>
+                        {item.icon && <FontAwesomeIcon icon={item.icon} />}{" "}
+                        {t(`form.fields.${item.label}.label`)}
+                      </>
+                    }
+                    name={item.name}
+                    placeholder={t(`form.fields.${item.label}.placeholder`)}
+                    required={item.isRequired}
+                    maxLength={item.maxLength}
+                    spacesRule={
+                      item.type === "email"
+                        ? InputSpaceEnums.noSpaces
+                        : InputSpaceEnums.limitMaxOneSpace
+                    }
+                    regex={item?.regex}
+                    onlyNumber={item?.onlyNumber}
+                    inputClassName={styles["text-input"]}
+                  />
+                </React.Fragment>
+              );
             }
-            contentBody={
-              <div className={stylesPopover["content"]}>
-                <p className={stylesPopover["text"]}>
-                  {t("form.questions.saveInfo")}
-                </p>
-              </div>
+
+            if (item.type === "select") {
+              return (
+                <React.Fragment key={index}>
+                  <SelectBox
+                    name={item.name}
+                    options={item.name === "role" ? (roleOptions ?? []) : []}
+                    control={control as any}
+                    required={item.isRequired}
+                    label={
+                      <>
+                        {item.icon && <FontAwesomeIcon icon={item.icon} />}{" "}
+                        {t(`form.fields.${item.label}.label`)}
+                      </>
+                    }
+                    placeholder={t(`form.fields.${item.label}.placeholder`)}
+                    formLabelClassName={styles["form-label"]}
+                    multiselect={item.isMultiselect}
+                    isSearchable
+                    isClearable
+                    hideSelectedOptions
+                    loading={roleLoading}
+                  />
+                </React.Fragment>
+              );
             }
-            closeContainer={
-              <div className={stylesPopover["btn-container"]}>
-                <button>{t("form.questions.no")}</button>
-                <button onClick={handleSubmit(onSubmit)}>
-                  {t("form.questions.yes")}
-                </button>
-              </div>
+
+            if (item.type === "checkbox") {
+              return (
+                <React.Fragment key={index}>
+                  <CheckBox
+                    name={item.name}
+                    control={control as any}
+                    align="top"
+                    className={styles["checkbox-container"]}
+                    defaultChecked={userInfo?.isActive}
+                    label={
+                      <span className={styles["checkbox-label"]}>
+                        {t("form.fields.isActive.label")}
+                      </span>
+                    }
+                    required={false}
+                  />
+                </React.Fragment>
+              );
             }
-          />
-        </div>
-      </form>
+
+            return null;
+          })}
+
+          <div className={styles["btn-group"]}>
+            <PopoverBody
+              triggerBody={
+                <Button
+                  type="simple"
+                  className={styles["submit-btn"]}
+                  label={
+                    isSubmitting
+                      ? t("form.buttons.saveSubmitting")
+                      : t("form.buttons.saveInfo")
+                  }
+                  disabled={isSubmitting}
+                />
+              }
+              contentBody={
+                <div className={stylesPopover["content"]}>
+                  <p className={stylesPopover["text"]}>
+                    {t("form.questions.saveInfo")}
+                  </p>
+                </div>
+              }
+              closeContainer={
+                <div className={stylesPopover["btn-container"]}>
+                  <button>{t("form.questions.no")}</button>
+                  <button onClick={handleSubmit(onSubmit)}>
+                    {t("form.questions.yes")}
+                  </button>
+                </div>
+              }
+            />
+          </div>
+        </form>
+        </ErrorChecker>
+      </LoadingChecker>
     </div>
   );
 };

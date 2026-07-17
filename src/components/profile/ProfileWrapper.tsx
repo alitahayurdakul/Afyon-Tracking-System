@@ -12,14 +12,14 @@ const ProfileWrapper = () => {
   const userInfo = useSelector((state: RootState) => state.auth.user);
   const id = userInfo?.id ?? "";
 
-  const { data, isLoading } = useGetUserDetailDataQuery(id, true);
+  const { data, isLoading, isError } = useGetUserDetailDataQuery(id, true);
 
   return (
     <div className={styles["profile-wrapper"]}>
       {!isLoading && (
         <>
-          <ProfileInfoForm userInfo={data} />
-          <PasswordForm />
+          <ProfileInfoForm userInfo={data} isLoading={isLoading} isError={true} />
+          <PasswordForm  isLoading={isLoading} />
         </>
       )}
     </div>

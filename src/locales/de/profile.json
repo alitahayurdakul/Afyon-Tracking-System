@@ -65,5 +65,6 @@
         "error": "Beim Aktualisieren des Passworts ist ein Fehler aufgetreten."
       }
     }
-  }
+  },
+  "error-label-profile": "Beim Laden der Profilinformationen ist ein Fehler aufgetreten."
 }

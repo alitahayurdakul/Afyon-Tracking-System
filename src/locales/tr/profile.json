@@ -66,5 +66,6 @@
         "error": "Şifre güncellenirken bir sorun ile karşılaşıldı."
       }
     }
-  }
+  },
+  "error-label-profile": "Profil bilgisi yüklenirken hata oluştu."
 }

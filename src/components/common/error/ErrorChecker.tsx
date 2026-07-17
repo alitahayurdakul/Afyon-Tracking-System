@@ -9,6 +9,7 @@ interface IPropsTypes {
   errorComponent?: any;
   noData?: boolean;
   noDataLabel?: string;
+  errorClassName?: string;
 }
 
 export const ErrorChecker = ({
@@ -17,10 +18,11 @@ export const ErrorChecker = ({
   children,
   errorLabel,
   noData,
-  noDataLabel
+  noDataLabel,
+  errorClassName
 }: React.PropsWithChildren<IPropsTypes>) => {
   if (isError) {
-    return errorComponent ? errorComponent : <ErrorComponent errorLabel={errorLabel} />;
+    return errorComponent ? errorComponent : <ErrorComponent errorLabel={errorLabel} errorClassName={errorClassName} />;
   }
   else if(noData){
     return <NoDataComponent noDataLabel={noDataLabel} />
