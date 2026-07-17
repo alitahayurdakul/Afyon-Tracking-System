@@ -135,6 +135,8 @@ export const Table = <T,>({
   }, [setSelectedRows, selectedRows, tableName]);
 
   const handleMouseDown = (event: any) => {
+    if ((event.target as HTMLElement).closest('[data-state="open"]')) return;
+
     if (scrollRef && scrollRef.current && !isBlockDraggable) {
       setIsDragging(true);
       setStartX(event.pageX - scrollRef.current.offsetLeft);
@@ -147,14 +149,24 @@ export const Table = <T,>({
   };
 
   const handleMouseMove = (event: any) => {
-    if (!isDragging && isBlockDraggable) return;
-    if (scrollRef && scrollRef?.current) {
+    if (!isDragging) return;
+    if (scrollRef && scrollRef.current) {
       const x = event.pageX - scrollRef.current.offsetLeft;
-
       const distance = x - startX;
       scrollRef.current.scrollLeft = scrollLeft - distance;
     }
   };
+  useEffect(() => {
+    if (!isDragging) return;
+
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [isDragging, startX, scrollLeft]);
 
   const onScroll = (e: any) => {
     scrollRef.current!.scrollLeft = e.target.scrollLeft;
@@ -197,19 +209,14 @@ export const Table = <T,>({
 
   return (
     <>
-      <div className={clsx(styles["table-wrapper"], {
-        [styles["dragging"]]: isDragging && draggableClassActive
-      }) }  
-      ref={scrollRef}
-          onScroll={onScroll}
-          onMouseDown={handleMouseDown}
-          onMouseUp={handleMouseUp}
-          onMouseMove={(e) => {
-            if (isDragging) handleMouseMove(e);
-          }}
-          onMouseLeave={handleMouseUp}
-          >
-       
+      <div
+        className={clsx(styles["table-wrapper"], {
+          [styles["dragging"]]: isDragging && draggableClassActive,
+        })}
+        ref={scrollRef}
+        onScroll={onScroll}
+        onMouseDown={handleMouseDown}
+      >
         <table
           {...{
             style: {
@@ -304,8 +311,8 @@ const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
     boxShadow: isLastLeftPinnedColumn
       ? "-4px 0 4px -4px gray inset"
       : isFirstRightPinnedColumn
-      ? "4px 0 4px -4px gray inset"
-      : undefined,
+        ? "4px 0 4px -4px gray inset"
+        : undefined,
     left: isPinned === "left" ? `${column.getStart("left")}px` : undefined,
     right: isPinned === "right" ? `${column.getAfter("right")}px` : undefined,
     position: isPinned ? "sticky" : "relative",
@@ -314,7 +321,7 @@ const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
     ...(isPinned && {
       width: column.getSize(),
       maxWidth: column.getSize(),
-      minWidth: column.getSize()
-    })
+      minWidth: column.getSize(),
+    }),
   };
 };
