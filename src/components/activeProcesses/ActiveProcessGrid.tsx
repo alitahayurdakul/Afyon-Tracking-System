@@ -7,6 +7,7 @@ import { ErrorChecker } from "@/components/common/error/ErrorChecker";
 import { LoadingChecker } from "@/components/common/loaders/LoadingChecker";
 import styles from "@/styles/components/activeProcesses/ActiveProcessesGrid.module.scss";
 import { IProcessesTypes, IProcessType } from "@/types/processTypes";
+import { ResponseStatusEnums } from "@/utils/enum/commonEnums";
 
 import SpinnerIcon from "../icons/SpinnerIcon";
 import { ActiveProcessCard } from "./ActiveProcessCard";
@@ -17,7 +18,7 @@ export const ActiveProcessGrid = ({
   setActiveUnit: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const { data, isLoading, isError } =
-    useGetActiveProcessesDataQuery<IProcessesTypes>("ACTIVE");
+    useGetActiveProcessesDataQuery<IProcessesTypes>(ResponseStatusEnums.active);
 
   useEffect(() => {
     if (data) {

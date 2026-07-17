@@ -13,7 +13,7 @@ import { CreateProjectsModal } from "./create/CreateProjectsModal";
 
 export const ProjectsListBody = () => {
   const t = useTranslations("projects");
-  const { data, isLoading } = useGetProjectsDataQuery();
+  const { data, isLoading, isFetching, isError } = useGetProjectsDataQuery();
 
   return (
     <section className={styles["pipeline-page"]}>
@@ -37,9 +37,10 @@ export const ProjectsListBody = () => {
         <Table
           className={styles["table-class"]}
           draggableClassActive
-          loading={isLoading}
+          loading={isLoading || isFetching}
           data={data || []}
           columns={createProjectsTableColumns(t)}
+          isError={isError}
         />
       </div>
     </section>

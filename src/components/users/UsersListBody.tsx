@@ -13,7 +13,7 @@ import { CreateUsersModal } from "./create/CreateUsersModal";
 
 export const UsersListBody = () => {
   const t = useTranslations("users");
-  const { data, isLoading } = useGetUsersDataQuery();
+  const { data, isLoading, isFetching, isError } = useGetUsersDataQuery();
 
   return (
     <section className={styles["pipeline-page"]}>
@@ -37,9 +37,10 @@ export const UsersListBody = () => {
         <Table
           className={styles["table-class"]}
           draggableClassActive
-          loading={isLoading}
+          loading={isLoading || isFetching}
           data={data ?? []}
           columns={createUsersTableColumns(t)}
+          isError={isError}
         />
       </div>
     </section>

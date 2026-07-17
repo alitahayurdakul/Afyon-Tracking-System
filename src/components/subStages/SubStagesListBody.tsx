@@ -13,7 +13,7 @@ import { CreateSubStagesModal } from "./create/CreateSubStagesModal";
 
 export const SubStagesListBody = () => {
   const t = useTranslations("subStages");
-  const { data, isLoading } = useGetSubStagesListDataQuery();
+  const { data, isLoading, isError, isFetching } = useGetSubStagesListDataQuery();
 
   return (
     <section className={styles["pipeline-page"]}>
@@ -37,9 +37,10 @@ export const SubStagesListBody = () => {
         <Table
           className={styles["table-class"]}
           draggableClassActive
-          loading={isLoading}
+          loading={isLoading || isFetching}
           data={data}
           columns={createSubStagesTableColumns(t)}
+          isError={isError}
         />
       </div>
     </section>

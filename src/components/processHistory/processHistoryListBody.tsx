@@ -7,13 +7,14 @@ import { useTranslations } from "next-intl";
 import { useGetActiveProcessesDataQuery } from "@/api/queries/useGetProcessesQueries";
 import styles from "@/styles/components/common/TableListBody.module.scss";
 import { IProcessesTypes } from "@/types/processTypes";
+import { ResponseStatusEnums } from "@/utils/enum/commonEnums";
 import { createProcessHistoryTableColumns } from "@/utils/processHistoryTableUtils";
 
 import { Table } from "../common/Table";
 
 export const ProcessHistoryListBody = () => {
   const t = useTranslations("processHistory");
-  const { data, isLoading } = useGetActiveProcessesDataQuery<IProcessesTypes>("COMPLETED");
+  const { data, isLoading, isFetching, isError } = useGetActiveProcessesDataQuery<IProcessesTypes>(ResponseStatusEnums.completed);
 
   return (
     <section className={styles["pipeline-page"]}>
@@ -35,9 +36,10 @@ export const ProcessHistoryListBody = () => {
         <Table
           className={styles["table-class"]}
           draggableClassActive
-          loading={isLoading}
+          loading={isLoading || isFetching}
           data={data || []}
           columns={createProcessHistoryTableColumns(t)}
+          isError={isError}
         />
       </div>
     </section>

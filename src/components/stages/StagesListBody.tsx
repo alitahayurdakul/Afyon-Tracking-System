@@ -40,9 +40,10 @@ export const StagesListBody = () => {
         <Table
           className={styles["table-class"]}
           draggableClassActive
-          loading={false}
+          loading={isLoading || isFetching}
           data={data ?? []}
           columns={createStagesTableColumns(t)}
+          isError={isError}
         />
       </div>
     </section>

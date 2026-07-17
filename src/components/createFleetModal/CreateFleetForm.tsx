@@ -36,6 +36,7 @@ import { useTranslations } from "next-intl";
 import { ITrainType } from "@/types/trainsTypes";
 import { useGetProjectOptionsDataQuery } from "@/api/queries/useGetProjectsQueries";
 import { extractApiError } from "@/utils/extractApiError";
+import { ResponseStatusEnums } from "@/utils/enum/commonEnums";
 
 export const CreateFleetForm = () => {
   const tValidation = useTranslations("layout.validation-errors");
@@ -59,7 +60,7 @@ export const CreateFleetForm = () => {
   });
   const trainId = watch("trainId");
   const t = useTranslations("layout.fleetForm");
-  const { data: projectOptions } = useGetProjectOptionsDataQuery("ACTIVE");
+  const { data: projectOptions } = useGetProjectOptionsDataQuery(ResponseStatusEnums.active);
   const { data: trainData, isLoading } = useGetTrainsDataQuery();
   const { data: workflowOptions } =
     useGetWorkflowsOptionsDataQuery<IOptionType[]>();

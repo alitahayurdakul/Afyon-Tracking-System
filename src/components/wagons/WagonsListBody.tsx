@@ -13,7 +13,7 @@ import { CreateWagonsModal } from "./create/CreateWagonsModal";
 
 export const WagonsListBody = () => {
   const t = useTranslations("wagons");
-  const { data, isLoading } = useGetWagonsDataQuery();
+  const { data, isLoading, isFetching, isError } = useGetWagonsDataQuery();
 
   return (
     <section className={styles["pipeline-page"]}>
@@ -37,9 +37,10 @@ export const WagonsListBody = () => {
         <Table
           className={styles["table-class"]}
           draggableClassActive
-          loading={isLoading}
+          loading={isLoading || isFetching}
           data={data}
           columns={createWagonsTableColumns(t)}
+          isError={isError}
         />
       </div>
     </section>

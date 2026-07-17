@@ -20,7 +20,6 @@ export const TrainsListBody = () => {
     <section className={styles["pipeline-page"]}>
       <div className={styles["page-top"]}>
         <div>
-
           <h2>{t("title")}</h2>
 
           <p>{t("description")}</p>
@@ -40,9 +39,10 @@ export const TrainsListBody = () => {
         <Table
           className={styles["table-class"]}
           draggableClassActive
-          loading={isLoading}
+          loading={isLoading || isFetching}
           data={data}
           columns={createTrainsTableColumns(t)}
+          isError={isError}
         />
       </div>
     </section>

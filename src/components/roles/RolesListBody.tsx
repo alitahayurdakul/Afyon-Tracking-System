@@ -13,7 +13,7 @@ import { CreateRolesModal } from "./create/CreateRolesModal";
 
 export const RolesListBody = () => {
   const t = useTranslations("roles");
-  const { data, isLoading } = useGetRolesDataQuery();
+  const { data, isLoading, isError, isFetching } = useGetRolesDataQuery();
 
   return (
     <section className={styles["pipeline-page"]}>
@@ -37,9 +37,10 @@ export const RolesListBody = () => {
         <Table
           className={styles["table-class"]}
           draggableClassActive
-          loading={isLoading}
+          loading={isLoading || isFetching}
           data={data ?? []}
           columns={createRolesTableColumns(t)}
+          isError={isError}
         />
       </div>
     </section>

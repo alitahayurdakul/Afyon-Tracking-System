@@ -43,9 +43,10 @@ export const WorkflowsListBody = () => {
         <Table
           className={styles["table-class"]}
           draggableClassActive
-          loading={isLoading}
+          loading={isLoading || isFetching}
           data={data ?? []}
           columns={createWorkflowTableColumns(t)}
+          isError={isError}
         />
       </div>
     </section>

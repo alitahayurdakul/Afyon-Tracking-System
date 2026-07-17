@@ -14,7 +14,7 @@ import { CreateReasonsModal } from "./create/CreateReasonsModal";
 
 export const ReasonsListBody = () => {
   const t = useTranslations("delayReasons");
-  const { data, isLoading } = useGetReasonsDataQuery<IReasonsType>();
+  const { data, isLoading, isFetching, isError } = useGetReasonsDataQuery<IReasonsType>();
 
   return (
     <section className={styles["pipeline-page"]}>
@@ -38,9 +38,10 @@ export const ReasonsListBody = () => {
         <Table
           className={styles["table-class"]}
           draggableClassActive
-          loading={isLoading}
+          loading={isLoading || isFetching}
           data={data}
           columns={createReasonsTableColumns(t)}
+          isError={isError}
         />
       </div>
     </section>
