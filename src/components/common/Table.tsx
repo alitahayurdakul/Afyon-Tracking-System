@@ -8,6 +8,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import clsx from "clsx";
+import { useTranslations } from "next-intl";
 import React, { CSSProperties, useEffect, useRef, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 
@@ -48,6 +49,12 @@ interface TableProps<T> {
   // instance
   setTableInstance?: React.Dispatch<React.SetStateAction<TypeReactTable<T>>>;
   isBlockDraggable?: boolean;
+
+  // Error / Empty state
+  isError?: boolean;
+  errorLabel?: string;
+  noDataLabel?: string;
+  defaultSkeletonRowCount?: number;
 }
 
 export const Table = <T,>({
@@ -72,7 +79,12 @@ export const Table = <T,>({
   paginationToScrolledUp,
   setTableInstance,
   isBlockDraggable,
+  isError,
+  errorLabel,
+  noDataLabel,
+  defaultSkeletonRowCount,
 }: TableProps<T>) => {
+  const t = useTranslations("layout");
   const isPaginationAvailable = currentPage || pageSize;
 
   const scrollRef = useRef<HTMLTableElement>(null);
@@ -156,6 +168,7 @@ export const Table = <T,>({
       scrollRef.current.scrollLeft = scrollLeft - distance;
     }
   };
+
   useEffect(() => {
     if (!isDragging) return;
 
@@ -172,40 +185,81 @@ export const Table = <T,>({
     scrollRef.current!.scrollLeft = e.target.scrollLeft;
   };
 
-  // useEffect(() => {
-  //   // If paginationToScrolledUp is false, do nothing and return early
-  //   if (!paginationToScrolledUp) return;
+  const skeletonRowCount =
+    data && data.length > 0
+      ? data.length
+      : pageSize || (defaultSkeletonRowCount?? 1);
 
-  //   // Dynamically require the eventEmitter to handle events
-  //   // const eventEmitter = require("@/eventHandlers/eventEmitter").eventEmitter;
+  const renderTbodyContent = () => {
+    if (loading) {
+      return Array.from({ length: skeletonRowCount }).map((_, rowIdx) => (
+        <tr key={`skeleton-row-${rowIdx}`}>
+          {columns.map((_, colIdx) => (
+            <td key={`skeleton-cell-${rowIdx}-${colIdx}`}>
+              <Skeleton />
+            </td>
+          ))}
+        </tr>
+      ));
+    }
 
-  //   // Define a handler function for when the pagination event is triggered
-  //   const paginationEventHandle = (data: null) => {
-  //     // Calculate the table's position relative to the viewport
-  //     const tablePosition =
-  //       (scrollRef?.current?.getBoundingClientRect().top ?? 0) + window.scrollY;
+    if (isError) {
+      return (
+        <tr>
+          <td
+            colSpan={columns.length}
+            style={{
+              textAlign: "center",
+              padding: "2rem 0",
+              color: "var(--red-60, #d13438)",
+              fontSize: "0.8125rem",
+              fontWeight: 600,
+            }}
+          >
+            {errorLabel ?? t("table.error")}
+          </td>
+        </tr>
+      );
+    }
 
-  //     // Scroll the window to the table's position, with a 150px offset
-  //     requestAnimationFrame(() => {
-  //       window.scrollTo({
-  //         top: tablePosition - 150,
-  //         behavior: "instant"
-  //       });
-  //       scrollRef?.current?.focus();
-  //     });
+    if (table.getRowModel().rows.length === 0 && !isError) {
+      return (
+        <tr>
+          <td
+            colSpan={columns.length}
+            style={{
+              textAlign: "center",
+              padding: "2rem 0",
+              color: "var(--base-grey-60, #9aa1a7)",
+              fontSize: "0.8125rem",
+              fontWeight: 600,
+            }}
+          >
+            {noDataLabel ?? t("table.noData")}
+          </td>
+        </tr>
+      );
+    }
 
-  //     // Focus the table element after scrolling
-  //     scrollRef?.current?.focus();
-  //   };
+    return table.getRowModel().rows.map((row) => (
+      <tr key={row.id}>
+        {row.getVisibleCells().map((cell) => {
+          const { column } = cell;
 
-  //   // Register the pagination event listener for the 'paginationToTableFocus' event
-  //   eventEmitter.on("paginationToTableFocus", paginationEventHandle);
-
-  //   // Clean up the event listener when the component is unmounted or when paginationToScrolledUp changes
-  //   return () => {
-  //     eventEmitter.off("paginationToTableFocus", paginationEventHandle);
-  //   };
-  // }, [paginationToScrolledUp]); // The effect will run when paginationToScrolledUp changes
+          return (
+            <td
+              style={{
+                ...getCommonPinningStyles(column),
+              }}
+              key={cell.id}
+            >
+              {flexRender(cell.column.columnDef.cell, cell.getContext())}
+            </td>
+          );
+        })}
+      </tr>
+    ));
+  };
 
   return (
     <>
@@ -262,35 +316,7 @@ export const Table = <T,>({
               </tr>
             ))}
           </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row) => {
-              return (
-                <tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => {
-                    const { column } = cell;
-
-                    return (
-                      <td
-                        style={{
-                          ...getCommonPinningStyles(column),
-                        }}
-                        key={cell.id}
-                      >
-                        {loading ? (
-                          <Skeleton />
-                        ) : (
-                          flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext(),
-                          )
-                        )}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
+          <tbody>{renderTbodyContent()}</tbody>
         </table>
       </div>
       <>{paginationElement && paginationElement(table)}</>

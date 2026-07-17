@@ -8,6 +8,7 @@ import { LoadingChecker } from "@/components/common/loaders/LoadingChecker";
 import styles from "@/styles/components/activeProcesses/ActiveProcessesGrid.module.scss";
 import { IProcessesTypes, IProcessType } from "@/types/processTypes";
 
+import SpinnerIcon from "../icons/SpinnerIcon";
 import { ActiveProcessCard } from "./ActiveProcessCard";
 
 export const ActiveProcessGrid = ({
@@ -28,7 +29,10 @@ export const ActiveProcessGrid = ({
 
   return (
     <>
-      <LoadingChecker isLoading={isLoading}>
+      <LoadingChecker
+        isLoading={isLoading}
+        icon={<SpinnerIcon color={"var(--blue-90)"} />}
+      >
         <ErrorChecker
           isError={isError || !data}
           noData={data && data.length < 1}

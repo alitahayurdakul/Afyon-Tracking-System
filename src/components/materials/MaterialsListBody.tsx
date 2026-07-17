@@ -13,7 +13,7 @@ import { CreateMaterialsModal } from "./create/CreateMaterialsModal";
 
 export const MaterialsListBody = () => {
   const t = useTranslations("materials");
-  const { data, isLoading } = useGetMaterialsDataQuery();
+  const { data, isLoading, isError, isFetching } = useGetMaterialsDataQuery();
 
   return (
     <section className={styles["pipeline-page"]}>
@@ -37,9 +37,10 @@ export const MaterialsListBody = () => {
         <Table
           className={styles["table-class"]}
           draggableClassActive
-          loading={isLoading}
+          loading={isLoading || isFetching}
           data={data ?? []}
           columns={createMaterialsTableColumns(t)}
+          isError={isError}
         />
       </div>
     </section>

@@ -76,5 +76,9 @@
     "minOneSelection": "En az bir seçenek seçiniz",
     "minOneMaterial": "En az bir malzeme seçiniz",
     "minOnePermission": "En az bir yetki seçiniz"
+  },
+  "table": {
+    "error": "Bir hata oluştu",
+    "noData": "Kayıt bulunamadı"
   }
 }

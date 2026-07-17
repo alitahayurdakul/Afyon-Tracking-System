@@ -76,5 +76,9 @@
     "minOneSelection": "Please select at least one option",
     "minOneMaterial": "Please select at least one material",
     "minOnePermission": "Please select at least one permission"
+  },
+  "table": {
+    "error": "An error occurred",
+    "noData": "No records found"
   }
 }
