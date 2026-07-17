@@ -77,7 +77,6 @@ export const EditProjectForm = ({ id, data }: IPropsTypes) => {
           projectCode: formData.code,
           status: formData.status,
           description: formData.desc,
-          // Backend proje şemasında güncelleyen alanı "lastUpdatedBy" adıyla tutuluyor
           lastUpdatedBy: currentUserName,
         };
         await axiosInstance.post(CLIENT_END_POINTS.project.edit, {

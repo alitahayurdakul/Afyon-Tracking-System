@@ -106,8 +106,6 @@ export const createProjectsTableColumns = (t: TFunction) => {
           );
         }
         if (column.name === "lastUpdatedBy") {
-          // Backend create sırasında lastUpdatedBy'ı creator ile dolduruyor;
-          // gerçekten güncellenmemiş kayıtlarda isim gösterilmez
           const isUnedited = !r.updatedAt || r.createdAt === r.updatedAt;
           if (isUnedited) {
             return <div className={styles["creator-name"]}>-</div>;

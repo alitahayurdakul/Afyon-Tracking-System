@@ -52,8 +52,6 @@ export const CreateReasonForm = () => {
         const params = {
           name: data.name,
           description: data.desc,
-          // Backend, gecikme nedeni şemasında "creator" tutmuyor; oluşturmada
-          // zorunlu alan olarak "editor" bekliyor
           editor: currentUserName,
         };
         await axiosInstance.post(CLIENT_END_POINTS.reason.create, {
