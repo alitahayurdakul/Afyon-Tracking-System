@@ -64,7 +64,7 @@ export const createReasonsTableColumns = (t: TFunction) => {
           return (
             <div>
               <DynamicTextWithTooltip
-                text={r.creator || "Admin"}
+                text={r.creator || "-"}
                 lines={1}
                 textClassName={styles["creator-name"]}
               />
@@ -83,7 +83,7 @@ export const createReasonsTableColumns = (t: TFunction) => {
           return (
             <div>
               <DynamicTextWithTooltip
-                text={r.editor || "Admin"}
+                text={r.editor || "-"}
                 lines={1}
                 textClassName={styles["creator-name"]}
               />

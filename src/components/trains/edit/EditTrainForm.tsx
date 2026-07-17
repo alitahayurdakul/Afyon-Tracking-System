@@ -30,6 +30,7 @@ import { formatDate } from "@/utils/formDate";
 import { SelectBox } from "@/components/formElements/SelectBox";
 import { useTranslations } from "next-intl";
 import SelectedItemList from "@/components/common/SelectedItemList";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 
 interface IPropsTypes {
   id: string;
@@ -65,6 +66,7 @@ export const EditTrainForm = ({ id, data, wagonOptions }: IPropsTypes) => {
   });
 
   const dispatch = useDispatch();
+  const currentUserName = useCurrentUserName();
   const removeModal = useRemoveQueryParamModal();
   const selectedWagons = watch("wagons");
 
@@ -86,7 +88,7 @@ export const EditTrainForm = ({ id, data, wagonOptions }: IPropsTypes) => {
           trainName: formData.trainSetNo ?? "",
           wagons,
           desc: formData?.desc ?? "",
-          creator: "Admin",
+          editor: currentUserName,
         };
         await axiosInstance.post(CLIENT_END_POINTS.train.edit, {
           type: TrainQueryTypes.editTrain,

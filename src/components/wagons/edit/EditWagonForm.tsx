@@ -22,6 +22,7 @@ import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { WagonQueryTypes } from "@/app/api/wagons/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { useTranslations } from "next-intl";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 
 interface IPropsTypes {
   id: string;
@@ -44,6 +45,7 @@ export const EditWagonForm = ({ id, data }: IPropsTypes) => {
   });
   const t = useTranslations("wagons");
   const dispatch = useDispatch();
+  const currentUserName = useCurrentUserName();
   const removeModal = useRemoveQueryParamModal();
 
   const onCancel = () => {
@@ -57,7 +59,7 @@ export const EditWagonForm = ({ id, data }: IPropsTypes) => {
           id,
           wagonNo: formData.name,
           description: formData.desc,
-          editor: "Admin",
+          editor: currentUserName,
         };
         await axiosInstance.post(CLIENT_END_POINTS.wagon.edit, {
           type: WagonQueryTypes.editWagon,
@@ -115,7 +117,7 @@ export const EditWagonForm = ({ id, data }: IPropsTypes) => {
         <div className={styles["activity-row"]}>
           <span className={styles["activity-label"]}>{t("form.labels.creator")}:</span>
           <span className={styles["activity-value"]}>
-            {data?.creator || "Admin"}
+            {currentUserName}
           </span>
         </div>
         <div className={styles["activity-row"]}>

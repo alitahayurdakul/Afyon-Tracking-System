@@ -15,7 +15,6 @@ export const rolesTableColumns: ICommonTableColumnsTypes = [
   { name: "roleName", label: "roleName" },
   { name: "roleDescription", label: "roleDescription" },
   { name: "permissions", label: "permissions" },
-  { name: "editor", label: "editor" },
   { name: "actions", label: "actions" },
 ];
 
@@ -61,15 +60,6 @@ export const createRolesTableColumns = (t: TFunction) => {
                 </span>
               ))}
             </div>
-          );
-        }
-        if (column.name === "editor") {
-          return (
-            <DynamicTextWithTooltip
-              text={r.editor || "-"}
-              lines={1}
-              textClassName={styles["muted"]}
-            />
           );
         }
         if (column.name === "actions") {

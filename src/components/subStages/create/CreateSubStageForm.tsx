@@ -24,6 +24,7 @@ import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { useGetMaterialsDataQuery, useGetMaterialsOptionsDataQuery } from "@/api/queries/useGetMaterialsQueries";
 import SelectedItemList from "@/components/common/SelectedItemList";
 import { extractApiError } from "@/utils/extractApiError";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 
 export const CreateSubStageForm = () => {
   const tValidation = useTranslations("layout.validation-errors");
@@ -46,6 +47,7 @@ export const CreateSubStageForm = () => {
   });
 
   const dispatch = useDispatch();
+  const currentUserName = useCurrentUserName();
   const removeModal = useRemoveQueryParamModal();
   const {data: materialOptions} = useGetMaterialsOptionsDataQuery();
 
@@ -62,7 +64,7 @@ export const CreateSubStageForm = () => {
           name: data.name,
           materialIds: data.materials.map((material: IOptionType) => material.value),
           description: data.desc,
-          editor: "Admin",
+          creator: currentUserName,
         };
 
         await axiosInstance.post(CLIENT_END_POINTS.subStage.create, {

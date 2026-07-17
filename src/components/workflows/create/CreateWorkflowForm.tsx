@@ -24,6 +24,7 @@ import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import SelectedItemList from "@/components/common/SelectedItemList";
 import { useTranslations } from "next-intl";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 
 export const CreateWorkflowForm = () => {
   const tValidation = useTranslations("layout.validation-errors");
@@ -51,6 +52,7 @@ export const CreateWorkflowForm = () => {
     useGetStagesOptionsDataQuery<IOptionType[]>();
 
   const dispatch = useDispatch();
+  const currentUserName = useCurrentUserName();
 
   const removeModal = useRemoveQueryParamModal();
 
@@ -72,7 +74,7 @@ export const CreateWorkflowForm = () => {
 
         const params = {
           ...rest,
-          creator: "admin",
+          creator: currentUserName,
           stages: newStages,
         };
 
@@ -93,6 +95,7 @@ export const CreateWorkflowForm = () => {
         );
         dispatch(addTriggerTable());
         reset();
+        removeModal();
       } catch (err) {
         dispatch(
           addToastify({

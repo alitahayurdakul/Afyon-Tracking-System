@@ -8,9 +8,9 @@ import { RootState } from "@/redux/store";
 
 interface RoleGuardProps {
   children: ReactNode;
-  allowedRoles?: string[]; // e.g. ["Super Admin", "Manager"]
-  requiredPermissions?: string[]; // e.g. ["user:delete"]
-  requireAll?: boolean; // default: false (OR logic)
+  allowedRoles?: string[];
+  requiredPermissions?: string[]; 
+  requireAll?: boolean; 
   fallback?: ReactNode;
 }
 

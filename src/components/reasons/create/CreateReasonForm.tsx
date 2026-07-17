@@ -19,6 +19,7 @@ import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { ReasonQueryTypes } from "@/app/api/reasons/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { useTranslations } from "next-intl";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 
 export const CreateReasonForm = () => {
   const tValidation = useTranslations("layout.validation-errors");
@@ -38,6 +39,7 @@ export const CreateReasonForm = () => {
 
   const t = useTranslations("delayReasons");
   const dispatch = useDispatch();
+  const currentUserName = useCurrentUserName();
   const removeModal = useRemoveQueryParamModal();
 
   const onCancel = () => {
@@ -50,7 +52,9 @@ export const CreateReasonForm = () => {
         const params = {
           name: data.name,
           description: data.desc,
-          editor: "Admin",
+          // Backend, gecikme nedeni şemasında "creator" tutmuyor; oluşturmada
+          // zorunlu alan olarak "editor" bekliyor
+          editor: currentUserName,
         };
         await axiosInstance.post(CLIENT_END_POINTS.reason.create, {
           type: ReasonQueryTypes.createReason,

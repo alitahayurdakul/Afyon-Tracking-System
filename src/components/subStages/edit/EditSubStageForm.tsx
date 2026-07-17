@@ -34,6 +34,7 @@ import {
 } from "@/api/queries/useGetMaterialsQueries";
 import SelectedItemList from "@/components/common/SelectedItemList";
 import { extractApiError } from "@/utils/extractApiError";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 
 interface IPropsTypes {
   id: string;
@@ -63,6 +64,7 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
   });
 
   const dispatch = useDispatch();
+  const currentUserName = useCurrentUserName();
   const removeModal = useRemoveQueryParamModal();
   const { data: materialOptions } = useGetMaterialsOptionsDataQuery();
 
@@ -82,7 +84,7 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
             (material: IOptionType) => material.value,
           ),
           description: formData.desc,
-          lastUpdatedBy: "Ali",
+          lastUpdatedBy: currentUserName,
         };
         await axiosInstance.post(CLIENT_END_POINTS.subStage.edit, {
           type: SubStageQueryTypes.editSubStage,
@@ -163,7 +165,7 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
             {t("form.activity.creator")}
           </span>
           <span className={styles["activity-value"]}>
-            {data?.creator || "Admin"}
+            {data?.creator || "-"}
           </span>
         </div>
         <div className={styles["activity-row"]}>

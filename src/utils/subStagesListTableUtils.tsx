@@ -86,7 +86,7 @@ export const createSubStagesTableColumns = (t: TFunction) => {
           return (
             <div>
               <DynamicTextWithTooltip
-                text={r.creator || "Admin"}
+                text={r.creator || "-"}
                 lines={1}
                 textClassName={styles["creator-name"]}
               />

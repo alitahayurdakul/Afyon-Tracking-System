@@ -24,6 +24,7 @@ import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import SelectedItemList from "@/components/common/SelectedItemList";
 import { useGetWagonsOptionsQuery } from "@/api/queries/useGetWagonsQueries";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 
 export const CreateTrainForm = () => {
   const tValidation = useTranslations("layout.validation-errors");
@@ -48,6 +49,7 @@ export const CreateTrainForm = () => {
   const { data, isLoading } = useGetWagonsOptionsQuery();
 
   const dispatch = useDispatch();
+  const currentUserName = useCurrentUserName();
   const removeModal = useRemoveQueryParamModal();
   const selectedWagons = watch("wagons");
 
@@ -68,7 +70,7 @@ export const CreateTrainForm = () => {
           trainName: data.trainSetNo ?? "",
           wagons,
           desc: data.desc,
-          creator: "Admin",
+          creator: currentUserName,
         };
         await axiosInstance.post(CLIENT_END_POINTS.train.create, {
           type: TrainQueryTypes.createTrain,

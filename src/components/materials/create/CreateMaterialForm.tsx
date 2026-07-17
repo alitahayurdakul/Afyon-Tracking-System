@@ -20,6 +20,7 @@ import { MaterialQueryTypes } from "@/app/api/materials/route";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { useTranslations } from "next-intl";
 import { extractApiError } from "@/utils/extractApiError";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 
 export const CreateMaterialForm = () => {
   const tValidation = useTranslations("layout.validation-errors");
@@ -40,6 +41,7 @@ export const CreateMaterialForm = () => {
 
   const t = useTranslations("materials");
   const dispatch = useDispatch();
+  const currentUserName = useCurrentUserName();
   const removeModal = useRemoveQueryParamModal();
 
   const onCancel = () => {
@@ -53,7 +55,7 @@ export const CreateMaterialForm = () => {
           name: data.name,
           materialCode: data.code,
           description: data.desc,
-          creator: "Admin",
+          creator: currentUserName,
         };
         await axiosInstance.post(CLIENT_END_POINTS.material.create, {
           type: MaterialQueryTypes.createMaterial,

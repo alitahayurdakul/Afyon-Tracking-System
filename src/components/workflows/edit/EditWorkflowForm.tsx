@@ -29,6 +29,7 @@ import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import SelectedItemList from "@/components/common/SelectedItemList";
 import { useTranslations } from "next-intl";
 import { formatDate } from "@/utils/formDate";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 interface IPropsTypes {
   id: string;
   workflowData?: IWorkflowFormTypes;
@@ -57,6 +58,7 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
 
   const t = useTranslations("workflows");
   const dispatch = useDispatch();
+  const currentUserName = useCurrentUserName();
 
   const removeModal = useRemoveQueryParamModal();
 
@@ -77,7 +79,7 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
 
         const params = {
           ...rest,
-          creator: "admin",
+          editor: currentUserName,
           stages: newStages,
         };
         await axiosInstance.post(CLIENT_END_POINTS.workflow.edit, {
@@ -97,6 +99,7 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
         );
         dispatch(addTriggerTable());
         reset();
+        removeModal();
       } catch (err) {
         dispatch(
           addToastify({
@@ -190,7 +193,7 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
         <div className={styles["activity-row"]}>
           <span className={styles["activity-label"]}>{t("form.labels.creator")}:</span>
           <span className={styles["activity-value"]}>
-            {workflowData?.creator || "Admin"}
+            {currentUserName}
           </span>
         </div>
         <div className={styles["activity-row"]}>
