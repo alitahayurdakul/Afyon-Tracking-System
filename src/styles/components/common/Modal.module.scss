@@ -47,8 +47,6 @@
   //   }
 }
 .container .divider-view + * {
-  // Alt padding scroll konteynerine verilmez: sticky buton barı scroll alanının
-  // dibine tam otursun diye (alt boşluğu zaten .container'ın padding-bottom'ı sağlıyor)
   padding: 20px 20px 0;
   //   @media screen and (max-width: 800px) {
   //     padding: 21px 20px 20px 20px;
