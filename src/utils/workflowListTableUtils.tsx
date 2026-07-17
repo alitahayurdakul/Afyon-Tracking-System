@@ -102,7 +102,6 @@ export const createWorkflowTableColumns = (t: TFunction) => {
           );
         }
         if (column.name === "editor") {
-          // Hiç güncellenmemiş kayıtlarda isim ve tarih gösterilmez
           const isUnedited = !r.updatedAt || r.createdAt === r.updatedAt;
           if (isUnedited) {
             return <div className={styles["creator-name"]}>-</div>;
