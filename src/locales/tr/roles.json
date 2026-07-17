@@ -7,6 +7,7 @@
     "roleName": "Rol Adı",
     "roleDescription": "Açıklama",
     "permissions": "Yetkiler",
+    "creator": "Oluşturan",
     "editor": "Güncelleyen",
     "actions": "İşlemler"
   },

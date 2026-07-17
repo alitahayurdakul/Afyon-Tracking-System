@@ -7,6 +7,7 @@
     "roleName": "Rollenname",
     "roleDescription": "Beschreibung",
     "permissions": "Berechtigungen",
+    "creator": "Erstellt von",
     "editor": "Aktualisiert von",
     "actions": "Aktionen"
   },

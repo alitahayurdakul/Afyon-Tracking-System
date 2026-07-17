@@ -52,7 +52,7 @@ export const CreateReasonForm = () => {
         const params = {
           name: data.name,
           description: data.desc,
-          editor: currentUserName,
+          creator: currentUserName,
         };
         await axiosInstance.post(CLIENT_END_POINTS.reason.create, {
           type: ReasonQueryTypes.createReason,
