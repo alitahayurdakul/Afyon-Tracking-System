@@ -44,6 +44,12 @@ textarea {
   display: flex;
   gap: 16px;
   justify-content: flex-end;
+  position: sticky;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-block: 10px 15px;
+  background-color: white;
 }
 
 .submit-btn {
@@ -72,7 +78,7 @@ textarea {
   border-radius: 14px;
   cursor: pointer;
 
-  background: transparent;
+  background: var(--slate-100);
   color: var(--slate-60);
 
   font-size: 14px;
@@ -82,7 +88,7 @@ textarea {
 }
 
 .cancel-btn:hover {
-  background: var(--slate-100);
+  background: var(--slate-20);
 }
 
 .activity-section {

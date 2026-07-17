@@ -45,11 +45,12 @@ textarea {
   gap: 16px;
   justify-content: flex-end;
   position: sticky;
-  left: 0;
-  right: 0;
   bottom: 0;
-  padding-block: 10px 15px;
+  z-index: 2;
+  margin: 0 -32px;
+  padding: 12px 32px 20px;
   background-color: white;
+  border-top: 1px solid var(--slate-20);
 }
 
 .submit-btn {
