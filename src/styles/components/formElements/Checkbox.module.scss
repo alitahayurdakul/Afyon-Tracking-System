@@ -73,27 +73,33 @@
   cursor: pointer;
   border: 1px solid var(--border);
   border-radius: 4px;
-  background-color: var(--white);
   display: inline-grid;
   place-content: center;
   transition: border-color var(--transition) ease;
+  // accent-color: var(--primary-blue);
 
+  // give us tick styles
   &::before {
     content: "";
-    width: 0.75rem;
-    height: 0.75rem;
+    width: 0.65rem;
+    height: 0.65rem;
     transform: scale(0);
     transition: 120ms transform ease-in-out;
-    box-shadow: inset 1em 1em var(--primary-blue);
+    box-shadow: inset 0.8em 0.8em var(--white);
     clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
   }
+
+  &:checked::before {
+  box-shadow: inset 1em 1em var(--primary-blue);
+}
 
   &:hover {
     border-color: var(--primary-blue);
   }
 
   &:checked {
-    border-color: var(--primary-blue);
+    border-color:var(--primary-blue);
+    background-color: var(--white);
 
     &::before {
       transform: scale(1);
