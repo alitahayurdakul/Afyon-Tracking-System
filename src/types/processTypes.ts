@@ -102,6 +102,8 @@ export type IProcessInstance = {
   projectId?: string;
   wagonNo?: string;
   wagonId?: string;
+  totalWagonCount: number;
+  wagonOrder: number;
   [key: string]: unknown;
 };
 

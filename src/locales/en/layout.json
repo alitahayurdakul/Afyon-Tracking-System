@@ -75,7 +75,8 @@
     "passwordsNotMatch": "Passwords do not match",
     "minOneSelection": "Please select at least one option",
     "minOneMaterial": "Please select at least one material",
-    "minOnePermission": "Please select at least one permission"
+    "minOnePermission": "Please select at least one permission",
+    "minTwoWagonSelection": "Please select at least 2 wagons"
   },
   "table": {
     "error": "An error occurred",

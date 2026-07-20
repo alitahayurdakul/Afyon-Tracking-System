@@ -75,7 +75,8 @@
     "passwordsNotMatch": "Şifreler eşleşmiyor",
     "minOneSelection": "En az bir seçenek seçiniz",
     "minOneMaterial": "En az bir malzeme seçiniz",
-    "minOnePermission": "En az bir yetki seçiniz"
+    "minOnePermission": "En az bir yetki seçiniz",
+    "minTwoWagonSelection": "En az 2 wagon seçiniz"
   },
   "table": {
     "error": "Bir hata oluştu",
