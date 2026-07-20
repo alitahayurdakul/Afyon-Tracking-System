@@ -12,8 +12,8 @@ export function TrainFormValidation(
       .typeError(t("required"))
       .required(t("required")),
     wagons: Yup.array()
-      .min(1, t("minOneSelection"))
-      .required(t("minOneSelection")),
+      .min(2, t("minTwoWagonSelection"))
+      .required(t("required")),
     desc: Yup.string().trim().default(""),
   };
 

@@ -75,7 +75,8 @@
     "passwordsNotMatch": "Пароли не совпадают",
     "minOneSelection": "Выберите хотя бы один вариант",
     "minOneMaterial": "Выберите хотя бы один материал",
-    "minOnePermission": "Выберите хотя бы одно разрешение"
+    "minOnePermission": "Выберите хотя бы одно разрешение",
+    "minTwoWagonSelection": "Выберите не менее 2 вагонов"
   },
   "table": {
   "error": "Произошла ошибка",

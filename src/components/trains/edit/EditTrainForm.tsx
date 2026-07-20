@@ -55,12 +55,14 @@ export const EditTrainForm = ({ id, data, wagonOptions }: IPropsTypes) => {
       trainSetNo: data?.trainSetNo || "",
       desc: data?.desc || "",
       wagons: data?.wagons
-        ? data?.wagons.map((wagon: IWagonDetail) => {
-            return {
-              value: wagon._id,
-              label: wagon.wagonNo,
-            };
-          })
+        ? data.wagons
+            .toSorted((a: IWagonDetail, b: IWagonDetail) => a.order - b.order)
+            .map((wagon: IWagonDetail) => {
+              return {
+                value: wagon._id,
+                label: wagon.wagonNo,
+              };
+            })
         : [],
     },
   });
@@ -83,6 +85,7 @@ export const EditTrainForm = ({ id, data, wagonOptions }: IPropsTypes) => {
             id: option.value,
           };
         });
+        console.log(formData.wagons, wagons);
         const params = {
           id: data?._id,
           trainName: formData.trainSetNo ?? "",

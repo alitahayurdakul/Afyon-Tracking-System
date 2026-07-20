@@ -75,7 +75,8 @@
     "passwordsNotMatch": "Die Passwörter stimmen nicht überein",
     "minOneSelection": "Bitte wählen Sie mindestens eine Option aus",
     "minOneMaterial": "Bitte wählen Sie mindestens ein Material aus",
-    "minOnePermission": "Bitte wählen Sie mindestens eine Berechtigung aus"
+    "minOnePermission": "Bitte wählen Sie mindestens eine Berechtigung aus",
+    "minTwoWagonSelection": "Bitte wählen Sie mindestens 2 Wagen aus"
   },
   "table": {
     "error": "Ein Fehler ist aufgetreten",
