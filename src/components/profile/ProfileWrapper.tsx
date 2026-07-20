@@ -18,7 +18,7 @@ const ProfileWrapper = () => {
     <div className={styles["profile-wrapper"]}>
       {!isLoading && (
         <>
-          <ProfileInfoForm userInfo={data} isLoading={isLoading} isError={true} />
+          <ProfileInfoForm userInfo={data} isLoading={isLoading} isError={isError} />
           <PasswordForm  isLoading={isLoading} />
         </>
       )}
