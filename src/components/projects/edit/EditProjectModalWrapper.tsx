@@ -1,9 +1,8 @@
 import { useTranslations } from "next-intl";
 
 import { useGetProjectDetailDataQuery } from "@/api/queries/useGetProjectsQueries";
-import { useGetWagonDetailDataQuery } from "@/api/queries/useGetWagonsQueries";
 import { NewModal } from "@/components/common/NewModal";
-import { EDIT_PROJECT_MODAL, EDIT_WAGON_MODAL } from "@/consts/modals";
+import { EDIT_PROJECT_MODAL } from "@/consts/modals";
 
 import { EditProjectForm } from "./EditProjectForm";
 

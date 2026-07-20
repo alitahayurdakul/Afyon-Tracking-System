@@ -5,7 +5,6 @@ import {
   CSSObjectWithLabel,
   DropdownIndicatorProps,
   GroupBase,
-  InputProps,
   OptionProps,
   StylesConfig,
 } from "react-select";
@@ -36,7 +35,7 @@ export const selectStyle:
   }),
   input: (
     base: CSSObjectWithLabel,
-    props: InputProps<IOptionType, boolean, GroupBase<IOptionType>>,
+    // props: InputProps<IOptionType, boolean, GroupBase<IOptionType>>,
   ) => ({
     ...base,
     margin: 0,
@@ -131,7 +130,7 @@ export const SelectValueContainer = ({
   refSelect,
   ...props
 }: any) => {
-  const [values, input] = children as any;
+  const [values, _input] = children as any;
 
   if (refSelect?.current && props.selectProps.menuIsOpen) {
     refSelect.current.focus();
@@ -163,7 +162,7 @@ export const SelectValueManufacturerContainer = ({
   refSelect,
   ...props
 }: any) => {
-  const [values, input] = children as any;
+  const [values, _input] = children as any;
 
   if (refSelect?.current && props.selectProps.menuIsOpen) {
     refSelect.current.focus();

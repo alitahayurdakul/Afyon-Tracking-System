@@ -1,5 +1,3 @@
-import { statusType } from "@/types/processTypes";
-
 const apiUrl = process.env.API_URL || "api";
 
 export const END_POINTS = {

@@ -13,7 +13,7 @@ import { CreateTrainsModal } from "./create/CreateTrainsModal";
 
 export const TrainsListBody = () => {
   const t = useTranslations("trains");
-  const { data, isLoading, isError, isFetching, refetch } =
+  const { data, isLoading, isError, isFetching } =
     useGetTrainsDataQuery();
 
   return (

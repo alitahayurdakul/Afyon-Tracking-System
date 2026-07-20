@@ -1,10 +1,9 @@
 import clsx from "clsx";
 import { AnimatePresence } from "framer-motion";
-import React, {
+import {
   forwardRef,
   ReactElement,
   useCallback,
-  useMemo,
   useRef,
   useState,
 } from "react";
@@ -49,7 +48,6 @@ export interface SelectBoxProps extends UseControllerProps {
   multiLabel?: string;
   disabled?: boolean;
   valueContainerStyles?: any;
-  multipleValueContainerStyles?: any;
   placeholderStyles?: any;
   isPortal?: boolean;
   changeExtraFn?: (id?: any) => void;
@@ -87,7 +85,7 @@ export const SelectBox = forwardRef<Ref, SelectBoxProps>(
       multiLabel,
       disabled,
       valueContainerStyles,
-      multipleValueContainerStyles,
+
       placeholderStyles,
       hideIndicator,
       changeExtraFn,

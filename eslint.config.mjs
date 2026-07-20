@@ -5,7 +5,7 @@ import tsPlugin from "@typescript-eslint/eslint-plugin";
 import react from "eslint-plugin-react";
 
 export default [
-  { ignores: ["**/.next/**"] },
+  { ignores: ["**/.next/**", "src/utils/enum/**"] },
 
   {
     files: ["src/**/*.{js,jsx,ts,tsx}"],

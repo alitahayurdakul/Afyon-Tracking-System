@@ -17,7 +17,7 @@ import React, { useCallback } from "react";
 import { IFormFieldType, IOptionType } from "@/types/formTypes";
 import { TRAIN_FORM_CONSTS } from "@/consts/trainsConsts";
 import { InputBox } from "@/components/formElements/InputBox";
-import { InputSpaceEnums } from "@/types/formEnums";
+import { InputSpaceEnums } from "@/utils/enum/formEnums";
 import { TextAreaBox } from "@/components/formElements/TextAreaBox";
 import { useRemoveQueryParamModal } from "@/utils/searchParams";
 import { axiosInstance } from "@/api/axiosInstance";

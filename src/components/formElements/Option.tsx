@@ -19,10 +19,7 @@ interface IPropsType {
 const Option = ({
   option,
   className,
-  isRadioContainer,
   isSelected,
-  code,
-  name,
   isMobile,
   onChange,
   isDisabled

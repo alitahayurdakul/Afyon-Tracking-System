@@ -2,7 +2,7 @@
 
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import {
   useCompleteStage,
@@ -62,38 +62,19 @@ export default function StageDetailModalContent({
   const [prevActiveIndex, setPrevActiveIndex] = useState<number>(0);
   const [prevSubStagesData, setPrevSubStagesData] = useState(subStagesData);
   const {
-    mutate,
-    isPending,
-    isError: startSubStageError,
-    error,
+    mutate
   } = useStartSubStage();
 
   const {
     mutate: saveMutate,
-    isPending: savePending,
-    isError: saveSubStageError,
-    error: saveError,
   } = useSaveSubStage();
 
   const {
-    mutate: completeMutate,
-    isPending: completePending,
-    isError: completeSubStageError,
-    error: completeError,
-  } = useCompleteSubStage();
-
-  const {
-    mutate: editMutate,
-    isPending: editPending,
-    isError: editSubStageError,
-    error: editError,
+    mutate: editMutate
   } = useEditSubStage();
 
   const {
     mutate: completeStageMutate,
-    isPending: completeStagePending,
-    isError: completeStageisError,
-    error: completeStageError,
   } = useCompleteStage();
 
   if (subStagesData !== prevSubStagesData) {

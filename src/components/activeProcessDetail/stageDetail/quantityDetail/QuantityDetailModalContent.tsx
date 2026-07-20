@@ -5,7 +5,6 @@ import { useState } from "react";
 
 import {
   useCompleteStage,
-  useGetStageDetailDataQuery,
 } from "@/api/queries/useGetStageDetailDataQuery";
 import { PopoverBody } from "@/components/Popover";
 import {
@@ -39,23 +38,16 @@ const Chevron = ({ open, small }: { open: boolean; small?: boolean }) => (
 
 export const QuantityDetailModalContent = ({
   stages,
-  id,
   entryId,
   stageStatus,
 }: {
   stages?: IStage[];
-  id: string;
   entryId: string;
   stageStatus: string;
 }) => {
   const [openStages, setOpenStages] = useState<Set<string>>(new Set());
   const [openSubStages, setOpenSubStages] = useState<Set<string>>(new Set());
   const t = useTranslations("activeProcessDetail");
-  const {
-    data: subStagesData,
-    isLoading,
-    isError,
-  } = useGetStageDetailDataQuery<SubStage[]>(id);
 
   const toggle = (
     set: Set<string>,
@@ -69,9 +61,9 @@ export const QuantityDetailModalContent = ({
 
   const {
     mutate: completeStageMutate,
-    isPending: completeStagePending,
-    isError: completeStageisError,
-    error: completeStageError,
+    // isPending: completeStagePending,
+    // isError: completeStageisError,
+    // error: completeStageError,
   } = useCompleteStage();
 
   const completeStage = async () => {

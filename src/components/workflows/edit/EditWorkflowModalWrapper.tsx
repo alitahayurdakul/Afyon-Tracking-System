@@ -13,7 +13,7 @@ import { EditWorkflowForm } from "./EditWorkflowForm";
 
 export const EditWorkflowModalWrapper = ({ id }: { id: string }) => {
   const t = useTranslations("workflows");
-  const { data, isLoading, isError, isFetching, refetch } =
+  const { data, isLoading, isError, isFetching } =
     useGetWorkflowDetailDataQuery<IWorkflowResponseTypes>(id);
   const transformedData: IWorkflowFormTypes | undefined = useMemo(() => {
     if (!data) return undefined;
@@ -31,7 +31,7 @@ export const EditWorkflowModalWrapper = ({ id }: { id: string }) => {
 
   return (
     <>
-      {!isFetching && !isLoading && (
+      {!isFetching && !isLoading && !isError && (
         <NewModal
           name={`${EDIT_WORKFLOW_MODAL}_${id}`}
           width={"900px"}

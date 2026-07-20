@@ -44,8 +44,7 @@ export const CheckBox = forwardRef<Ref, CheckBoxProps>(
       errorClassName,
       changeExtraFn,
       classNameInput
-    },
-    ref
+    }
   ) {
     const { field, fieldState, formState } = useController({
       name,
@@ -55,7 +54,7 @@ export const CheckBox = forwardRef<Ref, CheckBoxProps>(
       rules
     });
 
-    const { error, isTouched, isDirty } = fieldState;
+    const { error } = fieldState;
 
     const handleChange = useCallback(
       (e: React.ChangeEvent<HTMLInputElement>) => {

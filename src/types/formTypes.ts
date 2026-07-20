@@ -1,5 +1,4 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import { ReactNode } from "react";
 
 export type IElementType = "input" | "select" | "textarea" | "captcha" | "file" | "checkbox" | "radio" | "phoneInput" | "email" | "password"
 

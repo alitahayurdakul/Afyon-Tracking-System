@@ -9,7 +9,6 @@ import { useTranslations } from "next-intl";
 import { useGetStagesDataQuery } from "@/api/queries/useGetStagesQueries";
 import styles from "@/styles/components/common/TableListBody.module.scss";
 import { IStagesTypes } from "@/types/stagesTypes";
-import { IWorkflowResponseTypes } from "@/types/workflowTypes";
 import { createStagesTableColumns } from "@/utils/stagesListTableUtils";
 
 import { Table } from "../common/Table";
@@ -17,7 +16,7 @@ import { CreateStageModal } from "./create/CreateStageModal";
 
 export const StagesListBody = () => {
   const t = useTranslations("stages");
-  const { data, isLoading, isError, isFetching, refetch } = useGetStagesDataQuery<IStagesTypes[]>();
+  const { data, isLoading, isError, isFetching } = useGetStagesDataQuery<IStagesTypes[]>();
 
   return (
     <section className={styles["pipeline-page"]}>

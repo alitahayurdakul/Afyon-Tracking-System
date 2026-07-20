@@ -2,18 +2,13 @@ import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { useGetStageDetailDataQuery } from "@/api/queries/useGetStagesQueries";
 import { EDIT_STAGE_MODAL } from "@/consts/modals";
 import { addToastify } from "@/redux/slices/toastSlice";
 import styles from "@/styles/components/common/TableListBody.module.scss";
-import { IStageType } from "@/types/stagesTypes";
 import { useAddQueryParam } from "@/utils/searchParams";
 
-import { Modal } from "../../common/Modal";
-import { EditStageForm } from "./EditStageForm";
 import { EditStageModalWrapper } from "./EditStageModalWrapper";
 
 export const EditWorkflowModal = ({ id }: { id: string }) => {

@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import React, { ReactNode } from "react";
 
 export interface ITableTriggerTypes {
     triggerTrainTableTrigger: number

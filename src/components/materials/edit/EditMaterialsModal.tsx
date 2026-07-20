@@ -2,15 +2,11 @@ import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
 
-import { useGetMaterialDetailDataQuery } from "@/api/queries/useGetMaterialsQueries";
 import { EDIT_MATERIAL_MODAL } from "@/consts/modals";
 import styles from "@/styles/components/common/TableListBody.module.scss";
 import { useAddQueryParam } from "@/utils/searchParams";
 
-import { Modal } from "../../common/Modal";
-import { EditMaterialForm } from "./EditMaterialForm";
 import { EditMaterialModalWrapper } from "./EditMaterialModalWrapper";
 
 export const EditMaterialsModal = ({ id }: { id: string }) => {
