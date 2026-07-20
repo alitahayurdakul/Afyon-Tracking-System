@@ -13,7 +13,7 @@ export const usersTableColumns: ICommonTableColumnsTypes = [
   { name: "fullname", label: "fullname" },
   { name: "email", label: "email" },
   { name: "phone", label: "phone" },
-  { name: "department", label: "department" },
+  /*{ name: "department", label: "department" },*/
   { name: "role", label: "role" },
   { name: "isActive", label: "status" },
   { name: "actions", label: "actions" },
@@ -60,11 +60,11 @@ export const createUsersTableColumns = (t: TFunction) => {
         if (column.name === "phone") {
           return <DynamicTextWithTooltip text={r.phone || "-"} lines={1} />;
         }
-        if (column.name === "department") {
-          return (
-            <DynamicTextWithTooltip text={r.department || "-"} lines={1} />
-          );
-        }
+        // if (column.name === "department") {
+        //   return (
+        //     <DynamicTextWithTooltip text={r.department || "-"} lines={1} />
+        //   );
+        // }
         if (column.name === "role") {
           const roleLabel =
             typeof r.role === "string" ? r.role : r.role?.roleName;
