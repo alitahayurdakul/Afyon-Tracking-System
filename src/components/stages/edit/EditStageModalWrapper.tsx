@@ -14,7 +14,7 @@ export const EditStageModalWrapper = ({ id }: { id: string }) => {
 
   return (
     <>
-      {!isFetching && !isLoading && (
+      {!isFetching && !isLoading && !isError && (
         <NewModal
           name={`${EDIT_STAGE_MODAL}_${id}`}
           width={"900px"}

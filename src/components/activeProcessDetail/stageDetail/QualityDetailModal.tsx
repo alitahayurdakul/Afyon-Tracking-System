@@ -34,7 +34,6 @@ const QualityDetailModal = ({
       <div className={styles.modal}>
         <QuantityDetailModalContent
           stages={stages ?? []}
-          id={id}
           entryId={entryId}
           stageStatus={stageStatus}
         />

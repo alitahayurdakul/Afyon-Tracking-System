@@ -10,7 +10,7 @@ import { useCallback, useMemo } from "react";
 import { InputBox } from "@/components/formElements/InputBox";
 import { TextAreaBox } from "@/components/formElements/TextAreaBox";
 import { SelectBox } from "@/components/formElements/SelectBox";
-import { InputSpaceEnums } from "@/types/formEnums";
+import { InputSpaceEnums } from "@/utils/enum/formEnums";
 import { useRemoveQueryParamModal } from "@/utils/searchParams";
 import { useDispatch } from "react-redux";
 import { addToastify } from "@/redux/slices/toastSlice";

@@ -23,10 +23,10 @@ import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import stylesPopover from "@/styles/components/common/TableDeletePopover.module.scss";
 import styles from "@/styles/components/profile/ProfileWrapper.module.scss";
-import { InputSpaceEnums } from "@/types/formEnums";
 import { IFormFieldType } from "@/types/formTypes";
 import { IProfileFormTypes } from "@/types/profileTypes";
 import { IUserRoleRef, IUserType } from "@/types/usersTypes";
+import { InputSpaceEnums } from "@/utils/enum/formEnums";
 import { extractApiError } from "@/utils/extractApiError";
 import { ProfileInfoFormValidation } from "@/utils/validations/profileFormValidations";
 

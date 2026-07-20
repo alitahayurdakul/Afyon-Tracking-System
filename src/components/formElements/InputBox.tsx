@@ -10,7 +10,7 @@ import { CheckIcon } from "@/components/icons/CheckIcon";
 import { EmailVerifiedIcon } from "@/components/icons/EmailVerifiedIcon";
 import { ErrorIcon } from "@/components/icons/ErrorIcon";
 import styles from "@/styles/components/formElements/InputBox.module.scss";
-import { InputSpaceEnums } from "@/types/formEnums";
+import { InputSpaceEnums } from "@/utils/enum/formEnums";
 import { formAnimation } from "@/utils/animationUtils";
 
 import { ErrorLabel } from "./ErrorLabel";

@@ -16,7 +16,7 @@ import { CreateWorkflowModal } from "./create/CreateWorkflowModal";
 
 export const WorkflowsListBody = () => {
   const t = useTranslations("workflows");
-  const { data, isLoading, isError, isFetching, refetch } = useGetWorkflowsDataQuery<IWorkflowResponseTypes[]>();
+  const { data, isLoading, isError, isFetching } = useGetWorkflowsDataQuery<IWorkflowResponseTypes[]>();
 
   return (
     <section className={styles["pipeline-page"]}>

@@ -33,7 +33,7 @@ export const ErrorNotificationElement = ({
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(true);
 
-  const handleOpenChange = (open: boolean) => {
+  const handleOpenChange = () => {
     setOpen(false);
     setTimeout(() => {
       dispatch(removeToastify(toast.id));

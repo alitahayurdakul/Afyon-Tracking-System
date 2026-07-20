@@ -1,5 +1,5 @@
 "use client";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -21,17 +21,13 @@ interface IPropsTypes {
 
 export const FilterForm = ({
   filterItems,
-  isLoading,
-  defaultValues,
-  containerClassName,
-  resetFilter,
+  isLoading
 }: IPropsTypes) => {
   const [key, setKey] = useState<number>(0);
-  const { control, getValues, setValue, reset, register, watch } = useForm<any>(
+  const { control, getValues } = useForm<any>(
     {},
   );
-  const router = useRouter();
-  const pathname = usePathname();
+
   const searchParams = useSearchParams();
 
   const onChangeFormElement = useCallback(() => {
@@ -134,7 +130,7 @@ export const FilterForm = ({
                       ...(item.queryType && { queryType: item.queryType }),
                     }}
                   >
-                    {(data, loading, error) => (
+                    {(data, loading) => (
                       <SelectBox
                         key={key}
                         name={item.name}

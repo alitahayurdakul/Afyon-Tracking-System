@@ -29,7 +29,7 @@ import {
   useGetTrainsDataQuery,
 } from "@/api/queries/useGetTrainsQueries";
 import { URL_PAGES } from "@/consts/url";
-import { InputSpaceEnums } from "@/types/formEnums";
+import { InputSpaceEnums } from "@/utils/enum/formEnums";
 import { InputBox } from "../formElements/InputBox";
 import { optionsConverters } from "@/types/optionsConverter";
 import { useTranslations } from "next-intl";

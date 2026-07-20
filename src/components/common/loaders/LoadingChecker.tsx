@@ -5,8 +5,7 @@ import React from "react";
 interface IPropsTypes {
   isLoading?: boolean;
   icon?: any;
-  iconWidth?: number;
-  colorFilter?: string;
+  color?: string;
   isHideIcon?: boolean;
   height?: number
 }
@@ -14,11 +13,9 @@ interface IPropsTypes {
 export const LoadingChecker = ({
   children,
   isLoading,
-  colorFilter,
-  iconWidth,
+  color,
   icon,
   isHideIcon,
-  height
 }: React.PropsWithChildren<IPropsTypes>) => {
   return (
     <>
@@ -29,7 +26,7 @@ export const LoadingChecker = ({
       ) : (
         <div style={{ width: "100%", textAlign: "center" }}>
           {!isHideIcon && (
-            <FontAwesomeIcon icon={faSpinner} size="3x" spin style={{ animationDuration: '2s', color: "var(--slate-90)"}}  />
+            <FontAwesomeIcon icon={faSpinner} size="3x" spin style={{ animationDuration: '2s', color: color ?? "var(--slate-90)"}}  />
           )
           }
         </div>
