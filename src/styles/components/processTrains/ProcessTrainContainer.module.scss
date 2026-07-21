@@ -1,0 +1,330 @@
+.train-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* TITLE */
+
+.title h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.875rem;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--slate-90);
+}
+
+.title p {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--slate-60);
+}
+
+.train-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 22px 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--blue-90), var(--blue-70));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 34px color-mix(in srgb, var(--blue-90) 16%, transparent);
+    border-color: var(--border-blue-70);
+
+    &::before {
+      transform: scaleX(1);
+    }
+
+    .go-btn {
+      background: var(--blue-90);
+      color: var(--white);
+      transform: translateX(2px);
+    }
+  }
+
+  &.is-idle {
+    opacity: 0.72;
+  }
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px 4px 8px;
+  border-radius: 100px;
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  &.active {
+    color: #2fae73;
+    background: color-mix(in srgb, #2fae73 14%, transparent);
+
+    .dot {
+      box-shadow: 0 0 0 3px color-mix(in srgb, #2fae73 18%, transparent);
+      animation: pulse 2s ease-in-out infinite;
+    }
+  }
+
+  &.idle {
+    color: var(--slate-60);
+    background: var(--slate-20);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.train-code {
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--slate-50);
+}
+
+.train-name {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--slate-90);
+}
+
+// ---- wagon rail signature ----
+
+.rail-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rail {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  .car {
+    height: 10px;
+    flex: 1;
+    max-width: 22px;
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--blue-70) 16%, var(--white));
+    position: relative;
+    animation: fillIn 0.5s ease backwards;
+
+    &.filled {
+      background: var(--blue-70);
+    }
+
+    &:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      right: -4px;
+      top: 50%;
+      width: 4px;
+      height: 2px;
+      background: var(--slate-20);
+      transform: translateY(-50%);
+    }
+  }
+}
+
+@keyframes fillIn {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+.rail-caption {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--slate-50);
+  white-space: nowrap;
+}
+
+.desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--slate-60);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--slate-20);
+}
+
+.foot-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.process-count {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+
+  .num {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--slate-90);
+  }
+
+  .label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--slate-50);
+  }
+}
+
+.process-bar {
+  display: flex;
+  height: 5px;
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--slate-20);
+
+  .seg {
+    height: 100%;
+    transition: width 0.4s ease;
+
+    &.active {
+      background: #2fae73;
+    }
+
+    &.completed {
+      background: var(--blue-70);
+    }
+  }
+}
+
+.process-legend {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  .item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--slate-60);
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    &.active .dot {
+      background: #2fae73;
+    }
+
+    &.completed .dot {
+      background: var(--blue-70);
+    }
+  }
+
+  .empty {
+    font-size: 12px;
+    font-style: italic;
+    color: var(--slate-50);
+  }
+}
+
+.go-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--slate-20);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--slate-60);
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .train-card,
+  .go-btn,
+  .rail .car,
+  .status-pill.active .dot {
+    animation: none !important;
+    transition: none !important;
+  }
+}

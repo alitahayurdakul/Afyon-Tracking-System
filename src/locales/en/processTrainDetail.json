@@ -1,0 +1,34 @@
+{
+  "title": "AA",
+  "summary": "BB",
+  "trainDetail": {
+    "trainSetNoLabel": "Tren seti no",
+    "creatorLabel": "Oluşturan",
+    "wagonCountLabel": "Vagon sayısı",
+    "wagonCountValue": "{count} vagon",
+    "multipleWagonCountValue": "{count} vagon",
+    "createdAtLabel": "Oluşturulma tarihi",
+    "updatedAtLabel": "Güncellenme tarihi",
+    "statusActive": "Aktif",
+    "statusInactive": "Pasif"
+  },
+  "processTable": {
+    "search": "Arama...",
+    "status": {
+      "completed": "Tamamlandı",
+      "active": "Aktif",
+      "pending": "Bekliyor"
+    },
+    "table": {
+      "projectName": "Proje Adı",
+      "locomotiveNo": "Tren Numarası",
+      "wagonNo": "Vagon",
+      "workflowName": "İş Akışı Adı",
+      "totalDuration": "Toplam Geçen Süre",
+      "startedAt": "Başlama Zamanı",
+      "completedAt": "Bitiş Zamanı",
+      "actions": "İşlemler",
+      "description": "Açıklama"
+    }
+  }
+}
