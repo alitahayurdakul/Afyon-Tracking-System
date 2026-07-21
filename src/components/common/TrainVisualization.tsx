@@ -17,6 +17,7 @@ interface TrainVisualizationProps {
   totalCount: number;
   highlightedWagonNumber?: number;
   className?: string;
+  onClickWagon?: (wagonOrder?: number) => void;
 }
 
 const MIN_LOCOMOTIVES = 2;
@@ -44,6 +45,7 @@ export const TrainVisualization: React.FC<TrainVisualizationProps> = ({
   totalCount,
   highlightedWagonNumber,
   className,
+  onClickWagon
 }) => {
   const { pieces, svgWidth } = useMemo(() => {
     const safeTotal = Math.max(totalCount, MIN_LOCOMOTIVES);
@@ -61,7 +63,7 @@ export const TrainVisualization: React.FC<TrainVisualizationProps> = ({
         type === "locomotive" ? LOCOMOTIVE_WIDTH : WAGON_BASE_WIDTH;
 
       let wagonNumber: number | undefined;
-      if (type === "wagon") {
+      if (type === "wagon" || type === "locomotive") {
         wagonCounter += 1;
         wagonNumber = wagonCounter;
       }
@@ -150,7 +152,7 @@ export const TrainVisualization: React.FC<TrainVisualizationProps> = ({
               : null;
 
           return (
-            <g key={piece.overallIndex}>
+            <g key={piece.overallIndex} onClick={() => onClickWagon && onClickWagon(piece.wagonNumber)}>
               {/* Burun */}
               {nosePath && <path d={nosePath} className={bodyGroupClass} />}
 

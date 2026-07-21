@@ -113,7 +113,7 @@ export const END_POINTS = {
   },
   processTrains: {
     getAllProcessTrains: `${apiUrl}/api/trains/with-processes`,
-    getByTrain: `${apiUrl}/api/processes`,
+    getByTrain: `${apiUrl}/api/processes/search`,
   },
 };
 

@@ -31,6 +31,7 @@ async function getProcessTrainDetail(
 ): Promise<Response> {
   try {
     const { trainId, wagonId } = params;
+    console.log(trainId, "trainId");
     const response = await axiosInstance.post(
       END_POINTS.processTrains.getByTrain,
       {
@@ -39,10 +40,11 @@ async function getProcessTrainDetail(
       },
     );
     if (response.status === 200) {
-      return createJsonOnlyData(response.data || []);
+      return createJsonOnlyData(response.data.processes ?? []);
     }
     return createJsonError("Failed to fetch projects", 400);
   } catch (err: unknown) {
+    console.log(err, "errorr")
     return createJsonError(extractErrorMessage(err), 500);
   }
 }
