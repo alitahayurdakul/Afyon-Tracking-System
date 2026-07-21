@@ -383,6 +383,7 @@ export const SelectBox = forwardRef<Ref, SelectBoxProps>(
                 return{
                 ...base,
                 marginTop: "4px",
+                position: "static",
                 border: allSelected ? "none" : "1px solid var(--border)",
                 borderRadius: "var(--form-border-radius)",
                 boxShadow: "var(--shadow-card)",
