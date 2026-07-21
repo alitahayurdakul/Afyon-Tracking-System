@@ -85,7 +85,6 @@ export const EditTrainForm = ({ id, data, wagonOptions }: IPropsTypes) => {
             id: option.value,
           };
         });
-        console.log(formData.wagons, wagons);
         const params = {
           id: data?._id,
           trainName: formData.trainSetNo ?? "",

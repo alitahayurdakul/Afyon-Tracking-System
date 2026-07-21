@@ -6,7 +6,6 @@ import { useMemo, useState } from "react";
 
 import {
   useCompleteStage,
-  useCompleteSubStage,
   useEditSubStage,
   useGetStageDetailDataQuery,
   useSaveSubStage,
@@ -51,9 +50,7 @@ export default function StageDetailModalContent({
 }: StageDetailModalProps) {
   const t = useTranslations("activeProcessDetail");
   const {
-    data: subStagesData,
-    isLoading,
-    isError,
+    data: subStagesData
   } = useGetStageDetailDataQuery<SubStage[]>(id);
 
   const { id: processId } = useParams();
