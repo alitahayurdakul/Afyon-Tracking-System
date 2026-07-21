@@ -15,5 +15,6 @@ export const URL_PAGES = {
     login: "/login",
     materials: "/malzeme-yonetimi",
     projects: "/proje-yonetimi",
-    profile: "/profil"
+    profile: "/profil",
+    processTrain: "/tren-surecleri"
 }

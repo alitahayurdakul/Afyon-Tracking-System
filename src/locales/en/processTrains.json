@@ -1,0 +1,13 @@
+{
+  "noDesc": "No description has been provided for this train.",
+  "title": "Process Train Overview",
+  "summary": "Each card summarizes a train, its wagon configuration, and the processes running on that train.",
+  "wagonCount": "{count} Wagon",
+  "multipleWagonCount": "{count} Wagons",
+  "activeProcessCount": "{count} Active",
+  "completedProcessCount": "{count} Completed",
+  "totalProcess": "Total Process",
+  "multipleTotalProcess": "Total Processes",
+  "active": "Active",
+  "pending": "Pending"
+}

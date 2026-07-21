@@ -1,0 +1,13 @@
+{
+  "noDesc": "Для этого поезда описание не указано.",
+  "title": "Обзор процессов поездов",
+  "summary": "Каждая карточка содержит информацию о поезде, его составе вагонов и процессах, выполняющихся на этом поезде.",
+  "wagonCount": "{count} вагон",
+  "multipleWagonCount": "{count} вагонов",
+  "activeProcessCount": "{count} активных",
+  "completedProcessCount": "{count} завершено",
+  "totalProcess": "Общий процесс",
+  "multipleTotalProcess": "Общие процессы",
+  "active": "Активный",
+  "pending": "Ожидает"
+}

@@ -111,6 +111,10 @@ export const END_POINTS = {
       `${apiUrl}/api/projects${status ? `?status=${status}` : ""}`,
     getDetail: (id: string) => `${apiUrl}/api/projects/${id}`,
   },
+  processTrains: {
+    getAllProcessTrains: `${apiUrl}/api/trains/with-processes`,
+    getByTrain: `${apiUrl}/api/processes`,
+  },
 };
 
 export const CLIENT_END_POINTS = {
@@ -215,5 +219,10 @@ export const CLIENT_END_POINTS = {
     delete: "/api/projects",
     getAll: "/api/projects",
     getDetail: "/api/projects",
+  },
+  processTrains: {
+    getAll: "/api/processTrains",
+    getByTrain: "/api/processTrains",
+    getByTrainAndWagon: "/api/processTrains",
   },
 };

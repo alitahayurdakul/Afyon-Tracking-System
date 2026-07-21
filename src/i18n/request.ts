@@ -27,7 +27,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
     "workflows",
     "permissions",
     "processHistory",
-    "profile"
+    "profile",
+    "processTrains"
   ];
   const messages: Record<string, any> = {};
 

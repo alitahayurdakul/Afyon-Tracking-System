@@ -1,0 +1,13 @@
+{
+    "noDesc": "Bu tren için açıklama girilmemiş",
+    "title": "Süreç Trenlerine Genel Bakış",
+    "summary": "Her kart bir treni, vagon dizilimini ve o tren üzerinde yürüyen süreçleri özetler.",
+    "wagonCount": "{count} Vagon",
+    "multipleWagonCount": "{count} Vagon",
+    "activeProcessCount": "{count} Aktif",
+    "completedProcessCount": "{count} Tamamlandı",
+    "totalProcess": "Toplam Süreç",
+    "multipleTotalProcess": "Toplam Süreç",
+    "active": "Aktif",
+    "pending": "Beklemede"
+}

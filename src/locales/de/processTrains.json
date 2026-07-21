@@ -1,0 +1,13 @@
+{
+  "noDesc": "Für diesen Zug wurde keine Beschreibung angegeben.",
+  "title": "Übersicht der Prozesszüge",
+  "summary": "Jede Karte fasst einen Zug, seine Wagenkonfiguration und die auf diesem Zug laufenden Prozesse zusammen.",
+  "wagonCount": "{count} Wagen",
+  "multipleWagonCount": "{count} Wagen",
+  "activeProcessCount": "{count} Aktiv",
+  "completedProcessCount": "{count} Abgeschlossen",
+  "totalProcess": "Gesamtprozess",
+  "multipleTotalProcess": "Gesamtprozesse",
+  "active": "Aktiv",
+  "pending": "Ausstehend"
+}
