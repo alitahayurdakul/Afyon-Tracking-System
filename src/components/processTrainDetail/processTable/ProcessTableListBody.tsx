@@ -12,20 +12,18 @@ import { createProcessTrainsTableColumns } from "@/utils/processTrainTableUtils"
 
 export const ProcessTableListBody = () => {
   const t = useTranslations("processTrainDetail.processTable");
-    const {
+  const {
     data: processInfos,
     isLoading,
     isFetching,
-    isError
+    isError,
   } = useGetProcessTrainDetailDataQuery<IProcessInstance[]>();
 
   return (
     <>
-      <div className={styles.toolbar}>
-        <div className={styles["search-input"]}>
-          <FontAwesomeIcon icon={faSearch} />
-          <input placeholder={t("search")} style={{border: "1px solid blue"}}  />
-        </div>
+      <div className={styles["search-input"]}>
+        <FontAwesomeIcon icon={faSearch} />
+        <input placeholder={t("search")}/>
       </div>
 
       <div className={styles["table-card"]}>

@@ -1,11 +1,11 @@
 import { NextRequest } from "next/server";
 
-import { projectHandlers } from "@/api/handlers/projectsQueries";
 import { processTrainsHandlers } from "@/api/handlers/trainProcessesQueries";
 
 export enum ProcessTrainsQueryTypes {
   getProcessTrains = "GET_PROCESS_TRAINS",
-  getProcessTrainDetail = "GET_PROCESS_TRAIN_DETAIL"
+  getProcessTrainDetail = "GET_PROCESS_TRAIN_DETAIL",
+  getByTrainAndWagonProcesses = "GET_BY_TRAIN_AND_WAGON_PROCESSES",
 }
 
 export async function POST(request: NextRequest) {
@@ -15,8 +15,10 @@ export async function POST(request: NextRequest) {
   switch (type) {
     case ProcessTrainsQueryTypes.getProcessTrains:
       return await processTrainsHandlers.getProcessTrains();
-      case ProcessTrainsQueryTypes.getProcessTrainDetail:
+    case ProcessTrainsQueryTypes.getProcessTrainDetail:
       return await processTrainsHandlers.getProcessTrainDetail(params);
+    case ProcessTrainsQueryTypes.getByTrainAndWagonProcesses:
+      return await processTrainsHandlers.getByTrainAndWagonProcesses(params);
 
     default: {
       return Response.json(

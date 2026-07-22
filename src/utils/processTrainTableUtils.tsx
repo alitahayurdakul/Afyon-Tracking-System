@@ -8,7 +8,6 @@ import {
   ICommonTableColumnsType,
   ICommonTableColumnsTypes,
 } from "@/types/tableColumnTypes";
-import { IWagonType } from "@/types/wagonsTypes";
 
 import { formatDate } from "./formDate";
 import { getElapsedTime } from "./getElapsedTime";

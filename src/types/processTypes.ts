@@ -136,3 +136,5 @@ export type ProcessResponse = {
   stages: IStage[];
   summary: IProcessSummary;
 };
+
+export type ProcessArrayResponse = Array<ProcessResponse>

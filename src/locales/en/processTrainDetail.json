@@ -30,5 +30,11 @@
       "actions": "İşlemler",
       "description": "Açıklama"
     }
+  },
+  "modal": {
+    "title": "Süreçler",
+    "wagon": "{data}. vagon",
+    "completed": "Tamamlandı",
+    "active": "Aktif"
   }
 }

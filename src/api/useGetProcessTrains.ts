@@ -31,7 +31,7 @@ export const useGetProcessTrainsDataQuery = <T>() => {
   });
 };
 
-export const useGetProcessTrainDetailDataQuery = <T>(wagonId?: string) => {
+export const useGetProcessTrainDetailDataQuery = <T>() => {
   const trigger = useSelector(
     (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
   );
@@ -48,6 +48,34 @@ export const useGetProcessTrainDetailDataQuery = <T>(wagonId?: string) => {
           type: ProcessTrainsQueryTypes.getProcessTrainDetail,
           params: {
             trainId: typeof trainId === "string" ? trainId : trainId?.[0],
+          },
+        },
+      );
+      return data;
+    },
+  });
+};
+
+export const useGetTrainWagonProcessesDetailDataQuery = <T>(
+  wagonId?: string,
+) => {
+  const trigger = useSelector(
+    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+  );
+  const trainId = useParams().trainId;
+
+  return useQuery({
+    queryKey: [`getProcessTrainDetailDatas`, trigger, trainId, wagonId],
+    refetchOnWindowFocus: false,
+    enabled: !!trainId,
+    queryFn: async () => {
+      const { data } = await axiosInstance.post<T>(
+        CLIENT_END_POINTS.processTrains.getByTrainAndWagon,
+        {
+          type: ProcessTrainsQueryTypes.getByTrainAndWagonProcesses,
+          params: {
+            trainId: typeof trainId === "string" ? trainId : trainId?.[0],
+            ...(wagonId && { wagonId }),
           },
         },
       );

@@ -32,7 +32,7 @@ const IconClose = () => (
 
 interface ModalProps {
   /** URL'deki ?modal=NAME değeriyle eşleşince modal açılır. */
-  name: string;
+  name?: string;
   title: string | React.ReactElement | false;
   className?: string;
   classNameContent?: string;
@@ -51,6 +51,7 @@ interface ModalProps {
   /** Modal kapanırken çalışacak temizlik callback'i (örn. form state reset). */
   closeFn?: () => void;
   titleClassName?: string;
+  ignoreName?: boolean;
 }
 
 export const NewModal = ({
@@ -73,18 +74,19 @@ export const NewModal = ({
   isDivider = false,
   closeFn,
   titleClassName,
+  ignoreName
 }: PropsWithChildren<ModalProps>) => {
   const searchParams = useSearchParams();
   const addQueryParam = useAddQueryParam();
   const removeModal = useRemoveQueryParamModal();
   const ref = useRef<HTMLDivElement>(null);
 
-  const visible = searchParams?.get("modal") === name;
+  const visible = searchParams?.get("modal") === name || !!ignoreName;
 
   useBodyScrollLock(visible);
 
   const handleOpen = () => {
-    addQueryParam("modal", name);
+    name && addQueryParam("modal", name);
   };
 
   const handleClose = () => {
@@ -124,9 +126,7 @@ export const NewModal = ({
           >
             <NewSpinner className={styles["spinner"]} spin={loading}>
               {title && (
-                <Dialog.Title
-                  className={clsx(styles["title"], titleClassName)}
-                >
+                <Dialog.Title className={clsx(styles["title"], titleClassName)}>
                   {title}
                 </Dialog.Title>
               )}
@@ -153,10 +153,7 @@ export const NewModal = ({
                   ) : (
                     <button
                       type="button"
-                      className={clsx(
-                        styles["close-btn"],
-                        classNameCloseIcon,
-                      )}
+                      className={clsx(styles["close-btn"], classNameCloseIcon)}
                       onClick={handleClose}
                       aria-label="Close"
                     >

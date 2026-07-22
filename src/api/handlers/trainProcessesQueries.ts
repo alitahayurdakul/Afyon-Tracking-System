@@ -10,6 +10,7 @@ import {
 export const processTrainsHandlers = {
   getProcessTrains,
   getProcessTrainDetail,
+  getByTrainAndWagonProcesses,
 };
 
 async function getProcessTrains(): Promise<Response> {
@@ -30,13 +31,11 @@ async function getProcessTrainDetail(
   params: Record<string, any>,
 ): Promise<Response> {
   try {
-    const { trainId, wagonId } = params;
-    console.log(trainId, "trainId");
+    const { trainId } = params;
     const response = await axiosInstance.post(
       END_POINTS.processTrains.getByTrain,
       {
         ...(trainId && { trainId }),
-        ...(wagonId && { wagonId }),
       },
     );
     if (response.status === 200) {
@@ -44,7 +43,29 @@ async function getProcessTrainDetail(
     }
     return createJsonError("Failed to fetch projects", 400);
   } catch (err: unknown) {
-    console.log(err, "errorr")
+    console.log(err, "errorr");
+    return createJsonError(extractErrorMessage(err), 500);
+  }
+}
+
+async function getByTrainAndWagonProcesses(
+  params: Record<string, any>,
+): Promise<Response> {
+  try {
+    const { trainId, wagonId } = params;
+    if (!wagonId) {
+      return createJsonError("Failed to fetch projects", 400);
+    }
+
+    const response = await axiosInstance.get(
+      END_POINTS.processTrains.getByTrainAndWagon(trainId, wagonId),
+    );
+    if (response.status === 200) {
+      return createJsonOnlyData(response.data.processes ?? []);
+    }
+
+    return createJsonError("Failed to fetch projects", 400);
+  } catch (err: unknown) {
     return createJsonError(extractErrorMessage(err), 500);
   }
 }

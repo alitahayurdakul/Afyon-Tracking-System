@@ -62,8 +62,12 @@ textarea {
 
   // STATUS COLOR
   --completed: #378add;
-  --active: #2fae73;
+  --active: #639922;
   --passive: #b4b2a9;
+
+  --soft-completed: #dbeafe;
+  --soft-active: #dcfce7;
+  --soft-passive: #f3f4f6;
 
   --input-error-font-size: 0.875rem;
   --form-border-radius: 14px;
@@ -91,6 +95,12 @@ textarea {
   --text-muted: #737782;
   --border: #c2c6d3;
   --input-font-color: #1a1c1e;
+
+  --surface-warm: #faf8f4;
+  --border-muted: #e7e3db;
+
+  --orange: #e8963c;
+  --soft-orange: #fdf3e3;
 
   --transition: 0.2s;
 

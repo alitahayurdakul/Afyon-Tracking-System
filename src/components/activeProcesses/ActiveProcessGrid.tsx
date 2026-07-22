@@ -22,7 +22,7 @@ export const ActiveProcessGrid = ({
 
   useEffect(() => {
     if (data) {
-      setActiveUnit(data?.length.toString());
+      setActiveUnit(data?.length?.toString());
     }
   }, [setActiveUnit, data]);
 

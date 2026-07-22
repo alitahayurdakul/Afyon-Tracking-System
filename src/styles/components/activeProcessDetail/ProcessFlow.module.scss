@@ -63,7 +63,7 @@
   border-radius: 50%;
 
   &.completed {
-    background:  var(--completed);
+    background: var(--completed);
   }
   &.active {
     background: var(--active);
@@ -118,13 +118,13 @@
   z-index: 1;
 
   &.completed {
-    background: #639922;
+    background: var(--completed);
     color: #fff;
   }
   &.active {
-    background: #185fa5;
+    background: var(--active);
     color: #fff;
-    box-shadow: 0 0 0 4px #b5d4f4;
+    box-shadow: 0 0 0 4px #97bd6b;
   }
   &.pending {
     background: #fff;
@@ -146,11 +146,11 @@
   border: 0.5px solid #d3d1c7;
 
   &.completed {
-    background: #eaf3de;
+    background: #e6f1fb;
   }
   &.active {
-    background: #e6f1fb;
-    border: 1.5px solid #378add;
+    background: #eaf3de;
+    border: 1.5px solid var(--active);
   }
   &.pending {
     background: #f1efe8;
@@ -208,7 +208,6 @@
   background: #c0dd97;
   color: #173404;
 }
-
 
 // Are u sure questions styles
 

@@ -1,15 +1,22 @@
 "use client";
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-import { useGetTrainDetailDataQuery } from "@/api/useGetProcessTrains";
+import {
+  useGetTrainDetailDataQuery,
+} from "@/api/useGetProcessTrains";
+import { PROCESS_TRAIN_WAGONS_DETAIL_MODAL } from "@/consts/modals";
 import styles from "@/styles/components/processTrainDetail/ProcessTrainDetailContainer.module.scss";
 import stylesPage from "@/styles/pages/PageCommonContainer.module.scss";
 import { IWagonDetail } from "@/types/trainsTypes";
+import { useAddQueryParam } from "@/utils/searchParams";
 
 import { LoadingChecker } from "../common/loaders/LoadingChecker";
+import { NewModal } from "../common/NewModal";
 import TrainVisualization from "../common/TrainVisualization";
 import SpinnerIcon from "../icons/SpinnerIcon";
 import { ProcessTableListBody } from "./processTable/ProcessTableListBody";
+import ProcessTrainModalWrapper from "./processTrainModal/ProcessTrainModalWrapper";
 import TrainDetailSection from "./TrainDetailSection";
 
 export const ProcessTrainDetailContainer = () => {
@@ -19,13 +26,36 @@ export const ProcessTrainDetailContainer = () => {
     isFetching,
   } = useGetTrainDetailDataQuery();
   const t = useTranslations("processTrainDetail");
+  const addQueryParam = useAddQueryParam();
+  const searchParams = useSearchParams();
+  const modalParam = searchParams?.get("modal");
+  const wagonParamId = modalParam?.split("_").at(-1);
+  
+
+  const isMemberWagon =
+    !!trainInfos && trainInfos?.wagons
+      ? trainInfos?.wagons.find(
+          (wagon: IWagonDetail) => wagon._id === wagonParamId,
+        )
+      : false;
+
+  const isOpen =
+    !!isMemberWagon && !!modalParam
+      ? modalParam.split("_").slice(0, -1).join("_") ===
+        PROCESS_TRAIN_WAGONS_DETAIL_MODAL
+      : false;
 
   const onHandleWagonClick = (wagonOrder?: number) => {
     if (trainInfos && trainInfos.wagons && wagonOrder) {
-      const wagonInfos =
-        trainInfos?.wagons.find(
-          (wagon: IWagonDetail) => wagon.order === wagonOrder,
-        ) ?? {};
+      const wagonInfos = trainInfos?.wagons.find(
+        (wagon: IWagonDetail) => wagon.order === wagonOrder,
+      );
+      const wagonId = wagonInfos?._id ?? "";
+      !!wagonId &&
+        addQueryParam(
+          "modal",
+          `${PROCESS_TRAIN_WAGONS_DETAIL_MODAL}_${wagonId}`,
+        );
     }
   };
 
@@ -55,6 +85,18 @@ export const ProcessTrainDetailContainer = () => {
         </div>
 
         <ProcessTableListBody />
+        {isOpen && (
+          <NewModal
+            ignoreName
+            width={"900px"}
+            height={"auto"}
+            title={t("modal.title")}
+            isCloseOutside={false}
+            isCloseEsc={false}
+          >
+            <ProcessTrainModalWrapper wagonParamId={wagonParamId} />
+          </NewModal>
+        )}
       </LoadingChecker>
     </div>
   );

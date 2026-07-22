@@ -17,7 +17,8 @@
     "users": "Users",
     "roles": "Roles",
     "processesHistory": "Process History",
-    "profile": "Profile"
+    "profile": "Profile",
+    "processTrain": "Train Processes"
   },
   "login": {
     "brandTitle": "Afyon Workflow Management System",

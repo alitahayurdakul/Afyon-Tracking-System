@@ -114,6 +114,8 @@ export const END_POINTS = {
   processTrains: {
     getAllProcessTrains: `${apiUrl}/api/trains/with-processes`,
     getByTrain: `${apiUrl}/api/processes/search`,
+    getByTrainAndWagon: (trainId?: string, wagonId?: string) =>
+      `${apiUrl}/api/processes${trainId ? `?trainId=${trainId}` : ""}${wagonId ? `${trainId ? "&" : "?"}wagonId=${wagonId}` : ""}`,
   },
 };
 

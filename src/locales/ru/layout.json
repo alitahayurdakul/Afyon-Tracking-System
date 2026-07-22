@@ -17,7 +17,8 @@
     "users": "Пользователи",
     "roles": "Роли",
     "processesHistory": "История процессов",
-    "profile": "Профиль"
+    "profile": "Профиль",
+    "processTrain": "Процессы поездов"
   },
   "login": {
     "brandTitle": "Система управления рабочими процессами Afyon",

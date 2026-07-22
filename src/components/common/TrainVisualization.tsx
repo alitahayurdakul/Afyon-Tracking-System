@@ -45,7 +45,7 @@ export const TrainVisualization: React.FC<TrainVisualizationProps> = ({
   totalCount,
   highlightedWagonNumber,
   className,
-  onClickWagon
+  onClickWagon,
 }) => {
   const { pieces, svgWidth } = useMemo(() => {
     const safeTotal = Math.max(totalCount, MIN_LOCOMOTIVES);
@@ -152,7 +152,11 @@ export const TrainVisualization: React.FC<TrainVisualizationProps> = ({
               : null;
 
           return (
-            <g key={piece.overallIndex} onClick={() => onClickWagon && onClickWagon(piece.wagonNumber)}>
+            <g
+              key={piece.overallIndex}
+              onClick={() => onClickWagon && onClickWagon(piece.wagonNumber)}
+              style={{ cursor: "pointer" }}
+            >
               {/* Burun */}
               {nosePath && <path d={nosePath} className={bodyGroupClass} />}
 

@@ -5,6 +5,7 @@ import {
   faDiagramProject,
   faFolderTree,
   faLayerGroup,
+  faListCheck,
   faRoute,
   faSitemap,
   faTrailer,
@@ -12,8 +13,7 @@ import {
   faUserCircle,
   faUsers,
   faUsersGear,
-  faUserShield,
-} from "@fortawesome/free-solid-svg-icons";
+  faUserShield} from "@fortawesome/free-solid-svg-icons";
 
 import { ISidebarItemsTypes } from "@/types/sidebarTypes";
 
@@ -41,6 +41,12 @@ export const SIDEBAR_ITEMS: ISidebarItemsTypes = [
   //   ],
   // },
   {
+    default: "Süreç Trenleri",
+    key: "processTrain",
+    icon: faListCheck,
+    url: URL_PAGES.processTrain,
+  },
+  {
     default: "Aktif Süreçler",
     key: "activeProcesses",
     icon: faDiagramProject,
@@ -52,11 +58,6 @@ export const SIDEBAR_ITEMS: ISidebarItemsTypes = [
     icon: faClockRotateLeft,
     url: URL_PAGES.processesHistory,
   },
-  // {
-  //   default: "Geçmiş Süreçler",
-  //   icon: faClockRotateLeft,
-  //   url: URL_PAGES.workflowHistory,
-  // },
   {
     default: "İş Akışları",
     key: "workflows",

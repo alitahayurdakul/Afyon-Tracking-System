@@ -58,25 +58,24 @@
 .statusBadge {
   padding: 2px 8px;
   border-radius: 999px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
-  text-transform: uppercase;
 
   &.small {
     padding: 1px 6px;
     font-size: 10px;
   }
   &.active {
-    background: #dbeafe;
-    color: #1d4ed8;
+    background: var(--soft-active);
+    color: var(--active);
   }
   &.pending {
-    background: #f3f4f6;
-    color: #6b7280;
+    background: var(--soft-passive);
+    color: var(--passive);
   }
   &.completed {
-    background: #dcfce7;
-    color: #15803d;
+    background: var(--soft-completed);
+    color: var(--completed);
   }
   &.skipped {
     background: #fee2e2;

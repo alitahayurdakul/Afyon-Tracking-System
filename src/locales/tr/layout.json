@@ -17,7 +17,8 @@
     "users": "Kullanıcılar",
     "roles": "Roller",
     "processesHistory": "Geçmiş Süreçler",
-    "profile": "Profil"
+    "profile": "Profil",
+    "processTrain": "Tren Süreçleri"
   },
   "login": {
     "brandTitle": "Afyon İş Akışı Yönetim Sistemi",
