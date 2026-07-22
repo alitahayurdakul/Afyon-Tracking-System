@@ -4,8 +4,9 @@ import { NewModal } from "@/components/common/NewModal";
 import { ACTIVE_STAGE_DETAIL_MODAL } from "@/consts/modals";
 import { IStage } from "@/types/processTypes";
 
-import styles from "./QualityDetailModal.module.scss";
 import { QuantityDetailModalContent } from "./quantityDetail/QuantityDetailModalContent";
+
+import styles from "./QualityDetailModal.module.scss";
 
 const QualityDetailModal = ({
   id,

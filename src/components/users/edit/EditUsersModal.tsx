@@ -1,15 +1,17 @@
-import { faPen } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import clsx from "clsx";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import clsx from "clsx";
+
+import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { EDIT_USER_MODAL } from "@/consts/modals";
-import styles from "@/styles/components/common/TableListBody.module.scss";
-import compactStyles from "@/styles/components/users/UsersTableActionsCol.module.scss";
 import { useAddQueryParam } from "@/utils/searchParams";
 
 import { EditUserModalWrapper } from "./EditUserModalWrapper";
+
+import styles from "@/styles/components/common/TableListBody.module.scss";
+import compactStyles from "@/styles/components/users/UsersTableActionsCol.module.scss";
 
 export const EditUsersModal = ({ id }: { id: string }) => {
   const t = useTranslations("users");

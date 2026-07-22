@@ -2,7 +2,6 @@ import React from "react";
 
 import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
 import { TrainsTableActionsCol } from "@/components/trains/TrainsTableActionsCol";
-import styles from "@/styles/components/trains/TrainsListTableUtils.module.scss";
 import { TFunction } from "@/types/commonTypes";
 import {
   ICommonTableColumnsType,
@@ -11,6 +10,8 @@ import {
 import { IWagonType } from "@/types/wagonsTypes";
 
 import { formatDate } from "./formDate";
+
+import styles from "@/styles/components/trains/TrainsListTableUtils.module.scss";
 
 export const trainsTableColumns: ICommonTableColumnsTypes = [
   {

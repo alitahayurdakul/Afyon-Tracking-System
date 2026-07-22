@@ -9,12 +9,13 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { PERMISSION_ACTION, PERMISSION_RESOURCE } from "@/consts/permissions";
-import styles from "@/styles/components/common/Topbar.module.scss";
 import { getPermission } from "@/utils/getPermission";
 
 import { CreateFleetModal } from "../createFleetModal/CreateFleetModal";
 import LanguageSelector from "../NewLanguageSelectBox";
 import { RoleWrapper } from "../RoleWrapper";
+
+import styles from "@/styles/components/common/Topbar.module.scss";
 
 library.add(faSearch, faBell, faGear, faCirclePlus);
 

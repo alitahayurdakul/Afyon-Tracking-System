@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 
-import styles from "@/styles/pages/PageCommonContainer.module.scss";
-
 import { ActiveProcessesHeader } from "./ActiveProcessesHeader";
 import { ActiveProcessGrid } from "./ActiveProcessGrid";
+
+import styles from "@/styles/pages/PageCommonContainer.module.scss";
 
 export const ActiveProcessesWrapper = () => {
   const [activeUnit, setActiveUnit] = useState<string>("");

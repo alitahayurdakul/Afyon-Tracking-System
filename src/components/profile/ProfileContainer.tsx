@@ -1,8 +1,8 @@
 import { useTranslations } from "next-intl";
 
-import styles from "@/styles/components/common/TableListBody.module.scss";
-
 import ProfileWrapper from "./ProfileWrapper";
+
+import styles from "@/styles/components/common/TableListBody.module.scss";
 
 const ProfileContainer = () => {
   const t = useTranslations("profile");

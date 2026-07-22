@@ -1,7 +1,7 @@
 "use client";
 
-import clsx from "clsx";
 import { useTranslations } from "next-intl";
+import clsx from "clsx";
 
 import styles from "@/styles/components/processTrains/ProcessTrainContainer.module.scss";
 
@@ -31,7 +31,6 @@ export const TrainCard = ({
   onClick,
 }: TrainCardProps) => {
   const t = useTranslations("processTrains");
-  const shown = Math.min(wagonCount, MAX_SEGMENTS);
   const overflow = wagonCount - MAX_SEGMENTS;
 
   const activePct =
@@ -63,7 +62,7 @@ export const TrainCard = ({
 
       <div className={styles["rail-row"]}>
         <div className={styles["rail"]}>
-          {Array.from({ length: shown }).map((_, i) => (
+          {Array.from({ length: 3 }).map((_, i) => (
             <div
               key={i}
               className={clsx(styles["car"], isActive && styles["filled"])}

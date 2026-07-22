@@ -1,7 +1,8 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
+
+import { useQuery } from "@tanstack/react-query";
 
 import { axiosInstance } from "@/api/axiosInstance";
 import { SubStageQueryTypes } from "@/app/api/sub-stages/route";

@@ -3,8 +3,9 @@
 import { usePathname } from "next/navigation";
 
 import { Sidebar } from "@/components/sidebar/Sidebar";
-import styles from "@/styles/Layout.module.scss";
 import { stripLocale } from "@/utils/stripLocale";
+
+import styles from "@/styles/Layout.module.scss";
 
 const AUTH_ROUTES = ["/login", "/forgot-password"];
 

@@ -1,14 +1,17 @@
+import { useState } from "react";
+import { useTranslations } from "next-intl";
+
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
 
 import { CREATE_TRAIN_MODAL } from "@/consts/modals";
-import styles from "@/styles/components/common/TableListBody.module.scss";
 import { useAddQueryParam } from "@/utils/searchParams";
 
 import { Modal } from "../../common/Modal";
+
 import { CreateTrainForm } from "./CreateTrainForm";
+
+import styles from "@/styles/components/common/TableListBody.module.scss";
 
 export const CreateTrainsModal = () => {
   const t = useTranslations("trains");

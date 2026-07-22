@@ -1,17 +1,19 @@
 "use client";
 
-import * as Dialog from "@radix-ui/react-dialog";
-import clsx from "clsx";
-import { useSearchParams } from "next/navigation";
 import React, { PropsWithChildren, useRef } from "react";
+import { useSearchParams } from "next/navigation";
+import clsx from "clsx";
+
+import * as Dialog from "@radix-ui/react-dialog";
 
 import { useBodyScrollLock } from "@/api/queries/useBodyScrollLock";
 import { NewSpinner } from "@/components/loaders/NewSpinner";
-import styles from "@/styles/components/common/Modal.module.scss";
 import {
   useAddQueryParam,
   useRemoveQueryParamModal,
 } from "@/utils/searchParams";
+
+import styles from "@/styles/components/common/Modal.module.scss";
 
 const IconClose = () => (
   <svg

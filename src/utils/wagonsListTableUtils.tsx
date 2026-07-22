@@ -1,6 +1,5 @@
 import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
 import { WagonsTableActionsCol } from "@/components/wagons/WagonsTableActionsCol";
-import styles from "@/styles/components/wagons/WagonsListTableUtils.module.scss";
 import { TFunction } from "@/types/commonTypes";
 import {
   ICommonTableColumnsType,
@@ -9,6 +8,8 @@ import {
 import { IWagonType } from "@/types/wagonsTypes";
 
 import { formatDate } from "./formDate";
+
+import styles from "@/styles/components/wagons/WagonsListTableUtils.module.scss";
 
 export const wagonsTableColumns: ICommonTableColumnsTypes = [
   {

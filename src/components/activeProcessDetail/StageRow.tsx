@@ -2,15 +2,17 @@ import { useTranslations } from "next-intl";
 
 import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 import { useStartStage } from "@/api/queries/useGetProcessesQueries";
-import styles from "@/styles/components/activeProcessDetail/ProcessFlow.module.scss";
 import { IProcessEntry, IStage } from "@/types/processTypes";
 import { StatusEnums } from "@/utils/enum/commonEnums";
 import { formatDate } from "@/utils/formDate";
 import { getStatus } from "@/utils/getStatus";
 
 import { PopoverBody } from "../Popover";
+
 import StageDetailModal from "./stageDetail/StageDetailModal";
 import StatusChip from "./StatusChip";
+
+import styles from "@/styles/components/activeProcessDetail/ProcessFlow.module.scss";
 
 interface StageRowProps {
   stage: IStage;

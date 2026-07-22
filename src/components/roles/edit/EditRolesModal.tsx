@@ -1,15 +1,17 @@
-import { faPen } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import clsx from "clsx";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import clsx from "clsx";
+
+import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { EDIT_ROLE_MODAL } from "@/consts/modals";
-import styles from "@/styles/components/common/TableListBody.module.scss";
-import compactStyles from "@/styles/components/roles/RolesTableActionsCol.module.scss";
 import { useAddQueryParam } from "@/utils/searchParams";
 
 import { EditRoleModalWrapper } from "./EditRoleModalWrapper";
+
+import styles from "@/styles/components/common/TableListBody.module.scss";
+import compactStyles from "@/styles/components/roles/RolesTableActionsCol.module.scss";
 
 export const EditRolesModal = ({ id }: { id: string }) => {
   const t = useTranslations("roles");

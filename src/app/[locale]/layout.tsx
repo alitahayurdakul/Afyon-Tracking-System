@@ -1,14 +1,15 @@
+import type { Metadata } from "next";
+
+import { config } from "@fortawesome/fontawesome-svg-core";
+
+import { AppShell } from "@/components/layout/AppShell";
+
+import { Providers } from "./providers";
+
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import "react-loading-skeleton/dist/skeleton.css";
 import "../globals.css";
-
-import { config } from "@fortawesome/fontawesome-svg-core";
-import type { Metadata } from "next";
-
-import { AppShell } from "@/components/layout/AppShell";
 import styles from "@/styles/Layout.module.scss";
-
-import { Providers } from "./providers";
 
 config.autoAddCss = false;
 
@@ -39,11 +40,12 @@ export const metadata: Metadata = {
 //   );
 // }
 
-import { GoogleAnalytics } from "@next/third-parties/google";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
+
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 // import { CookieContainer } from "@/components/CookieContainer";
 // import { Footer } from "@/components/layout/footer/Footer";

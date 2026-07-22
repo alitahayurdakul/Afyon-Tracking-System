@@ -14,7 +14,7 @@ export default [
       "@typescript-eslint": tsPlugin,
       "simple-import-sort": simpleImportSort,
       prettier: prettierPlugin,
-      react
+      react,
     },
     languageOptions: {
       parser: tsParser,
@@ -37,24 +37,23 @@ export default [
             ["^@/"],
             ["^~"],
             ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
-            ["\\.png$", "\\.svg$"],
-            ["^.+\\.s?css$"],
             ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+            ["\\.png$", "\\.svg$"],
             ["^\\u0000"],
+            ["^.+\\.s?css$"],
           ],
         },
       ],
+      "simple-import-sort/exports": "warn",
       "react/no-unknown-property": "off",
       "@typescript-eslint/no-unnecessary-type-constraint": "off",
       "no-duplicate-imports": "error",
-      "simple-import-sort/imports": "warn",
-      "simple-import-sort/exports": "warn",
       "no-unused-vars": [
-      "warn",
-      { "ignoreRestSiblings": true, "varsIgnorePattern": "^_" }
-    ],
+        "warn",
+        { ignoreRestSiblings: true, varsIgnorePattern: "^_" },
+      ],
       "react/react-in-jsx-scope": "off",
-      "@next/next/no-img-element": "off"
+      "@next/next/no-img-element": "off",
     },
   },
 ];

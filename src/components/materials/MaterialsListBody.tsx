@@ -1,15 +1,18 @@
 "use client";
 
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
 
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { useGetMaterialsDataQuery } from "@/api/queries/useGetMaterialsQueries";
-import styles from "@/styles/components/common/TableListBody.module.scss";
 import { createMaterialsTableColumns } from "@/utils/materialsListTableUtils";
 
 import { Table } from "../common/Table";
+
 import { CreateMaterialsModal } from "./create/CreateMaterialsModal";
+
+import styles from "@/styles/components/common/TableListBody.module.scss";
 
 export const MaterialsListBody = () => {
   const t = useTranslations("materials");

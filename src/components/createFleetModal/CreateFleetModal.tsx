@@ -1,13 +1,16 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { CREATE_FLEET } from "@/consts/modals";
-import styles from "@/styles/components/CreateFleetModal.module.scss";
 import { useAddQueryParam } from "@/utils/searchParams";
 
 import { Modal } from "../common/Modal";
+
 import { CreateFleetForm } from "./CreateFleetForm";
+
+import styles from "@/styles/components/CreateFleetModal.module.scss";
 
 export const CreateFleetModal = () => {
   const addQueryParam = useAddQueryParam();

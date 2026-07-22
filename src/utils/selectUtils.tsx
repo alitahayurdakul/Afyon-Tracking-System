@@ -1,5 +1,5 @@
-import clsx from "clsx";
 import Image from "next/image";
+import clsx from "clsx";
 import {
   components,
   CSSObjectWithLabel,
@@ -10,8 +10,9 @@ import {
 } from "react-select";
 
 import { CaretDownIcon, CaretUpIcon } from "@/components/icons/CaretIcons";
-import styles from "@/styles/components/common/SelectBox.module.scss";
 import { IOptionType } from "@/types/formTypes";
+
+import styles from "@/styles/components/common/SelectBox.module.scss";
 
 export const selectStyle:
   | StylesConfig<IOptionType, boolean, GroupBase<IOptionType>>

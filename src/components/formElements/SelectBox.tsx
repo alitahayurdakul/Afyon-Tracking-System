@@ -1,5 +1,3 @@
-import clsx from "clsx";
-import { AnimatePresence } from "framer-motion";
 import {
   forwardRef,
   ReactElement,
@@ -7,6 +5,8 @@ import {
   useRef,
   useState,
 } from "react";
+import clsx from "clsx";
+import { AnimatePresence } from "framer-motion";
 import { useController, UseControllerProps } from "react-hook-form";
 import Select, {
   components,
@@ -14,7 +14,6 @@ import Select, {
   SingleValue as SingleValueType,
 } from "react-select";
 
-import styles from "@/styles/components/common/SelectBox.module.scss";
 import { IOptionType } from "@/types/formTypes";
 import {
   CustomMenuList,
@@ -25,6 +24,8 @@ import {
 } from "@/utils/selectUtils";
 
 import { ErrorLabel } from "./ErrorLabel";
+
+import styles from "@/styles/components/common/SelectBox.module.scss";
 
 export interface SelectBoxProps extends UseControllerProps {
   name: string;

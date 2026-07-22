@@ -1,12 +1,13 @@
 "use client";
+import React from "react";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useRouter } from "next/navigation";
-import { useTranslations } from "next-intl";
-import React from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 
 import { axiosInstance } from "@/api/axiosInstance";
 import { UserQueryTypes } from "@/app/api/users/route";
@@ -20,12 +21,13 @@ import { PASSWORD_FORM_CONSTS } from "@/consts/profileConsts";
 import { clearAuth } from "@/redux/slices/authSlice";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { RootState } from "@/redux/store";
-import stylesPopover from "@/styles/components/common/TableDeletePopover.module.scss";
-import styles from "@/styles/components/profile/ProfileWrapper.module.scss";
 import { IFormFieldType } from "@/types/formTypes";
 import { IPasswordFormTypes } from "@/types/profileTypes";
 import { extractApiError } from "@/utils/extractApiError";
 import { PasswordFormValidation } from "@/utils/validations/passwordFormValidation";
+
+import stylesPopover from "@/styles/components/common/TableDeletePopover.module.scss";
+import styles from "@/styles/components/profile/ProfileWrapper.module.scss";
 
 const PasswordForm = ({ isLoading }: { isLoading: boolean }) => {
   const t = useTranslations("profile");

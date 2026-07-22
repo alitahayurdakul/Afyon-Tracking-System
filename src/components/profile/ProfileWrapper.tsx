@@ -3,10 +3,11 @@ import { useSelector } from "react-redux";
 
 import { useGetUserDetailDataQuery } from "@/api/queries/useGetUsersQueries";
 import { RootState } from "@/redux/store";
-import styles from "@/styles/components/profile/ProfileWrapper.module.scss";
 
 import PasswordForm from "./sections/PasswordForm";
 import ProfileInfoForm from "./sections/ProfileInfoForm";
+
+import styles from "@/styles/components/profile/ProfileWrapper.module.scss";
 
 const ProfileWrapper = () => {
   const userInfo = useSelector((state: RootState) => state.auth.user);

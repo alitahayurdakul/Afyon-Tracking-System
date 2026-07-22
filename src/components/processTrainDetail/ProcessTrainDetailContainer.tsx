@@ -6,8 +6,6 @@ import {
   useGetTrainDetailDataQuery,
 } from "@/api/useGetProcessTrains";
 import { PROCESS_TRAIN_WAGONS_DETAIL_MODAL } from "@/consts/modals";
-import styles from "@/styles/components/processTrainDetail/ProcessTrainDetailContainer.module.scss";
-import stylesPage from "@/styles/pages/PageCommonContainer.module.scss";
 import { IWagonDetail } from "@/types/trainsTypes";
 import { useAddQueryParam } from "@/utils/searchParams";
 
@@ -15,9 +13,13 @@ import { LoadingChecker } from "../common/loaders/LoadingChecker";
 import { NewModal } from "../common/NewModal";
 import TrainVisualization from "../common/TrainVisualization";
 import SpinnerIcon from "../icons/SpinnerIcon";
+
 import { ProcessTableListBody } from "./processTable/ProcessTableListBody";
 import ProcessTrainModalWrapper from "./processTrainModal/ProcessTrainModalWrapper";
 import TrainDetailSection from "./TrainDetailSection";
+
+import styles from "@/styles/components/processTrainDetail/ProcessTrainDetailContainer.module.scss";
+import stylesPage from "@/styles/pages/PageCommonContainer.module.scss";
 
 export const ProcessTrainDetailContainer = () => {
   const {

@@ -1,16 +1,18 @@
-import * as Toast from "@radix-ui/react-toast";
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
 import { useDispatch } from "react-redux";
+
+import * as Toast from "@radix-ui/react-toast";
 
 import {
   clearToastify,
   IToastElement,
   removeToastify
 } from "@/redux/slices/toastSlice";
+import { getIcon } from "@/utils/toastUtils";
+
 import errorStyles from "@/styles/components/notifications/ErrorNotification.module.scss";
 import styles from "@/styles/components/notifications/NotificationProvider.module.scss";
-import { getIcon } from "@/utils/toastUtils";
 
 interface ErrorNotificationElementProps {
   toast: IToastElement;

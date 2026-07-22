@@ -1,6 +1,5 @@
 import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
 import { MaterialsTableActionsCol } from "@/components/materials/MaterialsTableActionsCol";
-import styles from "@/styles/components/materials/MaterialsListTableUtils.module.scss";
 import { TFunction } from "@/types/commonTypes";
 import { IMaterialType } from "@/types/materialsTypes";
 import {
@@ -9,6 +8,8 @@ import {
 } from "@/types/tableColumnTypes";
 
 import { formatDate } from "./formDate";
+
+import styles from "@/styles/components/materials/MaterialsListTableUtils.module.scss";
 
 export const materialsTableColumns: ICommonTableColumnsTypes = [
   {

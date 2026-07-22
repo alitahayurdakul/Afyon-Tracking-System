@@ -2,7 +2,6 @@ import React from "react";
 
 import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
 import { SubStagesTableActionsCol } from "@/components/subStages/SubStagesTableActionsCol";
-import styles from "@/styles/components/subStages/SubStagesListTableUtils.module.scss";
 import { TFunction } from "@/types/commonTypes";
 import { ISubStageMaterial, ISubStageType } from "@/types/subStagesTypes";
 import {
@@ -11,6 +10,8 @@ import {
 } from "@/types/tableColumnTypes";
 
 import { formatDate } from "./formDate";
+
+import styles from "@/styles/components/subStages/SubStagesListTableUtils.module.scss";
 
 export const subStagesTableColumns: ICommonTableColumnsTypes = [
   {

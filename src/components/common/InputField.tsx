@@ -1,7 +1,8 @@
 import { ChangeEvent, useState } from "react";
 
-import styles from "@/styles/components/common/InputField.module.scss";
 import { IInputField } from "@/types/inputTypes";
+
+import styles from "@/styles/components/common/InputField.module.scss";
 
 interface InputFieldProps extends IInputField {
   value?: string;

@@ -1,18 +1,21 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import {
   faSearch
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useTranslations } from "next-intl";
 
 import { useGetStagesDataQuery } from "@/api/queries/useGetStagesQueries";
-import styles from "@/styles/components/common/TableListBody.module.scss";
 import { IStagesTypes } from "@/types/stagesTypes";
 import { createStagesTableColumns } from "@/utils/stagesListTableUtils";
 
 import { Table } from "../common/Table";
+
 import { CreateStageModal } from "./create/CreateStageModal";
+
+import styles from "@/styles/components/common/TableListBody.module.scss";
 
 export const StagesListBody = () => {
   const t = useTranslations("stages");

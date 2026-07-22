@@ -1,10 +1,11 @@
-import clsx from "clsx";
 import { useTranslations } from "next-intl";
+import clsx from "clsx";
 
-import styles from "@/components/activeProcessDetail/stageDetail/StageDetailModal.module.scss";
 import { StatusEnums } from "@/utils/enum/commonEnums";
 import { formatDate } from "@/utils/formDate";
 import { getElapsedTime } from "@/utils/getElapsedTime";
+
+import styles from "@/components/activeProcessDetail/stageDetail/StageDetailModal.module.scss";
 
 interface IPropsTypes {
   startDate: string | null;

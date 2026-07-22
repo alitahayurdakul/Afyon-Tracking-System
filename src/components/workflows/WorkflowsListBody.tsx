@@ -1,18 +1,21 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import {
   faSearch
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useTranslations } from "next-intl";
 
 import { useGetWorkflowsDataQuery } from "@/api/queries/useGetWorkflowsQueries";
-import styles from "@/styles/components/common/TableListBody.module.scss";
 import { IWorkflowResponseTypes } from "@/types/workflowTypes";
 import { createWorkflowTableColumns } from "@/utils/workflowListTableUtils";
 
 import { Table } from "../common/Table";
+
 import { CreateWorkflowModal } from "./create/CreateWorkflowModal";
+
+import styles from "@/styles/components/common/TableListBody.module.scss";
 
 export const WorkflowsListBody = () => {
   const t = useTranslations("workflows");

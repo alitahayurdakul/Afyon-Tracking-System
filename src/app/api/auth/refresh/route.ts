@@ -1,5 +1,5 @@
-import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
+import axios from "axios";
 
 import { END_POINTS } from "@/consts/endpoints";
 

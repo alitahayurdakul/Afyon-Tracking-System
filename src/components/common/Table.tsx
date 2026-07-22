@@ -1,3 +1,8 @@
+import React, { CSSProperties, useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
+import clsx from "clsx";
+import Skeleton from "react-loading-skeleton";
+
 import {
   Column,
   ColumnPinningState,
@@ -7,13 +12,10 @@ import {
   Table as TypeReactTable,
   useReactTable,
 } from "@tanstack/react-table";
-import clsx from "clsx";
-import { useTranslations } from "next-intl";
-import React, { CSSProperties, useEffect, useRef, useState } from "react";
-import Skeleton from "react-loading-skeleton";
+
+import { DEFAULT_TABLE_PAGE_COUNT } from "@/utils/config";
 
 import styles from "@/styles/components/common/Table.module.scss";
-import { DEFAULT_TABLE_PAGE_COUNT } from "@/utils/config";
 
 interface TableProps<T> {
   tableName?: string;
@@ -186,7 +188,7 @@ export const Table = <T,>({
   };
 
   const skeletonRowCount =
-    data && data.length > 0
+    !!data && data.length > 0
       ? data.length
       : pageSize || (defaultSkeletonRowCount?? 1);
 

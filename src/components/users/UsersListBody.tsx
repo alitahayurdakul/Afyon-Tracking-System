@@ -1,15 +1,18 @@
 "use client";
 
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
 
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { useGetUsersDataQuery } from "@/api/queries/useGetUsersQueries";
-import styles from "@/styles/components/common/TableListBody.module.scss";
 import { createUsersTableColumns } from "@/utils/usersListTableUtils";
 
 import { Table } from "../common/Table";
+
 import { CreateUsersModal } from "./create/CreateUsersModal";
+
+import styles from "@/styles/components/common/TableListBody.module.scss";
 
 export const UsersListBody = () => {
   const t = useTranslations("users");

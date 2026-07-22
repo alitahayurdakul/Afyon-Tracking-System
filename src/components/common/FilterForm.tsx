@@ -1,15 +1,16 @@
 "use client";
-import { useSearchParams } from "next/navigation";
 import React, { useCallback, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 import { DataProvider } from "@/api/DataProvider";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import styles from "@/styles/components/statistics/FilterForm.module.scss";
 import { IFilterType } from "@/types/filterTypes";
 import { IOptionType } from "@/types/formTypes";
 
 import { SelectBox } from "../formElements/SelectBox";
+
+import styles from "@/styles/components/statistics/FilterForm.module.scss";
 
 interface IPropsTypes {
   filterItems: IFilterType[];

@@ -1,15 +1,18 @@
 "use client";
 
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
 
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { useGetProjectsDataQuery } from "@/api/queries/useGetProjectsQueries";
-import styles from "@/styles/components/common/TableListBody.module.scss";
 import { createProjectsTableColumns } from "@/utils/projectsListTableUtils";
 
 import { Table } from "../common/Table";
+
 import { CreateProjectsModal } from "./create/CreateProjectsModal";
+
+import styles from "@/styles/components/common/TableListBody.module.scss";
 
 export const ProjectsListBody = () => {
   const t = useTranslations("projects");

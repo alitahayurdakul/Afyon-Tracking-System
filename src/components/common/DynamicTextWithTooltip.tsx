@@ -1,12 +1,12 @@
 // components/trains/WagonCell.tsx
 "use client";
 
-import clsx from "clsx";
 import React, { useEffect,useRef, useState } from "react";
-
-import styles from "@/styles/components/common/DynamicTextWithTooltip.module.scss";
+import clsx from "clsx";
 
 import { TooltipBody } from "../TooltipBody";
+
+import styles from "@/styles/components/common/DynamicTextWithTooltip.module.scss";
 
 interface WagonCellProps {
   text?: string;

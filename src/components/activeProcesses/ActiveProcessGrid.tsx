@@ -1,16 +1,18 @@
 "use client";
-import { useTranslations } from "next-intl";
 import React, { useEffect } from "react";
+import { useTranslations } from "next-intl";
 
 import { useGetActiveProcessesDataQuery } from "@/api/queries/useGetProcessesQueries";
 import { ErrorChecker } from "@/components/common/error/ErrorChecker";
 import { LoadingChecker } from "@/components/common/loaders/LoadingChecker";
-import styles from "@/styles/components/activeProcesses/ActiveProcessesGrid.module.scss";
 import { IProcessesTypes, IProcessType } from "@/types/processTypes";
 import { ResponseStatusEnums } from "@/utils/enum/commonEnums";
 
 import SpinnerIcon from "../icons/SpinnerIcon";
+
 import { ActiveProcessCard } from "./ActiveProcessCard";
+
+import styles from "@/styles/components/activeProcesses/ActiveProcessesGrid.module.scss";
 
 export const ActiveProcessGrid = ({
   setActiveUnit,
@@ -36,11 +38,11 @@ export const ActiveProcessGrid = ({
       >
         <ErrorChecker
           isError={isError || !data}
-          noData={data && data.length < 1}
+          noData={!!data && data.length < 1}
           noDataLabel={t("noDataLabel")}
         >
           <div className={styles["unit-grid"]}>
-            {data &&
+            {!!data &&
               data.length > 0 &&
               data?.map((unit: IProcessType, index: number) => (
                 <React.Fragment key={index}>

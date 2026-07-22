@@ -1,7 +1,8 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
+
+import { useQuery } from "@tanstack/react-query";
 
 import { ProjectQueryTypes } from "@/app/api/projects/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";

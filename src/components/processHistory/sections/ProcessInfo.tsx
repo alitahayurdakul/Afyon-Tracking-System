@@ -1,3 +1,5 @@
+import { useTranslations } from "next-intl";
+
 import {
   faBox,
   faClock,
@@ -7,13 +9,13 @@ import {
   faTrain,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useTranslations } from "next-intl";
 
 import TrainVisualization from "@/components/common/TrainVisualization";
-import styles from "@/styles/components/processHistory/ModalContent.module.scss";
 import { IProcessInstance } from "@/types/processTypes";
 import { formatDate } from "@/utils/formDate";
 import { getElapsedTime } from "@/utils/getElapsedTime";
+
+import styles from "@/styles/components/processHistory/ModalContent.module.scss";
 
 const ProcessInfo = ({ processInfo }: { processInfo: IProcessInstance }) => {
   const t = useTranslations("processHistory");

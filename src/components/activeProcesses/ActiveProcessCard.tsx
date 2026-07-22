@@ -4,11 +4,12 @@ import { useTranslations } from "next-intl";
 
 import DE22000 from "@/assets/images/DE-22000.jpg";
 import { URL_PAGES } from "@/consts/url";
-import styles from "@/styles/components/activeProcesses/ActiveProcessesGrid.module.scss";
 import { IProcessType } from "@/types/processTypes";
 import { getStageProgress } from "@/utils/activeProcessUtils";
 
 import { DynamicTextWithTooltip } from "../common/DynamicTextWithTooltip";
+
+import styles from "@/styles/components/activeProcesses/ActiveProcessesGrid.module.scss";
 
 export const ActiveProcessCard = ({ unit }: { unit: IProcessType }) => {
   const t = useTranslations("activeProcess.card");

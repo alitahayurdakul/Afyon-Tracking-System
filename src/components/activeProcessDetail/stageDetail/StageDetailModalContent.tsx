@@ -1,8 +1,8 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useMemo, useState } from "react";
 
 import {
   useCompleteStage,
@@ -23,11 +23,13 @@ import { ResponseStatusEnums, StatusEnums } from "@/utils/enum/commonEnums";
 import { getStatus } from "@/utils/getStatus";
 
 import StatusChip from "../StatusChip";
+
+import TimeSection from "./sections/TimeSection";
 import DelayReasonGroup from "./DelayReasonGroup";
 import MaterialList from "./MaterialList";
-import TimeSection from "./sections/TimeSection";
-import styles from "./StageDetailModal.module.scss";
 import Stepper from "./Stepper";
+
+import styles from "./StageDetailModal.module.scss";
 
 interface StageDetailModalProps {
   id: string;

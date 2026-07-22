@@ -1,5 +1,5 @@
-import axios, { AxiosInstance } from "axios";
 import { NextRequest } from "next/server";
+import axios, { AxiosInstance } from "axios";
 
 export const createServerAxios = (request: NextRequest): AxiosInstance => {
   const authorization = request.headers.get("authorization");

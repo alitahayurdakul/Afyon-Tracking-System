@@ -1,15 +1,18 @@
 "use client";
 
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
 
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { useGetSubStagesListDataQuery } from "@/api/queries/useGetSubStagesManageQueries";
-import styles from "@/styles/components/common/TableListBody.module.scss";
 import { createSubStagesTableColumns } from "@/utils/subStagesListTableUtils";
 
 import { Table } from "../common/Table";
+
 import { CreateSubStagesModal } from "./create/CreateSubStagesModal";
+
+import styles from "@/styles/components/common/TableListBody.module.scss";
 
 export const SubStagesListBody = () => {
   const t = useTranslations("subStages");

@@ -1,6 +1,6 @@
+import React from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import React from "react";
 
 import styles from "@/styles/components/Breadcrumb.module.scss";
 

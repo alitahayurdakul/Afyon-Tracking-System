@@ -1,5 +1,8 @@
 "use client";
 
+import { useEffect, useMemo, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faArrowRight,
@@ -7,8 +10,6 @@ import {
   faComments,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useParams, useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
 
 import styles from "@/styles/components/activeProcessDetail/InfoProcessContainer.module.scss";
 

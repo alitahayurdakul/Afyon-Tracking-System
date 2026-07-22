@@ -9,7 +9,6 @@ import {
 import InfoProcessContainer from "@/components/activeProcessDetail/InfoProcessContainer";
 import { ProgressionContainer } from "@/components/activeProcessDetail/ProgressionContainer";
 import { Topbar } from "@/components/common/Topbar";
-import styles from "@/styles/pages/PageCommonContainer.module.scss";
 import { IOptionType } from "@/types/formTypes";
 import {
   IProcessesTypes,
@@ -19,6 +18,8 @@ import {
 } from "@/types/processTypes";
 import { StatusEnums } from "@/utils/enum/commonEnums";
 import { getStatus } from "@/utils/getStatus";
+
+import styles from "@/styles/pages/PageCommonContainer.module.scss";
 
 export default function ActiveProcessDetailPage() {
   const { data, isLoading, isError, refetch } =

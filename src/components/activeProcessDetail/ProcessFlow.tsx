@@ -1,15 +1,16 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 
-import styles from "@/styles/components/activeProcessDetail/ProcessFlow.module.scss";
 import { IProcessEntry, IStage, ProcessResponse } from "@/types/processTypes";
 import { getStageProgress } from "@/utils/activeProcessUtils";
 import { StatusEnums } from "@/utils/enum/commonEnums";
 import { getStatus } from "@/utils/getStatus";
 
 import StageRow from "./StageRow";
+
+import styles from "@/styles/components/activeProcessDetail/ProcessFlow.module.scss";
 
 export default function ProcessFlow({ data }: { data?: ProcessResponse }) {
   const [selectedStage, setSelectedStage] = useState<IStage | null>(null);

@@ -1,15 +1,17 @@
+import { useState } from "react";
+import { useTranslations } from "next-intl";
+
 import { faChevronDown, faTrain } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
 
 import StagesInfo from "@/components/processHistory/sections/StagesInfo";
-import styles from "@/styles/components/processTrainDetail/ProcessTrainModal.module.scss";
 import { ProcessResponse } from "@/types/processTypes";
 import { formatDate } from "@/utils/formDate";
 import { getStatus } from "@/utils/getStatus";
 
 import StatusBadge from "./StatusBadge";
+
+import styles from "@/styles/components/processTrainDetail/ProcessTrainModal.module.scss";
 
 export const ProcessTrainModalProcessDetail = ({
   processInfo,

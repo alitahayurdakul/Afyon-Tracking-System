@@ -1,15 +1,17 @@
 "use client";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import clsx from "clsx";
+import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
-import React, { useState } from "react";
+import clsx from "clsx";
 
-import styles from "@/styles/components/sidebar/sections/sidebarMenu/DropdownItem.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { ISidebarItemTypes } from "@/types/sidebarTypes";
 import { stripLocale } from "@/utils/stripLocale";
+
+import styles from "@/styles/components/sidebar/sections/sidebarMenu/DropdownItem.module.scss";
 interface IPropsTypes {
   item: ISidebarItemTypes;
 }

@@ -1,14 +1,15 @@
 "use client";
 
+import { useEffect,useRef, useState } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import { useLocale } from "next-intl";
-import { useEffect,useRef, useState } from "react";
 
 import { LANGUAGES } from "@/consts/languageConsts";
 import { usePathname, useRouter } from "@/i18n/routing";
-import styles from "@/styles/components/LanguageSelector.module.scss";
 import { ILanguagesTypes } from "@/types/generalTypes";
 import { ILanguageItemType } from "@/types/layoutTypes";
+
+import styles from "@/styles/components/LanguageSelector.module.scss";
 
 export default function LanguageSelector() {
   const locale = useLocale();

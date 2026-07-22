@@ -3,11 +3,13 @@ import { useTranslations } from "next-intl";
 import { ErrorChecker } from "@/components/common/error/ErrorChecker";
 import { LoadingChecker } from "@/components/common/loaders/LoadingChecker";
 import { SkeletonContainer } from "@/components/common/loaders/SkeletonContainer";
-import styles from "@/styles/components/activeProcessDetail/ProgressionContainer.module.scss";
 import { ProcessResponse } from "@/types/processTypes";
 
 import TrainVisualization from "../common/TrainVisualization";
+
 import ProcessFlow from "./ProcessFlow";
+
+import styles from "@/styles/components/activeProcessDetail/ProgressionContainer.module.scss";
 
 interface IPropsTypes {
   data?: ProcessResponse;
@@ -69,7 +71,7 @@ export const ProgressionContainer = ({
       <LoadingChecker isLoading={isLoading}>
         <ErrorChecker
           isError={isError || !data}
-          noData={data && data?.entries.length < 1}
+          noData={!!data && data?.entries.length < 1}
           noDataLabel={t("no-data-label")}
         >
           <ProcessFlow data={data} />

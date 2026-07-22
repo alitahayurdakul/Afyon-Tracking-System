@@ -1,15 +1,17 @@
-import { faPen } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useDispatch } from "react-redux";
 
+import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { EDIT_STAGE_MODAL } from "@/consts/modals";
 import { addToastify } from "@/redux/slices/toastSlice";
-import styles from "@/styles/components/common/TableListBody.module.scss";
 import { useAddQueryParam } from "@/utils/searchParams";
 
 import { EditStageModalWrapper } from "./EditStageModalWrapper";
+
+import styles from "@/styles/components/common/TableListBody.module.scss";
 
 export const EditWorkflowModal = ({ id }: { id: string }) => {
   const t = useTranslations("stages");

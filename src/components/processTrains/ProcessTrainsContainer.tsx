@@ -4,13 +4,15 @@ import { useTranslations } from "next-intl";
 
 import { useGetProcessTrainsDataQuery } from "@/api/useGetProcessTrains";
 import { URL_PAGES } from "@/consts/url";
-import styles from "@/styles/components/processTrains/ProcessTrainContainer.module.scss";
-import stylesPage from "@/styles/pages/PageCommonContainer.module.scss";
 import { IProcessTrainSummary } from "@/types/processTrainTypes";
 
 import { LoadingChecker } from "../common/loaders/LoadingChecker";
 import SpinnerIcon from "../icons/SpinnerIcon";
+
 import { TrainCard } from "./TrainCard";
+
+import styles from "@/styles/components/processTrains/ProcessTrainContainer.module.scss";
+import stylesPage from "@/styles/pages/PageCommonContainer.module.scss";
 
 export const ProcessTrainsContainer = () => {
   const {

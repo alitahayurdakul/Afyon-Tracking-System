@@ -1,11 +1,10 @@
 "use client";
+import { useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 
 import { useGetProjectOptionsDataQuery } from "@/api/queries/useGetProjectsQueries";
-import styles from "@/styles/components/activeProcesses/ActiveProcessesHeader.module.scss";
 import { ResponseStatusEnums } from "@/utils/enum/commonEnums";
 import {
   useAddQueryParam,
@@ -13,6 +12,8 @@ import {
 } from "@/utils/searchParams";
 
 import { SelectBox } from "../formElements/SelectBox";
+
+import styles from "@/styles/components/activeProcesses/ActiveProcessesHeader.module.scss";
 
 export const ActiveProcessesHeader = ({activeUnit}: {activeUnit: string}) => {
   const searchParams = useSearchParams();

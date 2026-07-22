@@ -1,13 +1,15 @@
-import { faPen } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
+import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { EDIT_WORKFLOW_MODAL } from "@/consts/modals";
-import styles from "@/styles/components/common/TableListBody.module.scss";
 import { useAddQueryParam } from "@/utils/searchParams";
 
 import { EditWorkflowModalWrapper } from "./EditWorkflowModalWrapper";
+
+import styles from "@/styles/components/common/TableListBody.module.scss";
 
 export const EditWorkflowModal = ({ id }: { id: string }) => {
   const addQueryParam = useAddQueryParam();

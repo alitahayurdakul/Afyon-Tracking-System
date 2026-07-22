@@ -1,19 +1,22 @@
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
 import { useDispatch } from "react-redux";
+
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { axiosInstance } from "@/api/axiosInstance";
 import { ProjectQueryTypes } from "@/app/api/projects/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import styles from "@/styles/components/common/TableActionsCol.module.scss";
-import stylesDeletePopover from "@/styles/components/common/TableDeletePopover.module.scss";
 import { extractApiError } from "@/utils/extractApiError";
 
 import { PopoverBody } from "../Popover";
+
 import { EditProjectsModal } from "./edit/EditProjectsModal";
+
+import styles from "@/styles/components/common/TableActionsCol.module.scss";
+import stylesDeletePopover from "@/styles/components/common/TableDeletePopover.module.scss";
 
 export const ProjectsTableActionsCol = ({ id }: { id: string }) => {
   const t = useTranslations("projects");

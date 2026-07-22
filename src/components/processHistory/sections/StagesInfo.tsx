@@ -1,7 +1,6 @@
-import { useTranslations } from "next-intl";
 import React, { useState } from "react";
+import { useTranslations } from "next-intl";
 
-import styles from "@/components/activeProcessDetail/stageDetail/QualityDetailModal.module.scss";
 import TimeSection from "@/components/activeProcessDetail/stageDetail/sections/TimeSection";
 import {
   DelayReasons,
@@ -10,6 +9,8 @@ import {
 } from "@/types/activeProcessDetailTypes";
 import { IStage } from "@/types/processTypes";
 import { getStatus } from "@/utils/getStatus";
+
+import styles from "@/components/activeProcessDetail/stageDetail/QualityDetailModal.module.scss";
 
 const StagesInfo = ({ stages }: { stages: IStage[] }) => {
   const [openStages, setOpenStages] = useState<Set<string>>(new Set());

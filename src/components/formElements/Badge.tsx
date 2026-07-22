@@ -1,6 +1,7 @@
 import clsx from "clsx";
 
 import SpinnerIcon from "@/components/icons/SpinnerIcon";
+
 import styles from "@/styles/components/formElements/Badge.module.scss";
 
 interface BadgeProps {

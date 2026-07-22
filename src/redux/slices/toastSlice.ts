@@ -1,5 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
 import React, { ReactNode } from "react";
+
+import { createSlice } from "@reduxjs/toolkit";
 
 export interface IToastElement {
   id: string;

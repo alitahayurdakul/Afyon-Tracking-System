@@ -1,5 +1,5 @@
-import { useTranslations } from "next-intl";
 import { useMemo } from "react";
+import { useTranslations } from "next-intl";
 
 import { useGetWorkflowDetailDataQuery } from "@/api/queries/useGetWorkflowsQueries";
 import { NewModal } from "@/components/common/NewModal";

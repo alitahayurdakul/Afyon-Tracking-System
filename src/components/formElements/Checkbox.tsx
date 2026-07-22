@@ -1,12 +1,12 @@
 'use client';
+import React, { forwardRef, useCallback } from "react";
 import clsx from "clsx";
 import { AnimatePresence } from "framer-motion";
-import React, { forwardRef, useCallback } from "react";
 import { useController, UseControllerProps } from "react-hook-form";
 
-import styles from "@/styles/components/formElements/Checkbox.module.scss";
-
 import { ErrorLabel } from "./ErrorLabel";
+
+import styles from "@/styles/components/formElements/Checkbox.module.scss";
 
 interface CheckBoxProps extends UseControllerProps {
   name: string;

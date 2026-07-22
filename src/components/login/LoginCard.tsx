@@ -1,16 +1,17 @@
 "use client";
 
+import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { useLoginMutation } from "@/api/queries/useAuthQueries";
 import { InputField } from "@/components/common/InputField";
 import { URL_PAGES } from "@/consts/url";
 import { addToastify } from "@/redux/slices/toastSlice";
-import styles from "@/styles/components/login/LoginCard.module.scss";
 import { extractApiError } from "@/utils/extractApiError";
+
+import styles from "@/styles/components/login/LoginCard.module.scss";
 
 export const LoginCard = () => {
   const t = useTranslations("layout.login");

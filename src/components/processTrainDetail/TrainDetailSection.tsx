@@ -2,9 +2,10 @@
 
 import { useTranslations } from "next-intl";
 
-import styles from "@/styles/components/processTrainDetail/TrainDetailSection.module.scss";
 import { ITrainType } from "@/types/trainsTypes";
 import { formatDate } from "@/utils/formDate";
+
+import styles from "@/styles/components/processTrainDetail/TrainDetailSection.module.scss";
 
 
 export default function TrainDetailSection({ trainSet }: {trainSet?: ITrainType}) {

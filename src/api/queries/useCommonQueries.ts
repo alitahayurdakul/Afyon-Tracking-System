@@ -1,6 +1,7 @@
 'use client';
-import { useQuery } from "@tanstack/react-query";
 import { useLocale } from "next-intl";
+
+import { useQuery } from "@tanstack/react-query";
 
 import { IOptionType } from "@/types/formTypes";
 

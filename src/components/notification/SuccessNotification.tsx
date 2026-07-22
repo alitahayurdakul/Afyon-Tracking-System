@@ -1,11 +1,13 @@
-import * as Toast from "@radix-ui/react-toast";
 import React from "react";
 import { useDispatch } from "react-redux";
 
+import * as Toast from "@radix-ui/react-toast";
+
 import { IToastElement, removeToastify } from "@/redux/slices/toastSlice";
+import { getIcon, getLink } from "@/utils/toastUtils";
+
 import styles from "@/styles/components/notifications/NotificationProvider.module.scss";
 import successStyles from "@/styles/components/notifications/SuccessNotification.module.scss";
-import { getIcon, getLink } from "@/utils/toastUtils";
 
 interface SuccessNotificationElementProps {
   toast: IToastElement;

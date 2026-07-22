@@ -3,7 +3,6 @@ import { useTranslations } from "next-intl";
 import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
 import { RolesTableActionsCol } from "@/components/roles/RolesTableActionsCol";
 import { Permission } from "@/consts/permissions";
-import styles from "@/styles/components/roles/RolesListTableUtils.module.scss";
 import { TFunction } from "@/types/commonTypes";
 import { IRoleType } from "@/types/rolesTypes";
 import {
@@ -12,6 +11,8 @@ import {
 } from "@/types/tableColumnTypes";
 
 import { formatDate } from "./formDate";
+
+import styles from "@/styles/components/roles/RolesListTableUtils.module.scss";
 
 export const rolesTableColumns: ICommonTableColumnsTypes = [
   { name: "roleName", label: "roleName" },

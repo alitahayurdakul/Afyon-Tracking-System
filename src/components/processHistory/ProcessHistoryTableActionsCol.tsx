@@ -1,6 +1,12 @@
+import { useTranslations } from "next-intl";
+
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useTranslations } from "next-intl";
+
+// import { extractApiError } from "@/utils/extractApiError";
+import { PopoverBody } from "../Popover";
+
+import { ProcessHistoryDetailModal } from "./ProcessHistoryDetailModal";
 
 // import { useDispatch } from "react-redux";
 // import { axiosInstance } from "@/api/axiosInstance";
@@ -10,10 +16,6 @@ import { useTranslations } from "next-intl";
 // import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import styles from "@/styles/components/common/TableActionsCol.module.scss";
 import stylesDeletePopover from "@/styles/components/common/TableDeletePopover.module.scss";
-
-// import { extractApiError } from "@/utils/extractApiError";
-import { PopoverBody } from "../Popover";
-import { ProcessHistoryDetailModal } from "./ProcessHistoryDetailModal";
 
 export const ProcessHistoryTableActionsCol = ({ id }: { id: string }) => {
   const t = useTranslations("processHistory");

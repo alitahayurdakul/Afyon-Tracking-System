@@ -1,15 +1,18 @@
 "use client";
 
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
 
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { useGetTrainsDataQuery } from "@/api/queries/useGetTrainsQueries";
-import styles from "@/styles/components/common/TableListBody.module.scss";
 import { createTrainsTableColumns } from "@/utils/trainsListTableUtils";
 
 import { Table } from "../common/Table";
+
 import { CreateTrainsModal } from "./create/CreateTrainsModal";
+
+import styles from "@/styles/components/common/TableListBody.module.scss";
 
 export const TrainsListBody = () => {
   const t = useTranslations("trains");

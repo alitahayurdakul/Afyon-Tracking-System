@@ -1,12 +1,13 @@
 import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
 import { UsersTableActionsCol } from "@/components/users/UsersTableActionsCol";
-import styles from "@/styles/components/users/UsersListTableUtils.module.scss";
 import { TFunction } from "@/types/commonTypes";
 import {
   ICommonTableColumnsType,
   ICommonTableColumnsTypes,
 } from "@/types/tableColumnTypes";
 import { IUserType } from "@/types/usersTypes";
+
+import styles from "@/styles/components/users/UsersListTableUtils.module.scss";
 
 export const usersTableColumns: ICommonTableColumnsTypes = [
   { name: "_id", label: "id" },

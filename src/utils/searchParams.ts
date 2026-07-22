@@ -1,7 +1,7 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export const useRemoveQueryParamModal = () => {
   const router = useRouter();

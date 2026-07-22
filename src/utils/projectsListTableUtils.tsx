@@ -1,7 +1,6 @@
 import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
 import { ProjectsTableActionsCol } from "@/components/projects/ProjectsTableActionsCol";
 import { PROJECT_STATUS_OPTIONS } from "@/consts/projectsConsts";
-import styles from "@/styles/components/projects/ProjectsListTableUtils.module.scss";
 import { TFunction } from "@/types/commonTypes";
 import { IOptionType } from "@/types/formTypes";
 import { IProjectType } from "@/types/projectsTypes";
@@ -11,6 +10,8 @@ import {
 } from "@/types/tableColumnTypes";
 
 import { formatDate } from "./formDate";
+
+import styles from "@/styles/components/projects/ProjectsListTableUtils.module.scss";
 
 export const projectsTableColumns: ICommonTableColumnsTypes = [
   {

@@ -112,7 +112,7 @@ export const CreateFleetForm = () => {
             id: "startNewProcessSuccess" + Date.now(),
           }),
         );
-        if (responseData.data && responseData.data.process._id) {
+        if (!!responseData.data && responseData.data.process._id) {
           router.push(
             `${URL_PAGES.activeProcesses}/${responseData.data.process._id}`,
           );

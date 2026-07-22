@@ -1,6 +1,5 @@
 import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
 import { ProcessHistoryTableActionsCol } from "@/components/processHistory/ProcessHistoryTableActionsCol";
-import styles from "@/styles/components/projects/ProjectsListTableUtils.module.scss";
 import { TFunction } from "@/types/commonTypes";
 import { IProcessType } from "@/types/processTypes";
 import {
@@ -10,6 +9,8 @@ import {
 
 import { formatDate } from "./formDate";
 import { getElapsedTime } from "./getElapsedTime";
+
+import styles from "@/styles/components/projects/ProjectsListTableUtils.module.scss";
 
 export const processHistoryTableColumns: ICommonTableColumnsTypes = [
   {

@@ -1,7 +1,6 @@
 import React from "react";
 
 import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
-import styles from "@/styles/components/trains/TrainsListTableUtils.module.scss";
 import { TFunction } from "@/types/commonTypes";
 import { IProcessType } from "@/types/processTypes";
 import {
@@ -11,6 +10,8 @@ import {
 
 import { formatDate } from "./formDate";
 import { getElapsedTime } from "./getElapsedTime";
+
+import styles from "@/styles/components/trains/TrainsListTableUtils.module.scss";
 
 export const processTrainsTableColumns: ICommonTableColumnsTypes = [
   {

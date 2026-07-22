@@ -1,21 +1,24 @@
+import { useTranslations } from "next-intl";
+import clsx from "clsx";
+import { useDispatch } from "react-redux";
+
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import clsx from "clsx";
-import { useTranslations } from "next-intl";
-import { useDispatch } from "react-redux";
 
 import { axiosInstance } from "@/api/axiosInstance";
 import { UserQueryTypes } from "@/app/api/users/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import styles from "@/styles/components/common/TableActionsCol.module.scss";
-import stylesDeletePopover from "@/styles/components/common/TableDeletePopover.module.scss";
-import compactStyles from "@/styles/components/users/UsersTableActionsCol.module.scss";
 import { extractApiError } from "@/utils/extractApiError";
 
 import { PopoverBody } from "../Popover";
+
 import { EditUsersModal } from "./edit/EditUsersModal";
+
+import styles from "@/styles/components/common/TableActionsCol.module.scss";
+import stylesDeletePopover from "@/styles/components/common/TableDeletePopover.module.scss";
+import compactStyles from "@/styles/components/users/UsersTableActionsCol.module.scss";
 
 export const UsersTableActionsCol = ({ id }: { id: string }) => {
   const t = useTranslations("users");

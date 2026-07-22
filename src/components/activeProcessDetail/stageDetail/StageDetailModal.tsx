@@ -5,11 +5,12 @@ import { useTranslations } from "next-intl";
 
 import StageDetailModalContent from "@/components/activeProcessDetail/stageDetail/StageDetailModalContent";
 import { ACTIVE_STAGE_DETAIL_MODAL } from "@/consts/modals";
-import styles from "@/styles/components/activeProcessDetail/ProcessFlow.module.scss";
 import { IStage } from "@/types/processTypes";
 import { useAddQueryParam } from "@/utils/searchParams";
 
 import QualityDetailModal from "./QualityDetailModal";
+
+import styles from "@/styles/components/activeProcessDetail/ProcessFlow.module.scss";
 
 export default function StageDetailModal({
   id,

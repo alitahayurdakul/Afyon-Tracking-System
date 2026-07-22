@@ -1,8 +1,8 @@
 import clsx from "clsx";
 
-import styles from "@/styles/components/common/ErrorChecker.module.scss";
-
 import { Button } from "../../formElements/Button";
+
+import styles from "@/styles/components/common/ErrorChecker.module.scss";
 
 interface IPropsTypes {
   isButton?: boolean;

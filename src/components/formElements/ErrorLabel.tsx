@@ -1,11 +1,12 @@
 import clsx from "clsx";
 import { motion } from "framer-motion";
 
-import styles from "@/styles/components/formElements/ErrorLabel.module.scss";
 import {
   checkBoxErrorAnimation,
   inputBoxErrorAnimation,
 } from "@/utils/animationUtils";
+
+import styles from "@/styles/components/formElements/ErrorLabel.module.scss";
 
 interface ErrorLabelProps {
   message: string;

@@ -1,10 +1,11 @@
 "use client";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useTranslations } from "next-intl";
 import React from "react";
+import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import { axiosInstance } from "@/api/axiosInstance";
 import { useGetRolesOptionsQuery } from "@/api/queries/useGetRolesQueries";
@@ -21,14 +22,15 @@ import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { PROFILE_FORM_CONSTS } from "@/consts/profileConsts";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import stylesPopover from "@/styles/components/common/TableDeletePopover.module.scss";
-import styles from "@/styles/components/profile/ProfileWrapper.module.scss";
 import { IFormFieldType } from "@/types/formTypes";
 import { IProfileFormTypes } from "@/types/profileTypes";
 import { IUserRoleRef, IUserType } from "@/types/usersTypes";
 import { InputSpaceEnums } from "@/utils/enum/formEnums";
 import { extractApiError } from "@/utils/extractApiError";
 import { ProfileInfoFormValidation } from "@/utils/validations/profileFormValidations";
+
+import stylesPopover from "@/styles/components/common/TableDeletePopover.module.scss";
+import styles from "@/styles/components/profile/ProfileWrapper.module.scss";
 
 const ProfileInfoForm = ({
   userInfo,

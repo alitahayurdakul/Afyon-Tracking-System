@@ -1,7 +1,7 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 
 import { refreshAccessToken } from "@/api/queries/useAuthQueries";

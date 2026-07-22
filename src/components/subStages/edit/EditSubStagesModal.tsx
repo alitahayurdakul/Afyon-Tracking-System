@@ -1,13 +1,15 @@
-import { faPen } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
+import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { EDIT_SUB_STAGE_MODAL } from "@/consts/modals";
-import styles from "@/styles/components/common/TableListBody.module.scss";
 import { useAddQueryParam } from "@/utils/searchParams";
 
 import { EditSubStageModalWrapper } from "./EditSubStageModalWrapper";
+
+import styles from "@/styles/components/common/TableListBody.module.scss";
 
 export const EditSubStagesModal = ({ id }: { id: string }) => {
   const t = useTranslations("subStages");

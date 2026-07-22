@@ -1,8 +1,9 @@
 "use client";
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 import { Provider } from "react-redux";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { AuthBootstrap } from "@/components/auth/AuthBootstrap";
 import NotificationProvider from "@/components/notification/NotificationProvider";

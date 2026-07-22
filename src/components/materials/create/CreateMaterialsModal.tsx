@@ -1,14 +1,17 @@
+import { useState } from "react";
+import { useTranslations } from "next-intl";
+
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
 
 import { CREATE_MATERIAL_MODAL } from "@/consts/modals";
-import styles from "@/styles/components/common/TableListBody.module.scss";
 import { useAddQueryParam } from "@/utils/searchParams";
 
 import { Modal } from "../../common/Modal";
+
 import { CreateMaterialForm } from "./CreateMaterialForm";
+
+import styles from "@/styles/components/common/TableListBody.module.scss";
 
 export const CreateMaterialsModal = () => {
   const addQueryParam = useAddQueryParam();

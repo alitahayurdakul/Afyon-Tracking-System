@@ -1,15 +1,18 @@
 "use client";
 
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
 
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { useGetWagonsDataQuery } from "@/api/queries/useGetWagonsQueries";
-import styles from "@/styles/components/common/TableListBody.module.scss";
 import { createWagonsTableColumns } from "@/utils/wagonsListTableUtils";
 
 import { Table } from "../common/Table";
+
 import { CreateWagonsModal } from "./create/CreateWagonsModal";
+
+import styles from "@/styles/components/common/TableListBody.module.scss";
 
 export const WagonsListBody = () => {
   const t = useTranslations("wagons");

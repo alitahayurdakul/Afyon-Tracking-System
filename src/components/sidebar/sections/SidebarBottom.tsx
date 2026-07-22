@@ -1,12 +1,14 @@
 "use client";
 
-import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { useLogoutMutation } from "@/api/queries/useAuthQueries";
 import { RootState } from "@/redux/store";
+
 import styles from "@/styles/components/sidebar/sections/SidebarBottom.module.scss";
 
 export const SidebarBottom = () => {

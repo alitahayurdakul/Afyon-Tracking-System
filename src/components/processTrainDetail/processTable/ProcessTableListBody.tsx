@@ -1,14 +1,16 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useTranslations } from "next-intl";
 
 import { useGetProcessTrainDetailDataQuery } from "@/api/useGetProcessTrains";
 import { Table } from "@/components/common/Table";
-import styles from "@/styles/components/common/TableListBody.module.scss";
 import { IProcessInstance } from "@/types/processTypes";
 import { createProcessTrainsTableColumns } from "@/utils/processTrainTableUtils";
+
+import styles from "@/styles/components/common/TableListBody.module.scss";
 
 export const ProcessTableListBody = () => {
   const t = useTranslations("processTrainDetail.processTable");
