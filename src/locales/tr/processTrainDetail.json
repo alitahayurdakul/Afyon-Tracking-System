@@ -1,6 +1,6 @@
 {
-  "title": "AA",
-  "summary": "BB",
+  "title": "Süreç Treni Detayı",
+  "summary": "Süreç trenine ait bilgileri, vagon yapılandırmasını ve süreç geçmişini görüntüleyin.",
   "trainDetail": {
     "trainSetNoLabel": "Tren seti no",
     "creatorLabel": "Oluşturan",

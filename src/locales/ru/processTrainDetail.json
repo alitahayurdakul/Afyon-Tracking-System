@@ -1,40 +1,40 @@
 {
-  "title": "AA",
-  "summary": "BB",
+  "title": "Сведения о поезде процесса",
+  "summary": "Просматривайте информацию, конфигурацию вагонов и историю процессов выбранного поезда.",
   "trainDetail": {
-    "trainSetNoLabel": "Tren seti no",
-    "creatorLabel": "Oluşturan",
-    "wagonCountLabel": "Vagon sayısı",
-    "wagonCountValue": "{count} vagon",
-    "multipleWagonCountValue": "{count} vagon",
-    "createdAtLabel": "Oluşturulma tarihi",
-    "updatedAtLabel": "Güncellenme tarihi",
-    "statusActive": "Aktif",
-    "statusInactive": "Pasif"
+    "trainSetNoLabel": "Номер состава",
+    "creatorLabel": "Создал",
+    "wagonCountLabel": "Количество вагонов",
+    "wagonCountValue": "{count} вагон",
+    "multipleWagonCountValue": "{count} вагонов",
+    "createdAtLabel": "Дата создания",
+    "updatedAtLabel": "Дата обновления",
+    "statusActive": "Активный",
+    "statusInactive": "Неактивный"
   },
   "processTable": {
-    "search": "Arama...",
+    "search": "Поиск...",
     "status": {
-      "completed": "Tamamlandı",
-      "active": "Aktif",
-      "pending": "Bekliyor"
+      "completed": "Завершён",
+      "active": "Активный",
+      "pending": "Ожидает"
     },
     "table": {
-      "projectName": "Proje Adı",
-      "locomotiveNo": "Tren Numarası",
-      "wagonNo": "Vagon",
-      "workflowName": "İş Akışı Adı",
-      "totalDuration": "Toplam Geçen Süre",
-      "startedAt": "Başlama Zamanı",
-      "completedAt": "Bitiş Zamanı",
-      "actions": "İşlemler",
-      "description": "Açıklama"
+      "projectName": "Название проекта",
+      "locomotiveNo": "Номер поезда",
+      "wagonNo": "Вагон",
+      "workflowName": "Название процесса",
+      "totalDuration": "Общее время выполнения",
+      "startedAt": "Время начала",
+      "completedAt": "Время завершения",
+      "actions": "Действия",
+      "description": "Описание"
     }
   },
   "modal": {
-    "title": "Süreçler",
-    "wagon": "{data}. vagon",
-    "completed": "Tamamlandı",
-    "active": "Aktif"
+    "title": "Процессы",
+    "wagon": "{data}-й вагон",
+    "completed": "Завершён",
+    "active": "Активный"
   }
 }

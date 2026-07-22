@@ -1,40 +1,40 @@
 {
-  "title": "AA",
-  "summary": "BB",
+  "title": "Process Train Details",
+  "summary": "View information, wagon configuration, and process history for the selected process train.",
   "trainDetail": {
-    "trainSetNoLabel": "Tren seti no",
-    "creatorLabel": "Oluşturan",
-    "wagonCountLabel": "Vagon sayısı",
-    "wagonCountValue": "{count} vagon",
-    "multipleWagonCountValue": "{count} vagon",
-    "createdAtLabel": "Oluşturulma tarihi",
-    "updatedAtLabel": "Güncellenme tarihi",
-    "statusActive": "Aktif",
-    "statusInactive": "Pasif"
+    "trainSetNoLabel": "Train Set No",
+    "creatorLabel": "Created By",
+    "wagonCountLabel": "Number of Wagons",
+    "wagonCountValue": "{count} Wagon",
+    "multipleWagonCountValue": "{count} Wagons",
+    "createdAtLabel": "Created At",
+    "updatedAtLabel": "Updated At",
+    "statusActive": "Active",
+    "statusInactive": "Inactive"
   },
   "processTable": {
-    "search": "Arama...",
+    "search": "Search...",
     "status": {
-      "completed": "Tamamlandı",
-      "active": "Aktif",
-      "pending": "Bekliyor"
+      "completed": "Completed",
+      "active": "Active",
+      "pending": "Pending"
     },
     "table": {
-      "projectName": "Proje Adı",
-      "locomotiveNo": "Tren Numarası",
-      "wagonNo": "Vagon",
-      "workflowName": "İş Akışı Adı",
-      "totalDuration": "Toplam Geçen Süre",
-      "startedAt": "Başlama Zamanı",
-      "completedAt": "Bitiş Zamanı",
-      "actions": "İşlemler",
-      "description": "Açıklama"
+      "projectName": "Project Name",
+      "locomotiveNo": "Train Number",
+      "wagonNo": "Wagon",
+      "workflowName": "Workflow Name",
+      "totalDuration": "Total Elapsed Time",
+      "startedAt": "Start Time",
+      "completedAt": "End Time",
+      "actions": "Actions",
+      "description": "Description"
     }
   },
   "modal": {
-    "title": "Süreçler",
-    "wagon": "{data}. vagon",
-    "completed": "Tamamlandı",
-    "active": "Aktif"
+    "title": "Processes",
+    "wagon": "Wagon {data}",
+    "completed": "Completed",
+    "active": "Active"
   }
 }

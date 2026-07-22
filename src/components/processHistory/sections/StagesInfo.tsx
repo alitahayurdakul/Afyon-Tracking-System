@@ -2,14 +2,19 @@ import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 
 import styles from "@/components/activeProcessDetail/stageDetail/QualityDetailModal.module.scss";
-import { DelayReasons, MaterialEntry, SubStage } from "@/types/activeProcessDetailTypes";
+import TimeSection from "@/components/activeProcessDetail/stageDetail/sections/TimeSection";
+import {
+  DelayReasons,
+  MaterialEntry,
+  SubStage,
+} from "@/types/activeProcessDetailTypes";
 import { IStage } from "@/types/processTypes";
 import { getStatus } from "@/utils/getStatus";
 
 const StagesInfo = ({ stages }: { stages: IStage[] }) => {
   const [openStages, setOpenStages] = useState<Set<string>>(new Set());
   const [openSubStages, setOpenSubStages] = useState<Set<string>>(new Set());
-  const t = useTranslations("processHistory")
+  const t = useTranslations("processHistory");
   const toggle = (
     set: Set<string>,
     setFn: (s: Set<string>) => void,
@@ -57,7 +62,9 @@ const StagesInfo = ({ stages }: { stages: IStage[] }) => {
                     )}
 
                     {stage.subStages.length === 0 ? (
-                      <p className={styles.empty}>{t("section.no-sub-stages")}</p>
+                      <p className={styles.empty}>
+                        {t("section.no-sub-stages")}
+                      </p>
                     ) : (
                       <div className={styles.subAccordion}>
                         {stage.subStages.map((sub: SubStage) => {
@@ -89,6 +96,12 @@ const StagesInfo = ({ stages }: { stages: IStage[] }) => {
 
                               {subOpen && (
                                 <div className={styles.subStageBody}>
+                                  <TimeSection
+                                    startDate={sub.start}
+                                    endDate={sub.end}
+                                    status={getStatus(sub.status)}
+                                    className={styles["time-section"]}
+                                  />
                                   {sub.subStageId.description && (
                                     <p className={styles.subStageDescription}>
                                       {sub.subStageId.description}
@@ -113,9 +126,7 @@ const StagesInfo = ({ stages }: { stages: IStage[] }) => {
                                       <b>{t("section.delay-reason")}</b>
                                       {sub.delayReasons.map(
                                         (m: DelayReasons) => (
-                                          <li key={m._id}>
-                                            {m.name}
-                                          </li>
+                                          <li key={m._id}>{m.name}</li>
                                         ),
                                       )}
                                     </ul>

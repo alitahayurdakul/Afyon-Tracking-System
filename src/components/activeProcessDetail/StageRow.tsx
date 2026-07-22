@@ -101,7 +101,7 @@ export default function StageRow({
             {getStatus(stage.status) === "active" && (
               <>
                 <span>
-                  {t("start-date")} {formatDate(entryForStage?.startedAt)}
+                  {t("start-date")}: {formatDate(entryForStage?.startedAt)}
                 </span>
                 <span>{t("pending")}</span>
               </>

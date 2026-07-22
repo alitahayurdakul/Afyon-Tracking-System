@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { useTranslations } from "next-intl";
 
 import styles from "@/components/activeProcessDetail/stageDetail/StageDetailModal.module.scss";
@@ -9,14 +10,24 @@ interface IPropsTypes {
   startDate: string | null;
   endDate?: string | null;
   status: string;
+  className?: string;
 }
 
-const TimeSection = ({ startDate, endDate, status }: IPropsTypes) => {
+const TimeSection = ({
+  startDate,
+  endDate,
+  status,
+  className,
+}: IPropsTypes) => {
   const t = useTranslations("activeProcessDetail");
   const date = new Date().toISOString();
 
   return (
-    <section className={styles.section}>
+    <section
+      className={clsx(styles.section, {
+        [className as string]: className,
+      })}
+    >
       <h3>{t("section.time-section-header")}</h3>
       <div className={styles.timeRow}>
         <div className={styles.timeCol}>
@@ -29,7 +40,9 @@ const TimeSection = ({ startDate, endDate, status }: IPropsTypes) => {
           <label>
             <b>{t("end-date")}</b>
           </label>
-          <label>{status === StatusEnums.completed ? formatDate(endDate) : "-"}</label>
+          <label>
+            {status === StatusEnums.completed ? formatDate(endDate) : "-"}
+          </label>
         </div>
         <div className={styles.timeCol}>
           <label>
@@ -39,7 +52,9 @@ const TimeSection = ({ startDate, endDate, status }: IPropsTypes) => {
             {startDate
               ? getElapsedTime(
                   startDate ?? "",
-                  (status === StatusEnums.completed ? endDate?.trim() : date) as string,
+                  (status === StatusEnums.completed
+                    ? endDate?.trim()
+                    : date) as string,
                 )
               : "-"}
           </label>

@@ -62,7 +62,7 @@
   font-weight: 600;
 
   &.small {
-    padding: 1px 6px;
+    padding: 3px 6px;
     font-size: 10px;
   }
   &.active {
@@ -245,5 +245,19 @@
   button:last-child {
     background-color: var(--on-sale-badge);
     color: var(--base-white);
+  }
+}
+
+.time-section {
+  h3 {
+    font-size: 14px;
+  }
+  & > div {
+    padding-right: 10%;
+    & > div {
+      label {
+        font-size: 12px;
+      }
+    }
   }
 }
