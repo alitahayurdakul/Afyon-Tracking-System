@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useTranslations } from "next-intl";
 
 import { IProcessEntry, IStage, ProcessResponse } from "@/types/processTypes";
@@ -13,7 +13,6 @@ import StageRow from "./StageRow";
 import styles from "@/styles/components/activeProcessDetail/ProcessFlow.module.scss";
 
 export default function ProcessFlow({ data }: { data?: ProcessResponse }) {
-  const [selectedStage, setSelectedStage] = useState<IStage | null>(null);
   const t = useTranslations("activeProcessDetail");
 
   const { percent } = getStageProgress(
@@ -65,7 +64,6 @@ export default function ProcessFlow({ data }: { data?: ProcessResponse }) {
               stage={stage}
               index={index}
               isLast={index === data?.stages.length - 1}
-              onOpenDetail={setSelectedStage}
               entryForStage={data?.entries.find(
                 (entry: IProcessEntry) => entry.stageId._id === stage._id,
               )}

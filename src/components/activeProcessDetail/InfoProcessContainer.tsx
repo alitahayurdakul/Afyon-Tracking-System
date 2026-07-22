@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -35,12 +35,10 @@ import { RoleWrapper } from "../RoleWrapper";
 export default function InfoProcessContainer({
   data,
   trainsOptions,
-  refetch,
   isCompletedButtonActive,
 }: {
   data?: ProcessResponse;
   trainsOptions: IOptionType[];
-  refetch: any;
   isCompletedButtonActive: boolean;
 }) {
   const { id } = useParams();

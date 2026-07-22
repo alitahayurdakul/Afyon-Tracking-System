@@ -138,7 +138,7 @@ export const SelectBox = forwardRef<Ref, SelectBoxProps>(
     );
 
     const getOptions = useCallback(
-      (name: string) => {
+      () => {
         // if (tParent) {
         //   const newOptions = options?.map((option: any) => {
         //     return {
@@ -154,15 +154,15 @@ export const SelectBox = forwardRef<Ref, SelectBoxProps>(
     );
 
     const value = useCallback(
-      (name: string) => {
+      () => {
         if (multiselect) {
           return field.value;
         }
 
         return (
           (options &&
-            Array.isArray(getOptions(name)) &&
-            getOptions(name).find((option) => {
+            Array.isArray(getOptions()) &&
+            getOptions().find((option) => {
               return (
                 option.value === field.value || option.value === +field.value
               );
@@ -237,7 +237,7 @@ export const SelectBox = forwardRef<Ref, SelectBoxProps>(
               );
             }}
             isClearable={isClearable}
-            value={value(name)}
+            value={value()}
             onChange={handleChange}
             placeholder={
               placeholder === "none" ? "" : placeholder
@@ -424,7 +424,7 @@ export const SelectBox = forwardRef<Ref, SelectBoxProps>(
                 };
               },
             }}
-            options={getOptions(name)}
+            options={getOptions()}
             defaultValue={
               (options &&
                 Array.isArray(options) &&

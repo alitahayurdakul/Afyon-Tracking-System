@@ -32,14 +32,23 @@ export default [
         "warn",
         {
           groups: [
+            // react / next / diğer 3rd-party paketler
             ["^react$", "^next", "^[a-z]"],
+            // @scope/paket importları
             ["^@"],
+            // proje içi alias (@/...)
             ["^@/"],
+            // ~ alias
             ["^~"],
+            // üst dizin relative importlar (../)
             ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+            // aynı dizin relative importlar (./)
             ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+            // görsel dosyalar
             ["\\.png$", "\\.svg$"],
+            // side-effect importlar (import "./something")
             ["^\\u0000"],
+            // stiller - en sonda
             ["^.+\\.s?css$"],
           ],
         },
@@ -48,9 +57,14 @@ export default [
       "react/no-unknown-property": "off",
       "@typescript-eslint/no-unnecessary-type-constraint": "off",
       "no-duplicate-imports": "error",
-      "no-unused-vars": [
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": [
         "warn",
-        { ignoreRestSiblings: true, varsIgnorePattern: "^_" },
+        {
+          ignoreRestSiblings: true,
+          varsIgnorePattern: "^_",
+          argsIgnorePattern: "^_",
+        },
       ],
       "react/react-in-jsx-scope": "off",
       "@next/next/no-img-element": "off",

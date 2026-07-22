@@ -1,5 +1,8 @@
 import { useTranslations } from "next-intl";
 
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 import { useStartStage } from "@/api/queries/useGetProcessesQueries";
 import { IProcessEntry, IStage } from "@/types/processTypes";
@@ -19,9 +22,8 @@ interface StageRowProps {
   index: number;
   isLast: boolean;
   entryForStage?: IProcessEntry;
-  onOpenDetail: (stage: IStage) => void;
   entriesEqStages?: boolean;
-  stages: IStage[]
+  stages: IStage[];
 }
 
 export default function StageRow({
@@ -29,9 +31,8 @@ export default function StageRow({
   entryForStage,
   index,
   isLast,
-  onOpenDetail,
   entriesEqStages,
-  stages
+  stages,
 }: StageRowProps) {
   const time = () => {
     const startTime = new Date(
@@ -52,9 +53,7 @@ export default function StageRow({
 
   const {
     mutate,
-    isPending,
-    isError: startStageError,
-    error: startError,
+    isPending
   } = useStartStage();
 
   const startStage = async () => {
@@ -79,7 +78,6 @@ export default function StageRow({
 
       <div
         className={`${styles.card} ${styles[getStatus(stage.status)]}`}
-        onClick={() => onOpenDetail(stage)}
       >
         <div className={styles.cardLeft}>
           <span className={styles.cardName}>
@@ -122,16 +120,19 @@ export default function StageRow({
               align="start"
               triggerBody={
                 <div>
-                  {
-                      stage.stageId === "6a548d7444cc81ed74b22b6a" ?
-                      entriesEqStages ? <button className={styles.startBtn}>
-                      {t("buttons.start-stage")}
-                    </button> : <></>
-                      :
+                  {stage.stageId === "6a548d7444cc81ed74b22b6a" ? (
+                    entriesEqStages ? (
+                      <button className={styles.startBtn}>
+                        {t("buttons.start-stage")}
+                      </button>
+                    ) : (
+                      <></>
+                    )
+                  ) : (
                     <button className={styles.startBtn}>
                       {t("buttons.start-stage")}
                     </button>
-                  }
+                  )}
                 </div>
               }
               contentBody={
@@ -144,7 +145,20 @@ export default function StageRow({
               closeContainer={
                 <div className={styles["btn-container"]}>
                   <button>{t("no")}</button>
-                  <button onClick={startStage}>{t("yes")}</button>
+                  <button onClick={startStage}>
+                    {isPending ? (
+                      <FontAwesomeIcon
+                        icon={faSpinner}
+                        spin
+                        style={{
+                          animationDuration: "2s",
+                          color: "var(--slate-90)",
+                        }}
+                      />
+                    ) : (
+                      t("yes")
+                    )}
+                  </button>
                 </div>
               }
             />
@@ -155,10 +169,9 @@ export default function StageRow({
               stageStatus={stage.status}
               entryId={entryForStage?._id ?? ""}
               isQuality={
-                stage.stageId === "6a548d7444cc81ed74b22b6a" &&
-                entriesEqStages
+                stage.stageId === "6a548d7444cc81ed74b22b6a" && entriesEqStages
               }
-              stages = {stages}
+              stages={stages}
             />
           )}
         </div>

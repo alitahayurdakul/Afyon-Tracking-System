@@ -22,7 +22,7 @@ import { getStatus } from "@/utils/getStatus";
 import styles from "@/styles/pages/PageCommonContainer.module.scss";
 
 export default function ActiveProcessDetailPage() {
-  const { data, isLoading, isError, refetch } =
+  const { data, isLoading, isError } =
     useActiveProcessDetailDataQuery<ProcessResponse>();
 
   const { data: activeProcessesData } =
@@ -63,7 +63,6 @@ export default function ActiveProcessDetailPage() {
       <InfoProcessContainer
         data={data}
         trainsOptions={trainsOptions}
-        refetch={refetch}
         isCompletedButtonActive={isCompletedButtonActive ?? false}
       />
     </div>

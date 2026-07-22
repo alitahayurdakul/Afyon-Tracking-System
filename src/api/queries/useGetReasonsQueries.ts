@@ -8,7 +8,7 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { ReasonQueryTypes } from "@/app/api/reasons/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
-import { IReasonsType, IReasonType } from "@/types/reasonsTypes";
+import { IReasonType } from "@/types/reasonsTypes";
 
 export const useGetReasonsDataQuery = <T>() => {
   const trigger = useSelector(
@@ -19,8 +19,8 @@ export const useGetReasonsDataQuery = <T>() => {
     queryKey: [`getReasonsAllDatas`, trigger],
     refetchOnWindowFocus: false,
     enabled: true,
-    queryFn: async (): Promise<IReasonsType> => {
-      const { data } = await axiosInstance.post<IReasonsType>(
+    queryFn: async (): Promise<T> => {
+      const { data } = await axiosInstance.post<T>(
         CLIENT_END_POINTS.reason.getAll,
         { type: ReasonQueryTypes.getAllReasons },
       );

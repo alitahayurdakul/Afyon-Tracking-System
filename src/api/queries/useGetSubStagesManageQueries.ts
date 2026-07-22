@@ -8,7 +8,6 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { SubStageQueryTypes } from "@/app/api/sub-stages/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
-import { IOptionType } from "@/types/formTypes";
 import { optionsConverters } from "@/types/optionsConverter";
 import { ISubStageType } from "@/types/subStagesTypes";
 

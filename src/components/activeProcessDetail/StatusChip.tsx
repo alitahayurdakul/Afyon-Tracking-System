@@ -1,5 +1,3 @@
-import { useTranslations } from "next-intl";
-
 import { STATUS } from "@/consts/options";
 import { IStatusType, TFunction } from "@/types/commonTypes";
 

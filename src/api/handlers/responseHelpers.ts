@@ -2,7 +2,7 @@ export function createJsonSuccess(data?: any, status = 200): Response {
   return Response.json({ success: true, data }, { status });
 }
 
-export function createJsonOnlyData(data?: any, status = 200): Response {
+export function createJsonOnlyData(data?: any): Response {
   return Response.json(data);
 }
 

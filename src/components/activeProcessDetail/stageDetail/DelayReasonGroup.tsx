@@ -4,6 +4,7 @@ import { useGetReasonsDataQuery } from "@/api/queries/useGetReasonsQueries";
 import Option from "@/components/formElements/Option";
 import { DelayReasons } from "@/types/activeProcessDetailTypes";
 import { IOptionType } from "@/types/formTypes";
+import { IReasonsType } from "@/types/reasonsTypes";
 
 import styles from "./StageDetailModal.module.scss";
 
@@ -20,7 +21,7 @@ export default function DelayReasonGroup({
   onChange,
   isOnlyText,
 }: DelayReasonGroupProps) {
-  const { data: delayReasonsData } = useGetReasonsDataQuery();
+  const { data: delayReasonsData } = useGetReasonsDataQuery<IReasonsType>();
 
   const handleChange = (value: IOptionType["value"], checked: boolean) => {
     if (checked) {
