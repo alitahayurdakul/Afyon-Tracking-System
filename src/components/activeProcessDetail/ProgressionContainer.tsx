@@ -5,7 +5,7 @@ import { LoadingChecker } from "@/components/common/loaders/LoadingChecker";
 import { SkeletonContainer } from "@/components/common/loaders/SkeletonContainer";
 import { ProcessResponse } from "@/types/processTypes";
 
-import TrainVisualization from "../common/TrainVisualization";
+import TrainComposition from "../trainComposition/TrainComposition";
 
 import ProcessFlow from "./ProcessFlow";
 
@@ -62,9 +62,9 @@ export const ProgressionContainer = ({
         wagonOrder &&
         totalWagonCount >= 2 &&
         wagonOrder <= totalWagonCount && (
-          <TrainVisualization
-            totalCount={totalWagonCount}
-            highlightedWagonNumber={wagonOrder}
+          <TrainComposition
+            totalCars={totalWagonCount}
+            activeCarIndex={wagonOrder}
           />
         )}
 

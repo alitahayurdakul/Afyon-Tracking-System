@@ -1,0 +1,189 @@
+@use "sass:color";
+
+$ink: #3d3d3a;
+$hairline: #a8adb2;
+$paper: #ffffff;
+
+$active-line: #3b6d11;
+$active-fill: #8cc63f;
+$active-glass: #e7f2d8;
+
+$stroke-body: 1.2px;
+$stroke-body-active: 1.8px;
+$stroke-detail: 0.9px;
+
+.root {
+  width: 100%;
+  overflow-x: auto;
+  background: $paper;
+  border-radius: 6px;
+  & > svg {
+    margin-inline: auto;
+  }
+}
+
+.canvas {
+  display: block;
+  height: auto;
+  flex-shrink: 0;
+
+  // --- gövde ---------------------------------------------------------------
+  :global(.carBody) {
+    fill: $paper;
+    stroke: $ink;
+    stroke-width: $stroke-body;
+  }
+
+  :global(.windshield) {
+    fill: $paper;
+    stroke: $ink;
+    stroke-width: 1px;
+  }
+
+  :global(.waistLine) {
+    stroke: $ink;
+    stroke-width: $stroke-detail;
+  }
+
+  // --- ekipman -------------------------------------------------------------
+  :global(.roofUnit),
+  :global(.gearBox) {
+    fill: $hairline;
+  }
+
+  :global(.window) {
+    fill: $paper;
+    stroke: $ink;
+    stroke-width: $stroke-detail;
+  }
+
+  :global(.door) {
+    fill: none;
+    stroke: $ink;
+    stroke-width: 1.4px;
+  }
+
+  :global(.doorGlass) {
+    fill: $paper;
+    stroke: $ink;
+    stroke-width: 0.8px;
+  }
+
+  // --- boji ----------------------------------------------------------------
+  :global(.bogieFrame) {
+    fill: none;
+    stroke: $ink;
+    stroke-width: $stroke-body;
+    stroke-linejoin: round;
+  }
+
+  :global(.axleLink) {
+    stroke: $ink;
+    stroke-width: 1px;
+  }
+
+  :global(.axle) {
+    stroke: $ink;
+    stroke-width: 1.4px;
+  }
+
+  :global(.wheel) {
+    fill: $paper;
+    stroke: $ink;
+    stroke-width: 1.3px;
+  }
+
+  :global(.brakeDisc) {
+    fill: none;
+    stroke: $ink;
+    stroke-width: 0.7px;
+    opacity: 0.6;
+  }
+
+  :global(.hub) {
+    fill: $ink;
+  }
+
+  :global(.pantograph) path {
+    fill: none;
+    stroke: $ink;
+    stroke-width: 1.3px;
+    stroke-linecap: round;
+  }
+}
+
+// --- aktif vagon: aynı geometri, yeşil kalem -------------------------------
+.canvas :global(.carActive) {
+  :global(.carBody) {
+    fill: color.change($active-fill, $alpha: 0.25);
+    stroke: $active-line;
+    stroke-width: $stroke-body-active;
+  }
+
+  :global(.waistLine),
+  :global(.axleLink),
+  :global(.axle),
+  :global(.bogieFrame),
+  :global(.window),
+  :global(.wheel),
+  :global(.brakeDisc),
+  :global(.door),
+  :global(.doorGlass) {
+    stroke: $active-line;
+  }
+
+  :global(.window),
+  :global(.doorGlass) {
+    fill: $active-glass;
+  }
+
+  :global(.roofUnit) {
+    fill: $active-line;
+  }
+
+  :global(.gearBox) {
+    fill: $active-fill;
+  }
+
+  :global(.hub) {
+    fill: $active-line;
+  }
+}
+
+// --- etkileşim -------------------------------------------------------------
+.selectable {
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: none;
+
+    .hitArea {
+      fill: color.change($active-fill, $alpha: 0.14);
+      stroke: $active-line;
+      stroke-width: 1.5px;
+      stroke-dasharray: 4 3;
+    }
+  }
+}
+
+.hitArea {
+  fill: transparent;
+  stroke: none;
+}
+
+// --- ray -------------------------------------------------------------------
+.railHead {
+  stroke: $ink;
+  stroke-width: 1.2px;
+}
+
+.railFoot {
+  stroke: $hairline;
+  stroke-width: 0.8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .selectable {
+    transition: none;
+  }
+}

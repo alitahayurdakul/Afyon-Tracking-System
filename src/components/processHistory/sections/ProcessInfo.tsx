@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import TrainVisualization from "@/components/common/TrainVisualization";
+import TrainComposition from "@/components/trainComposition/TrainComposition";
 import { IProcessInstance } from "@/types/processTypes";
 import { formatDate } from "@/utils/formDate";
 import { getElapsedTime } from "@/utils/getElapsedTime";
@@ -50,9 +50,9 @@ const ProcessInfo = ({ processInfo }: { processInfo: IProcessInstance }) => {
         wagonOrder &&
         totalWagonCount >= 2 &&
         wagonOrder <= totalWagonCount && (
-          <TrainVisualization
-            totalCount={9}
-            highlightedWagonNumber={wagonOrder}
+          <TrainComposition
+            totalCars={totalWagonCount}
+            activeCarIndex={wagonOrder}
             className={styles["train-visualization-wrapper"]}
           />
         )}

@@ -35,6 +35,7 @@
     "title": "Süreçler",
     "wagon": "{data}. vagon",
     "completed": "Tamamlandı",
-    "active": "Aktif"
+    "active": "Aktif",
+    "no-data-Label": "Süreç bulunamadı."
   }
 }

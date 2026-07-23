@@ -2,17 +2,15 @@
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-import {
-  useGetTrainDetailDataQuery,
-} from "@/api/useGetProcessTrains";
+import { useGetTrainDetailDataQuery } from "@/api/useGetProcessTrains";
 import { PROCESS_TRAIN_WAGONS_DETAIL_MODAL } from "@/consts/modals";
 import { IWagonDetail } from "@/types/trainsTypes";
 import { useAddQueryParam } from "@/utils/searchParams";
 
 import { LoadingChecker } from "../common/loaders/LoadingChecker";
 import { NewModal } from "../common/NewModal";
-import TrainVisualization from "../common/TrainVisualization";
 import SpinnerIcon from "../icons/SpinnerIcon";
+import TrainComposition from "../trainComposition/TrainComposition";
 
 import { ProcessTableListBody } from "./processTable/ProcessTableListBody";
 import ProcessTrainModalWrapper from "./processTrainModal/ProcessTrainModalWrapper";
@@ -32,7 +30,6 @@ export const ProcessTrainDetailContainer = () => {
   const searchParams = useSearchParams();
   const modalParam = searchParams?.get("modal");
   const wagonParamId = modalParam?.split("_").at(-1);
-  
 
   const isMemberWagon =
     !!trainInfos && trainInfos?.wagons
@@ -77,12 +74,10 @@ export const ProcessTrainDetailContainer = () => {
       >
         <div className={styles["top-container"]}>
           <TrainDetailSection trainSet={trainInfos} />
-          <TrainVisualization
-            totalCount={trainInfos?.wagons?.length ?? 0}
+          <TrainComposition
+            totalCars={trainInfos?.wagons?.length ?? 0}
+            onCarSelect={(wagonOrder: number) => onHandleWagonClick(wagonOrder)}
             className={styles["train-visualization-container"]}
-            onClickWagon={(wagonOrder?: number) =>
-              onHandleWagonClick(wagonOrder)
-            }
           />
         </div>
 

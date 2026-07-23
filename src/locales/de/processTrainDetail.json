@@ -35,6 +35,7 @@
     "title": "Prozesse",
     "wagon": "{data}. Wagen",
     "completed": "Abgeschlossen",
-    "active": "Aktiv"
+    "active": "Aktiv",
+    "no-data-label": "Keine Prozesse gefunden."
   }
 }
