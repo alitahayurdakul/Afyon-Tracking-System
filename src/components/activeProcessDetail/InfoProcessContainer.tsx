@@ -249,7 +249,7 @@ export default function InfoProcessContainer({
                   }
                 />
               )}
-              {!isCompletedButtonActive && (
+              {isCompletedButtonActive && (
                 <PopoverBody
                   alignOffset={-73}
                   align="start"
