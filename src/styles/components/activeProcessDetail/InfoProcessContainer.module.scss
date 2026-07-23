@@ -182,7 +182,8 @@
 
 /* Butonlar */
 .next-btn,
-.complete-btn {
+.complete-btn,
+.cancel-btn {
   border: none;
   cursor: pointer;
 
@@ -224,12 +225,19 @@
 }
 
 .complete-btn {
-  background: var(--on-sale-badge);
+  background: var(--blue-80);
 }
 
 .complete-btn:hover {
+  background: var(--blue-90);
+}
+
+.cancel-btn {
+  background: var(--on-sale-badge);
+}
+
+.cancel-btn:hover {
   background: var(--on-sale-badge-dark);
-  transform: translateY(-1px);
 }
 
 /* Ekip */

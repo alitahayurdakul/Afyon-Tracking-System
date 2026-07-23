@@ -35,6 +35,7 @@
     "edit": "Alt Aşamayı Güncelle",
     "complete-stage": "Üst Aşamayı Tamamla",
     "complete-process": "Süreci Tamamla",
+    "cancel-process": "Süreçi İptal Et",
     "complete-quality-stage": "Kalite Aşamasını Tamamla",
     "questions": {
       "start-sub-stage": "Alt Aşamayı başlatmak istediğinize emin misiniz?",
@@ -44,7 +45,8 @@
       "edit": "Alt Aşamayı güncellemek istediğinize emin misiniz?",
       "start-stage": "Aşamayı Başlatmak istediğinize emin misiniz?",
       "complete-process": "Süreci tamamlamak istediğinize emin misiniz?",
-      "completeQualityStage": "Kalite aşamasını tamamlamak istediğinize emin misiniz? Bu işlemden sonra geri dönüş olmayacaktır."
+      "completeQualityStage": "Kalite aşamasını tamamlamak istediğinize emin misiniz? Bu işlemden sonra geri dönüş olmayacaktır.",
+      "cancel-process": "Süreci iptal etmek istediğinize emin misiniz?"
     }
   },
   "yes": "Evet",
@@ -79,6 +81,10 @@
     "complete-process": {
       "success": "Aşama başarıyla başlatıldı.",
       "error": "Aşama başlatılırken bir sorun ile karşılaşıldı."
+    },
+    "cancel-process": {
+      "success": "Aşama başarıyla iptal edildi.",
+      "error": "Aşama iptal edilirken bir sorun ile karşılaşıldı."
     }
   }
 }

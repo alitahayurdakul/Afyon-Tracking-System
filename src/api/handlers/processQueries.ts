@@ -41,7 +41,7 @@ async function deleteProcess(id: string): Promise<Response> {
   try {
     if (id) {
       const response = await axiosInstance.delete(
-        END_POINTS.process.delete(id),
+        END_POINTS.process.deleteProcess(id),
       );
       if (response.status === 200) {
         return createJsonSuccess(response.data, 200);

@@ -16,9 +16,12 @@ import { extractApiError } from "@/utils/extractApiError";
 export const useGetActiveProcessesDataQuery = <T>(status?: string) => {
   const searchParams = useSearchParams();
   const projectId = searchParams.get("projectId") || "";
+  const trigger = useSelector(
+    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+  );
 
   return useQuery({
-    queryKey: [`getActiveProcessAllDatas`, status, projectId],
+    queryKey: [`getActiveProcessAllDatas`, status, projectId, trigger],
     refetchOnWindowFocus: false,
     enabled: true,
     queryFn: async () => {

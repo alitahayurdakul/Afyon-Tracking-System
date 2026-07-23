@@ -41,6 +41,8 @@ export const END_POINTS = {
       `${apiUrl}/api/processes/stage-entry/${entryId}/close`,
     startStage: (processId: string) =>
       `${apiUrl}/api/processes/${processId}/start-stage`,
+    deleteProcess: (id: string) => `${apiUrl}/api/processes/${id}`,
+
   },
   processOperations: {
     complete: (processId: string) =>
@@ -152,15 +154,11 @@ export const CLIENT_END_POINTS = {
     startSubStage: "/api/processes",
     saveandCompleteSubStage: "/api/processes",
     completeStage: "/api/processes",
-    startStage: "/api/processes",
+    startStage: "/api/processes"
   },
   activeProcessOperation: {
     complete: "/api/activeProcessOperations",
   },
-  // workflowHistory: {
-  //   getAll: "/api/workflowHistory",
-  //   getDetail: "/api/workflowHistory",
-  // },
   common: {
     getStages: "/api/stagesOptions",
     getTrainsOptions: "/api/trainsOptions",

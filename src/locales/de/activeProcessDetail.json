@@ -7,11 +7,11 @@
   },
   "progress-process": "{progress} abgeschlossen",
   "open-detail": "Details öffnen",
-  "start-date": "Startdatum",
-  "end-date": "Enddatum",
+  "start-date": "Beginn",
+  "end-date": "Ende",
   "not-yet-started": "Noch nicht gestartet",
   "pending": "Läuft",
-  "total-elapsed-time": "GESAMTVERGANGENE ZEIT",
+  "total-elapsed-time": "Gesamtzeit",
   "active-projects": "Aktive Projekte",
   "active-projects-select-explaining": "Wählen Sie einen Zug aus, um den Live-Fortschritt des Workflows anzuzeigen.",
   "processId": "Prozess-ID",
@@ -20,20 +20,22 @@
     "delay-reason": "Verzögerungsgründe",
     "materials": "Materialien und Seriennummern",
     "explaining": "Beschreibung",
-    "files": "Dateien"
+    "files": "Dateien",
+    "no-sub-stages": "Keine Unterphasen vorhanden."
   },
   "elapsed-time": "Verstrichene Zeit",
   "serial-number-placeholder": "Seriennummer",
   "explaining-placeholder": "Beschreibung eingeben.",
-  "file-placeholder": "Klicken Sie hier, um eine Datei hochzuladen.",
+  "file-placeholder": "Zum Hochladen einer Datei klicken.",
   "buttons": {
     "save-changes": "Änderungen speichern",
     "complete-sub-stage": "Unterphase abschließen",
     "start-stage": "Phase starten",
     "start-sub-stage": "Unterphase starten",
-    "edit": "Unterphase aktualisieren",
+    "edit": "Unterphase bearbeiten",
     "complete-stage": "Übergeordnete Phase abschließen",
     "complete-process": "Prozess abschließen",
+    "cancel-process": "Prozess abbrechen",
     "complete-quality-stage": "Qualitätsphase abschließen",
     "questions": {
       "start-sub-stage": "Möchten Sie die Unterphase wirklich starten?",
@@ -43,41 +45,46 @@
       "edit": "Möchten Sie die Unterphase wirklich aktualisieren?",
       "start-stage": "Möchten Sie die Phase wirklich starten?",
       "complete-process": "Möchten Sie den Prozess wirklich abschließen?",
-       "completeQualityStage": "Möchten Sie die Qualitätsphase wirklich abschließen? Diese Aktion kann nicht rückgängig gemacht werden."
+      "completeQualityStage": "Möchten Sie die Qualitätsphase wirklich abschließen? Diese Aktion kann nicht rückgängig gemacht werden.",
+      "cancel-process": "Möchten Sie den Prozess wirklich abbrechen?"
     }
   },
   "yes": "Ja",
   "no": "Nein",
   "stage-modal-header": "Phasendetails",
-  "no-data-label": "Keine Details zu aktiven Prozessen vorhanden.",
+  "no-data-label": "Keine aktiven Prozessdetails gefunden.",
   "notifications": {
     "start": {
-      "success": "Die Unterphase wurde erfolgreich gestartet.",
+      "success": "Unterphase erfolgreich gestartet.",
       "error": "Beim Starten der Unterphase ist ein Fehler aufgetreten."
     },
     "save": {
-      "success": "Die Unterphase wurde erfolgreich gespeichert.",
+      "success": "Unterphase erfolgreich gespeichert.",
       "error": "Beim Speichern der Unterphase ist ein Fehler aufgetreten."
     },
     "complete": {
-      "success": "Die Unterphase wurde erfolgreich abgeschlossen.",
+      "success": "Unterphase erfolgreich abgeschlossen.",
       "error": "Beim Abschließen der Unterphase ist ein Fehler aufgetreten."
     },
     "edit": {
-      "success": "Der Status der Unterphase wurde erfolgreich aktualisiert.",
+      "success": "Status der Unterphase erfolgreich aktualisiert.",
       "error": "Beim Aktualisieren des Status der Unterphase ist ein Fehler aufgetreten."
     },
     "complete-parent-stage": {
-      "success": "Die übergeordnete Phase wurde erfolgreich abgeschlossen.",
+      "success": "Übergeordnete Phase erfolgreich abgeschlossen.",
       "error": "Beim Abschließen der übergeordneten Phase ist ein Fehler aufgetreten."
     },
     "start-stage": {
-      "success": "Die Phase wurde erfolgreich gestartet.",
+      "success": "Phase erfolgreich gestartet.",
       "error": "Beim Starten der Phase ist ein Fehler aufgetreten."
     },
     "complete-process": {
-      "success": "Der Prozess wurde erfolgreich abgeschlossen.",
+      "success": "Prozess erfolgreich abgeschlossen.",
       "error": "Beim Abschließen des Prozesses ist ein Fehler aufgetreten."
+    },
+    "cancel-process": {
+      "success": "Prozess erfolgreich abgebrochen.",
+      "error": "Beim Abbrechen des Prozesses ist ein Fehler aufgetreten."
     }
   }
 }

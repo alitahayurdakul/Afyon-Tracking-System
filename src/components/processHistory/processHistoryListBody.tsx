@@ -16,7 +16,10 @@ import styles from "@/styles/components/common/TableListBody.module.scss";
 
 export const ProcessHistoryListBody = () => {
   const t = useTranslations("processHistory");
-  const { data, isLoading, isFetching, isError } = useGetActiveProcessesDataQuery<IProcessesTypes>(ResponseStatusEnums.completed);
+  const { data, isLoading, isFetching, isError } =
+    useGetActiveProcessesDataQuery<IProcessesTypes>(
+      ResponseStatusEnums.completed,
+    );
 
   return (
     <section className={styles["pipeline-page"]}>

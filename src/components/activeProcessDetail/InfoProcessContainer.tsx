@@ -19,11 +19,13 @@ import { useDispatch } from "react-redux";
 
 import { axiosInstance } from "@/api/axiosInstance";
 import { ProcessOperationsQueryTypes } from "@/app/api/activeProcessOperations/route";
+import { ProcessQueryTypes } from "@/app/api/processes/route";
 import DE22000 from "@/assets/images/DE-22000.jpg";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { PERMISSION_ACTION, PERMISSION_RESOURCE } from "@/consts/permissions";
 import { URL_PAGES } from "@/consts/url";
 import { addToastify } from "@/redux/slices/toastSlice";
+import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { IOptionType } from "@/types/formTypes";
 import { ProcessResponse } from "@/types/processTypes";
 import { extractApiError } from "@/utils/extractApiError";
@@ -82,22 +84,56 @@ export default function InfoProcessContainer({
           id,
         },
       );
-        dispatch(
-          addToastify({
-            message: t("notifications.complete-process.success"),
-            type: "success",
-            icon: "close",
-            id: "completeProcessSuccess" + Date.now(),
-          }),
-        );
-        router.push(URL_PAGES.activeProcesses);
+      dispatch(
+        addToastify({
+          message: t("notifications.complete-process.success"),
+          type: "success",
+          icon: "close",
+          id: "completeProcessSuccess" + Date.now(),
+        }),
+      );
+      router.push(URL_PAGES.activeProcesses);
     } catch (err) {
       dispatch(
         addToastify({
-          message: extractApiError(err, t("notifications.complete-process.error")),
+          message: extractApiError(
+            err,
+            t("notifications.complete-process.error"),
+          ),
           type: "error",
           icon: "close",
           id: "completeProcessError" + Date.now(),
+        }),
+      );
+    }
+  };
+
+  const onCancelProcess = async () => {
+    try {
+      await axiosInstance.post(CLIENT_END_POINTS.processes.delete, {
+        type: ProcessQueryTypes.deleteProcess,
+        id,
+      });
+      dispatch(
+        addToastify({
+          message: t("notifications.cancel-process.success"),
+          type: "success",
+          icon: "close",
+          id: "cancelProcessSuccess" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable());
+      router.push(URL_PAGES.activeProcesses);
+    } catch (err) {
+      dispatch(
+        addToastify({
+          message: extractApiError(
+            err,
+            t("notifications.cancel-process.error"),
+          ),
+          type: "error",
+          icon: "close",
+          id: "cancelProcessError" + Date.now(),
         }),
       );
     }
@@ -181,37 +217,63 @@ export default function InfoProcessContainer({
               </div>
             </div> */}
             <RoleWrapper
-                        requiredPermissions={[
-                          getPermission(PERMISSION_RESOURCE.ACTIVEPROCESS, PERMISSION_ACTION.MANAGE)
-                        ]}
-                      >
-            {isCompletedButtonActive && (
-              <PopoverBody
-                alignOffset={-73}
-                align="start"
-                triggerBody={
-                  <button
-                    className={styles["complete-btn"]}
-                  >
-                    {t("buttons.complete-process")}
-                    <FontAwesomeIcon icon="arrow-right" />
-                  </button>
-                }
-                contentBody={
-                  <div className={styles["content"]}>
-                    <p className={styles["text"]}>
-                      {t("buttons.questions.complete-process")}
-                    </p>
-                  </div>
-                }
-                closeContainer={
-                  <div className={styles["btn-container"]}>
-                    <button>{t("no")}</button>
-                    <button onClick={onCompleteProcess}>{t("yes")}</button>
-                  </div>
-                }
-              />
-            )}
+              requiredPermissions={[
+                getPermission(
+                  PERMISSION_RESOURCE.ACTIVEPROCESS,
+                  PERMISSION_ACTION.MANAGE,
+                ),
+              ]}
+            >
+              {!isCompletedButtonActive && (
+                <PopoverBody
+                  alignOffset={-73}
+                  align="start"
+                  triggerBody={
+                    <button className={styles["cancel-btn"]}>
+                      {t("buttons.cancel-process")}
+                      <FontAwesomeIcon icon="arrow-right" />
+                    </button>
+                  }
+                  contentBody={
+                    <div className={styles["content"]}>
+                      <p className={styles["text"]}>
+                        {t("buttons.questions.cancel-process")}
+                      </p>
+                    </div>
+                  }
+                  closeContainer={
+                    <div className={styles["btn-container"]}>
+                      <button>{t("no")}</button>
+                      <button onClick={onCancelProcess}>{t("yes")}</button>
+                    </div>
+                  }
+                />
+              )}
+              {!isCompletedButtonActive && (
+                <PopoverBody
+                  alignOffset={-73}
+                  align="start"
+                  triggerBody={
+                    <button className={styles["complete-btn"]}>
+                      {t("buttons.complete-process")}
+                      <FontAwesomeIcon icon="arrow-right" />
+                    </button>
+                  }
+                  contentBody={
+                    <div className={styles["content"]}>
+                      <p className={styles["text"]}>
+                        {t("buttons.questions.complete-process")}
+                      </p>
+                    </div>
+                  }
+                  closeContainer={
+                    <div className={styles["btn-container"]}>
+                      <button>{t("no")}</button>
+                      <button onClick={onCompleteProcess}>{t("yes")}</button>
+                    </div>
+                  }
+                />
+              )}
             </RoleWrapper>
           </div>
         </section>

@@ -7,11 +7,11 @@
   },
   "progress-process": "{progress} completed",
   "open-detail": "Open Details",
-  "start-date": "Start Date",
-  "end-date": "End Date",
-  "not-yet-started": "Not Started Yet",
+  "start-date": "Start",
+  "end-date": "End",
+  "not-yet-started": "Not started yet",
   "pending": "In Progress",
-  "total-elapsed-time": "TOTAL ELAPSED TIME",
+  "total-elapsed-time": "Total Elapsed Time",
   "active-projects": "Active Projects",
   "active-projects-select-explaining": "Select a train to view the live workflow progress.",
   "processId": "Process ID",
@@ -20,7 +20,8 @@
     "delay-reason": "Delay Reasons",
     "materials": "Materials and Serial Numbers",
     "explaining": "Description",
-    "files": "Files"
+    "files": "Files",
+    "no-sub-stages": "No sub-stages found."
   },
   "elapsed-time": "Elapsed Time",
   "serial-number-placeholder": "Serial number",
@@ -31,9 +32,10 @@
     "complete-sub-stage": "Complete Sub-Stage",
     "start-stage": "Start Stage",
     "start-sub-stage": "Start Sub-Stage",
-    "edit": "Update Sub-Stage",
+    "edit": "Edit Sub-Stage",
     "complete-stage": "Complete Parent Stage",
     "complete-process": "Complete Process",
+    "cancel-process": "Cancel Process",
     "complete-quality-stage": "Complete Quality Stage",
     "questions": {
       "start-sub-stage": "Are you sure you want to start the sub-stage?",
@@ -43,8 +45,8 @@
       "edit": "Are you sure you want to update the sub-stage?",
       "start-stage": "Are you sure you want to start the stage?",
       "complete-process": "Are you sure you want to complete the process?",
-      "completeQualityStage": "Are you sure you want to complete the quality stage? This action cannot be undone."
- 
+      "completeQualityStage": "Are you sure you want to complete the quality stage? This action cannot be undone.",
+      "cancel-process": "Are you sure you want to cancel the process?"
     }
   },
   "yes": "Yes",
@@ -53,32 +55,36 @@
   "no-data-label": "No active process details found.",
   "notifications": {
     "start": {
-      "success": "The sub-stage was started successfully.",
+      "success": "Sub-stage started successfully.",
       "error": "An error occurred while starting the sub-stage."
     },
     "save": {
-      "success": "The sub-stage was saved successfully.",
+      "success": "Sub-stage saved successfully.",
       "error": "An error occurred while saving the sub-stage."
     },
     "complete": {
-      "success": "The sub-stage was completed successfully.",
+      "success": "Sub-stage completed successfully.",
       "error": "An error occurred while completing the sub-stage."
     },
     "edit": {
-      "success": "The sub-stage status was updated successfully.",
+      "success": "Sub-stage status updated successfully.",
       "error": "An error occurred while updating the sub-stage status."
     },
     "complete-parent-stage": {
-      "success": "The parent stage was completed successfully.",
+      "success": "Parent stage completed successfully.",
       "error": "An error occurred while completing the parent stage."
     },
     "start-stage": {
-      "success": "The stage was started successfully.",
+      "success": "Stage started successfully.",
       "error": "An error occurred while starting the stage."
     },
     "complete-process": {
-      "success": "The process was completed successfully.",
+      "success": "Process completed successfully.",
       "error": "An error occurred while completing the process."
+    },
+    "cancel-process": {
+      "success": "Process cancelled successfully.",
+      "error": "An error occurred while cancelling the process."
     }
   }
 }

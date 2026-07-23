@@ -6,13 +6,14 @@ export enum ProcessQueryTypes {
   getAllActiveProcess = "GET_ALL_ACTIVE_PROCESS",
   createProcess = "CREATE_PROCESS",
   editProcess = "EDIT_PROCESS",
-  deleteProcess = "DELETE_PROCESS",
+  // deleteProcess = "DELETE_PROCESS",
   getDetailProcess = "GET_DETAIL_ACTIVE_PROCESS",
   getStageDetail = "GET_STAGE_DETAIL",
   startSubStage = "START_SUB_STAGE",
   saveandCompleteSubStage = "SAVE_AND_COMPLETE_SUB_STAGE",
   completeStage = "COMPLETE_STAGE",
-  startStage = "START_STAGE"
+  startStage = "START_STAGE",
+  deleteProcess = "DELETE_PROCESS"
 }
 
 export async function POST(request: NextRequest) {
