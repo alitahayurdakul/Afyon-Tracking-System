@@ -24,3 +24,14 @@
 .train-visualization-container{
   width: 55%!important;
 }
+
+@media (max-width: 768px) {
+  .top-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .train-visualization-container {
+    width: 100% !important;
+  }
+}

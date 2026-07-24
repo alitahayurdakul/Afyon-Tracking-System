@@ -1,7 +1,10 @@
 /* app/globals.css */
 
 .pipeline-page {
-  padding: px 40px 40px;
+  padding: clamp(1rem, 2.5vw, 2.5rem);
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
 }
 
 /* TOP HEADER */
@@ -12,6 +15,13 @@
   align-items: flex-end;
   gap: 24px;
   margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1024px) {
+  .page-top {
+    margin-bottom: 24px;
+  }
 }
 
 .page-top h2 {
@@ -68,12 +78,21 @@
   justify-content: space-between;
   gap: 18px;
   margin-bottom: 22px;
+  flex-wrap: wrap;
 }
 
 .search-input {
   position: relative;
   flex: 1;
+  min-width: 0;
   max-width: 560px;
+}
+
+@media (max-width: 640px) {
+  .search-input {
+    flex-basis: 100%;
+    max-width: none;
+  }
 }
 
 .search-input svg {
@@ -171,6 +190,28 @@
 
 .table-card tbody tr:hover {
   background: var(--slate-40);
+}
+
+/* Telefonda hücre boşluk/yazıları küçülür, böylece daha çok kolon sığar */
+@media (max-width: 768px) {
+  .table-card th {
+    padding: 12px 12px;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+
+  .table-card td {
+    padding: 12px 12px;
+    font-size: 12px;
+  }
+
+  .table-card td strong {
+    font-size: 13px;
+  }
+
+  .table-card td span {
+    font-size: 11px;
+  }
 }
 
 .right {

@@ -278,3 +278,27 @@
     color: var(--base-white);
   }
 }
+
+/* Telefonda aşama kartı dikey yığılır: buton/aksiyonlar alta iner, kesilmez */
+@media (max-width: 768px) {
+  .row {
+    gap: 10px;
+  }
+
+  .card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 14px 16px;
+  }
+
+  .cardName {
+    font-size: 15px;
+  }
+
+  .cardRight {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+}

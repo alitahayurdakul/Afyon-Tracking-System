@@ -5,3 +5,45 @@
 .content {
   margin-left: 16rem;
 }
+
+/* Hamburger ve overlay yalnızca mobilde (≤768px) görünür */
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 1.5rem;
+  left: 1rem;
+  z-index: 250;
+  width: 2.75rem;
+  height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--slate-20);
+  border-radius: 0.75rem;
+  background: var(--white);
+  color: var(--slate-90);
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 190;
+  background: rgba(15, 23, 42, 0.5);
+}
+
+@media (max-width: 768px) {
+  .content {
+    margin-left: 0;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .overlay {
+    display: block;
+  }
+}

@@ -13,12 +13,21 @@
 
   color: white;
   font-weight: 700;
+  white-space: nowrap;
   box-shadow: 0 12px 28px rgba(0, 66, 134, 0.18);
   transition: 0.25s ease;
 }
 
 .fleet-btn:hover {
   transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .fleet-btn {
+    padding: 9px 11px;
+    gap: 5px;
+    font-size: 0.7rem;
+  }
 }
 
 // FORM
