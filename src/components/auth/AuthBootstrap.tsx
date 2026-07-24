@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 
 import { refreshAccessToken } from "@/api/queries/useAuthQueries";
 import { URL_PAGES } from "@/consts/url";
-import { routing } from "@/i18n/routing";
+import { routing, usePathname, useRouter } from "@/i18n/routing";
 import {
   clearAuth,
   getAccessTokenInMemory,

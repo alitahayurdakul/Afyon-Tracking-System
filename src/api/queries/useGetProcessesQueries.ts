@@ -1,5 +1,5 @@
 "use client";
-import { useParams, usePathname, useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -8,6 +8,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { axiosInstance } from "@/api/axiosInstance";
 import { ProcessQueryTypes } from "@/app/api/processes/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { usePathname } from "@/i18n/routing";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { RootState } from "@/redux/store";

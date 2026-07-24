@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -10,6 +10,8 @@ import {
   faComments,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { useRouter } from "@/i18n/routing";
 
 import styles from "@/styles/components/activeProcessDetail/InfoProcessContainer.module.scss";
 

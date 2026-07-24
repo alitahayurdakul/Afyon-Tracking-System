@@ -21,7 +21,7 @@ import {
   useGetWorkflowsOptionsDataQuery,
 } from "@/api/queries/useGetWorkflowsQueries";
 import { IWorkflowResponseTypes } from "@/types/workflowTypes";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/routing";
 import { CreateFleetFormValidation } from "@/utils/validations/createFleetFormValidation";
 import {
   useGetTrainDetailWagonsDataQuery,
