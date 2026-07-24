@@ -1,9 +1,9 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 import { useGetProcessTrainsDataQuery } from "@/api/useGetProcessTrains";
 import { URL_PAGES } from "@/consts/url";
+import { useRouter } from "@/i18n/routing";
 import { IProcessTrainSummary } from "@/types/processTrainTypes";
 
 import { LoadingChecker } from "../common/loaders/LoadingChecker";

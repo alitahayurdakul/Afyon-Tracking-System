@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,6 +17,7 @@ import SpinnerIcon from "@/components/icons/SpinnerIcon";
 import { PopoverBody } from "@/components/Popover";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { PASSWORD_FORM_CONSTS } from "@/consts/profileConsts";
+import { useRouter } from "@/i18n/routing";
 import { clearAuth } from "@/redux/slices/authSlice";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { RootState } from "@/redux/store";

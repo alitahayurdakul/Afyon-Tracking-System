@@ -2,12 +2,12 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import clsx from "clsx";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { usePathname } from "@/i18n/routing";
 import { ISidebarItemTypes } from "@/types/sidebarTypes";
 import { stripLocale } from "@/utils/stripLocale";
 
