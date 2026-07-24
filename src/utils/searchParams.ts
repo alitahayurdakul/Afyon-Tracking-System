@@ -1,10 +1,18 @@
 "use client";
 
 import { useCallback } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
+// Modal görünürlüğü tamamen URL'deki ?modal= param'ına bağlı olduğu için, kapatma
+// da URL'i güvenilir şekilde güncellemeli. router.replace kullanınca Next.js App
+// Router'ın client cache'i ikinci kez aynı temiz URL'e gidildiğinde rotayı
+// cache'ten servis edip useSearchParams'ı yeniden okutmuyordu → ilk modal kapanıp
+// sonrakiler kapanmıyordu (özellikle Vercel prod build'inde).
+//
+// window.history.replaceState, Next tarafından enstrümante edilir: RSC navigasyon
+// ve cache makinesini atlar, URL'i doğrudan günceller; useSearchParams/usePathname
+// her seferinde yeniden okur. Bu yüzden query-only değişikliklerde bunu kullanıyoruz.
 export const useRemoveQueryParamModal = () => {
-  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -16,14 +24,13 @@ export const useRemoveQueryParamModal = () => {
       const queryString = params.toString();
       const url = queryString ? `${pathname}?${queryString}` : pathname;
 
-      router.replace(url, { scroll: false });
+      window.history.replaceState(null, "", url);
     },
-    [router, pathname, searchParams],
+    [pathname, searchParams],
   );
 };
 
 export const useAddQueryParam = () => {
-  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -32,8 +39,8 @@ export const useAddQueryParam = () => {
       const params = new URLSearchParams(searchParams.toString());
       params.set(willAddKey, willQueryValue);
 
-      router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+      window.history.replaceState(null, "", `${pathname}?${params.toString()}`);
     },
-    [router, pathname, searchParams],
+    [pathname, searchParams],
   );
 };
