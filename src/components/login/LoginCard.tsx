@@ -1,13 +1,13 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useDispatch } from "react-redux";
 
 import { useLoginMutation } from "@/api/queries/useAuthQueries";
 import { InputField } from "@/components/common/InputField";
 import { URL_PAGES } from "@/consts/url";
+import { useRouter } from "@/i18n/routing";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { extractApiError } from "@/utils/extractApiError";
 
