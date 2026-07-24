@@ -14,7 +14,7 @@
   "total-elapsed-time": "Toplam Geçen Süre",
   "active-projects": "Aktif Projeler",
   "active-projects-select-explaining": "Canlı iş akışı ilerlemesini görüntülemek için bir tren seçin.",
-  "processId": "Süreç ID",
+  "projectName": "Proje Adı",
   "section": {
     "time-section-header": "Zaman Bilgileri",
     "delay-reason": "Gecikme Nedenleri",

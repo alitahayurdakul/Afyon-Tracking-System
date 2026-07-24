@@ -48,9 +48,9 @@ export const ProgressionContainer = ({
             <SkeletonContainer />
           ) : (
             <>
-              {t("processId")}:{" "}
-              <span className={styles["workflow-id"]}>
-                {data?.process?._id ?? "-"}
+              {t("projectName")}:{" "}
+              <span>
+                <b>{data?.process?.projectName ?? "-"}</b>
               </span>
             </>
           )}

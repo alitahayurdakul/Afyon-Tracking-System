@@ -4,7 +4,7 @@ import styles from "@/styles/components/workflowList/WorkflowForm.module.scss";
 import { Button } from "@/components/formElements/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { IFormFieldType, IOptionType } from "@/types/formTypes";
 import { InputBox } from "@/components/formElements/InputBox";
 import { InputSpaceEnums } from "@/utils/enum/formEnums";
@@ -17,7 +17,10 @@ import { WORKFLOW_FORM_CONSTS } from "@/consts/workflowConsts";
 import { SelectBox } from "@/components/formElements/SelectBox";
 import { WorkflowFormValidation } from "@/utils/validations/workflowFormValidation";
 import { axiosInstance } from "@/api/axiosInstance";
-import { useGetStagesDataQuery, useGetStagesOptionsDataQuery } from "@/api/queries/useGetStagesQueries";
+import {
+  useGetStagesDataQuery,
+  useGetStagesOptionsDataQuery,
+} from "@/api/queries/useGetStagesQueries";
 import { IStageResponseDataTypes, IStageType } from "@/types/stagesTypes";
 import { WorkflowQueryTypes } from "@/app/api/workflows/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
@@ -48,8 +51,19 @@ export const CreateWorkflowForm = () => {
   });
 
   const t = useTranslations("workflows");
-  const { data: stagesOptions, isLoading, isError, isFetching, refetch } =
-    useGetStagesOptionsDataQuery<IOptionType[]>();
+  const {
+    data: stagesOptions,
+    isLoading,
+    isError,
+    isFetching,
+    refetch,
+  } = useGetStagesOptionsDataQuery<IOptionType[]>();
+
+  const newStagesOptions = useMemo(() => {
+    return stagesOptions?.filter(
+      (stage: IOptionType) => stage.value !== "6a548d7444cc81ed74b22b6a",
+    );
+  }, [stagesOptions]);
 
   const dispatch = useDispatch();
   const currentUserName = useCurrentUserName();
@@ -71,20 +85,24 @@ export const CreateWorkflowForm = () => {
             plannedOrder: index + 1,
           };
         });
+        const qualityStage = {
+          stageInfo: "6a548d7444cc81ed74b22b6a",
+          plannedOrder: newStages.length + 1,
+        };
+
+        const lastStages =
+          newStages && newStages.length > 0 ? [...newStages, qualityStage] : [];
 
         const params = {
           ...rest,
           creator: currentUserName,
-          stages: newStages,
+          stages: lastStages,
         };
 
-        const response = await axiosInstance.post(
-          CLIENT_END_POINTS.workflow.create,
-          {
-            type: WorkflowQueryTypes.createWorkflow,
-            params,
-          },
-        );
+        await axiosInstance.post(CLIENT_END_POINTS.workflow.create, {
+          type: WorkflowQueryTypes.createWorkflow,
+          params,
+        });
         dispatch(
           addToastify({
             message: t("notifications.create.success"),
@@ -160,7 +178,7 @@ export const CreateWorkflowForm = () => {
             <React.Fragment key={index}>
               <SelectBox
                 name={item.name}
-                options={stagesOptions || []}
+                options={newStagesOptions || []}
                 // className={styles["row"]}
                 control={control as any}
                 required={item.isRequired}

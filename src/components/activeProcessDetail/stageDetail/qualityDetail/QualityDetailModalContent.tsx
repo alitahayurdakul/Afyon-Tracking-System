@@ -36,7 +36,7 @@ const Chevron = ({ open, small }: { open: boolean; small?: boolean }) => (
   </svg>
 );
 
-export const QuantityDetailModalContent = ({
+export const QualityDetailModalContent = ({
   stages,
   entryId,
   stageStatus,
@@ -142,7 +142,7 @@ export const QuantityDetailModalContent = ({
                                 <div className={styles.subStageBody}>
                                   {sub.subStageId.description && (
                                     <p className={styles.subStageDescription}>
-                                      {sub.subStageId.description}
+                                      {sub.description}
                                     </p>
                                   )}
                                   {!!sub.materials?.length && (
