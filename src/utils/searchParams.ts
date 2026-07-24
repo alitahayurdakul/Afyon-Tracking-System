@@ -1,24 +1,25 @@
 "use client";
 
 import { useCallback } from "react";
-import { useSearchParams } from "next/navigation";
-
-import { usePathname, useRouter } from "@/i18n/routing";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export const useRemoveQueryParamModal = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  return useCallback((name?: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.delete(name ?? "modal");
+  return useCallback(
+    (name?: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.delete(name ?? "modal");
 
-    const queryString = params.toString();
-    const url = queryString ? `${pathname}?${queryString}` : pathname;
+      const queryString = params.toString();
+      const url = queryString ? `${pathname}?${queryString}` : pathname;
 
-    router.replace(url, { scroll: false });
-  }, [router, pathname, searchParams]);
+      router.replace(url, { scroll: false });
+    },
+    [router, pathname, searchParams],
+  );
 };
 
 export const useAddQueryParam = () => {
@@ -33,6 +34,6 @@ export const useAddQueryParam = () => {
 
       router.replace(`${pathname}?${params.toString()}`, { scroll: false });
     },
-    [router, pathname, searchParams]
+    [router, pathname, searchParams],
   );
 };
