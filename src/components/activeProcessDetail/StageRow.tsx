@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 import { useStartStage } from "@/api/queries/useGetProcessesQueries";
+import { QUALITY_STAGE_ID } from "@/consts/workflowConsts";
 import { IProcessEntry, IStage } from "@/types/processTypes";
 import { StatusEnums } from "@/utils/enum/commonEnums";
 import { formatDate } from "@/utils/formDate";
@@ -34,6 +35,7 @@ export default function StageRow({
   entriesEqStages,
   stages,
 }: StageRowProps) {
+  const qualityId = QUALITY_STAGE_ID;
   const time = () => {
     const startTime = new Date(
       entryForStage?.startedAt ?? "2026-04-19T08:00:00Z",
@@ -51,10 +53,7 @@ export default function StageRow({
   const t = useTranslations("activeProcessDetail");
   const currentUserName = useCurrentUserName();
 
-  const {
-    mutate,
-    isPending
-  } = useStartStage();
+  const { mutate, isPending } = useStartStage();
 
   const startStage = async () => {
     const payload = {
@@ -76,9 +75,7 @@ export default function StageRow({
         {nodeLabel}
       </div>
 
-      <div
-        className={`${styles.card} ${styles[getStatus(stage.status)]}`}
-      >
+      <div className={`${styles.card} ${styles[getStatus(stage.status)]}`}>
         <div className={styles.cardLeft}>
           <span className={styles.cardName}>
             {stage.name}
@@ -120,7 +117,7 @@ export default function StageRow({
               align="start"
               triggerBody={
                 <div>
-                  {stage.stageId === "6a548d7444cc81ed74b22b6a" ? (
+                  {stage.stageId === qualityId ? (
                     entriesEqStages ? (
                       <button className={styles.startBtn}>
                         {t("buttons.start-stage")}
@@ -168,9 +165,7 @@ export default function StageRow({
               stageName={stage.name ?? ""}
               stageStatus={stage.status}
               entryId={entryForStage?._id ?? ""}
-              isQuality={
-                stage.stageId === "6a548d7444cc81ed74b22b6a" && entriesEqStages
-              }
+              isQuality={stage.stageId === qualityId && entriesEqStages}
               stages={stages}
             />
           )}

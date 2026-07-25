@@ -17,7 +17,7 @@ import { InputBox } from "@/components/formElements/InputBox";
 import { SelectBox } from "@/components/formElements/SelectBox";
 import { TextAreaBox } from "@/components/formElements/TextAreaBox";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { WORKFLOW_FORM_CONSTS } from "@/consts/workflowConsts";
+import { QUALITY_STAGE_ID, WORKFLOW_FORM_CONSTS } from "@/consts/workflowConsts";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { IFormFieldType, IOptionType } from "@/types/formTypes";
@@ -31,6 +31,7 @@ import styles from "@/styles/components/workflowList/WorkflowForm.module.scss";
 
 export const CreateWorkflowForm = () => {
   const tValidation = useTranslations("layout.validation-errors");
+  const qualityId = QUALITY_STAGE_ID;
   const {
     control,
     handleSubmit,
@@ -56,7 +57,7 @@ export const CreateWorkflowForm = () => {
 
   const newStagesOptions = useMemo(() => {
     return stagesOptions?.filter(
-      (stage: IOptionType) => stage.value !== "6a548d7444cc81ed74b22b6a",
+      (stage: IOptionType) => stage.value !== qualityId,
     );
   }, [stagesOptions]);
 
@@ -81,7 +82,7 @@ export const CreateWorkflowForm = () => {
           };
         });
         const qualityStage = {
-          stageInfo: "6a548d7444cc81ed74b22b6a",
+          stageInfo: qualityId,
           plannedOrder: newStages.length + 1,
         };
 

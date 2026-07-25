@@ -49,3 +49,5 @@ export const EDIT_WORKFLOW_FORM_CONSTS: IFormFieldsType = [
     isRequired: true,
   },
 ];
+
+export const QUALITY_STAGE_ID = "6a548d7444cc81ed74b22b6a";
