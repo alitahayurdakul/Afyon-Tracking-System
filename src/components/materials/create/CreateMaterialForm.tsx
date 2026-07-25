@@ -1,26 +1,29 @@
 "use client";
-/* eslint-disable */
+
+
+import { useCallback } from "react";
+import { useTranslations } from "next-intl";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { axiosInstance } from "@/api/axiosInstance";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { MaterialQueryTypes } from "@/app/api/materials/route";
+import { Button } from "@/components/formElements/Button";
+import { InputBox } from "@/components/formElements/InputBox";
+import { TextAreaBox } from "@/components/formElements/TextAreaBox";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { addToastify } from "@/redux/slices/toastSlice";
+import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import { IMaterialFormDataTypes } from "@/types/materialsTypes";
+import { InputSpaceEnums } from "@/utils/enum/formEnums";
+import { extractApiError } from "@/utils/extractApiError";
+import { useRemoveQueryParamModal } from "@/utils/searchParams";
+import { MaterialFormValidation } from "@/utils/validations/materialFormValidation";
 
 import styles from "@/styles/components/materials/MaterialForm.module.scss";
-import { Button } from "@/components/formElements/Button";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { MaterialFormValidation } from "@/utils/validations/materialFormValidation";
-import { useCallback } from "react";
-import { TextAreaBox } from "@/components/formElements/TextAreaBox";
-import { InputBox } from "@/components/formElements/InputBox";
-import { InputSpaceEnums } from "@/utils/enum/formEnums";
-import { useRemoveQueryParamModal } from "@/utils/searchParams";
-import { useDispatch } from "react-redux";
-import { addToastify } from "@/redux/slices/toastSlice";
-import { IMaterialFormDataTypes } from "@/types/materialsTypes";
-import { axiosInstance } from "@/api/axiosInstance";
-import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { MaterialQueryTypes } from "@/app/api/materials/route";
-import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import { useTranslations } from "next-intl";
-import { extractApiError } from "@/utils/extractApiError";
-import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 
 export const CreateMaterialForm = () => {
   const tValidation = useTranslations("layout.validation-errors");
@@ -29,7 +32,7 @@ export const CreateMaterialForm = () => {
     handleSubmit,
     register,
     reset,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
   } = useForm<IMaterialFormDataTypes>({
     resolver: yupResolver(MaterialFormValidation(tValidation)),
     defaultValues: {

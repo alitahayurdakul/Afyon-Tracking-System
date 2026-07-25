@@ -1,34 +1,37 @@
 "use client";
-/* eslint-disable */
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
-import styles from "@/styles/components/workflowList/WorkflowForm.module.scss";
-import { Button } from "@/components/formElements/Button";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+
 import React, { useCallback } from "react";
-import { IFormFieldType, IOptionType } from "@/types/formTypes";
-import { InputBox } from "@/components/formElements/InputBox";
-import { InputSpaceEnums } from "@/utils/enum/formEnums";
-import { TextAreaBox } from "@/components/formElements/TextAreaBox";
-import { useRemoveQueryParamModal } from "@/utils/searchParams";
-import { useDispatch } from "react-redux";
-import { addToastify } from "@/redux/slices/toastSlice";
-import { SelectBox } from "@/components/formElements/SelectBox";
-import { axiosInstance } from "@/api/axiosInstance";
-import { useGetStagesDataQuery } from "@/api/queries/useGetStagesQueries";
-import { IStageFormDataTypes, IStageType } from "@/types/stagesTypes";
-import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import { StageFormValidation } from "@/utils/validations/stageFormValidation";
-import SelectedItemList from "@/components/common/SelectedItemList";
-import { STAGE_FORM_CONSTS } from "@/consts/stagesConsts";
 import { useTranslations } from "next-intl";
-import { optionsConverters } from "@/types/optionsConverter";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { axiosInstance } from "@/api/axiosInstance";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 import { useGetSubStagesOptionsListDataQuery } from "@/api/queries/useGetSubStagesManageQueries";
 import { StageQueryTypes } from "@/app/api/stages/route";
+import SelectedItemList from "@/components/common/SelectedItemList";
+import { Button } from "@/components/formElements/Button";
+import { InputBox } from "@/components/formElements/InputBox";
+import { SelectBox } from "@/components/formElements/SelectBox";
+import { TextAreaBox } from "@/components/formElements/TextAreaBox";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { STAGE_FORM_CONSTS } from "@/consts/stagesConsts";
+import { addToastify } from "@/redux/slices/toastSlice";
+import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import { IFormFieldType, IOptionType } from "@/types/formTypes";
+import { optionsConverters } from "@/types/optionsConverter";
+import { IStageFormDataTypes, IStageType } from "@/types/stagesTypes";
+import { InputSpaceEnums } from "@/utils/enum/formEnums";
+import { extractApiError } from "@/utils/extractApiError";
 import { formatDate } from "@/utils/formDate";
-import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { useRemoveQueryParamModal } from "@/utils/searchParams";
+import { StageFormValidation } from "@/utils/validations/stageFormValidation";
+
+import styles from "@/styles/components/workflowList/WorkflowForm.module.scss";
 
 interface IPropsTypes {
   id: string;
@@ -45,9 +48,7 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
     watch,
     setValue,
     reset,
-    // clearErrors,
-    // setFocus,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
   } = useForm<IStageFormDataTypes>({
     resolver: yupResolver(StageFormValidation(tValidation)),
     defaultValues: {
@@ -57,13 +58,8 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
     },
   });
 
-  const {
-    data: subStagesOptions,
-    isLoading,
-    isError,
-    isFetching,
-    refetch,
-  } = useGetSubStagesOptionsListDataQuery<IOptionType[]>();
+  const { data: subStagesOptions, isLoading } =
+    useGetSubStagesOptionsListDataQuery<IOptionType[]>();
 
   const dispatch = useDispatch();
   const currentUserName = useCurrentUserName();
@@ -110,7 +106,7 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
       } catch (err) {
         dispatch(
           addToastify({
-            message: t("form.notifications.editError"),
+            message: extractApiError(err, t("form.notifications.editError")),
             type: "error",
             icon: "close",
             id: "editStageError" + Date.now(),
@@ -180,6 +176,7 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
                 multiselect
                 isClearable
                 hideSelectedOptions
+                loading={isLoading}
               />
             </React.Fragment>
           );
@@ -196,7 +193,7 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
         />
       )}
 
-            <section className={styles["activity-section"]}>
+      <section className={styles["activity-section"]}>
         <div className={styles["activity-row"]}>
           <span className={styles["activity-label"]}>
             {t("form.activity.creator")}

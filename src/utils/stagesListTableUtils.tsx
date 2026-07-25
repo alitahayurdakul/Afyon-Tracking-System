@@ -2,18 +2,18 @@
 // import { TooltipBody } from "@/components/TooltipBody";
 // import { PAGE_URLS } from "@/consts/url";
 // import { localizedDateConverter } from "@/functions/dateConverter";
-/* eslint-disable */
-import {
-  ICommonTableColumnsTypes,
-  ICommonTableColumnsType
-} from "@/types/tableColumnTypes";
+
+import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
+import { StagesTableActionsCol } from "@/components/stages/StagesTableActionsCol";
 import { TFunction } from "@/types/commonTypes";
+import {
+  ICommonTableColumnsType,
+  ICommonTableColumnsTypes} from "@/types/tableColumnTypes";
+
+import { formatDate } from "./formDate";
 
 // import styles from "@/styles/components/table/CommonDashboardTable.module.scss";
 import styles from "@/styles/components/stages/StagesListTableUtils.module.scss";
-import { StagesTableActionsCol } from "@/components/stages/StagesTableActionsCol";
-import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
-import { formatDate } from "./formDate";
 
 export const stagesTableColumns: ICommonTableColumnsTypes = [
   {

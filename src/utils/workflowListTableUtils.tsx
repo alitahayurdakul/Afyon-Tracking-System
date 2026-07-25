@@ -1,16 +1,18 @@
-/* eslint-disable */
+
+import React from "react";
+
+import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
+import { WorkflowTableActionsCol } from "@/components/workflows/WorkflowTableActionsCol";
+import { TFunction } from "@/types/commonTypes";
 import {
-  ICommonTableColumnsTypes,
   ICommonTableColumnsType,
+  ICommonTableColumnsTypes,
 } from "@/types/tableColumnTypes";
+import { IStageType } from "@/types/workflowTypes";
+
+import { formatDate } from "./formDate";
 
 import styles from "@/styles/components/stages/StagesListTableUtils.module.scss";
-import { WorkflowTableActionsCol } from "@/components/workflows/WorkflowTableActionsCol";
-import { formatDate } from "./formDate";
-import { TFunction } from "@/types/commonTypes";
-import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
-import React from "react";
-import { IStageType } from "@/types/workflowTypes";
 
 export const workflowTableColumns: ICommonTableColumnsTypes = [
   {

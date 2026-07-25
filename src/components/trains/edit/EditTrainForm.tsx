@@ -1,36 +1,39 @@
 "use client";
-/* eslint-disable */
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
-import styles from "@/styles/components/trains/TrainForm.module.scss";
-import { Button } from "@/components/formElements/Button";
+
+import React, { useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
+
+import { axiosInstance } from "@/api/axiosInstance";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { TrainQueryTypes } from "@/app/api/trains/route";
+import SelectedItemList from "@/components/common/SelectedItemList";
+import { Button } from "@/components/formElements/Button";
+import { InputBox } from "@/components/formElements/InputBox";
+import { SelectBox } from "@/components/formElements/SelectBox";
+import { TextAreaBox } from "@/components/formElements/TextAreaBox";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { TRAIN_FORM_CONSTS } from "@/consts/trainsConsts";
+import { addToastify } from "@/redux/slices/toastSlice";
+import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import { IFormFieldType, IOptionType } from "@/types/formTypes";
 import {
   ITrainFormDataTypes,
   ITrainType,
   IWagonDetail,
 } from "@/types/trainsTypes";
-import { TrainFormValidation } from "@/utils/validations/trainFormValidation";
-import React, { useCallback } from "react";
-import { IFormFieldType, IOptionType } from "@/types/formTypes";
-import { TRAIN_FORM_CONSTS } from "@/consts/trainsConsts";
-import { InputBox } from "@/components/formElements/InputBox";
 import { InputSpaceEnums } from "@/utils/enum/formEnums";
-import { TextAreaBox } from "@/components/formElements/TextAreaBox";
-import { useRemoveQueryParamModal } from "@/utils/searchParams";
-import { axiosInstance } from "@/api/axiosInstance";
-import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { TrainQueryTypes } from "@/app/api/trains/route";
-import { addToastify } from "@/redux/slices/toastSlice";
-import { useDispatch } from "react-redux";
-import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { formatDate } from "@/utils/formDate";
-import { SelectBox } from "@/components/formElements/SelectBox";
-import { useTranslations } from "next-intl";
-import SelectedItemList from "@/components/common/SelectedItemList";
-import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { useRemoveQueryParamModal } from "@/utils/searchParams";
+import { TrainFormValidation } from "@/utils/validations/trainFormValidation";
+
+import styles from "@/styles/components/trains/TrainForm.module.scss";
 
 interface IPropsTypes {
   id: string;
@@ -47,8 +50,7 @@ export const EditTrainForm = ({ id, data, wagonOptions }: IPropsTypes) => {
     register,
     watch,
     setValue,
-    reset,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
   } = useForm<ITrainFormDataTypes>({
     resolver: yupResolver(TrainFormValidation(tValidation)),
     defaultValues: {

@@ -1,30 +1,32 @@
 "use client";
-/* eslint-disable */
 
-import { extractApiError } from "@/utils/extractApiError";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
-import styles from "@/styles/components/users/UserForm.module.scss";
-import { Button } from "@/components/formElements/Button";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { IUserEditFormDataTypes, IUserType } from "@/types/usersTypes";
-import { UserEditFormValidation } from "@/utils/validations/userFormValidation";
+
 import React, { useCallback } from "react";
+import { useTranslations } from "next-intl";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { axiosInstance } from "@/api/axiosInstance";
+import { useGetRolesOptionsQuery } from "@/api/queries/useGetRolesQueries";
+import { UserQueryTypes } from "@/app/api/users/route";
+import { Button } from "@/components/formElements/Button";
+import { CheckBox } from "@/components/formElements/Checkbox";
 import { InputBox } from "@/components/formElements/InputBox";
 import { SelectBox } from "@/components/formElements/SelectBox";
-import { InputSpaceEnums } from "@/utils/enum/formEnums";
-import { useRemoveQueryParamModal } from "@/utils/searchParams";
-import { addToastify } from "@/redux/slices/toastSlice";
-import { useDispatch } from "react-redux";
-import { axiosInstance } from "@/api/axiosInstance";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { UserQueryTypes } from "@/app/api/users/route";
+import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import { USER_DEPARTMENT_OPTIONS } from "@/consts/usersConsts";
-import { CheckBox } from "@/components/formElements/Checkbox";
-import { useGetRolesOptionsQuery } from "@/api/queries/useGetRolesQueries";
-import { useTranslations } from "next-intl";
+import { IUserEditFormDataTypes, IUserType } from "@/types/usersTypes";
+import { InputSpaceEnums } from "@/utils/enum/formEnums";
+import { extractApiError } from "@/utils/extractApiError";
+import { useRemoveQueryParamModal } from "@/utils/searchParams";
+import { UserEditFormValidation } from "@/utils/validations/userFormValidation";
+
+import styles from "@/styles/components/users/UserForm.module.scss";
 
 interface IPropsTypes {
   id: string;

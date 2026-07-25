@@ -1,30 +1,33 @@
 "use client";
-/* eslint-disable */
 
-import styles from "@/styles/components/subStages/SubStageForm.module.scss";
-import { Button } from "@/components/formElements/Button";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { SubStageFormValidation } from "@/utils/validations/subStageFormValidation";
-import { useTranslations } from "next-intl";
+
 import { useCallback } from "react";
-import { TextAreaBox } from "@/components/formElements/TextAreaBox";
+import { useTranslations } from "next-intl";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { axiosInstance } from "@/api/axiosInstance";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { useGetMaterialsOptionsDataQuery } from "@/api/queries/useGetMaterialsQueries";
+import { SubStageQueryTypes } from "@/app/api/sub-stages/route";
+import SelectedItemList from "@/components/common/SelectedItemList";
+import { Button } from "@/components/formElements/Button";
 import { InputBox } from "@/components/formElements/InputBox";
 import { SelectBox } from "@/components/formElements/SelectBox";
-import { InputSpaceEnums } from "@/utils/enum/formEnums";
-import { useRemoveQueryParamModal } from "@/utils/searchParams";
-import { useDispatch } from "react-redux";
-import { addToastify } from "@/redux/slices/toastSlice";
-import { ISubStageFormDataTypes } from "@/types/subStagesTypes";
-import { IOptionType } from "@/types/formTypes";
-import { axiosInstance } from "@/api/axiosInstance";
+import { TextAreaBox } from "@/components/formElements/TextAreaBox";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { SubStageQueryTypes } from "@/app/api/sub-stages/route";
+import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import { useGetMaterialsOptionsDataQuery } from "@/api/queries/useGetMaterialsQueries";
-import SelectedItemList from "@/components/common/SelectedItemList";
+import { IOptionType } from "@/types/formTypes";
+import { ISubStageFormDataTypes } from "@/types/subStagesTypes";
+import { InputSpaceEnums } from "@/utils/enum/formEnums";
 import { extractApiError } from "@/utils/extractApiError";
-import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { useRemoveQueryParamModal } from "@/utils/searchParams";
+import { SubStageFormValidation } from "@/utils/validations/subStageFormValidation";
+
+import styles from "@/styles/components/subStages/SubStageForm.module.scss";
 
 export const CreateSubStageForm = () => {
   const tValidation = useTranslations("layout.validation-errors");

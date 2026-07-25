@@ -1,4 +1,4 @@
-/* eslint-disable */
+
 
 "use client";
 
@@ -8,9 +8,8 @@ import clsx from "clsx";
 
 import * as Dialog from "@radix-ui/react-dialog";
 
-import { useAddQueryParam, useRemoveQueryParamModal } from "@/utils/searchParams";
-
 import { NewSpinner } from "@/components/loaders/NewSpinner";
+import { useAddQueryParam, useRemoveQueryParamModal } from "@/utils/searchParams";
 
 import styles from "@/styles/components/common/Modal.module.scss";
 

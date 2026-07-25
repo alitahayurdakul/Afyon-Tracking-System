@@ -1,30 +1,33 @@
 "use client";
-/* eslint-disable */
 
-import styles from "@/styles/components/trains/TrainForm.module.scss";
-import { Button } from "@/components/formElements/Button";
-import { SubmitHandler, useForm, useFieldArray } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { TrainFormValidation } from "@/utils/validations/trainFormValidation";
-import React, { useCallback, useEffect } from "react";
-import { IFormFieldType, IOptionType } from "@/types/formTypes";
-import { TRAIN_FORM_CONSTS } from "@/consts/trainsConsts";
-import { InputBox } from "@/components/formElements/InputBox";
-import { InputSpaceEnums } from "@/utils/enum/formEnums";
-import { TextAreaBox } from "@/components/formElements/TextAreaBox";
-import { useRemoveQueryParamModal } from "@/utils/searchParams";
-import { useDispatch } from "react-redux";
-import { ITrainFormDataTypes } from "@/types/trainsTypes";
-import { SelectBox } from "@/components/formElements/SelectBox";
+
+import React, { useCallback } from "react";
 import { useTranslations } from "next-intl";
+import { SubmitHandler,useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+
 import { axiosInstance } from "@/api/axiosInstance";
-import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { useGetWagonsOptionsQuery } from "@/api/queries/useGetWagonsQueries";
 import { TrainQueryTypes } from "@/app/api/trains/route";
+import SelectedItemList from "@/components/common/SelectedItemList";
+import { Button } from "@/components/formElements/Button";
+import { InputBox } from "@/components/formElements/InputBox";
+import { SelectBox } from "@/components/formElements/SelectBox";
+import { TextAreaBox } from "@/components/formElements/TextAreaBox";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { TRAIN_FORM_CONSTS } from "@/consts/trainsConsts";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import SelectedItemList from "@/components/common/SelectedItemList";
-import { useGetWagonsOptionsQuery } from "@/api/queries/useGetWagonsQueries";
-import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { IFormFieldType, IOptionType } from "@/types/formTypes";
+import { ITrainFormDataTypes } from "@/types/trainsTypes";
+import { InputSpaceEnums } from "@/utils/enum/formEnums";
+import { useRemoveQueryParamModal } from "@/utils/searchParams";
+import { TrainFormValidation } from "@/utils/validations/trainFormValidation";
+
+import styles from "@/styles/components/trains/TrainForm.module.scss";
 
 export const CreateTrainForm = () => {
   const tValidation = useTranslations("layout.validation-errors");
@@ -36,7 +39,7 @@ export const CreateTrainForm = () => {
     watch,
     setValue,
     reset,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
   } = useForm<ITrainFormDataTypes>({
     resolver: yupResolver(TrainFormValidation(tValidation)),
     defaultValues: {
@@ -142,6 +145,7 @@ export const CreateTrainForm = () => {
                 isSearchable
                 isClearable
                 hideSelectedOptions
+                loading={isLoading}
               />
             </React.Fragment>
           );

@@ -1,33 +1,33 @@
 "use client";
-/* eslint-disable */
-import styles from "@/styles/components/workflowList/WorkflowForm.module.scss";
-import { Button } from "@/components/formElements/Button";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+
 import React, { useCallback, useMemo } from "react";
-import { IFormFieldType, IOptionType } from "@/types/formTypes";
-import { InputBox } from "@/components/formElements/InputBox";
-import { InputSpaceEnums } from "@/utils/enum/formEnums";
-import { TextAreaBox } from "@/components/formElements/TextAreaBox";
-import { useRemoveQueryParamModal } from "@/utils/searchParams";
-import { useDispatch } from "react-redux";
-import { addToastify } from "@/redux/slices/toastSlice";
-import { IWorkflowFormDataTypes } from "@/types/workflowTypes";
-import { WORKFLOW_FORM_CONSTS } from "@/consts/workflowConsts";
-import { SelectBox } from "@/components/formElements/SelectBox";
-import { WorkflowFormValidation } from "@/utils/validations/workflowFormValidation";
-import { axiosInstance } from "@/api/axiosInstance";
-import {
-  useGetStagesDataQuery,
-  useGetStagesOptionsDataQuery,
-} from "@/api/queries/useGetStagesQueries";
-import { IStageResponseDataTypes, IStageType } from "@/types/stagesTypes";
-import { WorkflowQueryTypes } from "@/app/api/workflows/route";
-import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import SelectedItemList from "@/components/common/SelectedItemList";
 import { useTranslations } from "next-intl";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { axiosInstance } from "@/api/axiosInstance";
 import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { useGetStagesOptionsDataQuery } from "@/api/queries/useGetStagesQueries";
+import { WorkflowQueryTypes } from "@/app/api/workflows/route";
+import SelectedItemList from "@/components/common/SelectedItemList";
+import { Button } from "@/components/formElements/Button";
+import { InputBox } from "@/components/formElements/InputBox";
+import { SelectBox } from "@/components/formElements/SelectBox";
+import { TextAreaBox } from "@/components/formElements/TextAreaBox";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { WORKFLOW_FORM_CONSTS } from "@/consts/workflowConsts";
+import { addToastify } from "@/redux/slices/toastSlice";
+import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import { IFormFieldType, IOptionType } from "@/types/formTypes";
+import { IWorkflowFormDataTypes } from "@/types/workflowTypes";
+import { InputSpaceEnums } from "@/utils/enum/formEnums";
+import { extractApiError } from "@/utils/extractApiError";
+import { useRemoveQueryParamModal } from "@/utils/searchParams";
+import { WorkflowFormValidation } from "@/utils/validations/workflowFormValidation";
+
+import styles from "@/styles/components/workflowList/WorkflowForm.module.scss";
 
 export const CreateWorkflowForm = () => {
   const tValidation = useTranslations("layout.validation-errors");
@@ -40,7 +40,7 @@ export const CreateWorkflowForm = () => {
     reset,
     // clearErrors,
     // setFocus,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
   } = useForm<IWorkflowFormDataTypes>({
     resolver: yupResolver(WorkflowFormValidation(tValidation)),
     defaultValues: {
@@ -51,13 +51,8 @@ export const CreateWorkflowForm = () => {
   });
 
   const t = useTranslations("workflows");
-  const {
-    data: stagesOptions,
-    isLoading,
-    isError,
-    isFetching,
-    refetch,
-  } = useGetStagesOptionsDataQuery<IOptionType[]>();
+  const { data: stagesOptions, isLoading } =
+    useGetStagesOptionsDataQuery<IOptionType[]>();
 
   const newStagesOptions = useMemo(() => {
     return stagesOptions?.filter(
@@ -117,7 +112,7 @@ export const CreateWorkflowForm = () => {
       } catch (err) {
         dispatch(
           addToastify({
-            message: t("notifications.create.error"),
+            message: extractApiError(err, t("notifications.create.error")),
             type: "error",
             icon: "close",
             id: "createWorkflowError" + Date.now(),
@@ -189,6 +184,7 @@ export const CreateWorkflowForm = () => {
                 multiselect
                 isClearable
                 hideSelectedOptions
+                loading={isLoading}
               />
             </React.Fragment>
           );

@@ -1,40 +1,42 @@
 "use client";
-/* eslint-disable */
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
-import styles from "@/styles/components/subStages/SubStageForm.module.scss";
-import { Button } from "@/components/formElements/Button";
+
+import React, { useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { yupResolver } from "@hookform/resolvers/yup";
+
+import { axiosInstance } from "@/api/axiosInstance";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import {
+  useGetMaterialsOptionsDataQuery,
+} from "@/api/queries/useGetMaterialsQueries";
+import { SubStageQueryTypes } from "@/app/api/sub-stages/route";
+import SelectedItemList from "@/components/common/SelectedItemList";
+import { Button } from "@/components/formElements/Button";
+import { InputBox } from "@/components/formElements/InputBox";
+import { SelectBox } from "@/components/formElements/SelectBox";
+import { TextAreaBox } from "@/components/formElements/TextAreaBox";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { addToastify } from "@/redux/slices/toastSlice";
+import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import { IOptionType } from "@/types/formTypes";
 import {
   ISubStageFormDataTypes,
   ISubStageMaterial,
   ISubStageType,
 } from "@/types/subStagesTypes";
-import { SubStageFormValidation } from "@/utils/validations/subStageFormValidation";
-import { useTranslations } from "next-intl";
-import React, { useCallback, useMemo } from "react";
-import { TextAreaBox } from "@/components/formElements/TextAreaBox";
-import { InputBox } from "@/components/formElements/InputBox";
-import { SelectBox } from "@/components/formElements/SelectBox";
 import { InputSpaceEnums } from "@/utils/enum/formEnums";
-import { useRemoveQueryParamModal } from "@/utils/searchParams";
-import { addToastify } from "@/redux/slices/toastSlice";
-import { useDispatch } from "react-redux";
-import { formatDate } from "@/utils/formDate";
-import { axiosInstance } from "@/api/axiosInstance";
-import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { SubStageQueryTypes } from "@/app/api/sub-stages/route";
-import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import { IOptionType } from "@/types/formTypes";
-import {
-  useGetMaterialsDataQuery,
-  useGetMaterialsOptionsDataQuery,
-} from "@/api/queries/useGetMaterialsQueries";
-import SelectedItemList from "@/components/common/SelectedItemList";
 import { extractApiError } from "@/utils/extractApiError";
-import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { formatDate } from "@/utils/formDate";
+import { useRemoveQueryParamModal } from "@/utils/searchParams";
+import { SubStageFormValidation } from "@/utils/validations/subStageFormValidation";
+
+import styles from "@/styles/components/subStages/SubStageForm.module.scss";
 
 interface IPropsTypes {
   id: string;

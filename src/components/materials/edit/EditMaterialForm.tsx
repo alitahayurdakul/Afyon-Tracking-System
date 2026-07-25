@@ -1,29 +1,32 @@
 "use client";
-/* eslint-disable */
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
-import styles from "@/styles/components/materials/MaterialForm.module.scss";
-import { Button } from "@/components/formElements/Button";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { IMaterialFormDataTypes, IMaterialType } from "@/types/materialsTypes";
-import { MaterialFormValidation } from "@/utils/validations/materialFormValidation";
+
 import React, { useCallback } from "react";
-import { TextAreaBox } from "@/components/formElements/TextAreaBox";
-import { InputBox } from "@/components/formElements/InputBox";
-import { InputSpaceEnums } from "@/utils/enum/formEnums";
-import { useRemoveQueryParamModal } from "@/utils/searchParams";
-import { addToastify } from "@/redux/slices/toastSlice";
-import { useDispatch } from "react-redux";
-import { formatDate } from "@/utils/formDate";
-import { axiosInstance } from "@/api/axiosInstance";
-import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { MaterialQueryTypes } from "@/app/api/materials/route";
-import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { useTranslations } from "next-intl";
-import { extractApiError } from "@/utils/extractApiError";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { axiosInstance } from "@/api/axiosInstance";
 import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { MaterialQueryTypes } from "@/app/api/materials/route";
+import { Button } from "@/components/formElements/Button";
+import { InputBox } from "@/components/formElements/InputBox";
+import { TextAreaBox } from "@/components/formElements/TextAreaBox";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { addToastify } from "@/redux/slices/toastSlice";
+import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import { IMaterialFormDataTypes, IMaterialType } from "@/types/materialsTypes";
+import { InputSpaceEnums } from "@/utils/enum/formEnums";
+import { extractApiError } from "@/utils/extractApiError";
+import { formatDate } from "@/utils/formDate";
+import { useRemoveQueryParamModal } from "@/utils/searchParams";
+import { MaterialFormValidation } from "@/utils/validations/materialFormValidation";
+
+import styles from "@/styles/components/materials/MaterialForm.module.scss";
 
 interface IPropsTypes {
   id: string;
@@ -36,7 +39,7 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
     control,
     handleSubmit,
     register,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
   } = useForm<IMaterialFormDataTypes>({
     resolver: yupResolver(MaterialFormValidation(tValidation)),
     defaultValues: {
