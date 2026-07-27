@@ -94,10 +94,18 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
           };
         });
 
+        const qualityStage = {
+          stageInfo: qualityId,
+          plannedOrder: newStages.length + 1,
+        };
+
+        const lastStages =
+          newStages && newStages.length > 0 ? [...newStages, qualityStage] : [];
+
         const params = {
           ...rest,
           editor: currentUserName,
-          stages: newStages,
+          stages: lastStages,
         };
         await axiosInstance.post(CLIENT_END_POINTS.workflow.edit, {
           type: WorkflowQueryTypes.editWorkflow,
@@ -201,12 +209,12 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
       {selectedStages && selectedStages.length > 0 && (
         <SelectedItemList
           name="stages"
-          selectedItems={[
-            ...selectedStages,
-            ...(qualityData?.value && qualityData?.label
+          selectedItems={selectedStages}
+          pinnedItems={
+            qualityData?.value && qualityData?.label
               ? [{ value: qualityData.value, label: qualityData.label }]
-              : []),
-          ]}
+              : []
+          }
           setValue={setValue}
           title={t("form.labels.selectedStages")}
         />
