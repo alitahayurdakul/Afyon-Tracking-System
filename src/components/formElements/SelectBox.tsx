@@ -56,6 +56,7 @@ export interface SelectBoxProps extends UseControllerProps {
   isSearchable?: boolean;
   hideSelectedOptions?: boolean;
   controlStyles?: any;
+  menuStyles?: any;
 }
 
 export type Ref = HTMLInputElement;
@@ -92,7 +93,8 @@ export const SelectBox = forwardRef<Ref, SelectBoxProps>(
       changeExtraFn,
       isSearchable = false,
       hideSelectedOptions = false,
-      controlStyles
+      controlStyles,
+      menuStyles
     } = props;
     const selectRef = useRef<any>(null);
     const [, setTrigger] = useState<number>(0);
@@ -391,6 +393,7 @@ export const SelectBox = forwardRef<Ref, SelectBoxProps>(
                 padding: 0,
                 backgroundColor: "var(--white)",
                 overflow: "hidden",
+                ...menuStyles
               }},
               option: (base: any, state: any) => {
                 return {
