@@ -3,9 +3,10 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 
-import {
-  useCompleteStage,
-} from "@/api/queries/useGetStageDetailDataQuery";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { useCompleteStage } from "@/api/queries/useGetStageDetailDataQuery";
 import { PopoverBody } from "@/components/Popover";
 import {
   DelayReasons,
@@ -61,7 +62,7 @@ export const QualityDetailModalContent = ({
 
   const {
     mutate: completeStageMutate,
-    // isPending: completeStagePending,
+    isPending: completeStagePending,
     // isError: completeStageisError,
     // error: completeStageError,
   } = useCompleteStage();
@@ -108,7 +109,9 @@ export const QualityDetailModalContent = ({
                     )}
 
                     {stage.subStages.length === 0 ? (
-                      <p className={styles.empty}>{t("section.no-sub-stages")}</p>
+                      <p className={styles.empty}>
+                        {t("section.no-sub-stages")}
+                      </p>
                     ) : (
                       <div className={styles.subAccordion}>
                         {stage.subStages.map((sub: SubStage) => {
@@ -164,9 +167,7 @@ export const QualityDetailModalContent = ({
                                       <b>{t("section.delay-reason")}</b>
                                       {sub.delayReasons.map(
                                         (m: DelayReasons) => (
-                                          <li key={m._id}>
-                                            {m.name}
-                                          </li>
+                                          <li key={m._id}>{m.name}</li>
                                         ),
                                       )}
                                     </ul>
@@ -211,7 +212,21 @@ export const QualityDetailModalContent = ({
             closeContainer={
               <div className={styles["btn-container"]}>
                 <button>{t("no")}</button>
-                <button onClick={completeStage}>{t("yes")}</button>
+                <button onClick={completeStage}>
+                  {" "}
+                  {completeStagePending ? (
+                    <FontAwesomeIcon
+                      icon={faSpinner}
+                      spin
+                      style={{
+                        animationDuration: "2s",
+                        color: "var(--slate-90)",
+                      }}
+                    />
+                  ) : (
+                    t("yes")
+                  )}
+                </button>
               </div>
             }
           />
