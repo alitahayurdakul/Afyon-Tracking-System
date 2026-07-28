@@ -204,9 +204,6 @@
     font-size: 11px;
   }
 
-  // Hücre içindeki tüm metinleri küçült (DynamicTextWithTooltip + per-page
-  // sınıflar dahil) — böylece satırlar alçalır, kolonlar daralır, daha çok
-  // kolon ekrana sığar
   .table-card td * {
     font-size: 11px !important;
     line-height: 1.3 !important;
