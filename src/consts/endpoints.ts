@@ -76,7 +76,8 @@ export const END_POINTS = {
     create: `${apiUrl}/api/roles`,
     edit: (id: string) => `${apiUrl}/api/roles/${id}`,
     delete: (id: string) => `${apiUrl}/api/roles/${id}`,
-    getAll: `${apiUrl}/api/roles`,
+    getAll: ({ pageSize, currentPage }: IPaginationTypes) =>
+      `${apiUrl}/api/roles?pageNumber=${currentPage}&pageSize=${pageSize}`,
     getDetail: (id: string) => `${apiUrl}/api/roles/${id}`,
   },
   auth: {
@@ -88,7 +89,8 @@ export const END_POINTS = {
     create: `${apiUrl}/register`,
     edit: (id: string) => `${apiUrl}/api/users/${id}`,
     delete: (id: string) => `${apiUrl}/api/users/${id}`,
-    getAll: `${apiUrl}/api/users`,
+    getAll: ({ pageSize, currentPage }: IPaginationTypes) =>
+      `${apiUrl}/api/users?pageNumber=${currentPage}&pageSize=${pageSize}`,
     getDetail: (id: string) => `${apiUrl}/api/users/${id}`,
     changePassword: (id: string) => `${apiUrl}/api/users/${id}/password`,
   },

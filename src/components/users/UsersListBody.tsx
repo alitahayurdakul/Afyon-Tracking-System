@@ -1,13 +1,18 @@
 "use client";
 
+import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import { usePaginationParams } from "@/api/queries/usePaginationParams";
 import { useGetUsersDataQuery } from "@/api/queries/useGetUsersQueries";
+import { DEFAULT_PAGE_SIZE_OPTIONS } from "@/consts/tableConsts";
+import { currentPageController } from "@/utils/currentPageController";
 import { createUsersTableColumns } from "@/utils/usersListTableUtils";
 
+import { Pagination } from "../common/Pagination";
 import { Table } from "../common/Table";
 
 import { CreateUsersModal } from "./create/CreateUsersModal";
@@ -16,7 +21,21 @@ import styles from "@/styles/components/common/TableListBody.module.scss";
 
 export const UsersListBody = () => {
   const t = useTranslations("users");
-  const { data, isLoading, isFetching, isError } = useGetUsersDataQuery();
+  const { currentPage, pageSize, setCurrentPage, setPageSize } =
+    usePaginationParams();
+
+  const { data, isLoading, isFetching, isError } = useGetUsersDataQuery({
+    currentPage,
+    pageSize,
+  });
+
+  const safePage = currentPageController(currentPage, data?.totalPages);
+
+  useEffect(() => {
+    if (!isLoading && !isFetching && data && safePage !== currentPage) {
+      setCurrentPage(safePage);
+    }
+  }, [isLoading, isFetching, data, safePage, currentPage, setCurrentPage]);
 
   return (
     <section className={styles["pipeline-page"]}>
@@ -41,9 +60,23 @@ export const UsersListBody = () => {
           className={styles["table-class"]}
           draggableClassActive
           loading={isLoading || isFetching}
-          data={data ?? []}
+          data={data?.data ?? []}
           columns={createUsersTableColumns(t)}
           isError={isError}
+          currentPage={safePage}
+          pageSize={pageSize}
+          totalCount={data?.totalCount}
+          onPageChange={setCurrentPage}
+          paginationElement={() => (
+            <Pagination
+              currentPage={safePage}
+              pageSize={pageSize}
+              totalCount={data?.totalCount ?? 0}
+              onPageChange={setCurrentPage}
+              onPageSizeChange={setPageSize}
+              pageSizeOptions={DEFAULT_PAGE_SIZE_OPTIONS}
+            />
+          )}
         />
       </div>
     </section>

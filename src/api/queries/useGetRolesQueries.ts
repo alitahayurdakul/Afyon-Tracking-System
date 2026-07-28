@@ -8,22 +8,30 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { RoleQueryTypes } from "@/app/api/roles/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
+import { IPaginationTypes } from "@/types/commonTypes";
 import { optionsConverters } from "@/types/optionsConverter";
-import { IRolesType, IRoleType } from "@/types/rolesTypes";
+import {
+  IRoleResponseDataTypes,
+  IRolesType,
+  IRoleType,
+} from "@/types/rolesTypes";
 
-export const useGetRolesDataQuery = () => {
+export const useGetRolesDataQuery = ({
+  pageSize,
+  currentPage,
+}: IPaginationTypes) => {
   const trigger = useSelector(
     (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
   );
 
   return useQuery({
-    queryKey: [`getRolesAllDatas`, trigger],
+    queryKey: [`getRolesAllDatas`, trigger, pageSize, currentPage],
     refetchOnWindowFocus: false,
     enabled: true,
-    queryFn: async () => {
-      const { data } = await axiosInstance.post<IRolesType>(
+    queryFn: async (): Promise<IRoleResponseDataTypes> => {
+      const { data } = await axiosInstance.post<IRoleResponseDataTypes>(
         CLIENT_END_POINTS.role.getAll,
-        { type: RoleQueryTypes.getAllRoles },
+        { type: RoleQueryTypes.getAllRoles, pageSize, currentPage },
       );
       return data;
     },
@@ -62,12 +70,17 @@ export const useGetRolesOptionsQuery = () => {
     refetchOnWindowFocus: false,
     enabled: true,
     queryFn: async () => {
-      const { data } = await axiosInstance.post<IRolesType>(
+      // Seçenek listesinde tüm roller lazım: sayfalama uygulanmaz (yüksek pageSize)
+      const { data } = await axiosInstance.post<IRoleResponseDataTypes>(
         CLIENT_END_POINTS.role.getAll,
-        { type: RoleQueryTypes.getAllRoles },
+        {
+          type: RoleQueryTypes.getAllRoles,
+          pageSize: 1000,
+          currentPage: 1,
+        },
       );
 
-      const options = optionsConverters(data, "_id", "roleName");
+      const options = optionsConverters(data?.data ?? [], "_id", "roleName");
       return options;
     },
   });

@@ -1,5 +1,6 @@
 import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
+import { IPaginationTypes } from "@/types/commonTypes";
 import { IRolesType, IRoleType } from "@/types/rolesTypes";
 
 import {
@@ -58,10 +59,13 @@ async function editRole(params: Record<string, any>): Promise<Response> {
   }
 }
 
-async function getRoles(): Promise<Response> {
+async function getRoles({
+  pageSize,
+  currentPage,
+}: IPaginationTypes): Promise<Response> {
   try {
     const response = await axiosInstance.get<IRolesType>(
-      END_POINTS.role.getAll,
+      END_POINTS.role.getAll({ pageSize, currentPage }),
     );
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);

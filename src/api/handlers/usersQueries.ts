@@ -1,5 +1,6 @@
 import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
+import { IPaginationTypes } from "@/types/commonTypes";
 import { IUsersType, IUserType } from "@/types/usersTypes";
 
 import {
@@ -79,10 +80,13 @@ async function changePassword(
   }
 }
 
-async function getUsers(): Promise<Response> {
+async function getUsers({
+  pageSize,
+  currentPage,
+}: IPaginationTypes): Promise<Response> {
   try {
     const response = await axiosInstance.get<IUsersType>(
-      END_POINTS.user.getAll,
+      END_POINTS.user.getAll({ pageSize, currentPage }),
     );
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);

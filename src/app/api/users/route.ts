@@ -13,7 +13,7 @@ export enum UserQueryTypes {
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { id, params, type } = body;
+  const { id, params, type, pageSize, currentPage } = body;
 
   switch (type) {
     case UserQueryTypes.createUser:
@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     case UserQueryTypes.editUser:
       return await userHandlers.editUser(params);
     case UserQueryTypes.getAllUsers:
-      return await userHandlers.getUsers();
+      return await userHandlers.getUsers({ pageSize, currentPage });
     case UserQueryTypes.getDetailUser:
       return await userHandlers.getUserDetail(id);
     case UserQueryTypes.changePassword:

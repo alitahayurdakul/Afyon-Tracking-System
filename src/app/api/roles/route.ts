@@ -12,7 +12,7 @@ export enum RoleQueryTypes {
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { id, params, type } = body;
+  const { id, params, type, pageSize, currentPage } = body;
 
   switch (type) {
     case RoleQueryTypes.createRole:
@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     case RoleQueryTypes.editRole:
       return await roleHandlers.editRole(params);
     case RoleQueryTypes.getAllRoles:
-      return await roleHandlers.getRoles();
+      return await roleHandlers.getRoles({ pageSize, currentPage });
     case RoleQueryTypes.getDetailRole:
       return await roleHandlers.getRoleDetail(id);
 
