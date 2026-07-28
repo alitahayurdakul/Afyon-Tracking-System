@@ -194,22 +194,30 @@
 
 @media (max-width: 768px) {
   .table-card th {
-    padding: 12px 12px;
-    font-size: 10px;
-    letter-spacing: 0.08em;
+    padding: 8px 10px;
+    font-size: 9px;
+    letter-spacing: 0.06em;
   }
 
   .table-card td {
-    padding: 12px 12px;
-    font-size: 12px;
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  // Hücre içindeki tüm metinleri küçült (DynamicTextWithTooltip + per-page
+  // sınıflar dahil) — böylece satırlar alçalır, kolonlar daralır, daha çok
+  // kolon ekrana sığar
+  .table-card td * {
+    font-size: 11px !important;
+    line-height: 1.3 !important;
   }
 
   .table-card td strong {
-    font-size: 13px;
+    font-size: 12px !important;
   }
 
   .table-card td span {
-    font-size: 11px;
+    font-size: 10px !important;
   }
 }
 
