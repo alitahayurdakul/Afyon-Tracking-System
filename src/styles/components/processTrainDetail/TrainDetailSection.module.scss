@@ -43,14 +43,15 @@
 }
 
 .title {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 16px;
   margin: 0;
+  color: var(--slate-90);
 }
 
 .subtitle {
   font-size: 13px;
-  color: #6b6a63;
+  color: #475569;
   margin: 2px 0 0;
 }
 
@@ -82,15 +83,17 @@
 
 .infoLabel {
   font-size: 12px;
-  color: #9a9990;
+  color: #64748b;
   margin: 0 0 2px;
 }
 
 .infoValue {
   font-size: 14px;
   margin: 0;
+  color: var(--slate-90);
+  font-weight: 500;
 
   &.muted {
-    color: #9a9990;
+    color: #64748b;
   }
 }
