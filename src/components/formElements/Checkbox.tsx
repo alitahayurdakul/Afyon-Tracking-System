@@ -1,5 +1,5 @@
 'use client';
-import React, { forwardRef, useCallback } from "react";
+import React, { useCallback } from "react";
 import clsx from "clsx";
 import { AnimatePresence } from "framer-motion";
 import { useController, UseControllerProps } from "react-hook-form";
@@ -26,26 +26,23 @@ interface CheckBoxProps extends UseControllerProps {
 
 export type Ref = HTMLInputElement;
 
-export const CheckBox = forwardRef<Ref, CheckBoxProps>(
-  function CheckBoxComponent(
-    {
-      name,
-      className,
-      label,
-      required,
-      defaultChecked = false,
-      control,
-      shouldUnregister,
-      rules,
-      disabled,
-      classNameLabel,
-      align,
-      clickFn,
-      errorClassName,
-      changeExtraFn,
-      classNameInput
-    }
-  ) {
+export const CheckBox = ({
+  name,
+  className,
+  label,
+  required,
+  defaultChecked = false,
+  control,
+  shouldUnregister,
+  rules,
+  disabled,
+  classNameLabel,
+  align,
+  clickFn,
+  errorClassName,
+  changeExtraFn,
+  classNameInput,
+}: CheckBoxProps) => {
     const { field, fieldState, formState } = useController({
       name,
       control,
@@ -104,5 +101,4 @@ export const CheckBox = forwardRef<Ref, CheckBoxProps>(
         </AnimatePresence>
       </div>
     );
-  }
-);
+};

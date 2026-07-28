@@ -6,8 +6,8 @@ import { useTranslations } from "next-intl";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { usePaginationParams } from "@/api/queries/usePaginationParams";
 import { useGetUsersDataQuery } from "@/api/queries/useGetUsersQueries";
+import { usePaginationParams } from "@/api/queries/usePaginationParams";
 import { DEFAULT_PAGE_SIZE_OPTIONS } from "@/consts/tableConsts";
 import { currentPageController } from "@/utils/currentPageController";
 import { createUsersTableColumns } from "@/utils/usersListTableUtils";
