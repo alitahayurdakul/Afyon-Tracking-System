@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { useGetProjectsDataQuery } from "@/api/queries/useGetProjectsQueries";
+import { useGetTableProjectsDataQuery } from "@/api/queries/useGetProjectsQueries";
 import { usePaginationParams } from "@/api/queries/usePaginationParams";
 import { DEFAULT_PAGE_SIZE_OPTIONS } from "@/consts/tableConsts";
 import { currentPageController } from "@/utils/currentPageController";
@@ -23,7 +23,8 @@ export const ProjectsListBody = () => {
   const t = useTranslations("projects");
   const { currentPage, pageSize, setCurrentPage, setPageSize } =
     usePaginationParams();
-  const { data, isLoading, isFetching, isError } = useGetProjectsDataQuery({
+
+  const { data, isLoading, isFetching, isError } = useGetTableProjectsDataQuery({
     currentPage,
     pageSize,
   });

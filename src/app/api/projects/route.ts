@@ -8,6 +8,7 @@ export enum ProjectQueryTypes {
   editProject = "EDIT_PROJECT",
   deleteProject = "DELETE_PROJECT",
   getDetailProject = "GET_DETAIL_PROJECT",
+  getTableProjects = "GET_TABLE_PROJECTS",
 }
 
 export async function POST(request: NextRequest) {
@@ -22,7 +23,9 @@ export async function POST(request: NextRequest) {
     case ProjectQueryTypes.editProject:
       return await projectHandlers.editProject(params);
     case ProjectQueryTypes.getAllProjects:
-      return await projectHandlers.getProjects({
+      return await projectHandlers.getProjects(status);
+    case ProjectQueryTypes.getTableProjects:
+      return await projectHandlers.getTableProjects({
         pageSize,
         currentPage,
         status,

@@ -111,7 +111,13 @@ export const END_POINTS = {
     create: `${apiUrl}/api/projects`,
     edit: (id: string) => `${apiUrl}/api/projects/${id}`,
     delete: (id: string) => `${apiUrl}/api/projects/${id}`,
-    getAll: ({ pageSize, currentPage, status }: IPaginationWithStatus) =>
+    getAll: (status?: string) =>
+      `${apiUrl}/api/projects${status ? `?status=${status}` : ""}`,
+    getFilteredProjects: ({
+      pageSize,
+      currentPage,
+      status,
+    }: IPaginationWithStatus) =>
       `${apiUrl}/api/projects?pageNumber=${currentPage}&pageSize=${pageSize}${status ? `&status=${status}` : ""}`,
     getDetail: (id: string) => `${apiUrl}/api/projects/${id}`,
   },

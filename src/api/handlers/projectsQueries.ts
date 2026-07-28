@@ -1,6 +1,6 @@
 import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
-import { IPaginationTypes, IPaginationWithStatus } from "@/types/commonTypes";
+import { IPaginationWithStatus } from "@/types/commonTypes";
 import { IProjectType } from "@/types/projectsTypes";
 
 import {
@@ -16,6 +16,7 @@ export const projectHandlers = {
   editProject,
   getProjects,
   getProjectDetail,
+  getTableProjects,
 };
 
 async function createProject(params: Record<string, any>): Promise<Response> {
@@ -64,14 +65,27 @@ async function editProject(params: Record<string, any>): Promise<Response> {
   }
 }
 
-async function getProjects({
+async function getProjects(status?: string): Promise<Response> {
+  try {
+    const response = await axiosInstance.get(END_POINTS.project.getAll(status));
+
+    if (response.status === 200) {
+      return createJsonOnlyData(response.data.projects || []);
+    }
+    return createJsonError("Failed to fetch projects", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
+  }
+}
+
+async function getTableProjects({
   pageSize,
   currentPage,
   status,
 }: IPaginationWithStatus): Promise<Response> {
   try {
     const response = await axiosInstance.get(
-      END_POINTS.project.getAll({
+      END_POINTS.project.getFilteredProjects({
         pageSize,
         currentPage,
         status,
