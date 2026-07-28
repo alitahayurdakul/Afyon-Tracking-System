@@ -8,11 +8,12 @@ export enum WagonQueryTypes {
   editWagon = "EDIT_WAGON",
   deleteWagon = "DELETE_WAGON",
   getDetailWagon = "GET_DETAIL_WAGON",
+  getTableWagons = "GET_TABLE_WAGONS"
 }
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { id, params, type } = body;
+  const { id, params, type, currentPage, pageSize } = body;
 
   switch (type) {
     case WagonQueryTypes.createWagon:
@@ -25,6 +26,8 @@ export async function POST(request: NextRequest) {
       return await wagonHandlers.getWagons();
     case WagonQueryTypes.getDetailWagon:
       return await wagonHandlers.getWagonDetail(id);
+    case WagonQueryTypes.getTableWagons:
+      return await wagonHandlers.getTableWagons({pageSize, currentPage})
 
     default: {
       return Response.json(

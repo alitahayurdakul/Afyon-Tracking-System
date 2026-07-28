@@ -64,6 +64,8 @@ export const END_POINTS = {
     delete: (id: string) => `${apiUrl}/api/wagons/${id}`,
     getAll: `${apiUrl}/api/wagons`,
     getDetail: (id: string) => `${apiUrl}/api/wagons/${id}`,
+    getFilteredWagons: ({ currentPage, pageSize }: IPaginationTypes) =>
+      `${apiUrl}/api/wagons?pageNumber=${currentPage}&pageSize=${pageSize}`,
   },
   reason: {
     create: `${apiUrl}/api/reasons`,

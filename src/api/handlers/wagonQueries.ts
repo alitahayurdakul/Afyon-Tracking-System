@@ -1,9 +1,7 @@
 import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
-import {
-  IWagonResponseDataTypes,
-  IWagonType,
-} from "@/types/wagonsTypes";
+import { IPaginationTypes } from "@/types/commonTypes";
+import { IWagonResponseDataTypes, IWagonTableResponseDataTypes, IWagonType } from "@/types/wagonsTypes";
 
 import {
   createJsonError,
@@ -18,6 +16,7 @@ export const wagonHandlers = {
   editWagon,
   getWagons,
   getWagonDetail,
+  getTableWagons
 };
 
 async function createWagon(params: Record<string, any>): Promise<Response> {
@@ -68,6 +67,23 @@ async function getWagons(): Promise<Response> {
     );
     if (response.status === 200) {
       return createJsonOnlyData(response.data.wagons || []);
+    }
+    return createJsonError("Failed to fetch wagons", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
+  }
+}
+
+async function getTableWagons({
+  pageSize,
+  currentPage,
+}: IPaginationTypes): Promise<Response> {
+  try {
+    const response = await axiosInstance.get<IWagonTableResponseDataTypes>(
+      END_POINTS.wagon.getFilteredWagons({ pageSize, currentPage }),
+    );
+    if (response.status === 200) {
+      return createJsonOnlyData(response.data || []);
     }
     return createJsonError("Failed to fetch wagons", 400);
   } catch (err: unknown) {

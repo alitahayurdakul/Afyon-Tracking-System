@@ -8,9 +8,14 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { WagonQueryTypes } from "@/app/api/wagons/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
+import { IPaginationTypes } from "@/types/commonTypes";
 import { IOptionType } from "@/types/formTypes";
 import { optionsConverters } from "@/types/optionsConverter";
-import { IWagonsType, IWagonType } from "@/types/wagonsTypes";
+import {
+  IWagonsType,
+  IWagonTableResponseDataTypes,
+  IWagonType,
+} from "@/types/wagonsTypes";
 
 export const useGetWagonsDataQuery = () => {
   const trigger = useSelector(
@@ -25,6 +30,28 @@ export const useGetWagonsDataQuery = () => {
       const { data } = await axiosInstance.post<IWagonsType>(
         CLIENT_END_POINTS.wagon.getAll,
         { type: WagonQueryTypes.getAllWagons },
+      );
+      return data;
+    },
+  });
+};
+
+export const useGetTableWagonsDataQuery = ({
+  pageSize,
+  currentPage,
+}: IPaginationTypes) => {
+  const trigger = useSelector(
+    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+  );
+
+  return useQuery({
+    queryKey: [`getTableWagonsAllDatas`, trigger, pageSize, currentPage],
+    refetchOnWindowFocus: false,
+    enabled: true,
+    queryFn: async (): Promise<IWagonTableResponseDataTypes> => {
+      const { data } = await axiosInstance.post<IWagonTableResponseDataTypes>(
+        CLIENT_END_POINTS.wagon.getAll,
+        { type: WagonQueryTypes.getTableWagons, pageSize, currentPage },
       );
       return data;
     },
