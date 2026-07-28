@@ -8,6 +8,7 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { ReasonQueryTypes } from "@/app/api/reasons/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
+import { IPaginationTypes } from "@/types/commonTypes";
 import { IReasonType } from "@/types/reasonsTypes";
 
 export const useGetReasonsDataQuery = <T>() => {
@@ -23,6 +24,25 @@ export const useGetReasonsDataQuery = <T>() => {
       const { data } = await axiosInstance.post<T>(
         CLIENT_END_POINTS.reason.getAll,
         { type: ReasonQueryTypes.getAllReasons },
+      );
+      return data;
+    },
+  });
+};
+
+export const useGetTableReasonsDataQuery = <T>({pageSize, currentPage}: IPaginationTypes) => {
+  const trigger = useSelector(
+    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+  );
+
+  return useQuery({
+    queryKey: [`getTableReasonsAllDatas`, trigger, pageSize, currentPage],
+    refetchOnWindowFocus: false,
+    enabled: true,
+    queryFn: async (): Promise<T> => {
+      const { data } = await axiosInstance.post<T>(
+        CLIENT_END_POINTS.reason.getAll,
+        { type: ReasonQueryTypes.getTableReasons, pageSize, currentPage },
       );
       return data;
     },

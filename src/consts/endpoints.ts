@@ -71,6 +71,8 @@ export const END_POINTS = {
     delete: (id: string) => `${apiUrl}/api/reasons/${id}`,
     getAll: `${apiUrl}/api/reasons`,
     getDetail: (id: string) => `${apiUrl}/api/reasons/${id}`,
+    getFilteredReasons: ({ pageSize, currentPage }: IPaginationTypes) =>
+      `${apiUrl}/api/reasons?pageNumber=${currentPage}&pageSize=${pageSize}`,
   },
   role: {
     create: `${apiUrl}/api/roles`,

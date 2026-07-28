@@ -1,3 +1,5 @@
+import { ITableResponseType } from "./commonTypes";
+
 export interface IReasonFormDataTypes {
   name: string;
   desc: string;
@@ -15,7 +17,6 @@ export interface IReasonType {
 
 export type IReasonsType = Array<IReasonType>;
 
-export interface IReasonResponseDataTypes {
-  count: number;
-  reasons: IReasonType[];
+export interface IReasonResponseDataTypes extends ITableResponseType {
+  data: IReasonType[];
 }

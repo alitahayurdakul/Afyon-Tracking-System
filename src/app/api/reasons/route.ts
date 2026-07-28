@@ -8,11 +8,12 @@ export enum ReasonQueryTypes {
   editReason = "EDIT_REASON",
   deleteReason = "DELETE_REASON",
   getDetailReason = "GET_DETAIL_REASON",
+  getTableReasons = "GET_TABLE_REASONS",
 }
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { id, params, type } = body;
+  const { id, params, type, currentPage, pageSize } = body;
 
   switch (type) {
     case ReasonQueryTypes.createReason:
@@ -25,6 +26,8 @@ export async function POST(request: NextRequest) {
       return await reasonHandlers.getReasons();
     case ReasonQueryTypes.getDetailReason:
       return await reasonHandlers.getReasonDetail(id);
+    case ReasonQueryTypes.getTableReasons:
+      return await reasonHandlers.getTableReasons({ pageSize, currentPage });
 
     default: {
       return Response.json(

@@ -1,6 +1,7 @@
 import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
-import { IReasonsType, IReasonType } from "@/types/reasonsTypes";
+import { IPaginationTypes } from "@/types/commonTypes";
+import { IReasonResponseDataTypes, IReasonsType, IReasonType } from "@/types/reasonsTypes";
 
 import {
   createJsonError,
@@ -15,6 +16,7 @@ export const reasonHandlers = {
   editReason,
   getReasons,
   getReasonDetail,
+  getTableReasons
 };
 
 async function createReason(params: Record<string, any>): Promise<Response> {
@@ -62,6 +64,20 @@ async function getReasons(): Promise<Response> {
   try {
     const response = await axiosInstance.get<IReasonsType>(
       END_POINTS.reason.getAll,
+    );
+    if (response.status === 200) {
+      return createJsonOnlyData(response.data || []);
+    }
+    return createJsonError("Failed to fetch reasons", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
+  }
+}
+
+async function getTableReasons({pageSize, currentPage}: IPaginationTypes): Promise<Response> {
+  try {
+    const response = await axiosInstance.get<IReasonResponseDataTypes>(
+      END_POINTS.reason.getFilteredReasons({pageSize, currentPage}),
     );
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
