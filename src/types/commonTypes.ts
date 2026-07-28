@@ -14,6 +14,10 @@ export interface IPaginationTypes {
   currentPage: number;
 }
 
+export interface IPaginationWithStatus extends IPaginationTypes {
+  status?: string;
+}
+
 export interface ITableResponseType{
     pageNumber: number;
     pageSize: number;

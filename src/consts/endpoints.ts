@@ -1,4 +1,4 @@
-import { IPaginationTypes } from "@/types/commonTypes";
+import { IPaginationTypes, IPaginationWithStatus } from "@/types/commonTypes";
 
 const apiUrl = process.env.API_URL || "api";
 
@@ -111,8 +111,8 @@ export const END_POINTS = {
     create: `${apiUrl}/api/projects`,
     edit: (id: string) => `${apiUrl}/api/projects/${id}`,
     delete: (id: string) => `${apiUrl}/api/projects/${id}`,
-    getAll: (status?: string) =>
-      `${apiUrl}/api/projects${status ? `?status=${status}` : ""}`,
+    getAll: ({ pageSize, currentPage, status }: IPaginationWithStatus) =>
+      `${apiUrl}/api/projects?pageNumber=${currentPage}&pageSize=${pageSize}${status ? `&status=${status}` : ""}`,
     getDetail: (id: string) => `${apiUrl}/api/projects/${id}`,
   },
   processTrains: {

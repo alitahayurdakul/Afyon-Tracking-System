@@ -7,25 +7,29 @@ import { useQuery } from "@tanstack/react-query";
 import { ProjectQueryTypes } from "@/app/api/projects/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
+import { IPaginationTypes } from "@/types/commonTypes";
 import { IOptionType } from "@/types/formTypes";
 import { optionsConverters } from "@/types/optionsConverter";
-import { IProjectType } from "@/types/projectsTypes";
+import { IProjectsResponseTypes, IProjectType } from "@/types/projectsTypes";
 
 import { axiosInstance } from "../axiosInstance";
 
-export const useGetProjectsDataQuery = () => {
+export const useGetProjectsDataQuery = ({
+  pageSize,
+  currentPage,
+}: IPaginationTypes) => {
   const trigger = useSelector(
     (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
   );
 
   return useQuery({
-    queryKey: [`getProjectsAllDatas`, trigger],
+    queryKey: [`getProjectsAllDatas`, trigger, pageSize, currentPage],
     refetchOnWindowFocus: false,
     enabled: true,
-    queryFn: async (): Promise<IProjectType[]> => {
-      const { data } = await axiosInstance.post<IProjectType[]>(
+    queryFn: async (): Promise<IProjectsResponseTypes> => {
+      const { data } = await axiosInstance.post<IProjectsResponseTypes>(
         CLIENT_END_POINTS.project.getAll,
-        { type: ProjectQueryTypes.getAllProjects },
+        { type: ProjectQueryTypes.getAllProjects, pageSize, currentPage },
       );
       return data;
     },

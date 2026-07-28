@@ -1,9 +1,7 @@
-
 import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
-import {
-  IProjectType,
-} from "@/types/projectsTypes";
+import { IPaginationTypes, IPaginationWithStatus } from "@/types/commonTypes";
+import { IProjectType } from "@/types/projectsTypes";
 
 import {
   createJsonError,
@@ -66,11 +64,22 @@ async function editProject(params: Record<string, any>): Promise<Response> {
   }
 }
 
-async function getProjects(status?: string): Promise<Response> {
+async function getProjects({
+  pageSize,
+  currentPage,
+  status,
+}: IPaginationWithStatus): Promise<Response> {
   try {
-    const response = await axiosInstance.get(END_POINTS.project.getAll(status));
+    const response = await axiosInstance.get(
+      END_POINTS.project.getAll({
+        pageSize,
+        currentPage,
+        status,
+      }),
+    );
+
     if (response.status === 200) {
-      return createJsonOnlyData(response.data.projects || []);
+      return createJsonOnlyData(response.data || []);
     }
     return createJsonError("Failed to fetch projects", 400);
   } catch (err: unknown) {

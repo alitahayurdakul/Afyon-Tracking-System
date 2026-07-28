@@ -1,3 +1,5 @@
+import { ITableResponseType } from "./commonTypes";
+
 export type ProjectStatus = "ACTIVE" | "IN_PROGRESS" | "COMPLETED";
 
 export interface IProjectFormDataTypes {
@@ -17,4 +19,8 @@ export interface IProjectType {
   lastUpdatedBy?: string;
   createdAt: string;
   updatedAt?: string;
+}
+
+export interface IProjectsResponseTypes extends ITableResponseType{
+  data: IProjectType[];
 }
