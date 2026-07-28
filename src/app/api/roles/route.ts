@@ -8,6 +8,7 @@ export enum RoleQueryTypes {
   editRole = "EDIT_ROLE",
   deleteRole = "DELETE_ROLE",
   getDetailRole = "GET_DETAIL_ROLE",
+  getTableRoles = "GET_TABLE_ROLES"
 }
 
 export async function POST(request: NextRequest) {
@@ -25,6 +26,8 @@ export async function POST(request: NextRequest) {
       return await roleHandlers.getRoles();
     case RoleQueryTypes.getDetailRole:
       return await roleHandlers.getRoleDetail(id);
+    case RoleQueryTypes.getTableRoles:
+      return await roleHandlers.getTableRoles(params);
 
     default:
       return Response.json(

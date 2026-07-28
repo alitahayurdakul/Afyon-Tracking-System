@@ -1,6 +1,6 @@
 import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
-import { IRolesType, IRoleType } from "@/types/rolesTypes";
+import { IRoleResponseDataTypes, IRolesType, IRoleType } from "@/types/rolesTypes";
 
 import {
   createJsonError,
@@ -15,6 +15,7 @@ export const roleHandlers = {
   editRole,
   getRoles,
   getRoleDetail,
+  getTableRoles,
 };
 
 async function createRole(params: Record<string, any>): Promise<Response> {
@@ -65,6 +66,21 @@ async function getRoles(): Promise<Response> {
     );
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
+    }
+    return createJsonError("Failed to fetch roles", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
+  }
+}
+
+async function getTableRoles(params: Record<string, any>): Promise<Response> {
+  try {
+    const { currentPage, pageSize } = params;
+    const response = await axiosInstance.get<IRoleResponseDataTypes>(
+      END_POINTS.role.getFilteredRoles({ currentPage, pageSize }),
+    );
+    if (response.status === 200) {
+      return createJsonOnlyData(response.data || {});
     }
     return createJsonError("Failed to fetch roles", 400);
   } catch (err: unknown) {

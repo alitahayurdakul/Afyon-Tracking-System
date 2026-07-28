@@ -94,6 +94,8 @@ export const END_POINTS = {
     delete: (id: string) => `${apiUrl}/api/roles/${id}`,
     getAll: `${apiUrl}/api/roles`,
     getDetail: (id: string) => `${apiUrl}/api/roles/${id}`,
+    getFilteredRoles: ({ currentPage, pageSize }: IPaginationTypes) =>
+      `${apiUrl}/api/roles?pageNumber=${currentPage}&pageSize=${pageSize}`,
   },
   auth: {
     login: `${apiUrl}/auth`,

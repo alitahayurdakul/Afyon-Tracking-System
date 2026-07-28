@@ -1,5 +1,7 @@
 import { Permission } from "@/consts/permissions";
 
+import { ITableResponseType } from "./commonTypes";
+
 export interface IRoleFormDataTypes {
   roleName: string;
   roleDescription: string;
@@ -19,7 +21,6 @@ export interface IRoleType {
 
 export type IRolesType = Array<IRoleType>;
 
-export interface IRoleResponseDataTypes {
-  count: number;
-  roles: IRoleType[];
+export interface IRoleResponseDataTypes extends ITableResponseType {
+  data: IRoleType[];
 }
