@@ -8,11 +8,12 @@ export enum SubStageQueryTypes {
   editSubStage = "EDIT_SUB_STAGE",
   deleteSubStage = "DELETE_SUB_STAGE",
   getDetailSubStage = "GET_DETAIL_SUB_STAGE",
+  getTableSubStages = "GET_TABLE_SUB_STAGES",
 }
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { id, params, type } = body;
+  const { id, params, type, currentPage, pageSize } = body;
 
   switch (type) {
     case SubStageQueryTypes.createSubStage:
@@ -25,6 +26,11 @@ export async function POST(request: NextRequest) {
       return await subStageHandlers.getSubStages();
     case SubStageQueryTypes.getDetailSubStage:
       return await subStageHandlers.getSubStageDetail(id);
+    case SubStageQueryTypes.getTableSubStages:
+      return await subStageHandlers.getTableSubStages({
+        pageSize,
+        currentPage,
+      });
 
     default: {
       return Response.json(

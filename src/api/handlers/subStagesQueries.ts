@@ -1,9 +1,10 @@
-
 import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
+import { IPaginationTypes } from "@/types/commonTypes";
 import {
   ISubStageResponseDataTypes,
   ISubStageType,
+  ITableSubStageResponseTypes,
 } from "@/types/subStagesTypes";
 
 import {
@@ -19,6 +20,7 @@ export const subStageHandlers = {
   editSubStage,
   getSubStages,
   getSubStageDetail,
+  getTableSubStages
 };
 
 async function createSubStage(params: Record<string, any>): Promise<Response> {
@@ -69,7 +71,9 @@ async function editSubStage(params: Record<string, any>): Promise<Response> {
 
 async function getSubStages(): Promise<Response> {
   try {
-    const response = await axiosInstance.get<ISubStageResponseDataTypes>(END_POINTS.subStage.getAll);
+    const response = await axiosInstance.get<ISubStageResponseDataTypes>(
+      END_POINTS.subStage.getAll,
+    );
     if (response.status === 200) {
       return createJsonOnlyData(response.data.subStages ?? []);
     }
@@ -88,6 +92,23 @@ async function getSubStageDetail(id: string): Promise<Response> {
       return createJsonOnlyData(response.data);
     }
     return createJsonError("Failed to fetch sub stage detail", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
+  }
+}
+
+async function getTableSubStages({
+  pageSize,
+  currentPage,
+}: IPaginationTypes): Promise<Response> {
+  try {
+    const response = await axiosInstance.get<ITableSubStageResponseTypes>(
+      END_POINTS.subStage.getFilteredSubStages({ pageSize, currentPage }),
+    );
+    if (response.status === 200) {
+      return createJsonOnlyData(response.data ?? []);
+    }
+    return createJsonError("Failed to fetch sub stages", 400);
   } catch (err: unknown) {
     return createJsonError(extractErrorMessage(err), 500);
   }

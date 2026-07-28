@@ -8,22 +8,29 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { SubStageQueryTypes } from "@/app/api/sub-stages/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
+import { IPaginationTypes } from "@/types/commonTypes";
 import { optionsConverters } from "@/types/optionsConverter";
-import { ISubStageType } from "@/types/subStagesTypes";
+import {
+  ISubStageType,
+  ITableSubStageResponseTypes,
+} from "@/types/subStagesTypes";
 
-export const useGetSubStagesListDataQuery = () => {
+export const useGetSubStagesListDataQuery = ({
+  pageSize,
+  currentPage,
+}: IPaginationTypes) => {
   const trigger = useSelector(
     (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
   );
 
   return useQuery({
-    queryKey: [`getSubStagesAllDatas`, trigger],
+    queryKey: [`getSubStagesAllDatas`, trigger, pageSize, currentPage],
     refetchOnWindowFocus: false,
     enabled: true,
-    queryFn: async (): Promise<ISubStageType[]> => {
-      const { data } = await axiosInstance.post<ISubStageType[]>(
+    queryFn: async (): Promise<ITableSubStageResponseTypes> => {
+      const { data } = await axiosInstance.post<ITableSubStageResponseTypes>(
         CLIENT_END_POINTS.subStage.getAll,
-        { type: SubStageQueryTypes.getAllSubStages },
+        { type: SubStageQueryTypes.getTableSubStages, pageSize, currentPage },
       );
       return data;
     },

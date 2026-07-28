@@ -115,6 +115,8 @@ export const END_POINTS = {
     delete: (id: string) => `${apiUrl}/api/substages/${id}`,
     getAll: `${apiUrl}/api/substages`,
     getDetail: (id: string) => `${apiUrl}/api/substages/${id}`,
+    getFilteredSubStages: ({ pageSize, currentPage }: IPaginationTypes) =>
+      `${apiUrl}/api/substages?pageNumber=${currentPage}&pageSize=${pageSize}`,
   },
   project: {
     create: `${apiUrl}/api/projects`,

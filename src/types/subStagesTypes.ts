@@ -1,3 +1,4 @@
+import { ITableResponseType } from "./commonTypes";
 import { IOptionType } from "./formTypes";
 
 export interface ISubStageMaterial {
@@ -28,4 +29,8 @@ export interface ISubStageType {
 export interface ISubStageResponseDataTypes {
   count: number;
   subStages: ISubStageType[];
+}
+
+export interface ITableSubStageResponseTypes extends ITableResponseType {
+  data: ISubStageType[];
 }
