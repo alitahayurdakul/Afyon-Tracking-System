@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useBodyScrollLock } from "@/api/queries/useBodyScrollLock";
 import { Sidebar } from "@/components/sidebar/Sidebar";
+import { usePathname } from "@/i18n/routing";
 import { stripLocale } from "@/utils/stripLocale";
 
 import styles from "@/styles/Layout.module.scss";

@@ -1,33 +1,36 @@
 "use client";
-/* eslint-disable */
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
-import styles from "@/styles/components/roles/RoleForm.module.scss";
-import { Button } from "@/components/formElements/Button";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { RoleFormValidation } from "@/utils/validations/roleFormValidation";
+
 import React, { useCallback, useMemo } from "react";
-import { InputBox } from "@/components/formElements/InputBox";
-import { TextAreaBox } from "@/components/formElements/TextAreaBox";
-import { SelectBox } from "@/components/formElements/SelectBox";
-import { InputSpaceEnums } from "@/utils/enum/formEnums";
-import { useRemoveQueryParamModal } from "@/utils/searchParams";
-import { useDispatch } from "react-redux";
-import { addToastify } from "@/redux/slices/toastSlice";
-import { IRoleFormDataTypes, IRoleType } from "@/types/rolesTypes";
-import { axiosInstance } from "@/api/axiosInstance";
-import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { RoleQueryTypes } from "@/app/api/roles/route";
-import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import { extractApiError } from "@/utils/extractApiError";
 import { useTranslations } from "next-intl";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { axiosInstance } from "@/api/axiosInstance";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { RoleQueryTypes } from "@/app/api/roles/route";
+import { Button } from "@/components/formElements/Button";
+import { InputBox } from "@/components/formElements/InputBox";
+import { SelectBox } from "@/components/formElements/SelectBox";
+import { TextAreaBox } from "@/components/formElements/TextAreaBox";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import {
   generatePermissionOptions,
   PermissionOption,
 } from "@/consts/generatePermissionOptions";
-import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { addToastify } from "@/redux/slices/toastSlice";
+import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import { IRoleFormDataTypes, IRoleType } from "@/types/rolesTypes";
+import { InputSpaceEnums } from "@/utils/enum/formEnums";
+import { extractApiError } from "@/utils/extractApiError";
+import { useRemoveQueryParamModal } from "@/utils/searchParams";
+import { RoleFormValidation } from "@/utils/validations/roleFormValidation";
+
+import styles from "@/styles/components/roles/RoleForm.module.scss";
 
 interface IPropsTypes {
   id: string;

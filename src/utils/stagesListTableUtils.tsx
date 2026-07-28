@@ -2,18 +2,20 @@
 // import { TooltipBody } from "@/components/TooltipBody";
 // import { PAGE_URLS } from "@/consts/url";
 // import { localizedDateConverter } from "@/functions/dateConverter";
-/* eslint-disable */
-import {
-  ICommonTableColumnsTypes,
-  ICommonTableColumnsType
-} from "@/types/tableColumnTypes";
+
+import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
+import { StagesTableActionsCol } from "@/components/stages/StagesTableActionsCol";
+import { QUALITY_STAGE_ID } from "@/consts/workflowConsts";
 import { TFunction } from "@/types/commonTypes";
+import {
+  ICommonTableColumnsType,
+  ICommonTableColumnsTypes,
+} from "@/types/tableColumnTypes";
+
+import { formatDate } from "./formDate";
 
 // import styles from "@/styles/components/table/CommonDashboardTable.module.scss";
 import styles from "@/styles/components/stages/StagesListTableUtils.module.scss";
-import { StagesTableActionsCol } from "@/components/stages/StagesTableActionsCol";
-import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
-import { formatDate } from "./formDate";
 
 export const stagesTableColumns: ICommonTableColumnsTypes = [
   {
@@ -40,6 +42,7 @@ export const stagesTableColumns: ICommonTableColumnsTypes = [
 
 export const createStagesTableColumns = (t: TFunction) => {
   const columns = stagesTableColumns;
+  const qualityId = QUALITY_STAGE_ID;
 
   return [
     ...columns.map((column: ICommonTableColumnsType) => ({
@@ -61,9 +64,7 @@ export const createStagesTableColumns = (t: TFunction) => {
         if (column.name === "description") {
           return (
             <div className={styles["desc-cell"]}>
-              <DynamicTextWithTooltip
-                text={row.original.description || "-"}
-              />
+              <DynamicTextWithTooltip text={row.original.description || "-"} />
             </div>
           );
         }
@@ -82,7 +83,9 @@ export const createStagesTableColumns = (t: TFunction) => {
           );
         }
         if (column.name === "editor") {
-          const isUnedited = !row.original.updatedAt || row.original.createdAt === row.original.updatedAt;
+          const isUnedited =
+            !row.original.updatedAt ||
+            row.original.createdAt === row.original.updatedAt;
           return (
             <div>
               <DynamicTextWithTooltip
@@ -90,15 +93,21 @@ export const createStagesTableColumns = (t: TFunction) => {
                 lines={1}
                 textClassName={styles["creator-name"]}
               />
-              <p className={styles["creator-date"]}>{!isUnedited ? formatDate(row.original.updatedAt) : "-"}</p>
+              <p className={styles["creator-date"]}>
+                {!isUnedited ? formatDate(row.original.updatedAt) : "-"}
+              </p>
             </div>
           );
         }
 
         if (column.name === "actions") {
-          return row.original._id === "6a548d7444cc81ed74b22b6a" ? <div style={{ color: column.color ?? column.color }}>{t("form.notifications.blockedQualityStage")}</div> :
-          <StagesTableActionsCol id={row.original._id}/>
-
+          return row.original._id === qualityId ? (
+            <div style={{ color: column.color ?? column.color }}>
+              {t("form.notifications.blockedQualityStage")}
+            </div>
+          ) : (
+            <StagesTableActionsCol id={row.original._id} />
+          );
         }
 
         return <div style={{ color: column.color ?? column.color }}>-</div>;

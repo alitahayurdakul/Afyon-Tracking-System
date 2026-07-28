@@ -14,7 +14,7 @@
   "total-elapsed-time": "Total Elapsed Time",
   "active-projects": "Active Projects",
   "active-projects-select-explaining": "Select a train to view the live workflow progress.",
-  "processId": "Process ID",
+  "projectName": "Project Name",
   "section": {
     "time-section-header": "Time Information",
     "delay-reason": "Delay Reasons",

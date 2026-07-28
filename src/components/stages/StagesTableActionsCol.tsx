@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { axiosInstance } from "@/api/axiosInstance";
 import { StageQueryTypes } from "@/app/api/stages/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { QUALITY_STAGE_ID } from "@/consts/workflowConsts";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { extractApiError } from "@/utils/extractApiError";
@@ -21,10 +22,11 @@ import stylesDeletePopover from "@/styles/components/common/TableDeletePopover.m
 export const StagesTableActionsCol = ({ id }: { id: string }) => {
   const t = useTranslations("stages");
   const dispatch = useDispatch();
+  const qualityId = QUALITY_STAGE_ID;
 
   const onDeleteHandler = async () => {
     try {
-      if (id === "6a548d7444cc81ed74b22b6a") {
+      if (id === qualityId) {
         dispatch(
           addToastify({
             message: t("form.notifications.blockedQualityStageDelete"),
@@ -48,8 +50,7 @@ export const StagesTableActionsCol = ({ id }: { id: string }) => {
         }),
       );
       dispatch(addTriggerTable());
-    }
-    catch (err) {
+    } catch (err) {
       dispatch(
         addToastify({
           message: extractApiError(err, t("form.notifications.deleteError")),
@@ -59,7 +60,6 @@ export const StagesTableActionsCol = ({ id }: { id: string }) => {
         }),
       );
     }
-
   };
 
   return (

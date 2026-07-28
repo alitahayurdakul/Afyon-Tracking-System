@@ -4,6 +4,9 @@ import { useMemo, useState } from "react";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
   useCompleteStage,
   useEditSubStage,
@@ -51,30 +54,21 @@ export default function StageDetailModalContent({
   stageStatus,
 }: StageDetailModalProps) {
   const t = useTranslations("activeProcessDetail");
-  const {
-    data: subStagesData
-  } = useGetStageDetailDataQuery<SubStage[]>(id);
+  const { data: subStagesData } = useGetStageDetailDataQuery<SubStage[]>(id);
 
   const { id: processId } = useParams();
 
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [prevActiveIndex, setPrevActiveIndex] = useState<number>(0);
   const [prevSubStagesData, setPrevSubStagesData] = useState(subStagesData);
-  const {
-    mutate
-  } = useStartSubStage();
+  const { mutate, isPending } = useStartSubStage();
 
-  const {
-    mutate: saveMutate,
-  } = useSaveSubStage();
+  const { mutate: saveMutate, isPending: saveIsPending } = useSaveSubStage();
 
-  const {
-    mutate: editMutate
-  } = useEditSubStage();
+  const { mutate: editMutate, isPending: editIsPending } = useEditSubStage();
 
-  const {
-    mutate: completeStageMutate,
-  } = useCompleteStage();
+  const { mutate: completeStageMutate, isPending: completeIsPending } =
+    useCompleteStage();
 
   if (subStagesData !== prevSubStagesData) {
     setPrevSubStagesData(subStagesData);
@@ -352,7 +346,21 @@ export default function StageDetailModalContent({
                   closeContainer={
                     <div className={styles["btn-container"]}>
                       <button>{t("no")}</button>
-                      <button onClick={saveStageChanges}>{t("yes")}</button>
+                      <button onClick={saveStageChanges}>
+                        {" "}
+                        {saveIsPending ? (
+                          <FontAwesomeIcon
+                            icon={faSpinner}
+                            spin
+                            style={{
+                              animationDuration: "2s",
+                              color: "var(--slate-90)",
+                            }}
+                          />
+                        ) : (
+                          t("yes")
+                        )}
+                      </button>
                     </div>
                   }
                 />
@@ -374,7 +382,20 @@ export default function StageDetailModalContent({
                   closeContainer={
                     <div className={styles["btn-container"]}>
                       <button>{t("no")}</button>
-                      <button onClick={completeSubStage}>{t("yes")}</button>
+                      <button onClick={completeSubStage}>
+                        {saveIsPending ? (
+                          <FontAwesomeIcon
+                            icon={faSpinner}
+                            spin
+                            style={{
+                              animationDuration: "2s",
+                              color: "var(--slate-90)",
+                            }}
+                          />
+                        ) : (
+                          t("yes")
+                        )}
+                      </button>
                     </div>
                   }
                 />
@@ -400,7 +421,20 @@ export default function StageDetailModalContent({
                 closeContainer={
                   <div className={styles["btn-container"]}>
                     <button>{t("no")}</button>
-                    <button onClick={startStage}>{t("yes")}</button>
+                    <button onClick={startStage}>
+                      {isPending ? (
+                        <FontAwesomeIcon
+                          icon={faSpinner}
+                          spin
+                          style={{
+                            animationDuration: "2s",
+                            color: "var(--slate-90)",
+                          }}
+                        />
+                      ) : (
+                        t("yes")
+                      )}
+                    </button>
                   </div>
                 }
               />
@@ -427,7 +461,18 @@ export default function StageDetailModalContent({
                     <div className={styles["btn-container"]}>
                       <button>{t("no")}</button>
                       <button onClick={editCompletedSubStage}>
-                        {t("yes")}
+                        {editIsPending ? (
+                          <FontAwesomeIcon
+                            icon={faSpinner}
+                            spin
+                            style={{
+                              animationDuration: "2s",
+                              color: "var(--slate-90)",
+                            }}
+                          />
+                        ) : (
+                          t("yes")
+                        )}
                       </button>
                     </div>
                   }
@@ -454,7 +499,21 @@ export default function StageDetailModalContent({
                   closeContainer={
                     <div className={styles["btn-container"]}>
                       <button>{t("no")}</button>
-                      <button onClick={completeStage}>{t("yes")}</button>
+                      <button onClick={completeStage}>
+                        {" "}
+                        {completeIsPending ? (
+                          <FontAwesomeIcon
+                            icon={faSpinner}
+                            spin
+                            style={{
+                              animationDuration: "2s",
+                              color: "var(--slate-90)",
+                            }}
+                          />
+                        ) : (
+                          t("yes")
+                        )}
+                      </button>
                     </div>
                   }
                 />

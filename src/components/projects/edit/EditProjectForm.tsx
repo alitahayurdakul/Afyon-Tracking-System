@@ -1,32 +1,35 @@
 "use client";
-/* eslint-disable */
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
-import styles from "@/styles/components/projects/ProjectForm.module.scss";
-import { Button } from "@/components/formElements/Button";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { IProjectFormDataTypes, IProjectType } from "@/types/projectsTypes";
-import { ProjectFormValidation } from "@/utils/validations/projectFormValidation";
-import { useTranslations } from "next-intl";
+
 import { useCallback } from "react";
-import { TextAreaBox } from "@/components/formElements/TextAreaBox";
+import { useTranslations } from "next-intl";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { axiosInstance } from "@/api/axiosInstance";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { ProjectQueryTypes } from "@/app/api/projects/route";
+import { Button } from "@/components/formElements/Button";
 import { InputBox } from "@/components/formElements/InputBox";
 import { SelectBox } from "@/components/formElements/SelectBox";
-import { InputSpaceEnums } from "@/utils/enum/formEnums";
-import { useRemoveQueryParamModal } from "@/utils/searchParams";
-import { addToastify } from "@/redux/slices/toastSlice";
-import { useDispatch } from "react-redux";
-import { formatDate } from "@/utils/formDate";
-import { axiosInstance } from "@/api/axiosInstance";
+import { TextAreaBox } from "@/components/formElements/TextAreaBox";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { ProjectQueryTypes } from "@/app/api/projects/route";
-import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { PROJECT_STATUS_OPTIONS } from "@/consts/projectsConsts";
+import { addToastify } from "@/redux/slices/toastSlice";
+import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { IOptionType } from "@/types/formTypes";
+import { IProjectFormDataTypes, IProjectType } from "@/types/projectsTypes";
+import { InputSpaceEnums } from "@/utils/enum/formEnums";
 import { extractApiError } from "@/utils/extractApiError";
-import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { formatDate } from "@/utils/formDate";
+import { useRemoveQueryParamModal } from "@/utils/searchParams";
+import { ProjectFormValidation } from "@/utils/validations/projectFormValidation";
+
+import styles from "@/styles/components/projects/ProjectForm.module.scss";
 
 interface IPropsTypes {
   id: string;

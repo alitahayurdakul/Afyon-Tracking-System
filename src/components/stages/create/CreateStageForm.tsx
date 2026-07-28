@@ -1,29 +1,33 @@
 "use client";
-/* eslint-disable */
-import styles from "@/styles/components/stages/StageForm.module.scss";
-import { Button } from "@/components/formElements/Button";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+
 import React, { useCallback } from "react";
-import { IFormFieldType, IOptionType } from "@/types/formTypes";
-import { InputBox } from "@/components/formElements/InputBox";
-import { InputSpaceEnums } from "@/utils/enum/formEnums";
-import { TextAreaBox } from "@/components/formElements/TextAreaBox";
-import { useRemoveQueryParamModal } from "@/utils/searchParams";
-import { useDispatch } from "react-redux";
-import { addToastify } from "@/redux/slices/toastSlice";
-import { SelectBox } from "@/components/formElements/SelectBox";
-import { axiosInstance } from "@/api/axiosInstance";
-import { IStageFormDataTypes } from "@/types/stagesTypes";
-import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import { STAGE_FORM_CONSTS } from "@/consts/stagesConsts";
-import { StageFormValidation } from "@/utils/validations/stageFormValidation";
-import SelectedItemList from "@/components/common/SelectedItemList";
 import { useTranslations } from "next-intl";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { axiosInstance } from "@/api/axiosInstance";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
 import { useGetSubStagesOptionsListDataQuery } from "@/api/queries/useGetSubStagesManageQueries";
 import { StageQueryTypes } from "@/app/api/stages/route";
-import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import SelectedItemList from "@/components/common/SelectedItemList";
+import { Button } from "@/components/formElements/Button";
+import { InputBox } from "@/components/formElements/InputBox";
+import { SelectBox } from "@/components/formElements/SelectBox";
+import { TextAreaBox } from "@/components/formElements/TextAreaBox";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { STAGE_FORM_CONSTS } from "@/consts/stagesConsts";
+import { addToastify } from "@/redux/slices/toastSlice";
+import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import { IFormFieldType, IOptionType } from "@/types/formTypes";
+import { IStageFormDataTypes } from "@/types/stagesTypes";
+import { InputSpaceEnums } from "@/utils/enum/formEnums";
+import { extractApiError } from "@/utils/extractApiError";
+import { useRemoveQueryParamModal } from "@/utils/searchParams";
+import { StageFormValidation } from "@/utils/validations/stageFormValidation";
+
+import styles from "@/styles/components/stages/StageForm.module.scss";
 
 export const CreateStageForm = () => {
   const tValidation = useTranslations("layout.validation-errors");
@@ -37,7 +41,7 @@ export const CreateStageForm = () => {
     reset,
     // clearErrors,
     // setFocus,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
   } = useForm<IStageFormDataTypes>({
     resolver: yupResolver(StageFormValidation(tValidation)),
     defaultValues: {
@@ -90,7 +94,7 @@ export const CreateStageForm = () => {
       } catch (err) {
         dispatch(
           addToastify({
-            message: t("form.notifications.createError"),
+            message: extractApiError(err, t("form.notifications.createError")),
             type: "error",
             icon: "close",
             id: "createStageError" + Date.now(),

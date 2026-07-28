@@ -1,25 +1,28 @@
 "use client";
-/* eslint-disable */
 
-import styles from "@/styles/components/reasons/ReasonForm.module.scss";
-import { Button } from "@/components/formElements/Button";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { ReasonFormValidation } from "@/utils/validations/reasonFormValidation";
+
 import React, { useCallback } from "react";
-import { TextAreaBox } from "@/components/formElements/TextAreaBox";
+import { useTranslations } from "next-intl";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { axiosInstance } from "@/api/axiosInstance";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { ReasonQueryTypes } from "@/app/api/reasons/route";
+import { Button } from "@/components/formElements/Button";
 import { InputBox } from "@/components/formElements/InputBox";
+import { TextAreaBox } from "@/components/formElements/TextAreaBox";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { addToastify } from "@/redux/slices/toastSlice";
+import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import { IReasonFormDataTypes } from "@/types/reasonsTypes";
 import { InputSpaceEnums } from "@/utils/enum/formEnums";
 import { useRemoveQueryParamModal } from "@/utils/searchParams";
-import { useDispatch } from "react-redux";
-import { addToastify } from "@/redux/slices/toastSlice";
-import { IReasonFormDataTypes } from "@/types/reasonsTypes";
-import { axiosInstance } from "@/api/axiosInstance";
-import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { ReasonQueryTypes } from "@/app/api/reasons/route";
-import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import { useTranslations } from "next-intl";
-import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { ReasonFormValidation } from "@/utils/validations/reasonFormValidation";
+
+import styles from "@/styles/components/reasons/ReasonForm.module.scss";
 
 export const CreateReasonForm = () => {
   const tValidation = useTranslations("layout.validation-errors");
@@ -28,7 +31,7 @@ export const CreateReasonForm = () => {
     handleSubmit,
     register,
     reset,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
   } = useForm<IReasonFormDataTypes>({
     resolver: yupResolver(ReasonFormValidation(tValidation)),
     defaultValues: {

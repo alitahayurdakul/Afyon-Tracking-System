@@ -1,29 +1,32 @@
 "use client";
-/* eslint-disable */
 
-import styles from "@/styles/components/projects/ProjectForm.module.scss";
-import { Button } from "@/components/formElements/Button";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { ProjectFormValidation } from "@/utils/validations/projectFormValidation";
-import { useTranslations } from "next-intl";
+
 import React, { useCallback } from "react";
-import { TextAreaBox } from "@/components/formElements/TextAreaBox";
+import { useTranslations } from "next-intl";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { axiosInstance } from "@/api/axiosInstance";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { ProjectQueryTypes } from "@/app/api/projects/route";
+import { Button } from "@/components/formElements/Button";
 import { InputBox } from "@/components/formElements/InputBox";
 import { SelectBox } from "@/components/formElements/SelectBox";
-import { InputSpaceEnums } from "@/utils/enum/formEnums";
-import { useRemoveQueryParamModal } from "@/utils/searchParams";
-import { useDispatch } from "react-redux";
-import { addToastify } from "@/redux/slices/toastSlice";
-import { IProjectFormDataTypes } from "@/types/projectsTypes";
-import { axiosInstance } from "@/api/axiosInstance";
+import { TextAreaBox } from "@/components/formElements/TextAreaBox";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { ProjectQueryTypes } from "@/app/api/projects/route";
-import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { PROJECT_STATUS_OPTIONS } from "@/consts/projectsConsts";
+import { addToastify } from "@/redux/slices/toastSlice";
+import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { IOptionType } from "@/types/formTypes";
+import { IProjectFormDataTypes } from "@/types/projectsTypes";
+import { InputSpaceEnums } from "@/utils/enum/formEnums";
 import { extractApiError } from "@/utils/extractApiError";
-import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { useRemoveQueryParamModal } from "@/utils/searchParams";
+import { ProjectFormValidation } from "@/utils/validations/projectFormValidation";
+
+import styles from "@/styles/components/projects/ProjectForm.module.scss";
 
 export const CreateProjectForm = () => {
   const tValidation = useTranslations("layout.validation-errors");

@@ -1,42 +1,37 @@
 "use client";
-/* eslint-disable */
-import styles from "@/styles/components/CreateFleetModal.module.scss";
-import { Button } from "@/components/formElements/Button";
+
+import React, { useCallback, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useCallback, useEffect, useMemo } from "react";
-import { IFormFieldType, IOptionType } from "@/types/formTypes";
-import { useRemoveQueryParamModal } from "@/utils/searchParams";
 import { useDispatch } from "react-redux";
-import { addToastify } from "@/redux/slices/toastSlice";
-import { SelectBox } from "@/components/formElements/SelectBox";
+
+import { yupResolver } from "@hookform/resolvers/yup";
 
 import { axiosInstance } from "@/api/axiosInstance";
-import { CREATE_FLEET_FORM_CONSTS } from "@/consts/newFleetFormConsts";
-import { ICreateFleetFormDataTypes } from "@/types/createFleetTypes";
-import { ProcessQueryTypes } from "@/app/api/processes/route";
-import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import {
-  useGetWorkflowsDataQuery,
-  useGetWorkflowsOptionsDataQuery,
-} from "@/api/queries/useGetWorkflowsQueries";
-import { IWorkflowResponseTypes } from "@/types/workflowTypes";
-import { useRouter } from "next/navigation";
-import { CreateFleetFormValidation } from "@/utils/validations/createFleetFormValidation";
-import {
-  useGetTrainDetailWagonsDataQuery,
-  useGetTrainOptionsDataQuery,
-  useGetTrainsDataQuery,
-} from "@/api/queries/useGetTrainsQueries";
-import { URL_PAGES } from "@/consts/url";
-import { InputSpaceEnums } from "@/utils/enum/formEnums";
-import { InputBox } from "../formElements/InputBox";
-import { optionsConverters } from "@/types/optionsConverter";
-import { useTranslations } from "next-intl";
-import { ITrainType } from "@/types/trainsTypes";
 import { useGetProjectOptionsDataQuery } from "@/api/queries/useGetProjectsQueries";
-import { extractApiError } from "@/utils/extractApiError";
+import { useGetTrainsDataQuery } from "@/api/queries/useGetTrainsQueries";
+import { useGetWorkflowsOptionsDataQuery } from "@/api/queries/useGetWorkflowsQueries";
+import { ProcessQueryTypes } from "@/app/api/processes/route";
+import { Button } from "@/components/formElements/Button";
+import { SelectBox } from "@/components/formElements/SelectBox";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { CREATE_FLEET_FORM_CONSTS } from "@/consts/newFleetFormConsts";
+import { URL_PAGES } from "@/consts/url";
+import { useRouter } from "@/i18n/routing";
+import { addToastify } from "@/redux/slices/toastSlice";
+import { ICreateFleetFormDataTypes } from "@/types/createFleetTypes";
+import { IFormFieldType, IOptionType } from "@/types/formTypes";
+import { optionsConverters } from "@/types/optionsConverter";
+import { ITrainType } from "@/types/trainsTypes";
 import { ResponseStatusEnums } from "@/utils/enum/commonEnums";
+import { InputSpaceEnums } from "@/utils/enum/formEnums";
+import { extractApiError } from "@/utils/extractApiError";
+import { useRemoveQueryParamModal } from "@/utils/searchParams";
+import { CreateFleetFormValidation } from "@/utils/validations/createFleetFormValidation";
+
+import { InputBox } from "../formElements/InputBox";
+
+import styles from "@/styles/components/CreateFleetModal.module.scss";
 
 export const CreateFleetForm = () => {
   const tValidation = useTranslations("layout.validation-errors");
@@ -46,7 +41,6 @@ export const CreateFleetForm = () => {
     watch,
     // clearErrors,
     // setFocus,
-    setValue,
     formState: { isSubmitting },
   } = useForm<ICreateFleetFormDataTypes>({
     resolver: yupResolver(CreateFleetFormValidation(tValidation)),
@@ -60,7 +54,9 @@ export const CreateFleetForm = () => {
   });
   const trainId = watch("trainId");
   const t = useTranslations("layout.fleetForm");
-  const { data: projectOptions } = useGetProjectOptionsDataQuery(ResponseStatusEnums.active);
+  const { data: projectOptions } = useGetProjectOptionsDataQuery(
+    ResponseStatusEnums.active,
+  );
   const { data: trainData, isLoading } = useGetTrainsDataQuery();
   const { data: workflowOptions } =
     useGetWorkflowsOptionsDataQuery<IOptionType[]>();

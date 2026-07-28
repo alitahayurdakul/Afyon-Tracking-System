@@ -1,15 +1,16 @@
-/* eslint-disable */
+
+import React, { forwardRef, useCallback } from "react";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
-import React, { forwardRef, useCallback, useEffect } from "react";
 import { Control, useController, UseControllerProps } from "react-hook-form";
 
 import { CheckIcon } from "@/components/icons/CheckIcon";
 import { ErrorIcon } from "@/components/icons/ErrorIcon";
-import styles from "@/styles/components/formElements/TextAreaBox.module.scss";
 import { formAnimation } from "@/utils/animationUtils";
 
 import { ErrorLabel } from "./ErrorLabel";
+
+import styles from "@/styles/components/formElements/TextAreaBox.module.scss";
 
 interface TextAreaBoxProps extends UseControllerProps {
   label: string;

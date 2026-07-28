@@ -1,10 +1,11 @@
-/* eslint-disable */
+
 import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
 import {
   IMaterialResponseDataTypes,
   IMaterialType,
 } from "@/types/materialsTypes";
+
 import {
   createJsonError,
   createJsonOnlyData,

@@ -34,9 +34,12 @@ export const useGetSubStageDetailDataQuery = (id: string) => {
   const searchParams = useSearchParams();
   const param = searchParams.get("modal");
   const splittedId = param?.split("_").pop();
+  const triggered = useSelector(
+    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+  );
 
   return useQuery({
-    queryKey: [`getSubStageDetailDatas_${id}`],
+    queryKey: [`getSubStageDetailDatas_${id}`, triggered],
     refetchOnWindowFocus: false,
     enabled: splittedId === id,
     queryFn: async (): Promise<ISubStageType | undefined> => {

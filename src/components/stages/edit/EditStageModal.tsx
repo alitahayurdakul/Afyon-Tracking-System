@@ -6,6 +6,7 @@ import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { EDIT_STAGE_MODAL } from "@/consts/modals";
+import { QUALITY_STAGE_ID } from "@/consts/workflowConsts";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { useAddQueryParam } from "@/utils/searchParams";
 
@@ -20,9 +21,10 @@ export const EditWorkflowModal = ({ id }: { id: string }) => {
   const searchParams = useSearchParams();
   const modalName = `${EDIT_STAGE_MODAL}_${id}`;
   const isOpen = searchParams?.get("modal") === modalName;
+  const qualityId = QUALITY_STAGE_ID;
 
   const onEditClick = () => {
-    if (id === "6a548d7444cc81ed74b22b6a") {
+    if (id === qualityId) {
       dispatch(
         addToastify({
           message: t("form.notifications.blockedQualityStageEdit"),
@@ -36,7 +38,7 @@ export const EditWorkflowModal = ({ id }: { id: string }) => {
     addQueryParam("modal", `${EDIT_STAGE_MODAL}_${id}`);
   };
 
-   if (id === "6a548d7444cc81ed74b22b6a") {
+   if (id === qualityId) {
       return null;
     }
 

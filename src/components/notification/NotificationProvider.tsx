@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 
 import * as Toast from "@radix-ui/react-toast";
 
+import { usePathname } from "@/i18n/routing";
 import { clearToastify } from "@/redux/slices/toastSlice";
 import { RootState } from "@/redux/store";
 

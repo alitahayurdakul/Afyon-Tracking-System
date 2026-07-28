@@ -1,19 +1,21 @@
-/* eslint-disable */
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { DOMAttributes, forwardRef, useCallback, useState } from "react";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "framer-motion";
-import { DOMAttributes, forwardRef, useCallback, useState } from "react";
 import { Control, useController, UseControllerProps } from "react-hook-form";
+
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { CheckIcon } from "@/components/icons/CheckIcon";
 import { EmailVerifiedIcon } from "@/components/icons/EmailVerifiedIcon";
 import { ErrorIcon } from "@/components/icons/ErrorIcon";
-import styles from "@/styles/components/formElements/InputBox.module.scss";
-import { InputSpaceEnums } from "@/utils/enum/formEnums";
 import { formAnimation } from "@/utils/animationUtils";
+import { InputSpaceEnums } from "@/utils/enum/formEnums";
 
 import { ErrorLabel } from "./ErrorLabel";
+
+import styles from "@/styles/components/formElements/InputBox.module.scss";
 
 
 interface InputBoxProps extends UseControllerProps {
@@ -76,9 +78,7 @@ export const InputBox = forwardRef<Ref, InputBoxProps>(
 
     const {
       error: errorFormValidation,
-      isTouched,
-      isDirty,
-      invalid,
+      isDirty
     } = fieldState;
 
     const isErrorVisible = props.onChangeErrorTrigger || formState.isSubmitted;

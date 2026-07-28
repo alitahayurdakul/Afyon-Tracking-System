@@ -1,25 +1,27 @@
 "use client";
-/* eslint-disable */
 
-import styles from "@/styles/components/wagons/WagonForm.module.scss";
-import { Button } from "@/components/formElements/Button";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { WagonFormValidation } from "@/utils/validations/wagonFormValidation";
 import { useCallback } from "react";
-import { TextAreaBox } from "@/components/formElements/TextAreaBox";
+import { useTranslations } from "next-intl";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { axiosInstance } from "@/api/axiosInstance";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { WagonQueryTypes } from "@/app/api/wagons/route";
+import { Button } from "@/components/formElements/Button";
 import { InputBox } from "@/components/formElements/InputBox";
+import { TextAreaBox } from "@/components/formElements/TextAreaBox";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { addToastify } from "@/redux/slices/toastSlice";
+import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import { IWagonFormDataTypes } from "@/types/wagonsTypes";
 import { InputSpaceEnums } from "@/utils/enum/formEnums";
 import { useRemoveQueryParamModal } from "@/utils/searchParams";
-import { useDispatch } from "react-redux";
-import { addToastify } from "@/redux/slices/toastSlice";
-import { IWagonFormDataTypes } from "@/types/wagonsTypes";
-import { axiosInstance } from "@/api/axiosInstance";
-import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { WagonQueryTypes } from "@/app/api/wagons/route";
-import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import { useTranslations } from "next-intl";
-import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { WagonFormValidation } from "@/utils/validations/wagonFormValidation";
+
+import styles from "@/styles/components/wagons/WagonForm.module.scss";
 
 export const CreateWagonForm = () => {
   const tValidation = useTranslations("layout.validation-errors");
@@ -28,7 +30,7 @@ export const CreateWagonForm = () => {
     handleSubmit,
     register,
     reset,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
   } = useForm<IWagonFormDataTypes>({
     resolver: yupResolver(WagonFormValidation(tValidation)),
     defaultValues: {

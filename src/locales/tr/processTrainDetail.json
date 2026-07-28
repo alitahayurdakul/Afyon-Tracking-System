@@ -36,6 +36,6 @@
     "wagon": "{data}. vagon",
     "completed": "Tamamlandı",
     "active": "Aktif",
-    "no-data-Label": "Süreç bulunamadı."
+    "no-data-label": "Süreç bulunamadı."
   }
 }

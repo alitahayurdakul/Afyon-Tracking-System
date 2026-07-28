@@ -1,28 +1,31 @@
 "use client";
-/* eslint-disable */
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
-import styles from "@/styles/components/wagons/WagonForm.module.scss";
-import { Button } from "@/components/formElements/Button";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { IWagonFormDataTypes, IWagonType } from "@/types/wagonsTypes";
-import { WagonFormValidation } from "@/utils/validations/wagonFormValidation";
-import React, { useCallback } from "react";
-import { TextAreaBox } from "@/components/formElements/TextAreaBox";
-import { InputBox } from "@/components/formElements/InputBox";
-import { InputSpaceEnums } from "@/utils/enum/formEnums";
-import { useRemoveQueryParamModal } from "@/utils/searchParams";
-import { addToastify } from "@/redux/slices/toastSlice";
-import { useDispatch } from "react-redux";
-import { formatDate } from "@/utils/formDate";
-import { axiosInstance } from "@/api/axiosInstance";
-import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { WagonQueryTypes } from "@/app/api/wagons/route";
-import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+
+import { useCallback } from "react";
 import { useTranslations } from "next-intl";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { axiosInstance } from "@/api/axiosInstance";
 import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { WagonQueryTypes } from "@/app/api/wagons/route";
+import { Button } from "@/components/formElements/Button";
+import { InputBox } from "@/components/formElements/InputBox";
+import { TextAreaBox } from "@/components/formElements/TextAreaBox";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { addToastify } from "@/redux/slices/toastSlice";
+import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import { IWagonFormDataTypes, IWagonType } from "@/types/wagonsTypes";
+import { InputSpaceEnums } from "@/utils/enum/formEnums";
+import { formatDate } from "@/utils/formDate";
+import { useRemoveQueryParamModal } from "@/utils/searchParams";
+import { WagonFormValidation } from "@/utils/validations/wagonFormValidation";
+
+import styles from "@/styles/components/wagons/WagonForm.module.scss";
 
 interface IPropsTypes {
   id: string;
@@ -35,7 +38,7 @@ export const EditWagonForm = ({ id, data }: IPropsTypes) => {
     control,
     handleSubmit,
     register,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
   } = useForm<IWagonFormDataTypes>({
     resolver: yupResolver(WagonFormValidation(tValidation)),
     defaultValues: {

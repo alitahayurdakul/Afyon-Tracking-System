@@ -4,7 +4,7 @@ import { NewModal } from "@/components/common/NewModal";
 import { ACTIVE_STAGE_DETAIL_MODAL } from "@/consts/modals";
 import { IStage } from "@/types/processTypes";
 
-import { QuantityDetailModalContent } from "./quantityDetail/QuantityDetailModalContent";
+import { QualityDetailModalContent } from "./qualityDetail/QualityDetailModalContent";
 
 import styles from "./QualityDetailModal.module.scss";
 
@@ -33,7 +33,7 @@ const QualityDetailModal = ({
       isCloseEsc={false}
     >
       <div className={styles.modal}>
-        <QuantityDetailModalContent
+        <QualityDetailModalContent
           stages={stages ?? []}
           entryId={entryId}
           stageStatus={stageStatus}

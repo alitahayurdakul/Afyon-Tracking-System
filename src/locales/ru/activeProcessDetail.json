@@ -14,7 +14,7 @@
   "total-elapsed-time": "Общее время",
   "active-projects": "Активные проекты",
   "active-projects-select-explaining": "Выберите поезд, чтобы просмотреть ход выполнения процесса в реальном времени.",
-  "processId": "ID процесса",
+  "projectName": "Название проекта",
   "section": {
     "time-section-header": "Информация о времени",
     "delay-reason": "Причины задержки",

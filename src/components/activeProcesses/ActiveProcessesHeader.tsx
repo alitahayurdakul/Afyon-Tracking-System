@@ -15,7 +15,11 @@ import { SelectBox } from "../formElements/SelectBox";
 
 import styles from "@/styles/components/activeProcesses/ActiveProcessesHeader.module.scss";
 
-export const ActiveProcessesHeader = ({activeUnit}: {activeUnit: string}) => {
+export const ActiveProcessesHeader = ({
+  activeUnit,
+}: {
+  activeUnit: string;
+}) => {
   const searchParams = useSearchParams();
 
   const projectId = searchParams.get("projectId") || "";
@@ -64,6 +68,9 @@ export const ActiveProcessesHeader = ({activeUnit}: {activeUnit: string}) => {
             changeExtraFn={onChangeProjectSelect}
             valueContainerStyles={{ fontSize: "14px" }}
             controlStyles={{ width: "250px" }}
+            menuStyles={{
+              position: "absolute!important"
+            }}
           />
         </div>
         <div className={styles["stat-box"]}>

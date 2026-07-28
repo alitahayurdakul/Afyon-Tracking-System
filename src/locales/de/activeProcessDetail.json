@@ -14,7 +14,7 @@
   "total-elapsed-time": "Gesamtzeit",
   "active-projects": "Aktive Projekte",
   "active-projects-select-explaining": "Wählen Sie einen Zug aus, um den Live-Fortschritt des Workflows anzuzeigen.",
-  "processId": "Prozess-ID",
+  "projectName": "Projektname",
   "section": {
     "time-section-header": "Zeitinformationen",
     "delay-reason": "Verzögerungsgründe",

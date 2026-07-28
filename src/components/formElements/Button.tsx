@@ -1,11 +1,11 @@
-/* eslint-disable */
+import React, { forwardRef } from "react";
 import clsx from "clsx";
-import React, { forwardRef, MouseEventHandler, useEffect } from "react";
 
 import SpinnerIcon from "@/components/icons/SpinnerIcon";
-import styles from "@/styles/components/formElements/Button.module.scss";
 
 import { Badge } from "./Badge";
+
+import styles from "@/styles/components/formElements/Button.module.scss";
 
 export type TypeButtons =
   | "simple" // no hover effect
@@ -20,8 +20,10 @@ export type TypeButtons =
 
 type SizeElement = "small" | "medium" | "large";
 
-interface ButtonProps
-  extends Omit<React.ComponentPropsWithoutRef<"button">, "type"> {
+interface ButtonProps extends Omit<
+  React.ComponentPropsWithoutRef<"button">,
+  "type"
+> {
   type?: TypeButtons;
   buttonType?: "button" | "submit" | "reset";
   clickFn?: (

@@ -1,35 +1,39 @@
 "use client";
-/* eslint-disable */
-import styles from "@/styles/components/workflowList/WorkflowForm.module.scss";
-import { Button } from "@/components/formElements/Button";
+
+import React, { useCallback, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useCallback } from "react";
-import { IFormFieldType, IOptionType } from "@/types/formTypes";
-import { InputBox } from "@/components/formElements/InputBox";
-import { InputSpaceEnums } from "@/utils/enum/formEnums";
-import { TextAreaBox } from "@/components/formElements/TextAreaBox";
-import { useRemoveQueryParamModal } from "@/utils/searchParams";
 import { useDispatch } from "react-redux";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import { axiosInstance } from "@/api/axiosInstance";
+import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { useGetStagesOptionsDataQuery } from "@/api/queries/useGetStagesQueries";
+import { WorkflowQueryTypes } from "@/app/api/workflows/route";
+import SelectedItemList from "@/components/common/SelectedItemList";
+import { Button } from "@/components/formElements/Button";
+import { InputBox } from "@/components/formElements/InputBox";
+import { SelectBox } from "@/components/formElements/SelectBox";
+import { TextAreaBox } from "@/components/formElements/TextAreaBox";
+import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import {
+  QUALITY_STAGE_ID,
+  WORKFLOW_FORM_CONSTS,
+} from "@/consts/workflowConsts";
 import { addToastify } from "@/redux/slices/toastSlice";
+import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
+import { IFormFieldType, IOptionType } from "@/types/formTypes";
 import {
   IWorkflowFormDataTypes,
   IWorkflowFormTypes,
 } from "@/types/workflowTypes";
-import { WORKFLOW_FORM_CONSTS } from "@/consts/workflowConsts";
-import { SelectBox } from "@/components/formElements/SelectBox";
-import { WorkflowFormValidation } from "@/utils/validations/workflowFormValidation";
-import { axiosInstance } from "@/api/axiosInstance";
-import {
-  useGetStagesOptionsDataQuery,
-} from "@/api/queries/useGetStagesQueries";
-import { WorkflowQueryTypes } from "@/app/api/workflows/route";
-import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
-import SelectedItemList from "@/components/common/SelectedItemList";
-import { useTranslations } from "next-intl";
+import { InputSpaceEnums } from "@/utils/enum/formEnums";
 import { formatDate } from "@/utils/formDate";
-import { useCurrentUserName } from "@/api/queries/useCurrentUser";
+import { useRemoveQueryParamModal } from "@/utils/searchParams";
+import { WorkflowFormValidation } from "@/utils/validations/workflowFormValidation";
+
+import styles from "@/styles/components/workflowList/WorkflowForm.module.scss";
 interface IPropsTypes {
   id: string;
   workflowData?: IWorkflowFormTypes;
@@ -37,6 +41,7 @@ interface IPropsTypes {
 
 export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
   const tValidation = useTranslations("layout.validation-errors");
+  const qualityId = QUALITY_STAGE_ID;
   const {
     control,
     handleSubmit,
@@ -44,17 +49,29 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
     watch,
     setValue,
     reset,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting },
   } = useForm<IWorkflowFormDataTypes>({
     resolver: yupResolver(WorkflowFormValidation(tValidation)),
     defaultValues: {
       name: workflowData?.name,
       description: workflowData?.description,
-      stages: workflowData?.stages,
+      stages: workflowData?.stages.filter(
+        (stage: IOptionType) => stage.value !== qualityId,
+      ),
     },
   });
 
   const { data: stagesOptions } = useGetStagesOptionsDataQuery<IOptionType[]>();
+
+  const qualityData = stagesOptions?.find(
+    (stage: IOptionType) => stage.value === qualityId,
+  );
+
+  const newStagesOptions = useMemo(() => {
+    return stagesOptions?.filter(
+      (stage: IOptionType) => stage.value !== qualityId,
+    );
+  }, [stagesOptions]);
 
   const t = useTranslations("workflows");
   const dispatch = useDispatch();
@@ -77,10 +94,18 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
           };
         });
 
+        const qualityStage = {
+          stageInfo: qualityId,
+          plannedOrder: newStages.length + 1,
+        };
+
+        const lastStages =
+          newStages && newStages.length > 0 ? [...newStages, qualityStage] : [];
+
         const params = {
           ...rest,
           editor: currentUserName,
-          stages: newStages,
+          stages: lastStages,
         };
         await axiosInstance.post(CLIENT_END_POINTS.workflow.edit, {
           type: WorkflowQueryTypes.editWorkflow,
@@ -164,7 +189,7 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
             <React.Fragment key={index}>
               <SelectBox
                 name={item.name}
-                options={stagesOptions || []}
+                options={newStagesOptions || []}
                 // className={styles["row"]}
                 control={control as any}
                 required={item.isRequired}
@@ -185,25 +210,34 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
         <SelectedItemList
           name="stages"
           selectedItems={selectedStages}
+          pinnedItems={
+            qualityData?.value && qualityData?.label
+              ? [{ value: qualityData.value, label: qualityData.label }]
+              : []
+          }
           setValue={setValue}
           title={t("form.labels.selectedStages")}
         />
       )}
       <section className={styles["activity-section"]}>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>{t("form.labels.creator")}:</span>
-          <span className={styles["activity-value"]}>
-            {currentUserName}
+          <span className={styles["activity-label"]}>
+            {t("form.labels.creator")}:
           </span>
+          <span className={styles["activity-value"]}>{currentUserName}</span>
         </div>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>{t("form.labels.createdDate")}:</span>
+          <span className={styles["activity-label"]}>
+            {t("form.labels.createdDate")}:
+          </span>
           <span className={styles["activity-value"]}>
             {formatDate(workflowData?.createdAt) ?? "-"}
           </span>
         </div>
         <div className={styles["activity-row"]}>
-          <span className={styles["activity-label"]}>{t("form.labels.editor")}:</span>
+          <span className={styles["activity-label"]}>
+            {t("form.labels.editor")}:
+          </span>
           <span className={styles["activity-value"]}>
             {workflowData?.editor ?? "-"}
           </span>
