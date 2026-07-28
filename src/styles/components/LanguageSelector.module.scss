@@ -68,7 +68,9 @@
 .dropdown {
   position: absolute;
   top: calc(100% + 5px);
-  left: 0;
+  // Trigger sağ kenarda olduğu için dropdown sağa hizalanıp sola doğru açılır;
+  // aksi halde (left: 0) mobilde ekranın sağından taşıyordu
+  right: 0;
   min-width: 180px;
   background: #fff;
   border: 1px solid #e2e8f0;

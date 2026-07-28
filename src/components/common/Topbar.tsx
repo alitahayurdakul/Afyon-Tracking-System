@@ -1,12 +1,6 @@
 "use client";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-  faBell,
-  faCirclePlus,
-  faGear,
-  faSearch,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlus, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 import { PERMISSION_ACTION, PERMISSION_RESOURCE } from "@/consts/permissions";
 import { getPermission } from "@/utils/getPermission";
@@ -17,7 +11,7 @@ import { RoleWrapper } from "../RoleWrapper";
 
 import styles from "@/styles/components/common/Topbar.module.scss";
 
-library.add(faSearch, faBell, faGear, faCirclePlus);
+library.add(faSearch, faCirclePlus);
 
 // const TOPBAR_ACTIONS: { match: RegExp; render: () => React.ReactNode }[] = [
 //   { match: /^\/active-workflows\/[^/]+$/, render: () => <CreateWorkflowModal /> },
@@ -38,8 +32,6 @@ export const Topbar = ({ showCreateButton = false }: TopbarProps) => {
         <div className={styles["status-group"]}>
           <div className={styles["action-icons"]}>
             <LanguageSelector />
-            <FontAwesomeIcon icon="bell" className={styles["nav-icon"]} />
-            <FontAwesomeIcon icon="gear" className={styles["nav-icon"]} />
           </div>
         </div>
 
