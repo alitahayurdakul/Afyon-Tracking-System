@@ -1,3 +1,4 @@
+import { ITableResponseType } from "./commonTypes";
 import { IOptionType } from "./formTypes";
 import { IMaterialType } from "./materialsTypes";
 import { ISubStageType } from "./subStagesTypes";
@@ -8,8 +9,8 @@ export interface IStageFormDataTypes {
   subStages?: IOptionType[];
 }
 
-export interface IStageType{
-   _id: string;
+export interface IStageType {
+  _id: string;
   name: string;
   description: string;
   creator: string;
@@ -23,8 +24,12 @@ export interface IStageType{
 }
 
 export interface IStageResponseDataTypes {
-  count: number,
-  stages: Array<IStageType>
+  count: number;
+  stages: Array<IStageType>;
 }
 
 export type IStagesTypes = Array<IStageType>;
+
+export interface IStageTableResponseDataTypes extends ITableResponseType {
+  data: IStagesTypes;
+}

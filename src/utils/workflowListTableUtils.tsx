@@ -1,4 +1,3 @@
-
 import React from "react";
 
 import { DynamicTextWithTooltip } from "@/components/common/DynamicTextWithTooltip";
@@ -65,9 +64,7 @@ export const createWorkflowTableColumns = (t: TFunction) => {
         if (column.name === "description") {
           return (
             <div className={styles["desc-cell"]}>
-              <DynamicTextWithTooltip
-                text={row.original.description || "-"}
-              />
+              <DynamicTextWithTooltip text={row.original.description || "-"} />
             </div>
           );
         }
@@ -80,7 +77,7 @@ export const createWorkflowTableColumns = (t: TFunction) => {
                   <ul className={styles["wagon-list-container"]}>
                     {r.stages.map((stage: IStageType, index: number) => (
                       <React.Fragment key={index}>
-                        <li>{stage.stageInfo.name}</li>
+                        <li>{stage.stageInfo?.name ?? "-"}</li>
                       </React.Fragment>
                     ))}
                   </ul>

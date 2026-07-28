@@ -1,7 +1,11 @@
 import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
 import { IPaginationTypes } from "@/types/commonTypes";
-import { ITrainsType, ITrainType } from "@/types/trainsTypes";
+import {
+  ITrainsResponseDataTypes,
+  ITrainsType,
+  ITrainType,
+} from "@/types/trainsTypes";
 
 import {
   createJsonError,
@@ -93,7 +97,7 @@ async function getTableTrains({
   currentPage,
 }: IPaginationTypes): Promise<Response> {
   try {
-    const response = await axiosInstance.get<ITrainsType>(
+    const response = await axiosInstance.get<ITrainsResponseDataTypes>(
       END_POINTS.train.getFilteredTrains({ pageSize, currentPage }),
     );
     if (response.status === 200) {

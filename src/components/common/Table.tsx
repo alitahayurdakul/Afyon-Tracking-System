@@ -115,8 +115,6 @@ export const Table = <T,>({
     pageSize: resolvedPageSize,
   };
 
-  console.log(pagination)
-
   const table = useReactTable({
     data: data || [],
     columns: columns,

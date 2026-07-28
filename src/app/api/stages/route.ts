@@ -7,12 +7,13 @@ export enum StageQueryTypes {
   createStage = "CREATE_STAGE",
   editStage = "EDIT_STAGE",
   deleteStage = "DELETE_STAGE",
-  getDetailStage = "GET_DETAIL_STAGE"
+  getDetailStage = "GET_DETAIL_STAGE",
+  getTableStages = "GET_TABLE_STAGES"
 }
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { id, params, type } = body;
+  const { id, params, type, currentPage, pageSize } = body;
 
   switch (type) {
     case StageQueryTypes.createStage:
@@ -25,6 +26,8 @@ export async function POST(request: NextRequest) {
       return await stageHandlers.getStages();
     case StageQueryTypes.getDetailStage:
       return await stageHandlers.getStageDetail(id);
+    case StageQueryTypes.getTableStages:
+      return await stageHandlers.getTableStages({currentPage, pageSize});
 
     default: {
       return Response.json(

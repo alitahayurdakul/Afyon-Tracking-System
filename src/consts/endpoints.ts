@@ -9,6 +9,8 @@ export const END_POINTS = {
     delete: (id: string) => `${apiUrl}/api/stages/${id}`,
     getAll: `${apiUrl}/api/stages`,
     getDetail: (id: string) => `${apiUrl}/api/stages/${id}`,
+    getFilteredStages: ({ currentPage, pageSize }: IPaginationTypes) =>
+      `${apiUrl}/api/stages?pageNumber=${currentPage}&pageSize=${pageSize}`,
   },
   workflow: {
     create: `${apiUrl}/api/favorite-processes`,

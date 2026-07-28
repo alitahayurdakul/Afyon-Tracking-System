@@ -1,16 +1,26 @@
- 
 import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
-import { IStageResponseDataTypes, IStageType } from "@/types/stagesTypes";
+import { IPaginationTypes } from "@/types/commonTypes";
+import {
+  IStageResponseDataTypes,
+  IStageTableResponseDataTypes,
+  IStageType,
+} from "@/types/stagesTypes";
 
-import { createJsonError, createJsonOnlyData, createJsonSuccess, extractErrorMessage } from "./responseHelpers";
+import {
+  createJsonError,
+  createJsonOnlyData,
+  createJsonSuccess,
+  extractErrorMessage,
+} from "./responseHelpers";
 
 export const stageHandlers = {
   createStage,
   deleteStage,
   editStage,
   getStages,
-  getStageDetail
+  getStageDetail,
+  getTableStages,
 };
 
 async function createStage(params: Record<string, any>): Promise<Response> {
@@ -42,12 +52,9 @@ async function deleteStage(id: string): Promise<Response> {
 async function editStage(params: Record<string, any>): Promise<Response> {
   try {
     const { id, ...rest } = params;
-    const response = await axiosInstance.put(
-      END_POINTS.stage.edit(id),
-      {
-        ...rest
-      },
-    );
+    const response = await axiosInstance.put(END_POINTS.stage.edit(id), {
+      ...rest,
+    });
     if (response.status === 200) {
       return createJsonSuccess(response.data, 201);
     }
@@ -75,6 +82,23 @@ async function getStageDetail(id: string): Promise<Response> {
   try {
     const response = await axiosInstance.get<IStageType>(
       END_POINTS.stage.getDetail(id),
+    );
+    if (response.status === 200) {
+      return createJsonOnlyData(response.data || []);
+    }
+    return createJsonError("Failed to fetch sub stage detail", 400);
+  } catch (err: any) {
+    return createJsonError(extractErrorMessage(err), 500);
+  }
+}
+
+async function getTableStages({
+  currentPage,
+  pageSize,
+}: IPaginationTypes): Promise<Response> {
+  try {
+    const response = await axiosInstance.get<IStageTableResponseDataTypes>(
+      END_POINTS.stage.getFilteredStages({ currentPage, pageSize }),
     );
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
