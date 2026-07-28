@@ -9,6 +9,7 @@ import {
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
+  PaginationState,
   Table as TypeReactTable,
   useReactTable,
 } from "@tanstack/react-table";
@@ -32,6 +33,8 @@ interface TableProps<T> {
   currentPage?: number;
   paginationElement?: (table: TypeReactTable<T>) => React.JSX.Element;
   totalPage?: number;
+  totalCount?: number;
+  onPageChange?: (page: number) => void;
 
   // Pinning
   enablePinning?: boolean;
@@ -73,6 +76,8 @@ export const Table = <T,>({
   pageSize,
   currentPage,
   totalPage,
+  totalCount,
+  onPageChange,
   setSelectedRows,
   draggableClassActive,
   isReset,
@@ -85,20 +90,32 @@ export const Table = <T,>({
   defaultSkeletonRowCount,
 }: TableProps<T>) => {
   const t = useTranslations("layout");
-  const isPaginationAvailable = currentPage || pageSize;
+  const isPaginationAvailable =
+    currentPage !== undefined || pageSize !== undefined;
 
   const scrollRef = useRef<HTMLTableElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
 
+  const resolvedPageSize = pageSize || DEFAULT_TABLE_PAGE_COUNT;
+
   const pageCount = !isPaginationAvailable
     ? undefined
     : totalPage
       ? totalPage
-      : data
-        ? Math.ceil(data.length / (pageSize || DEFAULT_TABLE_PAGE_COUNT))
-        : DEFAULT_TABLE_PAGE_COUNT;
+      : totalCount !== undefined
+        ? Math.max(1, Math.ceil(totalCount / resolvedPageSize))
+        : data
+          ? Math.ceil(data.length / resolvedPageSize)
+          : DEFAULT_TABLE_PAGE_COUNT;
+
+  const pagination: PaginationState = {
+    pageIndex: (currentPage ?? 1) - 1,
+    pageSize: resolvedPageSize,
+  };
+
+  console.log(pagination)
 
   const table = useReactTable({
     data: data || [],
@@ -108,15 +125,15 @@ export const Table = <T,>({
     enableRowPinning,
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
-    initialState: {
-      pagination: {
-        pageSize: pageSize,
-        pageIndex: currentPage,
-      },
-      // columnPinning: columnPinning ? columnPinning : { left: [], right: [] }
+    state: {
+      pagination,
+    },
+    onPaginationChange: (updater) => {
+      const next =
+        typeof updater === "function" ? updater(pagination) : updater;
+      onPageChange?.(next.pageIndex);
     },
     enableRowSelection: true,
-    state: {},
     pageCount,
     getPaginationRowModel: isPaginationAvailable
       ? getPaginationRowModel()
@@ -188,7 +205,7 @@ export const Table = <T,>({
   const skeletonRowCount =
     !!data && data.length > 0
       ? data.length
-      : pageSize || (defaultSkeletonRowCount?? 1);
+      : pageSize || (defaultSkeletonRowCount ?? 1);
 
   const renderTbodyContent = () => {
     if (loading) {
@@ -343,7 +360,6 @@ const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
     right: isPinned === "right" ? `${column.getAfter("right")}px` : undefined,
     position: isPinned ? "sticky" : "relative",
     zIndex: isPinned ? 1 : 0,
-    // width/maxWidth/minWidth sadece pinned kolonlarda gerekli (sticky offset için)
     ...(isPinned && {
       width: column.getSize(),
       maxWidth: column.getSize(),

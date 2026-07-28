@@ -1,3 +1,5 @@
+import { IPaginationTypes } from "@/types/commonTypes";
+
 const apiUrl = process.env.API_URL || "api";
 
 export const END_POINTS = {
@@ -42,7 +44,6 @@ export const END_POINTS = {
     startStage: (processId: string) =>
       `${apiUrl}/api/processes/${processId}/start-stage`,
     deleteProcess: (id: string) => `${apiUrl}/api/processes/${id}`,
-
   },
   processOperations: {
     complete: (processId: string) =>
@@ -95,7 +96,8 @@ export const END_POINTS = {
     create: `${apiUrl}/api/materials`,
     edit: (id: string) => `${apiUrl}/api/materials/${id}`,
     delete: (id: string) => `${apiUrl}/api/materials/${id}`,
-    getAll: `${apiUrl}/api/materials`,
+    getAll: ({ pageSize, currentPage }: IPaginationTypes) =>
+      `${apiUrl}/api/materials?pageNumber=${currentPage}&pageSize=${pageSize}`,
     getDetail: (id: string) => `${apiUrl}/api/materials/${id}`,
   },
   subStage: {
@@ -154,7 +156,7 @@ export const CLIENT_END_POINTS = {
     startSubStage: "/api/processes",
     saveandCompleteSubStage: "/api/processes",
     completeStage: "/api/processes",
-    startStage: "/api/processes"
+    startStage: "/api/processes",
   },
   activeProcessOperation: {
     complete: "/api/activeProcessOperations",

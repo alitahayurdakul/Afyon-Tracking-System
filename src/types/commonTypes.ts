@@ -8,3 +8,15 @@ export interface IStatusType{
 
 export type IStatusTypes = Array<IStatusType>;
 export type TFunction = ReturnType<typeof useTranslations>;
+
+export interface IPaginationTypes {
+  pageSize: number;
+  currentPage: number;
+}
+
+export interface ITableResponseType{
+    pageNumber: number;
+    pageSize: number;
+    totalCount: number;
+    totalPages: number;
+}

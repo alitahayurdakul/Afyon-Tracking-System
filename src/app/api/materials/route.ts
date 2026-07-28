@@ -12,7 +12,7 @@ export enum MaterialQueryTypes {
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { id, params, type } = body;
+  const { id, params, type, pageSize, currentPage } = body;
 
   switch (type) {
     case MaterialQueryTypes.createMaterial:
@@ -22,7 +22,9 @@ export async function POST(request: NextRequest) {
     case MaterialQueryTypes.editMaterial:
       return await materialHandlers.editMaterial(params);
     case MaterialQueryTypes.getAllMaterials:
-      return await materialHandlers.getMaterials();
+      return await materialHandlers.getMaterials({
+        pageSize, currentPage
+      });
     case MaterialQueryTypes.getDetailMaterial:
       return await materialHandlers.getMaterialDetail(id);
 

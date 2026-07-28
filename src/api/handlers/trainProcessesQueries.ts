@@ -44,7 +44,6 @@ async function getProcessTrainDetail(
     }
     return createJsonError("Failed to fetch projects", 400);
   } catch (err: unknown) {
-    console.log(err, "errorr");
     return createJsonError(extractErrorMessage(err), 500);
   }
 }

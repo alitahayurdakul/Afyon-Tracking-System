@@ -81,6 +81,14 @@
   },
   "table": {
     "error": "An error occurred",
-    "noData": "No records found"
+    "noData": "No records found",
+    "totalCount": "{count} results",
+    "showingRange": "Showing {from}–{to}",
+    "previous": "Previous",
+    "next": "Next",
+    "goTo": "Go to",
+    "go": "Go",
+    "perPage": "Per page",
+    "page": "page"
   }
 }

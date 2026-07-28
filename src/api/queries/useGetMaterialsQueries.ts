@@ -8,23 +8,27 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { MaterialQueryTypes } from "@/app/api/materials/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
+import { IPaginationTypes } from "@/types/commonTypes";
 import { IOptionType } from "@/types/formTypes";
-import { IMaterialsType, IMaterialType } from "@/types/materialsTypes";
+import { IMaterialResponseDataTypes, IMaterialsType, IMaterialType } from "@/types/materialsTypes";
 import { optionsConverters } from "@/types/optionsConverter";
 
-export const useGetMaterialsDataQuery = () => {
+export const useGetMaterialsDataQuery = ({
+  pageSize,
+  currentPage,
+}: IPaginationTypes) => {
   const trigger = useSelector(
     (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
   );
 
   return useQuery({
-    queryKey: [`getMaterialsAllDatas`, trigger],
+    queryKey: [`getMaterialsAllDatas`, trigger, pageSize, currentPage],
     refetchOnWindowFocus: false,
     enabled: true,
-    queryFn: async (): Promise<IMaterialsType> => {
-      const { data } = await axiosInstance.post<IMaterialsType>(
+    queryFn: async (): Promise<IMaterialResponseDataTypes> => {
+      const { data } = await axiosInstance.post<IMaterialResponseDataTypes>(
         CLIENT_END_POINTS.material.getAll,
-        { type: MaterialQueryTypes.getAllMaterials },
+        { type: MaterialQueryTypes.getAllMaterials, pageSize, currentPage },
       );
       return data;
     },

@@ -1,3 +1,5 @@
+import { ITableResponseType } from "./commonTypes";
+
 export interface IMaterialFormDataTypes {
   name: string;
   code: string;
@@ -15,9 +17,8 @@ export interface IMaterialType {
   updatedAt?: string;
 }
 
-export type IMaterialsType = Array<IMaterialType>
+export type IMaterialsType = Array<IMaterialType>;
 
-export interface IMaterialResponseDataTypes {
-  count: number;
-  materials: IMaterialType[];
+export interface IMaterialResponseDataTypes extends ITableResponseType {
+  data: IMaterialType[];
 }

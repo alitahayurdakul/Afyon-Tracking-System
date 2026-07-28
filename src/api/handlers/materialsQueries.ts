@@ -1,6 +1,6 @@
-
 import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
+import { IPaginationTypes } from "@/types/commonTypes";
 import {
   IMaterialResponseDataTypes,
   IMaterialType,
@@ -67,11 +67,17 @@ async function editMaterial(params: Record<string, any>): Promise<Response> {
   }
 }
 
-async function getMaterials(): Promise<Response> {
+async function getMaterials({
+  pageSize,
+  currentPage,
+}: IPaginationTypes): Promise<Response> {
   try {
-    const response = await axiosInstance.get<IMaterialResponseDataTypes>(END_POINTS.material.getAll);
-    if (response.status === 200) {    
-      return createJsonOnlyData(response.data.materials || []);
+    const response = await axiosInstance.get<IMaterialResponseDataTypes>(
+      END_POINTS.material.getAll({ pageSize, currentPage }),
+    );
+
+    if (response.status === 200) {
+      return createJsonOnlyData(response.data || []);
     }
     return createJsonError("Failed to fetch materials", 400);
   } catch (err: unknown) {
