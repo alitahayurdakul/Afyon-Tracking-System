@@ -1,6 +1,11 @@
 import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
-import { IRoleResponseDataTypes, IRolesType, IRoleType } from "@/types/rolesTypes";
+import { IPaginationTypes } from "@/types/commonTypes";
+import {
+  IRoleResponseDataTypes,
+  IRolesType,
+  IRoleType,
+} from "@/types/rolesTypes";
 
 import {
   createJsonError,
@@ -73,9 +78,11 @@ async function getRoles(): Promise<Response> {
   }
 }
 
-async function getTableRoles(params: Record<string, any>): Promise<Response> {
+async function getTableRoles({
+  currentPage,
+  pageSize,
+}: IPaginationTypes): Promise<Response> {
   try {
-    const { currentPage, pageSize } = params;
     const response = await axiosInstance.get<IRoleResponseDataTypes>(
       END_POINTS.role.getFilteredRoles({ currentPage, pageSize }),
     );

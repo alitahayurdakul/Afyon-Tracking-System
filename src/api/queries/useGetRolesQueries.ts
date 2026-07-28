@@ -10,7 +10,11 @@ import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
 import { IPaginationTypes } from "@/types/commonTypes";
 import { optionsConverters } from "@/types/optionsConverter";
-import { IRoleResponseDataTypes, IRolesType, IRoleType } from "@/types/rolesTypes";
+import {
+  IRoleResponseDataTypes,
+  IRolesType,
+  IRoleType,
+} from "@/types/rolesTypes";
 
 export const useGetRolesDataQuery = ({
   pageSize,
@@ -29,10 +33,9 @@ export const useGetRolesDataQuery = ({
         CLIENT_END_POINTS.role.getAll,
         {
           type: RoleQueryTypes.getTableRoles,
-          params: {
-            currentPage,
-            pageSize,
-          },
+
+          currentPage,
+          pageSize,
         },
       );
       return data;
