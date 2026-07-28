@@ -19,6 +19,7 @@ export const materialHandlers = {
   editMaterial,
   getMaterials,
   getMaterialDetail,
+  getTableMaterials
 };
 
 async function createMaterial(params: Record<string, any>): Promise<Response> {
@@ -67,13 +68,26 @@ async function editMaterial(params: Record<string, any>): Promise<Response> {
   }
 }
 
-async function getMaterials({
+async function getMaterials(): Promise<Response> {
+  try {
+    const response = await axiosInstance.get(END_POINTS.material.getAll);
+
+    if (response.status === 200) {
+      return createJsonOnlyData(response.data.materials || []);
+    }
+    return createJsonError("Failed to fetch materials", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
+  }
+}
+
+async function getTableMaterials({
   pageSize,
   currentPage,
 }: IPaginationTypes): Promise<Response> {
   try {
     const response = await axiosInstance.get<IMaterialResponseDataTypes>(
-      END_POINTS.material.getAll({ pageSize, currentPage }),
+      END_POINTS.material.getFilteredMaterials({ pageSize, currentPage }),
     );
 
     if (response.status === 200) {

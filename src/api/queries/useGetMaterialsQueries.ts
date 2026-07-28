@@ -10,7 +10,11 @@ import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
 import { IPaginationTypes } from "@/types/commonTypes";
 import { IOptionType } from "@/types/formTypes";
-import { IMaterialResponseDataTypes, IMaterialsType, IMaterialType } from "@/types/materialsTypes";
+import {
+  IMaterialResponseDataTypes,
+  IMaterialsType,
+  IMaterialType,
+} from "@/types/materialsTypes";
 import { optionsConverters } from "@/types/optionsConverter";
 
 export const useGetMaterialsDataQuery = ({
@@ -28,7 +32,7 @@ export const useGetMaterialsDataQuery = ({
     queryFn: async (): Promise<IMaterialResponseDataTypes> => {
       const { data } = await axiosInstance.post<IMaterialResponseDataTypes>(
         CLIENT_END_POINTS.material.getAll,
-        { type: MaterialQueryTypes.getAllMaterials, pageSize, currentPage },
+        { type: MaterialQueryTypes.getTableMaterials, pageSize, currentPage },
       );
       return data;
     },

@@ -96,7 +96,8 @@ export const END_POINTS = {
     create: `${apiUrl}/api/materials`,
     edit: (id: string) => `${apiUrl}/api/materials/${id}`,
     delete: (id: string) => `${apiUrl}/api/materials/${id}`,
-    getAll: ({ pageSize, currentPage }: IPaginationTypes) =>
+    getAll: `${apiUrl}/api/materials`,
+    getFilteredMaterials: ({ pageSize, currentPage }: IPaginationTypes) =>
       `${apiUrl}/api/materials?pageNumber=${currentPage}&pageSize=${pageSize}`,
     getDetail: (id: string) => `${apiUrl}/api/materials/${id}`,
   },

@@ -8,6 +8,7 @@ export enum MaterialQueryTypes {
   editMaterial = "EDIT_MATERIAL",
   deleteMaterial = "DELETE_MATERIAL",
   getDetailMaterial = "GET_DETAIL_MATERIAL",
+  getTableMaterials = "GET_TABLE_MATERIALS",
 }
 
 export async function POST(request: NextRequest) {
@@ -22,8 +23,11 @@ export async function POST(request: NextRequest) {
     case MaterialQueryTypes.editMaterial:
       return await materialHandlers.editMaterial(params);
     case MaterialQueryTypes.getAllMaterials:
-      return await materialHandlers.getMaterials({
-        pageSize, currentPage
+      return await materialHandlers.getMaterials();
+    case MaterialQueryTypes.getTableMaterials:
+      return await materialHandlers.getTableMaterials({
+        pageSize,
+        currentPage,
       });
     case MaterialQueryTypes.getDetailMaterial:
       return await materialHandlers.getMaterialDetail(id);
