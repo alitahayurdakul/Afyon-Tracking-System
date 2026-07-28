@@ -13,7 +13,8 @@ export enum ProcessQueryTypes {
   saveandCompleteSubStage = "SAVE_AND_COMPLETE_SUB_STAGE",
   completeStage = "COMPLETE_STAGE",
   startStage = "START_STAGE",
-  deleteProcess = "DELETE_PROCESS"
+  deleteProcess = "DELETE_PROCESS",
+  getTableProcessHistory = "GET_TABLE_PROCESS_HISTORY"
 }
 
 export async function POST(request: NextRequest) {
@@ -41,6 +42,8 @@ export async function POST(request: NextRequest) {
       return await processHandlers.completeStage(entryId);
     case ProcessQueryTypes.startStage:
       return await processHandlers.startStage(params);
+    case ProcessQueryTypes.getTableProcessHistory:
+      return await processHandlers.getTableProcessHistory(params);
 
     default: {
       return Response.json(

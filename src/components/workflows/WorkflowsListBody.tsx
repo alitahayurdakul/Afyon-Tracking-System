@@ -6,16 +6,10 @@ import { useTranslations } from "next-intl";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import {
-  useGetTableWorkflowsDataQuery,
-  useGetWorkflowsDataQuery,
-} from "@/api/queries/useGetWorkflowsQueries";
+import { useGetTableWorkflowsDataQuery } from "@/api/queries/useGetWorkflowsQueries";
 import { usePaginationParams } from "@/api/queries/usePaginationParams";
 import { DEFAULT_PAGE_SIZE_OPTIONS } from "@/consts/tableConsts";
-import {
-  ITableWorkflowResponseTypes,
-  IWorkflowResponseTypes,
-} from "@/types/workflowTypes";
+import { ITableWorkflowResponseTypes } from "@/types/workflowTypes";
 import { currentPageController } from "@/utils/currentPageController";
 import { createWorkflowTableColumns } from "@/utils/workflowListTableUtils";
 

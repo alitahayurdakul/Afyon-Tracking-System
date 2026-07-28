@@ -1,4 +1,3 @@
-
 import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
 import { ResponseStatusEnums } from "@/utils/enum/commonEnums";
@@ -21,6 +20,7 @@ export const processHandlers = {
   saveandCompleteSubStage,
   completeStage,
   startStage,
+  getTableProcessHistory,
 };
 
 async function createProcess(params: Record<string, any>): Promise<Response> {
@@ -190,6 +190,27 @@ async function startStage(params: Record<string, any>): Promise<Response> {
 
     return createJsonError("Failed to start a sub stage", 400);
   } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
+  }
+}
+
+async function getTableProcessHistory(
+  params: Record<string, any>,
+): Promise<Response> {
+  try {
+    const { status, currentPage, pageSize } = params || {};
+    const response = await axiosInstance.get(
+      END_POINTS.process.getFilteredProcessHistory({
+        status,
+        currentPage,
+        pageSize,
+      }),
+    );
+    if (response.status === 200) {
+      return createJsonOnlyData(response.data || []);
+    }
+    return createJsonError("Failed to get all active processes", 400);
+  } catch (err: any) {
     return createJsonError(extractErrorMessage(err), 500);
   }
 }

@@ -1,4 +1,5 @@
 import { SubStage } from "./activeProcessDetailTypes";
+import { ITableResponseType } from "./commonTypes";
 
 export interface IStageEntryType {
   operator: string;
@@ -51,6 +52,10 @@ export interface IOpenStage {
 }
 
 export type IProcessesTypes = Array<IProcessType>;
+
+export interface ITableProcessHistoryResponseTypes extends ITableResponseType {
+  data: IProcessesTypes;
+}
 
 export type IdRef = {
   _id: string;
@@ -137,4 +142,4 @@ export type ProcessResponse = {
   summary: IProcessSummary;
 };
 
-export type ProcessArrayResponse = Array<ProcessResponse>
+export type ProcessArrayResponse = Array<ProcessResponse>;

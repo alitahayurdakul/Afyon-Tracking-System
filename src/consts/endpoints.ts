@@ -50,6 +50,12 @@ export const END_POINTS = {
     startStage: (processId: string) =>
       `${apiUrl}/api/processes/${processId}/start-stage`,
     deleteProcess: (id: string) => `${apiUrl}/api/processes/${id}`,
+    getFilteredProcessHistory: ({
+      pageSize,
+      currentPage,
+      status,
+    }: IPaginationWithStatus) =>
+      `${apiUrl}/api/processes?pageNumber=${currentPage}&pageSize=${pageSize}${status ? `&status=${status}` : ""}`,
   },
   processOperations: {
     complete: (processId: string) =>
