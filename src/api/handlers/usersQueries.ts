@@ -79,10 +79,12 @@ async function changePassword(
   }
 }
 
-async function getUsers(): Promise<Response> {
+async function getUsers(params: Record<string, any>): Promise<Response> {
   try {
+    const { currentPage, pageSize } = params;
+
     const response = await axiosInstance.get<IUsersType>(
-      END_POINTS.user.getAll,
+      END_POINTS.user.getAll({ currentPage, pageSize }),
     );
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);

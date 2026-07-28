@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     case UserQueryTypes.editUser:
       return await userHandlers.editUser(params);
     case UserQueryTypes.getAllUsers:
-      return await userHandlers.getUsers();
+      return await userHandlers.getUsers(params);
     case UserQueryTypes.getDetailUser:
       return await userHandlers.getUserDetail(id);
     case UserQueryTypes.changePassword:

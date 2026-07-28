@@ -54,7 +54,7 @@ export const useGetTableProcessesDataQuery = <T>({
 
   return useQuery({
     queryKey: [
-      `getActiveProcessAllDatas`,
+      `getTableProcessDatas`,
       status,
       trigger,
       currentPage,

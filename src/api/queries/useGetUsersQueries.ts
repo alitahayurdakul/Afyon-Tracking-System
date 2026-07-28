@@ -8,21 +8,31 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { UserQueryTypes } from "@/app/api/users/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
-import { IUsersType, IUserType } from "@/types/usersTypes";
+import { IPaginationTypes } from "@/types/commonTypes";
+import { IUserResponseDataTypes, IUserType } from "@/types/usersTypes";
 
-export const useGetUsersDataQuery = () => {
+export const useGetUsersDataQuery = ({
+  pageSize,
+  currentPage,
+}: IPaginationTypes) => {
   const trigger = useSelector(
     (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
   );
 
   return useQuery({
-    queryKey: [`getUsersAllDatas`, trigger],
+    queryKey: [`getUsersAllDatas`, trigger, pageSize, currentPage],
     refetchOnWindowFocus: false,
     enabled: true,
     queryFn: async () => {
-      const { data } = await axiosInstance.post<IUsersType>(
+      const { data } = await axiosInstance.post<IUserResponseDataTypes>(
         CLIENT_END_POINTS.user.getAll,
-        { type: UserQueryTypes.getAllUsers },
+        {
+          type: UserQueryTypes.getAllUsers,
+          params: {
+            currentPage,
+            pageSize,
+          },
+        },
       );
       return data;
     },

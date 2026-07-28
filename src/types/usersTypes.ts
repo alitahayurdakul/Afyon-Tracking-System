@@ -1,3 +1,5 @@
+import { ITableResponseType } from "./commonTypes";
+
 export interface IUserFormDataTypes {
   fullname: string;
   email: string;
@@ -39,7 +41,6 @@ export interface IUserType {
 
 export type IUsersType = Array<IUserType>;
 
-export interface IUserResponseDataTypes {
-  count: number;
-  users: IUserType[];
+export interface IUserResponseDataTypes extends ITableResponseType {
+  data: IUserType[];
 }
