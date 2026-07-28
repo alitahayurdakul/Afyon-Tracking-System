@@ -7,12 +7,13 @@ export enum WorkflowQueryTypes {
   createWorkflow = "CREATE_WORKFLOW",
   editWorkflow = "EDIT_WORKFLOW",
   deleteWorkflow = "DELETE_WORKFLOW",
-  getWorkflowDetail = "GET_WORKFLOW_DETAIL"
+  getWorkflowDetail = "GET_WORKFLOW_DETAIL",
+  getTableWorkflows = "GET_TABLE_WORKFLOWS",
 }
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { id, params, type } = body;
+  const { id, params, type, currentPage, pageSize } = body;
 
   switch (type) {
     case WorkflowQueryTypes.createWorkflow:
@@ -25,7 +26,11 @@ export async function POST(request: NextRequest) {
       return await workflowHandlers.getAllWorkflows();
     case WorkflowQueryTypes.getWorkflowDetail:
       return await workflowHandlers.getWorkflowDetail(id);
-
+    case WorkflowQueryTypes.getTableWorkflows:
+      return await workflowHandlers.getTableWorkflows({
+        currentPage,
+        pageSize,
+      });
 
     default: {
       return Response.json(

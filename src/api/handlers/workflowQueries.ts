@@ -1,7 +1,10 @@
- 
 import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
-import { IWorkflowResponseTypes } from "@/types/workflowTypes";
+import { IPaginationTypes } from "@/types/commonTypes";
+import {
+  ITableWorkflowResponseTypes,
+  IWorkflowResponseTypes,
+} from "@/types/workflowTypes";
 
 import {
   createJsonError,
@@ -16,6 +19,7 @@ export const workflowHandlers = {
   editWorkflow,
   getAllWorkflows,
   getWorkflowDetail,
+  getTableWorkflows
 };
 
 async function getAllWorkflows(): Promise<Response> {
@@ -94,6 +98,24 @@ async function getWorkflowDetail(id: string): Promise<Response> {
     }
     return createJsonError("Failed to fetch workflow detail", 400);
   } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
+  }
+}
+
+async function getTableWorkflows({
+  pageSize,
+  currentPage,
+}: IPaginationTypes): Promise<Response> {
+  try {
+    const response = await axiosInstance.get<ITableWorkflowResponseTypes>(
+      END_POINTS.workflow.getFilteredWorkflows({ pageSize, currentPage }),
+    );
+
+    if (response.status === 200) {
+      return createJsonOnlyData(response.data || []);
+    }
+    return createJsonError("Failed to fetch workflows", 400);
+  } catch (err: any) {
     return createJsonError(extractErrorMessage(err), 500);
   }
 }

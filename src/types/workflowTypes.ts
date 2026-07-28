@@ -1,3 +1,4 @@
+import { ITableResponseType } from "./commonTypes";
 import { IOptionType } from "./formTypes";
 
 export interface IWorkflowFormDataTypes {
@@ -33,4 +34,8 @@ export interface IWorkflowResponseTypes {
   createdAt: string;
   updatedAt: string;
   editor?: string;
+}
+
+export interface ITableWorkflowResponseTypes extends ITableResponseType {
+  data: IWorkflowResponseTypes[];
 }

@@ -8,6 +8,7 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { WorkflowQueryTypes } from "@/app/api/workflows/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
+import { IPaginationTypes } from "@/types/commonTypes";
 import { optionsConverters } from "@/types/optionsConverter";
 
 export const useGetWorkflowsDataQuery = <T>() => {
@@ -64,6 +65,27 @@ export const useGetWorkflowsOptionsDataQuery = <T>() => {
         { type: WorkflowQueryTypes.getAllWorkflows },
       );
       return optionsConverters(data, "_id", "name") as unknown as T;
+    },
+  });
+};
+
+export const useGetTableWorkflowsDataQuery = <T>({
+  currentPage,
+  pageSize,
+}: IPaginationTypes) => {
+  const trigger = useSelector(
+    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+  );
+  return useQuery({
+    queryKey: [`getTableWorkflowsAllDatas`, trigger, currentPage, pageSize],
+    refetchOnWindowFocus: false,
+    enabled: true,
+    queryFn: async (): Promise<T> => {
+      const { data } = await axiosInstance.post<T>(
+        CLIENT_END_POINTS.workflow.getAll,
+        { type: WorkflowQueryTypes.getTableWorkflows, currentPage, pageSize },
+      );
+      return data;
     },
   });
 };

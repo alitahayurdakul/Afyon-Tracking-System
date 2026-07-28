@@ -1,16 +1,25 @@
 "use client";
 
+import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 
-import {
-  faSearch
-} from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { useGetWorkflowsDataQuery } from "@/api/queries/useGetWorkflowsQueries";
-import { IWorkflowResponseTypes } from "@/types/workflowTypes";
+import {
+  useGetTableWorkflowsDataQuery,
+  useGetWorkflowsDataQuery,
+} from "@/api/queries/useGetWorkflowsQueries";
+import { usePaginationParams } from "@/api/queries/usePaginationParams";
+import { DEFAULT_PAGE_SIZE_OPTIONS } from "@/consts/tableConsts";
+import {
+  ITableWorkflowResponseTypes,
+  IWorkflowResponseTypes,
+} from "@/types/workflowTypes";
+import { currentPageController } from "@/utils/currentPageController";
 import { createWorkflowTableColumns } from "@/utils/workflowListTableUtils";
 
+import { Pagination } from "../common/Pagination";
 import { Table } from "../common/Table";
 
 import { CreateWorkflowModal } from "./create/CreateWorkflowModal";
@@ -19,20 +28,31 @@ import styles from "@/styles/components/common/TableListBody.module.scss";
 
 export const WorkflowsListBody = () => {
   const t = useTranslations("workflows");
-  const { data, isLoading, isError, isFetching } = useGetWorkflowsDataQuery<IWorkflowResponseTypes[]>();
+  const { currentPage, pageSize, setCurrentPage, setPageSize } =
+    usePaginationParams();
+  const { data, isLoading, isError, isFetching } =
+    useGetTableWorkflowsDataQuery<ITableWorkflowResponseTypes>({
+      currentPage,
+      pageSize,
+    });
+
+  const safePage = currentPageController(currentPage, data?.totalPages);
+
+  useEffect(() => {
+    if (!isLoading && !isFetching && data && safePage !== currentPage) {
+      setCurrentPage(safePage);
+    }
+  }, [isLoading, isFetching, data, safePage, currentPage, setCurrentPage]);
 
   return (
     <section className={styles["pipeline-page"]}>
       <div className={styles["page-top"]}>
         <div>
           <h2>{t("header")}</h2>
-          <p>
-            {t("description")}
-          </p>
+          <p>{t("description")}</p>
         </div>
 
         <CreateWorkflowModal />
-        
       </div>
 
       <div className={styles.toolbar}>
@@ -47,9 +67,23 @@ export const WorkflowsListBody = () => {
           className={styles["table-class"]}
           draggableClassActive
           loading={isLoading || isFetching}
-          data={data ?? []}
+          data={data?.data ?? []}
           columns={createWorkflowTableColumns(t)}
           isError={isError}
+          currentPage={safePage}
+          pageSize={pageSize}
+          totalCount={data?.totalCount}
+          onPageChange={setCurrentPage}
+          paginationElement={() => (
+            <Pagination
+              currentPage={safePage}
+              pageSize={pageSize}
+              totalCount={data?.totalCount ?? 0}
+              onPageChange={setCurrentPage}
+              onPageSizeChange={setPageSize}
+              pageSizeOptions={DEFAULT_PAGE_SIZE_OPTIONS}
+            />
+          )}
         />
       </div>
     </section>

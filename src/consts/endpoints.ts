@@ -18,6 +18,8 @@ export const END_POINTS = {
     delete: (id: string) => `${apiUrl}/api/favorite-processes/${id}`,
     getAll: `${apiUrl}/api/favorite-processes`,
     getDetail: (id: string) => `${apiUrl}/api/favorite-processes/${id}`,
+    getFilteredWorkflows: ({ currentPage, pageSize }: IPaginationTypes) =>
+      `${apiUrl}/api/favorite-processes?pageNumber=${currentPage}&pageSize=${pageSize}`,
   },
   train: {
     create: `${apiUrl}/api/trains`,
