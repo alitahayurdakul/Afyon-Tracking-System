@@ -81,6 +81,14 @@
   },
   "table": {
     "error": "Bir hata oluştu",
-    "noData": "Kayıt bulunamadı"
+    "noData": "Kayıt bulunamadı",
+    "totalCount": "{count} sonuç",
+    "showingRange": "{from}–{to} arası gösteriliyor",
+    "previous": "Önceki",
+    "next": "Sonraki",
+    "goTo": "Git",
+    "go": "Git",
+    "perPage": "Sayfa başına",
+    "page": "sayfa"
   }
 }

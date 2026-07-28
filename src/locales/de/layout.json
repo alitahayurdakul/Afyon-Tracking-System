@@ -81,6 +81,14 @@
   },
   "table": {
     "error": "Ein Fehler ist aufgetreten",
-    "noData": "Keine Einträge gefunden"
+    "noData": "Keine Einträge gefunden",
+    "totalCount": "{count} Ergebnisse",
+    "showingRange": "{from}–{to} wird angezeigt",
+    "previous": "Zurück",
+    "next": "Weiter",
+    "goTo": "Gehe zu",
+    "go": "Los",
+    "perPage": "Pro Seite",
+    "page": "Seite"
   }
 }
