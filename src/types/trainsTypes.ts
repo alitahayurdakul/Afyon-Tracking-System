@@ -1,3 +1,4 @@
+import { ITableResponseType } from "./commonTypes";
 import { IOptionType } from "./formTypes";
 
 export interface IWagonDetail {
@@ -29,3 +30,7 @@ export interface ITrainType {
 }
 
 export type ITrainsType = Array<ITrainType>;
+
+export interface ITrainsResponseDataTypes extends ITableResponseType {
+  data: ITrainsType;
+}

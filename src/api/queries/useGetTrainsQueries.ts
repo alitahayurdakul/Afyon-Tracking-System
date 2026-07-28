@@ -8,8 +8,9 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { TrainQueryTypes } from "@/app/api/trains/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
+import { IPaginationTypes } from "@/types/commonTypes";
 import { optionsConverters } from "@/types/optionsConverter";
-import { ITrainsType, ITrainType } from "@/types/trainsTypes";
+import { ITrainsResponseDataTypes, ITrainsType, ITrainType } from "@/types/trainsTypes";
 
 export const useGetTrainsDataQuery = () => {
   const trigger = useSelector(
@@ -25,6 +26,32 @@ export const useGetTrainsDataQuery = () => {
         CLIENT_END_POINTS.train.getAll,
         {
           type: TrainQueryTypes.getAllTrains,
+        },
+      );
+      return data;
+    },
+  });
+};
+
+export const useGetTableTrainsDataQuery = ({
+  currentPage,
+  pageSize,
+}: IPaginationTypes) => {
+  const trigger = useSelector(
+    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+  );
+
+  return useQuery({
+    queryKey: [`getTableTrainsAllDatas`, trigger, currentPage, pageSize],
+    refetchOnWindowFocus: false,
+    enabled: true,
+    queryFn: async () => {
+      const { data } = await axiosInstance.post<ITrainsResponseDataTypes>(
+        CLIENT_END_POINTS.train.getAll,
+        {
+          type: TrainQueryTypes.getTableTrain,
+          pageSize,
+          currentPage,
         },
       );
       return data;

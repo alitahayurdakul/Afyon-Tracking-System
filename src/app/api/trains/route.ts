@@ -8,11 +8,12 @@ export enum TrainQueryTypes {
   editTrain = "EDIT_TRAIN",
   deleteTrain = "DELETE_TRAIN",
   getDetailTrain = "GET_DETAIL_TRAIN",
+  getTableTrain = "GET_TABLE_TRAIN"
 }
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { id, params, type } = body;
+  const { id, params, type, pageSize, currentPage } = body;
 
   switch (type) {
     case TrainQueryTypes.createTrain:
@@ -25,6 +26,8 @@ export async function POST(request: NextRequest) {
       return await trainHandlers.getTrains();
     case TrainQueryTypes.getDetailTrain:
       return await trainHandlers.getTrainDetail(id);
+    case TrainQueryTypes.getTableTrain:
+      return await trainHandlers.getTableTrains({pageSize, currentPage})
 
     default: {
       return Response.json(

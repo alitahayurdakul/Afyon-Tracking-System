@@ -23,6 +23,8 @@ export const END_POINTS = {
     delete: (trainId: string) => `${apiUrl}/api/trains/${trainId}`,
     getAll: `${apiUrl}/api/trains`,
     getDetail: (trainId: string) => `${apiUrl}/api/trains/${trainId}`,
+    getFilteredTrains: ({ pageSize, currentPage }: IPaginationTypes) =>
+      `${apiUrl}/api/trains?pageNumber=${currentPage}&pageSize=${pageSize}`,
   },
   process: {
     start: `${apiUrl}/api/processes/start`,

@@ -1,5 +1,6 @@
 import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
+import { IPaginationTypes } from "@/types/commonTypes";
 import { ITrainsType, ITrainType } from "@/types/trainsTypes";
 
 import {
@@ -15,6 +16,7 @@ export const trainHandlers = {
   editTrain,
   getTrains,
   getTrainDetail,
+  getTableTrains,
 };
 
 async function createTrain(params: Record<string, any>): Promise<Response> {
@@ -81,6 +83,23 @@ async function getTrainDetail(id: string): Promise<Response> {
       return createJsonOnlyData(response.data || []);
     }
     return createJsonError("Failed to fetch train detail", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
+  }
+}
+
+async function getTableTrains({
+  pageSize,
+  currentPage,
+}: IPaginationTypes): Promise<Response> {
+  try {
+    const response = await axiosInstance.get<ITrainsType>(
+      END_POINTS.train.getFilteredTrains({ pageSize, currentPage }),
+    );
+    if (response.status === 200) {
+      return createJsonOnlyData(response.data || []);
+    }
+    return createJsonError("Failed to fetch trains", 400);
   } catch (err: unknown) {
     return createJsonError(extractErrorMessage(err), 500);
   }
