@@ -192,7 +192,6 @@
   background: var(--slate-40);
 }
 
-/* Telefonda hücre boşluk/yazıları küçülür, böylece daha çok kolon sığar */
 @media (max-width: 768px) {
   .table-card th {
     padding: 12px 12px;

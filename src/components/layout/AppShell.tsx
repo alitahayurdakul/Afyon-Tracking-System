@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useBodyScrollLock } from "@/api/queries/useBodyScrollLock";
 import { Sidebar } from "@/components/sidebar/Sidebar";
-import { usePathname } from "@/i18n/routing";
 import { stripLocale } from "@/utils/stripLocale";
 
 import styles from "@/styles/Layout.module.scss";
@@ -22,13 +21,10 @@ export const AppShell = ({ children }: { children: React.ReactNode }) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  // Rota değişince drawer'ı kapat (menü linkleri next/link olduğu için
-  // tıklamalarda otomatik tetiklenir — menü bileşenlerine dokunmaya gerek yok)
   useEffect(() => {
     setIsOpen(false);
   }, [rawPathname]);
 
-  // Escape ile kapat
   useEffect(() => {
     if (!isOpen) return;
     const onKeyDown = (e: KeyboardEvent) => {
@@ -38,7 +34,6 @@ export const AppShell = ({ children }: { children: React.ReactNode }) => {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [isOpen]);
 
-  // Drawer açıkken arka planı kilitle (mobil)
   useBodyScrollLock(isOpen);
 
   if (isAuthRoute) {
