@@ -7,7 +7,6 @@
   padding: 16px 10px;
 }
 
-// Left: count + range
 .pagination-summary {
   display: flex;
   align-items: baseline;
@@ -107,7 +106,6 @@
   color: var(--base-grey-60, #9aa1a7);
 }
 
-// Right: goto + page-size, styled as matching quiet pills
 .pagination-tail {
   display: flex;
   align-items: center;
@@ -132,17 +130,19 @@
   }
 
   input {
-    width: 32px;
+    width: 36px;
     border: none;
     outline: none;
     background: transparent;
-    text-align: center;
+    text-align: left;
+    padding-left: 4px;
     font-size: 0.75rem;
     font-weight: 600;
     color: var(--base-grey-85, #4b5157);
 
-    &::-webkit-inner-spin-button {
-      -webkit-appearance: none;
+    &::placeholder {
+      color: var(--base-grey-60, #9aa1a7);
+      font-weight: 500;
     }
   }
 }
