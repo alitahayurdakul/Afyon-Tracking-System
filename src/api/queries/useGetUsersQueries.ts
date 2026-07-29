@@ -23,16 +23,10 @@ export const useGetUsersDataQuery = ({
     queryKey: [`getUsersAllDatas`, trigger, pageSize, currentPage],
     refetchOnWindowFocus: false,
     enabled: true,
-    queryFn: async () => {
+    queryFn: async (): Promise<IUserResponseDataTypes> => {
       const { data } = await axiosInstance.post<IUserResponseDataTypes>(
         CLIENT_END_POINTS.user.getAll,
-        {
-          type: UserQueryTypes.getAllUsers,
-          params: {
-            currentPage,
-            pageSize,
-          },
-        },
+        { type: UserQueryTypes.getTableUsers, pageSize, currentPage },
       );
       return data;
     },

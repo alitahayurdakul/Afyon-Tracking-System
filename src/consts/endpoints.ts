@@ -106,7 +106,8 @@ export const END_POINTS = {
     create: `${apiUrl}/register`,
     edit: (id: string) => `${apiUrl}/api/users/${id}`,
     delete: (id: string) => `${apiUrl}/api/users/${id}`,
-    getAll: ({ currentPage, pageSize }: IPaginationTypes) =>
+    getAll: `${apiUrl}/api/users`,
+    getFilteredUsers: ({ pageSize, currentPage }: IPaginationTypes) =>
       `${apiUrl}/api/users?pageNumber=${currentPage}&pageSize=${pageSize}`,
     getDetail: (id: string) => `${apiUrl}/api/users/${id}`,
     changePassword: (id: string) => `${apiUrl}/api/users/${id}/password`,

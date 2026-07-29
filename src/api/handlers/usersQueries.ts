@@ -1,6 +1,11 @@
 import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
-import { IUsersType, IUserType } from "@/types/usersTypes";
+import { IPaginationTypes } from "@/types/commonTypes";
+import {
+  IUserResponseDataTypes,
+  IUsersType,
+  IUserType,
+} from "@/types/usersTypes";
 
 import {
   createJsonError,
@@ -14,6 +19,7 @@ export const userHandlers = {
   deleteUser,
   editUser,
   getUsers,
+  getTableUsers,
   getUserDetail,
   changePassword,
 };
@@ -79,12 +85,27 @@ async function changePassword(
   }
 }
 
-async function getUsers(params: Record<string, any>): Promise<Response> {
+async function getUsers(): Promise<Response> {
   try {
-    const { currentPage, pageSize } = params;
-
     const response = await axiosInstance.get<IUsersType>(
-      END_POINTS.user.getAll({ currentPage, pageSize }),
+      END_POINTS.user.getAll,
+    );
+    if (response.status === 200) {
+      return createJsonOnlyData(response.data || []);
+    }
+    return createJsonError("Failed to fetch users", 400);
+  } catch (err: unknown) {
+    return createJsonError(extractErrorMessage(err), 500);
+  }
+}
+
+async function getTableUsers({
+  pageSize,
+  currentPage,
+}: IPaginationTypes): Promise<Response> {
+  try {
+    const response = await axiosInstance.get<IUserResponseDataTypes>(
+      END_POINTS.user.getFilteredUsers({ pageSize, currentPage }),
     );
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);

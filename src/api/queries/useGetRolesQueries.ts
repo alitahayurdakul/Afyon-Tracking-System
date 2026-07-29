@@ -25,18 +25,13 @@ export const useGetRolesDataQuery = ({
   );
 
   return useQuery({
-    queryKey: [`getRolesAllDatas`, trigger],
+    queryKey: [`getRolesAllDatas`, trigger, pageSize, currentPage],
     refetchOnWindowFocus: false,
     enabled: true,
-    queryFn: async () => {
+    queryFn: async (): Promise<IRoleResponseDataTypes> => {
       const { data } = await axiosInstance.post<IRoleResponseDataTypes>(
         CLIENT_END_POINTS.role.getAll,
-        {
-          type: RoleQueryTypes.getTableRoles,
-
-          currentPage,
-          pageSize,
-        },
+        { type: RoleQueryTypes.getTableRoles, pageSize, currentPage },
       );
       return data;
     },
