@@ -25,7 +25,6 @@
   color: var(--base-grey-60, #9aa1a7);
 }
 
-// Center: the unified pill nav
 .pagination-group {
   display: flex;
   align-items: center;
@@ -152,34 +151,79 @@
   display: flex;
   align-items: center;
   height: 32px;
+}
 
-  select {
-    appearance: none;
-    height: 100%;
-    padding: 0 26px 0 12px;
-    border-radius: 999px;
-    border: 1px solid var(--grey-15, #e2e8eb);
-    background: white;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--base-grey-85, #4b5157);
-    cursor: pointer;
-    transition: border-color 0.15s ease;
+.pagination-size-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--grey-15, #e2e8eb);
+  background: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--base-grey-85, #4b5157);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.15s ease;
 
-    &:hover,
-    &:focus {
-      border-color: var(--blue-40, #3d7fff);
-      outline: none;
-    }
+  &:hover,
+  &:focus-visible {
+    border-color: var(--blue-40, #3d7fff);
+    outline: none;
   }
 
   svg {
-    position: absolute;
-    right: 10px;
-    pointer-events: none;
     font-size: 8px;
     color: var(--base-grey-60, #9aa1a7);
+    transition: transform 0.18s ease;
   }
+}
+
+.pagination-size-chevron-open {
+  transform: rotate(180deg);
+}
+
+.pagination-size-menu {
+  position: absolute;
+  // Pagination sayfanın altında olduğu için menü yukarı doğru açılır
+  bottom: calc(100% + 6px);
+  right: 0;
+  z-index: 60;
+  min-width: 100%;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  border-radius: 12px;
+  border: 1px solid var(--grey-15, #e2e8eb);
+  background: white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.pagination-size-option {
+  display: block;
+  width: 100%;
+  padding: 7px 12px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  text-align: left;
+  white-space: nowrap;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--base-grey-85, #4b5157);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--slate-40, #f8fafc);
+  }
+}
+
+.pagination-size-option-active {
+  background: var(--slate-100, #f1f5f9);
+  color: var(--primary-blue, #004286);
 }
 
 @media (max-width: 640px) {

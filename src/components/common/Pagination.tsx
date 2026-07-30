@@ -1,6 +1,6 @@
 "use client";
 
-import { KeyboardEvent,useMemo, useState } from "react";
+import { KeyboardEvent, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import clsx from "clsx";
 
@@ -67,6 +67,27 @@ export const Pagination = ({
 }: PaginationProps) => {
   const t = useTranslations("layout");
   const [gotoValue, setGotoValue] = useState("");
+  const [sizeOpen, setSizeOpen] = useState(false);
+  const sizeRef = useRef<HTMLDivElement>(null);
+
+  // Sayfa boyutu menüsü: dışarı tıklayınca / Escape ile kapanır
+  useEffect(() => {
+    if (!sizeOpen) return;
+    const onPointerDown = (e: MouseEvent) => {
+      if (sizeRef.current && !sizeRef.current.contains(e.target as Node)) {
+        setSizeOpen(false);
+      }
+    };
+    const onKeyDown = (e: globalThis.KeyboardEvent) => {
+      if (e.key === "Escape") setSizeOpen(false);
+    };
+    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [sizeOpen]);
 
   const pageCount = Math.max(1, Math.ceil(totalCount / pageSize));
 
@@ -92,8 +113,9 @@ export const Pagination = ({
     if (e.key === "Enter") commitGoto();
   };
 
-  const handlePageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onPageSizeChange?.(Number(e.target.value));
+  const handlePageSizeSelect = (size: number) => {
+    setSizeOpen(false);
+    if (size !== pageSize) onPageSizeChange?.(size);
   };
 
   return (
@@ -169,15 +191,46 @@ export const Pagination = ({
         </div>
 
         {onPageSizeChange && (
-          <div className={styles["pagination-size"]}>
-            <select value={pageSize} onChange={handlePageSizeChange}>
-              {pageSizeOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option} / {t("table.page")}
-                </option>
-              ))}
-            </select>
-            <FontAwesomeIcon icon={faChevronDown} />
+          <div className={styles["pagination-size"]} ref={sizeRef}>
+            <button
+              type="button"
+              className={styles["pagination-size-trigger"]}
+              aria-haspopup="listbox"
+              aria-expanded={sizeOpen}
+              aria-label={t("table.perPage")}
+              onClick={() => setSizeOpen((prev) => !prev)}
+            >
+              <span>
+                {pageSize} / {t("table.page")}
+              </span>
+              <FontAwesomeIcon
+                icon={faChevronDown}
+                className={clsx({
+                  [styles["pagination-size-chevron-open"]]: sizeOpen,
+                })}
+              />
+            </button>
+
+            {sizeOpen && (
+              <ul className={styles["pagination-size-menu"]} role="listbox">
+                {pageSizeOptions.map((option) => (
+                  <li key={option}>
+                    <button
+                      type="button"
+                      role="option"
+                      aria-selected={option === pageSize}
+                      className={clsx(styles["pagination-size-option"], {
+                        [styles["pagination-size-option-active"]]:
+                          option === pageSize,
+                      })}
+                      onClick={() => handlePageSizeSelect(option)}
+                    >
+                      {option} / {t("table.page")}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         )}
       </div>
