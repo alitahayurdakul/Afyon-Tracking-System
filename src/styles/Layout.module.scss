@@ -3,7 +3,8 @@
 }
 
 .content {
-  margin-left: 16rem;
+  margin-left: calc(var(--app-gutter, 0px) + var(--sidebar-width, 16rem));
+  margin-right: var(--app-gutter, 0px);
 }
 
 .hamburger {
