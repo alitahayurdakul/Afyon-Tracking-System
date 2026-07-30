@@ -70,7 +70,6 @@ export const Pagination = ({
   const [sizeOpen, setSizeOpen] = useState(false);
   const sizeRef = useRef<HTMLDivElement>(null);
 
-  // Sayfa boyutu menüsü: dışarı tıklayınca / Escape ile kapanır
   useEffect(() => {
     if (!sizeOpen) return;
     const onPointerDown = (e: MouseEvent) => {

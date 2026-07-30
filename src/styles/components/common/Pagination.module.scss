@@ -188,7 +188,6 @@
 
 .pagination-size-menu {
   position: absolute;
-  // Pagination sayfanın altında olduğu için menü yukarı doğru açılır
   bottom: calc(100% + 6px);
   right: 0;
   z-index: 60;
