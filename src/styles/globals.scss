@@ -114,7 +114,12 @@ textarea {
   --shadow-cta: 0 10px 24px -6px rgba(0, 66, 134, 0.3);
   --shadow-cta-hover: 0 14px 32px -4px rgba(0, 66, 134, 0.4);
 
-  // same color will be removed
+  --content-max: 1600px;
+
+  --app-max: 1920px;
+  --sidebar-width: 16rem;
+  --app-gutter: max(0px, calc((100vw - var(--app-max)) / 2));
+  
   --color-primary: #1a73e8;
   --color-secondary: #e8710a;
   --color-tertiary: #1e8e3e;

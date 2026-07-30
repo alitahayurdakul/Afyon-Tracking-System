@@ -1,7 +1,13 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+
+import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { useBodyScrollLock } from "@/api/queries/useBodyScrollLock";
 import { Sidebar } from "@/components/sidebar/Sidebar";
-import { usePathname } from "@/i18n/routing";
 import { stripLocale } from "@/utils/stripLocale";
 
 import styles from "@/styles/Layout.module.scss";
@@ -9,8 +15,26 @@ import styles from "@/styles/Layout.module.scss";
 const AUTH_ROUTES = ["/login", "/forgot-password"];
 
 export const AppShell = ({ children }: { children: React.ReactNode }) => {
-  const pathname = stripLocale(usePathname());
+  const rawPathname = usePathname();
+  const pathname = stripLocale(rawPathname);
   const isAuthRoute = AUTH_ROUTES.some((route) => pathname?.startsWith(route));
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [rawPathname]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isOpen]);
+
+  useBodyScrollLock(isOpen);
 
   if (isAuthRoute) {
     return <>{children}</>;
@@ -18,7 +42,25 @@ export const AppShell = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      <Sidebar />
+      <button
+        type="button"
+        className={styles["hamburger"]}
+        aria-label={isOpen ? "Menüyü kapat" : "Menüyü aç"}
+        aria-expanded={isOpen}
+        onClick={() => setIsOpen((prev) => !prev)}
+      >
+        <FontAwesomeIcon icon={isOpen ? faXmark : faBars} />
+      </button>
+
+      {isOpen && (
+        <div
+          className={styles["overlay"]}
+          onClick={() => setIsOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      <Sidebar isOpen={isOpen} />
       <div className={styles["content"]}>{children}</div>
     </>
   );
