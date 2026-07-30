@@ -1,5 +1,5 @@
 'use client';
-import React, { forwardRef, useCallback } from "react";
+import React, { useCallback } from "react";
 import clsx from "clsx";
 import { AnimatePresence } from "framer-motion";
 import { useController, UseControllerProps } from "react-hook-form";
@@ -26,83 +26,81 @@ interface CheckBoxProps extends UseControllerProps {
 
 export type Ref = HTMLInputElement;
 
-export const CheckBox = forwardRef<Ref, CheckBoxProps>(
-  function CheckBoxComponent(
-    {
-      name,
-      className,
-      label,
-      required,
-      defaultChecked = false,
-      control,
-      shouldUnregister,
-      rules,
-      disabled,
-      classNameLabel,
-      align,
-      clickFn,
-      errorClassName,
-      changeExtraFn,
-      classNameInput
-    }
-  ) {
-    const { field, fieldState, formState } = useController({
-      name,
-      control,
-      defaultValue: defaultChecked,
-      shouldUnregister,
-      rules
-    });
+export const CheckBox = ({
+  name,
+  className,
+  label,
+  required,
+  defaultChecked = false,
+  control,
+  shouldUnregister,
+  rules,
+  disabled,
+  classNameLabel,
+  align,
+  clickFn,
+  errorClassName,
+  changeExtraFn,
+  classNameInput,
+}: CheckBoxProps) => {
+  const { field, fieldState, formState } = useController({
+    name,
+    control,
+    defaultValue: defaultChecked,
+    shouldUnregister,
+    rules,
+  });
 
-    const { error } = fieldState;
+  const { error } = fieldState;
 
-    const handleChange = useCallback(
-      (e: React.ChangeEvent<HTMLInputElement>) => {
-        field.onChange(e.target.checked);
-        changeExtraFn && changeExtraFn(e.target.checked);
-      },
-      [changeExtraFn, field]
-    );
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      field.onChange(e.target.checked);
+      changeExtraFn && changeExtraFn(e.target.checked);
+    },
+    [changeExtraFn, field],
+  );
 
-    return (
-      <div className={styles["checkbox-wrapper"]} >
-        <div
-          className={`${className} ${styles[align || "top"]} ${
-            styles.container
-          } ${disabled ? styles["disable-container"] : ""}`}
+  return (
+    <div className={styles["checkbox-wrapper"]}>
+      <div
+        className={`${className} ${styles[align || "top"]} ${
+          styles.container
+        } ${disabled ? styles["disable-container"] : ""}`}
+      >
+        <input
+          {...field}
+          className={`${
+            error && styles["error-input"]
+          } ${classNameInput || ""} ${styles["check-input"]}`}
+          onClick={() => {
+            clickFn && clickFn();
+          }}
+          onChange={handleChange}
+          name={name}
+          // defaultChecked={defaultChecked} // no need for this because it is controlled component
+          type="checkbox"
+          disabled={disabled}
+          checked={field.value}
+        />
+        <label
+          className={clsx(styles["default-label"], {
+            [classNameLabel as string]: classNameLabel,
+          })}
         >
-          <input
-            {...field}
-            className={`${
-              error && styles["error-input"]
-            } ${classNameInput || ""} ${styles["check-input"]}`}
-            onClick={() => {
-              clickFn && clickFn();
-            }}
-            onChange={handleChange}
-            name={name}
-            // defaultChecked={defaultChecked} // no need for this because it is controlled component
-            type="checkbox"
-            disabled={disabled}
-            checked={field.value}
-          />
-          <label className={clsx(styles["default-label"], {
-            [classNameLabel as string]: classNameLabel
-          })}>
-            {label} {required && "*"}
-          </label>
-        </div>
-        {/* Error message part */}
-        <AnimatePresence>
-          {error && error?.message && formState.isSubmitted && (
-            <ErrorLabel
-              type="checkbox"
-              message={error.message}
-              className={errorClassName}
-            />
-          )}
-        </AnimatePresence>
+          {label} {required && "*"}
+        </label>
       </div>
-    );
-  }
-);
+      {/* Error message part */}
+      <AnimatePresence>
+        {error && error?.message && formState.isSubmitted && (
+          <ErrorLabel
+            type="checkbox"
+            message={error.message}
+            className={errorClassName}
+          />
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};

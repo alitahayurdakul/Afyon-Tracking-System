@@ -154,12 +154,16 @@ export const Pagination = ({
         <div className={styles["pagination-goto"]}>
           <span>{t("table.goTo")}</span>
           <input
-            type="number"
-            min={1}
-            max={pageCount}
+            type="text"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            autoComplete="off"
+            aria-label={t("table.goTo")}
             value={gotoValue}
             placeholder={String(currentPage)}
-            onChange={(e) => setGotoValue(e.target.value)}
+            onChange={(e) =>
+              setGotoValue(e.target.value.replace(/\D/g, ""))
+            }
             onKeyDown={handleGotoKeyDown}
           />
         </div>
