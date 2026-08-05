@@ -8,7 +8,15 @@
   margin-inline: auto;
 }
 
+// Bu sayfada sağda 320px'lik sabit bilgi rayı var. İçeriğin ortalanması (page-container'ın
+// max-width + margin-inline: auto) ray ile içerik arasında boşluk bırakıp kopuk gösteriyordu;
+// burada tam genişlik kullanıp yalnızca ray kadar sağ boşluk bırakıyoruz.
 .active-process-detail {
+  max-width: none;
+  // width: 100% margin-right'ı etkisiz kılıp içeriğin rayın altına taşmasına
+  // yol açıyordu; auto ile sağ boşluk gerçekten hesaba katılır
+  width: auto;
+  margin-inline: 0;
   margin-right: 20rem;
 }
 
