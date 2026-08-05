@@ -1,7 +1,6 @@
 .sidebar {
   position: fixed;
   top: 0;
-  // Geniş ekranda ortalanmış gövdenin sağ kenarına hizalanır (viewport kenarına değil)
   right: var(--app-gutter, 0px);
 
   width: 320px;
