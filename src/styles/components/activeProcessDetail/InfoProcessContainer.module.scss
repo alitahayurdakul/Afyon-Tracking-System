@@ -1,7 +1,7 @@
 .sidebar {
   position: fixed;
   top: 0;
-  right: 0;
+  right: var(--app-gutter, 0px);
 
   width: 320px;
   height: 100vh;
