@@ -1,0 +1,230 @@
+.captcha-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.label {
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+}
+
+.captcha-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  padding: 0.5rem;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  background: var(--white);
+  position: relative;
+
+  transition:
+    border-color var(--transition) ease,
+    box-shadow var(--transition) ease;
+
+  &:focus-within {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px
+      color-mix(in srgb, var(--primary-blue) 12%, transparent);
+  }
+}
+
+.captcha-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.captcha-text-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+
+  flex: 1;
+  min-width: 0;
+
+  border-radius: var(--radius-md);
+  background: var(--surface-highest);
+  border: 1px solid var(--border);
+  padding: 0.25rem 0.5rem;
+  height: 2.25rem;
+
+  canvas {
+    display: block;
+    user-select: none;
+  }
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 9999px;
+
+    background: var(--primary-blue);
+    color: var(--white);
+    cursor: pointer;
+    flex-shrink: 0;
+
+    transition:
+      transform 0.4s ease,
+      background-color var(--transition) ease;
+
+    svg {
+      width: 0.875rem;
+      height: 0.875rem;
+    }
+
+    &:hover {
+      background: var(--primary-blue-hover);
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.captcha-text-input {
+  padding: 0 0.875rem;
+  height: 2.25rem;
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background-color: var(--surface-highest);
+  outline: none;
+
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.25rem;
+
+  transition:
+    border-color var(--transition) ease,
+    background-color var(--transition) ease;
+
+  &::placeholder {
+    color: var(--text-muted);
+    letter-spacing: normal;
+    font-weight: 400;
+  }
+
+  &:focus {
+    border-color: var(--primary-blue);
+    background-color: var(--white);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.captcha-section button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 2.25rem;
+  margin: 0;
+  padding: 0 1rem !important;
+  border: none;
+  border-radius: var(--radius-md) !important;
+
+  background-color: var(--primary-blue);
+  color: var(--white);
+  text-align: center;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  transition:
+    background-color var(--transition) ease,
+    opacity var(--transition) ease;
+
+  &:hover:not(:disabled) {
+    background-color: var(--primary-blue-hover) !important;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.error-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 9999px;
+  background-color: color-mix(in srgb, var(--red-100) 14%, transparent);
+  flex-shrink: 0;
+}
+
+.success-div {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border-radius: var(--radius-xl);
+  border: 1px solid color-mix(in srgb, var(--green-75) 35%, transparent);
+  background: color-mix(in srgb, var(--green-75) 12%, transparent);
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 9999px;
+    background-color: var(--green-75);
+    flex-shrink: 0;
+  }
+
+  p {
+    margin: 0;
+    color: var(--green-75);
+    font-size: 0.8125rem;
+    font-weight: 700;
+  }
+}
+
+.success-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+  filter: brightness(0) invert(1);
+}
+
+.captcha-error {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-md);
+
+  background-color: color-mix(in srgb, var(--red-100) 14%, transparent);
+  color: var(--red-100);
+  font-size: 0.75rem;
+  font-weight: 700;
+}

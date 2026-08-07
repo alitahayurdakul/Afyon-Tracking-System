@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { useLoginMutation } from "@/api/queries/useAuthQueries";
 import { InputField } from "@/components/common/InputField";
 import { URL_PAGES } from "@/consts/url";
-import { useRouter } from "@/i18n/routing";
+import { Link, useRouter } from "@/i18n/routing";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { extractApiError } from "@/utils/extractApiError";
 
@@ -15,6 +15,7 @@ import styles from "@/styles/components/login/LoginCard.module.scss";
 
 export const LoginCard = () => {
   const t = useTranslations("layout.login");
+  const tForgot = useTranslations("layout.forgotPassword");
   const router = useRouter();
   const dispatch = useDispatch();
   const { mutateAsync, isPending } = useLoginMutation();
@@ -87,6 +88,12 @@ export const LoginCard = () => {
             value={pwd}
             onChange={(e) => setPwd(e.target.value)}
           />
+
+          <div className={styles["options-row"]}>
+            <Link href={URL_PAGES.forgotPassword} className={styles.forgot}>
+              {tForgot("forgotLink")}
+            </Link>
+          </div>
         </div>
 
         <button type="submit" className={styles.submit} disabled={isPending}>

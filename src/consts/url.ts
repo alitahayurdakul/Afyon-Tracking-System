@@ -13,6 +13,8 @@ export const URL_PAGES = {
     subStages: "/alt-asamalar-yonetimi",
     delayReasons: "/gecikme-nedenleri",
     login: "/login",
+    forgotPassword: "/forgot-password",
+    resetPassword: "/forgot-password/reset",
     materials: "/malzeme-yonetimi",
     projects: "/proje-yonetimi",
     profile: "/profil",

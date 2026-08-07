@@ -32,6 +32,58 @@
     "success": "Login successful",
     "error": "Login failed"
   },
+  "forgotPassword": {
+    "forgotLink": "Forgot Password",
+    "title": "Password Reset",
+    "description": "Enter your registered email address to reset your password. We will send a one-time verification code to your address.",
+    "emailLabel": "Email",
+    "emailPlaceholder": "example@company.com",
+    "submit": "Send Verification Code",
+    "submitting": "Sending...",
+    "backToLogin": "Back to Login",
+    "invalidEmail": "Please enter a valid email address.",
+    "captchaRequired": "Verify the security code to continue.",
+    "captchaToast": "You need to verify the security code.",
+    "sendError": "The code could not be sent. Please try again.",
+    "verifiedToast": "Code verified. You can set your new password.",
+    "modal": {
+      "title": "Verification Code",
+      "description": "We sent a {length}-digit code to {email}. Enter the code below.",
+      "remaining": "Time remaining {time}",
+      "expired": "The code has expired",
+      "verify": "Verify",
+      "verifying": "Verifying...",
+      "resend": "Resend Code",
+      "resending": "Sending...",
+      "close": "Close",
+      "invalidCode": "The verification code is incorrect.",
+      "resendError": "The code could not be sent."
+    },
+    "reset": {
+      "title": "Set New Password",
+      "description": "Create a new password for your account. It must be at least {min} characters.",
+      "passwordLabel": "New Password",
+      "confirmationLabel": "Confirm Password",
+      "submit": "Change Password",
+      "submitting": "Saving...",
+      "passwordMin": "Password must be at least {min} characters.",
+      "confirmationRequired": "Password confirmation is required.",
+      "passwordsNotMatch": "Passwords do not match.",
+      "passwordsMatch": "Passwords match.",
+      "showPassword": "Show password",
+      "hidePassword": "Hide password",
+      "success": "Your password has been changed successfully. You can log in now.",
+      "error": "The password could not be changed. Please try again."
+    }
+  },
+  "captcha": {
+    "label": "Security Code",
+    "placeholder": "Type the code above",
+    "verify": "Verify",
+    "refresh": "Generate a new security code",
+    "refreshTitle": "Generate new code",
+    "verified": "Security code verified."
+  },
   "fleetForm": {
     "header": "Start New Process",
     "form": {

@@ -32,6 +32,58 @@
     "success": "Anmeldung erfolgreich",
     "error": "Anmeldung fehlgeschlagen"
   },
+  "forgotPassword": {
+    "forgotLink": "Passwort vergessen",
+    "title": "Passwort zurücksetzen",
+    "description": "Geben Sie Ihre registrierte E-Mail-Adresse ein, um Ihr Passwort zurückzusetzen. Wir senden Ihnen einen einmaligen Bestätigungscode.",
+    "emailLabel": "E-Mail",
+    "emailPlaceholder": "beispiel@firma.com",
+    "submit": "Bestätigungscode senden",
+    "submitting": "Wird gesendet...",
+    "backToLogin": "Zurück zur Anmeldung",
+    "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+    "captchaRequired": "Bestätigen Sie den Sicherheitscode, um fortzufahren.",
+    "captchaToast": "Sie müssen den Sicherheitscode bestätigen.",
+    "sendError": "Der Code konnte nicht gesendet werden. Bitte versuchen Sie es erneut.",
+    "verifiedToast": "Code bestätigt. Sie können Ihr neues Passwort festlegen.",
+    "modal": {
+      "title": "Bestätigungscode",
+      "description": "Wir haben einen {length}-stelligen Code an {email} gesendet. Geben Sie den Code unten ein.",
+      "remaining": "Verbleibende Zeit {time}",
+      "expired": "Der Code ist abgelaufen",
+      "verify": "Bestätigen",
+      "verifying": "Wird bestätigt...",
+      "resend": "Code erneut senden",
+      "resending": "Wird gesendet...",
+      "close": "Schließen",
+      "invalidCode": "Der Bestätigungscode ist falsch.",
+      "resendError": "Der Code konnte nicht gesendet werden."
+    },
+    "reset": {
+      "title": "Neues Passwort festlegen",
+      "description": "Erstellen Sie ein neues Passwort für Ihr Konto. Es muss mindestens {min} Zeichen lang sein.",
+      "passwordLabel": "Neues Passwort",
+      "confirmationLabel": "Passwort bestätigen",
+      "submit": "Passwort ändern",
+      "submitting": "Wird gespeichert...",
+      "passwordMin": "Das Passwort muss mindestens {min} Zeichen lang sein.",
+      "confirmationRequired": "Die Passwortbestätigung ist erforderlich.",
+      "passwordsNotMatch": "Die Passwörter stimmen nicht überein.",
+      "passwordsMatch": "Die Passwörter stimmen überein.",
+      "showPassword": "Passwort anzeigen",
+      "hidePassword": "Passwort verbergen",
+      "success": "Ihr Passwort wurde erfolgreich geändert. Sie können sich jetzt anmelden.",
+      "error": "Das Passwort konnte nicht geändert werden. Bitte versuchen Sie es erneut."
+    }
+  },
+  "captcha": {
+    "label": "Sicherheitscode",
+    "placeholder": "Geben Sie den obigen Code ein",
+    "verify": "Bestätigen",
+    "refresh": "Neuen Sicherheitscode erzeugen",
+    "refreshTitle": "Neuen Code erzeugen",
+    "verified": "Sicherheitscode bestätigt."
+  },
   "fleetForm": {
     "header": "Neuen Prozess starten",
     "form": {
