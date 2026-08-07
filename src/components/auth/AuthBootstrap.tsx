@@ -27,7 +27,6 @@ const stripLocale = (path: string): string => {
   return path;
 };
 
-// Alt rotalar da public sayılır (ör. /forgot-password/reset)
 const isPublicPath = (path: string): boolean =>
   PUBLIC_PATHS.some(
     (publicPath) => path === publicPath || path.startsWith(`${publicPath}/`),
