@@ -32,6 +32,58 @@
     "success": "Giriş başarılı",
     "error": "Giriş başarısız"
   },
+  "forgotPassword": {
+    "forgotLink": "Şifremi Unuttum",
+    "title": "Şifre Sıfırlama",
+    "description": "Şifrenizi sıfırlamak için kayıtlı e-posta adresinizi giriniz. Adresinize tek kullanımlık bir doğrulama kodu göndereceğiz.",
+    "emailLabel": "E-posta",
+    "emailPlaceholder": "ornek@firma.com",
+    "submit": "Doğrulama Kodu Gönder",
+    "submitting": "Gönderiliyor...",
+    "backToLogin": "Girişe Dön",
+    "invalidEmail": "Geçerli bir e-posta adresi giriniz.",
+    "captchaRequired": "Devam etmek için güvenlik kodunu doğrulayın.",
+    "captchaToast": "Güvenlik kodunu doğrulamanız gerekiyor.",
+    "sendError": "Kod gönderilemedi. Lütfen tekrar deneyin.",
+    "verifiedToast": "Kod doğrulandı. Yeni şifrenizi belirleyebilirsiniz.",
+    "modal": {
+      "title": "Doğrulama Kodu",
+      "description": "{email} adresine {length} haneli bir kod gönderdik. Kodu aşağıya girin.",
+      "remaining": "Kalan süre {time}",
+      "expired": "Kodun süresi doldu",
+      "verify": "Doğrula",
+      "verifying": "Doğrulanıyor...",
+      "resend": "Kodu Tekrar Gönder",
+      "resending": "Gönderiliyor...",
+      "close": "Kapat",
+      "invalidCode": "Doğrulama kodu hatalı.",
+      "resendError": "Kod gönderilemedi."
+    },
+    "reset": {
+      "title": "Yeni Şifre Belirle",
+      "description": "Hesabınız için yeni bir şifre oluşturun. Şifreniz en az {min} karakter olmalıdır.",
+      "passwordLabel": "Yeni Şifre",
+      "confirmationLabel": "Şifre Tekrarı",
+      "submit": "Şifreyi Değiştir",
+      "submitting": "Kaydediliyor...",
+      "passwordMin": "Şifre en az {min} karakter olmalıdır.",
+      "confirmationRequired": "Şifre tekrarı zorunludur.",
+      "passwordsNotMatch": "Şifreler eşleşmiyor.",
+      "passwordsMatch": "Şifreler eşleşiyor.",
+      "showPassword": "Şifreyi göster",
+      "hidePassword": "Şifreyi gizle",
+      "success": "Şifreniz başarıyla değiştirildi. Giriş yapabilirsiniz.",
+      "error": "Şifre değiştirilemedi. Lütfen tekrar deneyin."
+    }
+  },
+  "captcha": {
+    "label": "Güvenlik Kodu",
+    "placeholder": "Yukarıdaki kodu yazın",
+    "verify": "Doğrula",
+    "refresh": "Yeni güvenlik kodu üret",
+    "refreshTitle": "Yeni kod üret",
+    "verified": "Güvenlik kodu doğrulandı."
+  },
   "fleetForm": {
     "header": "Yeni Süreç Başlat",
     "form": {

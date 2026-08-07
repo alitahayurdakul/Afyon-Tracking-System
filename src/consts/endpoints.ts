@@ -101,6 +101,9 @@ export const END_POINTS = {
     login: `${apiUrl}/auth`,
     refresh: `${apiUrl}/refresh`,
     logout: `${apiUrl}/logout`,
+    forgotPassword: `${apiUrl}/auth/forgot-password`,
+    verifyResetCode: `${apiUrl}/auth/verify-reset-code`,
+    resetPassword: `${apiUrl}/auth/reset-password`,
   },
   user: {
     create: `${apiUrl}/register`,
@@ -220,6 +223,9 @@ export const CLIENT_END_POINTS = {
     login: "/api/auth/login",
     refresh: "/api/auth/refresh",
     logout: "/api/auth/logout",
+    forgotPassword: "/api/auth/forgot-password",
+    verifyResetCode: "/api/auth/forgot-password",
+    resetPassword: "/api/auth/forgot-password",
   },
   user: {
     create: "/api/users",

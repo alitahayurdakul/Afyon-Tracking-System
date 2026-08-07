@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { refreshAccessToken } from "@/api/queries/useAuthQueries";
 import { URL_PAGES } from "@/consts/url";
@@ -11,21 +11,14 @@ import {
   getAccessTokenInMemory,
   setAccessToken,
 } from "@/redux/slices/authSlice";
+import { RootState } from "@/redux/store";
 
 import styles from "./Wrapper.module.scss";
 
 const PUBLIC_PATHS = ["/login", "/forgot-password"];
-// const HOME_PATH = "/";
 const HOME_PATH = URL_PAGES.activeProcesses;
 
-// The session is validated once per browser session via /refresh. Changing the
-// language remounts this component (the `[locale]` segment changes), but we must
-// not re-run the refresh + redirect — that would bounce a logged-in user back to
-// /login. On those remounts we trust the in-memory access token instead.
 let sessionChecked = false;
-
-// Strip a leading locale segment (e.g. "/en/login" -> "/login") so public-path
-// checks work regardless of the active language.
 const stripLocale = (path: string): string => {
   const [, maybeLocale, ...rest] = path.split("/");
   if ((routing.locales as readonly string[]).includes(maybeLocale)) {
@@ -34,13 +27,17 @@ const stripLocale = (path: string): string => {
   return path;
 };
 
+// Alt rotalar da public sayılır (ör. /forgot-password/reset)
+const isPublicPath = (path: string): boolean =>
+  PUBLIC_PATHS.some(
+    (publicPath) => path === publicPath || path.startsWith(`${publicPath}/`),
+  );
+
 type Status = "loading" | "ready" | "redirecting";
 
 export const Wrapper = () => {
   return (
-    <div className={styles.overlay}>
-      {<span className={styles.spinner} />}
-    </div>
+    <div className={styles.overlay}>{<span className={styles.spinner} />}</div>
   );
 };
 
@@ -48,14 +45,13 @@ export const AuthBootstrap = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const pathname = usePathname();
-  const isPublic = PUBLIC_PATHS.includes(stripLocale(pathname));
+  const isPublic = isPublicPath(stripLocale(pathname));
   const [status, setStatus] = useState<Status>("loading");
+  const accessToken = useSelector((state: RootState) => state.auth.accessToken);
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      // Already validated this browser session (e.g. a remount triggered by a
-      // language change): rely on the in-memory token, don't hit /refresh again.
       if (sessionChecked) {
         const token = getAccessTokenInMemory();
         if (token && isPublic) {
@@ -96,12 +92,10 @@ export const AuthBootstrap = ({ children }: { children: React.ReactNode }) => {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [pathname, isPublic]);
 
-  useEffect(() => {
-    if (status === "redirecting") setStatus("ready");
-  }, [pathname]);
+  const blocked = sessionChecked && !accessToken && !isPublic;
 
-  if (status !== "ready") return <Wrapper />;
+  if (status !== "ready" || blocked) return <Wrapper />;
   return <>{children}</>;
 };
