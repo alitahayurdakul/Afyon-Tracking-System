@@ -63,7 +63,7 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
         const params = {
           id,
           name: formData.name,
-          code: formData.code,
+          materialCode: formData.code,
           description: formData.desc,
           editor: currentUserName,
         };
