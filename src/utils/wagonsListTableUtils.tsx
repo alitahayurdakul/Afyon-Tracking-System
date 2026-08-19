@@ -57,10 +57,12 @@ export const createWagonsTableColumns = (t: TFunction) => {
         }
         if (column.name === "desc") {
           return (
-            <DynamicTextWithTooltip
-              text={w.description || "-"}
-              textClassName={styles["name-text"]}
-            />
+            <div className={styles["desc-cell"]}>
+              <DynamicTextWithTooltip
+                text={w.description || "-"}
+                textClassName={styles["name-text"]}
+              />
+            </div>
           );
         }
         if (column.name === "creator") {

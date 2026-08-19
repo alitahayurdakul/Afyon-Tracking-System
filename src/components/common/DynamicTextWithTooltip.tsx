@@ -1,7 +1,7 @@
 // components/trains/WagonCell.tsx
 "use client";
 
-import React, { useEffect,useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 
 import { TooltipBody } from "../TooltipBody";
@@ -26,12 +26,23 @@ export function DynamicTextWithTooltip({
   const content = text ?? contentBody;
   const clampStyle = { WebkitLineClamp: lines };
 
-  useEffect(() => {
+  const measure = useCallback(() => {
     const el = textRef.current;
-    if (el) {
-      setIsOverflowing(el.scrollHeight > el.clientHeight + 2);
-    }
-  }, [text, lines]);
+    if (!el) return;
+    setIsOverflowing(
+      el.scrollHeight > el.clientHeight + 2 ||
+        el.scrollWidth > el.clientWidth + 2,
+    );
+  }, []);
+
+  useEffect(() => {
+    measure();
+    const el = textRef.current;
+    if (!el || typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(measure);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [measure, text, contentBody, lines, isOverflowing]);
 
   return (
     <div className={styles["cell"]}>
@@ -49,6 +60,7 @@ export function DynamicTextWithTooltip({
         <TooltipBody
           triggerBody={
             <div
+              ref={textRef}
               style={clampStyle}
               className={clsx(styles["trigger-text"], textClassName)}
             >
