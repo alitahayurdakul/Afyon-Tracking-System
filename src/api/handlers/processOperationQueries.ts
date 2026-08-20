@@ -6,6 +6,7 @@ import {
   createJsonError,
   createJsonOnlyData,
   extractErrorMessage,
+  extractErrorStatus,
 } from "./responseHelpers";
 
 export const processOperationsHandlers = {
@@ -22,6 +23,6 @@ async function completeProcess(processId: string, http: AxiosInstance): Promise<
     }
     return createJsonError("Failed to get all active processes", 400);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }

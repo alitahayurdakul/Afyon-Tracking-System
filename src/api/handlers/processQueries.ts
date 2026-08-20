@@ -8,6 +8,7 @@ import {
   createJsonOnlyData,
   createJsonSuccess,
   extractErrorMessage,
+  extractErrorStatus,
 } from "./responseHelpers";
 
 export const processHandlers = {
@@ -30,12 +31,15 @@ async function createProcess(params: Record<string, any>, http: AxiosInstance): 
       ...params,
     });
 
-    if (response.status === 201) {
+    // axios rejects on non-2xx, so a resolved response here is always a
+    // success. Returning an error body with HTTP 200 made the client treat the
+    // call as successful while the payload said it had failed.
+    if (response.status >= 200 && response.status < 300) {
       return createJsonSuccess(response.data, 201);
     }
-    return createJsonError("Failed to create a process", 200);
+    return createJsonError("Failed to create a process", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -51,7 +55,7 @@ async function deleteProcess(id: string, http: AxiosInstance): Promise<Response>
     }
     return createJsonError("Failed to delete a process", 400);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -66,7 +70,7 @@ async function editProcess(params: Record<string, any>, http: AxiosInstance): Pr
     }
     return createJsonError("Failed to edit a process", 400);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -84,7 +88,7 @@ async function getActiveProcesses(
     }
     return createJsonError("Failed to get all active processes", 400);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -96,7 +100,7 @@ async function getProcessDetail(id: string, http: AxiosInstance): Promise<Respon
     }
     return createJsonError("Failed to get process detail", 400);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -115,7 +119,7 @@ async function getStageDetail(
 
     return createJsonError("Failed to get process detail", 400);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -134,7 +138,7 @@ async function startSubStage(params: Record<string, any>, http: AxiosInstance): 
     }
     return createJsonError("Failed to start a sub stage", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -156,7 +160,7 @@ async function saveandCompleteSubStage(
 
     return createJsonError("Failed to start a sub stage", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -172,7 +176,7 @@ async function completeStage(entryId: string, http: AxiosInstance): Promise<Resp
 
     return createJsonError("Failed to start a sub stage", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -194,7 +198,7 @@ async function startStage(params: Record<string, any>, http: AxiosInstance): Pro
 
     return createJsonError("Failed to start a sub stage", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -216,6 +220,6 @@ async function getTableProcessHistory(
     }
     return createJsonError("Failed to get all active processes", 400);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }

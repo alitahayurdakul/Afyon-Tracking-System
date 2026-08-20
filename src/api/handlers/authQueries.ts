@@ -6,6 +6,7 @@ import {
   createJsonError,
   createJsonOnlyData,
   extractErrorMessage,
+  extractErrorStatus,
 } from "./responseHelpers";
 
 export const authHandlers = {
@@ -27,10 +28,7 @@ async function forgotPassword(
     }
     return createJsonError("Failed to send reset code", 400);
   } catch (err: any) {
-    return createJsonError(
-      extractErrorMessage(err),
-      err?.response?.status || 500,
-    );
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -48,10 +46,7 @@ async function verifyResetCode(
     }
     return createJsonError("Failed to verify reset code", 400);
   } catch (err: any) {
-    return createJsonError(
-      extractErrorMessage(err),
-      err?.response?.status || 500,
-    );
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -69,9 +64,6 @@ async function resetPassword(
     }
     return createJsonError("Failed to reset password", 400);
   } catch (err: any) {
-    return createJsonError(
-      extractErrorMessage(err),
-      err?.response?.status || 500,
-    );
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }

@@ -6,6 +6,7 @@ import {
   createJsonError,
   createJsonOnlyData,
   extractErrorMessage,
+  extractErrorStatus,
 } from "./responseHelpers";
 
 export const processTrainsHandlers = {
@@ -24,7 +25,7 @@ async function getProcessTrains(http: AxiosInstance): Promise<Response> {
     }
     return createJsonError("Failed to fetch process trains", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -45,7 +46,7 @@ async function getProcessTrainDetail(
     }
     return createJsonError("Failed to fetch projects", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -68,6 +69,6 @@ async function getByTrainAndWagonProcesses(
 
     return createJsonError("Failed to fetch projects", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }

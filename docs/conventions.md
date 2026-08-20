@@ -13,6 +13,12 @@
 - **Configuration debt** (bottom of this file): leave untouched until the owner explicitly requests a cleanup. Never fix these as drive-by changes.
 - **Production code is never modified without an explicit owner request** — documentation changes are always allowed, code changes are not.
 
+## Deliberate decisions — do not "fix" these ✔
+
+- **`/api/auth/refresh` and `/api/auth/logout` stay `GET`.** A security review flagged them as CSRF-able (no CSRF token, no `Origin`/`Sec-Fetch-Site` check) and proposed converting them to `POST`. The owner declined on 2026-08-20: the backend may have been designed around `GET`, and the frontend cannot verify that from here. Do not convert them without checking the backend first.
+- **The 401/403 refresh-retry in `axiosInstance`** is intentional — the backend returns 403 for expired tokens (see [api-layer.md](api-layer.md#auth)).
+- **`window.history.replaceState` in `src/utils/searchParams.ts`** is an App Router cache workaround, not an oversight (see [frontend-patterns.md](frontend-patterns.md#modal-system-url-driven)).
+
 ## Git workflow (observed — branch/merge policy not yet confirmed by owner)
 
 Current working branch is `claudeForAfyon`. Commit messages are short English prefixed summaries (`feat: ...`, `edit: ...`, `docs: ...`). The merge target and branching policy have not been stated — ask before merging or creating branches.

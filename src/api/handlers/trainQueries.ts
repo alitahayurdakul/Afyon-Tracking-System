@@ -13,6 +13,7 @@ import {
   createJsonOnlyData,
   createJsonSuccess,
   extractErrorMessage,
+  extractErrorStatus,
 } from "./responseHelpers";
 
 export const trainHandlers = {
@@ -32,7 +33,7 @@ async function createTrain(params: Record<string, any>, http: AxiosInstance): Pr
     }
     return createJsonError("Failed to create train", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -46,7 +47,7 @@ async function deleteTrain(id: string, http: AxiosInstance): Promise<Response> {
     }
     return createJsonError("Failed to delete train", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -61,7 +62,7 @@ async function editTrain(params: Record<string, any>, http: AxiosInstance): Prom
     }
     return createJsonError("Failed to edit train", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -75,7 +76,7 @@ async function getTrains(http: AxiosInstance): Promise<Response> {
     }
     return createJsonError("Failed to fetch trains", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -89,7 +90,7 @@ async function getTrainDetail(id: string, http: AxiosInstance): Promise<Response
     }
     return createJsonError("Failed to fetch train detail", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -106,6 +107,6 @@ async function getTableTrains(
     }
     return createJsonError("Failed to fetch trains", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }

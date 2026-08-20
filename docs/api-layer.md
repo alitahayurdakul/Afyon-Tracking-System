@@ -62,6 +62,11 @@ Note: a handler that needs an *optional* argument must type it as `arg: T | unde
 - `createJsonError(message, status)` → `{ success: false, error }`
 - `createJsonOnlyData(data)` → raw passthrough
 - `extractErrorMessage(err)` → digs message out of axios error shapes (`response.data`, `.message`, `.error`)
+- `extractErrorStatus(err)` → the upstream status (4xx/5xx), falling back to 500
+
+✔ **Rule: every catch block returns `createJsonError(extractErrorMessage(err), extractErrorStatus(err))`.** Never hard-code 500. Flattening every failure to 500 hid the difference between "not found", "forbidden" and a real fault — and critically, it meant `axiosInstance` never saw the 401/403 that triggers its refresh-and-retry, so an expired token surfaced as a generic error instead of silently refreshing.
+
+✔ **Rule: never return an error body with a 2xx status.** axios rejects on non-2xx, so a resolved response is already a success; an error payload sent with HTTP 200 makes the client show a success toast for a failed call.
 
 ### 4. External backend
 

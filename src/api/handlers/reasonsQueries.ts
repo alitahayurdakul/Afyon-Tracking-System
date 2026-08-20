@@ -9,6 +9,7 @@ import {
   createJsonOnlyData,
   createJsonSuccess,
   extractErrorMessage,
+  extractErrorStatus,
 } from "./responseHelpers";
 
 export const reasonHandlers = {
@@ -28,7 +29,7 @@ async function createReason(params: Record<string, any>, http: AxiosInstance): P
     }
     return createJsonError("Failed to create reason", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -42,7 +43,7 @@ async function deleteReason(id: string, http: AxiosInstance): Promise<Response> 
     }
     return createJsonError("Failed to delete reason", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -57,7 +58,7 @@ async function editReason(params: Record<string, any>, http: AxiosInstance): Pro
     }
     return createJsonError("Failed to edit reason", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -71,7 +72,7 @@ async function getReasons(http: AxiosInstance): Promise<Response> {
     }
     return createJsonError("Failed to fetch reasons", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -85,7 +86,7 @@ async function getTableReasons({pageSize, currentPage}: IPaginationTypes, http: 
     }
     return createJsonError("Failed to fetch reasons", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -99,6 +100,6 @@ async function getReasonDetail(id: string, http: AxiosInstance): Promise<Respons
     }
     return createJsonError("Failed to fetch reason detail", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }

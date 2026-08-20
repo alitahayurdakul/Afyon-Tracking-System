@@ -13,6 +13,7 @@ import {
   createJsonOnlyData,
   createJsonSuccess,
   extractErrorMessage,
+  extractErrorStatus,
 } from "./responseHelpers";
 
 export const subStageHandlers = {
@@ -35,7 +36,7 @@ async function createSubStage(params: Record<string, any>, http: AxiosInstance):
     }
     return createJsonError("Failed to create sub stage", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -51,7 +52,7 @@ async function deleteSubStage(id: string, http: AxiosInstance): Promise<Response
     }
     return createJsonError("Failed to delete sub stage", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -66,7 +67,7 @@ async function editSubStage(params: Record<string, any>, http: AxiosInstance): P
     }
     return createJsonError("Failed to edit sub stage", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -80,7 +81,7 @@ async function getSubStages(http: AxiosInstance): Promise<Response> {
     }
     return createJsonError("Failed to fetch sub stages", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -94,7 +95,7 @@ async function getSubStageDetail(id: string, http: AxiosInstance): Promise<Respo
     }
     return createJsonError("Failed to fetch sub stage detail", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -111,6 +112,6 @@ async function getTableSubStages(
     }
     return createJsonError("Failed to fetch sub stages", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }

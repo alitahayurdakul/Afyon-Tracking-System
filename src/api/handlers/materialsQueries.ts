@@ -12,6 +12,7 @@ import {
   createJsonOnlyData,
   createJsonSuccess,
   extractErrorMessage,
+  extractErrorStatus,
 } from "./responseHelpers";
 
 export const materialHandlers = {
@@ -34,7 +35,7 @@ async function createMaterial(params: Record<string, any>, http: AxiosInstance):
     }
     return createJsonError("Failed to create material", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -50,7 +51,7 @@ async function deleteMaterial(id: string, http: AxiosInstance): Promise<Response
     }
     return createJsonError("Failed to delete material", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -65,7 +66,7 @@ async function editMaterial(params: Record<string, any>, http: AxiosInstance): P
     }
     return createJsonError("Failed to edit material", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -78,7 +79,7 @@ async function getMaterials(http: AxiosInstance): Promise<Response> {
     }
     return createJsonError("Failed to fetch materials", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -96,7 +97,7 @@ async function getTableMaterials(
     }
     return createJsonError("Failed to fetch materials", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -110,6 +111,6 @@ async function getMaterialDetail(id: string, http: AxiosInstance): Promise<Respo
     }
     return createJsonError("Failed to fetch material detail", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }

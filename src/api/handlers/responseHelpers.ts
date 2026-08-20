@@ -26,6 +26,19 @@ export function createJsonError(message = "Hata oluştu", status = 500): Respons
   return Response.json({ success: false, error: message }, { status });
 }
 
+/**
+ * Maps a failed backend call to the status the client should see. Flattening
+ * everything to 500 hides the difference between "not found", "forbidden" and
+ * a real server fault, and in particular stops axiosInstance from refreshing
+ * the access token, since that only retries on 401/403.
+ */
+export function extractErrorStatus(error: unknown, fallback = 500): number {
+  const status = (error as Record<string, any>)?.response?.status;
+  return typeof status === "number" && status >= 400 && status <= 599
+    ? status
+    : fallback;
+}
+
 export function extractErrorMessage(error: unknown, fallback = "Hata oluştu"): string {
   if (!error) return fallback;
   if (typeof error === "string") return error;

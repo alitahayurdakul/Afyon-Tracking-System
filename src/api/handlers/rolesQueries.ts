@@ -13,6 +13,7 @@ import {
   createJsonOnlyData,
   createJsonSuccess,
   extractErrorMessage,
+  extractErrorStatus,
 } from "./responseHelpers";
 
 export const roleHandlers = {
@@ -32,7 +33,7 @@ async function createRole(params: Record<string, any>, http: AxiosInstance): Pro
     }
     return createJsonError("Failed to create role", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -46,7 +47,7 @@ async function deleteRole(id: string, http: AxiosInstance): Promise<Response> {
     }
     return createJsonError("Failed to delete role", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -61,7 +62,7 @@ async function editRole(params: Record<string, any>, http: AxiosInstance): Promi
     }
     return createJsonError("Failed to edit role", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -75,7 +76,7 @@ async function getRoles(http: AxiosInstance): Promise<Response> {
     }
     return createJsonError("Failed to fetch roles", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -92,7 +93,7 @@ async function getTableRoles(
     }
     return createJsonError("Failed to fetch roles", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -106,6 +107,6 @@ async function getRoleDetail(id: string, http: AxiosInstance): Promise<Response>
     }
     return createJsonError("Failed to fetch role detail", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }

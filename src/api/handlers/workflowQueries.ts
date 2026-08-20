@@ -12,6 +12,7 @@ import {
   createJsonOnlyData,
   createJsonSuccess,
   extractErrorMessage,
+  extractErrorStatus,
 } from "./responseHelpers";
 
 export const workflowHandlers = {
@@ -34,7 +35,7 @@ async function getAllWorkflows(http: AxiosInstance): Promise<Response> {
     }
     return createJsonError("Failed to fetch workflows", 400);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -49,7 +50,7 @@ async function createWorkflow(params: Record<string, any>, http: AxiosInstance):
     }
     return createJsonError("Failed to create workflow", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -65,7 +66,7 @@ async function deleteWorkflow(id: string, http: AxiosInstance): Promise<Response
     }
     return createJsonError("Failed to delete workflow", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -85,7 +86,7 @@ async function editWorkflow(params: Record<string, any>, http: AxiosInstance): P
     }
     return createJsonError("Failed to edit workflow", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -99,7 +100,7 @@ async function getWorkflowDetail(id: string, http: AxiosInstance): Promise<Respo
     }
     return createJsonError("Failed to fetch workflow detail", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -117,6 +118,6 @@ async function getTableWorkflows(
     }
     return createJsonError("Failed to fetch workflows", 400);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }

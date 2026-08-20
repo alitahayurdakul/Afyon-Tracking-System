@@ -9,6 +9,7 @@ import {
   createJsonOnlyData,
   createJsonSuccess,
   extractErrorMessage,
+  extractErrorStatus,
 } from "./responseHelpers";
 
 export const projectHandlers = {
@@ -31,7 +32,7 @@ async function createProject(params: Record<string, any>, http: AxiosInstance): 
     }
     return createJsonError("Failed to create project", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -47,7 +48,7 @@ async function deleteProject(id: string, http: AxiosInstance): Promise<Response>
     }
     return createJsonError("Failed to delete project", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -62,7 +63,7 @@ async function editProject(params: Record<string, any>, http: AxiosInstance): Pr
     }
     return createJsonError("Failed to edit project", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -78,7 +79,7 @@ async function getProjects(
     }
     return createJsonError("Failed to fetch projects", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -100,7 +101,7 @@ async function getTableProjects(
     }
     return createJsonError("Failed to fetch projects", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
 
@@ -114,6 +115,6 @@ async function getProjectDetail(id: string, http: AxiosInstance): Promise<Respon
     }
     return createJsonError("Failed to fetch project detail", 400);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
   }
 }
