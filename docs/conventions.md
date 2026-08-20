@@ -13,9 +13,9 @@
 - **Configuration debt** (bottom of this file): leave untouched until the owner explicitly requests a cleanup. Never fix these as drive-by changes.
 - **Production code is never modified without an explicit owner request** — documentation changes are always allowed, code changes are not.
 
-## Git workflow (observed)
+## Git workflow (observed — branch/merge policy not yet confirmed by owner)
 
-Work happens on the `dev` branch; `main` is the PR/merge target. Commit messages use conventional-commit style in English (`feat: ...`, `docs: ...`).
+Current working branch is `claudeForAfyon`. Commit messages are short English prefixed summaries (`feat: ...`, `edit: ...`, `docs: ...`). The merge target and branching policy have not been stated — ask before merging or creating branches.
 
 ## Naming conventions
 
