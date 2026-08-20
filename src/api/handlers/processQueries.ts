@@ -4,11 +4,10 @@ import { END_POINTS } from "@/consts/endpoints";
 import { ResponseStatusEnums } from "@/utils/enum/commonEnums";
 
 import {
+  createErrorResponse,
   createJsonError,
   createJsonOnlyData,
   createJsonSuccess,
-  extractErrorMessage,
-  extractErrorStatus,
 } from "./responseHelpers";
 
 export const processHandlers = {
@@ -39,7 +38,7 @@ async function createProcess(params: Record<string, any>, http: AxiosInstance): 
     }
     return createJsonError("Failed to create a process", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -53,9 +52,9 @@ async function deleteProcess(id: string, http: AxiosInstance): Promise<Response>
         return createJsonSuccess(response.data, 200);
       }
     }
-    return createJsonError("Failed to delete a process", 400);
+    return createJsonError("Failed to delete a process", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -68,9 +67,9 @@ async function editProcess(params: Record<string, any>, http: AxiosInstance): Pr
     if (response.status === 201) {
       return createJsonSuccess(response.data, 201);
     }
-    return createJsonError("Failed to edit a process", 400);
+    return createJsonError("Failed to edit a process", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -86,9 +85,9 @@ async function getActiveProcesses(
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to get all active processes", 400);
+    return createJsonError("Failed to get all active processes", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -98,9 +97,9 @@ async function getProcessDetail(id: string, http: AxiosInstance): Promise<Respon
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to get process detail", 400);
+    return createJsonError("Failed to get process detail", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -117,9 +116,9 @@ async function getStageDetail(
       return createJsonOnlyData(response.data.subStages);
     }
 
-    return createJsonError("Failed to get process detail", 400);
+    return createJsonError("Failed to get process detail", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -136,9 +135,9 @@ async function startSubStage(params: Record<string, any>, http: AxiosInstance): 
     if (response.status === 200) {
       return createJsonSuccess(response.data, 200);
     }
-    return createJsonError("Failed to start a sub stage", 400);
+    return createJsonError("Failed to start a sub stage", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -158,9 +157,9 @@ async function saveandCompleteSubStage(
       return createJsonSuccess(200);
     }
 
-    return createJsonError("Failed to start a sub stage", 400);
+    return createJsonError("Failed to start a sub stage", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -174,9 +173,9 @@ async function completeStage(entryId: string, http: AxiosInstance): Promise<Resp
       return createJsonSuccess(200);
     }
 
-    return createJsonError("Failed to start a sub stage", 400);
+    return createJsonError("Failed to start a sub stage", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -196,9 +195,9 @@ async function startStage(params: Record<string, any>, http: AxiosInstance): Pro
       return createJsonSuccess(200);
     }
 
-    return createJsonError("Failed to start a sub stage", 400);
+    return createJsonError("Failed to start a sub stage", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -218,8 +217,8 @@ async function getTableProcessHistory(
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to get all active processes", 400);
+    return createJsonError("Failed to get all active processes", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }

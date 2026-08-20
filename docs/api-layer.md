@@ -61,10 +61,48 @@ Note: a handler that needs an *optional* argument must type it as `arg: T | unde
 - `createJsonSuccess(data, status)` → `{ success: true, data }`
 - `createJsonError(message, status)` → `{ success: false, error }`
 - `createJsonOnlyData(data)` → raw passthrough
-- `extractErrorMessage(err)` → digs message out of axios error shapes (`response.data`, `.message`, `.error`)
+- `extractErrorMessage(err)` → the backend's message, **but only for 4xx** (see below)
 - `extractErrorStatus(err)` → the upstream status (4xx/5xx), falling back to 500
+- `createErrorResponse(err)` → the standard catch-block response: safe message + upstream status, and logs full detail for 5xx
 
-✔ **Rule: every catch block returns `createJsonError(extractErrorMessage(err), extractErrorStatus(err))`.** Never hard-code 500. Flattening every failure to 500 hid the difference between "not found", "forbidden" and a real fault — and critically, it meant `axiosInstance` never saw the 401/403 that triggers its refresh-and-retry, so an expired token surfaced as a generic error instead of silently refreshing.
+✔ **Rule: every catch block is `return createErrorResponse(err);`.** Never hard-code 500, and never build the response by hand.
+
+### What a caller is allowed to see
+
+| Backend result | Client sees |
+|---|---|
+| 4xx with a message ("this train number already exists") | that message verbatim |
+| 5xx, with or without a body | generic fallback; detail goes to the server log |
+| Transport failure (`ECONNREFUSED 10.0.0.5:8080`) | generic fallback; detail goes to the server log |
+| 4xx whose body is HTML or over 300 chars | generic fallback (it tells the user nothing) |
+
+The split is deliberate: **4xx describes something the caller can fix**, so the backend's own copy is the best message available. **5xx and transport text are internal details** — they can carry stack traces, HTML error pages, or the backend host and port, and previously all of it was relayed verbatim to anonymous callers. The auth routes (`login`, `refresh`, `logout`) follow the same rule and no longer echo `err.message`.
+
+For the message to actually reach the user, the client form must read it with `extractApiError(err, fallback)` (`src/utils/extractApiError.ts`). ✔ **Never use `(err as Error)?.message` in a form** — that is axios's own English text ("Request failed with status code 409"), and it hides the backend's message entirely.
+
+### Which message the user sees, and in which language
+
+`extractApiError` relays the response body **only for 4xx**; for anything else the caller's `fallback` wins — and every call site passes a `t(...)` value, so those messages follow the selected language.
+
+| Failure | Message shown | Localized? |
+|---|---|---|
+| 4xx from the backend | the backend's own copy | No — comes from the backend as-is |
+| 502 (backend answered in an unexpected shape) | caller's `t(...)` fallback | **Yes** |
+| 5xx / transport failure | caller's `t(...)` fallback | **Yes** |
+
+✔ **Rule: our own error strings must never be user-visible.** Placeholders like `"Failed to create train"` are English developer text, so any response carrying one uses a status that `extractApiError` refuses to relay (502 for an unexpected upstream response, 5xx for a fault). Returning such a string with a 4xx would print untranslated English into a Turkish UI.
+
+The one remaining gap is outside the frontend: **the backend's 4xx messages are single-language**, so a user on `/en` still sees them in whatever language the backend emits. Fixing that requires either translated messages or message codes from the backend.
+
+### Login errors
+
+`LoginCard` maps the status itself rather than relaying whatever came back:
+
+- **400 / 401 → `layout.login.invalidCredentials`** ("E-posta veya şifre hatalı"). ✔ **Keep this message combined.** Saying "no such account" separately would reveal which e-mail addresses are registered.
+- **Other 4xx** → `extractApiError`, so a specific backend message (locked account, etc.) still shows.
+- **5xx / no response → `layout.login.unavailable`.** The auth routes' own fallback text is a non-localised placeholder, so the client substitutes its translated copy instead of displaying it.
+
+The forgot-password flow already follows the same shape via `extractApiError` with localized fallbacks (`sendError`, `invalidCode`, `resendError`). Flattening every failure to 500 hid the difference between "not found", "forbidden" and a real fault — and critically, it meant `axiosInstance` never saw the 401/403 that triggers its refresh-and-retry, so an expired token surfaced as a generic error instead of silently refreshing.
 
 ✔ **Rule: never return an error body with a 2xx status.** axios rejects on non-2xx, so a resolved response is already a success; an error payload sent with HTTP 200 makes the client show a success toast for a failed call.
 

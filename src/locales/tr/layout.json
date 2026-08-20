@@ -30,7 +30,9 @@
     "submit": "Giriş Yap",
     "submitting": "Giriş yapılıyor...",
     "success": "Giriş başarılı",
-    "error": "Giriş başarısız"
+    "error": "Giriş başarısız",
+    "invalidCredentials": "E-posta veya şifre hatalı",
+    "unavailable": "Giriş yapılamadı. Lütfen daha sonra tekrar deneyin."
   },
   "forgotPassword": {
     "forgotLink": "Şifremi Unuttum",

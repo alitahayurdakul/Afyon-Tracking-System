@@ -38,9 +38,24 @@ export const LoginCard = () => {
       // router.push("/");
       router.push(URL_PAGES.activeProcesses);
     } catch (err: any) {
+      const status = err?.response?.status;
+
+      let message: string;
+      if (status === 400 || status === 401) {
+        // Deliberately does not say which half was wrong: telling the user
+        // "no such account" would reveal which e-mails are registered.
+        message = t("invalidCredentials");
+      } else if (typeof status === "number" && status < 500) {
+        message = extractApiError(err, t("error"));
+      } else {
+        // 5xx or no response at all. The proxy's message for those is a
+        // non-localised placeholder, so show our own translated copy.
+        message = t("unavailable");
+      }
+
       dispatch(
         addToastify({
-          message: extractApiError(err, t("error")),
+          message,
           type: "error",
           icon: "close",
           id: "login" + Date.now(),

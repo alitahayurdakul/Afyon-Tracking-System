@@ -54,7 +54,7 @@ dispatch(addTriggerTable());   // forces the table to refetch — see below
 removeModal();                 // closes the URL-driven modal
 ```
 
-The error path dispatches an error toast with `extract`ed/fallback message.
+The error path dispatches an error toast whose message comes from ✔ **`extractApiError(err, t("...error"))`** — never from `(err as Error)?.message`, which is axios's own text ("Request failed with status code 409") and hides whatever the backend actually said. See [api-layer.md](api-layer.md#what-a-caller-is-allowed-to-see) for which messages survive the proxy.
 
 ## Tables & pagination
 

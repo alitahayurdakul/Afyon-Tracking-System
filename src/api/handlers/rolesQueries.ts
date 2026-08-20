@@ -9,11 +9,10 @@ import {
 } from "@/types/rolesTypes";
 
 import {
+  createErrorResponse,
   createJsonError,
   createJsonOnlyData,
   createJsonSuccess,
-  extractErrorMessage,
-  extractErrorStatus,
 } from "./responseHelpers";
 
 export const roleHandlers = {
@@ -31,9 +30,9 @@ async function createRole(params: Record<string, any>, http: AxiosInstance): Pro
     if (response.status === 200 || response.status === 201) {
       return createJsonSuccess(response.data, 201);
     }
-    return createJsonError("Failed to create role", 400);
+    return createJsonError("Failed to create role", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -45,9 +44,9 @@ async function deleteRole(id: string, http: AxiosInstance): Promise<Response> {
         return createJsonOnlyData(response.data || { success: true });
       }
     }
-    return createJsonError("Failed to delete role", 400);
+    return createJsonError("Failed to delete role", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -60,9 +59,9 @@ async function editRole(params: Record<string, any>, http: AxiosInstance): Promi
     if (response.status === 200 || response.status === 201) {
       return createJsonSuccess(response.data, 200);
     }
-    return createJsonError("Failed to edit role", 400);
+    return createJsonError("Failed to edit role", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -74,9 +73,9 @@ async function getRoles(http: AxiosInstance): Promise<Response> {
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch roles", 400);
+    return createJsonError("Failed to fetch roles", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -91,9 +90,9 @@ async function getTableRoles(
     if (response.status === 200) {
       return createJsonOnlyData(response.data || {});
     }
-    return createJsonError("Failed to fetch roles", 400);
+    return createJsonError("Failed to fetch roles", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -105,8 +104,8 @@ async function getRoleDetail(id: string, http: AxiosInstance): Promise<Response>
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch role detail", 400);
+    return createJsonError("Failed to fetch role detail", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }

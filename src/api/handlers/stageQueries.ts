@@ -9,11 +9,10 @@ import {
 } from "@/types/stagesTypes";
 
 import {
+  createErrorResponse,
   createJsonError,
   createJsonOnlyData,
   createJsonSuccess,
-  extractErrorMessage,
-  extractErrorStatus,
 } from "./responseHelpers";
 
 export const stageHandlers = {
@@ -31,9 +30,9 @@ async function createStage(params: Record<string, any>, http: AxiosInstance): Pr
     if (response.status === 201) {
       return createJsonSuccess(response.data, 201);
     }
-    return createJsonError("Failed to create sub stage", 400);
+    return createJsonError("Failed to create sub stage", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -45,9 +44,9 @@ async function deleteStage(id: string, http: AxiosInstance): Promise<Response> {
         return createJsonOnlyData(response.data || []);
       }
     }
-    return createJsonError("Failed to delete stage", 400);
+    return createJsonError("Failed to delete stage", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -60,9 +59,9 @@ async function editStage(params: Record<string, any>, http: AxiosInstance): Prom
     if (response.status === 200) {
       return createJsonSuccess(response.data, 201);
     }
-    return createJsonError("Failed to edit stage", 400);
+    return createJsonError("Failed to edit stage", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -74,9 +73,9 @@ async function getStages(http: AxiosInstance): Promise<Response> {
     if (response.status === 200) {
       return createJsonOnlyData(response.data.stages || []);
     }
-    return createJsonError("Failed to fetch sub stage detail", 400);
+    return createJsonError("Failed to fetch sub stage detail", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -88,9 +87,9 @@ async function getStageDetail(id: string, http: AxiosInstance): Promise<Response
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch sub stage detail", 400);
+    return createJsonError("Failed to fetch sub stage detail", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -105,8 +104,8 @@ async function getTableStages(
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch sub stage detail", 400);
+    return createJsonError("Failed to fetch sub stage detail", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }

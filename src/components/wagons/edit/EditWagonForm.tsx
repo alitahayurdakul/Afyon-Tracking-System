@@ -21,6 +21,7 @@ import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { IWagonFormDataTypes, IWagonType } from "@/types/wagonsTypes";
 import { InputSpaceEnums } from "@/utils/enum/formEnums";
+import { extractApiError } from "@/utils/extractApiError";
 import { formatDate } from "@/utils/formDate";
 import { useRemoveQueryParamModal } from "@/utils/searchParams";
 import { WagonFormValidation } from "@/utils/validations/wagonFormValidation";
@@ -81,7 +82,7 @@ export const EditWagonForm = ({ id, data }: IPropsTypes) => {
       } catch (err) {
         dispatch(
           addToastify({
-            message: (err as Error)?.message || t("notifications.edit.error"),
+            message: extractApiError(err, t("notifications.edit.error")),
             type: "error",
             icon: "close",
             id: "editWagon" + Date.now(),

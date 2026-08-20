@@ -3,10 +3,9 @@ import { AxiosInstance } from "axios";
 import { END_POINTS } from "@/consts/endpoints";
 
 import {
+  createErrorResponse,
   createJsonError,
   createJsonOnlyData,
-  extractErrorMessage,
-  extractErrorStatus,
 } from "./responseHelpers";
 
 export const processTrainsHandlers = {
@@ -23,9 +22,9 @@ async function getProcessTrains(http: AxiosInstance): Promise<Response> {
     if (response.status === 200) {
       return createJsonOnlyData(response.data.trains || []);
     }
-    return createJsonError("Failed to fetch process trains", 400);
+    return createJsonError("Failed to fetch process trains", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -44,9 +43,9 @@ async function getProcessTrainDetail(
     if (response.status === 200) {
       return createJsonOnlyData(response.data.processes ?? []);
     }
-    return createJsonError("Failed to fetch projects", 400);
+    return createJsonError("Failed to fetch projects", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -57,7 +56,7 @@ async function getByTrainAndWagonProcesses(
   try {
     const { trainId, wagonId } = params;
     if (!wagonId) {
-      return createJsonError("Failed to fetch projects", 400);
+      return createJsonError("Failed to fetch projects", 502);
     }
 
     const response = await http.get(
@@ -67,8 +66,8 @@ async function getByTrainAndWagonProcesses(
       return createJsonOnlyData(response.data.processes ?? []);
     }
 
-    return createJsonError("Failed to fetch projects", 400);
+    return createJsonError("Failed to fetch projects", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }

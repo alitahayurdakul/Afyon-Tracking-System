@@ -29,6 +29,7 @@ import {
   IWorkflowFormTypes,
 } from "@/types/workflowTypes";
 import { InputSpaceEnums } from "@/utils/enum/formEnums";
+import { extractApiError } from "@/utils/extractApiError";
 import { formatDate } from "@/utils/formDate";
 import { useRemoveQueryParamModal } from "@/utils/searchParams";
 import { WorkflowFormValidation } from "@/utils/validations/workflowFormValidation";
@@ -128,7 +129,7 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
       } catch (err) {
         dispatch(
           addToastify({
-            message: (err as Error)?.message || t("notifications.edit.error"),
+            message: extractApiError(err, t("notifications.edit.error")),
             type: "error",
             icon: "close",
             id: "editWorkflowError" + Date.now(),

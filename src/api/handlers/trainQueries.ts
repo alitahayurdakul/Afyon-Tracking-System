@@ -9,11 +9,10 @@ import {
 } from "@/types/trainsTypes";
 
 import {
+  createErrorResponse,
   createJsonError,
   createJsonOnlyData,
   createJsonSuccess,
-  extractErrorMessage,
-  extractErrorStatus,
 } from "./responseHelpers";
 
 export const trainHandlers = {
@@ -31,9 +30,9 @@ async function createTrain(params: Record<string, any>, http: AxiosInstance): Pr
     if (response.status === 201) {
       return createJsonSuccess(response.data, 201);
     }
-    return createJsonError("Failed to create train", 400);
+    return createJsonError("Failed to create train", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -45,9 +44,9 @@ async function deleteTrain(id: string, http: AxiosInstance): Promise<Response> {
         return createJsonOnlyData(response.data || { success: true });
       }
     }
-    return createJsonError("Failed to delete train", 400);
+    return createJsonError("Failed to delete train", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -60,9 +59,9 @@ async function editTrain(params: Record<string, any>, http: AxiosInstance): Prom
     if (response.status === 200 || response.status === 201) {
       return createJsonSuccess(response.data, 200);
     }
-    return createJsonError("Failed to edit train", 400);
+    return createJsonError("Failed to edit train", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -74,9 +73,9 @@ async function getTrains(http: AxiosInstance): Promise<Response> {
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch trains", 400);
+    return createJsonError("Failed to fetch trains", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -88,9 +87,9 @@ async function getTrainDetail(id: string, http: AxiosInstance): Promise<Response
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch train detail", 400);
+    return createJsonError("Failed to fetch train detail", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -105,8 +104,8 @@ async function getTableTrains(
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch trains", 400);
+    return createJsonError("Failed to fetch trains", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }

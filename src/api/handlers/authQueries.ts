@@ -3,10 +3,9 @@ import { AxiosInstance } from "axios";
 import { END_POINTS } from "@/consts/endpoints";
 
 import {
+  createErrorResponse,
   createJsonError,
   createJsonOnlyData,
-  extractErrorMessage,
-  extractErrorStatus,
 } from "./responseHelpers";
 
 export const authHandlers = {
@@ -26,9 +25,9 @@ async function forgotPassword(
     if (response.status === 200) {
       return createJsonOnlyData(response.data);
     }
-    return createJsonError("Failed to send reset code", 400);
+    return createJsonError("Failed to send reset code", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -44,9 +43,9 @@ async function verifyResetCode(
     if (response.status === 200) {
       return createJsonOnlyData(response.data);
     }
-    return createJsonError("Failed to verify reset code", 400);
+    return createJsonError("Failed to verify reset code", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -62,8 +61,8 @@ async function resetPassword(
     if (response.status === 200) {
       return createJsonOnlyData(response.data);
     }
-    return createJsonError("Failed to reset password", 400);
+    return createJsonError("Failed to reset password", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }

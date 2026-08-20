@@ -8,11 +8,10 @@ import {
 } from "@/types/materialsTypes";
 
 import {
+  createErrorResponse,
   createJsonError,
   createJsonOnlyData,
   createJsonSuccess,
-  extractErrorMessage,
-  extractErrorStatus,
 } from "./responseHelpers";
 
 export const materialHandlers = {
@@ -33,9 +32,9 @@ async function createMaterial(params: Record<string, any>, http: AxiosInstance):
     if (response.status === 201) {
       return createJsonSuccess(response.data, 201);
     }
-    return createJsonError("Failed to create material", 400);
+    return createJsonError("Failed to create material", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -49,9 +48,9 @@ async function deleteMaterial(id: string, http: AxiosInstance): Promise<Response
         return createJsonSuccess(response.data || { success: true }, 200);
       }
     }
-    return createJsonError("Failed to delete material", 400);
+    return createJsonError("Failed to delete material", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -64,9 +63,9 @@ async function editMaterial(params: Record<string, any>, http: AxiosInstance): P
     if (response.status === 200 || response.status === 201) {
       return createJsonSuccess(response.data, 200);
     }
-    return createJsonError("Failed to edit material", 400);
+    return createJsonError("Failed to edit material", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -77,9 +76,9 @@ async function getMaterials(http: AxiosInstance): Promise<Response> {
     if (response.status === 200) {
       return createJsonOnlyData(response.data.materials || []);
     }
-    return createJsonError("Failed to fetch materials", 400);
+    return createJsonError("Failed to fetch materials", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -95,9 +94,9 @@ async function getTableMaterials(
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch materials", 400);
+    return createJsonError("Failed to fetch materials", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -109,8 +108,8 @@ async function getMaterialDetail(id: string, http: AxiosInstance): Promise<Respo
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch material detail", 400);
+    return createJsonError("Failed to fetch material detail", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }

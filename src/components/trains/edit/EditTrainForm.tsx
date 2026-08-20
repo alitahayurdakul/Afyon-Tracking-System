@@ -29,6 +29,7 @@ import {
   IWagonDetail,
 } from "@/types/trainsTypes";
 import { InputSpaceEnums } from "@/utils/enum/formEnums";
+import { extractApiError } from "@/utils/extractApiError";
 import { formatDate } from "@/utils/formDate";
 import { useRemoveQueryParamModal } from "@/utils/searchParams";
 import { TrainFormValidation } from "@/utils/validations/trainFormValidation";
@@ -111,7 +112,7 @@ export const EditTrainForm = ({ id, data, wagonOptions }: IPropsTypes) => {
       } catch (err) {
         dispatch(
           addToastify({
-            message: (err as Error)?.message || t("form.notifications.error"),
+            message: extractApiError(err, t("form.notifications.error")),
             type: "error",
             icon: "close",
             id: "editTrainError" + Date.now(),

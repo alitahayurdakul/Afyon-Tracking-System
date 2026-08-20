@@ -25,8 +25,11 @@ export async function GET(request: NextRequest) {
     forwardSetCookies(response.headers, next);
     return next;
   } catch (err: any) {
+    // The thrown message can carry the backend host/port (ECONNREFUSED
+    // 10.0.0.5:8080); keep it in the server log, never in the response.
+    console.error("[api] refresh request failed", err?.code, err?.message);
     return NextResponse.json(
-      { success: false, error: err?.message ?? "Refresh failed" },
+      { success: false, error: "Refresh failed" },
       { status: 500 },
     );
   }

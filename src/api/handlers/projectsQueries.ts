@@ -5,11 +5,10 @@ import { IPaginationWithStatus } from "@/types/commonTypes";
 import { IProjectType } from "@/types/projectsTypes";
 
 import {
+  createErrorResponse,
   createJsonError,
   createJsonOnlyData,
   createJsonSuccess,
-  extractErrorMessage,
-  extractErrorStatus,
 } from "./responseHelpers";
 
 export const projectHandlers = {
@@ -30,9 +29,9 @@ async function createProject(params: Record<string, any>, http: AxiosInstance): 
     if (response.status === 201) {
       return createJsonSuccess(response.data, 201);
     }
-    return createJsonError("Failed to create project", 400);
+    return createJsonError("Failed to create project", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -46,9 +45,9 @@ async function deleteProject(id: string, http: AxiosInstance): Promise<Response>
         return createJsonSuccess(response.data || { success: true }, 200);
       }
     }
-    return createJsonError("Failed to delete project", 400);
+    return createJsonError("Failed to delete project", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -61,9 +60,9 @@ async function editProject(params: Record<string, any>, http: AxiosInstance): Pr
     if (response.status === 200 || response.status === 201) {
       return createJsonSuccess(response.data, 200);
     }
-    return createJsonError("Failed to edit project", 400);
+    return createJsonError("Failed to edit project", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -77,9 +76,9 @@ async function getProjects(
     if (response.status === 200) {
       return createJsonOnlyData(response.data.projects || []);
     }
-    return createJsonError("Failed to fetch projects", 400);
+    return createJsonError("Failed to fetch projects", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -99,9 +98,9 @@ async function getTableProjects(
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch projects", 400);
+    return createJsonError("Failed to fetch projects", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -113,8 +112,8 @@ async function getProjectDetail(id: string, http: AxiosInstance): Promise<Respon
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch project detail", 400);
+    return createJsonError("Failed to fetch project detail", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }

@@ -30,7 +30,9 @@
     "submit": "Log In",
     "submitting": "Logging in...",
     "success": "Login successful",
-    "error": "Login failed"
+    "error": "Login failed",
+    "invalidCredentials": "Incorrect email or password",
+    "unavailable": "Could not sign in. Please try again later."
   },
   "forgotPassword": {
     "forgotLink": "Forgot Password",

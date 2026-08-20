@@ -4,11 +4,10 @@ import { END_POINTS } from "@/consts/endpoints";
 import { IUsersType, IUserType } from "@/types/usersTypes";
 
 import {
+  createErrorResponse,
   createJsonError,
   createJsonOnlyData,
   createJsonSuccess,
-  extractErrorMessage,
-  extractErrorStatus,
 } from "./responseHelpers";
 
 export const userHandlers = {
@@ -26,9 +25,9 @@ async function createUser(params: Record<string, any>, http: AxiosInstance): Pro
     if (response.status === 200 || response.status === 201) {
       return createJsonSuccess(response.data, 201);
     }
-    return createJsonError("Failed to create user", 400);
+    return createJsonError("Failed to create user", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -40,9 +39,9 @@ async function deleteUser(id: string, http: AxiosInstance): Promise<Response> {
         return createJsonOnlyData(response.data || { success: true });
       }
     }
-    return createJsonError("Failed to delete user", 400);
+    return createJsonError("Failed to delete user", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -55,9 +54,9 @@ async function editUser(params: Record<string, any>, http: AxiosInstance): Promi
     if (response.status === 200 || response.status === 201) {
       return createJsonSuccess(response.data, 200);
     }
-    return createJsonError("Failed to edit user", 400);
+    return createJsonError("Failed to edit user", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -73,9 +72,9 @@ async function changePassword(
     if (response.status === 200) {
       return createJsonSuccess(response.data, 200);
     }
-    return createJsonError("Failed to change password", 400);
+    return createJsonError("Failed to change password", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -89,9 +88,9 @@ async function getUsers(params: Record<string, any>, http: AxiosInstance): Promi
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch users", 400);
+    return createJsonError("Failed to fetch users", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -103,8 +102,8 @@ async function getUserDetail(id: string, http: AxiosInstance): Promise<Response>
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch user detail", 400);
+    return createJsonError("Failed to fetch user detail", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }

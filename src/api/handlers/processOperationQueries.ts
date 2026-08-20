@@ -3,10 +3,9 @@ import { AxiosInstance } from "axios";
 import { END_POINTS } from "@/consts/endpoints";
 
 import {
+  createErrorResponse,
   createJsonError,
   createJsonOnlyData,
-  extractErrorMessage,
-  extractErrorStatus,
 } from "./responseHelpers";
 
 export const processOperationsHandlers = {
@@ -21,8 +20,8 @@ async function completeProcess(processId: string, http: AxiosInstance): Promise<
     if (response.status === 200) {
       return createJsonOnlyData(response.data);
     }
-    return createJsonError("Failed to get all active processes", 400);
+    return createJsonError("Failed to get all active processes", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }

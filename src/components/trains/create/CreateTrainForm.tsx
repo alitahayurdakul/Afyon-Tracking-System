@@ -24,6 +24,7 @@ import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { IFormFieldType, IOptionType } from "@/types/formTypes";
 import { ITrainFormDataTypes } from "@/types/trainsTypes";
 import { InputSpaceEnums } from "@/utils/enum/formEnums";
+import { extractApiError } from "@/utils/extractApiError";
 import { useRemoveQueryParamModal } from "@/utils/searchParams";
 import { TrainFormValidation } from "@/utils/validations/trainFormValidation";
 
@@ -93,7 +94,7 @@ export const CreateTrainForm = () => {
       } catch (err) {
         dispatch(
           addToastify({
-            message: (err as Error)?.message || t("form.notifications.error"),
+            message: extractApiError(err, t("form.notifications.error")),
             type: "error",
             icon: "close",
             id: "createTrainError" + Date.now(),

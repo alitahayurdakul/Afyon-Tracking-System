@@ -8,11 +8,10 @@ import {
 } from "@/types/workflowTypes";
 
 import {
+  createErrorResponse,
   createJsonError,
   createJsonOnlyData,
   createJsonSuccess,
-  extractErrorMessage,
-  extractErrorStatus,
 } from "./responseHelpers";
 
 export const workflowHandlers = {
@@ -33,9 +32,9 @@ async function getAllWorkflows(http: AxiosInstance): Promise<Response> {
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch workflows", 400);
+    return createJsonError("Failed to fetch workflows", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -48,9 +47,9 @@ async function createWorkflow(params: Record<string, any>, http: AxiosInstance):
     if (response.status === 201) {
       return createJsonSuccess(response.data, 201);
     }
-    return createJsonError("Failed to create workflow", 400);
+    return createJsonError("Failed to create workflow", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -64,9 +63,9 @@ async function deleteWorkflow(id: string, http: AxiosInstance): Promise<Response
         return createJsonOnlyData(response.data || []);
       }
     }
-    return createJsonError("Failed to delete workflow", 400);
+    return createJsonError("Failed to delete workflow", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -84,9 +83,9 @@ async function editWorkflow(params: Record<string, any>, http: AxiosInstance): P
     if (response.status === 200) {
       return createJsonSuccess(response.data, 200);
     }
-    return createJsonError("Failed to edit workflow", 400);
+    return createJsonError("Failed to edit workflow", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -98,9 +97,9 @@ async function getWorkflowDetail(id: string, http: AxiosInstance): Promise<Respo
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch workflow detail", 400);
+    return createJsonError("Failed to fetch workflow detail", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -116,8 +115,8 @@ async function getTableWorkflows(
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch workflows", 400);
+    return createJsonError("Failed to fetch workflows", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }

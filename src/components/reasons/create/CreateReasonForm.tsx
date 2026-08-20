@@ -19,6 +19,7 @@ import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { IReasonFormDataTypes } from "@/types/reasonsTypes";
 import { InputSpaceEnums } from "@/utils/enum/formEnums";
+import { extractApiError } from "@/utils/extractApiError";
 import { useRemoveQueryParamModal } from "@/utils/searchParams";
 import { ReasonFormValidation } from "@/utils/validations/reasonFormValidation";
 
@@ -75,7 +76,7 @@ export const CreateReasonForm = () => {
       } catch (err) {
         dispatch(
           addToastify({
-            message: (err as Error)?.message || t("notifications.create.error"),
+            message: extractApiError(err, t("notifications.create.error")),
             type: "error",
             icon: "close",
             id: "createReason" + Date.now(),

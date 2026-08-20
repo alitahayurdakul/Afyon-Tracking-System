@@ -30,7 +30,9 @@
     "submit": "Anmelden",
     "submitting": "Anmeldung läuft...",
     "success": "Anmeldung erfolgreich",
-    "error": "Anmeldung fehlgeschlagen"
+    "error": "Anmeldung fehlgeschlagen",
+    "invalidCredentials": "E-Mail oder Passwort ist falsch",
+    "unavailable": "Anmeldung nicht möglich. Bitte versuchen Sie es später erneut."
   },
   "forgotPassword": {
     "forgotLink": "Passwort vergessen",

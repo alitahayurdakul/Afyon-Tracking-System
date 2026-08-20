@@ -5,11 +5,10 @@ import { IPaginationTypes } from "@/types/commonTypes";
 import { IWagonResponseDataTypes, IWagonTableResponseDataTypes, IWagonType } from "@/types/wagonsTypes";
 
 import {
+  createErrorResponse,
   createJsonError,
   createJsonOnlyData,
   createJsonSuccess,
-  extractErrorMessage,
-  extractErrorStatus,
 } from "./responseHelpers";
 
 export const wagonHandlers = {
@@ -27,9 +26,9 @@ async function createWagon(params: Record<string, any>, http: AxiosInstance): Pr
     if (response.status === 201) {
       return createJsonSuccess(response.data, 201);
     }
-    return createJsonError("Failed to create wagon", 400);
+    return createJsonError("Failed to create wagon", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -41,9 +40,9 @@ async function deleteWagon(id: string, http: AxiosInstance): Promise<Response> {
         return createJsonOnlyData(response.data || { success: true });
       }
     }
-    return createJsonError("Failed to delete wagon", 400);
+    return createJsonError("Failed to delete wagon", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -56,9 +55,9 @@ async function editWagon(params: Record<string, any>, http: AxiosInstance): Prom
     if (response.status === 200 || response.status === 201) {
       return createJsonSuccess(response.data, 200);
     }
-    return createJsonError("Failed to edit wagon", 400);
+    return createJsonError("Failed to edit wagon", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -70,9 +69,9 @@ async function getWagons(http: AxiosInstance): Promise<Response> {
     if (response.status === 200) {
       return createJsonOnlyData(response.data.wagons || []);
     }
-    return createJsonError("Failed to fetch wagons", 400);
+    return createJsonError("Failed to fetch wagons", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -87,9 +86,9 @@ async function getTableWagons(
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch wagons", 400);
+    return createJsonError("Failed to fetch wagons", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -101,8 +100,8 @@ async function getWagonDetail(id: string, http: AxiosInstance): Promise<Response
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch wagon detail", 400);
+    return createJsonError("Failed to fetch wagon detail", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }

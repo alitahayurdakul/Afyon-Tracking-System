@@ -5,11 +5,10 @@ import { IPaginationTypes } from "@/types/commonTypes";
 import { IReasonResponseDataTypes, IReasonsType, IReasonType } from "@/types/reasonsTypes";
 
 import {
+  createErrorResponse,
   createJsonError,
   createJsonOnlyData,
   createJsonSuccess,
-  extractErrorMessage,
-  extractErrorStatus,
 } from "./responseHelpers";
 
 export const reasonHandlers = {
@@ -27,9 +26,9 @@ async function createReason(params: Record<string, any>, http: AxiosInstance): P
     if (response.status === 201) {
       return createJsonSuccess(response.data, 201);
     }
-    return createJsonError("Failed to create reason", 400);
+    return createJsonError("Failed to create reason", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -41,9 +40,9 @@ async function deleteReason(id: string, http: AxiosInstance): Promise<Response> 
         return createJsonOnlyData(response.data || { success: true });
       }
     }
-    return createJsonError("Failed to delete reason", 400);
+    return createJsonError("Failed to delete reason", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -56,9 +55,9 @@ async function editReason(params: Record<string, any>, http: AxiosInstance): Pro
     if (response.status === 200 || response.status === 201) {
       return createJsonSuccess(response.data, 200);
     }
-    return createJsonError("Failed to edit reason", 400);
+    return createJsonError("Failed to edit reason", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -70,9 +69,9 @@ async function getReasons(http: AxiosInstance): Promise<Response> {
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch reasons", 400);
+    return createJsonError("Failed to fetch reasons", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -84,9 +83,9 @@ async function getTableReasons({pageSize, currentPage}: IPaginationTypes, http: 
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch reasons", 400);
+    return createJsonError("Failed to fetch reasons", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
 
@@ -98,8 +97,8 @@ async function getReasonDetail(id: string, http: AxiosInstance): Promise<Respons
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch reason detail", 400);
+    return createJsonError("Failed to fetch reason detail", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), extractErrorStatus(err));
+    return createErrorResponse(err);
   }
 }
