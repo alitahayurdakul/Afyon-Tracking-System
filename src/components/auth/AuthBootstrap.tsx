@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { refreshAccessToken } from "@/api/queries/useAuthQueries";
-import { URL_PAGES } from "@/consts/url";
+import { isPublicPath, URL_PAGES } from "@/consts/url";
 import { routing, usePathname, useRouter } from "@/i18n/routing";
 import {
   clearAuth,
@@ -15,7 +15,6 @@ import { RootState } from "@/redux/store";
 
 import styles from "./Wrapper.module.scss";
 
-const PUBLIC_PATHS = ["/login", "/forgot-password"];
 const HOME_PATH = URL_PAGES.activeProcesses;
 
 let sessionChecked = false;
@@ -26,11 +25,6 @@ const stripLocale = (path: string): string => {
   }
   return path;
 };
-
-const isPublicPath = (path: string): boolean =>
-  PUBLIC_PATHS.some(
-    (publicPath) => path === publicPath || path.startsWith(`${publicPath}/`),
-  );
 
 type Status = "loading" | "ready" | "redirecting";
 

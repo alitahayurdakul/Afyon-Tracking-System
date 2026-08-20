@@ -92,6 +92,17 @@ The `statistics.*` builders still take a pre-built query string and are delibera
 - `src/api/serverAxios.ts` — `createServerAxios(request)` builds an axios instance forwarding the incoming request's `Authorization` and `Cookie` headers. **This is the only way handlers talk to the backend**; every route builds one per request and passes it down.
 - `src/components/auth/AuthBootstrap.tsx` (mounted in providers) runs a one-time session check (refresh call) before rendering, and redirects: unauthenticated users → `/login`; authenticated users on public paths (`/login`, `/forgot-password`) → active processes.
 
+### Route protection (two layers)
+
+1. **Server-side gate — `src/proxy.ts`.** Redirects to `/login` when the `jwt` session cookie is absent and the path is not public, preserving the locale prefix (`/en/tren-yonetimi` → `/en/login`). This is a **presence check, not a validity check** — the frontend cannot verify the signature, so the backend remains the authority. Its value: protected pages are never served to an anonymous request, and this holds with JavaScript disabled.
+2. **Client-side gate — `AuthBootstrap`.** Performs the actual refresh call and handles the "already signed in → skip `/login`" direction.
+
+✔ **Rule: the proxy must never redirect *away* from a public path.** A present-but-expired cookie would send the user into the app, `AuthBootstrap` would bounce them back to `/login`, and the two gates would loop. Only the client knows whether a refresh succeeded.
+
+✔ **Rule: public routes are defined once**, in `PUBLIC_PATHS`/`isPublicPath` (`src/consts/url.ts`), and imported by both gates. Diverging lists cause redirect loops. The cookie name lives beside them as `SESSION_COOKIE_NAME`.
+
+Verified behaviour (production build, no cookie → 307; with cookie → 200): protected and locale-prefixed paths redirect, `/login`, `/forgot-password` and `/forgot-password/reset` stay reachable, and an empty `jwt=` value (what logout writes) counts as no session.
+
 ## Permissions
 
 `src/consts/permissions.ts` defines the `Permission` template type `` `${resource}:${action}` `` with resources `activeProcess | user | role | stage` and actions `read | write | delete | manage` (manage = all ops incl. create). Check with `useHasRole().hasPermission(required: string[], requireAll = false)` (`src/api/queries/useHasRole.ts`), which reads `state.auth.user.role.permissions`.
