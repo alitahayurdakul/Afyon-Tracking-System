@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-
+import { Analytics } from "@vercel/analytics/next"
 import '@/styles/globals.scss';
 
 export const metadata: Metadata = {
@@ -20,7 +20,10 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
