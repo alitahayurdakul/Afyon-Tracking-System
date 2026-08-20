@@ -2,9 +2,8 @@
 
 import { useTranslations } from "next-intl";
 
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+// import { faSearch } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useGetProcessTrainDetailDataQuery } from "@/api/useGetProcessTrains";
 import { Table } from "@/components/common/Table";
 import { IProcessInstance } from "@/types/processTypes";
@@ -23,10 +22,12 @@ export const ProcessTableListBody = () => {
 
   return (
     <>
+      {/* Search bar geçici olarak devre dışı bırakıldı
       <div className={styles["search-input"]}>
         <FontAwesomeIcon icon={faSearch} />
         <input placeholder={t("search")}/>
       </div>
+      */}
 
       <div className={styles["table-card"]}>
         <Table

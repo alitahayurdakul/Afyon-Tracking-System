@@ -3,9 +3,8 @@
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+// import { faSearch } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useGetMaterialsDataQuery } from "@/api/queries/useGetMaterialsQueries";
 import { usePaginationParams } from "@/api/queries/usePaginationParams";
 import { DEFAULT_PAGE_SIZE_OPTIONS } from "@/consts/tableConsts";
@@ -51,12 +50,14 @@ export const MaterialsListBody = () => {
         <CreateMaterialsModal />
       </div>
 
+      {/* Search bar geçici olarak devre dışı bırakıldı
       <div className={styles.toolbar}>
         <div className={styles["search-input"]}>
           <FontAwesomeIcon icon={faSearch} />
           <input placeholder={t("search")} />
         </div>
       </div>
+      */}
 
       <div className={styles["table-card"]}>
         <Table
