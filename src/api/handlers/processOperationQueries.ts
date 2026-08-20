@@ -1,5 +1,5 @@
+import { AxiosInstance } from "axios";
 
-import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
 
 import {
@@ -12,9 +12,9 @@ export const processOperationsHandlers = {
   completeProcess,
 };
 
-async function completeProcess(processId: string): Promise<Response> {
+async function completeProcess(processId: string, http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.post(
+    const response = await http.post(
       END_POINTS.processOperations.complete(processId || ""),
     );
     if (response.status === 200) {

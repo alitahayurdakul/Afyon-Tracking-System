@@ -1,4 +1,5 @@
-import { axiosInstance } from "@/api/axiosInstance";
+import { AxiosInstance } from "axios";
+
 import { END_POINTS } from "@/consts/endpoints";
 import { IPaginationTypes } from "@/types/commonTypes";
 import {
@@ -22,9 +23,9 @@ export const materialHandlers = {
   getTableMaterials
 };
 
-async function createMaterial(params: Record<string, any>): Promise<Response> {
+async function createMaterial(params: Record<string, any>, http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.post(
+    const response = await http.post(
       END_POINTS.material.create,
       params,
     );
@@ -37,10 +38,10 @@ async function createMaterial(params: Record<string, any>): Promise<Response> {
   }
 }
 
-async function deleteMaterial(id: string): Promise<Response> {
+async function deleteMaterial(id: string, http: AxiosInstance): Promise<Response> {
   try {
     if (id) {
-      const response = await axiosInstance.delete(
+      const response = await http.delete(
         END_POINTS.material.delete(id),
       );
       if (response.status === 200 || response.status === 204) {
@@ -53,10 +54,10 @@ async function deleteMaterial(id: string): Promise<Response> {
   }
 }
 
-async function editMaterial(params: Record<string, any>): Promise<Response> {
+async function editMaterial(params: Record<string, any>, http: AxiosInstance): Promise<Response> {
   try {
     const { id, ...rest } = params;
-    const response = await axiosInstance.put(END_POINTS.material.edit(id), {
+    const response = await http.put(END_POINTS.material.edit(id), {
       ...rest,
     });
     if (response.status === 200 || response.status === 201) {
@@ -68,9 +69,9 @@ async function editMaterial(params: Record<string, any>): Promise<Response> {
   }
 }
 
-async function getMaterials(): Promise<Response> {
+async function getMaterials(http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.get(END_POINTS.material.getAll);
+    const response = await http.get(END_POINTS.material.getAll);
 
     if (response.status === 200) {
       return createJsonOnlyData(response.data.materials || []);
@@ -81,12 +82,12 @@ async function getMaterials(): Promise<Response> {
   }
 }
 
-async function getTableMaterials({
-  pageSize,
-  currentPage,
-}: IPaginationTypes): Promise<Response> {
+async function getTableMaterials(
+  { pageSize, currentPage }: IPaginationTypes,
+  http: AxiosInstance,
+): Promise<Response> {
   try {
-    const response = await axiosInstance.get<IMaterialResponseDataTypes>(
+    const response = await http.get<IMaterialResponseDataTypes>(
       END_POINTS.material.getFilteredMaterials({ pageSize, currentPage }),
     );
 
@@ -99,9 +100,9 @@ async function getTableMaterials({
   }
 }
 
-async function getMaterialDetail(id: string): Promise<Response> {
+async function getMaterialDetail(id: string, http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.get<IMaterialType>(
+    const response = await http.get<IMaterialType>(
       END_POINTS.material.getDetail(id),
     );
     if (response.status === 200) {

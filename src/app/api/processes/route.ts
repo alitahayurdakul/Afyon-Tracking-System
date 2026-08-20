@@ -1,6 +1,11 @@
 import { NextRequest } from "next/server";
 
 import { processHandlers } from "@/api/handlers/processQueries";
+import {
+  createJsonError,
+  readJsonBody,
+} from "@/api/handlers/responseHelpers";
+import { createServerAxios } from "@/api/serverAxios";
 
 export enum ProcessQueryTypes {
   getAllActiveProcess = "GET_ALL_ACTIVE_PROCESS",
@@ -18,32 +23,37 @@ export enum ProcessQueryTypes {
 }
 
 export async function POST(request: NextRequest) {
-  const body = await request.json();
+  const body = await readJsonBody(request);
+  if (!body) {
+    return createJsonError("Invalid JSON body", 400);
+  }
   const { id, processId, stageId, params, type, entryId } = body;
+
+  const http = createServerAxios(request);
 
   switch (type) {
     case ProcessQueryTypes.createProcess:
-      return await processHandlers.createProcess(params);
+      return await processHandlers.createProcess(params, http);
     case ProcessQueryTypes.deleteProcess:
-      return await processHandlers.deleteProcess(id);
+      return await processHandlers.deleteProcess(id, http);
     case ProcessQueryTypes.editProcess:
-      return await processHandlers.editProcess(params);
+      return await processHandlers.editProcess(params, http);
     case ProcessQueryTypes.getAllActiveProcess:
-      return await processHandlers.getActiveProcesses(params);
+      return await processHandlers.getActiveProcesses(params, http);
     case ProcessQueryTypes.getDetailProcess:
-      return await processHandlers.getProcessDetail(id);
+      return await processHandlers.getProcessDetail(id, http);
     case ProcessQueryTypes.getStageDetail:
-      return await processHandlers.getStageDetail(processId, stageId);
+      return await processHandlers.getStageDetail(processId, stageId, http);
     case ProcessQueryTypes.startSubStage:
-      return await processHandlers.startSubStage(params);
+      return await processHandlers.startSubStage(params, http);
     case ProcessQueryTypes.saveandCompleteSubStage:
-      return await processHandlers.saveandCompleteSubStage(params);
+      return await processHandlers.saveandCompleteSubStage(params, http);
     case ProcessQueryTypes.completeStage:
-      return await processHandlers.completeStage(entryId);
+      return await processHandlers.completeStage(entryId, http);
     case ProcessQueryTypes.startStage:
-      return await processHandlers.startStage(params);
+      return await processHandlers.startStage(params, http);
     case ProcessQueryTypes.getTableProcessHistory:
-      return await processHandlers.getTableProcessHistory(params);
+      return await processHandlers.getTableProcessHistory(params, http);
 
     default: {
       return Response.json(

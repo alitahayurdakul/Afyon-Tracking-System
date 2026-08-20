@@ -1,6 +1,11 @@
 import { NextRequest } from "next/server";
 
 import { projectHandlers } from "@/api/handlers/projectsQueries";
+import {
+  createJsonError,
+  readJsonBody,
+} from "@/api/handlers/responseHelpers";
+import { createServerAxios } from "@/api/serverAxios";
 
 export enum ProjectQueryTypes {
   getAllProjects = "GET_ALL_PROJECTS",
@@ -12,26 +17,31 @@ export enum ProjectQueryTypes {
 }
 
 export async function POST(request: NextRequest) {
-  const body = await request.json();
+  const body = await readJsonBody(request);
+  if (!body) {
+    return createJsonError("Invalid JSON body", 400);
+  }
   const { id, params, type, status, pageSize, currentPage } = body;
+
+  const http = createServerAxios(request);
 
   switch (type) {
     case ProjectQueryTypes.createProject:
-      return await projectHandlers.createProject(params);
+      return await projectHandlers.createProject(params, http);
     case ProjectQueryTypes.deleteProject:
-      return await projectHandlers.deleteProject(id);
+      return await projectHandlers.deleteProject(id, http);
     case ProjectQueryTypes.editProject:
-      return await projectHandlers.editProject(params);
+      return await projectHandlers.editProject(params, http);
     case ProjectQueryTypes.getAllProjects:
-      return await projectHandlers.getProjects(status);
+      return await projectHandlers.getProjects(status, http);
     case ProjectQueryTypes.getTableProjects:
       return await projectHandlers.getTableProjects({
         pageSize,
         currentPage,
         status,
-      });
+      }, http);
     case ProjectQueryTypes.getDetailProject:
-      return await projectHandlers.getProjectDetail(id);
+      return await projectHandlers.getProjectDetail(id, http);
 
     default: {
       return Response.json(

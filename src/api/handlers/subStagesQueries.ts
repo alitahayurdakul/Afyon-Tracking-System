@@ -1,4 +1,5 @@
-import { axiosInstance } from "@/api/axiosInstance";
+import { AxiosInstance } from "axios";
+
 import { END_POINTS } from "@/consts/endpoints";
 import { IPaginationTypes } from "@/types/commonTypes";
 import {
@@ -23,9 +24,9 @@ export const subStageHandlers = {
   getTableSubStages
 };
 
-async function createSubStage(params: Record<string, any>): Promise<Response> {
+async function createSubStage(params: Record<string, any>, http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.post(
+    const response = await http.post(
       END_POINTS.subStage.create,
       params,
     );
@@ -38,10 +39,10 @@ async function createSubStage(params: Record<string, any>): Promise<Response> {
   }
 }
 
-async function deleteSubStage(id: string): Promise<Response> {
+async function deleteSubStage(id: string, http: AxiosInstance): Promise<Response> {
   try {
     if (id) {
-      const response = await axiosInstance.delete(
+      const response = await http.delete(
         END_POINTS.subStage.delete(id),
       );
       if (response.status === 200 || response.status === 204) {
@@ -54,10 +55,10 @@ async function deleteSubStage(id: string): Promise<Response> {
   }
 }
 
-async function editSubStage(params: Record<string, any>): Promise<Response> {
+async function editSubStage(params: Record<string, any>, http: AxiosInstance): Promise<Response> {
   try {
     const { id, ...rest } = params;
-    const response = await axiosInstance.put(END_POINTS.subStage.edit(id), {
+    const response = await http.put(END_POINTS.subStage.edit(id), {
       ...rest,
     });
     if (response.status === 200 || response.status === 201) {
@@ -69,9 +70,9 @@ async function editSubStage(params: Record<string, any>): Promise<Response> {
   }
 }
 
-async function getSubStages(): Promise<Response> {
+async function getSubStages(http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.get<ISubStageResponseDataTypes>(
+    const response = await http.get<ISubStageResponseDataTypes>(
       END_POINTS.subStage.getAll,
     );
     if (response.status === 200) {
@@ -83,9 +84,9 @@ async function getSubStages(): Promise<Response> {
   }
 }
 
-async function getSubStageDetail(id: string): Promise<Response> {
+async function getSubStageDetail(id: string, http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.get<ISubStageType>(
+    const response = await http.get<ISubStageType>(
       END_POINTS.subStage.getDetail(id),
     );
     if (response.status === 200) {
@@ -97,12 +98,12 @@ async function getSubStageDetail(id: string): Promise<Response> {
   }
 }
 
-async function getTableSubStages({
-  pageSize,
-  currentPage,
-}: IPaginationTypes): Promise<Response> {
+async function getTableSubStages(
+  { pageSize, currentPage }: IPaginationTypes,
+  http: AxiosInstance,
+): Promise<Response> {
   try {
-    const response = await axiosInstance.get<ITableSubStageResponseTypes>(
+    const response = await http.get<ITableSubStageResponseTypes>(
       END_POINTS.subStage.getFilteredSubStages({ pageSize, currentPage }),
     );
     if (response.status === 200) {

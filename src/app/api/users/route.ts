@@ -1,6 +1,11 @@
 import { NextRequest } from "next/server";
 
+import {
+  createJsonError,
+  readJsonBody,
+} from "@/api/handlers/responseHelpers";
 import { userHandlers } from "@/api/handlers/usersQueries";
+import { createServerAxios } from "@/api/serverAxios";
 
 export enum UserQueryTypes {
   getAllUsers = "GET_ALL_USERS",
@@ -12,25 +17,27 @@ export enum UserQueryTypes {
 }
 
 export async function POST(request: NextRequest) {
-  const body = await request.json();
+  const body = await readJsonBody(request);
+  if (!body) {
+    return createJsonError("Invalid JSON body", 400);
+  }
   const { id, params, type } = body;
+
+  const http = createServerAxios(request);
 
   switch (type) {
     case UserQueryTypes.createUser:
-      return await userHandlers.createUser(params);
+      return await userHandlers.createUser(params, http);
     case UserQueryTypes.deleteUser:
-      return await userHandlers.deleteUser(id);
+      return await userHandlers.deleteUser(id, http);
     case UserQueryTypes.editUser:
-      return await userHandlers.editUser(params);
+      return await userHandlers.editUser(params, http);
     case UserQueryTypes.getAllUsers:
-      return await userHandlers.getUsers(params);
+      return await userHandlers.getUsers(params, http);
     case UserQueryTypes.getDetailUser:
-      return await userHandlers.getUserDetail(id);
+      return await userHandlers.getUserDetail(id, http);
     case UserQueryTypes.changePassword:
-      return await userHandlers.changePassword(
-        params,
-        request.headers.get("authorization"),
-      );
+      return await userHandlers.changePassword(params, http);
 
     default:
       return Response.json(

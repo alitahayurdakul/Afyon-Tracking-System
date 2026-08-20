@@ -1,5 +1,5 @@
+import { AxiosInstance } from "axios";
 
-import { axiosInstance } from "@/api/axiosInstance";
 import { END_POINTS } from "@/consts/endpoints";
 
 import {
@@ -14,9 +14,9 @@ export const processTrainsHandlers = {
   getByTrainAndWagonProcesses,
 };
 
-async function getProcessTrains(): Promise<Response> {
+async function getProcessTrains(http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.get(
+    const response = await http.get(
       END_POINTS.processTrains.getAllProcessTrains,
     );
     if (response.status === 200) {
@@ -30,10 +30,11 @@ async function getProcessTrains(): Promise<Response> {
 
 async function getProcessTrainDetail(
   params: Record<string, any>,
+  http: AxiosInstance,
 ): Promise<Response> {
   try {
     const { trainId } = params;
-    const response = await axiosInstance.post(
+    const response = await http.post(
       END_POINTS.processTrains.getByTrain,
       {
         ...(trainId && { trainId }),
@@ -50,6 +51,7 @@ async function getProcessTrainDetail(
 
 async function getByTrainAndWagonProcesses(
   params: Record<string, any>,
+  http: AxiosInstance,
 ): Promise<Response> {
   try {
     const { trainId, wagonId } = params;
@@ -57,7 +59,7 @@ async function getByTrainAndWagonProcesses(
       return createJsonError("Failed to fetch projects", 400);
     }
 
-    const response = await axiosInstance.get(
+    const response = await http.get(
       END_POINTS.processTrains.getByTrainAndWagon(trainId, wagonId),
     );
     if (response.status === 200) {

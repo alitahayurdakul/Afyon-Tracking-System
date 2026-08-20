@@ -1,4 +1,5 @@
-import { axiosInstance } from "@/api/axiosInstance";
+import { AxiosInstance } from "axios";
+
 import { END_POINTS } from "@/consts/endpoints";
 import { ResponseStatusEnums } from "@/utils/enum/commonEnums";
 
@@ -23,9 +24,9 @@ export const processHandlers = {
   getTableProcessHistory,
 };
 
-async function createProcess(params: Record<string, any>): Promise<Response> {
+async function createProcess(params: Record<string, any>, http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.post(END_POINTS.process.start, {
+    const response = await http.post(END_POINTS.process.start, {
       ...params,
     });
 
@@ -38,10 +39,10 @@ async function createProcess(params: Record<string, any>): Promise<Response> {
   }
 }
 
-async function deleteProcess(id: string): Promise<Response> {
+async function deleteProcess(id: string, http: AxiosInstance): Promise<Response> {
   try {
     if (id) {
-      const response = await axiosInstance.delete(
+      const response = await http.delete(
         END_POINTS.process.deleteProcess(id),
       );
       if (response.status === 200) {
@@ -54,10 +55,10 @@ async function deleteProcess(id: string): Promise<Response> {
   }
 }
 
-async function editProcess(params: Record<string, any>): Promise<Response> {
+async function editProcess(params: Record<string, any>, http: AxiosInstance): Promise<Response> {
   try {
     const { id, ...rest } = params;
-    const response = await axiosInstance.put(END_POINTS.process.edit(id), {
+    const response = await http.put(END_POINTS.process.edit(id), {
       ...rest,
     });
     if (response.status === 201) {
@@ -71,10 +72,11 @@ async function editProcess(params: Record<string, any>): Promise<Response> {
 
 async function getActiveProcesses(
   params: Record<string, any>,
+  http: AxiosInstance,
 ): Promise<Response> {
   try {
     const { status, projectId } = params || {};
-    const response = await axiosInstance.get(
+    const response = await http.get(
       END_POINTS.process.getAll({ status, projectId }),
     );
     if (response.status === 200) {
@@ -86,9 +88,9 @@ async function getActiveProcesses(
   }
 }
 
-async function getProcessDetail(id: string): Promise<Response> {
+async function getProcessDetail(id: string, http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.get(END_POINTS.process.getDetail(id));
+    const response = await http.get(END_POINTS.process.getDetail(id));
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
@@ -101,9 +103,10 @@ async function getProcessDetail(id: string): Promise<Response> {
 async function getStageDetail(
   processId: string,
   stageId: string,
+  http: AxiosInstance,
 ): Promise<Response> {
   try {
-    const response = await axiosInstance.get(
+    const response = await http.get(
       END_POINTS.process.stageDetail(processId || "", stageId || ""),
     );
     if (response.status === 200) {
@@ -116,10 +119,10 @@ async function getStageDetail(
   }
 }
 
-async function startSubStage(params: Record<string, any>): Promise<Response> {
+async function startSubStage(params: Record<string, any>, http: AxiosInstance): Promise<Response> {
   try {
     const { processId, stageId, subStageId } = params;
-    const response = await axiosInstance.put(
+    const response = await http.put(
       END_POINTS.process.subStageOperation(processId, stageId, subStageId),
       {
         status: ResponseStatusEnums.active,
@@ -137,11 +140,12 @@ async function startSubStage(params: Record<string, any>): Promise<Response> {
 
 async function saveandCompleteSubStage(
   params: Record<string, any>,
+  http: AxiosInstance,
 ): Promise<Response> {
   try {
     const { processId, stageId, subStageId, data } = params;
 
-    const response = await axiosInstance.put(
+    const response = await http.put(
       END_POINTS.process.subStageOperation(processId, stageId, subStageId),
       { ...data },
     );
@@ -156,9 +160,9 @@ async function saveandCompleteSubStage(
   }
 }
 
-async function completeStage(entryId: string): Promise<Response> {
+async function completeStage(entryId: string, http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.patch(
+    const response = await http.patch(
       END_POINTS.process.completeStage(entryId),
     );
 
@@ -172,14 +176,14 @@ async function completeStage(entryId: string): Promise<Response> {
   }
 }
 
-async function startStage(params: Record<string, any>): Promise<Response> {
+async function startStage(params: Record<string, any>, http: AxiosInstance): Promise<Response> {
   const { stageId, processId, operator } = params;
   try {
     const params = {
       stageId,
       operator,
     };
-    const response = await axiosInstance.post(
+    const response = await http.post(
       END_POINTS.process.startStage(processId),
       { ...params },
     );
@@ -196,10 +200,11 @@ async function startStage(params: Record<string, any>): Promise<Response> {
 
 async function getTableProcessHistory(
   params: Record<string, any>,
+  http: AxiosInstance,
 ): Promise<Response> {
   try {
     const { status, currentPage, pageSize } = params || {};
-    const response = await axiosInstance.get(
+    const response = await http.get(
       END_POINTS.process.getFilteredProcessHistory({
         status,
         currentPage,

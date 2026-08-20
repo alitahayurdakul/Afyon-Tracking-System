@@ -1,4 +1,5 @@
-import { axiosInstance } from "@/api/axiosInstance";
+import { AxiosInstance } from "axios";
+
 import { END_POINTS } from "@/consts/endpoints";
 import { IPaginationWithStatus } from "@/types/commonTypes";
 import { IProjectType } from "@/types/projectsTypes";
@@ -19,9 +20,9 @@ export const projectHandlers = {
   getTableProjects,
 };
 
-async function createProject(params: Record<string, any>): Promise<Response> {
+async function createProject(params: Record<string, any>, http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.post(
+    const response = await http.post(
       END_POINTS.project.create,
       params,
     );
@@ -34,10 +35,10 @@ async function createProject(params: Record<string, any>): Promise<Response> {
   }
 }
 
-async function deleteProject(id: string): Promise<Response> {
+async function deleteProject(id: string, http: AxiosInstance): Promise<Response> {
   try {
     if (id) {
-      const response = await axiosInstance.delete(
+      const response = await http.delete(
         END_POINTS.project.delete(id),
       );
       if (response.status === 200 || response.status === 204) {
@@ -50,10 +51,10 @@ async function deleteProject(id: string): Promise<Response> {
   }
 }
 
-async function editProject(params: Record<string, any>): Promise<Response> {
+async function editProject(params: Record<string, any>, http: AxiosInstance): Promise<Response> {
   try {
     const { id, ...rest } = params;
-    const response = await axiosInstance.put(END_POINTS.project.edit(id), {
+    const response = await http.put(END_POINTS.project.edit(id), {
       ...rest,
     });
     if (response.status === 200 || response.status === 201) {
@@ -65,9 +66,12 @@ async function editProject(params: Record<string, any>): Promise<Response> {
   }
 }
 
-async function getProjects(status?: string): Promise<Response> {
+async function getProjects(
+  status: string | undefined,
+  http: AxiosInstance,
+): Promise<Response> {
   try {
-    const response = await axiosInstance.get(END_POINTS.project.getAll(status));
+    const response = await http.get(END_POINTS.project.getAll(status));
 
     if (response.status === 200) {
       return createJsonOnlyData(response.data.projects || []);
@@ -78,13 +82,12 @@ async function getProjects(status?: string): Promise<Response> {
   }
 }
 
-async function getTableProjects({
-  pageSize,
-  currentPage,
-  status,
-}: IPaginationWithStatus): Promise<Response> {
+async function getTableProjects(
+  { pageSize, currentPage, status }: IPaginationWithStatus,
+  http: AxiosInstance,
+): Promise<Response> {
   try {
-    const response = await axiosInstance.get(
+    const response = await http.get(
       END_POINTS.project.getFilteredProjects({
         pageSize,
         currentPage,
@@ -101,9 +104,9 @@ async function getTableProjects({
   }
 }
 
-async function getProjectDetail(id: string): Promise<Response> {
+async function getProjectDetail(id: string, http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.get<IProjectType>(
+    const response = await http.get<IProjectType>(
       END_POINTS.project.getDetail(id),
     );
     if (response.status === 200) {

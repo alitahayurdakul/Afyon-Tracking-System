@@ -1,4 +1,5 @@
-import { axiosInstance } from "@/api/axiosInstance";
+import { AxiosInstance } from "axios";
+
 import { END_POINTS } from "@/consts/endpoints";
 import { IPaginationTypes } from "@/types/commonTypes";
 import {
@@ -22,9 +23,9 @@ export const workflowHandlers = {
   getTableWorkflows
 };
 
-async function getAllWorkflows(): Promise<Response> {
+async function getAllWorkflows(http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.get<IWorkflowResponseTypes>(
+    const response = await http.get<IWorkflowResponseTypes>(
       END_POINTS.workflow.getAll,
     );
 
@@ -37,9 +38,9 @@ async function getAllWorkflows(): Promise<Response> {
   }
 }
 
-async function createWorkflow(params: Record<string, any>): Promise<Response> {
+async function createWorkflow(params: Record<string, any>, http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.post(
+    const response = await http.post(
       END_POINTS.workflow.create,
       params,
     );
@@ -52,10 +53,10 @@ async function createWorkflow(params: Record<string, any>): Promise<Response> {
   }
 }
 
-async function deleteWorkflow(id: string): Promise<Response> {
+async function deleteWorkflow(id: string, http: AxiosInstance): Promise<Response> {
   try {
     if (id) {
-      const response = await axiosInstance.delete(
+      const response = await http.delete(
         END_POINTS.workflow.delete(id),
       );
       if (response.status === 200) {
@@ -68,14 +69,14 @@ async function deleteWorkflow(id: string): Promise<Response> {
   }
 }
 
-async function editWorkflow(params: Record<string, any>): Promise<Response> {
+async function editWorkflow(params: Record<string, any>, http: AxiosInstance): Promise<Response> {
   try {
     const { id, ...rest } = params;
 
     if (!id) {
       return createJsonError("Workflow ID is required", 400);
     }
-    const response = await axiosInstance.put(END_POINTS.workflow.edit(id), {
+    const response = await http.put(END_POINTS.workflow.edit(id), {
       ...rest,
     });
 
@@ -88,9 +89,9 @@ async function editWorkflow(params: Record<string, any>): Promise<Response> {
   }
 }
 
-async function getWorkflowDetail(id: string): Promise<Response> {
+async function getWorkflowDetail(id: string, http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.get<IWorkflowResponseTypes>(
+    const response = await http.get<IWorkflowResponseTypes>(
       END_POINTS.workflow.getDetail(id),
     );
     if (response.status === 200) {
@@ -102,12 +103,12 @@ async function getWorkflowDetail(id: string): Promise<Response> {
   }
 }
 
-async function getTableWorkflows({
-  pageSize,
-  currentPage,
-}: IPaginationTypes): Promise<Response> {
+async function getTableWorkflows(
+  { pageSize, currentPage }: IPaginationTypes,
+  http: AxiosInstance,
+): Promise<Response> {
   try {
-    const response = await axiosInstance.get<ITableWorkflowResponseTypes>(
+    const response = await http.get<ITableWorkflowResponseTypes>(
       END_POINTS.workflow.getFilteredWorkflows({ pageSize, currentPage }),
     );
 
