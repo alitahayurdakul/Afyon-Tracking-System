@@ -81,6 +81,16 @@ Two things about the 404 that are easy to get wrong:
 - **The root file is the one that runs for a wrong URL.** An unmatched path never enters `[locale]`, so it sits above `NextIntlClientProvider`. It resolves the locale itself from the `NEXT_LOCALE` cookie the proxy sets and calls `getTranslations({ locale })`.
 - ✔ **Do not add a `[locale]/[...rest]` catch-all to get translations there.** It works, but the route then *matches*, so Next commits a 200 before `notFound()` runs and every 404 becomes a soft 404. This was tried and reverted; correct status beats a shorter file.
 
+### Document structure and metadata
+
+`<html>`/`<body>` are rendered by **`app/[locale]/layout.tsx`**, not by the root layout, which is a pass-through. That is deliberate: `lang` has to match the locale (screen readers use it to pick pronunciation), and the locale is only a build-time value inside `[locale]`. Resolving it in the root layout with `cookies()` works but makes **every page dynamic**.
+
+✔ **Rule: never use a dynamic API (`cookies()`, `headers()`) in `app/layout.tsx` or `app/not-found.tsx`.** In the global not-found this is especially costly — it opts the *entire app* out of static generation, not just that route. This was measured: 14 static groups dropped to 0.
+
+Because the root layout no longer supplies a document, `app/not-found.tsx` and `app/global-error.tsx` render their own `<html>`/`<body>` with inline styles.
+
+Titles come from `generateMetadata` in the locale layout, reading `layout.meta` from the message catalogue. ✔ **Call `setRequestLocale(locale)` before `getTranslations` there** or next-intl treats the render as dynamic. The app is sign-in only, so metadata also sets `robots: { index: false, follow: false }`.
+
 `global-error.tsx` is deliberately self-contained — default-locale copy and inline styles — because nothing it could import is guaranteed to have loaded.
 
 

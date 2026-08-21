@@ -155,5 +155,9 @@
     "title": "Sayfa bulunamadı",
     "description": "Aradığınız sayfa taşınmış veya silinmiş olabilir.",
     "home": "Ana sayfaya dön"
+  },
+  "meta": {
+    "title": "Afyon İş Akışı Yönetim Sistemi",
+    "description": "Tren filosu bakım ve iş akışı takip sistemi."
   }
 }

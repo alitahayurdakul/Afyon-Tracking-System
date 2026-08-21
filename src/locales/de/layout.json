@@ -155,5 +155,9 @@
     "title": "Seite nicht gefunden",
     "description": "Die gesuchte Seite wurde möglicherweise verschoben oder gelöscht.",
     "home": "Zurück zur Startseite"
+  },
+  "meta": {
+    "title": "Afyon Workflow-Management-System",
+    "description": "System zur Verfolgung von Wartung und Arbeitsabläufen der Zugflotte."
   }
 }

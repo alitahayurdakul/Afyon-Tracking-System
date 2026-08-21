@@ -155,5 +155,9 @@
     "title": "Page not found",
     "description": "The page you are looking for may have been moved or deleted.",
     "home": "Back to home"
+  },
+  "meta": {
+    "title": "Afyon Workflow Management System",
+    "description": "Train fleet maintenance and workflow tracking system."
   }
 }

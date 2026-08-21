@@ -1,43 +1,64 @@
-import { cookies } from "next/headers";
-import { getTranslations } from "next-intl/server";
-
-import { URL_PAGES } from "@/consts/url";
 import { routing } from "@/i18n/routing";
-import { ILanguagesTypes } from "@/types/generalTypes";
-
-import styles from "@/styles/pages/StatusPage.module.scss";
 
 /**
- * Root 404. An unmatched URL never enters the [locale] segment, so this file —
- * not app/[locale]/not-found.tsx — is what Next renders, and it sits above
- * NextIntlClientProvider. Adding a catch-all route inside [locale] would make
- * the locale available but turns the response into a soft 404 (HTTP 200,
- * because the route then matches), so the locale is resolved here instead from
- * the NEXT_LOCALE cookie that the proxy sets.
+ * Root 404, rendered for any URL that matches no route. Such a URL never enters
+ * the [locale] segment, so this file sits outside it — and since <html>/<body>
+ * live in app/[locale]/layout.tsx, this page has to supply its own document.
+ * Styles are inline for the same reason.
+ *
+ * The copy is default-locale only, deliberately. Resolving the locale here
+ * would need a dynamic API (cookies/headers), and a dynamic API in the global
+ * not-found opts the ENTIRE app out of static generation — that cost is not
+ * worth a translated 404. A [locale]/[...rest] catch-all was also tried: the
+ * route then matches, so Next commits a 200 before notFound() runs and every
+ * 404 becomes a soft 404. In-segment notFound() calls still render the
+ * translated app/[locale]/not-found.tsx.
  */
-export default async function NotFound() {
-  const cookieLocale = (await cookies()).get("NEXT_LOCALE")?.value;
-  const locale = routing.locales.includes(cookieLocale as ILanguagesTypes)
-    ? (cookieLocale as ILanguagesTypes)
-    : routing.defaultLocale;
-
-  const t = await getTranslations({ locale, namespace: "layout.notFoundPage" });
-  const home =
-    locale === routing.defaultLocale
-      ? URL_PAGES.activeProcesses
-      : `/${locale}${URL_PAGES.activeProcesses}`;
-
+export default function NotFound() {
   return (
-    <section className={styles["status-page"]}>
-      <p className={styles.code}>404</p>
-      <h1 className={styles.title}>{t("title")}</h1>
-      <p className={styles.description}>{t("description")}</p>
-
-      <div className={styles.actions}>
-        <a href={home} className={styles.button}>
-          {t("home")}
+    <html lang={routing.defaultLocale}>
+      <body
+        style={{
+          margin: 0,
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "0.75rem",
+          padding: "2rem",
+          textAlign: "center",
+          fontFamily:
+            'Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
+          color: "#1a1c1e",
+          background: "#fff",
+        }}
+      >
+        <p style={{ fontSize: "4rem", fontWeight: 800, margin: 0, color: "#eaedf2" }}>
+          404
+        </p>
+        <h1 style={{ fontSize: "1.5rem", fontWeight: 700, margin: 0 }}>
+          Sayfa bulunamadı
+        </h1>
+        <p style={{ maxWidth: "32rem", color: "#64748b", lineHeight: 1.6 }}>
+          Aradığınız sayfa taşınmış veya silinmiş olabilir.
+        </p>
+        <a
+          href="/aktif-surecler"
+          style={{
+            marginTop: "0.5rem",
+            padding: "0.625rem 1.25rem",
+            border: "1px solid #004286",
+            borderRadius: "0.5rem",
+            background: "#004286",
+            color: "#fff",
+            fontWeight: 600,
+            textDecoration: "none",
+          }}
+        >
+          Ana sayfaya dön
         </a>
-      </div>
-    </section>
+      </body>
+    </html>
   );
 }
