@@ -46,7 +46,8 @@ Current working branch is `claudeForAfyon`. Commit messages are short English pr
 ## Git hooks & scripts
 
 - `.husky/pre-commit` runs `npx eslint . --fix` followed by `npm run build`. Consequences: commits are slow, fail on build errors, and eslint auto-fixes are **not re-staged** (they remain as unstaged changes).
-- Scripts: `dev`, `build`, `start`, `lint` (`eslint`), `lint-fix` (**broken** — uses `next lint`, removed in Next 16).
+- Scripts: `dev`, `build`, `start`, `lint` (`eslint`), `typecheck` (`tsc --noEmit`), `lint-fix` (**broken** — uses `next lint`, removed in Next 16).
+- Use `npm run typecheck` while working: it reports the same type errors as the pre-commit build in well under a second, because it skips compiling and prerendering the 93 pages. It is a faster feedback loop, not a replacement — the hook still runs the full build, which additionally catches anything that throws during static generation.
 
 ## TypeScript
 
