@@ -144,5 +144,16 @@
     "go": "Go",
     "perPage": "Per page",
     "page": "page"
+  },
+  "errorPage": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred. You can try again or go back to the home page.",
+    "retry": "Try again",
+    "home": "Back to home"
+  },
+  "notFoundPage": {
+    "title": "Page not found",
+    "description": "The page you are looking for may have been moved or deleted.",
+    "home": "Back to home"
   }
 }

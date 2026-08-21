@@ -63,6 +63,25 @@ The error path dispatches an error toast whose message comes from ✔ **`extract
 - `usePaginationParams({ defaultPageSize?, paramPrefix? })` (`src/api/queries/usePaginationParams.ts`) reads/writes `page` / `pageSize` URL params (prefixable as `<prefix>_page` for multiple tables on one page). **Pagination is 1-indexed everywhere** — no ±1 conversions anywhere; changing page size resets to page 1. Defaults come from `src/consts/tableConsts.ts` (`DEFAULT_PAGE_SIZE`, `DEFAULT_PAGE_SIZE_OPTIONS`).
 - Loading states use `react-loading-skeleton` (`components/common/loaders/`).
 
+## Error and not-found boundaries
+
+Four files cover failure states; there were none before, so any render throw blanked the app.
+
+| File | Catches |
+|---|---|
+| `src/app/[locale]/error.tsx` | anything thrown below the locale layout — has translations and a `reset()` retry |
+| `src/app/global-error.tsx` | a throw in the **root layout itself**, where providers/i18n/stylesheets are unavailable |
+| `src/app/not-found.tsx` | unmatched URLs (what Next actually renders for a 404) |
+| `src/app/[locale]/not-found.tsx` | `notFound()` called from inside the locale segment |
+
+Two things about the 404 that are easy to get wrong:
+
+- **The root file is the one that runs for a wrong URL.** An unmatched path never enters `[locale]`, so it sits above `NextIntlClientProvider`. It resolves the locale itself from the `NEXT_LOCALE` cookie the proxy sets and calls `getTranslations({ locale })`.
+- ✔ **Do not add a `[locale]/[...rest]` catch-all to get translations there.** It works, but the route then *matches*, so Next commits a 200 before `notFound()` runs and every 404 becomes a soft 404. This was tried and reverted; correct status beats a shorter file.
+
+`global-error.tsx` is deliberately self-contained — default-locale copy and inline styles — because nothing it could import is guaranteed to have loaded.
+
+
 ## State management
 
 ### Redux (`src/redux/store.ts`)

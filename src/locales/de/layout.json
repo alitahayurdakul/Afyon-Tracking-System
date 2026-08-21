@@ -144,5 +144,16 @@
     "go": "Los",
     "perPage": "Pro Seite",
     "page": "Seite"
+  },
+  "errorPage": {
+    "title": "Etwas ist schiefgelaufen",
+    "description": "Ein unerwarteter Fehler ist aufgetreten. Sie können es erneut versuchen oder zur Startseite zurückkehren.",
+    "retry": "Erneut versuchen",
+    "home": "Zurück zur Startseite"
+  },
+  "notFoundPage": {
+    "title": "Seite nicht gefunden",
+    "description": "Die gesuchte Seite wurde möglicherweise verschoben oder gelöscht.",
+    "home": "Zurück zur Startseite"
   }
 }

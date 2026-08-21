@@ -144,5 +144,16 @@
     "go": "Git",
     "perPage": "Sayfa başına",
     "page": "sayfa"
+  },
+  "errorPage": {
+    "title": "Bir şeyler ters gitti",
+    "description": "Beklenmeyen bir hata oluştu. Sayfayı yeniden deneyebilir ya da ana sayfaya dönebilirsiniz.",
+    "retry": "Tekrar dene",
+    "home": "Ana sayfaya dön"
+  },
+  "notFoundPage": {
+    "title": "Sayfa bulunamadı",
+    "description": "Aradığınız sayfa taşınmış veya silinmiş olabilir.",
+    "home": "Ana sayfaya dön"
   }
 }
