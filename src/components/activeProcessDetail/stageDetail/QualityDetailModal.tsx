@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 
-import { NewModal } from "@/components/common/NewModal";
+import { Modal } from "@/components/common/Modal";
 import { ACTIVE_STAGE_DETAIL_MODAL } from "@/consts/modals";
 import { IStage } from "@/types/processTypes";
 
@@ -24,8 +24,9 @@ const QualityDetailModal = ({
   const t = useTranslations("activeProcessDetail");
 
   return (
-    <NewModal
+    <Modal
       name={`${ACTIVE_STAGE_DETAIL_MODAL}_${id}`}
+      open
       width="900px"
       height="auto"
       title={`${t("stage-modal-header")} — ${stageName || ""}`}
@@ -39,7 +40,7 @@ const QualityDetailModal = ({
           stageStatus={stageStatus}
         />
       </div>
-    </NewModal>
+    </Modal>
   );
 };
 

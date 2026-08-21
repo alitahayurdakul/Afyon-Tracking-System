@@ -8,7 +8,7 @@
 - **Imports**: prefer the `@/` alias over relative paths in new code (existing relative sibling imports may remain).
 - **Hooks**: new reusable hooks go in `src/hooks/` (create on first use). The hooks currently in `src/api/queries/` (`usePaginationParams`, `useHasRole`, `useBodyScrollLock`) stay put.
 - **Language**: new code comments and all documentation in English. Existing Turkish comments are not to be translated or removed.
-- **Legacy components**: `NewModal`, `InputField`, `Captcha` must not be used in new work — use `Modal` and `InputBox`.
+- **Legacy components**: `InputField`, `Captcha` must not be used in new work — use `Modal` and `InputBox`. `NewModal` no longer exists; it was merged into `Modal`.
 - **Query hook files**: standardize on `useGet<Domain>Queries.ts` (plural, containing all of the domain's hooks); the singular `useGetStageDetailDataQuery.ts` style is legacy.
 - **Configuration debt** (bottom of this file): leave untouched until the owner explicitly requests a cleanup. Never fix these as drive-by changes.
 - **`stripLocale` has exactly one implementation** (`src/utils/stripLocale.ts`). `AuthBootstrap` used to carry a private copy that handled trailing slashes differently; both gates must resolve a path identically or they can disagree about what is public.

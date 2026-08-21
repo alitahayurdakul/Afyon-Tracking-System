@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
 import { useGetStageDetailDataQuery } from "@/api/queries/useGetStagesQueries";
-import { NewModal } from "@/components/common/NewModal";
+import { Modal } from "@/components/common/Modal";
 import {  EDIT_STAGE_MODAL } from "@/consts/modals";
 import { IStageType } from "@/types/stagesTypes";
 
@@ -15,8 +15,9 @@ export const EditStageModalWrapper = ({ id }: { id: string }) => {
   return (
     <>
       {!isFetching && !isLoading && !isError && (
-        <NewModal
+        <Modal
           name={`${EDIT_STAGE_MODAL}_${id}`}
+          open
           width={"900px"}
           height={"auto"}
           title={t("modal.edit")}
@@ -24,7 +25,7 @@ export const EditStageModalWrapper = ({ id }: { id: string }) => {
           isCloseEsc={false}
         >
           <EditStageForm id={id} stageData={data} />
-        </NewModal>
+        </Modal>
       )}
     </>
   );

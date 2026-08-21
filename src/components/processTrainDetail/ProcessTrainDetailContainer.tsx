@@ -9,7 +9,7 @@ import { useAddQueryParam } from "@/utils/searchParams";
 
 import { ErrorChecker } from "../common/error/ErrorChecker";
 import { LoadingChecker } from "../common/loaders/LoadingChecker";
-import { NewModal } from "../common/NewModal";
+import { Modal } from "../common/Modal";
 import SpinnerIcon from "../icons/SpinnerIcon";
 import TrainComposition from "../trainComposition/TrainComposition";
 
@@ -92,8 +92,9 @@ export const ProcessTrainDetailContainer = () => {
 
           <ProcessTableListBody />
           {isOpen && (
-            <NewModal
-              ignoreName
+            <Modal
+              name={PROCESS_TRAIN_WAGONS_DETAIL_MODAL}
+              open
               width={"900px"}
               height={"auto"}
               title={t("modal.title")}
@@ -101,7 +102,7 @@ export const ProcessTrainDetailContainer = () => {
               isCloseEsc={false}
             >
               <ProcessTrainModalWrapper wagonParamId={wagonParamId} />
-            </NewModal>
+            </Modal>
           )}
         </ErrorChecker>
       </LoadingChecker>

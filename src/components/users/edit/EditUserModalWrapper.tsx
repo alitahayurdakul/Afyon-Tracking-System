@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
 import { useGetUserDetailDataQuery } from "@/api/queries/useGetUsersQueries";
-import { NewModal } from "@/components/common/NewModal";
+import { Modal } from "@/components/common/Modal";
 import { EDIT_USER_MODAL } from "@/consts/modals";
 
 import { EditUserForm } from "./EditUserForm";
@@ -13,8 +13,9 @@ export const EditUserModalWrapper = ({ id }: { id: string }) => {
   return (
     <>
        {!isFetching && !isLoading && (
-        <NewModal
+        <Modal
           name={`${EDIT_USER_MODAL}_${id}`}
+          open
           width={"900px"}
           height={"auto"}
           title={t("modal.edit")}
@@ -22,7 +23,7 @@ export const EditUserModalWrapper = ({ id }: { id: string }) => {
           isCloseEsc={false}
         >
           <EditUserForm id={id} data={data} />
-        </NewModal>
+        </Modal>
       )}
     </>
   );

@@ -48,7 +48,7 @@ These were explicitly decided by the project owner — follow them in all new co
 
 - **Named exports only** for new components/modules (the lone `SelectedItemList` default export is legacy).
 - **Prefer the `@/` alias** over relative imports (existing relative sibling imports are fine to leave).
-- **Use `Modal` and `InputBox`** for new work — `NewModal`, `InputField`, and `Captcha` are legacy; do not use them.
+- **Use `Modal` and `InputBox`** for new work — `InputField` and `Captcha` are legacy; do not use them. (`NewModal` was the second modal implementation and has been removed; every modal now goes through `Modal`.)
 - **New reusable hooks go in `src/hooks/`** (create the folder on first use); existing hooks in `src/api/queries/` stay where they are.
 - **Keep the mirrored `src/styles/` tree** — do not co-locate styles.
 - **Keep the POST-RPC API pattern** for all new endpoints; do not introduce REST-style routes.

@@ -15,7 +15,7 @@ import {
   useStartSubStage,
 } from "@/api/queries/useGetStageDetailDataQuery";
 import { ErrorComponent } from "@/components/common/error/ErrorComponent";
-import { NewModal } from "@/components/common/NewModal";
+import { Modal } from "@/components/common/Modal";
 import { PopoverBody } from "@/components/Popover";
 import { ACTIVE_STAGE_DETAIL_MODAL } from "@/consts/modals";
 import {
@@ -147,8 +147,9 @@ export default function StageDetailModalContent({
   // has no sub-stages.
   if (isError) {
     return (
-      <NewModal
+      <Modal
         name={`${ACTIVE_STAGE_DETAIL_MODAL}_${id}`}
+        open
         width="900px"
         height="auto"
         title={`${t("stage-modal-header")} — ${stageName || ""}`}
@@ -156,7 +157,7 @@ export default function StageDetailModalContent({
         isCloseEsc={false}
       >
         <ErrorComponent errorLabel={tErrors("loadFailed")} />
-      </NewModal>
+      </Modal>
     );
   }
 
@@ -245,8 +246,9 @@ export default function StageDetailModalContent({
   };
 
   return (
-    <NewModal
+    <Modal
       name={`${ACTIVE_STAGE_DETAIL_MODAL}_${id}`}
+      open
       width="900px"
       height="auto"
       title={`${t("stage-modal-header")} — ${stageName || ""}`}
@@ -543,6 +545,6 @@ export default function StageDetailModalContent({
           </div>
         )}
       </div>
-    </NewModal>
+    </Modal>
   );
 }
