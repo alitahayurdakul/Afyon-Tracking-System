@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -71,58 +71,55 @@ export const CreateWorkflowForm = () => {
     removeModal();
   };
 
-  const onSubmit: SubmitHandler<IWorkflowFormDataTypes> = useCallback(
-    async (data) => {
-      try {
-        const { stages, ...rest } = data;
-        const newStages = stages.map((stage: IOptionType, index: number) => {
-          return {
-            stageInfo: stage.value,
-            plannedOrder: index + 1,
-          };
-        });
-        const qualityStage = {
-          stageInfo: qualityId,
-          plannedOrder: newStages.length + 1,
+  const onSubmit: SubmitHandler<IWorkflowFormDataTypes> = async (data) => {
+    try {
+      const { stages, ...rest } = data;
+      const newStages = stages.map((stage: IOptionType, index: number) => {
+        return {
+          stageInfo: stage.value,
+          plannedOrder: index + 1,
         };
+      });
+      const qualityStage = {
+        stageInfo: qualityId,
+        plannedOrder: newStages.length + 1,
+      };
 
-        const lastStages =
-          newStages && newStages.length > 0 ? [...newStages, qualityStage] : [];
+      const lastStages =
+        newStages && newStages.length > 0 ? [...newStages, qualityStage] : [];
 
-        const params = {
-          ...rest,
-          creator: currentUserName,
-          stages: lastStages,
-        };
+      const params = {
+        ...rest,
+        creator: currentUserName,
+        stages: lastStages,
+      };
 
-        await axiosInstance.post(CLIENT_END_POINTS.workflow.create, {
-          type: WorkflowQueryTypes.createWorkflow,
-          params,
-        });
-        dispatch(
-          addToastify({
-            message: t("notifications.create.success"),
-            type: "success",
-            icon: "close",
-            id: "createWorkflowSuccess" + Date.now(),
-          }),
-        );
-        dispatch(addTriggerTable());
-        reset();
-        removeModal();
-      } catch (err) {
-        dispatch(
-          addToastify({
-            message: extractApiError(err, t("notifications.create.error")),
-            type: "error",
-            icon: "close",
-            id: "createWorkflowError" + Date.now(),
-          }),
-        );
-      }
-    },
-    [],
-  );
+      await axiosInstance.post(CLIENT_END_POINTS.workflow.create, {
+        type: WorkflowQueryTypes.createWorkflow,
+        params,
+      });
+      dispatch(
+        addToastify({
+          message: t("notifications.create.success"),
+          type: "success",
+          icon: "close",
+          id: "createWorkflowSuccess" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable());
+      reset();
+      removeModal();
+    } catch (err) {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, t("notifications.create.error")),
+          type: "error",
+          icon: "close",
+          id: "createWorkflowError" + Date.now(),
+        }),
+      );
+    }
+  };
 
   const selectedStages = watch("stages");
 

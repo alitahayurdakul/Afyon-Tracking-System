@@ -1,6 +1,5 @@
 "use client";
 
-import { useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -49,42 +48,39 @@ export const CreateWagonForm = () => {
     removeModal();
   };
 
-  const onSubmit: SubmitHandler<IWagonFormDataTypes> = useCallback(
-    async (data) => {
-      try {
-        const params = {
-          wagonNo: data.name,
-          description: data.desc,
-          creator: currentUserName,
-        };
-        await axiosInstance.post(CLIENT_END_POINTS.wagon.create, {
-          type: WagonQueryTypes.createWagon,
-          params,
-        });
-        dispatch(
-          addToastify({
-            message: t("notifications.create.success"),
-            type: "success",
-            icon: "close",
-            id: "createWagonSuccess" + Date.now(),
-          }),
-        );
-        dispatch(addTriggerTable());
-        reset();
-        removeModal();
-      } catch (err) {
-        dispatch(
-          addToastify({
-            message: extractApiError(err, t("notifications.create.error")),
-            type: "error",
-            icon: "close",
-            id: "createWagonError" + Date.now(),
-          }),
-        );
-      }
-    },
-    [],
-  );
+  const onSubmit: SubmitHandler<IWagonFormDataTypes> = async (data) => {
+    try {
+      const params = {
+        wagonNo: data.name,
+        description: data.desc,
+        creator: currentUserName,
+      };
+      await axiosInstance.post(CLIENT_END_POINTS.wagon.create, {
+        type: WagonQueryTypes.createWagon,
+        params,
+      });
+      dispatch(
+        addToastify({
+          message: t("notifications.create.success"),
+          type: "success",
+          icon: "close",
+          id: "createWagonSuccess" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable());
+      reset();
+      removeModal();
+    } catch (err) {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, t("notifications.create.error")),
+          type: "error",
+          icon: "close",
+          id: "createWagonError" + Date.now(),
+        }),
+      );
+    }
+  };
 
   return (
     <form className={styles["train-form"]}>

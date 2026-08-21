@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback } from "react";
+import React from "react";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -62,48 +62,45 @@ export const CreateStageForm = () => {
     removeModal();
   };
 
-  const onSubmit: SubmitHandler<IStageFormDataTypes> = useCallback(
-    async (data) => {
-      try {
-        const { subStages, ...rest } = data;
-        const newSubStages = subStages?.map(
-          (sStage: IOptionType) => sStage.value,
-        );
+  const onSubmit: SubmitHandler<IStageFormDataTypes> = async (data) => {
+    try {
+      const { subStages, ...rest } = data;
+      const newSubStages = subStages?.map(
+        (sStage: IOptionType) => sStage.value,
+      );
 
-        const params = {
-          ...rest,
-          creator: currentUserName,
-          subStageIds: newSubStages,
-        };
+      const params = {
+        ...rest,
+        creator: currentUserName,
+        subStageIds: newSubStages,
+      };
 
-        await axiosInstance.post(CLIENT_END_POINTS.stage.create, {
-          type: StageQueryTypes.createStage,
-          params,
-        });
-        dispatch(
-          addToastify({
-            message: t("form.notifications.createSuccess"),
-            type: "success",
-            icon: "close",
-            id: "createStageSuccess" + Date.now(),
-          }),
-        );
-        dispatch(addTriggerTable());
-        reset();
-        removeModal();
-      } catch (err) {
-        dispatch(
-          addToastify({
-            message: extractApiError(err, t("form.notifications.createError")),
-            type: "error",
-            icon: "close",
-            id: "createStageError" + Date.now(),
-          }),
-        );
-      }
-    },
-    [],
-  );
+      await axiosInstance.post(CLIENT_END_POINTS.stage.create, {
+        type: StageQueryTypes.createStage,
+        params,
+      });
+      dispatch(
+        addToastify({
+          message: t("form.notifications.createSuccess"),
+          type: "success",
+          icon: "close",
+          id: "createStageSuccess" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable());
+      reset();
+      removeModal();
+    } catch (err) {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, t("form.notifications.createError")),
+          type: "error",
+          icon: "close",
+          id: "createStageError" + Date.now(),
+        }),
+      );
+    }
+  };
 
   return (
     <form className={styles["stage-form"]}>

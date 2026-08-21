@@ -1,7 +1,7 @@
 "use client";
 
 
-import React, { useCallback, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -74,43 +74,40 @@ export const EditRoleForm = ({ id, data }: IPropsTypes) => {
   const currentUserName = useCurrentUserName();
   const removeModal = useRemoveQueryParamModal();
 
-  const onSubmit: SubmitHandler<IRoleFormDataTypes> = useCallback(
-    async (formData) => {
-      try {
-        const params = {
-          id,
-          roleName: formData.roleName.trim(),
-          roleDescription: formData.roleDescription.trim(),
-          permissions: formData.permissions.map((p) => p.value),
-          editor: currentUserName,
-        };
-        await axiosInstance.post(CLIENT_END_POINTS.role.edit, {
-          type: RoleQueryTypes.editRole,
-          params,
-        });
-        dispatch(
-          addToastify({
-            message: t("notifications.editSuccess"),
-            type: "success",
-            icon: "close",
-            id: "editRole" + Date.now(),
-          }),
-        );
-        dispatch(addTriggerTable());
-        removeModal();
-      } catch (err) {
-        dispatch(
-          addToastify({
-            message: extractApiError(err, t("notifications.editError")),
-            type: "error",
-            icon: "close",
-            id: "editRole" + Date.now(),
-          }),
-        );
-      }
-    },
-    [id],
-  );
+  const onSubmit: SubmitHandler<IRoleFormDataTypes> = async (formData) => {
+    try {
+      const params = {
+        id,
+        roleName: formData.roleName.trim(),
+        roleDescription: formData.roleDescription.trim(),
+        permissions: formData.permissions.map((p) => p.value),
+        editor: currentUserName,
+      };
+      await axiosInstance.post(CLIENT_END_POINTS.role.edit, {
+        type: RoleQueryTypes.editRole,
+        params,
+      });
+      dispatch(
+        addToastify({
+          message: t("notifications.editSuccess"),
+          type: "success",
+          icon: "close",
+          id: "editRole" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable());
+      removeModal();
+    } catch (err) {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, t("notifications.editError")),
+          type: "error",
+          icon: "close",
+          id: "editRole" + Date.now(),
+        }),
+      );
+    }
+  };
 
   return (
     <form className={styles["train-form"]}>

@@ -1,7 +1,7 @@
 "use client";
 
 
-import React, { useCallback } from "react";
+import React from "react";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -59,45 +59,42 @@ export const EditUserForm = ({ id, data }: IPropsTypes) => {
 
   const onCancel = () => removeModal();
 
-  const onSubmit: SubmitHandler<IUserEditFormDataTypes> = useCallback(
-    async (formData) => {
-      try {
-        const params: Record<string, any> = {
-          id,
-          fullname: formData.fullname.trim(),
-          email: formData.email.trim().toLowerCase(),
-          phone: formData.phone.trim(),
-          // department: formData.department,
-          role: formData.role,
-          isActive: formData.isActive,
-        };
-        await axiosInstance.post(CLIENT_END_POINTS.user.edit, {
-          type: UserQueryTypes.editUser,
-          params,
-        });
-        dispatch(
-          addToastify({
-            message: t("notifications.editSuccess"),
-            type: "success",
-            icon: "close",
-            id: "editUser" + Date.now(),
-          }),
-        );
-        dispatch(addTriggerTable());
-        removeModal();
-      } catch (err) {
-        dispatch(
-          addToastify({
-            message: extractApiError(err, t("notifications.editError")),
-            type: "error",
-            icon: "close",
-            id: "editUser" + Date.now(),
-          }),
-        );
-      }
-    },
-    [id],
-  );
+  const onSubmit: SubmitHandler<IUserEditFormDataTypes> = async (formData) => {
+    try {
+      const params: Record<string, any> = {
+        id,
+        fullname: formData.fullname.trim(),
+        email: formData.email.trim().toLowerCase(),
+        phone: formData.phone.trim(),
+        // department: formData.department,
+        role: formData.role,
+        isActive: formData.isActive,
+      };
+      await axiosInstance.post(CLIENT_END_POINTS.user.edit, {
+        type: UserQueryTypes.editUser,
+        params,
+      });
+      dispatch(
+        addToastify({
+          message: t("notifications.editSuccess"),
+          type: "success",
+          icon: "close",
+          id: "editUser" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable());
+      removeModal();
+    } catch (err) {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, t("notifications.editError")),
+          type: "error",
+          icon: "close",
+          id: "editUser" + Date.now(),
+        }),
+      );
+    }
+  };
 
   return (
     <form className={styles["train-form"]}>

@@ -1,7 +1,7 @@
 "use client";
 
 
-import React, { useCallback } from "react";
+import React from "react";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -37,12 +37,11 @@ import { TrainFormValidation } from "@/utils/validations/trainFormValidation";
 import styles from "@/styles/components/trains/TrainForm.module.scss";
 
 interface IPropsTypes {
-  id: string;
   data?: ITrainType;
   wagonOptions?: IOptionType[];
 }
 
-export const EditTrainForm = ({ id, data, wagonOptions }: IPropsTypes) => {
+export const EditTrainForm = ({ data, wagonOptions }: IPropsTypes) => {
   const tValidation = useTranslations("layout.validation-errors");
   const t = useTranslations("trains");
   const {
@@ -79,49 +78,46 @@ export const EditTrainForm = ({ id, data, wagonOptions }: IPropsTypes) => {
     removeModal();
   };
 
-  const onSubmit: SubmitHandler<ITrainFormDataTypes> = useCallback(
-    async (formData) => {
-      try {
-        const wagons = formData.wagons.map((option: IOptionType, index) => {
-          return {
-            order: index + 1,
-            id: option.value,
-          };
-        });
-        const params = {
-          id: data?._id,
-          trainName: formData.trainSetNo ?? "",
-          wagons,
-          desc: formData?.desc ?? "",
-          editor: currentUserName,
+  const onSubmit: SubmitHandler<ITrainFormDataTypes> = async (formData) => {
+    try {
+      const wagons = formData.wagons.map((option: IOptionType, index) => {
+        return {
+          order: index + 1,
+          id: option.value,
         };
-        await axiosInstance.post(CLIENT_END_POINTS.train.edit, {
-          type: TrainQueryTypes.editTrain,
-          params,
-        });
-        dispatch(
-          addToastify({
-            message: t("form.notifications.editSuccess"),
-            type: "success",
-            icon: "close",
-            id: "editTrain" + Date.now(),
-          }),
-        );
-        dispatch(addTriggerTable());
-        removeModal();
-      } catch (err) {
-        dispatch(
-          addToastify({
-            message: extractApiError(err, t("form.notifications.error")),
-            type: "error",
-            icon: "close",
-            id: "editTrainError" + Date.now(),
-          }),
-        );
-      }
-    },
-    [id],
-  );
+      });
+      const params = {
+        id: data?._id,
+        trainName: formData.trainSetNo ?? "",
+        wagons,
+        desc: formData?.desc ?? "",
+        editor: currentUserName,
+      };
+      await axiosInstance.post(CLIENT_END_POINTS.train.edit, {
+        type: TrainQueryTypes.editTrain,
+        params,
+      });
+      dispatch(
+        addToastify({
+          message: t("form.notifications.editSuccess"),
+          type: "success",
+          icon: "close",
+          id: "editTrain" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable());
+      removeModal();
+    } catch (err) {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, t("form.notifications.error")),
+          type: "error",
+          icon: "close",
+          id: "editTrainError" + Date.now(),
+        }),
+      );
+    }
+  };
 
   return (
     <form className={styles["train-form"]}>

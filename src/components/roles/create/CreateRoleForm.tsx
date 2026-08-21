@@ -1,7 +1,7 @@
 "use client";
 
 
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -60,43 +60,40 @@ export const CreateRoleForm = () => {
     }));
   }, []);
 
-  const onSubmit: SubmitHandler<IRoleFormDataTypes> = useCallback(
-    async (data) => {
-      try {
-        const params = {
-          roleName: data.roleName.trim(),
-          roleDescription: data.roleDescription.trim(),
-          permissions: data.permissions.map((p) => p.value),
-          creator: currentUserName,
-        };
-        await axiosInstance.post(CLIENT_END_POINTS.role.create, {
-          type: RoleQueryTypes.createRole,
-          params,
-        });
-        dispatch(
-          addToastify({
-            message: t("notifications.createSuccess"),
-            type: "success",
-            icon: "close",
-            id: "createRole" + Date.now(),
-          }),
-        );
-        dispatch(addTriggerTable());
-        reset();
-        removeModal();
-      } catch (err) {
-        dispatch(
-          addToastify({
-            message: extractApiError(err, t("notifications.createError")),
-            type: "error",
-            icon: "close",
-            id: "createRole" + Date.now(),
-          }),
-        );
-      }
-    },
-    [],
-  );
+  const onSubmit: SubmitHandler<IRoleFormDataTypes> = async (data) => {
+    try {
+      const params = {
+        roleName: data.roleName.trim(),
+        roleDescription: data.roleDescription.trim(),
+        permissions: data.permissions.map((p) => p.value),
+        creator: currentUserName,
+      };
+      await axiosInstance.post(CLIENT_END_POINTS.role.create, {
+        type: RoleQueryTypes.createRole,
+        params,
+      });
+      dispatch(
+        addToastify({
+          message: t("notifications.createSuccess"),
+          type: "success",
+          icon: "close",
+          id: "createRole" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable());
+      reset();
+      removeModal();
+    } catch (err) {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, t("notifications.createError")),
+          type: "error",
+          icon: "close",
+          id: "createRole" + Date.now(),
+        }),
+      );
+    }
+  };
 
   return (
     <form className={styles["train-form"]}>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -82,50 +82,47 @@ export const CreateFleetForm = () => {
     removeModal();
   };
 
-  const onSubmit: SubmitHandler<ICreateFleetFormDataTypes> = useCallback(
-    async (data) => {
-      try {
-        const params = {
-          projectId: data.projectId,
-          trainId: data.trainId,
-          wagonId: data.wagonId,
-          workflowId: data.workflows,
-          description: data.additionInfo,
-        };
+  const onSubmit: SubmitHandler<ICreateFleetFormDataTypes> = async (data) => {
+    try {
+      const params = {
+        projectId: data.projectId,
+        trainId: data.trainId,
+        wagonId: data.wagonId,
+        workflowId: data.workflows,
+        description: data.additionInfo,
+      };
 
-        const { data: responseData } = await axiosInstance.post(
-          CLIENT_END_POINTS.processes.create,
-          {
-            type: ProcessQueryTypes.createProcess,
-            params,
-          },
-        );
-        dispatch(
-          addToastify({
-            message: t("form.notifications.success"),
-            type: "success",
-            icon: "close",
-            id: "startNewProcessSuccess" + Date.now(),
-          }),
-        );
-        if (!!responseData.data && responseData.data.process._id) {
-          router.push(
-            `${URL_PAGES.activeProcesses}/${responseData.data.process._id}`,
-          );
-        }
-      } catch (err: any) {
-        dispatch(
-          addToastify({
-            message: extractApiError(err, t("form.notifications.error")),
-            type: "error",
-            icon: "close",
-            id: "createProject" + Date.now(),
-          }),
+      const { data: responseData } = await axiosInstance.post(
+        CLIENT_END_POINTS.processes.create,
+        {
+          type: ProcessQueryTypes.createProcess,
+          params,
+        },
+      );
+      dispatch(
+        addToastify({
+          message: t("form.notifications.success"),
+          type: "success",
+          icon: "close",
+          id: "startNewProcessSuccess" + Date.now(),
+        }),
+      );
+      if (!!responseData.data && responseData.data.process._id) {
+        router.push(
+          `${URL_PAGES.activeProcesses}/${responseData.data.process._id}`,
         );
       }
-    },
-    [trainOptions],
-  );
+    } catch (err: any) {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, t("form.notifications.error")),
+          type: "error",
+          icon: "close",
+          id: "createProject" + Date.now(),
+        }),
+      );
+    }
+  };
 
   return (
     <form className={styles["start-process-form"]}>

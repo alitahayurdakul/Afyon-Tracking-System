@@ -1,7 +1,6 @@
 "use client";
 
 
-import { useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -51,43 +50,40 @@ export const CreateMaterialForm = () => {
     removeModal();
   };
 
-  const onSubmit: SubmitHandler<IMaterialFormDataTypes> = useCallback(
-    async (data) => {
-      try {
-        const params = {
-          name: data.name,
-          materialCode: data.code,
-          description: data.desc,
-          creator: currentUserName,
-        };
-        await axiosInstance.post(CLIENT_END_POINTS.material.create, {
-          type: MaterialQueryTypes.createMaterial,
-          params,
-        });
-        dispatch(
-          addToastify({
-            message: t("notifications.create.success"),
-            type: "success",
-            icon: "close",
-            id: "createMaterialSuccess" + Date.now(),
-          }),
-        );
-        dispatch(addTriggerTable());
-        reset();
-        removeModal();
-      } catch (err: any) {
-        dispatch(
-          addToastify({
-            message: extractApiError(err, t("notifications.create.error")),
-            type: "error",
-            icon: "close",
-            id: "createMaterialError" + Date.now(),
-          }),
-        );
-      }
-    },
-    [],
-  );
+  const onSubmit: SubmitHandler<IMaterialFormDataTypes> = async (data) => {
+    try {
+      const params = {
+        name: data.name,
+        materialCode: data.code,
+        description: data.desc,
+        creator: currentUserName,
+      };
+      await axiosInstance.post(CLIENT_END_POINTS.material.create, {
+        type: MaterialQueryTypes.createMaterial,
+        params,
+      });
+      dispatch(
+        addToastify({
+          message: t("notifications.create.success"),
+          type: "success",
+          icon: "close",
+          id: "createMaterialSuccess" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable());
+      reset();
+      removeModal();
+    } catch (err: any) {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, t("notifications.create.error")),
+          type: "error",
+          icon: "close",
+          id: "createMaterialError" + Date.now(),
+        }),
+      );
+    }
+  };
 
   return (
     <form className={styles["train-form"]}>

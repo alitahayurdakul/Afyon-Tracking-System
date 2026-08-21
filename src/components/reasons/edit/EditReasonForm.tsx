@@ -1,7 +1,6 @@
 "use client";
 
 
-import { useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -56,42 +55,39 @@ export const EditReasonForm = ({ id, data }: IPropsTypes) => {
     removeModal();
   };
 
-  const onSubmit: SubmitHandler<IReasonFormDataTypes> = useCallback(
-    async (formData) => {
-      try {
-        const params = {
-          id,
-          name: formData.name,
-          description: formData.desc,
-          editor: currentUserName,
-        };
-        await axiosInstance.post(CLIENT_END_POINTS.reason.edit, {
-          type: ReasonQueryTypes.editReason,
-          params,
-        });
-        dispatch(
-          addToastify({
-            message: t("notifications.edit.success"),
-            type: "success",
-            icon: "close",
-            id: "editReason" + Date.now(),
-          }),
-        );
-        dispatch(addTriggerTable());
-        removeModal();
-      } catch (err) {
-        dispatch(
-          addToastify({
-            message: extractApiError(err, t("notifications.edit.error")),
-            type: "error",
-            icon: "close",
-            id: "editReason" + Date.now(),
-          }),
-        );
-      }
-    },
-    [id],
-  );
+  const onSubmit: SubmitHandler<IReasonFormDataTypes> = async (formData) => {
+    try {
+      const params = {
+        id,
+        name: formData.name,
+        description: formData.desc,
+        editor: currentUserName,
+      };
+      await axiosInstance.post(CLIENT_END_POINTS.reason.edit, {
+        type: ReasonQueryTypes.editReason,
+        params,
+      });
+      dispatch(
+        addToastify({
+          message: t("notifications.edit.success"),
+          type: "success",
+          icon: "close",
+          id: "editReason" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable());
+      removeModal();
+    } catch (err) {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, t("notifications.edit.error")),
+          type: "error",
+          icon: "close",
+          id: "editReason" + Date.now(),
+        }),
+      );
+    }
+  };
 
   return (
     <form className={styles["train-form"]}>

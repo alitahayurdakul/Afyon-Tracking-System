@@ -1,7 +1,7 @@
 "use client";
 
 
-import React, { useCallback } from "react";
+import React from "react";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -53,45 +53,42 @@ export const CreateUserForm = () => {
 
   const onCancel = () => removeModal();
 
-  const onSubmit: SubmitHandler<IUserFormDataTypes> = useCallback(
-    async (data) => {
-      try {
-        const params = {
-          fullname: data.fullname.trim(),
-          email: data.email.trim().toLowerCase(),
-          pwd: data.pwd,
-          phone: data.phone.trim(),
-          // department: data.department,
-          role: data.role,
-        };
-        await axiosInstance.post(CLIENT_END_POINTS.user.create, {
-          type: UserQueryTypes.createUser,
-          params,
-        });
-        dispatch(
-          addToastify({
-            message: t("notifications.createSuccess"),
-            type: "success",
-            icon: "close",
-            id: "createUser" + Date.now(),
-          }),
-        );
-        dispatch(addTriggerTable());
-        reset();
-        removeModal();
-      } catch (err) {
-        dispatch(
-          addToastify({
-            message: extractApiError(err, t("notifications.createError")),
-            type: "error",
-            icon: "close",
-            id: "createUser" + Date.now(),
-          }),
-        );
-      }
-    },
-    [],
-  );
+  const onSubmit: SubmitHandler<IUserFormDataTypes> = async (data) => {
+    try {
+      const params = {
+        fullname: data.fullname.trim(),
+        email: data.email.trim().toLowerCase(),
+        pwd: data.pwd,
+        phone: data.phone.trim(),
+        // department: data.department,
+        role: data.role,
+      };
+      await axiosInstance.post(CLIENT_END_POINTS.user.create, {
+        type: UserQueryTypes.createUser,
+        params,
+      });
+      dispatch(
+        addToastify({
+          message: t("notifications.createSuccess"),
+          type: "success",
+          icon: "close",
+          id: "createUser" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable());
+      reset();
+      removeModal();
+    } catch (err) {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, t("notifications.createError")),
+          type: "error",
+          icon: "close",
+          id: "createUser" + Date.now(),
+        }),
+      );
+    }
+  };
 
   return (
     <form className={styles["train-form"]}>

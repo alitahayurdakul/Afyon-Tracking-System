@@ -24,7 +24,7 @@ export const EditTrainModalWrapper = ({ id }: { id: string }) => {
           isCloseOutside={false}
           isCloseEsc={false}
         >
-          <EditTrainForm id={id} data={data} wagonOptions={wagonOptions} />
+          <EditTrainForm data={data} wagonOptions={wagonOptions} />
         </NewModal>
       )}
     </>

@@ -1,7 +1,7 @@
 "use client";
 
 
-import React, { useCallback } from "react";
+import React from "react";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -57,43 +57,40 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
     removeModal();
   };
 
-  const onSubmit: SubmitHandler<IMaterialFormDataTypes> = useCallback(
-    async (formData) => {
-      try {
-        const params = {
-          id,
-          name: formData.name,
-          materialCode: formData.code,
-          description: formData.desc,
-          editor: currentUserName,
-        };
-        await axiosInstance.post(CLIENT_END_POINTS.material.edit, {
-          type: MaterialQueryTypes.editMaterial,
-          params,
-        });
-        dispatch(
-          addToastify({
-            message: t("notifications.edit.success"),
-            type: "success",
-            icon: "close",
-            id: "editMaterialSuccess" + Date.now(),
-          }),
-        );
-        dispatch(addTriggerTable());
-        removeModal();
-      } catch (err: any) {
-        dispatch(
-          addToastify({
-            message: extractApiError(err, t("notifications.edit.error")),
-            type: "error",
-            icon: "close",
-            id: "editMaterialError" + Date.now(),
-          }),
-        );
-      }
-    },
-    [id],
-  );
+  const onSubmit: SubmitHandler<IMaterialFormDataTypes> = async (formData) => {
+    try {
+      const params = {
+        id,
+        name: formData.name,
+        materialCode: formData.code,
+        description: formData.desc,
+        editor: currentUserName,
+      };
+      await axiosInstance.post(CLIENT_END_POINTS.material.edit, {
+        type: MaterialQueryTypes.editMaterial,
+        params,
+      });
+      dispatch(
+        addToastify({
+          message: t("notifications.edit.success"),
+          type: "success",
+          icon: "close",
+          id: "editMaterialSuccess" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable());
+      removeModal();
+    } catch (err: any) {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, t("notifications.edit.error")),
+          type: "error",
+          icon: "close",
+          id: "editMaterialError" + Date.now(),
+        }),
+      );
+    }
+  };
 
   return (
     <form className={styles["train-form"]}>

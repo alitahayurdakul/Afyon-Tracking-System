@@ -64,44 +64,41 @@ export const CreateProjectForm = () => {
     removeModal();
   };
 
-  const onSubmit: SubmitHandler<IProjectFormDataTypes> = useCallback(
-    async (data) => {
-      try {
-        const params = {
-          name: data.name,
-          projectCode: data.code,
-          status: data.status,
-          description: data.desc,
-          creator: currentUserName,
-        };
-        await axiosInstance.post(CLIENT_END_POINTS.project.create, {
-          type: ProjectQueryTypes.createProject,
-          params,
-        });
-        dispatch(
-          addToastify({
-            message: t("form.notifications.createSuccess"),
-            type: "success",
-            icon: "close",
-            id: "createProject" + Date.now(),
-          }),
-        );
-        dispatch(addTriggerTable());
-        reset();
-        removeModal();
-      } catch (err: any) {
-        dispatch(
-          addToastify({
-            message: extractApiError(err, t("form.notifications.createError")),
-            type: "error",
-            icon: "close",
-            id: "createProject" + Date.now(),
-          }),
-        );
-      }
-    },
-    [],
-  );
+  const onSubmit: SubmitHandler<IProjectFormDataTypes> = async (data) => {
+    try {
+      const params = {
+        name: data.name,
+        projectCode: data.code,
+        status: data.status,
+        description: data.desc,
+        creator: currentUserName,
+      };
+      await axiosInstance.post(CLIENT_END_POINTS.project.create, {
+        type: ProjectQueryTypes.createProject,
+        params,
+      });
+      dispatch(
+        addToastify({
+          message: t("form.notifications.createSuccess"),
+          type: "success",
+          icon: "close",
+          id: "createProject" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable());
+      reset();
+      removeModal();
+    } catch (err: any) {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, t("form.notifications.createError")),
+          type: "error",
+          icon: "close",
+          id: "createProject" + Date.now(),
+        }),
+      );
+    }
+  };
 
   return (
     <form className={styles["train-form"]}>
