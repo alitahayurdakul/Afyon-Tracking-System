@@ -73,6 +73,32 @@ The error path dispatches an error toast whose message comes from ✔ **`extract
 - `usePaginationParams({ defaultPageSize?, paramPrefix? })` (`src/api/queries/usePaginationParams.ts`) reads/writes `page` / `pageSize` URL params (prefixable as `<prefix>_page` for multiple tables on one page). **Pagination is 1-indexed everywhere** — no ±1 conversions anywhere; changing page size resets to page 1. Defaults come from `src/consts/tableConsts.ts` (`DEFAULT_PAGE_SIZE`, `DEFAULT_PAGE_SIZE_OPTIONS`).
 - Loading states use `react-loading-skeleton` (`components/common/loaders/`).
 
+## Fetch states: never swallow `isError`
+
+✔ **Rule: a component that reads `data` from a query must also read `isError`.** Dropping it does not produce an error message — it produces a *convincing empty state*, which is worse, because the user reads "there is nothing here" and stops looking.
+
+Wrap the content in the shared `ErrorChecker` (`src/components/common/error/ErrorChecker.tsx`) inside the existing `LoadingChecker`, following `ActiveProcessGrid` as the reference:
+
+```tsx
+<LoadingChecker isLoading={isLoading} icon={<SpinnerIcon />}>
+  <ErrorChecker isError={isError || !data} errorLabel={tErrors("loadFailed")}>
+    ...
+  </ErrorChecker>
+</LoadingChecker>
+```
+
+`errorLabel` comes from the shared `layout.errors.loadFailed` key so the message follows the selected language; `ErrorComponent`'s own default is hardcoded Turkish and should not be relied on.
+
+Three places had swallowed it, each failing differently:
+
+| Component | What the user saw on a failed fetch |
+|---|---|
+| `ProcessTrainsContainer` | an empty grid — identical to "no trains exist" |
+| `ProcessTrainDetailContainer` | a train drawn with zero wagons |
+| `StageDetailModalContent` | **nothing at all** — it returned `null`, so opening stage detail was a silent no-op |
+
+The last one is the shape to watch for: an early `if (!data) return null` in a component that renders its own modal turns a failed request into a dead button.
+
 ## Error and not-found boundaries
 
 Four files cover failure states; there were none before, so any render throw blanked the app.

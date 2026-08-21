@@ -14,6 +14,7 @@ import {
   useSaveSubStage,
   useStartSubStage,
 } from "@/api/queries/useGetStageDetailDataQuery";
+import { ErrorComponent } from "@/components/common/error/ErrorComponent";
 import { NewModal } from "@/components/common/NewModal";
 import { PopoverBody } from "@/components/Popover";
 import { ACTIVE_STAGE_DETAIL_MODAL } from "@/consts/modals";
@@ -54,7 +55,9 @@ export default function StageDetailModalContent({
   stageStatus,
 }: StageDetailModalProps) {
   const t = useTranslations("activeProcessDetail");
-  const { data: subStagesData } = useGetStageDetailDataQuery<SubStage[]>(id);
+  const tErrors = useTranslations("layout.errors");
+  const { data: subStagesData, isError } =
+    useGetStageDetailDataQuery<SubStage[]>(id);
 
   const { id: processId } = useParams();
 
@@ -136,6 +139,25 @@ export default function StageDetailModalContent({
       materialList: activeSubStageData?.materials ?? [],
       description: activeSubStageData?.description ?? "",
     });
+  }
+
+  // The modal has to render even when the fetch failed. Returning null here
+  // made "open stage detail" a silent no-op: the user clicked and nothing
+  // happened, with no way to tell a broken request from a stage that simply
+  // has no sub-stages.
+  if (isError) {
+    return (
+      <NewModal
+        name={`${ACTIVE_STAGE_DETAIL_MODAL}_${id}`}
+        width="900px"
+        height="auto"
+        title={`${t("stage-modal-header")} — ${stageName || ""}`}
+        isCloseOutside={false}
+        isCloseEsc={false}
+      >
+        <ErrorComponent errorLabel={tErrors("loadFailed")} />
+      </NewModal>
+    );
   }
 
   if (!activeSubStageData) return null;

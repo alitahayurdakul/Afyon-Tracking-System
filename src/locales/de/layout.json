@@ -159,5 +159,8 @@
   "meta": {
     "title": "Afyon Workflow-Management-System",
     "description": "System zur Verfolgung von Wartung und Arbeitsabläufen der Zugflotte."
+  },
+  "errors": {
+    "loadFailed": "Der Inhalt konnte nicht geladen werden."
   }
 }

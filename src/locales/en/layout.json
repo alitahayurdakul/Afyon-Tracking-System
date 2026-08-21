@@ -159,5 +159,8 @@
   "meta": {
     "title": "Afyon Workflow Management System",
     "description": "Train fleet maintenance and workflow tracking system."
+  },
+  "errors": {
+    "loadFailed": "Content could not be loaded."
   }
 }

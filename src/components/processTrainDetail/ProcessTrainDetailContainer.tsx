@@ -7,6 +7,7 @@ import { PROCESS_TRAIN_WAGONS_DETAIL_MODAL } from "@/consts/modals";
 import { IWagonDetail } from "@/types/trainsTypes";
 import { useAddQueryParam } from "@/utils/searchParams";
 
+import { ErrorChecker } from "../common/error/ErrorChecker";
 import { LoadingChecker } from "../common/loaders/LoadingChecker";
 import { NewModal } from "../common/NewModal";
 import SpinnerIcon from "../icons/SpinnerIcon";
@@ -24,8 +25,10 @@ export const ProcessTrainDetailContainer = () => {
     data: trainInfos,
     isLoading,
     isFetching,
+    isError,
   } = useGetTrainDetailDataQuery();
   const t = useTranslations("processTrainDetail");
+  const tErrors = useTranslations("layout.errors");
   const addQueryParam = useAddQueryParam();
   const searchParams = useSearchParams();
   const modalParam = searchParams?.get("modal");
@@ -72,28 +75,35 @@ export const ProcessTrainDetailContainer = () => {
           </div>
         }
       >
-        <div className={styles["top-container"]}>
-          <TrainDetailSection trainSet={trainInfos} />
-          <TrainComposition
-            totalCars={trainInfos?.wagons?.length ?? 0}
-            onCarSelect={(wagonOrder: number) => onHandleWagonClick(wagonOrder)}
-            className={styles["train-visualization-container"]}
-          />
-        </div>
+        <ErrorChecker
+          isError={isError || !trainInfos}
+          errorLabel={tErrors("loadFailed")}
+        >
+          <div className={styles["top-container"]}>
+            <TrainDetailSection trainSet={trainInfos} />
+            <TrainComposition
+              totalCars={trainInfos?.wagons?.length ?? 0}
+              onCarSelect={(wagonOrder: number) =>
+                onHandleWagonClick(wagonOrder)
+              }
+              className={styles["train-visualization-container"]}
+            />
+          </div>
 
-        <ProcessTableListBody />
-        {isOpen && (
-          <NewModal
-            ignoreName
-            width={"900px"}
-            height={"auto"}
-            title={t("modal.title")}
-            isCloseOutside={false}
-            isCloseEsc={false}
-          >
-            <ProcessTrainModalWrapper wagonParamId={wagonParamId} />
-          </NewModal>
-        )}
+          <ProcessTableListBody />
+          {isOpen && (
+            <NewModal
+              ignoreName
+              width={"900px"}
+              height={"auto"}
+              title={t("modal.title")}
+              isCloseOutside={false}
+              isCloseEsc={false}
+            >
+              <ProcessTrainModalWrapper wagonParamId={wagonParamId} />
+            </NewModal>
+          )}
+        </ErrorChecker>
       </LoadingChecker>
     </div>
   );
