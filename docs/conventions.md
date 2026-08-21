@@ -11,6 +11,7 @@
 - **Legacy components**: `NewModal`, `InputField`, `Captcha` must not be used in new work — use `Modal` and `InputBox`.
 - **Query hook files**: standardize on `useGet<Domain>Queries.ts` (plural, containing all of the domain's hooks); the singular `useGetStageDetailDataQuery.ts` style is legacy.
 - **Configuration debt** (bottom of this file): leave untouched until the owner explicitly requests a cleanup. Never fix these as drive-by changes.
+- **`stripLocale` has exactly one implementation** (`src/utils/stripLocale.ts`). `AuthBootstrap` used to carry a private copy that handled trailing slashes differently; both gates must resolve a path identically or they can disagree about what is public.
 - **Production code is never modified without an explicit owner request** — documentation changes are always allowed, code changes are not.
 
 ## Deliberate decisions — do not "fix" these ✔
@@ -18,6 +19,7 @@
 - **`/api/auth/refresh` and `/api/auth/logout` stay `GET`.** A security review flagged them as CSRF-able (no CSRF token, no `Origin`/`Sec-Fetch-Site` check) and proposed converting them to `POST`. The owner declined on 2026-08-20: the backend may have been designed around `GET`, and the frontend cannot verify that from here. Do not convert them without checking the backend first.
 - **The 401/403 refresh-retry in `axiosInstance`** is intentional — the backend returns 403 for expired tokens (see [api-layer.md](api-layer.md#auth)).
 - **`window.history.replaceState` in `src/utils/searchParams.ts`** is an App Router cache workaround, not an oversight (see [frontend-patterns.md](frontend-patterns.md#modal-system-url-driven)).
+- **This project has no automated tests, and none are to be added.** ✔ Owner decision (2026-08-21): the audit recommended a Vitest suite for the pure-logic helpers; a scaffold was built and then removed at the owner's request. Do not propose, install or reintroduce a test runner. Verification is done by `npm run build` (which typechecks) and by exercising the app.
 
 ## Git workflow (observed — branch/merge policy not yet confirmed by owner)
 
