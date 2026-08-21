@@ -162,5 +162,9 @@
   },
   "errors": {
     "loadFailed": "Content could not be loaded."
+  },
+  "languageSelector": {
+    "label": "Language: {language}. Open to change",
+    "menuLabel": "Languages"
   }
 }

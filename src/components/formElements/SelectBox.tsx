@@ -206,6 +206,8 @@ export const SelectBox = forwardRef<Ref, SelectBoxProps>(
             menuIsOpen={menuIsOpen}
             instanceId={name}
             inputId={name}
+            aria-invalid={!!error}
+            aria-describedby={error?.message ? `${name}-error` : undefined}
             className={clsx(styles["form-select"], selectClassName)}
             isLoading={loading}
             noOptionsMessage={({ inputValue }) => {
@@ -436,7 +438,9 @@ export const SelectBox = forwardRef<Ref, SelectBoxProps>(
             }
           />
           <AnimatePresence>
-            {error?.message && <ErrorLabel message={error.message} />}
+            {error?.message && (
+              <ErrorLabel id={`${name}-error`} message={error.message} />
+            )}
           </AnimatePresence>
         </div>
       </>

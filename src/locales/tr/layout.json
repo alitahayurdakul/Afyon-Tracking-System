@@ -162,5 +162,9 @@
   },
   "errors": {
     "loadFailed": "İçerik yüklenemedi."
+  },
+  "languageSelector": {
+    "label": "Dil: {language}. Değiştirmek için açın",
+    "menuLabel": "Diller"
   }
 }

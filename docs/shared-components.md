@@ -33,6 +33,24 @@ Side effects while open: body scroll is locked (with scrollbar-width compensatio
 
 ✔ **Rule: to stop Radix closing a dialog, call `event.preventDefault()` in `onEscapeKeyDown` / `onPointerDownOutside`.** Radix closes by default; returning a value from the handler does nothing. `Modal`'s handlers used to return `false`, so `isCloseEsc={false}` was silently ignored and Escape discarded half-filled create forms. Every create and edit modal passes both flags as `false`, and they are now honoured.
 
+## Accessibility rules for form elements
+
+✔ **Rule: an invalid field must carry `aria-invalid`, and its message must be reachable through `aria-describedby`.** `InputBox`, `TextAreaBox`, `SelectBox` and `Checkbox` all do this now, pointing at `` `${name}-error` ``, which is the `id` given to `ErrorLabel`. `ErrorLabel` also sets `role="alert"` so the message is announced the moment it appears.
+
+Without this the field's red border is the *only* signal: a screen reader user submitted the form, nothing happened, and nothing was read out — the message was on screen but belonged to no element.
+
+⚠️ **`aria-describedby` must be gated on the same condition that renders the message.** The elements compute a single `showErrorLabel` flag and use it in both places. Pointing at an id that is not in the DOM is a dangling reference; omitting it while the message *is* shown leaves the error unannounced.
+
+✔ **Rule: every form control needs an accessible name** — `<label htmlFor={name}>` paired with `id={name}` on the control. `Checkbox` had a label with no `htmlFor` and an input with no `id`, so it announced as "checkbox, not checked" with no indication of what it controlled.
+
+## Interactive elements
+
+✔ **Rule: anything clickable is a `<button>`, not a `<div onClick>`.** A div is not in the tab order, announces nothing, and does not respond to Enter or Space — so the control simply does not exist for anyone not using a mouse.
+
+The language selector (`src/components/NewLanguageSelectBox.tsx`) was built from divs and could not be operated by keyboard at all. It now uses the menu pattern: a `<button>` trigger with `aria-haspopup="menu"` / `aria-expanded`, a `role="menu"` container, and `role="menuitem"` buttons. Arrow keys move focus, Home/End jump to the ends, Escape closes and returns focus to the trigger, and Tab closes rather than leaving an orphaned menu open.
+
+When converting a styled `div` to a `button`, reset the browser defaults in the SCSS (`font: inherit`, and for full-width rows `width: 100%; border: none; background: none; text-align: left`) and add a `:focus-visible` outline — keyboard users need to see where focus is, and `:focus-visible` does not affect mouse users.
+
 ## Table — `src/components/common/Table.tsx`
 
 Generic TanStack Table wrapper `<Table<T> />`. Pagination is **server-side style**: you pass `currentPage` (1-indexed) + `totalCount`, and it derives `pageCount`; it does not slice data itself when `totalPage`/`totalCount` are provided.

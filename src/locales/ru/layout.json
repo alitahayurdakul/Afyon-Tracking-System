@@ -162,5 +162,9 @@
   },
   "errors": {
     "loadFailed": "Не удалось загрузить содержимое."
+  },
+  "languageSelector": {
+    "label": "Язык: {language}. Откройте, чтобы изменить",
+    "menuLabel": "Языки"
   }
 }
