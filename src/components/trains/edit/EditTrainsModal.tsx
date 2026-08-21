@@ -21,6 +21,7 @@ export const EditTrainsModal = ({ id }: { id: string }) => {
   return (
     <>
       <button
+        type="button"
         className={styles["edit-btn"]}
         onClick={() => addQueryParam("modal", modalName)}
       >

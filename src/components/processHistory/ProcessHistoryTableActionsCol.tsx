@@ -57,7 +57,7 @@ export const ProcessHistoryTableActionsCol = ({ id }: { id: string }) => {
         alignOffset={-73}
         align="start"
         triggerBody={
-          <button className={styles["delete-btn"]}>
+          <button type="button" className={styles["delete-btn"]}>
             <FontAwesomeIcon icon={faTrash} />
             <span>{t("actions.delete")}</span>
           </button>
@@ -71,8 +71,8 @@ export const ProcessHistoryTableActionsCol = ({ id }: { id: string }) => {
         }
         closeContainer={
           <div className={stylesDeletePopover["btn-container"]}>
-            <button>{t("deletePopover.no")}</button>
-            <button onClick={onDeleteHandler}>{t("deletePopover.yes")}</button>
+            <button type="button">{t("deletePopover.no")}</button>
+            <button type="button" onClick={onDeleteHandler}>{t("deletePopover.yes")}</button>
           </div>
         }
       />

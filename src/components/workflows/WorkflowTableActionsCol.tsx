@@ -57,7 +57,7 @@ export const WorkflowTableActionsCol = ({ id }: { id: string }) => {
         alignOffset={-73}
         align="start"
         triggerBody={
-          <button className={styles["delete-btn"]}>
+          <button type="button" className={styles["delete-btn"]}>
             <FontAwesomeIcon icon={faTrash} />
             <span>{t("buttons.delete")}</span>
           </button>
@@ -71,8 +71,8 @@ export const WorkflowTableActionsCol = ({ id }: { id: string }) => {
         }
         closeContainer={
           <div className={stylesDeletePopover["btn-container"]}>
-            <button>{t("no")}</button>
-            <button onClick={onDeleteHandler}>{t("yes")}</button>
+            <button type="button">{t("no")}</button>
+            <button type="button" onClick={onDeleteHandler}>{t("yes")}</button>
           </div>
         }
       />

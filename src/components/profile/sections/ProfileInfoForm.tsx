@@ -224,8 +224,8 @@ const ProfileInfoForm = ({
               }
               closeContainer={
                 <div className={stylesPopover["btn-container"]}>
-                  <button>{t("form.questions.no")}</button>
-                  <button onClick={handleSubmit(onSubmit)}>
+                  <button type="button">{t("form.questions.no")}</button>
+                  <button type="button" onClick={handleSubmit(onSubmit)}>
                     {t("form.questions.yes")}
                   </button>
                 </div>

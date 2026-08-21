@@ -42,6 +42,14 @@ react-hook-form + `yupResolver`, config-driven:
 - **Field definitions** are const arrays in `src/consts/<domain>Consts.tsx` (`IFormFieldsType`): `{ name, type: "input" | "textarea" | "select" | ..., label, isRequired, maxLength, ... }`. The form component maps over them and renders the matching `formElements` component (`InputBox`, `SelectBox`, `TextAreaBox`, `Checkbox`...).
 - **Validation schemas** are translator-taking factories in `src/utils/validations/<domain>FormValidation.ts`: `<Domain>FormValidation(t): Yup.ObjectSchema<IForm...>`, with messages resolved from the `layout.validation-errors` translation namespace (`useTranslations("layout.validation-errors")`).
 
+### Buttons
+
+✔ **Rule: every `<button>` declares an explicit `type`.** HTML defaults a button inside a form to `type="submit"`, and the shared `Button` component (`src/components/formElements/Button.tsx`) already guards against this — it takes `buttonType` with a `"button"` default. Raw `<button>` elements do not.
+
+This was not theoretical. Both profile forms put a confirmation popover inside `<form>`, and `Popover.Content` is not portaled, so its buttons really are inside the form in the DOM. The **"Hayır"** button had no `type`, so declining the confirmation submitted the form natively — and since the form has neither `action` nor `onSubmit`, the browser issued a GET to the current URL with every named input serialised into the query string. On `PasswordForm` those inputs are the password fields. The "Evet" button escaped only because `handleSubmit` calls `preventDefault` for it.
+
+Prefer the shared `Button`; when a raw `<button>` is unavoidable, write `type="button"` unless it is genuinely meant to submit.
+
 ### Mutation flow (the standard onSubmit)
 
 ✔ **Owner decision: raw `axiosInstance.post` inside `onSubmit` is the standard for new mutations** — not `useMutation` (the few `useMutation` usages in `useGetProcessesQueries` / auth / forgot-password are grandfathered, not a pattern to extend). The success path is always the same sequence:

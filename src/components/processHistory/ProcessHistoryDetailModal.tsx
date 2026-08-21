@@ -21,6 +21,7 @@ export const ProcessHistoryDetailModal = ({ id }: { id: string }) => {
   return (
     <>
       <button
+        type="button"
         className={styles["edit-btn"]}
         onClick={() =>
           addQueryParam("modal", `${DETAIL_PROCESS_HISTORY_MODAL}_${id}`)

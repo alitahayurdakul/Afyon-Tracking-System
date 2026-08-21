@@ -198,7 +198,7 @@ export const QualityDetailModalContent = ({
             alignOffset={-73}
             align="start"
             triggerBody={
-              <button className={styles.completeParentStageBtn}>
+              <button type="button" className={styles.completeParentStageBtn}>
                 {t("buttons.complete-quality-stage")}
               </button>
             }
@@ -211,8 +211,8 @@ export const QualityDetailModalContent = ({
             }
             closeContainer={
               <div className={styles["btn-container"]}>
-                <button>{t("no")}</button>
-                <button onClick={completeStage}>
+                <button type="button">{t("no")}</button>
+                <button type="button" onClick={completeStage}>
                   {" "}
                   {completeStagePending ? (
                     <FontAwesomeIcon

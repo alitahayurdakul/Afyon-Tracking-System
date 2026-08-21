@@ -21,6 +21,7 @@ export const EditProjectsModal = ({ id }: { id: string }) => {
   return (
     <>
       <button
+        type="button"
         className={styles["edit-btn"]}
         onClick={() => addQueryParam("modal", `${EDIT_PROJECT_MODAL}_${id}`)}
       >

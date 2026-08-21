@@ -21,6 +21,7 @@ export const CreateStageModal = () => {
   return (
     <>
       <button
+        type="button"
         className={styles["primary-btn"]}
         onClick={() => {
           if (!open) {

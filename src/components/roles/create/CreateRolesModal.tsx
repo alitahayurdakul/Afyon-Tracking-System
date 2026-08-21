@@ -21,6 +21,7 @@ export const CreateRolesModal = () => {
   return (
     <>
       <button
+        type="button"
         className={styles["primary-btn"]}
         onClick={() => {
           if (!open) addQueryParam("modal", CREATE_ROLE_MODAL);
