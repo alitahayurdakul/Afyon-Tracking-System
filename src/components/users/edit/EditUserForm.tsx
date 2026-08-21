@@ -82,7 +82,7 @@ export const EditUserForm = ({ id, data }: IPropsTypes) => {
           id: "editUser" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("users"));
       removeModal();
     } catch (err) {
       dispatch(

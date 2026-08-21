@@ -49,7 +49,7 @@ export const StagesTableActionsCol = ({ id }: { id: string }) => {
           id: "contactePage" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("stages"));
     } catch (err) {
       dispatch(
         addToastify({

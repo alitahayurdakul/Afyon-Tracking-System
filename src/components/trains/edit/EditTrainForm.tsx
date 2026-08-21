@@ -105,7 +105,7 @@ export const EditTrainForm = ({ data, wagonOptions }: IPropsTypes) => {
           id: "editTrain" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("trains"));
       removeModal();
     } catch (err) {
       dispatch(

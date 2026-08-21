@@ -99,7 +99,7 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
           id: "editStageSuccess" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("stages"));
       reset();
       removeModal();
     } catch (err) {

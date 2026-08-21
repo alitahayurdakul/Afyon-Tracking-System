@@ -13,7 +13,7 @@ import { IReasonType } from "@/types/reasonsTypes";
 
 export const useGetReasonsDataQuery = <T>() => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.reasons,
   );
 
   return useQuery({
@@ -32,7 +32,7 @@ export const useGetReasonsDataQuery = <T>() => {
 
 export const useGetTableReasonsDataQuery = <T>({pageSize, currentPage}: IPaginationTypes) => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.reasons,
   );
 
   return useQuery({
@@ -54,7 +54,7 @@ export const useGetReasonDetailDataQuery = (id: string) => {
   const param = searchParams.get("modal");
   const splittedId = param?.split("_").pop();
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.reasons,
   );
 
   return useQuery({

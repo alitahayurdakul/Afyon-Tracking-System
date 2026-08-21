@@ -67,7 +67,7 @@ export const CreateWagonForm = () => {
           id: "createWagonSuccess" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("wagons"));
       reset();
       removeModal();
     } catch (err) {

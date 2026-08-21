@@ -87,7 +87,7 @@ export const CreateStageForm = () => {
           id: "createStageSuccess" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("stages"));
       reset();
       removeModal();
     } catch (err) {

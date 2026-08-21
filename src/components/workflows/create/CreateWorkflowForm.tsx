@@ -106,7 +106,7 @@ export const CreateWorkflowForm = () => {
           id: "createWorkflowSuccess" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("workflows"));
       reset();
       removeModal();
     } catch (err) {

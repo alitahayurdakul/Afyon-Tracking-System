@@ -85,7 +85,7 @@ export const CreateProjectForm = () => {
           id: "createProject" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("projects"));
       reset();
       removeModal();
     } catch (err: any) {

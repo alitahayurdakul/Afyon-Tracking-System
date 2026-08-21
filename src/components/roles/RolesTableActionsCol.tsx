@@ -38,7 +38,7 @@ export const RolesTableActionsCol = ({ id }: { id: string }) => {
           id: "deleteRole" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("roles"));
     } catch (err) {
       dispatch(
         addToastify({

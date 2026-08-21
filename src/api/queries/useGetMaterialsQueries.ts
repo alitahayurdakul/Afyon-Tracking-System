@@ -22,7 +22,7 @@ export const useGetMaterialsDataQuery = ({
   currentPage,
 }: IPaginationTypes) => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.materials,
   );
 
   return useQuery({
@@ -44,7 +44,7 @@ export const useGetMaterialDetailDataQuery = (id: string) => {
   const param = searchParams.get("modal");
   const splittedId = param?.split("_").pop();
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.materials,
   );
 
   return useQuery({
@@ -63,7 +63,7 @@ export const useGetMaterialDetailDataQuery = (id: string) => {
 
 export const useGetMaterialsOptionsDataQuery = () => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.materials,
   );
 
   return useQuery({

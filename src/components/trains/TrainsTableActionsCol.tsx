@@ -36,7 +36,7 @@ export const TrainsTableActionsCol = ({ id }: { id: string }) => {
           id: "deleteTrainSuccess" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("trains"));
     } catch (err) {
       dispatch(
         addToastify({

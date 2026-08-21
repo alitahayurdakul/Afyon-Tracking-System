@@ -38,7 +38,7 @@ export const UsersTableActionsCol = ({ id }: { id: string }) => {
           id: "deleteUser" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("users"));
     } catch (err) {
       dispatch(
         addToastify({

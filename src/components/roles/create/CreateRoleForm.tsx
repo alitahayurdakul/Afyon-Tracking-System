@@ -80,7 +80,7 @@ export const CreateRoleForm = () => {
           id: "createRole" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("roles"));
       reset();
       removeModal();
     } catch (err) {

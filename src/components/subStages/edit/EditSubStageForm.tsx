@@ -99,7 +99,7 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
           id: "editSubStage" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("subStages"));
       removeModal();
     } catch (err: any) {
       dispatch(

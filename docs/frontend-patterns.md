@@ -104,7 +104,16 @@ There used to be four competing implementations. `Modal` had its own, and it was
 
 ### Table refetch trigger pattern
 
-✔ **Owner decision: refetch is NEVER done with `queryClient.invalidateQueries` — the trigger pattern is mandatory for new code.** `triggerTableSlices` holds a counter per domain (e.g. `triggerTrainTableTrigger`); table query hooks include it in their `queryKey`; mutations dispatch `addTriggerTable()` to bump it, which changes the key and makes React Query refetch. Follow this pattern when adding new tables/mutations.
+✔ **Owner decision: refetch is NEVER done with `queryClient.invalidateQueries` — the trigger pattern is mandatory for new code.** `triggerTableSlices` holds **one counter per domain** (`TRIGGER_DOMAINS`); query hooks include their own domain's counter in their `queryKey`; mutations dispatch `addTriggerTable("<domain>")` to bump it, which changes the key and makes React Query refetch.
+
+Two rules keep it correct:
+
+- ✔ **A hook subscribes to the domain of the file it lives in.** Every `*OptionsQuery` sits in the file of the domain that owns the data (wagon options are in `useGetWagonsQueries`), so this is right even when the consumer is another domain's form.
+- ✔ **A mutation passes the domain whose records it changes** — `profile` forms pass `"users"`, `processHistory` and `activeProcessDetail` pass `"processes"`.
+
+Anything that *embeds* another domain's records is declared once, in the `CASCADES` map in the slice, instead of at the call sites: stage detail embeds its sub-stages, workflow detail embeds its stages, the user table renders the role name, and so on. Extend that map rather than dispatching twice.
+
+Until this was split, a single shared counter served every domain, so saving a wagon changed the key of all ~41 queries in the app. Little of that refetched immediately — React Query only refetches mounted queries — but the whole cache became unreachable, so `staleTime: 60_000` was effectively cancelled app-wide by any mutation. Per domain, a save now invalidates between 2 and 13 queries instead of 41.
 
 ### TanStack Query
 

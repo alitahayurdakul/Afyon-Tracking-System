@@ -69,7 +69,7 @@ export const CreateReasonForm = () => {
           id: "createReason" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("reasons"));
       reset();
       removeModal();
     } catch (err) {

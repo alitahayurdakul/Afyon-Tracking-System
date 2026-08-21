@@ -80,7 +80,7 @@ export const CreateSubStageForm = () => {
           id: "createSubStage" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("subStages"));
       reset();
       removeModal();
     } catch (err: any) {

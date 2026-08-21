@@ -95,7 +95,7 @@ export const EditRoleForm = ({ id, data }: IPropsTypes) => {
           id: "editRole" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("roles"));
       removeModal();
     } catch (err) {
       dispatch(

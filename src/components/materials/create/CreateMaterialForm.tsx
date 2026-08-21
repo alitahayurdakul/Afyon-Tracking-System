@@ -70,7 +70,7 @@ export const CreateMaterialForm = () => {
           id: "createMaterialSuccess" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("materials"));
       reset();
       removeModal();
     } catch (err: any) {

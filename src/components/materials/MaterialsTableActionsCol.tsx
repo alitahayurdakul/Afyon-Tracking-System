@@ -36,7 +36,7 @@ export const MaterialsTableActionsCol = ({ id }: { id: string }) => {
           id: "deleteMaterial" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("materials"));
     } catch (err: any) {
       dispatch(
         addToastify({

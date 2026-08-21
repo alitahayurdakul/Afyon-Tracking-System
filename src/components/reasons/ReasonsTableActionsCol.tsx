@@ -36,7 +36,7 @@ export const ReasonsTableActionsCol = ({ id }: { id: string }) => {
           id: "deleteReason" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("reasons"));
     } catch (err) {
       dispatch(
         addToastify({

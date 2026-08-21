@@ -36,7 +36,7 @@ export const SubStagesTableActionsCol = ({ id }: { id: string }) => {
           id: "deleteSubStage" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("subStages"));
     } catch (err: any) {
       dispatch(
         addToastify({

@@ -36,7 +36,7 @@ export const WorkflowTableActionsCol = ({ id }: { id: string }) => {
           id: "contactePage" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("workflows"));
     } catch (err: any) {
       dispatch(
         addToastify({

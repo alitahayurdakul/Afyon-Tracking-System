@@ -36,7 +36,7 @@ export const WagonsTableActionsCol = ({ id }: { id: string }) => {
           id: "deleteWagon" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("wagons"));
     } catch (err) {
       dispatch(
         addToastify({

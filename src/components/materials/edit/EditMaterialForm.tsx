@@ -78,7 +78,7 @@ export const EditMaterialForm = ({ id, data }: IPropsTypes) => {
           id: "editMaterialSuccess" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("materials"));
       removeModal();
     } catch (err: any) {
       dispatch(

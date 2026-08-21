@@ -13,7 +13,7 @@ import { optionsConverters } from "@/types/optionsConverter";
 
 export const useGetWorkflowsDataQuery = <T>() => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.workflows,
   );
   return useQuery({
     queryKey: [`getWorkflowsAllDatas`, trigger],
@@ -34,7 +34,7 @@ export const useGetWorkflowDetailDataQuery = <T>(id: string) => {
   const param = searchParams.get("modal");
   const splittedId = param?.split("_").pop();
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.workflows,
   );
 
   return useQuery({
@@ -53,7 +53,7 @@ export const useGetWorkflowDetailDataQuery = <T>(id: string) => {
 
 export const useGetWorkflowsOptionsDataQuery = <T>() => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.workflows,
   );
   return useQuery({
     queryKey: [`getWorkflowsOptionsDatas`, trigger],
@@ -74,7 +74,7 @@ export const useGetTableWorkflowsDataQuery = <T>({
   pageSize,
 }: IPaginationTypes) => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.workflows,
   );
   return useQuery({
     queryKey: [`getTableWorkflowsAllDatas`, trigger, currentPage, pageSize],

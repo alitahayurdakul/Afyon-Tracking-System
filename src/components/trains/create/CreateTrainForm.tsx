@@ -88,7 +88,7 @@ export const CreateTrainForm = () => {
         }),
       );
       reset();
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("trains"));
       removeModal();
     } catch (err) {
       dispatch(

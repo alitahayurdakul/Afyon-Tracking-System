@@ -36,7 +36,7 @@ export const ProjectsTableActionsCol = ({ id }: { id: string }) => {
           id: "deleteProject" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("projects"));
     } catch (err: any) {
       dispatch(
         addToastify({

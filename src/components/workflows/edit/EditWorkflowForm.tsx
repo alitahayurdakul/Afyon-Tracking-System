@@ -122,7 +122,7 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
           id: "editWorkflowSuccess" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("workflows"));
       reset();
       removeModal();
     } catch (err) {

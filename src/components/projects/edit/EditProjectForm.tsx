@@ -93,7 +93,7 @@ export const EditProjectForm = ({ id, data }: IPropsTypes) => {
           id: "editProject" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("projects"));
       removeModal();
     } catch (err: any) {
       dispatch(

@@ -20,7 +20,7 @@ export const useGetSubStagesListDataQuery = ({
   currentPage,
 }: IPaginationTypes) => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.subStages,
   );
 
   return useQuery({
@@ -42,7 +42,7 @@ export const useGetSubStageDetailDataQuery = (id: string) => {
   const param = searchParams.get("modal");
   const splittedId = param?.split("_").pop();
   const triggered = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.subStages,
   );
 
   return useQuery({
@@ -61,7 +61,7 @@ export const useGetSubStageDetailDataQuery = (id: string) => {
 
 export const useGetSubStagesOptionsListDataQuery = <T>() => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.subStages,
   );
 
   return useQuery({

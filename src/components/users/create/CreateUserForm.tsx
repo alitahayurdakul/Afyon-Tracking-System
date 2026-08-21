@@ -75,7 +75,7 @@ export const CreateUserForm = () => {
           id: "createUser" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("users"));
       reset();
       removeModal();
     } catch (err) {

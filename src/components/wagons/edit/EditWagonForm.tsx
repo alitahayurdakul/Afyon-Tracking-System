@@ -75,7 +75,7 @@ export const EditWagonForm = ({ id, data }: IPropsTypes) => {
           id: "editWagon" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("wagons"));
       removeModal();
     } catch (err) {
       dispatch(

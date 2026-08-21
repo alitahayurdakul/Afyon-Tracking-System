@@ -75,7 +75,7 @@ export const EditReasonForm = ({ id, data }: IPropsTypes) => {
           id: "editReason" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("reasons"));
       removeModal();
     } catch (err) {
       dispatch(

@@ -124,7 +124,7 @@ export default function InfoProcessContainer({
           id: "cancelProcessSuccess" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("processes"));
       router.push(URL_PAGES.activeProcesses);
     } catch (err) {
       dispatch(

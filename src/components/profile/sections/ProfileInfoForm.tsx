@@ -93,7 +93,7 @@ const ProfileInfoForm = ({
         }),
       );
       reset(data);
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("users"));
     } catch (err) {
       dispatch(
         addToastify({

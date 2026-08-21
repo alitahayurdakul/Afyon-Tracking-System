@@ -37,7 +37,7 @@ export const ProcessHistoryTableActionsCol = ({ id }: { id: string }) => {
           id: "deleteProcessHistorySuccess" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("processes"));
     } catch (err: any) {
       dispatch(
         addToastify({
