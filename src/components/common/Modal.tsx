@@ -8,6 +8,7 @@ import clsx from "clsx";
 
 import * as Dialog from "@radix-ui/react-dialog";
 
+import { useBodyScrollLock } from "@/api/queries/useBodyScrollLock";
 import { NewSpinner } from "@/components/loaders/NewSpinner";
 import { useAddQueryParam, useRemoveQueryParamModal } from "@/utils/searchParams";
 
@@ -132,23 +133,13 @@ PropsWithChildren<ModalProps>) => {
     }
   }, [visible]);
 
-  useEffect(() => {
-    if (visible) {
-      const scrollBarWidth =
-        window.innerWidth - document.documentElement.clientWidth;
-
-      document.body.style.overflow = "hidden";
-      document.body.style.paddingRight = `-${scrollBarWidth}px`;
-    } else {
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
-    }
-
-    return () => {
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
-    };
-  }, [visible]);
+  // Uses the shared refcounted lock rather than writing to document.body here.
+  // The hand-rolled version this replaces had two defects: it set a negative
+  // paddingRight (invalid CSS, so the scrollbar gap was never compensated), and
+  // its cleanup reset overflow/paddingRight unconditionally — so closing this
+  // modal released the lock held by a NewModal or the mobile drawer that was
+  // still open, and the page scrolled behind them.
+  useBodyScrollLock(!!visible);
 
   return (
     <>

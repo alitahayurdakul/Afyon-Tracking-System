@@ -82,6 +82,13 @@ Two things about the 404 that are easy to get wrong:
 `global-error.tsx` is deliberately self-contained — default-locale copy and inline styles — because nothing it could import is guaranteed to have loaded.
 
 
+### Body scroll lock
+
+✔ **Rule: never write to `document.body.style` for scroll locking.** Use `useBodyScrollLock(locked)` (`src/api/queries/useBodyScrollLock.ts`), which is refcounted and restores the original values.
+
+There used to be four competing implementations. `Modal` had its own, and it was wrong twice over: it set a **negative** `paddingRight` (invalid CSS, so the scrollbar gap was never compensated and the page shifted), and its cleanup cleared `overflow`/`paddingRight` unconditionally — so closing a create modal released the lock still held by an open `NewModal` or the mobile drawer, and the page scrolled behind them. `Modal` and `VerifyCodeModal` now both go through the shared hook.
+
+
 ## State management
 
 ### Redux (`src/redux/store.ts`)

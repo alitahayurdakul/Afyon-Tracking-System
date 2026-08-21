@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 
+import { useBodyScrollLock } from "@/api/queries/useBodyScrollLock";
 import {
   useForgotPasswordMutation,
   useVerifyResetCodeMutation,
@@ -67,14 +68,15 @@ export const VerifyCodeModal = ({
     };
     document.addEventListener("keydown", onKeyDown);
 
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
     return () => {
       document.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = previousOverflow;
     };
   }, [onClose]);
+
+  // This component is only mounted while the dialog is open, so the lock is
+  // held for its whole lifetime. It goes through the shared refcounted hook so
+  // it cannot fight the other locks over document.body.
+  useBodyScrollLock(true);
 
   const onSubmit = useCallback(async () => {
     if (isExpired || code.length !== RESET_CODE_LENGTH) return;
