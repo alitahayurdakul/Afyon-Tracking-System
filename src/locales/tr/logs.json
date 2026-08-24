@@ -1,0 +1,35 @@
+{
+  "title": "Log Kayıtları",
+  "description": "Sistemde gerçekleştirilen kullanıcı işlemlerinin kronolojik kaydı.",
+  "table": {
+    "userId": "Kullanıcı ID",
+    "fullname": "Ad Soyad",
+    "operationTime": "İşlem Zamanı",
+    "action": "Aksiyon"
+  },
+  "actions": {
+    "USER_CREATE": "Kullanıcı ekleme",
+    "USER_UPDATE": "Kullanıcı güncelleme",
+    "USER_DELETE": "Kullanıcı silme",
+    "USER_PASSWORD_CHANGE": "Şifre değiştirme",
+    "AUTH_LOGIN": "Giriş yapma",
+    "AUTH_LOGOUT": "Çıkış yapma",
+    "ROLE_CREATE": "Rol ekleme",
+    "ROLE_UPDATE": "Rol güncelleme",
+    "ROLE_DELETE": "Rol silme",
+    "PROCESS_START": "Süreç başlatma",
+    "PROCESS_COMPLETE": "Süreç tamamlama",
+    "PROCESS_DELETE": "Süreç silme",
+    "STAGE_START": "Aşama başlatma",
+    "STAGE_COMPLETE": "Aşama tamamlama",
+    "SUB_STAGE_COMPLETE": "Alt aşama tamamlama",
+    "WORKFLOW_CREATE": "İş akışı ekleme",
+    "WORKFLOW_UPDATE": "İş akışı güncelleme",
+    "PROJECT_CREATE": "Proje ekleme",
+    "TRAIN_CREATE": "Tren ekleme",
+    "TRAIN_DELETE": "Tren silme",
+    "WAGON_CREATE": "Vagon ekleme",
+    "MATERIAL_DELETE": "Malzeme silme",
+    "REASON_CREATE": "Gecikme nedeni ekleme"
+  }
+}

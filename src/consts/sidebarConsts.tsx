@@ -1,6 +1,7 @@
 import {
   faBoxesStacked,
   faCircleExclamation,
+  faClipboardList,
   faClockRotateLeft,
   faDiagramProject,
   faFolderTree,
@@ -128,6 +129,12 @@ export const SIDEBAR_ITEMS: ISidebarItemsTypes = [
         key: "roles",
         icon: faUserShield,
         url: URL_PAGES.roles,
+      },
+      {
+        default: "Log Kayıtları",
+        key: "logs",
+        icon: faClipboardList,
+        url: URL_PAGES.logs,
       },
     ],
   },

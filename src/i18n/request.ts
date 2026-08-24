@@ -29,7 +29,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
     "processHistory",
     "profile",
     "processTrains",
-    "processTrainDetail"
+    "processTrainDetail",
+    "logs"
   ];
   const messages: Record<string, any> = {};
 

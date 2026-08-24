@@ -1,0 +1,82 @@
+.cell-mono {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 11px;
+  color: var(--slate-90);
+  word-break: break-all;
+}
+
+.primary-text {
+  margin: 0;
+  font-weight: 600;
+  color: var(--slate-90);
+  font-size: 14px;
+}
+
+.time-text {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--slate-60);
+  white-space: nowrap;
+}
+
+/* ACTION BADGE */
+
+.action-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 5px 12px;
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.action-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.create {
+  color: rgb(5, 122, 85);
+  background: rgba(5, 122, 85, 0.1);
+}
+
+.update {
+  color: rgb(29, 78, 216);
+  background: rgba(29, 78, 216, 0.1);
+}
+
+.delete {
+  color: rgb(190, 42, 42);
+  background: rgba(190, 42, 42, 0.1);
+}
+
+.auth {
+  color: rgb(109, 40, 217);
+  background: rgba(109, 40, 217, 0.1);
+}
+
+.process {
+  color: rgb(180, 106, 6);
+  background: rgba(180, 106, 6, 0.12);
+}
+
+.neutral {
+  color: var(--slate-60);
+  background: rgba(100, 116, 139, 0.12);
+}
+
+@media (max-width: 768px) {
+  .action-badge {
+    padding: 3px 8px;
+  }
+}

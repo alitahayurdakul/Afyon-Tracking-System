@@ -18,7 +18,8 @@
     "roles": "Rollen",
     "processesHistory": "Prozessverlauf",
     "profile": "Profil",
-    "processTrain": "Zugprozesse"
+    "processTrain": "Zugprozesse",
+    "logs": "Protokolleinträge"
   },
   "login": {
     "brandTitle": "Afyon Workflow-Management-System",

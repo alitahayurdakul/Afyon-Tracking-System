@@ -1,0 +1,35 @@
+{
+  "title": "Activity Logs",
+  "description": "Chronological record of user operations performed in the system.",
+  "table": {
+    "userId": "User ID",
+    "fullname": "Full Name",
+    "operationTime": "Operation Time",
+    "action": "Action"
+  },
+  "actions": {
+    "USER_CREATE": "User created",
+    "USER_UPDATE": "User updated",
+    "USER_DELETE": "User deleted",
+    "USER_PASSWORD_CHANGE": "Password changed",
+    "AUTH_LOGIN": "Signed in",
+    "AUTH_LOGOUT": "Signed out",
+    "ROLE_CREATE": "Role created",
+    "ROLE_UPDATE": "Role updated",
+    "ROLE_DELETE": "Role deleted",
+    "PROCESS_START": "Process started",
+    "PROCESS_COMPLETE": "Process completed",
+    "PROCESS_DELETE": "Process deleted",
+    "STAGE_START": "Stage started",
+    "STAGE_COMPLETE": "Stage completed",
+    "SUB_STAGE_COMPLETE": "Sub stage completed",
+    "WORKFLOW_CREATE": "Workflow created",
+    "WORKFLOW_UPDATE": "Workflow updated",
+    "PROJECT_CREATE": "Project created",
+    "TRAIN_CREATE": "Train created",
+    "TRAIN_DELETE": "Train deleted",
+    "WAGON_CREATE": "Wagon created",
+    "MATERIAL_DELETE": "Material deleted",
+    "REASON_CREATE": "Delay reason created"
+  }
+}

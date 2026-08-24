@@ -1,0 +1,35 @@
+{
+  "title": "Журнал операций",
+  "description": "Хронологическая запись действий пользователей в системе.",
+  "table": {
+    "userId": "ID пользователя",
+    "fullname": "ФИО",
+    "operationTime": "Время операции",
+    "action": "Действие"
+  },
+  "actions": {
+    "USER_CREATE": "Создание пользователя",
+    "USER_UPDATE": "Изменение пользователя",
+    "USER_DELETE": "Удаление пользователя",
+    "USER_PASSWORD_CHANGE": "Смена пароля",
+    "AUTH_LOGIN": "Вход в систему",
+    "AUTH_LOGOUT": "Выход из системы",
+    "ROLE_CREATE": "Создание роли",
+    "ROLE_UPDATE": "Изменение роли",
+    "ROLE_DELETE": "Удаление роли",
+    "PROCESS_START": "Запуск процесса",
+    "PROCESS_COMPLETE": "Завершение процесса",
+    "PROCESS_DELETE": "Удаление процесса",
+    "STAGE_START": "Запуск этапа",
+    "STAGE_COMPLETE": "Завершение этапа",
+    "SUB_STAGE_COMPLETE": "Завершение подэтапа",
+    "WORKFLOW_CREATE": "Создание маршрута",
+    "WORKFLOW_UPDATE": "Изменение маршрута",
+    "PROJECT_CREATE": "Создание проекта",
+    "TRAIN_CREATE": "Создание поезда",
+    "TRAIN_DELETE": "Удаление поезда",
+    "WAGON_CREATE": "Создание вагона",
+    "MATERIAL_DELETE": "Удаление материала",
+    "REASON_CREATE": "Создание причины задержки"
+  }
+}
