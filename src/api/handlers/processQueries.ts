@@ -1,12 +1,13 @@
-import { axiosInstance } from "@/api/axiosInstance";
+import { AxiosInstance } from "axios";
+
 import { END_POINTS } from "@/consts/endpoints";
 import { ResponseStatusEnums } from "@/utils/enum/commonEnums";
 
 import {
+  createErrorResponse,
   createJsonError,
   createJsonOnlyData,
   createJsonSuccess,
-  extractErrorMessage,
 } from "./responseHelpers";
 
 export const processHandlers = {
@@ -23,103 +24,108 @@ export const processHandlers = {
   getTableProcessHistory,
 };
 
-async function createProcess(params: Record<string, any>): Promise<Response> {
+async function createProcess(params: Record<string, any>, http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.post(END_POINTS.process.start, {
+    const response = await http.post(END_POINTS.process.start, {
       ...params,
     });
 
-    if (response.status === 201) {
+    // axios rejects on non-2xx, so a resolved response here is always a
+    // success. Returning an error body with HTTP 200 made the client treat the
+    // call as successful while the payload said it had failed.
+    if (response.status >= 200 && response.status < 300) {
       return createJsonSuccess(response.data, 201);
     }
-    return createJsonError("Failed to create a process", 200);
+    return createJsonError("Failed to create a process", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }
 
-async function deleteProcess(id: string): Promise<Response> {
+async function deleteProcess(id: string, http: AxiosInstance): Promise<Response> {
   try {
     if (id) {
-      const response = await axiosInstance.delete(
+      const response = await http.delete(
         END_POINTS.process.deleteProcess(id),
       );
       if (response.status === 200) {
         return createJsonSuccess(response.data, 200);
       }
     }
-    return createJsonError("Failed to delete a process", 400);
+    return createJsonError("Failed to delete a process", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }
 
-async function editProcess(params: Record<string, any>): Promise<Response> {
+async function editProcess(params: Record<string, any>, http: AxiosInstance): Promise<Response> {
   try {
     const { id, ...rest } = params;
-    const response = await axiosInstance.put(END_POINTS.process.edit(id), {
+    const response = await http.put(END_POINTS.process.edit(id), {
       ...rest,
     });
     if (response.status === 201) {
       return createJsonSuccess(response.data, 201);
     }
-    return createJsonError("Failed to edit a process", 400);
+    return createJsonError("Failed to edit a process", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }
 
 async function getActiveProcesses(
   params: Record<string, any>,
+  http: AxiosInstance,
 ): Promise<Response> {
   try {
     const { status, projectId } = params || {};
-    const response = await axiosInstance.get(
+    const response = await http.get(
       END_POINTS.process.getAll({ status, projectId }),
     );
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to get all active processes", 400);
+    return createJsonError("Failed to get all active processes", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }
 
-async function getProcessDetail(id: string): Promise<Response> {
+async function getProcessDetail(id: string, http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.get(END_POINTS.process.getDetail(id));
+    const response = await http.get(END_POINTS.process.getDetail(id));
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to get process detail", 400);
+    return createJsonError("Failed to get process detail", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }
 
 async function getStageDetail(
   processId: string,
   stageId: string,
+  http: AxiosInstance,
 ): Promise<Response> {
   try {
-    const response = await axiosInstance.get(
+    const response = await http.get(
       END_POINTS.process.stageDetail(processId || "", stageId || ""),
     );
     if (response.status === 200) {
       return createJsonOnlyData(response.data.subStages);
     }
 
-    return createJsonError("Failed to get process detail", 400);
+    return createJsonError("Failed to get process detail", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }
 
-async function startSubStage(params: Record<string, any>): Promise<Response> {
+async function startSubStage(params: Record<string, any>, http: AxiosInstance): Promise<Response> {
   try {
     const { processId, stageId, subStageId } = params;
-    const response = await axiosInstance.put(
+    const response = await http.put(
       END_POINTS.process.subStageOperation(processId, stageId, subStageId),
       {
         status: ResponseStatusEnums.active,
@@ -129,19 +135,20 @@ async function startSubStage(params: Record<string, any>): Promise<Response> {
     if (response.status === 200) {
       return createJsonSuccess(response.data, 200);
     }
-    return createJsonError("Failed to start a sub stage", 400);
+    return createJsonError("Failed to start a sub stage", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }
 
 async function saveandCompleteSubStage(
   params: Record<string, any>,
+  http: AxiosInstance,
 ): Promise<Response> {
   try {
     const { processId, stageId, subStageId, data } = params;
 
-    const response = await axiosInstance.put(
+    const response = await http.put(
       END_POINTS.process.subStageOperation(processId, stageId, subStageId),
       { ...data },
     );
@@ -150,15 +157,15 @@ async function saveandCompleteSubStage(
       return createJsonSuccess(200);
     }
 
-    return createJsonError("Failed to start a sub stage", 400);
+    return createJsonError("Failed to start a sub stage", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }
 
-async function completeStage(entryId: string): Promise<Response> {
+async function completeStage(entryId: string, http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.patch(
+    const response = await http.patch(
       END_POINTS.process.completeStage(entryId),
     );
 
@@ -166,20 +173,20 @@ async function completeStage(entryId: string): Promise<Response> {
       return createJsonSuccess(200);
     }
 
-    return createJsonError("Failed to start a sub stage", 400);
+    return createJsonError("Failed to start a sub stage", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }
 
-async function startStage(params: Record<string, any>): Promise<Response> {
+async function startStage(params: Record<string, any>, http: AxiosInstance): Promise<Response> {
   const { stageId, processId, operator } = params;
   try {
     const params = {
       stageId,
       operator,
     };
-    const response = await axiosInstance.post(
+    const response = await http.post(
       END_POINTS.process.startStage(processId),
       { ...params },
     );
@@ -188,18 +195,19 @@ async function startStage(params: Record<string, any>): Promise<Response> {
       return createJsonSuccess(200);
     }
 
-    return createJsonError("Failed to start a sub stage", 400);
+    return createJsonError("Failed to start a sub stage", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }
 
 async function getTableProcessHistory(
   params: Record<string, any>,
+  http: AxiosInstance,
 ): Promise<Response> {
   try {
     const { status, currentPage, pageSize } = params || {};
-    const response = await axiosInstance.get(
+    const response = await http.get(
       END_POINTS.process.getFilteredProcessHistory({
         status,
         currentPage,
@@ -209,8 +217,8 @@ async function getTableProcessHistory(
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to get all active processes", 400);
+    return createJsonError("Failed to get all active processes", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }

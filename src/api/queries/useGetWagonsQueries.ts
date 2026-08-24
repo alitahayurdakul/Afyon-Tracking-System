@@ -19,7 +19,7 @@ import {
 
 export const useGetWagonsDataQuery = () => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.wagons,
   );
 
   return useQuery({
@@ -41,7 +41,7 @@ export const useGetTableWagonsDataQuery = ({
   currentPage,
 }: IPaginationTypes) => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.wagons,
   );
 
   return useQuery({
@@ -63,7 +63,7 @@ export const useGetWagonDetailDataQuery = (id: string) => {
   const param = searchParams.get("modal");
   const splittedId = param?.split("_").pop();
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.wagons,
   );
 
   return useQuery({
@@ -82,7 +82,7 @@ export const useGetWagonDetailDataQuery = (id: string) => {
 
 export const useGetWagonsOptionsQuery = () => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.wagons,
   );
 
   return useQuery({

@@ -124,7 +124,7 @@ export default function InfoProcessContainer({
           id: "cancelProcessSuccess" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("processes"));
       router.push(URL_PAGES.activeProcesses);
     } catch (err) {
       dispatch(
@@ -231,7 +231,7 @@ export default function InfoProcessContainer({
                   alignOffset={-73}
                   align="start"
                   triggerBody={
-                    <button className={styles["cancel-btn"]}>
+                    <button type="button" className={styles["cancel-btn"]}>
                       {t("buttons.cancel-process")}
                       <FontAwesomeIcon icon="arrow-right" />
                     </button>
@@ -245,8 +245,8 @@ export default function InfoProcessContainer({
                   }
                   closeContainer={
                     <div className={styles["btn-container"]}>
-                      <button>{t("no")}</button>
-                      <button onClick={onCancelProcess}>{t("yes")}</button>
+                      <button type="button">{t("no")}</button>
+                      <button type="button" onClick={onCancelProcess}>{t("yes")}</button>
                     </div>
                   }
                 />
@@ -256,7 +256,7 @@ export default function InfoProcessContainer({
                   alignOffset={-73}
                   align="start"
                   triggerBody={
-                    <button className={styles["complete-btn"]}>
+                    <button type="button" className={styles["complete-btn"]}>
                       {t("buttons.complete-process")}
                       <FontAwesomeIcon icon="arrow-right" />
                     </button>
@@ -270,8 +270,8 @@ export default function InfoProcessContainer({
                   }
                   closeContainer={
                     <div className={styles["btn-container"]}>
-                      <button>{t("no")}</button>
-                      <button onClick={onCompleteProcess}>{t("yes")}</button>
+                      <button type="button">{t("no")}</button>
+                      <button type="button" onClick={onCompleteProcess}>{t("yes")}</button>
                     </div>
                   }
                 />

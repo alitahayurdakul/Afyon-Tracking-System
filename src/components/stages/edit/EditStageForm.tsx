@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback } from "react";
+import React from "react";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -70,52 +70,49 @@ export const EditStageForm = ({ id, stageData }: IPropsTypes) => {
     removeModal();
   };
 
-  const onSubmit: SubmitHandler<IStageFormDataTypes> = useCallback(
-    async (data) => {
-      try {
-        const { subStages, ...rest } = data;
-        const subStageIds = subStages?.map(
-          (subStage: IOptionType) => subStage.value,
-        );
+  const onSubmit: SubmitHandler<IStageFormDataTypes> = async (data) => {
+    try {
+      const { subStages, ...rest } = data;
+      const subStageIds = subStages?.map(
+        (subStage: IOptionType) => subStage.value,
+      );
 
-        const params = {
-          ...rest,
-          editor: currentUserName,
-          subStageIds,
-        };
+      const params = {
+        ...rest,
+        editor: currentUserName,
+        subStageIds,
+      };
 
-        await axiosInstance.post(CLIENT_END_POINTS.stage.edit, {
-          type: StageQueryTypes.editStage,
-          params: {
-            ...params,
-            id,
-          },
-        });
+      await axiosInstance.post(CLIENT_END_POINTS.stage.edit, {
+        type: StageQueryTypes.editStage,
+        params: {
+          ...params,
+          id,
+        },
+      });
 
-        dispatch(
-          addToastify({
-            message: t("form.notifications.editSuccess"),
-            type: "success",
-            icon: "close",
-            id: "editStageSuccess" + Date.now(),
-          }),
-        );
-        dispatch(addTriggerTable());
-        reset();
-        removeModal();
-      } catch (err) {
-        dispatch(
-          addToastify({
-            message: extractApiError(err, t("form.notifications.editError")),
-            type: "error",
-            icon: "close",
-            id: "editStageError" + Date.now(),
-          }),
-        );
-      }
-    },
-    [],
-  );
+      dispatch(
+        addToastify({
+          message: t("form.notifications.editSuccess"),
+          type: "success",
+          icon: "close",
+          id: "editStageSuccess" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable("stages"));
+      reset();
+      removeModal();
+    } catch (err) {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, t("form.notifications.editError")),
+          type: "error",
+          icon: "close",
+          id: "editStageError" + Date.now(),
+        }),
+      );
+    }
+  };
   const selectedStages = watch("subStages");
 
   return (

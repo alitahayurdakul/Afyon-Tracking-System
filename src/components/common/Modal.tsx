@@ -8,6 +8,7 @@ import clsx from "clsx";
 
 import * as Dialog from "@radix-ui/react-dialog";
 
+import { useBodyScrollLock } from "@/api/queries/useBodyScrollLock";
 import { NewSpinner } from "@/components/loaders/NewSpinner";
 import { useAddQueryParam, useRemoveQueryParamModal } from "@/utils/searchParams";
 
@@ -43,7 +44,6 @@ interface ModalProps {
   height?: string;
   isCloseOutside?: boolean;
   isCloseEsc?: boolean;
-  forceMount?: boolean;
   open?: boolean;
   setOpen?: React.Dispatch<React.SetStateAction<boolean | undefined>>;
   toggleFn?: (value: boolean) => void;
@@ -55,7 +55,6 @@ interface ModalProps {
   closeElement?: ((clickFn: () => void) => React.ReactElement) | false;
   mobilePosition?: "bottom" | "center";
   loading?: boolean;
-  isPortal?: boolean;
   isDivider?: boolean;
   parentContainer?: HTMLElement;
   closeFn?: () => void; // cb fn when modal is closed for like resetting state inside modal.
@@ -82,7 +81,6 @@ export const Modal = ({
   enableParams = true,
   mobilePosition = "bottom",
   loading,
-  isPortal,
   parentContainer,
   isDivider = false,
   closeFn,
@@ -132,23 +130,13 @@ PropsWithChildren<ModalProps>) => {
     }
   }, [visible]);
 
-  useEffect(() => {
-    if (visible) {
-      const scrollBarWidth =
-        window.innerWidth - document.documentElement.clientWidth;
-
-      document.body.style.overflow = "hidden";
-      document.body.style.paddingRight = `-${scrollBarWidth}px`;
-    } else {
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
-    }
-
-    return () => {
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
-    };
-  }, [visible]);
+  // Uses the shared refcounted lock rather than writing to document.body here.
+  // The hand-rolled version this replaces had two defects: it set a negative
+  // paddingRight (invalid CSS, so the scrollbar gap was never compensated), and
+  // its cleanup reset overflow/paddingRight unconditionally — so closing one
+  // modal released the lock held by another modal or the mobile drawer that
+  // was still open, and the page scrolled behind them.
+  useBodyScrollLock(!!visible);
 
   return (
     <>
@@ -166,9 +154,18 @@ PropsWithChildren<ModalProps>) => {
             <Dialog.Content
               ref={ref}
               aria-describedby={name}
-              onPointerDownOutside={(e) => e.preventDefault()}
-              onInteractOutside={() => (isCloseOutside ? handleClose() : false)}
-              onEscapeKeyDown={() => (isCloseEsc ? handleClose() : false)}
+              // Radix closes the dialog by default on Escape and on an
+              // outside interaction; the ONLY way to stop it is
+              // event.preventDefault(). The previous handlers returned `false`
+              // instead, which does nothing — so isCloseEsc={false} was
+              // ignored and Escape discarded half-filled create forms.
+              // Closing itself is handled by Dialog.Root's onOpenChange.
+              onPointerDownOutside={(e) => {
+                if (!isCloseOutside) e.preventDefault();
+              }}
+              onEscapeKeyDown={(e) => {
+                if (!isCloseEsc) e.preventDefault();
+              }}
               style={{ width: width, height: height }}
               className={clsx(
                 {
@@ -197,7 +194,7 @@ PropsWithChildren<ModalProps>) => {
                     styles["content"]
                   )}
                 >
-                  {isPortal ? children : children}
+                  {children}
 
                   {footer ? (
                     <div className={styles["footer"]}>

@@ -19,7 +19,7 @@ export const useGetTableProjectsDataQuery = ({
   currentPage,
 }: IPaginationTypes) => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.projects,
   );
 
   return useQuery({
@@ -41,7 +41,7 @@ export const useGetProjectDetailDataQuery = (id: string) => {
   const param = searchParams.get("modal");
   const splittedId = param?.split("_").pop();
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.projects,
   );
 
   return useQuery({
@@ -60,7 +60,7 @@ export const useGetProjectDetailDataQuery = (id: string) => {
 
 export const useGetProjectOptionsDataQuery = (status?: string) => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.projects,
   );
 
   return useQuery({

@@ -21,6 +21,7 @@ export const CreateTrainsModal = () => {
   return (
     <>
       <button
+        type="button"
         className={styles["primary-btn"]}
         onClick={() => {
           if (!open) {

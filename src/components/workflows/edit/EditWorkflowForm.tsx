@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -29,6 +29,7 @@ import {
   IWorkflowFormTypes,
 } from "@/types/workflowTypes";
 import { InputSpaceEnums } from "@/utils/enum/formEnums";
+import { extractApiError } from "@/utils/extractApiError";
 import { formatDate } from "@/utils/formDate";
 import { useRemoveQueryParamModal } from "@/utils/searchParams";
 import { WorkflowFormValidation } from "@/utils/validations/workflowFormValidation";
@@ -83,61 +84,58 @@ export const EditWorkflowForm = ({ id, workflowData }: IPropsTypes) => {
     removeModal();
   };
 
-  const onSubmit: SubmitHandler<IWorkflowFormDataTypes> = useCallback(
-    async (data) => {
-      try {
-        const { stages, ...rest } = data;
-        const newStages = stages.map((stage: IOptionType, index: number) => {
-          return {
-            stageInfo: stage.value,
-            plannedOrder: index + 1,
-          };
-        });
-
-        const qualityStage = {
-          stageInfo: qualityId,
-          plannedOrder: newStages.length + 1,
+  const onSubmit: SubmitHandler<IWorkflowFormDataTypes> = async (data) => {
+    try {
+      const { stages, ...rest } = data;
+      const newStages = stages.map((stage: IOptionType, index: number) => {
+        return {
+          stageInfo: stage.value,
+          plannedOrder: index + 1,
         };
+      });
 
-        const lastStages =
-          newStages && newStages.length > 0 ? [...newStages, qualityStage] : [];
+      const qualityStage = {
+        stageInfo: qualityId,
+        plannedOrder: newStages.length + 1,
+      };
 
-        const params = {
-          ...rest,
-          editor: currentUserName,
-          stages: lastStages,
-        };
-        await axiosInstance.post(CLIENT_END_POINTS.workflow.edit, {
-          type: WorkflowQueryTypes.editWorkflow,
-          params: {
-            ...params,
-            id,
-          },
-        });
-        dispatch(
-          addToastify({
-            message: t("notifications.edit.success"),
-            type: "success",
-            icon: "close",
-            id: "editWorkflowSuccess" + Date.now(),
-          }),
-        );
-        dispatch(addTriggerTable());
-        reset();
-        removeModal();
-      } catch (err) {
-        dispatch(
-          addToastify({
-            message: (err as Error)?.message || t("notifications.edit.error"),
-            type: "error",
-            icon: "close",
-            id: "editWorkflowError" + Date.now(),
-          }),
-        );
-      }
-    },
-    [],
-  );
+      const lastStages =
+        newStages && newStages.length > 0 ? [...newStages, qualityStage] : [];
+
+      const params = {
+        ...rest,
+        editor: currentUserName,
+        stages: lastStages,
+      };
+      await axiosInstance.post(CLIENT_END_POINTS.workflow.edit, {
+        type: WorkflowQueryTypes.editWorkflow,
+        params: {
+          ...params,
+          id,
+        },
+      });
+      dispatch(
+        addToastify({
+          message: t("notifications.edit.success"),
+          type: "success",
+          icon: "close",
+          id: "editWorkflowSuccess" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable("workflows"));
+      reset();
+      removeModal();
+    } catch (err) {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, t("notifications.edit.error")),
+          type: "error",
+          icon: "close",
+          id: "editWorkflowError" + Date.now(),
+        }),
+      );
+    }
+  };
 
   const selectedStages = watch("stages");
 

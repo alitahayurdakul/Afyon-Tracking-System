@@ -1,6 +1,11 @@
 import { NextRequest } from "next/server";
 
+import {
+  createJsonError,
+  readJsonBody,
+} from "@/api/handlers/responseHelpers";
 import { stageHandlers } from "@/api/handlers/stageQueries";
+import { createServerAxios } from "@/api/serverAxios";
 
 export enum StageQueryTypes {
   getAllStages = "GET_ALL_STAGES",
@@ -12,22 +17,27 @@ export enum StageQueryTypes {
 }
 
 export async function POST(request: NextRequest) {
-  const body = await request.json();
+  const body = await readJsonBody(request);
+  if (!body) {
+    return createJsonError("Invalid JSON body", 400);
+  }
   const { id, params, type, currentPage, pageSize } = body;
+
+  const http = createServerAxios(request);
 
   switch (type) {
     case StageQueryTypes.createStage:
-      return await stageHandlers.createStage(params);
+      return await stageHandlers.createStage(params, http);
     case StageQueryTypes.deleteStage:
-      return await stageHandlers.deleteStage(id);
+      return await stageHandlers.deleteStage(id, http);
     case StageQueryTypes.editStage:
-      return await stageHandlers.editStage(params);
+      return await stageHandlers.editStage(params, http);
     case StageQueryTypes.getAllStages:
-      return await stageHandlers.getStages();
+      return await stageHandlers.getStages(http);
     case StageQueryTypes.getDetailStage:
-      return await stageHandlers.getStageDetail(id);
+      return await stageHandlers.getStageDetail(id, http);
     case StageQueryTypes.getTableStages:
-      return await stageHandlers.getTableStages({currentPage, pageSize});
+      return await stageHandlers.getTableStages({currentPage, pageSize}, http);
 
     default: {
       return Response.json(

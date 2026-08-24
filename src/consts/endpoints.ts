@@ -2,68 +2,100 @@ import { IPaginationTypes, IPaginationWithStatus } from "@/types/commonTypes";
 
 const apiUrl = process.env.API_URL || "api";
 
+/** Upper bound for a client-supplied page size (UI offers at most 50). */
+const MAX_PAGE_SIZE = 200;
+const DEFAULT_PAGE_NUMBER = 1;
+const DEFAULT_PAGE_SIZE = 25;
+
+/**
+ * Encodes a client-supplied value before it is interpolated into a backend URL.
+ * Without this, an id containing "../", "?", "&" or "#" would silently change
+ * which backend path is called. Throws on an empty value so a missing id fails
+ * loudly instead of requesting ".../undefined".
+ */
+const enc = (value: string | number): string => {
+  const raw = String(value ?? "").trim();
+  if (!raw) {
+    throw new Error("Missing required URL parameter");
+  }
+  return encodeURIComponent(raw);
+};
+
+/** Coerces a client-supplied page number into a safe positive integer. */
+const pageNumber = (value: unknown): number => {
+  const n = Math.floor(Number(value));
+  return Number.isFinite(n) && n > 0 ? n : DEFAULT_PAGE_NUMBER;
+};
+
+/** Coerces a client-supplied page size into a safe, bounded integer. */
+const pageSizeOf = (value: unknown): number => {
+  const n = Math.floor(Number(value));
+  if (!Number.isFinite(n) || n < 1) return DEFAULT_PAGE_SIZE;
+  return Math.min(n, MAX_PAGE_SIZE);
+};
+
 export const END_POINTS = {
   stage: {
     create: `${apiUrl}/api/stages`,
-    edit: (id: string) => `${apiUrl}/api/stages/${id}`,
-    delete: (id: string) => `${apiUrl}/api/stages/${id}`,
+    edit: (id: string) => `${apiUrl}/api/stages/${enc(id)}`,
+    delete: (id: string) => `${apiUrl}/api/stages/${enc(id)}`,
     getAll: `${apiUrl}/api/stages`,
-    getDetail: (id: string) => `${apiUrl}/api/stages/${id}`,
+    getDetail: (id: string) => `${apiUrl}/api/stages/${enc(id)}`,
     getFilteredStages: ({ currentPage, pageSize }: IPaginationTypes) =>
-      `${apiUrl}/api/stages?pageNumber=${currentPage}&pageSize=${pageSize}`,
+      `${apiUrl}/api/stages?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}`,
   },
   workflow: {
     create: `${apiUrl}/api/favorite-processes`,
-    edit: (id: string) => `${apiUrl}/api/favorite-processes/${id}`,
-    delete: (id: string) => `${apiUrl}/api/favorite-processes/${id}`,
+    edit: (id: string) => `${apiUrl}/api/favorite-processes/${enc(id)}`,
+    delete: (id: string) => `${apiUrl}/api/favorite-processes/${enc(id)}`,
     getAll: `${apiUrl}/api/favorite-processes`,
-    getDetail: (id: string) => `${apiUrl}/api/favorite-processes/${id}`,
+    getDetail: (id: string) => `${apiUrl}/api/favorite-processes/${enc(id)}`,
     getFilteredWorkflows: ({ currentPage, pageSize }: IPaginationTypes) =>
-      `${apiUrl}/api/favorite-processes?pageNumber=${currentPage}&pageSize=${pageSize}`,
+      `${apiUrl}/api/favorite-processes?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}`,
   },
   train: {
     create: `${apiUrl}/api/trains`,
-    edit: (trainId: string) => `${apiUrl}/api/trains/${trainId}`,
-    delete: (trainId: string) => `${apiUrl}/api/trains/${trainId}`,
+    edit: (trainId: string) => `${apiUrl}/api/trains/${enc(trainId)}`,
+    delete: (trainId: string) => `${apiUrl}/api/trains/${enc(trainId)}`,
     getAll: `${apiUrl}/api/trains`,
-    getDetail: (trainId: string) => `${apiUrl}/api/trains/${trainId}`,
+    getDetail: (trainId: string) => `${apiUrl}/api/trains/${enc(trainId)}`,
     getFilteredTrains: ({ pageSize, currentPage }: IPaginationTypes) =>
-      `${apiUrl}/api/trains?pageNumber=${currentPage}&pageSize=${pageSize}`,
+      `${apiUrl}/api/trains?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}`,
   },
   process: {
     start: `${apiUrl}/api/processes/start`,
-    edit: (id: string) => `${apiUrl}/api/favorite-processes/${id}`,
-    delete: (id: string) => `${apiUrl}/api/favorite-processes/${id}`,
-    getDetail: (id: string) => `${apiUrl}/api/processes/${id}`,
+    edit: (id: string) => `${apiUrl}/api/favorite-processes/${enc(id)}`,
+    delete: (id: string) => `${apiUrl}/api/favorite-processes/${enc(id)}`,
+    getDetail: (id: string) => `${apiUrl}/api/processes/${enc(id)}`,
     getAll: ({ status, projectId }: { status?: string; projectId?: string }) =>
-      `${apiUrl}/api/processes${projectId ? `?projectId=${projectId}` : ""}${status ? `${projectId ? "&" : "?"}status=${status}` : ""}`,
+      `${apiUrl}/api/processes${projectId ? `?projectId=${enc(projectId)}` : ""}${status ? `${projectId ? "&" : "?"}status=${enc(status)}` : ""}`,
     stageDetail: (processId: string, stageId: string) =>
-      `${apiUrl}/api/processes/${processId}/stages/${stageId}/substages`,
+      `${apiUrl}/api/processes/${enc(processId)}/stages/${enc(stageId)}/substages`,
     subStageOperation: (
       processId: string,
       stageId: string,
       subStageId: string,
     ) =>
-      `${apiUrl}/api/substages/processes/${processId}/stages/${stageId}/substages/${subStageId}`,
+      `${apiUrl}/api/substages/processes/${enc(processId)}/stages/${enc(stageId)}/substages/${enc(subStageId)}`,
     completeStage: (entryId: string) =>
-      `${apiUrl}/api/processes/stage-entry/${entryId}/close`,
+      `${apiUrl}/api/processes/stage-entry/${enc(entryId)}/close`,
     startStage: (processId: string) =>
-      `${apiUrl}/api/processes/${processId}/start-stage`,
-    deleteProcess: (id: string) => `${apiUrl}/api/processes/${id}`,
+      `${apiUrl}/api/processes/${enc(processId)}/start-stage`,
+    deleteProcess: (id: string) => `${apiUrl}/api/processes/${enc(id)}`,
     getFilteredProcessHistory: ({
       pageSize,
       currentPage,
       status,
     }: IPaginationWithStatus) =>
-      `${apiUrl}/api/processes?pageNumber=${currentPage}&pageSize=${pageSize}${status ? `&status=${status}` : ""}`,
+      `${apiUrl}/api/processes?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}${status ? `&status=${enc(status)}` : ""}`,
   },
   processOperations: {
     complete: (processId: string) =>
-      `${apiUrl}/api/processes/${processId}/complete`,
+      `${apiUrl}/api/processes/${enc(processId)}/complete`,
   },
   // workflowHistory: {
   //   getAll: `${apiUrl}/api/processes?status=COMPLETED`,
-  //   getDetail: (id: string) => `${apiUrl}/api/processes/${id}`,
+  //   getDetail: (id: string) => `${apiUrl}/api/processes/${enc(id)}`,
   // },
   statistics: {
     stages: (query: string) => `${apiUrl}/api/processes/statistics?${query}`,
@@ -72,30 +104,30 @@ export const END_POINTS = {
   },
   wagon: {
     create: `${apiUrl}/api/wagons`,
-    edit: (id: string) => `${apiUrl}/api/wagons/${id}`,
-    delete: (id: string) => `${apiUrl}/api/wagons/${id}`,
+    edit: (id: string) => `${apiUrl}/api/wagons/${enc(id)}`,
+    delete: (id: string) => `${apiUrl}/api/wagons/${enc(id)}`,
     getAll: `${apiUrl}/api/wagons`,
-    getDetail: (id: string) => `${apiUrl}/api/wagons/${id}`,
+    getDetail: (id: string) => `${apiUrl}/api/wagons/${enc(id)}`,
     getFilteredWagons: ({ currentPage, pageSize }: IPaginationTypes) =>
-      `${apiUrl}/api/wagons?pageNumber=${currentPage}&pageSize=${pageSize}`,
+      `${apiUrl}/api/wagons?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}`,
   },
   reason: {
     create: `${apiUrl}/api/reasons`,
-    edit: (id: string) => `${apiUrl}/api/reasons/${id}`,
-    delete: (id: string) => `${apiUrl}/api/reasons/${id}`,
+    edit: (id: string) => `${apiUrl}/api/reasons/${enc(id)}`,
+    delete: (id: string) => `${apiUrl}/api/reasons/${enc(id)}`,
     getAll: `${apiUrl}/api/reasons`,
-    getDetail: (id: string) => `${apiUrl}/api/reasons/${id}`,
+    getDetail: (id: string) => `${apiUrl}/api/reasons/${enc(id)}`,
     getFilteredReasons: ({ pageSize, currentPage }: IPaginationTypes) =>
-      `${apiUrl}/api/reasons?pageNumber=${currentPage}&pageSize=${pageSize}`,
+      `${apiUrl}/api/reasons?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}`,
   },
   role: {
     create: `${apiUrl}/api/roles`,
-    edit: (id: string) => `${apiUrl}/api/roles/${id}`,
-    delete: (id: string) => `${apiUrl}/api/roles/${id}`,
+    edit: (id: string) => `${apiUrl}/api/roles/${enc(id)}`,
+    delete: (id: string) => `${apiUrl}/api/roles/${enc(id)}`,
     getAll: `${apiUrl}/api/roles`,
-    getDetail: (id: string) => `${apiUrl}/api/roles/${id}`,
+    getDetail: (id: string) => `${apiUrl}/api/roles/${enc(id)}`,
     getFilteredRoles: ({ currentPage, pageSize }: IPaginationTypes) =>
-      `${apiUrl}/api/roles?pageNumber=${currentPage}&pageSize=${pageSize}`,
+      `${apiUrl}/api/roles?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}`,
   },
   auth: {
     login: `${apiUrl}/auth`,
@@ -107,50 +139,50 @@ export const END_POINTS = {
   },
   user: {
     create: `${apiUrl}/register`,
-    edit: (id: string) => `${apiUrl}/api/users/${id}`,
-    delete: (id: string) => `${apiUrl}/api/users/${id}`,
+    edit: (id: string) => `${apiUrl}/api/users/${enc(id)}`,
+    delete: (id: string) => `${apiUrl}/api/users/${enc(id)}`,
     getAll: ({ currentPage, pageSize }: IPaginationTypes) =>
-      `${apiUrl}/api/users?pageNumber=${currentPage}&pageSize=${pageSize}`,
-    getDetail: (id: string) => `${apiUrl}/api/users/${id}`,
-    changePassword: (id: string) => `${apiUrl}/api/users/${id}/password`,
+      `${apiUrl}/api/users?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}`,
+    getDetail: (id: string) => `${apiUrl}/api/users/${enc(id)}`,
+    changePassword: (id: string) => `${apiUrl}/api/users/${enc(id)}/password`,
   },
   material: {
     create: `${apiUrl}/api/materials`,
-    edit: (id: string) => `${apiUrl}/api/materials/${id}`,
-    delete: (id: string) => `${apiUrl}/api/materials/${id}`,
+    edit: (id: string) => `${apiUrl}/api/materials/${enc(id)}`,
+    delete: (id: string) => `${apiUrl}/api/materials/${enc(id)}`,
     getAll: `${apiUrl}/api/materials`,
     getFilteredMaterials: ({ pageSize, currentPage }: IPaginationTypes) =>
-      `${apiUrl}/api/materials?pageNumber=${currentPage}&pageSize=${pageSize}`,
-    getDetail: (id: string) => `${apiUrl}/api/materials/${id}`,
+      `${apiUrl}/api/materials?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}`,
+    getDetail: (id: string) => `${apiUrl}/api/materials/${enc(id)}`,
   },
   subStage: {
     create: `${apiUrl}/api/substages`,
-    edit: (id: string) => `${apiUrl}/api/substages/${id}`,
-    delete: (id: string) => `${apiUrl}/api/substages/${id}`,
+    edit: (id: string) => `${apiUrl}/api/substages/${enc(id)}`,
+    delete: (id: string) => `${apiUrl}/api/substages/${enc(id)}`,
     getAll: `${apiUrl}/api/substages`,
-    getDetail: (id: string) => `${apiUrl}/api/substages/${id}`,
+    getDetail: (id: string) => `${apiUrl}/api/substages/${enc(id)}`,
     getFilteredSubStages: ({ pageSize, currentPage }: IPaginationTypes) =>
-      `${apiUrl}/api/substages?pageNumber=${currentPage}&pageSize=${pageSize}`,
+      `${apiUrl}/api/substages?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}`,
   },
   project: {
     create: `${apiUrl}/api/projects`,
-    edit: (id: string) => `${apiUrl}/api/projects/${id}`,
-    delete: (id: string) => `${apiUrl}/api/projects/${id}`,
+    edit: (id: string) => `${apiUrl}/api/projects/${enc(id)}`,
+    delete: (id: string) => `${apiUrl}/api/projects/${enc(id)}`,
     getAll: (status?: string) =>
-      `${apiUrl}/api/projects${status ? `?status=${status}` : ""}`,
+      `${apiUrl}/api/projects${status ? `?status=${enc(status)}` : ""}`,
     getFilteredProjects: ({
       pageSize,
       currentPage,
       status,
     }: IPaginationWithStatus) =>
-      `${apiUrl}/api/projects?pageNumber=${currentPage}&pageSize=${pageSize}${status ? `&status=${status}` : ""}`,
-    getDetail: (id: string) => `${apiUrl}/api/projects/${id}`,
+      `${apiUrl}/api/projects?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}${status ? `&status=${enc(status)}` : ""}`,
+    getDetail: (id: string) => `${apiUrl}/api/projects/${enc(id)}`,
   },
   processTrains: {
     getAllProcessTrains: `${apiUrl}/api/trains/with-processes`,
     getByTrain: `${apiUrl}/api/processes/search`,
     getByTrainAndWagon: (trainId?: string, wagonId?: string) =>
-      `${apiUrl}/api/processes${trainId ? `?trainId=${trainId}` : ""}${wagonId ? `${trainId ? "&" : "?"}wagonId=${wagonId}` : ""}`,
+      `${apiUrl}/api/processes${trainId ? `?trainId=${enc(trainId)}` : ""}${wagonId ? `${trainId ? "&" : "?"}wagonId=${enc(wagonId)}` : ""}`,
   },
 };
 

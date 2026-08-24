@@ -36,7 +36,7 @@ export const SubStagesTableActionsCol = ({ id }: { id: string }) => {
           id: "deleteSubStage" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("subStages"));
     } catch (err: any) {
       dispatch(
         addToastify({
@@ -56,7 +56,7 @@ export const SubStagesTableActionsCol = ({ id }: { id: string }) => {
         alignOffset={-73}
         align="start"
         triggerBody={
-          <button className={styles["delete-btn"]}>
+          <button type="button" className={styles["delete-btn"]}>
             <FontAwesomeIcon icon={faTrash} />
             <span>{t("actions.delete")}</span>
           </button>
@@ -70,8 +70,8 @@ export const SubStagesTableActionsCol = ({ id }: { id: string }) => {
         }
         closeContainer={
           <div className={stylesDeletePopover["btn-container"]}>
-            <button>{t("deletePopover.no")}</button>
-            <button onClick={onDeleteHandler}>{t("deletePopover.yes")}</button>
+            <button type="button">{t("deletePopover.no")}</button>
+            <button type="button" onClick={onDeleteHandler}>{t("deletePopover.yes")}</button>
           </div>
         }
       />

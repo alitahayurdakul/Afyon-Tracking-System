@@ -16,7 +16,7 @@ export const useGetUsersDataQuery = ({
   currentPage,
 }: IPaginationTypes) => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.users,
   );
 
   return useQuery({
@@ -47,7 +47,7 @@ export const useGetUserDetailDataQuery = (
   const param = searchParams.get("modal");
   const splittedId = param?.split("_").pop();
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.users,
   );
 
   return useQuery({

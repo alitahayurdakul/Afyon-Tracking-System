@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
 import { useGetWagonDetailDataQuery } from "@/api/queries/useGetWagonsQueries";
-import { NewModal } from "@/components/common/NewModal";
+import { Modal } from "@/components/common/Modal";
 import { EDIT_WAGON_MODAL } from "@/consts/modals";
 
 import { EditWagonForm } from "./EditWagonForm";
@@ -13,8 +13,9 @@ export const EditWagonModalWrapper = ({ id }: { id: string }) => {
   return (
     <>
       {!isFetching && (
-        <NewModal
+        <Modal
           name={`${EDIT_WAGON_MODAL}_${id}`}
+          open
           width={"900px"}
           height={"auto"}
           title={t("modal.edit-header")}
@@ -22,7 +23,7 @@ export const EditWagonModalWrapper = ({ id }: { id: string }) => {
           isCloseEsc={false}
         >
           <EditWagonForm id={id} data={data} />
-        </NewModal>
+        </Modal>
       )}
     </>
   );

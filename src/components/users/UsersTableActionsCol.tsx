@@ -38,7 +38,7 @@ export const UsersTableActionsCol = ({ id }: { id: string }) => {
           id: "deleteUser" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("users"));
     } catch (err) {
       dispatch(
         addToastify({
@@ -61,6 +61,7 @@ export const UsersTableActionsCol = ({ id }: { id: string }) => {
         align="start"
         triggerBody={
           <button
+            type="button"
             className={clsx(styles["delete-btn"], compactStyles["compact-btn"])}
           >
             <FontAwesomeIcon icon={faTrash} />
@@ -76,8 +77,8 @@ export const UsersTableActionsCol = ({ id }: { id: string }) => {
         }
         closeContainer={
           <div className={stylesDeletePopover["btn-container"]}>
-            <button>{t("deletePopover.no")}</button>
-            <button onClick={onDeleteHandler}>{t("deletePopover.yes")}</button>
+            <button type="button">{t("deletePopover.no")}</button>
+            <button type="button" onClick={onDeleteHandler}>{t("deletePopover.yes")}</button>
           </div>
         }
       />

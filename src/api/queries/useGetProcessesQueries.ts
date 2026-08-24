@@ -19,7 +19,7 @@ export const useGetActiveProcessesDataQuery = <T>(status?: string) => {
   const searchParams = useSearchParams();
   const projectId = searchParams.get("projectId") || "";
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.processes,
   );
 
   return useQuery({
@@ -49,7 +49,7 @@ export const useGetTableProcessesDataQuery = <T>({
   pageSize,
 }: IPaginationWithStatus) => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.processes,
   );
 
   return useQuery({
@@ -84,7 +84,7 @@ export const useActiveProcessDetailDataQuery = <T>(processId?: string) => {
   const params = useParams();
   const { id } = params;
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.processes,
   );
   const pathname = usePathname();
 
@@ -159,7 +159,7 @@ export const useStartStage = () => {
           id: "startStageSuccess" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("processes"));
     },
     onError: (err) => {
       dispatch(

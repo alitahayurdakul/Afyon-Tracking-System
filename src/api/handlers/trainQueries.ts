@@ -1,4 +1,5 @@
-import { axiosInstance } from "@/api/axiosInstance";
+import { AxiosInstance } from "axios";
+
 import { END_POINTS } from "@/consts/endpoints";
 import { IPaginationTypes } from "@/types/commonTypes";
 import {
@@ -8,10 +9,10 @@ import {
 } from "@/types/trainsTypes";
 
 import {
+  createErrorResponse,
   createJsonError,
   createJsonOnlyData,
   createJsonSuccess,
-  extractErrorMessage,
 } from "./responseHelpers";
 
 export const trainHandlers = {
@@ -23,88 +24,88 @@ export const trainHandlers = {
   getTableTrains,
 };
 
-async function createTrain(params: Record<string, any>): Promise<Response> {
+async function createTrain(params: Record<string, any>, http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.post(END_POINTS.train.create, params);
+    const response = await http.post(END_POINTS.train.create, params);
     if (response.status === 201) {
       return createJsonSuccess(response.data, 201);
     }
-    return createJsonError("Failed to create train", 400);
+    return createJsonError("Failed to create train", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }
 
-async function deleteTrain(id: string): Promise<Response> {
+async function deleteTrain(id: string, http: AxiosInstance): Promise<Response> {
   try {
     if (id) {
-      const response = await axiosInstance.delete(END_POINTS.train.delete(id));
+      const response = await http.delete(END_POINTS.train.delete(id));
       if (response.status === 200 || response.status === 204) {
         return createJsonOnlyData(response.data || { success: true });
       }
     }
-    return createJsonError("Failed to delete train", 400);
+    return createJsonError("Failed to delete train", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }
 
-async function editTrain(params: Record<string, any>): Promise<Response> {
+async function editTrain(params: Record<string, any>, http: AxiosInstance): Promise<Response> {
   try {
     const { id, ...rest } = params;
-    const response = await axiosInstance.put(END_POINTS.train.edit(id), {
+    const response = await http.put(END_POINTS.train.edit(id), {
       ...rest,
     });
     if (response.status === 200 || response.status === 201) {
       return createJsonSuccess(response.data, 200);
     }
-    return createJsonError("Failed to edit train", 400);
+    return createJsonError("Failed to edit train", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }
 
-async function getTrains(): Promise<Response> {
+async function getTrains(http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.get<ITrainsType>(
+    const response = await http.get<ITrainsType>(
       END_POINTS.train.getAll,
     );
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch trains", 400);
+    return createJsonError("Failed to fetch trains", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }
 
-async function getTrainDetail(id: string): Promise<Response> {
+async function getTrainDetail(id: string, http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.get<ITrainType>(
+    const response = await http.get<ITrainType>(
       END_POINTS.train.getDetail(id),
     );
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch train detail", 400);
+    return createJsonError("Failed to fetch train detail", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }
 
-async function getTableTrains({
-  pageSize,
-  currentPage,
-}: IPaginationTypes): Promise<Response> {
+async function getTableTrains(
+  { pageSize, currentPage }: IPaginationTypes,
+  http: AxiosInstance,
+): Promise<Response> {
   try {
-    const response = await axiosInstance.get<ITrainsResponseDataTypes>(
+    const response = await http.get<ITrainsResponseDataTypes>(
       END_POINTS.train.getFilteredTrains({ pageSize, currentPage }),
     );
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch trains", 400);
+    return createJsonError("Failed to fetch trains", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }

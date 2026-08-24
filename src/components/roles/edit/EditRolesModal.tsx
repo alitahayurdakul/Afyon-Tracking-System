@@ -23,6 +23,7 @@ export const EditRolesModal = ({ id }: { id: string }) => {
   return (
     <>
       <button
+        type="button"
         className={clsx(styles["edit-btn"], compactStyles["compact-btn"])}
         onClick={() => addQueryParam("modal", `${EDIT_ROLE_MODAL}_${id}`)}
       >

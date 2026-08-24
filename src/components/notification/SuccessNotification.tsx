@@ -55,6 +55,7 @@ export const SuccessNotificationElement = ({
               altText="Close"
             >
               <button
+                type="button"
                 onClick={() => setOpen(false)}
                 className={styles["close-btn"]}
               >

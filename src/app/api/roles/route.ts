@@ -1,6 +1,11 @@
 import { NextRequest } from "next/server";
 
+import {
+  createJsonError,
+  readJsonBody,
+} from "@/api/handlers/responseHelpers";
 import { roleHandlers } from "@/api/handlers/rolesQueries";
+import { createServerAxios } from "@/api/serverAxios";
 
 export enum RoleQueryTypes {
   getAllRoles = "GET_ALL_ROLES",
@@ -12,22 +17,27 @@ export enum RoleQueryTypes {
 }
 
 export async function POST(request: NextRequest) {
-  const body = await request.json();
+  const body = await readJsonBody(request);
+  if (!body) {
+    return createJsonError("Invalid JSON body", 400);
+  }
   const { id, params, type, currentPage, pageSize } = body;
+
+  const http = createServerAxios(request);
 
   switch (type) {
     case RoleQueryTypes.createRole:
-      return await roleHandlers.createRole(params);
+      return await roleHandlers.createRole(params, http);
     case RoleQueryTypes.deleteRole:
-      return await roleHandlers.deleteRole(id);
+      return await roleHandlers.deleteRole(id, http);
     case RoleQueryTypes.editRole:
-      return await roleHandlers.editRole(params);
+      return await roleHandlers.editRole(params, http);
     case RoleQueryTypes.getAllRoles:
-      return await roleHandlers.getRoles();
+      return await roleHandlers.getRoles(http);
     case RoleQueryTypes.getDetailRole:
-      return await roleHandlers.getRoleDetail(id);
+      return await roleHandlers.getRoleDetail(id, http);
     case RoleQueryTypes.getTableRoles:
-      return await roleHandlers.getTableRoles({ pageSize, currentPage });
+      return await roleHandlers.getTableRoles({ pageSize, currentPage }, http);
 
     default:
       return Response.json(

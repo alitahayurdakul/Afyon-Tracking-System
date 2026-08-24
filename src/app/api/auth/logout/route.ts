@@ -19,8 +19,11 @@ export async function GET(request: NextRequest) {
     next.cookies.set("jwt", "", { path: "/", maxAge: 0 });
     return next;
   } catch (err: any) {
+    // The thrown message can carry the backend host/port (ECONNREFUSED
+    // 10.0.0.5:8080); keep it in the server log, never in the response.
+    console.error("[api] logout request failed", err?.code, err?.message);
     return NextResponse.json(
-      { success: false, error: err?.message ?? "Logout failed" },
+      { success: false, error: "Logout failed" },
       { status: 500 },
     );
   }

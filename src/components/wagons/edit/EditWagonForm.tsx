@@ -1,7 +1,6 @@
 "use client";
 
 
-import { useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -21,6 +20,7 @@ import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { IWagonFormDataTypes, IWagonType } from "@/types/wagonsTypes";
 import { InputSpaceEnums } from "@/utils/enum/formEnums";
+import { extractApiError } from "@/utils/extractApiError";
 import { formatDate } from "@/utils/formDate";
 import { useRemoveQueryParamModal } from "@/utils/searchParams";
 import { WagonFormValidation } from "@/utils/validations/wagonFormValidation";
@@ -55,42 +55,39 @@ export const EditWagonForm = ({ id, data }: IPropsTypes) => {
     removeModal();
   };
 
-  const onSubmit: SubmitHandler<IWagonFormDataTypes> = useCallback(
-    async (formData) => {
-      try {
-        const params = {
-          id,
-          wagonNo: formData.name,
-          description: formData.desc,
-          editor: currentUserName,
-        };
-        await axiosInstance.post(CLIENT_END_POINTS.wagon.edit, {
-          type: WagonQueryTypes.editWagon,
-          params,
-        });
-        dispatch(
-          addToastify({
-            message: t("notifications.edit.success"),
-            type: "success",
-            icon: "close",
-            id: "editWagon" + Date.now(),
-          }),
-        );
-        dispatch(addTriggerTable());
-        removeModal();
-      } catch (err) {
-        dispatch(
-          addToastify({
-            message: (err as Error)?.message || t("notifications.edit.error"),
-            type: "error",
-            icon: "close",
-            id: "editWagon" + Date.now(),
-          }),
-        );
-      }
-    },
-    [id],
-  );
+  const onSubmit: SubmitHandler<IWagonFormDataTypes> = async (formData) => {
+    try {
+      const params = {
+        id,
+        wagonNo: formData.name,
+        description: formData.desc,
+        editor: currentUserName,
+      };
+      await axiosInstance.post(CLIENT_END_POINTS.wagon.edit, {
+        type: WagonQueryTypes.editWagon,
+        params,
+      });
+      dispatch(
+        addToastify({
+          message: t("notifications.edit.success"),
+          type: "success",
+          icon: "close",
+          id: "editWagon" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable("wagons"));
+      removeModal();
+    } catch (err) {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, t("notifications.edit.error")),
+          type: "error",
+          icon: "close",
+          id: "editWagon" + Date.now(),
+        }),
+      );
+    }
+  };
 
   return (
     <form className={styles["train-form"]}>

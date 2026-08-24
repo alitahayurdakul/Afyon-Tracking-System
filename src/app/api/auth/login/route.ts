@@ -24,8 +24,11 @@ export async function POST(request: NextRequest) {
     forwardSetCookies(response.headers, next);
     return next;
   } catch (err: any) {
+    // The thrown message can carry the backend host/port (ECONNREFUSED
+    // 10.0.0.5:8080); keep it in the server log, never in the response.
+    console.error("[api] login request failed", err?.code, err?.message);
     return NextResponse.json(
-      { success: false, error: err?.message ?? "Login failed" },
+      { success: false, error: "Login failed" },
       { status: 500 },
     );
   }

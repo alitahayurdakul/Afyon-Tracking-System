@@ -30,7 +30,9 @@
     "submit": "Giriş Yap",
     "submitting": "Giriş yapılıyor...",
     "success": "Giriş başarılı",
-    "error": "Giriş başarısız"
+    "error": "Giriş başarısız",
+    "invalidCredentials": "E-posta veya şifre hatalı",
+    "unavailable": "Giriş yapılamadı. Lütfen daha sonra tekrar deneyin."
   },
   "forgotPassword": {
     "forgotLink": "Şifremi Unuttum",
@@ -142,5 +144,27 @@
     "go": "Git",
     "perPage": "Sayfa başına",
     "page": "sayfa"
+  },
+  "errorPage": {
+    "title": "Bir şeyler ters gitti",
+    "description": "Beklenmeyen bir hata oluştu. Sayfayı yeniden deneyebilir ya da ana sayfaya dönebilirsiniz.",
+    "retry": "Tekrar dene",
+    "home": "Ana sayfaya dön"
+  },
+  "notFoundPage": {
+    "title": "Sayfa bulunamadı",
+    "description": "Aradığınız sayfa taşınmış veya silinmiş olabilir.",
+    "home": "Ana sayfaya dön"
+  },
+  "meta": {
+    "title": "Afyon İş Akışı Yönetim Sistemi",
+    "description": "Tren filosu bakım ve iş akışı takip sistemi."
+  },
+  "errors": {
+    "loadFailed": "İçerik yüklenemedi."
+  },
+  "languageSelector": {
+    "label": "Dil: {language}. Değiştirmek için açın",
+    "menuLabel": "Diller"
   }
 }

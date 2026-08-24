@@ -21,6 +21,7 @@ export const EditSubStagesModal = ({ id }: { id: string }) => {
   return (
     <>
       <button
+        type="button"
         className={styles["edit-btn"]}
         onClick={() => addQueryParam("modal", `${EDIT_SUB_STAGE_MODAL}_${id}`)}
       >

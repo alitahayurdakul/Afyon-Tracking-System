@@ -1,7 +1,7 @@
 "use client";
 
 
-import React, { useCallback } from "react";
+import React from "react";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -19,6 +19,7 @@ import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { IReasonFormDataTypes } from "@/types/reasonsTypes";
 import { InputSpaceEnums } from "@/utils/enum/formEnums";
+import { extractApiError } from "@/utils/extractApiError";
 import { useRemoveQueryParamModal } from "@/utils/searchParams";
 import { ReasonFormValidation } from "@/utils/validations/reasonFormValidation";
 
@@ -49,42 +50,39 @@ export const CreateReasonForm = () => {
     removeModal();
   };
 
-  const onSubmit: SubmitHandler<IReasonFormDataTypes> = useCallback(
-    async (data) => {
-      try {
-        const params = {
-          name: data.name,
-          description: data.desc,
-          creator: currentUserName,
-        };
-        await axiosInstance.post(CLIENT_END_POINTS.reason.create, {
-          type: ReasonQueryTypes.createReason,
-          params,
-        });
-        dispatch(
-          addToastify({
-            message: t("notifications.create.success"),
-            type: "success",
-            icon: "close",
-            id: "createReason" + Date.now(),
-          }),
-        );
-        dispatch(addTriggerTable());
-        reset();
-        removeModal();
-      } catch (err) {
-        dispatch(
-          addToastify({
-            message: (err as Error)?.message || t("notifications.create.error"),
-            type: "error",
-            icon: "close",
-            id: "createReason" + Date.now(),
-          }),
-        );
-      }
-    },
-    [],
-  );
+  const onSubmit: SubmitHandler<IReasonFormDataTypes> = async (data) => {
+    try {
+      const params = {
+        name: data.name,
+        description: data.desc,
+        creator: currentUserName,
+      };
+      await axiosInstance.post(CLIENT_END_POINTS.reason.create, {
+        type: ReasonQueryTypes.createReason,
+        params,
+      });
+      dispatch(
+        addToastify({
+          message: t("notifications.create.success"),
+          type: "success",
+          icon: "close",
+          id: "createReason" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable("reasons"));
+      reset();
+      removeModal();
+    } catch (err) {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, t("notifications.create.error")),
+          type: "error",
+          icon: "close",
+          id: "createReason" + Date.now(),
+        }),
+      );
+    }
+  };
 
   return (
     <form className={styles["train-form"]}>

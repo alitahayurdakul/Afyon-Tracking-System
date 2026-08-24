@@ -14,7 +14,7 @@ import { ITrainsResponseDataTypes, ITrainsType, ITrainType } from "@/types/train
 
 export const useGetTrainsDataQuery = () => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.trains,
   );
 
   return useQuery({
@@ -38,7 +38,7 @@ export const useGetTableTrainsDataQuery = ({
   pageSize,
 }: IPaginationTypes) => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.trains,
   );
 
   return useQuery({
@@ -64,7 +64,7 @@ export const useGetTrainDetailDataQuery = (id: string) => {
   const param = searchParams.get("modal");
   const splittedId = param?.split("_").pop();
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.trains,
   );
 
   return useQuery({
@@ -89,9 +89,14 @@ export const useGetTrainDetailWagonsDataQuery = (id: string) => {
   const searchParams = useSearchParams();
   const param = searchParams.get("modal");
   const splittedId = param?.split("_").pop();
+  // Was the only hook in this file without the trigger in its key, so the
+  // wagon list inside the edit modal never refreshed after a mutation.
+  const trigger = useSelector(
+    (state: RootState) => state.tableTrigger.trains,
+  );
 
   return useQuery({
-    queryKey: [`getTrainDetailWagonsDatas_${id}`],
+    queryKey: [`getTrainDetailWagonsDatas_${id}`, trigger],
     refetchOnWindowFocus: false,
     enabled: splittedId === id,
     queryFn: async () => {
@@ -110,7 +115,7 @@ export const useGetTrainDetailWagonsDataQuery = (id: string) => {
 
 export const useGetTrainOptionsDataQuery = () => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.trains,
   );
 
   return useQuery({

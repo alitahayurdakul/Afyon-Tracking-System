@@ -1,6 +1,11 @@
 import { NextRequest } from "next/server";
 
+import {
+  createJsonError,
+  readJsonBody,
+} from "@/api/handlers/responseHelpers";
 import { subStageHandlers } from "@/api/handlers/subStagesQueries";
+import { createServerAxios } from "@/api/serverAxios";
 
 export enum SubStageQueryTypes {
   getAllSubStages = "GET_ALL_SUB_STAGES",
@@ -12,25 +17,30 @@ export enum SubStageQueryTypes {
 }
 
 export async function POST(request: NextRequest) {
-  const body = await request.json();
+  const body = await readJsonBody(request);
+  if (!body) {
+    return createJsonError("Invalid JSON body", 400);
+  }
   const { id, params, type, currentPage, pageSize } = body;
+
+  const http = createServerAxios(request);
 
   switch (type) {
     case SubStageQueryTypes.createSubStage:
-      return await subStageHandlers.createSubStage(params);
+      return await subStageHandlers.createSubStage(params, http);
     case SubStageQueryTypes.deleteSubStage:
-      return await subStageHandlers.deleteSubStage(id);
+      return await subStageHandlers.deleteSubStage(id, http);
     case SubStageQueryTypes.editSubStage:
-      return await subStageHandlers.editSubStage(params);
+      return await subStageHandlers.editSubStage(params, http);
     case SubStageQueryTypes.getAllSubStages:
-      return await subStageHandlers.getSubStages();
+      return await subStageHandlers.getSubStages(http);
     case SubStageQueryTypes.getDetailSubStage:
-      return await subStageHandlers.getSubStageDetail(id);
+      return await subStageHandlers.getSubStageDetail(id, http);
     case SubStageQueryTypes.getTableSubStages:
       return await subStageHandlers.getTableSubStages({
         pageSize,
         currentPage,
-      });
+      }, http);
 
     default: {
       return Response.json(

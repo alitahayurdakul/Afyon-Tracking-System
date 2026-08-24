@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
 import { useGetRoleDetailDataQuery } from "@/api/queries/useGetRolesQueries";
-import { NewModal } from "@/components/common/NewModal";
+import { Modal } from "@/components/common/Modal";
 import { EDIT_ROLE_MODAL } from "@/consts/modals";
 
 import { EditRoleForm } from "./EditRoleForm";
@@ -13,8 +13,9 @@ export const EditRoleModalWrapper = ({ id }: { id: string }) => {
   return (
     <>
       {!isFetching && !isLoading && (
-        <NewModal
+        <Modal
           name={`${EDIT_ROLE_MODAL}_${id}`}
+          open
           width={"900px"}
           height={"auto"}
           title={t("modal.edit")}
@@ -22,7 +23,7 @@ export const EditRoleModalWrapper = ({ id }: { id: string }) => {
           isCloseEsc={false}
         >
           <EditRoleForm id={id} data={data} />
-        </NewModal>
+        </Modal>
       )}
     </>
   );

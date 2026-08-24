@@ -18,7 +18,7 @@ export const useGetStageDetailDataQuery = <T>(stageId: string) => {
   const { id: processId } = useParams();
 
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.processes,
   );
 
   return useQuery({
@@ -76,7 +76,7 @@ export const useStartSubStage = () => {
           id: "startSubStageSuccess" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("processes"));
     },
     onError: (err) => {
       dispatch(
@@ -139,7 +139,7 @@ export const useSaveSubStage = () => {
           id: "saveSubStageSuccess" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("processes"));
     },
     onError: (err) => {
       dispatch(
@@ -203,7 +203,7 @@ export const useCompleteSubStage = () => {
           id: "completeSubStageSuccess" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("processes"));
     },
     onError: (err) => {
       dispatch(
@@ -258,7 +258,7 @@ export const useEditSubStage = () => {
           id: "editSubStageSuccess" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("processes"));
     },
     onError: (err) => {
       dispatch(
@@ -307,7 +307,7 @@ export const useCompleteStage = () => {
           id: "completeStageSuccess" + Date.now(),
         }),
       );
-      dispatch(addTriggerTable());
+      dispatch(addTriggerTable("processes"));
     },
     onError: (err) => {
       dispatch(

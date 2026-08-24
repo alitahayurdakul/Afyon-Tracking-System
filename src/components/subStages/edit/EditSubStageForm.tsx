@@ -1,7 +1,7 @@
 "use client";
 
 
-import React, { useCallback } from "react";
+import React from "react";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -76,45 +76,42 @@ export const EditSubStageForm = ({ id, data }: IPropsTypes) => {
     removeModal();
   };
 
-  const onSubmit: SubmitHandler<ISubStageFormDataTypes> = useCallback(
-    async (formData) => {
-      try {
-        const params = {
-          id,
-          name: formData.name,
-          materialIds: formData.materials.map(
-            (material: IOptionType) => material.value,
-          ),
-          description: formData.desc,
-          lastUpdatedBy: currentUserName,
-        };
-        await axiosInstance.post(CLIENT_END_POINTS.subStage.edit, {
-          type: SubStageQueryTypes.editSubStage,
-          params,
-        });
-        dispatch(
-          addToastify({
-            message: t("form.notifications.editSuccess"),
-            type: "success",
-            icon: "close",
-            id: "editSubStage" + Date.now(),
-          }),
-        );
-        dispatch(addTriggerTable());
-        removeModal();
-      } catch (err: any) {
-        dispatch(
-          addToastify({
-            message: extractApiError(err, t("form.notifications.editError")),
-            type: "error",
-            icon: "close",
-            id: "editSubStage" + Date.now(),
-          }),
-        );
-      }
-    },
-    [id],
-  );
+  const onSubmit: SubmitHandler<ISubStageFormDataTypes> = async (formData) => {
+    try {
+      const params = {
+        id,
+        name: formData.name,
+        materialIds: formData.materials.map(
+          (material: IOptionType) => material.value,
+        ),
+        description: formData.desc,
+        lastUpdatedBy: currentUserName,
+      };
+      await axiosInstance.post(CLIENT_END_POINTS.subStage.edit, {
+        type: SubStageQueryTypes.editSubStage,
+        params,
+      });
+      dispatch(
+        addToastify({
+          message: t("form.notifications.editSuccess"),
+          type: "success",
+          icon: "close",
+          id: "editSubStage" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable("subStages"));
+      removeModal();
+    } catch (err: any) {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, t("form.notifications.editError")),
+          type: "error",
+          icon: "close",
+          id: "editSubStage" + Date.now(),
+        }),
+      );
+    }
+  };
 
   return (
     <form className={styles["train-form"]}>

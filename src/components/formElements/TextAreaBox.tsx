@@ -49,6 +49,12 @@ export const TextAreaBox = forwardRef<Ref, TextAreaBoxProps>(
 
     const error = props.error || (formState.isSubmitted && errorFormValidation);
 
+    // Must match the render condition below, so aria-describedby never
+    // points at an id that is not on the page.
+    const showErrorLabel = Boolean(
+      error && error.message && formState.isSubmitted,
+    );
+
     const success =
       props.success === false
         ? false
@@ -89,6 +95,8 @@ export const TextAreaBox = forwardRef<Ref, TextAreaBoxProps>(
         >
           <textarea
             id={props.name}
+            aria-invalid={!!error}
+            aria-describedby={showErrorLabel ? `${props.name}-error` : undefined}
             rows={props.rows}
             cols={props.cols}
             {...field}
@@ -153,6 +161,7 @@ export const TextAreaBox = forwardRef<Ref, TextAreaBoxProps>(
         <AnimatePresence>
           {error && error?.message && formState.isSubmitted && (
             <ErrorLabel
+              id={`${props.name}-error`}
               message={error.message}
               className={props.errorLabelClassName}
             />

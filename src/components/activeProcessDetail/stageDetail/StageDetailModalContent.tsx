@@ -14,7 +14,8 @@ import {
   useSaveSubStage,
   useStartSubStage,
 } from "@/api/queries/useGetStageDetailDataQuery";
-import { NewModal } from "@/components/common/NewModal";
+import { ErrorComponent } from "@/components/common/error/ErrorComponent";
+import { Modal } from "@/components/common/Modal";
 import { PopoverBody } from "@/components/Popover";
 import { ACTIVE_STAGE_DETAIL_MODAL } from "@/consts/modals";
 import {
@@ -54,7 +55,9 @@ export default function StageDetailModalContent({
   stageStatus,
 }: StageDetailModalProps) {
   const t = useTranslations("activeProcessDetail");
-  const { data: subStagesData } = useGetStageDetailDataQuery<SubStage[]>(id);
+  const tErrors = useTranslations("layout.errors");
+  const { data: subStagesData, isError } =
+    useGetStageDetailDataQuery<SubStage[]>(id);
 
   const { id: processId } = useParams();
 
@@ -136,6 +139,26 @@ export default function StageDetailModalContent({
       materialList: activeSubStageData?.materials ?? [],
       description: activeSubStageData?.description ?? "",
     });
+  }
+
+  // The modal has to render even when the fetch failed. Returning null here
+  // made "open stage detail" a silent no-op: the user clicked and nothing
+  // happened, with no way to tell a broken request from a stage that simply
+  // has no sub-stages.
+  if (isError) {
+    return (
+      <Modal
+        name={`${ACTIVE_STAGE_DETAIL_MODAL}_${id}`}
+        open
+        width="900px"
+        height="auto"
+        title={`${t("stage-modal-header")} — ${stageName || ""}`}
+        isCloseOutside={false}
+        isCloseEsc={false}
+      >
+        <ErrorComponent errorLabel={tErrors("loadFailed")} />
+      </Modal>
+    );
   }
 
   if (!activeSubStageData) return null;
@@ -223,8 +246,9 @@ export default function StageDetailModalContent({
   };
 
   return (
-    <NewModal
+    <Modal
       name={`${ACTIVE_STAGE_DETAIL_MODAL}_${id}`}
+      open
       width="900px"
       height="auto"
       title={`${t("stage-modal-header")} — ${stageName || ""}`}
@@ -332,7 +356,7 @@ export default function StageDetailModalContent({
                   alignOffset={-73}
                   align="start"
                   triggerBody={
-                    <button className={styles.saveBtn}>
+                    <button type="button" className={styles.saveBtn}>
                       {t("buttons.save-changes")}
                     </button>
                   }
@@ -345,8 +369,8 @@ export default function StageDetailModalContent({
                   }
                   closeContainer={
                     <div className={styles["btn-container"]}>
-                      <button>{t("no")}</button>
-                      <button onClick={saveStageChanges}>
+                      <button type="button">{t("no")}</button>
+                      <button type="button" onClick={saveStageChanges}>
                         {" "}
                         {saveIsPending ? (
                           <FontAwesomeIcon
@@ -368,7 +392,7 @@ export default function StageDetailModalContent({
                   alignOffset={-73}
                   align="start"
                   triggerBody={
-                    <button className={styles.completeBtn}>
+                    <button type="button" className={styles.completeBtn}>
                       {t("buttons.complete-sub-stage")}
                     </button>
                   }
@@ -381,8 +405,8 @@ export default function StageDetailModalContent({
                   }
                   closeContainer={
                     <div className={styles["btn-container"]}>
-                      <button>{t("no")}</button>
-                      <button onClick={completeSubStage}>
+                      <button type="button">{t("no")}</button>
+                      <button type="button" onClick={completeSubStage}>
                         {saveIsPending ? (
                           <FontAwesomeIcon
                             icon={faSpinner}
@@ -407,7 +431,7 @@ export default function StageDetailModalContent({
                 alignOffset={-73}
                 align="start"
                 triggerBody={
-                  <button className={styles.startBtn}>
+                  <button type="button" className={styles.startBtn}>
                     {t("buttons.start-sub-stage")}
                   </button>
                 }
@@ -420,8 +444,8 @@ export default function StageDetailModalContent({
                 }
                 closeContainer={
                   <div className={styles["btn-container"]}>
-                    <button>{t("no")}</button>
-                    <button onClick={startStage}>
+                    <button type="button">{t("no")}</button>
+                    <button type="button" onClick={startStage}>
                       {isPending ? (
                         <FontAwesomeIcon
                           icon={faSpinner}
@@ -446,7 +470,7 @@ export default function StageDetailModalContent({
                   alignOffset={-73}
                   align="start"
                   triggerBody={
-                    <button className={styles.editBtn}>
+                    <button type="button" className={styles.editBtn}>
                       {t("buttons.edit")}
                     </button>
                   }
@@ -459,8 +483,8 @@ export default function StageDetailModalContent({
                   }
                   closeContainer={
                     <div className={styles["btn-container"]}>
-                      <button>{t("no")}</button>
-                      <button onClick={editCompletedSubStage}>
+                      <button type="button">{t("no")}</button>
+                      <button type="button" onClick={editCompletedSubStage}>
                         {editIsPending ? (
                           <FontAwesomeIcon
                             icon={faSpinner}
@@ -485,7 +509,7 @@ export default function StageDetailModalContent({
                   alignOffset={-73}
                   align="start"
                   triggerBody={
-                    <button className={styles.completeParentStageBtn}>
+                    <button type="button" className={styles.completeParentStageBtn}>
                       {t("buttons.complete-stage")}
                     </button>
                   }
@@ -498,8 +522,8 @@ export default function StageDetailModalContent({
                   }
                   closeContainer={
                     <div className={styles["btn-container"]}>
-                      <button>{t("no")}</button>
-                      <button onClick={completeStage}>
+                      <button type="button">{t("no")}</button>
+                      <button type="button" onClick={completeStage}>
                         {" "}
                         {completeIsPending ? (
                           <FontAwesomeIcon
@@ -521,6 +545,6 @@ export default function StageDetailModalContent({
           </div>
         )}
       </div>
-    </NewModal>
+    </Modal>
   );
 }

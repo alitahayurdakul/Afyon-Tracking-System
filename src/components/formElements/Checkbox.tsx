@@ -69,6 +69,13 @@ export const CheckBox = ({
         } ${disabled ? styles["disable-container"] : ""}`}
       >
         <input
+          id={name}
+          aria-invalid={!!error}
+          aria-describedby={
+            error && error.message && formState.isSubmitted
+              ? `${name}-error`
+              : undefined
+          }
           {...field}
           className={`${
             error && styles["error-input"]
@@ -83,7 +90,10 @@ export const CheckBox = ({
           disabled={disabled}
           checked={field.value}
         />
+        {/* Without htmlFor the checkbox has no accessible name at all —
+            a screen reader announced only "checkbox, not checked". */}
         <label
+          htmlFor={name}
           className={clsx(styles["default-label"], {
             [classNameLabel as string]: classNameLabel,
           })}
@@ -95,6 +105,7 @@ export const CheckBox = ({
       <AnimatePresence>
         {error && error?.message && formState.isSubmitted && (
           <ErrorLabel
+            id={`${name}-error`}
             type="checkbox"
             message={error.message}
             className={errorClassName}

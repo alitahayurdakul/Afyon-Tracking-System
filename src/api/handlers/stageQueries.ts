@@ -1,4 +1,5 @@
-import { axiosInstance } from "@/api/axiosInstance";
+import { AxiosInstance } from "axios";
+
 import { END_POINTS } from "@/consts/endpoints";
 import { IPaginationTypes } from "@/types/commonTypes";
 import {
@@ -8,10 +9,10 @@ import {
 } from "@/types/stagesTypes";
 
 import {
+  createErrorResponse,
   createJsonError,
   createJsonOnlyData,
   createJsonSuccess,
-  extractErrorMessage,
 } from "./responseHelpers";
 
 export const stageHandlers = {
@@ -23,88 +24,88 @@ export const stageHandlers = {
   getTableStages,
 };
 
-async function createStage(params: Record<string, any>): Promise<Response> {
+async function createStage(params: Record<string, any>, http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.post(END_POINTS.stage.create, params);
+    const response = await http.post(END_POINTS.stage.create, params);
     if (response.status === 201) {
       return createJsonSuccess(response.data, 201);
     }
-    return createJsonError("Failed to create sub stage", 400);
+    return createJsonError("Failed to create sub stage", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }
 
-async function deleteStage(id: string): Promise<Response> {
+async function deleteStage(id: string, http: AxiosInstance): Promise<Response> {
   try {
     if (id) {
-      const response = await axiosInstance.delete(END_POINTS.stage.delete(id));
+      const response = await http.delete(END_POINTS.stage.delete(id));
       if (response.status === 200) {
         return createJsonOnlyData(response.data || []);
       }
     }
-    return createJsonError("Failed to delete stage", 400);
+    return createJsonError("Failed to delete stage", 502);
   } catch (err: unknown) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }
 
-async function editStage(params: Record<string, any>): Promise<Response> {
+async function editStage(params: Record<string, any>, http: AxiosInstance): Promise<Response> {
   try {
     const { id, ...rest } = params;
-    const response = await axiosInstance.put(END_POINTS.stage.edit(id), {
+    const response = await http.put(END_POINTS.stage.edit(id), {
       ...rest,
     });
     if (response.status === 200) {
       return createJsonSuccess(response.data, 201);
     }
-    return createJsonError("Failed to edit stage", 400);
+    return createJsonError("Failed to edit stage", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }
 
-async function getStages(): Promise<Response> {
+async function getStages(http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.get<IStageResponseDataTypes>(
+    const response = await http.get<IStageResponseDataTypes>(
       END_POINTS.stage.getAll,
     );
     if (response.status === 200) {
       return createJsonOnlyData(response.data.stages || []);
     }
-    return createJsonError("Failed to fetch sub stage detail", 400);
+    return createJsonError("Failed to fetch sub stage detail", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }
 
-async function getStageDetail(id: string): Promise<Response> {
+async function getStageDetail(id: string, http: AxiosInstance): Promise<Response> {
   try {
-    const response = await axiosInstance.get<IStageType>(
+    const response = await http.get<IStageType>(
       END_POINTS.stage.getDetail(id),
     );
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch sub stage detail", 400);
+    return createJsonError("Failed to fetch sub stage detail", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }
 
-async function getTableStages({
-  currentPage,
-  pageSize,
-}: IPaginationTypes): Promise<Response> {
+async function getTableStages(
+  { currentPage, pageSize }: IPaginationTypes,
+  http: AxiosInstance,
+): Promise<Response> {
   try {
-    const response = await axiosInstance.get<IStageTableResponseDataTypes>(
+    const response = await http.get<IStageTableResponseDataTypes>(
       END_POINTS.stage.getFilteredStages({ currentPage, pageSize }),
     );
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);
     }
-    return createJsonError("Failed to fetch sub stage detail", 400);
+    return createJsonError("Failed to fetch sub stage detail", 502);
   } catch (err: any) {
-    return createJsonError(extractErrorMessage(err), 500);
+    return createErrorResponse(err);
   }
 }

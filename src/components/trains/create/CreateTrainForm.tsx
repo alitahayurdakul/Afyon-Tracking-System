@@ -1,7 +1,7 @@
 "use client";
 
 
-import React, { useCallback } from "react";
+import React from "react";
 import { useTranslations } from "next-intl";
 import { SubmitHandler,useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -24,6 +24,7 @@ import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { IFormFieldType, IOptionType } from "@/types/formTypes";
 import { ITrainFormDataTypes } from "@/types/trainsTypes";
 import { InputSpaceEnums } from "@/utils/enum/formEnums";
+import { extractApiError } from "@/utils/extractApiError";
 import { useRemoveQueryParamModal } from "@/utils/searchParams";
 import { TrainFormValidation } from "@/utils/validations/trainFormValidation";
 
@@ -60,49 +61,46 @@ export const CreateTrainForm = () => {
     removeModal();
   };
 
-  const onSubmit: SubmitHandler<ITrainFormDataTypes> = useCallback(
-    async (data) => {
-      try {
-        const wagons = data.wagons.map((option: IOptionType, index) => {
-          return{
-            order: index + 1,
-            id: option.value
-          }
-        })
-        const params = {
-          trainName: data.trainSetNo ?? "",
-          wagons,
-          desc: data.desc,
-          creator: currentUserName,
-        };
-        await axiosInstance.post(CLIENT_END_POINTS.train.create, {
-          type: TrainQueryTypes.createTrain,
-          params,
-        });
-        dispatch(
-          addToastify({
-            message: t("form.notifications.createSuccess"),
-            type: "success",
-            icon: "close",
-            id: "createTrain" + Date.now(),
-          }),
-        );
-        reset();
-        dispatch(addTriggerTable());
-        removeModal();
-      } catch (err) {
-        dispatch(
-          addToastify({
-            message: (err as Error)?.message || t("form.notifications.error"),
-            type: "error",
-            icon: "close",
-            id: "createTrainError" + Date.now(),
-          }),
-        );
-      }
-    },
-    [],
-  );
+  const onSubmit: SubmitHandler<ITrainFormDataTypes> = async (data) => {
+    try {
+      const wagons = data.wagons.map((option: IOptionType, index) => {
+        return{
+          order: index + 1,
+          id: option.value
+        }
+      })
+      const params = {
+        trainName: data.trainSetNo ?? "",
+        wagons,
+        desc: data.desc,
+        creator: currentUserName,
+      };
+      await axiosInstance.post(CLIENT_END_POINTS.train.create, {
+        type: TrainQueryTypes.createTrain,
+        params,
+      });
+      dispatch(
+        addToastify({
+          message: t("form.notifications.createSuccess"),
+          type: "success",
+          icon: "close",
+          id: "createTrain" + Date.now(),
+        }),
+      );
+      reset();
+      dispatch(addTriggerTable("trains"));
+      removeModal();
+    } catch (err) {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, t("form.notifications.error")),
+          type: "error",
+          icon: "close",
+          id: "createTrainError" + Date.now(),
+        }),
+      );
+    }
+  };
 
   return (
     <form className={styles["train-form"]}>

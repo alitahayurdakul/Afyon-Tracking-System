@@ -17,7 +17,7 @@ export const useGetStagesDataQuery = <T>({
   currentPage,
 }: IPaginationTypes) => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.stages,
   );
   return useQuery({
     queryKey: [`getStagesAllDatas`, trigger, pageSize, currentPage],
@@ -38,7 +38,7 @@ export const useGetStageDetailDataQuery = <T>(id: string) => {
   const param = searchParams.get("modal");
   const splittedId = param?.split("_").pop();
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.stages,
   );
 
   return useQuery({
@@ -57,7 +57,7 @@ export const useGetStageDetailDataQuery = <T>(id: string) => {
 
 export const useGetStagesOptionsDataQuery = <T>() => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.stages,
   );
   return useQuery({
     queryKey: [`getStagesOptionsAllDatas`, trigger],

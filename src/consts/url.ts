@@ -20,3 +20,23 @@ export const URL_PAGES = {
     profile: "/profil",
     processTrain: "/tren-surecleri"
 }
+
+/**
+ * Name of the httpOnly session cookie the backend sets. The access token lives
+ * in memory only, so this cookie is the sole auth signal visible server-side.
+ */
+export const SESSION_COOKIE_NAME = "jwt";
+
+/**
+ * Routes reachable without a session. Shared by the proxy (server-side gate)
+ * and AuthBootstrap (client-side gate) — the two must never diverge, or a user
+ * bounces between them in a redirect loop.
+ */
+export const PUBLIC_PATHS = [URL_PAGES.login, URL_PAGES.forgotPassword];
+
+/** Expects a locale-stripped pathname (see `stripLocale`). */
+export const isPublicPath = (pathname: string): boolean =>
+  PUBLIC_PATHS.some(
+    (publicPath) =>
+      pathname === publicPath || pathname.startsWith(`${publicPath}/`),
+  );

@@ -30,7 +30,9 @@
     "submit": "Anmelden",
     "submitting": "Anmeldung läuft...",
     "success": "Anmeldung erfolgreich",
-    "error": "Anmeldung fehlgeschlagen"
+    "error": "Anmeldung fehlgeschlagen",
+    "invalidCredentials": "E-Mail oder Passwort ist falsch",
+    "unavailable": "Anmeldung nicht möglich. Bitte versuchen Sie es später erneut."
   },
   "forgotPassword": {
     "forgotLink": "Passwort vergessen",
@@ -142,5 +144,27 @@
     "go": "Los",
     "perPage": "Pro Seite",
     "page": "Seite"
+  },
+  "errorPage": {
+    "title": "Etwas ist schiefgelaufen",
+    "description": "Ein unerwarteter Fehler ist aufgetreten. Sie können es erneut versuchen oder zur Startseite zurückkehren.",
+    "retry": "Erneut versuchen",
+    "home": "Zurück zur Startseite"
+  },
+  "notFoundPage": {
+    "title": "Seite nicht gefunden",
+    "description": "Die gesuchte Seite wurde möglicherweise verschoben oder gelöscht.",
+    "home": "Zurück zur Startseite"
+  },
+  "meta": {
+    "title": "Afyon Workflow-Management-System",
+    "description": "System zur Verfolgung von Wartung und Arbeitsabläufen der Zugflotte."
+  },
+  "errors": {
+    "loadFailed": "Der Inhalt konnte nicht geladen werden."
+  },
+  "languageSelector": {
+    "label": "Sprache: {language}. Zum Ändern öffnen",
+    "menuLabel": "Sprachen"
   }
 }

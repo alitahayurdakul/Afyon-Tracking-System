@@ -84,7 +84,18 @@ export const InputBox = forwardRef<Ref, InputBoxProps>(
     const isErrorVisible = props.onChangeErrorTrigger || formState.isSubmitted;
 
     const error = props.error || (isErrorVisible && errorFormValidation);
-    
+
+    // Whether the message is actually on screen. aria-describedby must agree
+    // with this: pointing at an id that is not rendered leaves a dangling
+    // reference, and omitting it when the message *is* shown leaves the error
+    // unannounced.
+    const showErrorLabel = Boolean(
+      error &&
+        error.message &&
+        ((!props.onChangeErrorTrigger && formState.isSubmitted) ||
+          props.onChangeErrorTrigger),
+    );
+
 
     const success =
       props.success === false
@@ -243,6 +254,8 @@ export const InputBox = forwardRef<Ref, InputBoxProps>(
         >
           <input
             id={props.name}
+            aria-invalid={!!error}
+            aria-describedby={showErrorLabel ? `${props.name}-error` : undefined}
             pattern={props.onlyNumber ? "[0-9]*" : undefined}
             type={inputType}
             disabled={props?.disabled || props?.onlyInputDisabled}
@@ -333,11 +346,9 @@ export const InputBox = forwardRef<Ref, InputBoxProps>(
         </div>
         {/* Error message part */}
         <AnimatePresence>
-          {error &&
-            error?.message &&
-            ((!props.onChangeErrorTrigger && formState.isSubmitted) ||
-              props.onChangeErrorTrigger) && (
+          {showErrorLabel && error && error.message && (
               <ErrorLabel
+                id={`${props.name}-error`}
                 className={props.errorLabelClassName}
                 message={error.message}
               />

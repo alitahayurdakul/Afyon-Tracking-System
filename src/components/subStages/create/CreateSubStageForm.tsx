@@ -1,7 +1,6 @@
 "use client";
 
 
-import { useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -60,44 +59,41 @@ export const CreateSubStageForm = () => {
     removeModal();
   };
 
-  const onSubmit: SubmitHandler<ISubStageFormDataTypes> = useCallback(
-    async (data) => {
-      try {
-        const params = {
-          name: data.name,
-          materialIds: data.materials.map((material: IOptionType) => material.value),
-          description: data.desc,
-          creator: currentUserName,
-        };
+  const onSubmit: SubmitHandler<ISubStageFormDataTypes> = async (data) => {
+    try {
+      const params = {
+        name: data.name,
+        materialIds: data.materials.map((material: IOptionType) => material.value),
+        description: data.desc,
+        creator: currentUserName,
+      };
 
-        await axiosInstance.post(CLIENT_END_POINTS.subStage.create, {
-          type: SubStageQueryTypes.createSubStage,
-          params,
-        });
-        dispatch(
-          addToastify({
-            message: t("form.notifications.createSuccess"),
-            type: "success",
-            icon: "close",
-            id: "createSubStage" + Date.now(),
-          }),
-        );
-        dispatch(addTriggerTable());
-        reset();
-        removeModal();
-      } catch (err: any) {
-        dispatch(
-          addToastify({
-            message: extractApiError(err, t("form.notifications.createError")),
-            type: "error",
-            icon: "close",
-            id: "createSubStage" + Date.now(),
-          }),
-        );
-      }
-    },
-    [],
-  );
+      await axiosInstance.post(CLIENT_END_POINTS.subStage.create, {
+        type: SubStageQueryTypes.createSubStage,
+        params,
+      });
+      dispatch(
+        addToastify({
+          message: t("form.notifications.createSuccess"),
+          type: "success",
+          icon: "close",
+          id: "createSubStage" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable("subStages"));
+      reset();
+      removeModal();
+    } catch (err: any) {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, t("form.notifications.createError")),
+          type: "error",
+          icon: "close",
+          id: "createSubStage" + Date.now(),
+        }),
+      );
+    }
+  };
 
   return (
     <form className={styles["train-form"]}>

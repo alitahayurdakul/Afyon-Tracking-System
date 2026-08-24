@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
 import { useGetMaterialDetailDataQuery } from "@/api/queries/useGetMaterialsQueries";
-import { NewModal } from "@/components/common/NewModal";
+import { Modal } from "@/components/common/Modal";
 import { EDIT_MATERIAL_MODAL } from "@/consts/modals";
 
 import { EditMaterialForm } from "./EditMaterialForm";
@@ -13,8 +13,9 @@ export const EditMaterialModalWrapper = ({ id }: { id: string }) => {
   return (
     <>
       {!isFetching && !isLoading && (
-        <NewModal
+        <Modal
           name={`${EDIT_MATERIAL_MODAL}_${id}`}
+          open
           width={"900px"}
           height={"auto"}
           title={t("modal.edit-header")}
@@ -22,7 +23,7 @@ export const EditMaterialModalWrapper = ({ id }: { id: string }) => {
           isCloseEsc={false}
         >
           <EditMaterialForm id={id} data={data} />
-        </NewModal>
+        </Modal>
       )}
     </>
   );

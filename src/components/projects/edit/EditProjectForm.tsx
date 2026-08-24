@@ -71,44 +71,41 @@ export const EditProjectForm = ({ id, data }: IPropsTypes) => {
     removeModal();
   };
 
-  const onSubmit: SubmitHandler<IProjectFormDataTypes> = useCallback(
-    async (formData) => {
-      try {
-        const params = {
-          id,
-          name: formData.name,
-          projectCode: formData.code,
-          status: formData.status,
-          description: formData.desc,
-          lastUpdatedBy: currentUserName,
-        };
-        await axiosInstance.post(CLIENT_END_POINTS.project.edit, {
-          type: ProjectQueryTypes.editProject,
-          params,
-        });
-        dispatch(
-          addToastify({
-            message: t("form.notifications.editSuccess"),
-            type: "success",
-            icon: "close",
-            id: "editProject" + Date.now(),
-          }),
-        );
-        dispatch(addTriggerTable());
-        removeModal();
-      } catch (err: any) {
-        dispatch(
-          addToastify({
-            message: extractApiError(err, t("form.notifications.editError")),
-            type: "error",
-            icon: "close",
-            id: "editProject" + Date.now(),
-          }),
-        );
-      }
-    },
-    [id],
-  );
+  const onSubmit: SubmitHandler<IProjectFormDataTypes> = async (formData) => {
+    try {
+      const params = {
+        id,
+        name: formData.name,
+        projectCode: formData.code,
+        status: formData.status,
+        description: formData.desc,
+        lastUpdatedBy: currentUserName,
+      };
+      await axiosInstance.post(CLIENT_END_POINTS.project.edit, {
+        type: ProjectQueryTypes.editProject,
+        params,
+      });
+      dispatch(
+        addToastify({
+          message: t("form.notifications.editSuccess"),
+          type: "success",
+          icon: "close",
+          id: "editProject" + Date.now(),
+        }),
+      );
+      dispatch(addTriggerTable("projects"));
+      removeModal();
+    } catch (err: any) {
+      dispatch(
+        addToastify({
+          message: extractApiError(err, t("form.notifications.editError")),
+          type: "error",
+          icon: "close",
+          id: "editProject" + Date.now(),
+        }),
+      );
+    }
+  };
 
   return (
     <form className={styles["train-form"]}>

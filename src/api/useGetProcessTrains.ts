@@ -13,7 +13,7 @@ import { ITrainType } from "@/types/trainsTypes";
 
 export const useGetProcessTrainsDataQuery = <T>() => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.processTrains,
   );
 
   return useQuery({
@@ -34,7 +34,7 @@ export const useGetProcessTrainsDataQuery = <T>() => {
 
 export const useGetProcessTrainDetailDataQuery = <T>() => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.processTrains,
   );
   const trainId = useParams().trainId;
 
@@ -61,7 +61,7 @@ export const useGetTrainWagonProcessesDetailDataQuery = <T>(
   wagonId?: string,
 ) => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.processTrains,
   );
   const trainId = useParams().trainId;
 
@@ -87,7 +87,7 @@ export const useGetTrainWagonProcessesDetailDataQuery = <T>(
 
 export const useGetTrainDetailDataQuery = () => {
   const trigger = useSelector(
-    (state: RootState) => state.tableTrigger.triggerTrainTableTrigger,
+    (state: RootState) => state.tableTrigger.processTrains,
   );
   const trainId = useParams().trainId;
 

@@ -44,7 +44,7 @@ export const EditWorkflowModal = ({ id }: { id: string }) => {
 
   return (
     <>
-      <button className={styles["edit-btn"]} onClick={onEditClick}>
+      <button type="button" className={styles["edit-btn"]} onClick={onEditClick}>
         <FontAwesomeIcon icon={faPen} />
         <span>{t("actions.edit")}</span>
       </button>

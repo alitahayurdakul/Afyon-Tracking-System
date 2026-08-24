@@ -21,6 +21,7 @@ export const EditMaterialsModal = ({ id }: { id: string }) => {
   return (
     <>
       <button
+        type="button"
         className={styles["edit-btn"]}
         onClick={() => addQueryParam("modal", `${EDIT_MATERIAL_MODAL}_${id}`)}
       >

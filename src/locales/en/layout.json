@@ -30,7 +30,9 @@
     "submit": "Log In",
     "submitting": "Logging in...",
     "success": "Login successful",
-    "error": "Login failed"
+    "error": "Login failed",
+    "invalidCredentials": "Incorrect email or password",
+    "unavailable": "Could not sign in. Please try again later."
   },
   "forgotPassword": {
     "forgotLink": "Forgot Password",
@@ -142,5 +144,27 @@
     "go": "Go",
     "perPage": "Per page",
     "page": "page"
+  },
+  "errorPage": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred. You can try again or go back to the home page.",
+    "retry": "Try again",
+    "home": "Back to home"
+  },
+  "notFoundPage": {
+    "title": "Page not found",
+    "description": "The page you are looking for may have been moved or deleted.",
+    "home": "Back to home"
+  },
+  "meta": {
+    "title": "Afyon Workflow Management System",
+    "description": "Train fleet maintenance and workflow tracking system."
+  },
+  "errors": {
+    "loadFailed": "Content could not be loaded."
+  },
+  "languageSelector": {
+    "label": "Language: {language}. Open to change",
+    "menuLabel": "Languages"
   }
 }

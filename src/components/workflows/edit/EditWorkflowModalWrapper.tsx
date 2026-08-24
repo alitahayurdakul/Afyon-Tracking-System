@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 
 import { useGetWorkflowDetailDataQuery } from "@/api/queries/useGetWorkflowsQueries";
-import { NewModal } from "@/components/common/NewModal";
+import { Modal } from "@/components/common/Modal";
 import { EDIT_WORKFLOW_MODAL } from "@/consts/modals";
 import {
   IWorkflowFormTypes,
@@ -32,8 +32,9 @@ export const EditWorkflowModalWrapper = ({ id }: { id: string }) => {
   return (
     <>
       {!isFetching && !isLoading && !isError && (
-        <NewModal
+        <Modal
           name={`${EDIT_WORKFLOW_MODAL}_${id}`}
+          open
           width={"900px"}
           height={"auto"}
           title={t("modal.edit-header")}
@@ -41,7 +42,7 @@ export const EditWorkflowModalWrapper = ({ id }: { id: string }) => {
           isCloseEsc={false}
         >
           <EditWorkflowForm id={id} workflowData={transformedData} />
-        </NewModal>
+        </Modal>
       )}
     </>
   );

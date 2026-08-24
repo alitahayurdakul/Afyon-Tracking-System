@@ -36,6 +36,7 @@ export default function StageDetailModal({
   return (
     <>
       <button
+        type="button"
         className={styles.detailBtn}
         onClick={() => addQueryParam("modal", modalName)}
       >

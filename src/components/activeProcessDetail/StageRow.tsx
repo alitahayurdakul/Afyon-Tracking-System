@@ -119,14 +119,14 @@ export default function StageRow({
                 <div>
                   {stage.stageId === qualityId ? (
                     entriesEqStages ? (
-                      <button className={styles.startBtn}>
+                      <button type="button" className={styles.startBtn}>
                         {t("buttons.start-stage")}
                       </button>
                     ) : (
                       <></>
                     )
                   ) : (
-                    <button className={styles.startBtn}>
+                    <button type="button" className={styles.startBtn}>
                       {t("buttons.start-stage")}
                     </button>
                   )}
@@ -141,8 +141,8 @@ export default function StageRow({
               }
               closeContainer={
                 <div className={styles["btn-container"]}>
-                  <button>{t("no")}</button>
-                  <button onClick={startStage}>
+                  <button type="button">{t("no")}</button>
+                  <button type="button" onClick={startStage}>
                     {isPending ? (
                       <FontAwesomeIcon
                         icon={faSpinner}

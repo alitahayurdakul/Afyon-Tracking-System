@@ -20,6 +20,7 @@ export const CreateFleetModal = () => {
   return (
     <>
       <button
+        type="button"
         className={styles["fleet-btn"]}
         onClick={() => {
           if (!open) {
