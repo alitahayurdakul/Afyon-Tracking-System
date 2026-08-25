@@ -18,7 +18,8 @@ export const URL_PAGES = {
     materials: "/malzeme-yonetimi",
     projects: "/proje-yonetimi",
     profile: "/profil",
-    processTrain: "/tren-surecleri"
+    processTrain: "/tren-surecleri",
+    logs: "/log-kayitlari"
 }
 
 /**

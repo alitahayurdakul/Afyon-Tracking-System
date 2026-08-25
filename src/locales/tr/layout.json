@@ -18,7 +18,8 @@
     "roles": "Roller",
     "processesHistory": "Geçmiş Süreçler",
     "profile": "Profil",
-    "processTrain": "Tren Süreçleri"
+    "processTrain": "Tren Süreçleri",
+    "logs": "Log Kayıtları"
   },
   "login": {
     "brandTitle": "Afyon İş Akışı Yönetim Sistemi",

@@ -1,0 +1,35 @@
+{
+  "title": "Protokolleinträge",
+  "description": "Chronologische Aufzeichnung der im System durchgeführten Benutzeraktionen.",
+  "table": {
+    "userId": "Benutzer-ID",
+    "fullname": "Vollständiger Name",
+    "operationTime": "Zeitpunkt",
+    "action": "Aktion"
+  },
+  "actions": {
+    "USER_CREATE": "Benutzer angelegt",
+    "USER_UPDATE": "Benutzer aktualisiert",
+    "USER_DELETE": "Benutzer gelöscht",
+    "USER_PASSWORD_CHANGE": "Passwort geändert",
+    "AUTH_LOGIN": "Anmeldung",
+    "AUTH_LOGOUT": "Abmeldung",
+    "ROLE_CREATE": "Rolle angelegt",
+    "ROLE_UPDATE": "Rolle aktualisiert",
+    "ROLE_DELETE": "Rolle gelöscht",
+    "PROCESS_START": "Prozess gestartet",
+    "PROCESS_COMPLETE": "Prozess abgeschlossen",
+    "PROCESS_DELETE": "Prozess gelöscht",
+    "STAGE_START": "Phase gestartet",
+    "STAGE_COMPLETE": "Phase abgeschlossen",
+    "SUB_STAGE_COMPLETE": "Unterphase abgeschlossen",
+    "WORKFLOW_CREATE": "Arbeitsablauf angelegt",
+    "WORKFLOW_UPDATE": "Arbeitsablauf aktualisiert",
+    "PROJECT_CREATE": "Projekt angelegt",
+    "TRAIN_CREATE": "Zug angelegt",
+    "TRAIN_DELETE": "Zug gelöscht",
+    "WAGON_CREATE": "Waggon angelegt",
+    "MATERIAL_DELETE": "Material gelöscht",
+    "REASON_CREATE": "Verzögerungsgrund angelegt"
+  }
+}
