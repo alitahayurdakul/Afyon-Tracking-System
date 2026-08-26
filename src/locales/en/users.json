@@ -3,6 +3,9 @@
   "description": "Manage system users and their roles centrally.",
   "addButton": "Add New User",
   "search": "Search...",
+  "searchLabel": "Search users",
+  "searchClear": "Clear search",
+  "noSearchResult": "No results found for \"{query}\"",
   "table": {
     "id": "ID",
     "fullname": "Full Name",

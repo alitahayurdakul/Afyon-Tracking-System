@@ -1,5 +1,4 @@
 import {
-  IPaginationTypes,
   IPaginationWithSearch,
   IPaginationWithStatusAndSearch,
 } from "@/types/commonTypes";
@@ -159,8 +158,12 @@ export const END_POINTS = {
     delete: (id: string) => `${apiUrl}/api/roles/${enc(id)}`,
     getAll: `${apiUrl}/api/roles`,
     getDetail: (id: string) => `${apiUrl}/api/roles/${enc(id)}`,
-    getFilteredRoles: ({ currentPage, pageSize }: IPaginationTypes) =>
-      `${apiUrl}/api/roles?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}`,
+    getFilteredRoles: ({
+      currentPage,
+      pageSize,
+      search,
+    }: IPaginationWithSearch) =>
+      `${apiUrl}/api/roles?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}${searchParam(search)}`,
   },
   auth: {
     login: `${apiUrl}/auth`,
@@ -174,8 +177,8 @@ export const END_POINTS = {
     create: `${apiUrl}/register`,
     edit: (id: string) => `${apiUrl}/api/users/${enc(id)}`,
     delete: (id: string) => `${apiUrl}/api/users/${enc(id)}`,
-    getAll: ({ currentPage, pageSize }: IPaginationTypes) =>
-      `${apiUrl}/api/users?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}`,
+    getAll: ({ currentPage, pageSize, search }: IPaginationWithSearch) =>
+      `${apiUrl}/api/users?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}${searchParam(search)}`,
     getDetail: (id: string) => `${apiUrl}/api/users/${enc(id)}`,
     changePassword: (id: string) => `${apiUrl}/api/users/${enc(id)}/password`,
   },

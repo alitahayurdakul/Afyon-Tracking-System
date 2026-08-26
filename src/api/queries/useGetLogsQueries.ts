@@ -3,8 +3,32 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { MOCK_LOGS } from "@/consts/logsConsts";
-import { IPaginationTypes } from "@/types/commonTypes";
-import { ILogsResponseDataTypes } from "@/types/logsTypes";
+import { IPaginationWithSearch } from "@/types/commonTypes";
+import { ILogsResponseDataTypes, ILogType } from "@/types/logsTypes";
+
+interface IUseGetLogsDataQueryOptions extends IPaginationWithSearch {
+  /**
+   * Resolves a raw action key to the label shown in the table. Passed in from
+   * the component because the search has to match what the user actually sees,
+   * and translations are not available inside the hook.
+   */
+  actionLabel?: (action: string) => string;
+}
+
+const matchesSearch = (
+  log: ILogType,
+  term: string,
+  actionLabel?: (action: string) => string,
+) => {
+  const haystack = [
+    log.fullname,
+    log.userId,
+    log.action,
+    actionLabel?.(log.action),
+  ];
+
+  return haystack.some((value) => value?.toLowerCase().includes(term));
+};
 
 /**
  * Log listesi sorgusu.
@@ -25,16 +49,24 @@ import { ILogsResponseDataTypes } from "@/types/logsTypes";
 export const useGetLogsDataQuery = ({
   pageSize,
   currentPage,
-}: IPaginationTypes) => {
+  search,
+  actionLabel,
+}: IUseGetLogsDataQueryOptions) => {
   return useQuery<ILogsResponseDataTypes>({
-    queryKey: ["getLogsAllDatas", pageSize, currentPage],
+    queryKey: ["getLogsAllDatas", pageSize, currentPage, search],
     refetchOnWindowFocus: false,
+    placeholderData: (previousData) => previousData,
     queryFn: async () => {
-      const totalCount = MOCK_LOGS.length;
+      const term = search?.trim().toLowerCase();
+      const logs = term
+        ? MOCK_LOGS.filter((log) => matchesSearch(log, term, actionLabel))
+        : MOCK_LOGS;
+
+      const totalCount = logs.length;
       const start = (currentPage - 1) * pageSize;
 
       return {
-        data: MOCK_LOGS.slice(start, start + pageSize),
+        data: logs.slice(start, start + pageSize),
         totalCount,
         totalPages: Math.max(1, Math.ceil(totalCount / pageSize)),
         pageNumber: currentPage,

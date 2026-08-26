@@ -3,6 +3,9 @@
   "description": "Verwalten Sie Rollen und die zugehörigen Berechtigungen.",
   "addButton": "Neue Rolle hinzufügen",
   "search": "Suche...",
+  "searchLabel": "Rolle suchen",
+  "searchClear": "Suche löschen",
+  "noSearchResult": "Keine Ergebnisse für \"{query}\"",
   "table": {
     "roleName": "Rollenname",
     "roleDescription": "Beschreibung",
