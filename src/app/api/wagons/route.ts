@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
   if (!body) {
     return createJsonError("Invalid JSON body", 400);
   }
-  const { id, params, type, currentPage, pageSize } = body;
+  const { id, params, type, currentPage, pageSize, search } = body;
 
   const http = createServerAxios(request);
 
@@ -37,7 +37,10 @@ export async function POST(request: NextRequest) {
     case WagonQueryTypes.getDetailWagon:
       return await wagonHandlers.getWagonDetail(id, http);
     case WagonQueryTypes.getTableWagons:
-      return await wagonHandlers.getTableWagons({pageSize, currentPage}, http)
+      return await wagonHandlers.getTableWagons(
+        { pageSize, currentPage, search },
+        http,
+      );
 
     default: {
       return Response.json(

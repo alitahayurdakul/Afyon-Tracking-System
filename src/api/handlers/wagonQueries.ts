@@ -1,7 +1,7 @@
 import { AxiosInstance } from "axios";
 
 import { END_POINTS } from "@/consts/endpoints";
-import { IPaginationTypes } from "@/types/commonTypes";
+import { IPaginationWithSearch } from "@/types/commonTypes";
 import { IWagonResponseDataTypes, IWagonTableResponseDataTypes, IWagonType } from "@/types/wagonsTypes";
 
 import {
@@ -76,12 +76,12 @@ async function getWagons(http: AxiosInstance): Promise<Response> {
 }
 
 async function getTableWagons(
-  { pageSize, currentPage }: IPaginationTypes,
+  { pageSize, currentPage, search }: IPaginationWithSearch,
   http: AxiosInstance,
 ): Promise<Response> {
   try {
     const response = await http.get<IWagonTableResponseDataTypes>(
-      END_POINTS.wagon.getFilteredWagons({ pageSize, currentPage }),
+      END_POINTS.wagon.getFilteredWagons({ pageSize, currentPage, search }),
     );
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);

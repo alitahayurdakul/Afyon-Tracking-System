@@ -124,8 +124,12 @@ export const END_POINTS = {
     delete: (id: string) => `${apiUrl}/api/wagons/${enc(id)}`,
     getAll: `${apiUrl}/api/wagons`,
     getDetail: (id: string) => `${apiUrl}/api/wagons/${enc(id)}`,
-    getFilteredWagons: ({ currentPage, pageSize }: IPaginationTypes) =>
-      `${apiUrl}/api/wagons?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}`,
+    getFilteredWagons: ({
+      currentPage,
+      pageSize,
+      search,
+    }: IPaginationWithSearch) =>
+      `${apiUrl}/api/wagons?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}${searchParam(search)}`,
   },
   reason: {
     create: `${apiUrl}/api/reasons`,
