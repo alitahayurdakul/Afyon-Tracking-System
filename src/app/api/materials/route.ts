@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
   if (!body) {
     return createJsonError("Invalid JSON body", 400);
   }
-  const { id, params, type, pageSize, currentPage } = body;
+  const { id, params, type, pageSize, currentPage, search } = body;
 
   const http = createServerAxios(request);
 
@@ -35,10 +35,14 @@ export async function POST(request: NextRequest) {
     case MaterialQueryTypes.getAllMaterials:
       return await materialHandlers.getMaterials(http);
     case MaterialQueryTypes.getTableMaterials:
-      return await materialHandlers.getTableMaterials({
-        pageSize,
-        currentPage,
-      }, http);
+      return await materialHandlers.getTableMaterials(
+        {
+          pageSize,
+          currentPage,
+          search,
+        },
+        http,
+      );
     case MaterialQueryTypes.getDetailMaterial:
       return await materialHandlers.getMaterialDetail(id, http);
 

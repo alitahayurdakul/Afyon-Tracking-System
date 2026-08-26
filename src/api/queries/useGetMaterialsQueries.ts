@@ -8,7 +8,7 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { MaterialQueryTypes } from "@/app/api/materials/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
-import { IPaginationTypes } from "@/types/commonTypes";
+import { IPaginationWithSearch } from "@/types/commonTypes";
 import { IOptionType } from "@/types/formTypes";
 import {
   IMaterialResponseDataTypes,
@@ -20,19 +20,26 @@ import { optionsConverters } from "@/types/optionsConverter";
 export const useGetMaterialsDataQuery = ({
   pageSize,
   currentPage,
-}: IPaginationTypes) => {
+  search,
+}: IPaginationWithSearch) => {
   const trigger = useSelector(
     (state: RootState) => state.tableTrigger.materials,
   );
 
   return useQuery({
-    queryKey: [`getMaterialsAllDatas`, trigger, pageSize, currentPage],
+    queryKey: [`getMaterialsAllDatas`, trigger, pageSize, currentPage, search],
     refetchOnWindowFocus: false,
     enabled: true,
+    placeholderData: (previousData) => previousData,
     queryFn: async (): Promise<IMaterialResponseDataTypes> => {
       const { data } = await axiosInstance.post<IMaterialResponseDataTypes>(
         CLIENT_END_POINTS.material.getAll,
-        { type: MaterialQueryTypes.getTableMaterials, pageSize, currentPage },
+        {
+          type: MaterialQueryTypes.getTableMaterials,
+          pageSize,
+          currentPage,
+          search,
+        },
       );
       return data;
     },

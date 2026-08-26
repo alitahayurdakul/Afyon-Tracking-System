@@ -82,10 +82,22 @@
 }
 
 .search-input {
-  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
   flex: 1;
   min-width: 0;
   max-width: 560px;
+
+  padding: 0 8px 0 16px;
+  border: 1px solid var(--slate-20);
+  border-radius: 14px;
+  background: var(--base-white);
+
+  transition:
+    border-color var(--transition) ease,
+    box-shadow var(--transition) ease;
 }
 
 @media (max-width: 640px) {
@@ -95,21 +107,35 @@
   }
 }
 
-.search-input svg {
-  position: absolute;
-  top: 50%;
-  left: 16px;
-  transform: translateY(-50%);
+.search-input:hover {
+  border-color: var(--base-grey-15);
+}
+
+.search-input:focus-within {
+  border-color: var(--blue-70);
+  box-shadow: 0 0 0 3px rgba(0, 66, 134, 0.12);
+}
+
+.search-input > svg {
+  flex-shrink: 0;
+  font-size: 15px;
+  color: var(--slate-50);
+  transition: color var(--transition) ease;
+}
+
+.search-input:focus-within > svg {
   color: var(--blue-90);
 }
 
 .search-input input {
-  width: 100%;
-  padding: 14px 16px 14px 44px;
-  border-radius: 14px;
-  border: 1px solid var(--slate-20);
-  background: white;
+  flex: 1;
+  min-width: 0;
+
+  padding: 13px 0;
+  border: none;
+  background: transparent;
   outline: none;
+
   font-size: 14px;
   color: var(--text-primary);
 }
@@ -118,9 +144,45 @@
   color: var(--text-muted);
 }
 
-.search-input input:focus {
-  border-color: var(--border-blue-70);
-  box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.1);
+.search-input input[type="search"]::-webkit-search-cancel-button,
+.search-input input[type="search"]::-webkit-search-decoration {
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.search-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 28px;
+  height: 28px;
+  padding: 0;
+
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  cursor: pointer;
+
+  color: var(--slate-50);
+  transition:
+    background var(--transition) ease,
+    color var(--transition) ease;
+}
+
+.search-clear svg {
+  font-size: 13px;
+}
+
+.search-clear:hover {
+  background: rgba(0, 66, 134, 0.08);
+  color: var(--blue-90);
+}
+
+.search-clear:focus-visible {
+  outline: 2px solid var(--blue-70);
+  outline-offset: 1px;
 }
 
 .toolbar-actions {

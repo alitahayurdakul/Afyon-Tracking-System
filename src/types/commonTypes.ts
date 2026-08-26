@@ -18,6 +18,10 @@ export interface IPaginationWithStatus extends IPaginationTypes {
   status?: string;
 }
 
+export interface IPaginationWithSearch extends IPaginationTypes {
+  search?: string;
+}
+
 export interface ITableResponseType {
   pageNumber: number;
   pageSize: number;
