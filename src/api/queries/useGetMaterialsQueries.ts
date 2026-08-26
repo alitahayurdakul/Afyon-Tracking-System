@@ -30,8 +30,6 @@ export const useGetMaterialsDataQuery = ({
     queryKey: [`getMaterialsAllDatas`, trigger, pageSize, currentPage, search],
     refetchOnWindowFocus: false,
     enabled: true,
-    // Arama terimi değişirken eski sonuçları ekranda tutar; tablo boşalıp
-    // yeniden dolmak yerine yumuşak bir şekilde tazelenir.
     placeholderData: (previousData) => previousData,
     queryFn: async (): Promise<IMaterialResponseDataTypes> => {
       const { data } = await axiosInstance.post<IMaterialResponseDataTypes>(

@@ -19,7 +19,6 @@ export interface IPaginationWithStatus extends IPaginationTypes {
 }
 
 export interface IPaginationWithSearch extends IPaginationTypes {
-  /** Serbest metin araması; boş/undefined ise sorguya eklenmez. */
   search?: string;
 }
 

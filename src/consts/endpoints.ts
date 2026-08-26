@@ -31,14 +31,8 @@ const pageNumber = (value: unknown): number => {
   return Number.isFinite(n) && n > 0 ? n : DEFAULT_PAGE_NUMBER;
 };
 
-/** Upper bound for a free-text search term forwarded to the backend. */
 const MAX_SEARCH_LENGTH = 100;
 
-/**
- * Builds the optional `&search=` fragment. Returns an empty string for a blank
- * term so the backend keeps returning the unfiltered list, and encodes/caps the
- * value for the same reason `enc` exists.
- */
 const searchParam = (value?: string): string => {
   const raw = String(value ?? "").trim();
   if (!raw) return "";
