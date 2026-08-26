@@ -12,7 +12,7 @@ import { usePathname } from "@/i18n/routing";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { RootState } from "@/redux/store";
-import { IPaginationWithStatus } from "@/types/commonTypes";
+import { IPaginationWithStatusAndSearch } from "@/types/commonTypes";
 import { extractApiError } from "@/utils/extractApiError";
 
 export const useGetActiveProcessesDataQuery = <T>(status?: string) => {
@@ -47,7 +47,8 @@ export const useGetTableProcessesDataQuery = <T>({
   status,
   currentPage,
   pageSize,
-}: IPaginationWithStatus) => {
+  search,
+}: IPaginationWithStatusAndSearch) => {
   const trigger = useSelector(
     (state: RootState) => state.tableTrigger.processes,
   );
@@ -59,9 +60,11 @@ export const useGetTableProcessesDataQuery = <T>({
       trigger,
       currentPage,
       pageSize,
+      search,
     ],
     refetchOnWindowFocus: false,
     enabled: true,
+    placeholderData: (previousData) => previousData,
     queryFn: async () => {
       const { data } = await axiosInstance.post<T>(
         CLIENT_END_POINTS.processes.getAllActive,
@@ -71,6 +74,7 @@ export const useGetTableProcessesDataQuery = <T>({
             status,
             currentPage,
             pageSize,
+            search,
           },
         },
       );

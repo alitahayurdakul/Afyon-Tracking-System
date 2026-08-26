@@ -1,7 +1,6 @@
 import {
   IPaginationTypes,
   IPaginationWithSearch,
-  IPaginationWithStatus,
   IPaginationWithStatusAndSearch,
 } from "@/types/commonTypes";
 
@@ -111,8 +110,9 @@ export const END_POINTS = {
       pageSize,
       currentPage,
       status,
-    }: IPaginationWithStatus) =>
-      `${apiUrl}/api/processes?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}${status ? `&status=${enc(status)}` : ""}`,
+      search,
+    }: IPaginationWithStatusAndSearch) =>
+      `${apiUrl}/api/processes?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}${status ? `&status=${enc(status)}` : ""}${searchParam(search)}`,
   },
   processOperations: {
     complete: (processId: string) =>

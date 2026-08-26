@@ -2,6 +2,9 @@
   "title": "Process History Management",
   "description": "View all completed processes.",
   "search": "Search...",
+  "searchLabel": "Search processes",
+  "searchClear": "Clear search",
+  "noSearchResult": "No results found for \"{query}\"",
   "status": {
     "completed": "Completed",
     "active": "Active",
