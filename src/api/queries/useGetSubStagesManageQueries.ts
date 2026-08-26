@@ -8,7 +8,7 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { SubStageQueryTypes } from "@/app/api/sub-stages/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
-import { IPaginationTypes } from "@/types/commonTypes";
+import { IPaginationWithSearch } from "@/types/commonTypes";
 import { optionsConverters } from "@/types/optionsConverter";
 import {
   ISubStageType,
@@ -18,19 +18,32 @@ import {
 export const useGetSubStagesListDataQuery = ({
   pageSize,
   currentPage,
-}: IPaginationTypes) => {
+  search,
+}: IPaginationWithSearch) => {
   const trigger = useSelector(
     (state: RootState) => state.tableTrigger.subStages,
   );
 
   return useQuery({
-    queryKey: [`getSubStagesAllDatas`, trigger, pageSize, currentPage],
+    queryKey: [
+      `getSubStagesAllDatas`,
+      trigger,
+      pageSize,
+      currentPage,
+      search,
+    ],
     refetchOnWindowFocus: false,
     enabled: true,
+    placeholderData: (previousData) => previousData,
     queryFn: async (): Promise<ITableSubStageResponseTypes> => {
       const { data } = await axiosInstance.post<ITableSubStageResponseTypes>(
         CLIENT_END_POINTS.subStage.getAll,
-        { type: SubStageQueryTypes.getTableSubStages, pageSize, currentPage },
+        {
+          type: SubStageQueryTypes.getTableSubStages,
+          pageSize,
+          currentPage,
+          search,
+        },
       );
       return data;
     },

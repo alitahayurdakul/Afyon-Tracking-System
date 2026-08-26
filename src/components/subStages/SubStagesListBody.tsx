@@ -3,11 +3,13 @@
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 
-// import { faSearch } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { useGetSubStagesListDataQuery } from "@/api/queries/useGetSubStagesManageQueries";
 import { usePaginationParams } from "@/api/queries/usePaginationParams";
 import { DEFAULT_PAGE_SIZE_OPTIONS } from "@/consts/tableConsts";
+import { useSearchQueryParam } from "@/hooks/useSearchQueryParam";
 import { currentPageController } from "@/utils/currentPageController";
 import { createSubStagesTableColumns } from "@/utils/subStagesListTableUtils";
 
@@ -23,8 +25,11 @@ export const SubStagesListBody = () => {
   const { currentPage, pageSize, setCurrentPage, setPageSize } =
     usePaginationParams();
     
+  const { search, inputValue, setInputValue, clearSearch } =
+    useSearchQueryParam();
+
   const { data, isLoading, isError, isFetching } = useGetSubStagesListDataQuery(
-    { currentPage, pageSize },
+    { currentPage, pageSize, search },
   );
 
   const safePage = currentPageController(currentPage, data?.totalPages);
@@ -46,14 +51,28 @@ export const SubStagesListBody = () => {
         <CreateSubStagesModal />
       </div>
 
-      {/* Search bar geçici olarak devre dışı bırakıldı
       <div className={styles.toolbar}>
         <div className={styles["search-input"]}>
           <FontAwesomeIcon icon={faSearch} />
-          <input placeholder={t("search")} />
+          <input
+            type="search"
+            value={inputValue}
+            onChange={(event) => setInputValue(event.target.value)}
+            placeholder={t("search")}
+            aria-label={t("searchLabel")}
+          />
+          {inputValue && (
+            <button
+              type="button"
+              className={styles["search-clear"]}
+              onClick={clearSearch}
+              aria-label={t("searchClear")}
+            >
+              <FontAwesomeIcon icon={faXmark} />
+            </button>
+          )}
         </div>
       </div>
-      */}
 
       <div className={styles["table-card"]}>
         <Table
@@ -67,6 +86,9 @@ export const SubStagesListBody = () => {
           pageSize={pageSize}
           totalCount={data?.totalCount}
           onPageChange={setCurrentPage}
+          noDataLabel={
+            search ? t("noSearchResult", { query: search }) : undefined
+          }
           paginationElement={() => (
             <Pagination
               currentPage={safePage}

@@ -3,6 +3,9 @@
   "description": "Aşamalara bağlı alt aşamaları merkezi olarak yönetin.",
   "addButton": "Yeni Alt Aşama Ekle",
   "search": "Arama...",
+  "searchLabel": "Alt aşama ara",
+  "searchClear": "Aramayı temizle",
+  "noSearchResult": "\"{query}\" için sonuç bulunamadı",
   "table": {
     "name": "Alt Aşama Adı",
     "materials": "Malzemeler",

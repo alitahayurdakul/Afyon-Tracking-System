@@ -3,6 +3,9 @@
   "description": "Verwalten Sie die mit Phasen verknüpften Unterphasen zentral.",
   "addButton": "Neue Unterphase hinzufügen",
   "search": "Suche...",
+  "searchLabel": "Unterphase suchen",
+  "searchClear": "Suche löschen",
+  "noSearchResult": "Keine Ergebnisse für \"{query}\"",
   "table": {
     "name": "Unterphasenname",
     "materials": "Materialien",
