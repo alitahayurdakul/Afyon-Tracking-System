@@ -1,7 +1,7 @@
 import { AxiosInstance } from "axios";
 
 import { END_POINTS } from "@/consts/endpoints";
-import { IPaginationTypes } from "@/types/commonTypes";
+import { IPaginationWithSearch } from "@/types/commonTypes";
 import {
   IStageResponseDataTypes,
   IStageTableResponseDataTypes,
@@ -94,12 +94,12 @@ async function getStageDetail(id: string, http: AxiosInstance): Promise<Response
 }
 
 async function getTableStages(
-  { currentPage, pageSize }: IPaginationTypes,
+  { currentPage, pageSize, search }: IPaginationWithSearch,
   http: AxiosInstance,
 ): Promise<Response> {
   try {
     const response = await http.get<IStageTableResponseDataTypes>(
-      END_POINTS.stage.getFilteredStages({ currentPage, pageSize }),
+      END_POINTS.stage.getFilteredStages({ currentPage, pageSize, search }),
     );
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);

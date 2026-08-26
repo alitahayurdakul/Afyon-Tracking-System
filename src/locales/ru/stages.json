@@ -3,6 +3,9 @@
   "description": "Настройте и упорядочьте этапы.",
   "addButton": "Добавить этап",
   "search": "Поиск...",
+  "searchLabel": "Поиск этапов",
+  "searchClear": "Очистить поиск",
+  "noSearchResult": "По запросу \"{query}\" ничего не найдено",
   "table": {
     "name": "Название этапа",
     "description": "Описание",

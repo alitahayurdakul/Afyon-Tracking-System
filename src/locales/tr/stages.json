@@ -3,6 +3,9 @@
   "description": "Aşamaları yapılandır ve sırala.",
   "addButton": "Yeni Aşama Ekle",
   "search": "Arama...",
+  "searchLabel": "Aşama ara",
+  "searchClear": "Aramayı temizle",
+  "noSearchResult": "\"{query}\" için sonuç bulunamadı",
   "table": {
     "name": "Aşama Adı",
     "description": "Açıklama",

@@ -8,25 +8,27 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { StageQueryTypes } from "@/app/api/stages/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
-import { IPaginationTypes } from "@/types/commonTypes";
+import { IPaginationWithSearch } from "@/types/commonTypes";
 import { optionsConverters } from "@/types/optionsConverter";
 import { IStagesTypes } from "@/types/stagesTypes";
 
 export const useGetStagesDataQuery = <T>({
   pageSize,
   currentPage,
-}: IPaginationTypes) => {
+  search,
+}: IPaginationWithSearch) => {
   const trigger = useSelector(
     (state: RootState) => state.tableTrigger.stages,
   );
   return useQuery({
-    queryKey: [`getStagesAllDatas`, trigger, pageSize, currentPage],
+    queryKey: [`getStagesAllDatas`, trigger, pageSize, currentPage, search],
     refetchOnWindowFocus: false,
     enabled: true,
+    placeholderData: (previousData) => previousData,
     queryFn: async (): Promise<T> => {
       const { data } = await axiosInstance.post<T>(
         CLIENT_END_POINTS.stage.getAll,
-        { type: StageQueryTypes.getTableStages, currentPage, pageSize },
+        { type: StageQueryTypes.getTableStages, currentPage, pageSize, search },
       );
       return data;
     },
