@@ -8,7 +8,7 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { WagonQueryTypes } from "@/app/api/wagons/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
-import { IPaginationTypes } from "@/types/commonTypes";
+import { IPaginationWithSearch } from "@/types/commonTypes";
 import { IOptionType } from "@/types/formTypes";
 import { optionsConverters } from "@/types/optionsConverter";
 import {
@@ -39,19 +39,27 @@ export const useGetWagonsDataQuery = () => {
 export const useGetTableWagonsDataQuery = ({
   pageSize,
   currentPage,
-}: IPaginationTypes) => {
+  search,
+}: IPaginationWithSearch) => {
   const trigger = useSelector(
     (state: RootState) => state.tableTrigger.wagons,
   );
 
   return useQuery({
-    queryKey: [`getTableWagonsAllDatas`, trigger, pageSize, currentPage],
+    queryKey: [
+      `getTableWagonsAllDatas`,
+      trigger,
+      pageSize,
+      currentPage,
+      search,
+    ],
     refetchOnWindowFocus: false,
     enabled: true,
+    placeholderData: (previousData) => previousData,
     queryFn: async (): Promise<IWagonTableResponseDataTypes> => {
       const { data } = await axiosInstance.post<IWagonTableResponseDataTypes>(
         CLIENT_END_POINTS.wagon.getAll,
-        { type: WagonQueryTypes.getTableWagons, pageSize, currentPage },
+        { type: WagonQueryTypes.getTableWagons, pageSize, currentPage, search },
       );
       return data;
     },
