@@ -54,8 +54,12 @@ export const END_POINTS = {
     delete: (id: string) => `${apiUrl}/api/stages/${enc(id)}`,
     getAll: `${apiUrl}/api/stages`,
     getDetail: (id: string) => `${apiUrl}/api/stages/${enc(id)}`,
-    getFilteredStages: ({ currentPage, pageSize }: IPaginationTypes) =>
-      `${apiUrl}/api/stages?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}`,
+    getFilteredStages: ({
+      currentPage,
+      pageSize,
+      search,
+    }: IPaginationWithSearch) =>
+      `${apiUrl}/api/stages?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}${searchParam(search)}`,
   },
   workflow: {
     create: `${apiUrl}/api/favorite-processes`,

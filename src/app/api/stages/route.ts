@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
   if (!body) {
     return createJsonError("Invalid JSON body", 400);
   }
-  const { id, params, type, currentPage, pageSize } = body;
+  const { id, params, type, currentPage, pageSize, search } = body;
 
   const http = createServerAxios(request);
 
@@ -37,7 +37,10 @@ export async function POST(request: NextRequest) {
     case StageQueryTypes.getDetailStage:
       return await stageHandlers.getStageDetail(id, http);
     case StageQueryTypes.getTableStages:
-      return await stageHandlers.getTableStages({currentPage, pageSize}, http);
+      return await stageHandlers.getTableStages(
+        { currentPage, pageSize, search },
+        http,
+      );
 
     default: {
       return Response.json(

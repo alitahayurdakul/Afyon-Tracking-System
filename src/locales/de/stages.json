@@ -3,6 +3,9 @@
   "description": "Phasen konfigurieren und sortieren.",
   "addButton": "Neue Phase hinzufügen",
   "search": "Suche...",
+  "searchLabel": "Phase suchen",
+  "searchClear": "Suche löschen",
+  "noSearchResult": "Keine Ergebnisse für \"{query}\"",
   "table": {
     "name": "Phasenname",
     "description": "Beschreibung",
