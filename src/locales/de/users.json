@@ -3,6 +3,9 @@
   "description": "Verwalten Sie Systembenutzer und ihre Rollen zentral.",
   "addButton": "Neuen Benutzer hinzufügen",
   "search": "Suche...",
+  "searchLabel": "Benutzer suchen",
+  "searchClear": "Suche löschen",
+  "noSearchResult": "Keine Ergebnisse für \"{query}\"",
   "table": {
     "id": "ID",
     "fullname": "Vollständiger Name",

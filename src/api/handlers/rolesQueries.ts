@@ -1,7 +1,7 @@
 import { AxiosInstance } from "axios";
 
 import { END_POINTS } from "@/consts/endpoints";
-import { IPaginationTypes } from "@/types/commonTypes";
+import { IPaginationWithSearch } from "@/types/commonTypes";
 import {
   IRoleResponseDataTypes,
   IRolesType,
@@ -80,12 +80,12 @@ async function getRoles(http: AxiosInstance): Promise<Response> {
 }
 
 async function getTableRoles(
-  { currentPage, pageSize }: IPaginationTypes,
+  { currentPage, pageSize, search }: IPaginationWithSearch,
   http: AxiosInstance,
 ): Promise<Response> {
   try {
     const response = await http.get<IRoleResponseDataTypes>(
-      END_POINTS.role.getFilteredRoles({ currentPage, pageSize }),
+      END_POINTS.role.getFilteredRoles({ currentPage, pageSize, search }),
     );
     if (response.status === 200) {
       return createJsonOnlyData(response.data || {});

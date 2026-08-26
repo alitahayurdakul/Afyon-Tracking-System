@@ -1,6 +1,10 @@
 {
   "title": "Log Kayıtları",
   "description": "Sistemde gerçekleştirilen kullanıcı işlemlerinin kronolojik kaydı.",
+  "search": "Arama...",
+  "searchLabel": "Log kaydı ara",
+  "searchClear": "Aramayı temizle",
+  "noSearchResult": "\"{query}\" için sonuç bulunamadı",
   "table": {
     "userId": "Kullanıcı ID",
     "fullname": "Ad Soyad",

@@ -1,6 +1,10 @@
 {
   "title": "Activity Logs",
   "description": "Chronological record of user operations performed in the system.",
+  "search": "Search...",
+  "searchLabel": "Search logs",
+  "searchClear": "Clear search",
+  "noSearchResult": "No results found for \"{query}\"",
   "table": {
     "userId": "User ID",
     "fullname": "Full Name",

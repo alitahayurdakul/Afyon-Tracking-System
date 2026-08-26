@@ -3,6 +3,9 @@
   "description": "Manage roles and the permissions they hold.",
   "addButton": "Add New Role",
   "search": "Search...",
+  "searchLabel": "Search roles",
+  "searchClear": "Clear search",
+  "noSearchResult": "No results found for \"{query}\"",
   "table": {
     "roleName": "Role Name",
     "roleDescription": "Description",

@@ -3,6 +3,9 @@
   "description": "Rolleri ve sahip oldukları yetkileri yönetin.",
   "addButton": "Yeni Rol Ekle",
   "search": "Arama...",
+  "searchLabel": "Rol ara",
+  "searchClear": "Aramayı temizle",
+  "noSearchResult": "\"{query}\" için sonuç bulunamadı",
   "table": {
     "roleName": "Rol Adı",
     "roleDescription": "Açıklama",

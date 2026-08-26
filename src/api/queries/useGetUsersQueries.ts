@@ -8,21 +8,23 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { UserQueryTypes } from "@/app/api/users/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
-import { IPaginationTypes } from "@/types/commonTypes";
+import { IPaginationWithSearch } from "@/types/commonTypes";
 import { IUserResponseDataTypes, IUserType } from "@/types/usersTypes";
 
 export const useGetUsersDataQuery = ({
   pageSize,
   currentPage,
-}: IPaginationTypes) => {
+  search,
+}: IPaginationWithSearch) => {
   const trigger = useSelector(
     (state: RootState) => state.tableTrigger.users,
   );
 
   return useQuery({
-    queryKey: [`getUsersAllDatas`, trigger, pageSize, currentPage],
+    queryKey: [`getUsersAllDatas`, trigger, pageSize, currentPage, search],
     refetchOnWindowFocus: false,
     enabled: true,
+    placeholderData: (previousData) => previousData,
     queryFn: async () => {
       const { data } = await axiosInstance.post<IUserResponseDataTypes>(
         CLIENT_END_POINTS.user.getAll,
@@ -31,6 +33,7 @@ export const useGetUsersDataQuery = ({
           params: {
             currentPage,
             pageSize,
+            search,
           },
         },
       );

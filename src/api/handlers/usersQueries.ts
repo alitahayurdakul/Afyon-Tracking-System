@@ -80,10 +80,10 @@ async function changePassword(
 
 async function getUsers(params: Record<string, any>, http: AxiosInstance): Promise<Response> {
   try {
-    const { currentPage, pageSize } = params;
+    const { currentPage, pageSize, search } = params;
 
     const response = await http.get<IUsersType>(
-      END_POINTS.user.getAll({ currentPage, pageSize }),
+      END_POINTS.user.getAll({ currentPage, pageSize, search }),
     );
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);

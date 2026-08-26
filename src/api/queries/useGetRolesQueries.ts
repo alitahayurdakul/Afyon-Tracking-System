@@ -8,7 +8,7 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { RoleQueryTypes } from "@/app/api/roles/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
-import { IPaginationTypes } from "@/types/commonTypes";
+import { IPaginationWithSearch } from "@/types/commonTypes";
 import { optionsConverters } from "@/types/optionsConverter";
 import {
   IRoleResponseDataTypes,
@@ -19,23 +19,25 @@ import {
 export const useGetRolesDataQuery = ({
   pageSize,
   currentPage,
-}: IPaginationTypes) => {
+  search,
+}: IPaginationWithSearch) => {
   const trigger = useSelector(
     (state: RootState) => state.tableTrigger.roles,
   );
 
   return useQuery({
-    queryKey: [`getRolesAllDatas`, trigger],
+    queryKey: [`getRolesAllDatas`, trigger, pageSize, currentPage, search],
     refetchOnWindowFocus: false,
     enabled: true,
+    placeholderData: (previousData) => previousData,
     queryFn: async () => {
       const { data } = await axiosInstance.post<IRoleResponseDataTypes>(
         CLIENT_END_POINTS.role.getAll,
         {
           type: RoleQueryTypes.getTableRoles,
-
           currentPage,
           pageSize,
+          search,
         },
       );
       return data;

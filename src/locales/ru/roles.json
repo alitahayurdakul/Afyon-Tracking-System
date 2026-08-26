@@ -3,6 +3,9 @@
   "description": "Управляйте ролями и их правами доступа.",
   "addButton": "Добавить роль",
   "search": "Поиск...",
+  "searchLabel": "Поиск ролей",
+  "searchClear": "Очистить поиск",
+  "noSearchResult": "По запросу \"{query}\" ничего не найдено",
   "table": {
     "roleName": "Название роли",
     "roleDescription": "Описание",

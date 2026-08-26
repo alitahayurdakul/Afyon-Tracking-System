@@ -1,6 +1,10 @@
 {
   "title": "Protokolleinträge",
   "description": "Chronologische Aufzeichnung der im System durchgeführten Benutzeraktionen.",
+  "search": "Suche...",
+  "searchLabel": "Protokoll suchen",
+  "searchClear": "Suche löschen",
+  "noSearchResult": "Keine Ergebnisse für \"{query}\"",
   "table": {
     "userId": "Benutzer-ID",
     "fullname": "Vollständiger Name",

@@ -3,6 +3,9 @@
   "description": "Sistem kullanıcılarını ve rollerini merkezi olarak yönetin.",
   "addButton": "Yeni Kullanıcı Ekle",
   "search": "Arama...",
+  "searchLabel": "Kullanıcı ara",
+  "searchClear": "Aramayı temizle",
+  "noSearchResult": "\"{query}\" için sonuç bulunamadı",
   "table": {
     "id": "ID",
     "fullname": "Ad Soyad",
