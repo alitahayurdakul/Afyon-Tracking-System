@@ -2,6 +2,9 @@
   "title": "Verwaltung des Prozessverlaufs",
   "description": "Alle abgeschlossenen Prozesse anzeigen.",
   "search": "Suchen...",
+  "searchLabel": "Prozess suchen",
+  "searchClear": "Suche löschen",
+  "noSearchResult": "Keine Ergebnisse für \"{query}\"",
   "status": {
     "completed": "Abgeschlossen",
     "active": "Aktiv",

@@ -2,6 +2,9 @@
   "title": "Geçmiş Süreçler Yönetimi",
   "description": "Tüm Gemiş Süreçleri görüntüleyin.",
   "search": "Arama...",
+  "searchLabel": "Süreç ara",
+  "searchClear": "Aramayı temizle",
+  "noSearchResult": "\"{query}\" için sonuç bulunamadı",
   "status": {
     "completed": "Tamamlandı",
     "active": "Aktif",

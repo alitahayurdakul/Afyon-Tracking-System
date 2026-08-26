@@ -206,12 +206,13 @@ async function getTableProcessHistory(
   http: AxiosInstance,
 ): Promise<Response> {
   try {
-    const { status, currentPage, pageSize } = params || {};
+    const { status, currentPage, pageSize, search } = params || {};
     const response = await http.get(
       END_POINTS.process.getFilteredProcessHistory({
         status,
         currentPage,
         pageSize,
+        search,
       }),
     );
     if (response.status === 200) {
