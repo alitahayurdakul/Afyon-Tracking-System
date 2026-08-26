@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
   if (!body) {
     return createJsonError("Invalid JSON body", 400);
   }
-  const { id, params, type, currentPage, pageSize } = body;
+  const { id, params, type, currentPage, pageSize, search } = body;
 
   const http = createServerAxios(request);
 
@@ -37,7 +37,10 @@ export async function POST(request: NextRequest) {
     case ReasonQueryTypes.getDetailReason:
       return await reasonHandlers.getReasonDetail(id, http);
     case ReasonQueryTypes.getTableReasons:
-      return await reasonHandlers.getTableReasons({ pageSize, currentPage }, http);
+      return await reasonHandlers.getTableReasons(
+        { pageSize, currentPage, search },
+        http,
+      );
 
     default: {
       return Response.json(

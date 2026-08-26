@@ -137,8 +137,12 @@ export const END_POINTS = {
     delete: (id: string) => `${apiUrl}/api/reasons/${enc(id)}`,
     getAll: `${apiUrl}/api/reasons`,
     getDetail: (id: string) => `${apiUrl}/api/reasons/${enc(id)}`,
-    getFilteredReasons: ({ pageSize, currentPage }: IPaginationTypes) =>
-      `${apiUrl}/api/reasons?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}`,
+    getFilteredReasons: ({
+      pageSize,
+      currentPage,
+      search,
+    }: IPaginationWithSearch) =>
+      `${apiUrl}/api/reasons?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}${searchParam(search)}`,
   },
   role: {
     create: `${apiUrl}/api/roles`,

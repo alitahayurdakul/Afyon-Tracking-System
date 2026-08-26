@@ -3,13 +3,15 @@
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 
-// import { faSearch } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
   useGetTableReasonsDataQuery,
 } from "@/api/queries/useGetReasonsQueries";
 import { usePaginationParams } from "@/api/queries/usePaginationParams";
 import { DEFAULT_PAGE_SIZE_OPTIONS } from "@/consts/tableConsts";
+import { useSearchQueryParam } from "@/hooks/useSearchQueryParam";
 import { IReasonResponseDataTypes } from "@/types/reasonsTypes";
 import { currentPageController } from "@/utils/currentPageController";
 import { createReasonsTableColumns } from "@/utils/reasonsListTableUtils";
@@ -25,10 +27,14 @@ export const ReasonsListBody = () => {
   const t = useTranslations("delayReasons");
   const { currentPage, pageSize, setCurrentPage, setPageSize } =
     usePaginationParams();
+  const { search, inputValue, setInputValue, clearSearch } =
+    useSearchQueryParam();
+
   const { data, isLoading, isFetching, isError } =
     useGetTableReasonsDataQuery<IReasonResponseDataTypes>({
       pageSize,
       currentPage,
+      search,
     });
 
   const safePage = currentPageController(currentPage, data?.totalPages);
@@ -50,14 +56,28 @@ export const ReasonsListBody = () => {
         <CreateReasonsModal />
       </div>
 
-      {/* Search bar geçici olarak devre dışı bırakıldı
       <div className={styles.toolbar}>
         <div className={styles["search-input"]}>
           <FontAwesomeIcon icon={faSearch} />
-          <input placeholder={t("search")} />
+          <input
+            type="search"
+            value={inputValue}
+            onChange={(event) => setInputValue(event.target.value)}
+            placeholder={t("search")}
+            aria-label={t("searchLabel")}
+          />
+          {inputValue && (
+            <button
+              type="button"
+              className={styles["search-clear"]}
+              onClick={clearSearch}
+              aria-label={t("searchClear")}
+            >
+              <FontAwesomeIcon icon={faXmark} />
+            </button>
+          )}
         </div>
       </div>
-      */}
 
       <div className={styles["table-card"]}>
         <Table
@@ -71,6 +91,9 @@ export const ReasonsListBody = () => {
           pageSize={pageSize}
           totalCount={data?.totalCount}
           onPageChange={setCurrentPage}
+          noDataLabel={
+            search ? t("noSearchResult", { query: search }) : undefined
+          }
           paginationElement={() => (
             <Pagination
               currentPage={safePage}

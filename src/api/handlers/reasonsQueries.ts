@@ -1,7 +1,7 @@
 import { AxiosInstance } from "axios";
 
 import { END_POINTS } from "@/consts/endpoints";
-import { IPaginationTypes } from "@/types/commonTypes";
+import { IPaginationWithSearch } from "@/types/commonTypes";
 import { IReasonResponseDataTypes, IReasonsType, IReasonType } from "@/types/reasonsTypes";
 
 import {
@@ -75,10 +75,13 @@ async function getReasons(http: AxiosInstance): Promise<Response> {
   }
 }
 
-async function getTableReasons({pageSize, currentPage}: IPaginationTypes, http: AxiosInstance): Promise<Response> {
+async function getTableReasons(
+  { pageSize, currentPage, search }: IPaginationWithSearch,
+  http: AxiosInstance,
+): Promise<Response> {
   try {
     const response = await http.get<IReasonResponseDataTypes>(
-      END_POINTS.reason.getFilteredReasons({pageSize, currentPage}),
+      END_POINTS.reason.getFilteredReasons({ pageSize, currentPage, search }),
     );
     if (response.status === 200) {
       return createJsonOnlyData(response.data || []);

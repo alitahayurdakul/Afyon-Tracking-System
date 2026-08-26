@@ -8,7 +8,7 @@ import { axiosInstance } from "@/api/axiosInstance";
 import { ReasonQueryTypes } from "@/app/api/reasons/route";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
 import { RootState } from "@/redux/store";
-import { IPaginationTypes } from "@/types/commonTypes";
+import { IPaginationWithSearch } from "@/types/commonTypes";
 import { IReasonType } from "@/types/reasonsTypes";
 
 export const useGetReasonsDataQuery = <T>() => {
@@ -30,19 +30,35 @@ export const useGetReasonsDataQuery = <T>() => {
   });
 };
 
-export const useGetTableReasonsDataQuery = <T>({pageSize, currentPage}: IPaginationTypes) => {
+export const useGetTableReasonsDataQuery = <T>({
+  pageSize,
+  currentPage,
+  search,
+}: IPaginationWithSearch) => {
   const trigger = useSelector(
     (state: RootState) => state.tableTrigger.reasons,
   );
 
   return useQuery({
-    queryKey: [`getTableReasonsAllDatas`, trigger, pageSize, currentPage],
+    queryKey: [
+      `getTableReasonsAllDatas`,
+      trigger,
+      pageSize,
+      currentPage,
+      search,
+    ],
     refetchOnWindowFocus: false,
     enabled: true,
+    placeholderData: (previousData) => previousData,
     queryFn: async (): Promise<T> => {
       const { data } = await axiosInstance.post<T>(
         CLIENT_END_POINTS.reason.getAll,
-        { type: ReasonQueryTypes.getTableReasons, pageSize, currentPage },
+        {
+          type: ReasonQueryTypes.getTableReasons,
+          pageSize,
+          currentPage,
+          search,
+        },
       );
       return data;
     },
