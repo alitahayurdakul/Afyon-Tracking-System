@@ -3,6 +3,9 @@
   "description": "Manage projects and their statuses centrally.",
   "addButton": "Add New Project",
   "search": "Search...",
+  "searchLabel": "Search projects",
+  "searchClear": "Clear search",
+  "noSearchResult": "No results found for \"{query}\"",
   "table": {
     "name": "Project Name",
     "code": "Project Code",

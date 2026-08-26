@@ -2,6 +2,7 @@ import {
   IPaginationTypes,
   IPaginationWithSearch,
   IPaginationWithStatus,
+  IPaginationWithStatusAndSearch,
 } from "@/types/commonTypes";
 
 const apiUrl = process.env.API_URL || "api";
@@ -202,8 +203,9 @@ export const END_POINTS = {
       pageSize,
       currentPage,
       status,
-    }: IPaginationWithStatus) =>
-      `${apiUrl}/api/projects?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}${status ? `&status=${enc(status)}` : ""}`,
+      search,
+    }: IPaginationWithStatusAndSearch) =>
+      `${apiUrl}/api/projects?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}${status ? `&status=${enc(status)}` : ""}${searchParam(search)}`,
     getDetail: (id: string) => `${apiUrl}/api/projects/${enc(id)}`,
   },
   processTrains: {
