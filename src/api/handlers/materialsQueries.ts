@@ -1,7 +1,7 @@
 import { AxiosInstance } from "axios";
 
 import { END_POINTS } from "@/consts/endpoints";
-import { IPaginationTypes } from "@/types/commonTypes";
+import { IPaginationWithSearch } from "@/types/commonTypes";
 import {
   IMaterialResponseDataTypes,
   IMaterialType,
@@ -83,12 +83,16 @@ async function getMaterials(http: AxiosInstance): Promise<Response> {
 }
 
 async function getTableMaterials(
-  { pageSize, currentPage }: IPaginationTypes,
+  { pageSize, currentPage, search }: IPaginationWithSearch,
   http: AxiosInstance,
 ): Promise<Response> {
   try {
     const response = await http.get<IMaterialResponseDataTypes>(
-      END_POINTS.material.getFilteredMaterials({ pageSize, currentPage }),
+      END_POINTS.material.getFilteredMaterials({
+        pageSize,
+        currentPage,
+        search,
+      }),
     );
 
     if (response.status === 200) {

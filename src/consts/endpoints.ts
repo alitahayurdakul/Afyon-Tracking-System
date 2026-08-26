@@ -1,4 +1,8 @@
-import { IPaginationTypes, IPaginationWithStatus } from "@/types/commonTypes";
+import {
+  IPaginationTypes,
+  IPaginationWithSearch,
+  IPaginationWithStatus,
+} from "@/types/commonTypes";
 
 const apiUrl = process.env.API_URL || "api";
 
@@ -25,6 +29,20 @@ const enc = (value: string | number): string => {
 const pageNumber = (value: unknown): number => {
   const n = Math.floor(Number(value));
   return Number.isFinite(n) && n > 0 ? n : DEFAULT_PAGE_NUMBER;
+};
+
+/** Upper bound for a free-text search term forwarded to the backend. */
+const MAX_SEARCH_LENGTH = 100;
+
+/**
+ * Builds the optional `&search=` fragment. Returns an empty string for a blank
+ * term so the backend keeps returning the unfiltered list, and encodes/caps the
+ * value for the same reason `enc` exists.
+ */
+const searchParam = (value?: string): string => {
+  const raw = String(value ?? "").trim();
+  if (!raw) return "";
+  return `&search=${encodeURIComponent(raw.slice(0, MAX_SEARCH_LENGTH))}`;
 };
 
 /** Coerces a client-supplied page size into a safe, bounded integer. */
@@ -151,8 +169,12 @@ export const END_POINTS = {
     edit: (id: string) => `${apiUrl}/api/materials/${enc(id)}`,
     delete: (id: string) => `${apiUrl}/api/materials/${enc(id)}`,
     getAll: `${apiUrl}/api/materials`,
-    getFilteredMaterials: ({ pageSize, currentPage }: IPaginationTypes) =>
-      `${apiUrl}/api/materials?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}`,
+    getFilteredMaterials: ({
+      pageSize,
+      currentPage,
+      search,
+    }: IPaginationWithSearch) =>
+      `${apiUrl}/api/materials?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}${searchParam(search)}`,
     getDetail: (id: string) => `${apiUrl}/api/materials/${enc(id)}`,
   },
   subStage: {

@@ -18,6 +18,11 @@ export interface IPaginationWithStatus extends IPaginationTypes {
   status?: string;
 }
 
+export interface IPaginationWithSearch extends IPaginationTypes {
+  /** Serbest metin araması; boş/undefined ise sorguya eklenmez. */
+  search?: string;
+}
+
 export interface ITableResponseType {
   pageNumber: number;
   pageSize: number;
