@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 
 interface UseSearchQueryParamOptions {
   paramKey?: string;
@@ -14,7 +14,6 @@ export const useSearchQueryParam = ({
   pageKey = "page",
   debounceMs = 400,
 }: UseSearchQueryParamOptions = {}) => {
-  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -45,21 +44,15 @@ export const useSearchQueryParam = ({
       params.delete(pageKey);
 
       const query = params.toString();
-      router.replace(query ? `${pathname}?${query}` : pathname, {
-        scroll: false,
-      });
+      window.history.replaceState(
+        null,
+        "",
+        query ? `${pathname}?${query}` : pathname,
+      );
     }, debounceMs);
 
     return () => clearTimeout(timer);
-  }, [
-    inputValue,
-    debounceMs,
-    pageKey,
-    paramKey,
-    pathname,
-    router,
-    searchParams,
-  ]);
+  }, [inputValue, debounceMs, pageKey, paramKey, pathname, searchParams]);
 
   const clearSearch = useCallback(() => setInputValue(""), []);
 
