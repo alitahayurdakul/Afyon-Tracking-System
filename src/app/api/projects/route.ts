@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
   if (!body) {
     return createJsonError("Invalid JSON body", 400);
   }
-  const { id, params, type, status, pageSize, currentPage } = body;
+  const { id, params, type, status, pageSize, currentPage, search } = body;
 
   const http = createServerAxios(request);
 
@@ -39,6 +39,7 @@ export async function POST(request: NextRequest) {
         pageSize,
         currentPage,
         status,
+        search,
       }, http);
     case ProjectQueryTypes.getDetailProject:
       return await projectHandlers.getProjectDetail(id, http);

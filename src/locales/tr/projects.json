@@ -3,6 +3,9 @@
   "description": "Projeleri ve durumlarını merkezi olarak yönetin.",
   "addButton": "Yeni Proje Ekle",
   "search": "Arama...",
+  "searchLabel": "Proje ara",
+  "searchClear": "Aramayı temizle",
+  "noSearchResult": "\"{query}\" için sonuç bulunamadı",
   "table": {
     "name": "Proje Adı",
     "code": "Proje Kodu",

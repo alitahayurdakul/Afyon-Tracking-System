@@ -3,6 +3,9 @@
   "description": "Verwalten Sie Projekte und ihre Status zentral.",
   "addButton": "Neues Projekt hinzufügen",
   "search": "Suche...",
+  "searchLabel": "Projekt suchen",
+  "searchClear": "Suche löschen",
+  "noSearchResult": "Keine Ergebnisse für \"{query}\"",
   "table": {
     "name": "Projektname",
     "code": "Projektcode",

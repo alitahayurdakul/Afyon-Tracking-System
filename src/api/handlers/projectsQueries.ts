@@ -1,7 +1,7 @@
 import { AxiosInstance } from "axios";
 
 import { END_POINTS } from "@/consts/endpoints";
-import { IPaginationWithStatus } from "@/types/commonTypes";
+import { IPaginationWithStatusAndSearch } from "@/types/commonTypes";
 import { IProjectType } from "@/types/projectsTypes";
 
 import {
@@ -83,7 +83,7 @@ async function getProjects(
 }
 
 async function getTableProjects(
-  { pageSize, currentPage, status }: IPaginationWithStatus,
+  { pageSize, currentPage, status, search }: IPaginationWithStatusAndSearch,
   http: AxiosInstance,
 ): Promise<Response> {
   try {
@@ -92,6 +92,7 @@ async function getTableProjects(
         pageSize,
         currentPage,
         status,
+        search,
       }),
     );
 

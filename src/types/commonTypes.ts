@@ -22,6 +22,10 @@ export interface IPaginationWithSearch extends IPaginationTypes {
   search?: string;
 }
 
+export interface IPaginationWithStatusAndSearch extends IPaginationWithStatus {
+  search?: string;
+}
+
 export interface ITableResponseType {
   pageNumber: number;
   pageSize: number;
