@@ -190,8 +190,12 @@ export const END_POINTS = {
     delete: (id: string) => `${apiUrl}/api/substages/${enc(id)}`,
     getAll: `${apiUrl}/api/substages`,
     getDetail: (id: string) => `${apiUrl}/api/substages/${enc(id)}`,
-    getFilteredSubStages: ({ pageSize, currentPage }: IPaginationTypes) =>
-      `${apiUrl}/api/substages?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}`,
+    getFilteredSubStages: ({
+      pageSize,
+      currentPage,
+      search,
+    }: IPaginationWithSearch) =>
+      `${apiUrl}/api/substages?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}${searchParam(search)}`,
   },
   project: {
     create: `${apiUrl}/api/projects`,
