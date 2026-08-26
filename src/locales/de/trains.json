@@ -3,6 +3,9 @@
   "description": "Verwalten Sie Ihre Flotte zentral.",
   "addButton": "Neuen Zug hinzufügen",
   "search": "Suchen...",
+  "searchLabel": "Zug suchen",
+  "searchClear": "Suche löschen",
+  "noSearchResult": "Keine Ergebnisse für \"{query}\"",
   "columns": {
     "trainSetNo": "Zugnummer",
     "description": "Beschreibung",

@@ -3,6 +3,9 @@
   "description": "Filonuzu merkezi olarak yönetin.",
   "addButton": "Yeni Tren Ekle",
   "search": "Arama...",
+  "searchLabel": "Tren ara",
+  "searchClear": "Aramayı temizle",
+  "noSearchResult": "\"{query}\" için sonuç bulunamadı",
   "columns": {
     "trainSetNo": "Tren No",
     "description": "Açıklama",

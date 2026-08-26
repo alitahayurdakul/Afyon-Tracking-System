@@ -3,6 +3,9 @@
   "description": "Централизованное управление парком поездов.",
   "addButton": "Добавить новый поезд",
   "search": "Поиск...",
+  "searchLabel": "Поиск поездов",
+  "searchClear": "Очистить поиск",
+  "noSearchResult": "По запросу \"{query}\" ничего не найдено",
   "columns": {
     "trainSetNo": "Номер поезда",
     "description": "Описание",
