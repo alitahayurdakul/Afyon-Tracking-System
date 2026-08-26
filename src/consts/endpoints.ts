@@ -67,8 +67,12 @@ export const END_POINTS = {
     delete: (id: string) => `${apiUrl}/api/favorite-processes/${enc(id)}`,
     getAll: `${apiUrl}/api/favorite-processes`,
     getDetail: (id: string) => `${apiUrl}/api/favorite-processes/${enc(id)}`,
-    getFilteredWorkflows: ({ currentPage, pageSize }: IPaginationTypes) =>
-      `${apiUrl}/api/favorite-processes?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}`,
+    getFilteredWorkflows: ({
+      currentPage,
+      pageSize,
+      search,
+    }: IPaginationWithSearch) =>
+      `${apiUrl}/api/favorite-processes?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}${searchParam(search)}`,
   },
   train: {
     create: `${apiUrl}/api/trains`,

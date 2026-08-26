@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
   if (!body) {
     return createJsonError("Invalid JSON body", 400);
   }
-  const { id, params, type, currentPage, pageSize } = body;
+  const { id, params, type, currentPage, pageSize, search } = body;
 
   const http = createServerAxios(request);
 
@@ -40,6 +40,7 @@ export async function POST(request: NextRequest) {
       return await workflowHandlers.getTableWorkflows({
         currentPage,
         pageSize,
+        search,
       }, http);
 
     default: {
