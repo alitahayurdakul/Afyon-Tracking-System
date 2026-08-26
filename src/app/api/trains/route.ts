@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
   if (!body) {
     return createJsonError("Invalid JSON body", 400);
   }
-  const { id, params, type, pageSize, currentPage } = body;
+  const { id, params, type, pageSize, currentPage, search } = body;
 
   const http = createServerAxios(request);
 
@@ -37,7 +37,10 @@ export async function POST(request: NextRequest) {
     case TrainQueryTypes.getDetailTrain:
       return await trainHandlers.getTrainDetail(id, http);
     case TrainQueryTypes.getTableTrain:
-      return await trainHandlers.getTableTrains({pageSize, currentPage}, http)
+      return await trainHandlers.getTableTrains(
+        { pageSize, currentPage, search },
+        http,
+      );
 
     default: {
       return Response.json(

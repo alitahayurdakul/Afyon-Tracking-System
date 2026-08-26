@@ -3,6 +3,9 @@
   "description": "Manage your fleet centrally.",
   "addButton": "Add New Train",
   "search": "Search...",
+  "searchLabel": "Search trains",
+  "searchClear": "Clear search",
+  "noSearchResult": "No results found for \"{query}\"",
   "columns": {
     "trainSetNo": "Train No",
     "description": "Description",

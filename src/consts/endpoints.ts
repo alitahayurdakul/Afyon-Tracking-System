@@ -71,8 +71,12 @@ export const END_POINTS = {
     delete: (trainId: string) => `${apiUrl}/api/trains/${enc(trainId)}`,
     getAll: `${apiUrl}/api/trains`,
     getDetail: (trainId: string) => `${apiUrl}/api/trains/${enc(trainId)}`,
-    getFilteredTrains: ({ pageSize, currentPage }: IPaginationTypes) =>
-      `${apiUrl}/api/trains?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}`,
+    getFilteredTrains: ({
+      pageSize,
+      currentPage,
+      search,
+    }: IPaginationWithSearch) =>
+      `${apiUrl}/api/trains?pageNumber=${pageNumber(currentPage)}&pageSize=${pageSizeOf(pageSize)}${searchParam(search)}`,
   },
   process: {
     start: `${apiUrl}/api/processes/start`,
