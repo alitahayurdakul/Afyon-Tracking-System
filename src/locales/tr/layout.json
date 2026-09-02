@@ -167,5 +167,9 @@
   "languageSelector": {
     "label": "Dil: {language}. Değiştirmek için açın",
     "menuLabel": "Diller"
+  },
+  "accessDenied": {
+    "title": "Bu sayfaya erişim yetkiniz yok",
+    "description": "Bu bölümü görüntülemek için gerekli yetkiye sahip değilsiniz. Erişim gerekiyorsa sistem yöneticinizle iletişime geçin."
   }
 }

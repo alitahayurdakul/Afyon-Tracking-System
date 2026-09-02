@@ -6,10 +6,10 @@ import { useTranslations } from "next-intl";
 import { faSearch, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import {
-  useGetTableReasonsDataQuery,
-} from "@/api/queries/useGetReasonsQueries";
+import { useGetTableReasonsDataQuery } from "@/api/queries/useGetReasonsQueries";
 import { usePaginationParams } from "@/api/queries/usePaginationParams";
+import { RoleWrapper } from "@/components/RoleWrapper";
+import { PERMISSION_ACTION, PERMISSION_RESOURCE } from "@/consts/permissions";
 import { DEFAULT_PAGE_SIZE_OPTIONS } from "@/consts/tableConsts";
 import { useSearchQueryParam } from "@/hooks/useSearchQueryParam";
 import { IReasonResponseDataTypes } from "@/types/reasonsTypes";
@@ -53,7 +53,12 @@ export const ReasonsListBody = () => {
           <p>{t("description")}</p>
         </div>
 
-        <CreateReasonsModal />
+        <RoleWrapper
+          resource={PERMISSION_RESOURCE.DELAYREASON}
+          action={PERMISSION_ACTION.WRITE}
+        >
+          <CreateReasonsModal />
+        </RoleWrapper>
       </div>
 
       <div className={styles.toolbar}>

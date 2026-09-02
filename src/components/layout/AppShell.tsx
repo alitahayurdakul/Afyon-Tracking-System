@@ -7,6 +7,7 @@ import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useBodyScrollLock } from "@/api/queries/useBodyScrollLock";
+import { PermissionRouteGuard } from "@/components/common/PermissionRouteGuard";
 import { Sidebar } from "@/components/sidebar/Sidebar";
 import { stripLocale } from "@/utils/stripLocale";
 
@@ -61,7 +62,9 @@ export const AppShell = ({ children }: { children: React.ReactNode }) => {
       )}
 
       <Sidebar isOpen={isOpen} />
-      <div className={styles["content"]}>{children}</div>
+      <div className={styles["content"]}>
+        <PermissionRouteGuard>{children}</PermissionRouteGuard>
+      </div>
     </>
   );
 };

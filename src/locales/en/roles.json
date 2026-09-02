@@ -45,5 +45,30 @@
     "editError": "Failed to update role",
     "deleteSuccess": "Role deleted",
     "deleteError": "Failed to delete role"
+  },
+  "presets": {
+    "label": "Role Template",
+    "placeholder": "Select a template (optional)",
+    "hint": "Selecting a template fills the permissions according to the permission matrix; you can still adjust them one by one.",
+    "admin": {
+      "name": "Administrator",
+      "description": "Unlimited access across the system, including role and user management."
+    },
+    "fieldChief": {
+      "name": "Field Chief / Foreman",
+      "description": "Can start and manage processes, but cannot delete them."
+    },
+    "fieldStaff": {
+      "name": "Field Staff",
+      "description": "Sees and fills in the stages of their own work; cannot start a process."
+    },
+    "warehouse": {
+      "name": "Warehouse Officer",
+      "description": "Full access to the material module; view only in the process flow."
+    },
+    "qualityControl": {
+      "name": "Quality Control / Observer",
+      "description": "View only, including past records; cannot enter data."
+    }
   }
 }

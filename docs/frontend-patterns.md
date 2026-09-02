@@ -171,4 +171,5 @@ Redux-driven Radix toasts: dispatch `addToastify(IToastElement)` from anywhere; 
 
 - `AppShell` (`src/components/layout/AppShell.tsx`): renders `Sidebar` + hamburger (mobile), locks body scroll when the drawer is open, and renders bare children on auth routes (`/login`, `/forgot-password`). Sidebar items are declared in `src/consts/sidebarConsts.tsx` with FontAwesome icons and `URL_PAGES` urls; labels are translated by `key`.
 - `AuthBootstrap` (`src/components/auth/AuthBootstrap.tsx`): one-time refresh-token session check before rendering the app; redirects unauthenticated → `/login` and authenticated users away from public paths → active processes.
-- Permission checks in UI: `useHasRole().hasPermission([...])`.
+- `PermissionRouteGuard` (`src/components/common/PermissionRouteGuard.tsx`, rendered inside `AppShell`): maps the current path through `ROUTE_PERMISSIONS` and renders `AccessDenied` when the user lacks the page's permission. `SidebarMenu` hides the same items from the menu.
+- Permission checks in UI: `usePermissions().can(resource, action)` or `<RoleWrapper resource action>` — see [permissions.md](permissions.md).

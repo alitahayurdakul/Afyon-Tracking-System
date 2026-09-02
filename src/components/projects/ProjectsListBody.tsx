@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useGetTableProjectsDataQuery } from "@/api/queries/useGetProjectsQueries";
 import { usePaginationParams } from "@/api/queries/usePaginationParams";
+import { RoleWrapper } from "@/components/RoleWrapper";
+import { PERMISSION_ACTION, PERMISSION_RESOURCE } from "@/consts/permissions";
 import { DEFAULT_PAGE_SIZE_OPTIONS } from "@/consts/tableConsts";
 import { useSearchQueryParam } from "@/hooks/useSearchQueryParam";
 import { currentPageController } from "@/utils/currentPageController";
@@ -28,11 +30,13 @@ export const ProjectsListBody = () => {
   const { search, inputValue, setInputValue, clearSearch } =
     useSearchQueryParam();
 
-  const { data, isLoading, isFetching, isError } = useGetTableProjectsDataQuery({
-    currentPage,
-    pageSize,
-    search,
-  });
+  const { data, isLoading, isFetching, isError } = useGetTableProjectsDataQuery(
+    {
+      currentPage,
+      pageSize,
+      search,
+    },
+  );
 
   const safePage = currentPageController(currentPage, data?.totalPages);
 
@@ -50,7 +54,12 @@ export const ProjectsListBody = () => {
           <p>{t("description")}</p>
         </div>
 
-        <CreateProjectsModal />
+        <RoleWrapper
+          resource={PERMISSION_RESOURCE.PROJECT}
+          action={PERMISSION_ACTION.WRITE}
+        >
+          <CreateProjectsModal />
+        </RoleWrapper>
       </div>
 
       <div className={styles.toolbar}>

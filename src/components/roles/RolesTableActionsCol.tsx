@@ -7,7 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { axiosInstance } from "@/api/axiosInstance";
 import { RoleQueryTypes } from "@/app/api/roles/route";
+import { RoleWrapper } from "@/components/RoleWrapper";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
+import { PERMISSION_ACTION, PERMISSION_RESOURCE } from "@/consts/permissions";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { extractApiError } from "@/utils/extractApiError";
@@ -52,31 +54,51 @@ export const RolesTableActionsCol = ({ id }: { id: string }) => {
   };
 
   return (
-    <div className={clsx(styles["table-actions"], compactStyles["table-actions"])}>
-      <EditRolesModal id={id} />
-      <PopoverBody
-        alignOffset={-73}
-        align="start"
-        triggerBody={
-          <button type="button" className={clsx(styles["delete-btn"], compactStyles["compact-btn"])}>
-            <FontAwesomeIcon icon={faTrash} />
-            <span>{t("actions.delete")}</span>
-          </button>
-        }
-        contentBody={
-          <div className={stylesDeletePopover["content"]}>
-            <p className={stylesDeletePopover["text"]}>
-              {t("deletePopover.question")}
-            </p>
-          </div>
-        }
-        closeContainer={
-          <div className={stylesDeletePopover["btn-container"]}>
-            <button type="button">{t("deletePopover.no")}</button>
-            <button type="button" onClick={onDeleteHandler}>{t("deletePopover.yes")}</button>
-          </div>
-        }
-      />
+    <div
+      className={clsx(styles["table-actions"], compactStyles["table-actions"])}
+    >
+      <RoleWrapper
+        resource={PERMISSION_RESOURCE.ROLE}
+        action={PERMISSION_ACTION.WRITE}
+      >
+        <EditRolesModal id={id} />
+      </RoleWrapper>
+      <RoleWrapper
+        resource={PERMISSION_RESOURCE.ROLE}
+        action={PERMISSION_ACTION.DELETE}
+      >
+        <PopoverBody
+          alignOffset={-73}
+          align="start"
+          triggerBody={
+            <button
+              type="button"
+              className={clsx(
+                styles["delete-btn"],
+                compactStyles["compact-btn"],
+              )}
+            >
+              <FontAwesomeIcon icon={faTrash} />
+              <span>{t("actions.delete")}</span>
+            </button>
+          }
+          contentBody={
+            <div className={stylesDeletePopover["content"]}>
+              <p className={stylesDeletePopover["text"]}>
+                {t("deletePopover.question")}
+              </p>
+            </div>
+          }
+          closeContainer={
+            <div className={stylesDeletePopover["btn-container"]}>
+              <button type="button">{t("deletePopover.no")}</button>
+              <button type="button" onClick={onDeleteHandler}>
+                {t("deletePopover.yes")}
+              </button>
+            </div>
+          }
+        />
+      </RoleWrapper>
     </div>
   );
 };

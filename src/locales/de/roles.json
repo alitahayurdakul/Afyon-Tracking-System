@@ -45,5 +45,30 @@
     "editError": "Rolle konnte nicht aktualisiert werden",
     "deleteSuccess": "Rolle gelöscht",
     "deleteError": "Rolle konnte nicht gelöscht werden"
+  },
+  "presets": {
+    "label": "Rollenvorlage",
+    "placeholder": "Vorlage auswählen (optional)",
+    "hint": "Bei Auswahl einer Vorlage werden die Berechtigungen gemäß der Berechtigungsmatrix ausgefüllt; sie können danach einzeln angepasst werden.",
+    "admin": {
+      "name": "Administrator",
+      "description": "Uneingeschränkter Zugriff auf das gesamte System, einschließlich Rollen- und Benutzerverwaltung."
+    },
+    "fieldChief": {
+      "name": "Bauleiter / Vorarbeiter",
+      "description": "Kann Prozesse starten und verwalten, aber nicht löschen."
+    },
+    "fieldStaff": {
+      "name": "Feldpersonal",
+      "description": "Sieht die Phasen der eigenen Arbeit und erfasst Daten; kann keinen Prozess starten."
+    },
+    "warehouse": {
+      "name": "Lagerverantwortlicher",
+      "description": "Vollzugriff auf das Materialmodul; im Prozessablauf nur Ansicht."
+    },
+    "qualityControl": {
+      "name": "Qualitätskontrolle / Beobachter",
+      "description": "Nur Ansicht, einschließlich vergangener Aufzeichnungen; keine Dateneingabe."
+    }
   }
 }

@@ -31,7 +31,6 @@ import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { IOptionType } from "@/types/formTypes";
 import { ProcessResponse } from "@/types/processTypes";
 import { extractApiError } from "@/utils/extractApiError";
-import { getPermission } from "@/utils/getPermission";
 
 import { PopoverBody } from "../Popover";
 import { RoleWrapper } from "../RoleWrapper";
@@ -219,12 +218,8 @@ export default function InfoProcessContainer({
               </div>
             </div> */}
             <RoleWrapper
-              requiredPermissions={[
-                getPermission(
-                  PERMISSION_RESOURCE.ACTIVEPROCESS,
-                  PERMISSION_ACTION.MANAGE,
-                ),
-              ]}
+              resource={PERMISSION_RESOURCE.ACTIVEPROCESS}
+              action={PERMISSION_ACTION.DELETE}
             >
               {!isCompletedButtonActive && (
                 <PopoverBody
@@ -246,11 +241,18 @@ export default function InfoProcessContainer({
                   closeContainer={
                     <div className={styles["btn-container"]}>
                       <button type="button">{t("no")}</button>
-                      <button type="button" onClick={onCancelProcess}>{t("yes")}</button>
+                      <button type="button" onClick={onCancelProcess}>
+                        {t("yes")}
+                      </button>
                     </div>
                   }
                 />
               )}
+            </RoleWrapper>
+            <RoleWrapper
+              resource={PERMISSION_RESOURCE.ACTIVEPROCESS}
+              action={PERMISSION_ACTION.WRITE}
+            >
               {isCompletedButtonActive && (
                 <PopoverBody
                   alignOffset={-73}
@@ -271,7 +273,9 @@ export default function InfoProcessContainer({
                   closeContainer={
                     <div className={styles["btn-container"]}>
                       <button type="button">{t("no")}</button>
-                      <button type="button" onClick={onCompleteProcess}>{t("yes")}</button>
+                      <button type="button" onClick={onCompleteProcess}>
+                        {t("yes")}
+                      </button>
                     </div>
                   }
                 />

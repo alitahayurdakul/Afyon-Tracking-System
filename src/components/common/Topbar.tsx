@@ -3,7 +3,6 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faCirclePlus, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 import { PERMISSION_ACTION, PERMISSION_RESOURCE } from "@/consts/permissions";
-import { getPermission } from "@/utils/getPermission";
 
 import { CreateFleetModal } from "../createFleetModal/CreateFleetModal";
 import LanguageSelector from "../NewLanguageSelectBox";
@@ -37,12 +36,8 @@ export const Topbar = ({ showCreateButton = false }: TopbarProps) => {
 
         {showCreateButton && (
           <RoleWrapper
-            requiredPermissions={[
-              getPermission(
-                PERMISSION_RESOURCE.ACTIVEPROCESS,
-                PERMISSION_ACTION.MANAGE,
-              ),
-            ]}
+            resource={PERMISSION_RESOURCE.ACTIVEPROCESS}
+            action={PERMISSION_ACTION.WRITE}
           >
             <CreateFleetModal />
           </RoleWrapper>

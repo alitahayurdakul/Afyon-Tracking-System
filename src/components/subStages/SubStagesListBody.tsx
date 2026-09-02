@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useGetSubStagesListDataQuery } from "@/api/queries/useGetSubStagesManageQueries";
 import { usePaginationParams } from "@/api/queries/usePaginationParams";
+import { RoleWrapper } from "@/components/RoleWrapper";
+import { PERMISSION_ACTION, PERMISSION_RESOURCE } from "@/consts/permissions";
 import { DEFAULT_PAGE_SIZE_OPTIONS } from "@/consts/tableConsts";
 import { useSearchQueryParam } from "@/hooks/useSearchQueryParam";
 import { currentPageController } from "@/utils/currentPageController";
@@ -24,7 +26,7 @@ export const SubStagesListBody = () => {
   const t = useTranslations("subStages");
   const { currentPage, pageSize, setCurrentPage, setPageSize } =
     usePaginationParams();
-    
+
   const { search, inputValue, setInputValue, clearSearch } =
     useSearchQueryParam();
 
@@ -48,7 +50,12 @@ export const SubStagesListBody = () => {
           <p>{t("description")}</p>
         </div>
 
-        <CreateSubStagesModal />
+        <RoleWrapper
+          resource={PERMISSION_RESOURCE.SUBSTAGE}
+          action={PERMISSION_ACTION.WRITE}
+        >
+          <CreateSubStagesModal />
+        </RoleWrapper>
       </div>
 
       <div className={styles.toolbar}>

@@ -6,6 +6,7 @@ export interface IRoleFormDataTypes {
   roleName: string;
   roleDescription: string;
   permissions: { label: string; value: string }[];
+  preset?: string;
 }
 
 export interface IRoleType {

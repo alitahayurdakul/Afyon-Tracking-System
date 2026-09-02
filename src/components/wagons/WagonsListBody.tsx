@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useGetTableWagonsDataQuery } from "@/api/queries/useGetWagonsQueries";
 import { usePaginationParams } from "@/api/queries/usePaginationParams";
+import { RoleWrapper } from "@/components/RoleWrapper";
+import { PERMISSION_ACTION, PERMISSION_RESOURCE } from "@/consts/permissions";
 import { DEFAULT_PAGE_SIZE_OPTIONS } from "@/consts/tableConsts";
 import { useSearchQueryParam } from "@/hooks/useSearchQueryParam";
 import { currentPageController } from "@/utils/currentPageController";
@@ -49,7 +51,12 @@ export const WagonsListBody = () => {
           <p>{t("description")}</p>
         </div>
 
-        <CreateWagonsModal />
+        <RoleWrapper
+          resource={PERMISSION_RESOURCE.WAGON}
+          action={PERMISSION_ACTION.WRITE}
+        >
+          <CreateWagonsModal />
+        </RoleWrapper>
       </div>
 
       <div className={styles.toolbar}>

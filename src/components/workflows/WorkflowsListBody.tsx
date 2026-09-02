@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useGetTableWorkflowsDataQuery } from "@/api/queries/useGetWorkflowsQueries";
 import { usePaginationParams } from "@/api/queries/usePaginationParams";
+import { RoleWrapper } from "@/components/RoleWrapper";
+import { PERMISSION_ACTION, PERMISSION_RESOURCE } from "@/consts/permissions";
 import { DEFAULT_PAGE_SIZE_OPTIONS } from "@/consts/tableConsts";
 import { useSearchQueryParam } from "@/hooks/useSearchQueryParam";
 import { ITableWorkflowResponseTypes } from "@/types/workflowTypes";
@@ -51,7 +53,12 @@ export const WorkflowsListBody = () => {
           <p>{t("description")}</p>
         </div>
 
-        <CreateWorkflowModal />
+        <RoleWrapper
+          resource={PERMISSION_RESOURCE.WORKFLOW}
+          action={PERMISSION_ACTION.WRITE}
+        >
+          <CreateWorkflowModal />
+        </RoleWrapper>
       </div>
 
       <div className={styles.toolbar}>

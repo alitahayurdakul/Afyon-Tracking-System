@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useGetRolesDataQuery } from "@/api/queries/useGetRolesQueries";
 import { usePaginationParams } from "@/api/queries/usePaginationParams";
+import { RoleWrapper } from "@/components/RoleWrapper";
+import { PERMISSION_ACTION, PERMISSION_RESOURCE } from "@/consts/permissions";
 import { DEFAULT_PAGE_SIZE_OPTIONS } from "@/consts/tableConsts";
 import { useSearchQueryParam } from "@/hooks/useSearchQueryParam";
 import { currentPageController } from "@/utils/currentPageController";
@@ -49,7 +51,12 @@ export const RolesListBody = () => {
           <p>{t("description")}</p>
         </div>
 
-        <CreateRolesModal />
+        <RoleWrapper
+          resource={PERMISSION_RESOURCE.ROLE}
+          action={PERMISSION_ACTION.WRITE}
+        >
+          <CreateRolesModal />
+        </RoleWrapper>
       </div>
 
       <div className={styles.toolbar}>

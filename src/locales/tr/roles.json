@@ -45,5 +45,30 @@
     "editError": "Rol güncellenemedi",
     "deleteSuccess": "Rol silindi",
     "deleteError": "Rol silinemedi"
+  },
+  "presets": {
+    "label": "Hazır Rol Şablonu",
+    "placeholder": "Şablon seçiniz (opsiyonel)",
+    "hint": "Bir şablon seçtiğinizde yetkiler yetki matrisine göre otomatik doldurulur; ardından tek tek düzenleyebilirsiniz.",
+    "admin": {
+      "name": "Yönetici",
+      "description": "Tüm sistem üzerinde sınırsız yetki; rol ve kullanıcı yönetimi dahil."
+    },
+    "fieldChief": {
+      "name": "Saha Şefi / Ustabaşı",
+      "description": "Süreçleri başlatıp yönetebilir, ancak silemez."
+    },
+    "fieldStaff": {
+      "name": "Saha Personeli",
+      "description": "Kendi işine dair aşamaları görür ve veri girer; süreç başlatamaz."
+    },
+    "warehouse": {
+      "name": "Depo Sorumlusu",
+      "description": "Malzeme modülünde tam yetkili; süreç akışında yalnızca görüntüleyici."
+    },
+    "qualityControl": {
+      "name": "Kalite Kontrol / İzleyici",
+      "description": "Sadece görüntüleme ve geçmiş kayıtlara bakma; veri giremez."
+    }
   }
 }

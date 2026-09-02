@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useGetTableTrainsDataQuery } from "@/api/queries/useGetTrainsQueries";
 import { usePaginationParams } from "@/api/queries/usePaginationParams";
+import { RoleWrapper } from "@/components/RoleWrapper";
+import { PERMISSION_ACTION, PERMISSION_RESOURCE } from "@/consts/permissions";
 import { DEFAULT_PAGE_SIZE_OPTIONS } from "@/consts/tableConsts";
 import { useSearchQueryParam } from "@/hooks/useSearchQueryParam";
 import { currentPageController } from "@/utils/currentPageController";
@@ -50,7 +52,12 @@ export const TrainsListBody = () => {
           <p>{t("description")}</p>
         </div>
 
-        <CreateTrainsModal />
+        <RoleWrapper
+          resource={PERMISSION_RESOURCE.TRAIN}
+          action={PERMISSION_ACTION.WRITE}
+        >
+          <CreateTrainsModal />
+        </RoleWrapper>
       </div>
 
       <div className={styles.toolbar}>
