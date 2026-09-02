@@ -14,6 +14,7 @@ Train fleet / job-tracking frontend (Next.js 16 App Router, React 19, TS strict)
 |---|---|
 | [docs/architecture.md](docs/architecture.md) | Stack, folder structure, request flow, environment |
 | [docs/api-layer.md](docs/api-layer.md) | The 4-layer API chain, endpoints, auth/token lifecycle, permissions, **checklist for adding an endpoint** |
+| [docs/permissions.md](docs/permissions.md) | Permission resources/actions, the five role presets from the owner's permission matrix, where gating is applied |
 | [docs/frontend-patterns.md](docs/frontend-patterns.md) | Page anatomy, URL-driven modals, config-driven forms, tables/pagination, Redux + React Query, toasts |
 | [docs/shared-components.md](docs/shared-components.md) | Prop contracts of the shared `common/` + `formElements/` components (Modal, Table, inputs...) |
 | [docs/styling-and-i18n.md](docs/styling-and-i18n.md) | SCSS organization, tokens/breakpoints, locales, message loading |

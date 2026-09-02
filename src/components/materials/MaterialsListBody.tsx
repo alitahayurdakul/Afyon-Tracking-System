@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useGetMaterialsDataQuery } from "@/api/queries/useGetMaterialsQueries";
 import { usePaginationParams } from "@/api/queries/usePaginationParams";
+import { RoleWrapper } from "@/components/RoleWrapper";
+import { PERMISSION_ACTION, PERMISSION_RESOURCE } from "@/consts/permissions";
 import { DEFAULT_PAGE_SIZE_OPTIONS } from "@/consts/tableConsts";
 import { useSearchQueryParam } from "@/hooks/useSearchQueryParam";
 import { currentPageController } from "@/utils/currentPageController";
@@ -52,7 +54,12 @@ export const MaterialsListBody = () => {
           <p>{t("description")}</p>
         </div>
 
-        <CreateMaterialsModal />
+        <RoleWrapper
+          resource={PERMISSION_RESOURCE.MATERIAL}
+          action={PERMISSION_ACTION.WRITE}
+        >
+          <CreateMaterialsModal />
+        </RoleWrapper>
       </div>
 
       <div className={styles.toolbar}>
@@ -90,7 +97,9 @@ export const MaterialsListBody = () => {
           pageSize={pageSize}
           totalCount={data?.totalCount}
           onPageChange={setCurrentPage}
-          noDataLabel={search ? t("noSearchResult", { query: search }) : undefined}
+          noDataLabel={
+            search ? t("noSearchResult", { query: search }) : undefined
+          }
           paginationElement={() => (
             <Pagination
               currentPage={safePage}

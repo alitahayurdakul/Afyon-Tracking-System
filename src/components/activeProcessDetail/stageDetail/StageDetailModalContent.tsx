@@ -17,7 +17,9 @@ import {
 import { ErrorComponent } from "@/components/common/error/ErrorComponent";
 import { Modal } from "@/components/common/Modal";
 import { PopoverBody } from "@/components/Popover";
+import { RoleWrapper } from "@/components/RoleWrapper";
 import { ACTIVE_STAGE_DETAIL_MODAL } from "@/consts/modals";
+import { PERMISSION_ACTION, PERMISSION_RESOURCE } from "@/consts/permissions";
 import {
   DelayReasons,
   MaterialEntry,
@@ -341,151 +343,116 @@ export default function StageDetailModalContent({
           </section>*/}
         </div>
         {getStatus(stageStatus) !== StatusEnums.completed && (
-          <div
-            className={styles.footer}
-            style={{
-              borderTop:
-                getStatus(stageStatus) !== StatusEnums.completed
-                  ? "0.5px solid #d3d1c7"
-                  : "none",
-            }}
+          <RoleWrapper
+            resource={PERMISSION_RESOURCE.PROCESSSTAGE}
+            action={PERMISSION_ACTION.WRITE}
           >
-            {getStatus(activeSubStageData.status) === "active" && (
-              <>
-                <PopoverBody
-                  alignOffset={-73}
-                  align="start"
-                  triggerBody={
-                    <button type="button" className={styles.saveBtn}>
-                      {t("buttons.save-changes")}
-                    </button>
-                  }
-                  contentBody={
-                    <div className={styles["content"]}>
-                      <p className={styles["text"]}>
-                        {t("buttons.questions.save")}
-                      </p>
-                    </div>
-                  }
-                  closeContainer={
-                    <div className={styles["btn-container"]}>
-                      <button type="button">{t("no")}</button>
-                      <button type="button" onClick={saveStageChanges}>
-                        {" "}
-                        {saveIsPending ? (
-                          <FontAwesomeIcon
-                            icon={faSpinner}
-                            spin
-                            style={{
-                              animationDuration: "2s",
-                              color: "var(--slate-90)",
-                            }}
-                          />
-                        ) : (
-                          t("yes")
-                        )}
+            <div
+              className={styles.footer}
+              style={{
+                borderTop:
+                  getStatus(stageStatus) !== StatusEnums.completed
+                    ? "0.5px solid #d3d1c7"
+                    : "none",
+              }}
+            >
+              {getStatus(activeSubStageData.status) === "active" && (
+                <>
+                  <PopoverBody
+                    alignOffset={-73}
+                    align="start"
+                    triggerBody={
+                      <button type="button" className={styles.saveBtn}>
+                        {t("buttons.save-changes")}
                       </button>
-                    </div>
-                  }
-                />
-                <PopoverBody
-                  alignOffset={-73}
-                  align="start"
-                  triggerBody={
-                    <button type="button" className={styles.completeBtn}>
-                      {t("buttons.complete-sub-stage")}
-                    </button>
-                  }
-                  contentBody={
-                    <div className={styles["content"]}>
-                      <p className={styles["text"]}>
-                        {t("buttons.questions.complete-sub-stage")}
-                      </p>
-                    </div>
-                  }
-                  closeContainer={
-                    <div className={styles["btn-container"]}>
-                      <button type="button">{t("no")}</button>
-                      <button type="button" onClick={completeSubStage}>
-                        {saveIsPending ? (
-                          <FontAwesomeIcon
-                            icon={faSpinner}
-                            spin
-                            style={{
-                              animationDuration: "2s",
-                              color: "var(--slate-90)",
-                            }}
-                          />
-                        ) : (
-                          t("yes")
-                        )}
+                    }
+                    contentBody={
+                      <div className={styles["content"]}>
+                        <p className={styles["text"]}>
+                          {t("buttons.questions.save")}
+                        </p>
+                      </div>
+                    }
+                    closeContainer={
+                      <div className={styles["btn-container"]}>
+                        <button type="button">{t("no")}</button>
+                        <button type="button" onClick={saveStageChanges}>
+                          {" "}
+                          {saveIsPending ? (
+                            <FontAwesomeIcon
+                              icon={faSpinner}
+                              spin
+                              style={{
+                                animationDuration: "2s",
+                                color: "var(--slate-90)",
+                              }}
+                            />
+                          ) : (
+                            t("yes")
+                          )}
+                        </button>
+                      </div>
+                    }
+                  />
+                  <PopoverBody
+                    alignOffset={-73}
+                    align="start"
+                    triggerBody={
+                      <button type="button" className={styles.completeBtn}>
+                        {t("buttons.complete-sub-stage")}
                       </button>
-                    </div>
-                  }
-                />
-              </>
-            )}
+                    }
+                    contentBody={
+                      <div className={styles["content"]}>
+                        <p className={styles["text"]}>
+                          {t("buttons.questions.complete-sub-stage")}
+                        </p>
+                      </div>
+                    }
+                    closeContainer={
+                      <div className={styles["btn-container"]}>
+                        <button type="button">{t("no")}</button>
+                        <button type="button" onClick={completeSubStage}>
+                          {saveIsPending ? (
+                            <FontAwesomeIcon
+                              icon={faSpinner}
+                              spin
+                              style={{
+                                animationDuration: "2s",
+                                color: "var(--slate-90)",
+                              }}
+                            />
+                          ) : (
+                            t("yes")
+                          )}
+                        </button>
+                      </div>
+                    }
+                  />
+                </>
+              )}
 
-            {getStatus(activeSubStageData.status) === "pending" && (
-              <PopoverBody
-                alignOffset={-73}
-                align="start"
-                triggerBody={
-                  <button type="button" className={styles.startBtn}>
-                    {t("buttons.start-sub-stage")}
-                  </button>
-                }
-                contentBody={
-                  <div className={styles["content"]}>
-                    <p className={styles["text"]}>
-                      {t("buttons.questions.start-sub-stage")}
-                    </p>
-                  </div>
-                }
-                closeContainer={
-                  <div className={styles["btn-container"]}>
-                    <button type="button">{t("no")}</button>
-                    <button type="button" onClick={startStage}>
-                      {isPending ? (
-                        <FontAwesomeIcon
-                          icon={faSpinner}
-                          spin
-                          style={{
-                            animationDuration: "2s",
-                            color: "var(--slate-90)",
-                          }}
-                        />
-                      ) : (
-                        t("yes")
-                      )}
-                    </button>
-                  </div>
-                }
-              />
-            )}
-
-            {getStatus(activeSubStageData.status) === StatusEnums.completed &&
-              getStatus(stageStatus) !== StatusEnums.completed && (
+              {getStatus(activeSubStageData.status) === "pending" && (
                 <PopoverBody
                   alignOffset={-73}
                   align="start"
                   triggerBody={
-                    <button type="button" className={styles.editBtn}>
-                      {t("buttons.edit")}
+                    <button type="button" className={styles.startBtn}>
+                      {t("buttons.start-sub-stage")}
                     </button>
                   }
                   contentBody={
                     <div className={styles["content"]}>
                       <p className={styles["text"]}>
-                        {t("buttons.questions.edit")}
+                        {t("buttons.questions.start-sub-stage")}
                       </p>
                     </div>
                   }
                   closeContainer={
                     <div className={styles["btn-container"]}>
                       <button type="button">{t("no")}</button>
-                      <button type="button" onClick={editCompletedSubStage}>
-                        {editIsPending ? (
+                      <button type="button" onClick={startStage}>
+                        {isPending ? (
                           <FontAwesomeIcon
                             icon={faSpinner}
                             spin
@@ -503,46 +470,89 @@ export default function StageDetailModalContent({
                 />
               )}
 
-            {isAllCompleted &&
-              getStatus(stageStatus) !== StatusEnums.completed && (
-                <PopoverBody
-                  alignOffset={-73}
-                  align="start"
-                  triggerBody={
-                    <button type="button" className={styles.completeParentStageBtn}>
-                      {t("buttons.complete-stage")}
-                    </button>
-                  }
-                  contentBody={
-                    <div className={styles["content"]}>
-                      <p className={styles["text"]}>
-                        {t("buttons.questions.completeStage")}
-                      </p>
-                    </div>
-                  }
-                  closeContainer={
-                    <div className={styles["btn-container"]}>
-                      <button type="button">{t("no")}</button>
-                      <button type="button" onClick={completeStage}>
-                        {" "}
-                        {completeIsPending ? (
-                          <FontAwesomeIcon
-                            icon={faSpinner}
-                            spin
-                            style={{
-                              animationDuration: "2s",
-                              color: "var(--slate-90)",
-                            }}
-                          />
-                        ) : (
-                          t("yes")
-                        )}
+              {getStatus(activeSubStageData.status) === StatusEnums.completed &&
+                getStatus(stageStatus) !== StatusEnums.completed && (
+                  <PopoverBody
+                    alignOffset={-73}
+                    align="start"
+                    triggerBody={
+                      <button type="button" className={styles.editBtn}>
+                        {t("buttons.edit")}
                       </button>
-                    </div>
-                  }
-                />
-              )}
-          </div>
+                    }
+                    contentBody={
+                      <div className={styles["content"]}>
+                        <p className={styles["text"]}>
+                          {t("buttons.questions.edit")}
+                        </p>
+                      </div>
+                    }
+                    closeContainer={
+                      <div className={styles["btn-container"]}>
+                        <button type="button">{t("no")}</button>
+                        <button type="button" onClick={editCompletedSubStage}>
+                          {editIsPending ? (
+                            <FontAwesomeIcon
+                              icon={faSpinner}
+                              spin
+                              style={{
+                                animationDuration: "2s",
+                                color: "var(--slate-90)",
+                              }}
+                            />
+                          ) : (
+                            t("yes")
+                          )}
+                        </button>
+                      </div>
+                    }
+                  />
+                )}
+
+              {isAllCompleted &&
+                getStatus(stageStatus) !== StatusEnums.completed && (
+                  <PopoverBody
+                    alignOffset={-73}
+                    align="start"
+                    triggerBody={
+                      <button
+                        type="button"
+                        className={styles.completeParentStageBtn}
+                      >
+                        {t("buttons.complete-stage")}
+                      </button>
+                    }
+                    contentBody={
+                      <div className={styles["content"]}>
+                        <p className={styles["text"]}>
+                          {t("buttons.questions.completeStage")}
+                        </p>
+                      </div>
+                    }
+                    closeContainer={
+                      <div className={styles["btn-container"]}>
+                        <button type="button">{t("no")}</button>
+                        <button type="button" onClick={completeStage}>
+                          {" "}
+                          {completeIsPending ? (
+                            <FontAwesomeIcon
+                              icon={faSpinner}
+                              spin
+                              style={{
+                                animationDuration: "2s",
+                                color: "var(--slate-90)",
+                              }}
+                            />
+                          ) : (
+                            t("yes")
+                          )}
+                        </button>
+                      </div>
+                    }
+                  />
+                )}
+            </div>
+          </RoleWrapper>
         )}
       </div>
     </Modal>

@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useGetStagesDataQuery } from "@/api/queries/useGetStagesQueries";
 import { usePaginationParams } from "@/api/queries/usePaginationParams";
+import { RoleWrapper } from "@/components/RoleWrapper";
+import { PERMISSION_ACTION, PERMISSION_RESOURCE } from "@/consts/permissions";
 import { DEFAULT_PAGE_SIZE_OPTIONS } from "@/consts/tableConsts";
 import { useSearchQueryParam } from "@/hooks/useSearchQueryParam";
 import { IStageTableResponseDataTypes } from "@/types/stagesTypes";
@@ -50,7 +52,12 @@ export const StagesListBody = () => {
           <h2>{t("title")}</h2>
           <p>{t("description")}</p>
         </div>
-        <CreateStageModal />
+        <RoleWrapper
+          resource={PERMISSION_RESOURCE.STAGE}
+          action={PERMISSION_ACTION.WRITE}
+        >
+          <CreateStageModal />
+        </RoleWrapper>
       </div>
 
       <div className={styles.toolbar}>

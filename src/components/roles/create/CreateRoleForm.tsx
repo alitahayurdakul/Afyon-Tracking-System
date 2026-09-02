@@ -1,7 +1,6 @@
 "use client";
 
 
-import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -16,10 +15,7 @@ import { InputBox } from "@/components/formElements/InputBox";
 import { SelectBox } from "@/components/formElements/SelectBox";
 import { TextAreaBox } from "@/components/formElements/TextAreaBox";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import {
-  generatePermissionOptions,
-  PermissionOption,
-} from "@/consts/generatePermissionOptions";
+import { usePermissionOptions } from "@/hooks/usePermissionOptions";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { IRoleFormDataTypes } from "@/types/rolesTypes";
@@ -28,17 +24,20 @@ import { extractApiError } from "@/utils/extractApiError";
 import { useRemoveQueryParamModal } from "@/utils/searchParams";
 import { RoleFormValidation } from "@/utils/validations/roleFormValidation";
 
+import { RolePresetSelect } from "../RolePresetSelect";
+
 import styles from "@/styles/components/roles/RoleForm.module.scss";
 
 export const CreateRoleForm = () => {
   const tValidation = useTranslations("layout.validation-errors");
   const t = useTranslations("roles");
-  const tPermission = useTranslations("permissions");
+  const { permissionOptions } = usePermissionOptions();
   const {
     control,
     handleSubmit,
     register,
     reset,
+    setValue,
     formState: { isSubmitting },
   } = useForm<IRoleFormDataTypes>({
     resolver: yupResolver(RoleFormValidation(tValidation)) as any,
@@ -46,19 +45,13 @@ export const CreateRoleForm = () => {
       roleName: "",
       roleDescription: "",
       permissions: [],
+      preset: "",
     },
   });
 
   const dispatch = useDispatch();
   const currentUserName = useCurrentUserName();
   const removeModal = useRemoveQueryParamModal();
-
-  const permissionOptions = useMemo(() => {
-    return generatePermissionOptions().map((p: PermissionOption) => ({
-      label: tPermission(p.label),
-      value: p.value,
-    }));
-  }, []);
 
   const onSubmit: SubmitHandler<IRoleFormDataTypes> = async (data) => {
     try {
@@ -97,6 +90,7 @@ export const CreateRoleForm = () => {
 
   return (
     <form className={styles["train-form"]}>
+      <RolePresetSelect control={control} setValue={setValue} />
       <InputBox
         control={control as any}
         label={t("form.roleNameLabel")}
@@ -126,6 +120,9 @@ export const CreateRoleForm = () => {
         required
         multiselect
         options={permissionOptions}
+        isClearable
+        isSearchable
+        hideSelectedOptions
       />
       <div className={styles["btn-group"]}>
         <Button

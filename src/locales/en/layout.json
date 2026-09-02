@@ -167,5 +167,9 @@
   "languageSelector": {
     "label": "Language: {language}. Open to change",
     "menuLabel": "Languages"
+  },
+  "accessDenied": {
+    "title": "You do not have access to this page",
+    "description": "You lack the permission required to view this section. Contact your system administrator if you need access."
   }
 }

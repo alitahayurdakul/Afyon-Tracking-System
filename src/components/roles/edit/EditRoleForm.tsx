@@ -18,10 +18,7 @@ import { InputBox } from "@/components/formElements/InputBox";
 import { SelectBox } from "@/components/formElements/SelectBox";
 import { TextAreaBox } from "@/components/formElements/TextAreaBox";
 import { CLIENT_END_POINTS } from "@/consts/endpoints";
-import {
-  generatePermissionOptions,
-  PermissionOption,
-} from "@/consts/generatePermissionOptions";
+import { usePermissionOptions } from "@/hooks/usePermissionOptions";
 import { addToastify } from "@/redux/slices/toastSlice";
 import { addTriggerTable } from "@/redux/slices/triggerTableSlices";
 import { IRoleFormDataTypes, IRoleType } from "@/types/rolesTypes";
@@ -29,6 +26,8 @@ import { InputSpaceEnums } from "@/utils/enum/formEnums";
 import { extractApiError } from "@/utils/extractApiError";
 import { useRemoveQueryParamModal } from "@/utils/searchParams";
 import { RoleFormValidation } from "@/utils/validations/roleFormValidation";
+
+import { RolePresetSelect } from "../RolePresetSelect";
 
 import styles from "@/styles/components/roles/RoleForm.module.scss";
 
@@ -40,26 +39,18 @@ interface IPropsTypes {
 export const EditRoleForm = ({ id, data }: IPropsTypes) => {
   const tValidation = useTranslations("layout.validation-errors");
   const t = useTranslations("roles");
-  const tPermission = useTranslations("permissions");
+  const { permissionOptions, toOptions } = usePermissionOptions();
 
-  const defaultPermissions = useMemo(() => {
-    return (data?.permissions ?? []).map((p) => ({
-      value: p,
-      label: tPermission(p)
-    }));
-  }, [data]);
-
-  const permissionOptions = useMemo(() => {
-    return generatePermissionOptions().map((p: PermissionOption) => ({
-      label: tPermission(p.label),
-      value: p.value,
-    }));
-  }, []);
+  const defaultPermissions = useMemo(
+    () => toOptions(data?.permissions ?? []),
+    [data, toOptions],
+  );
 
   const {
     control,
     handleSubmit,
     register,
+    setValue,
     formState: { isSubmitting },
   } = useForm<IRoleFormDataTypes>({
     resolver: yupResolver(RoleFormValidation(tValidation)) as any,
@@ -67,6 +58,7 @@ export const EditRoleForm = ({ id, data }: IPropsTypes) => {
       roleName: data?.roleName ?? "",
       roleDescription: data?.roleDescription ?? "",
       permissions: defaultPermissions,
+      preset: "",
     },
   });
 
@@ -111,6 +103,7 @@ export const EditRoleForm = ({ id, data }: IPropsTypes) => {
 
   return (
     <form className={styles["train-form"]}>
+      <RolePresetSelect control={control} setValue={setValue} />
       <InputBox
         control={control as any}
         label={t("form.roleNameLabel")}

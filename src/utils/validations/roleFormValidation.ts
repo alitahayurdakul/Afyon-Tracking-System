@@ -24,5 +24,6 @@ export function RoleFormValidation(
       )
       .min(1, t("minOnePermission"))
       .required(t("required")),
+    preset: Yup.string().optional(),
   });
 }

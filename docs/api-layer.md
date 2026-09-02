@@ -148,7 +148,9 @@ Verified behaviour (production build, no cookie → 307; with cookie → 200): p
 
 ## Permissions
 
-`src/consts/permissions.ts` defines the `Permission` template type `` `${resource}:${action}` `` with resources `activeProcess | user | role | stage` and actions `read | write | delete | manage` (manage = all ops incl. create). Check with `useHasRole().hasPermission(required: string[], requireAll = false)` (`src/api/queries/useHasRole.ts`), which reads `state.auth.user.role.permissions`.
+`src/consts/permissions.ts` defines the `Permission` template type `` `${resource}:${action}` `` with one resource per module (`processTrain | activeProcess | processStage | processHistory | workflow | stage | subStage | project | train | wagon | material | delayReason | user | role`) and actions `read | write | delete | manage`. Stronger actions imply weaker ones (`manage` ⇒ all, `write` ⇒ `read`), so a role carries only the strongest permission per resource. Check with `usePermissions().can(resource, action)` (`src/hooks/usePermissions.ts`) or `<RoleWrapper resource action>`; both read `state.auth.user.role.permissions`. `useHasRole().hasPermission(required: string[], requireAll = false)` still works and delegates to the same logic.
+
+The resources, the five role presets from the owner's permission matrix, and every place gating is applied are documented in [permissions.md](permissions.md).
 
 ## Checklist: adding a new domain endpoint
 

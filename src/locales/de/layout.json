@@ -167,5 +167,9 @@
   "languageSelector": {
     "label": "Sprache: {language}. Zum Ändern öffnen",
     "menuLabel": "Sprachen"
+  },
+  "accessDenied": {
+    "title": "Sie haben keinen Zugriff auf diese Seite",
+    "description": "Ihnen fehlt die erforderliche Berechtigung für diesen Bereich. Wenden Sie sich an Ihren Systemadministrator, wenn Sie Zugriff benötigen."
   }
 }

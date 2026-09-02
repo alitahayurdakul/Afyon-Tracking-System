@@ -1,0 +1,28 @@
+.access-denied {
+  width: 100%;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  text-align: center;
+
+  .icon {
+    font-size: 2.5rem;
+    color: var(--slate-50);
+  }
+
+  .title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--slate-90);
+  }
+
+  .description {
+    font-size: 0.95rem;
+    color: var(--slate-60);
+    max-width: 32rem;
+  }
+}
